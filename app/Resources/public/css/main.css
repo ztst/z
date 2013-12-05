@@ -1,0 +1,122 @@
+/* Sticky footer styles */
+
+html,
+body
+{
+    height: 100%;
+}
+
+.wrap
+{
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.footer
+{
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+.wrap > .container
+{
+    padding: 15px 0;
+}
+
+.container .credit
+{
+    margin: 20px 0;
+}
+
+.footer > .container
+{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar-brand
+{
+    padding: 0;
+}
+
+.navbar-container
+{
+    background: url("/images/header/header_background.png") repeat-x;
+    border-color: #e7e7e7;
+}
+
+.navbar-nav
+{
+
+}
+
+.navbar-toggle
+{
+    background: #0088CC;
+}
+
+.navbar-toggle .icon-bar
+{
+    background: #2a6496;
+}
+
+.nav
+{
+    margin-top: 40px;
+}
+
+.nav>li>a
+{
+    color: #000000;
+    padding: 0 12px;
+}
+
+.nav .about_link a
+{
+    color: #ffffff;
+}
+
+.nav>li>a:hover
+{
+    background: none;
+}
+
+.class-menu,
+.subject-menu
+{
+    padding: 0;
+}
+
+.class-menu .list-group-item
+{
+    height: 60px;
+
+    border: none;
+    border-radius: 0;
+
+    margin-bottom: 10px;
+    padding: 20px 3px 10px;
+
+    background: #66afe9;
+}
+
+.class-menu .class-number
+{
+    font-size: 22px;
+}
+
+.subject-menu
+{
+    border: 1px dashed #dbdbdb;
+    background: #f9f9f9;
+}
+
+.subject-menu .list-group-item
+{
+    border: none;
+    border-radius: 0;
+
+    background: none;
+}

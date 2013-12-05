@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <title>{% block title %}Знайка.ру{% endblock %}</title>
+    {% block stylesheets %}
+      {% stylesheets filter="cssrewrite"
+        '../app/Resources/public/css/bootstrap.min.css'
+        '../app/Resources/public/css/main.css'
+      %}
+        <link rel="stylesheet" type="text/css" charset="UTF-8" media="all" href="{{ asset_url }}"/>
+      {% endstylesheets %}
+    {% endblock %}
+    {% block javascripts %}
+      <script src="https://code.jquery.com/jquery.js"></script>
+      {% javascripts '../app/Resources/public/js/*' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+      {% endjavascripts %}
+    {% endblock %}
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrap">
+      {% block header %}
+        <div class="navbar navbar-container navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{{ path("znaika_frontend_homepage") }}"><img src="{{ asset("images/logo.png") }}"/></a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="#">Видеоуроки</a></li>
+                <li><a href="#">Литература</a></li>
+                <li><a href="#">Поиск</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="about_link"><a href="#">О проекте</a></li>
+                <li><a href="#">Регистрация</a></li>
+                <li><a href="#">Вход</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      {% endblock %}
+      <div class="container">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+    {% block footer %}
+      <div class="footer">
+        <div class="container">
+          <p class="text-muted credit">Знайка.ру&copy;</p>
+        </div>
+      </div>
+    {% endblock %}
+  </body>
+</html>

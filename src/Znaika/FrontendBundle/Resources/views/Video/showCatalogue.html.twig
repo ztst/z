@@ -1,0 +1,8 @@
+{% extends "::base.html.twig" %}
+
+{% block content %}
+  <h1>Вы в {{ class }} классе</h1>
+  {% if subject != 'all' %}
+    <h2>Вам интересен предмет - {{ subject }}</h2>
+  {% endif %}
+{% endblock %}

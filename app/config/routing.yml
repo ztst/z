@@ -1,0 +1,4 @@
+znaika_frontend:
+    resource: "@ZnaikaFrontendBundle/Resources/config/routing.yml"
+    prefix:   /
+

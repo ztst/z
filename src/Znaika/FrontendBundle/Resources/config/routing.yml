@@ -1,0 +1,11 @@
+znaika_frontend_homepage:
+    pattern:  /
+    defaults: { _controller: ZnaikaFrontendBundle:Default:index }
+
+show_catalogue:
+    pattern: /catalogue/{class}/{subject}
+    defaults: { _controller: ZnaikaFrontendBundle:Video:showCatalogue, subject: all }
+
+show_video:
+    pattern: /video/{class}/{subject}/{id}
+    defaults: { _controller: ZnaikaFrontendBundle:Video:showVideo }

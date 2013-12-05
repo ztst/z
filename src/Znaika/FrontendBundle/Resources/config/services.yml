@@ -1,0 +1,7 @@
+parameters:
+#    znaika_frontend.example.class: Znaika\FrontendBundle\Example
+
+services:
+#    znaika_frontend.example:
+#        class: %znaika_frontend.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
