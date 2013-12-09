@@ -6,8 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class VideoController extends Controller
 {
-    public function showCatalogueAction($class, $subject)
+    public function showCatalogueAction($class, $subjectName)
     {
+        $subject = null;
+        if( $subjectName )
+        {
+            $repository = $this->getDoctrine()
+                               ->getRepository('ZnaikaFrontendBundle:Lesson\Category\Subject');
+            $subject = $repository->findOneByUrlName($subjectName);
+        }
+
         return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
             'class'     => $class,
             'subject'   => $subject

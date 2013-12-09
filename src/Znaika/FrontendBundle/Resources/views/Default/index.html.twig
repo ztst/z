@@ -3,35 +3,14 @@
 {% block content %}
   <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
     <div class="col-xs-3 col-3 col-sm-4 col-lg-3 list-group class-menu">
-      <a href="{{ path('show_catalogue', {'class': '1'}) }}" class="list-group-item"><span class="class-number">1</span>класс</a>
-      <a href="{{ path('show_catalogue', {'class': '2'}) }}" class="list-group-item"><span class="class-number">2</span>класс</a>
-      <a href="{{ path('show_catalogue', {'class': '3'}) }}" class="list-group-item"><span class="class-number">3</span>класс</a>
-      <a href="{{ path('show_catalogue', {'class': '4'}) }}" class="list-group-item"><span class="class-number">4</span>класс</a>
-      <a href="{{ path('show_catalogue', {'class': '5'}) }}" class="list-group-item"><span class="class-number">5</span>класс</a>
-      <a href="{{ path('show_catalogue', {'class': '6'}) }}" class="list-group-item"><span class="class-number">6</span>класс</a>
-      <a href="{{ path('show_catalogue', {'class': '7'}) }}" class="list-group-item"><span class="class-number">7</span>класс</a>
-      <a href="{{ path('show_catalogue', {'class': '8'}) }}" class="list-group-item"><span class="class-number">8</span>класс</a>
-      <a href="{{ path('show_catalogue', {'class': '9'}) }}" class="list-group-item"><span class="class-number">9</span>класс</a>
-      <a href="{{ path('show_catalogue', {'class': '10'}) }}" class="list-group-item"><span class="class-number">10</span>класс</a>
+      {% for classNumber in classes %}
+        <a href="{{ path('show_catalogue', {'class': classNumber}) }}" class="list-group-item"><span class="class-number">{{ classNumber }}</span>класс</a>
+      {% endfor %}
     </div>
     <div class="col-xs-8 col-5 col-sm-8 col-lg-9 list-group subject-menu">
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'algebra'}) }}" class="list-group-item">Алгебра</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'geometry'}) }}" class="list-group-item">Геометрия</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'math'}) }}" class="list-group-item">Математика</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'informatics'}) }}" class="list-group-item">Информатика</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'physics'}) }}" class="list-group-item">Физика</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'chemistry'}) }}" class="list-group-item">Химия</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'outward-things'}) }}" class="list-group-item">Окружающий мир</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'nature-study'}) }}" class="list-group-item">Природоведение</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'biology'}) }}" class="list-group-item">Биология</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'geography'}) }}" class="list-group-item">Георграфия</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'history'}) }}" class="list-group-item">История</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'reading'}) }}" class="list-group-item">Чтение</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'literature'}) }}" class="list-group-item">Литература</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'russian'}) }}" class="list-group-item">Русский язык</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'english'}) }}" class="list-group-item">Английский язык</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'social-studies'}) }}" class="list-group-item">Обществознание</a>
-      <a href="{{ path('show_catalogue', {'class': '8', 'subject': 'basics-of-life-safety'}) }}" class="list-group-item">ОБЖ</a>
+      {% for subject in subjects %}
+        <a href="{{ path('show_catalogue', {'class': '8', 'subjectName': subject.getUrlName}) }}" class="list-group-item">{{ subject.getName }}</a>
+      {% endfor %}
     </div>
   </div>
 {% endblock %}
