@@ -3,10 +3,46 @@
 namespace Znaika\FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
 
 class VideoController extends Controller
 {
     public function showCatalogueAction($class, $subjectName)
+    {
+        $isValidClass = ClassNumberUtil::isValidClassNumber($class);
+        $subject = $this->getSubjectByName($subjectName);
+
+        return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
+            'isValidClass' => $isValidClass,
+            'class'        => $class,
+            'subject'      => $subject
+        ));
+    }
+
+    public function showVideoAction($class, $subjectName, $videoName)
+    {
+        $video = null;
+        if( $videoName )
+        {
+            $repository = $this->getDoctrine()
+                               ->getRepository('ZnaikaFrontendBundle:Lesson\Content\Video');
+            $video = $repository->findOneByUrlName($videoName);
+        }
+        $subject = $this->getSubjectByName($subjectName);
+
+        return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
+            'classNumber'   => $class,
+            'subject'       => $subject,
+            'video'         => $video
+        ));
+    }
+
+    /**
+     * @param $subjectName
+     *
+     * @return null
+     */
+    protected function getSubjectByName($subjectName)
     {
         $subject = null;
         if( $subjectName )
@@ -15,20 +51,7 @@ class VideoController extends Controller
                                ->getRepository('ZnaikaFrontendBundle:Lesson\Category\Subject');
             $subject = $repository->findOneByUrlName($subjectName);
         }
-
-        return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
-            'class'     => $class,
-            'subject'   => $subject
-        ));
-    }
-
-    public function showVideoAction($class, $subject, $id)
-    {
-        return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
-            'class'     => $class,
-            'subject'   => $subject,
-            'id'        => $id
-        ));
+        return $subject;
     }
 
 }

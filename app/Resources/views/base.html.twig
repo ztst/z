@@ -28,34 +28,9 @@
   </head>
   <body>
     <div class="wrap">
-      {% block header %}
-        <div class="navbar navbar-container navbar-static-top" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="{{ path("znaika_frontend_homepage") }}"><img src="{{ asset("images/logo.png") }}"/></a>
-            </div>
-            <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li><a href="#">Видеоуроки</a></li>
-                <li><a href="#">Литература</a></li>
-                <li><a href="#">Поиск</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li class="about_link"><a href="#">О проекте</a></li>
-                <li><a href="#">Регистрация</a></li>
-                <li><a href="#">Вход</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div>
-        </div>
-      {% endblock %}
+      {% block header %}{% endblock %}
       <div class="container">
+        {% block sidebarmenu %}{% endblock %}
         {% block content %}{% endblock %}
       </div>
     </div>

@@ -1,4 +1,8 @@
-/* Sticky footer styles */
+*
+{
+    margin: 0;
+    padding: 0;
+}
 
 html,
 body
@@ -89,6 +93,12 @@ body
     padding: 0;
 }
 
+.class-menu li,
+.subject-menu li
+{
+    display: block;
+}
+
 .class-menu .list-group-item
 {
     height: 60px;
@@ -100,6 +110,12 @@ body
     padding: 20px 3px 10px;
 
     background: #66afe9;
+}
+
+.class-menu .list-group-item a
+{
+    color: #555555;
+    text-decoration: none;
 }
 
 .class-menu .class-number

@@ -3,8 +3,8 @@ Znaika\FrontendBundle\Entity\Lesson\Category\Subject:
     table: subject
     repositoryClass: Znaika\FrontendBundle\Entity\Lesson\Category\SubjectRepository
     fields:
-        userId:
-            column: user_id
+        subjectId:
+            column: subject_id
             type: integer
             id: true
             generator:

@@ -4,8 +4,16 @@ znaika_frontend_homepage:
 
 show_catalogue:
     pattern: /catalog/{class}-klass/{subjectName}
+    defaults: { _controller: ZnaikaFrontendBundle:Video:showCatalogue }
+
+show_catalogue_by_class:
+    pattern: /catalog/{class}-klass
     defaults: { _controller: ZnaikaFrontendBundle:Video:showCatalogue, subjectName: "" }
 
+show_catalogue_by_subject:
+    pattern: /catalog/{subjectName}
+    defaults: { _controller: ZnaikaFrontendBundle:Video:showCatalogue, class: 0 }
+
 show_video:
-    pattern: /video/{class}-klass/{subject}/{id}
+    pattern: /video/{class}-klass/{subjectName}/{videoName}
     defaults: { _controller: ZnaikaFrontendBundle:Video:showVideo }

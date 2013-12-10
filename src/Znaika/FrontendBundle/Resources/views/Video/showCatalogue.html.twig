@@ -1,7 +1,9 @@
-{% extends "::base.html.twig" %}
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
 {% block content %}
-  <h1>Вы в {{ class }} классе</h1>
+  {% if isValidClass %}
+    <h1>Вы в {{ class }} классе</h1>
+  {% endif %}
   {% if subject %}
     <h2>Вам интересен предмет - {{ subject.getName }}</h2>
   {% endif %}

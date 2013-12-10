@@ -8,10 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Subject
 {
+
     /**
      * @var integer
      */
-    private $userId;
+    private $subjectId;
 
     /**
      * @var string
@@ -30,13 +31,13 @@ class Subject
 
 
     /**
-     * Get userId
+     * Get subjectId
      *
-     * @return integer
+     * @return integer 
      */
-    public function getUserId()
+    public function getSubjectId()
     {
-        return $this->userId;
+        return $this->subjectId;
     }
 
     /**
@@ -48,14 +49,14 @@ class Subject
     public function setName($name)
     {
         $this->name = $name;
-
+    
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
@@ -71,14 +72,14 @@ class Subject
     public function setUrlName($urlName)
     {
         $this->urlName = $urlName;
-
+    
         return $this;
     }
 
     /**
      * Get urlName
      *
-     * @return string
+     * @return string 
      */
     public function getUrlName()
     {
@@ -94,14 +95,14 @@ class Subject
     public function setCreatedTime($createdTime)
     {
         $this->createdTime = $createdTime;
-
+    
         return $this;
     }
 
     /**
      * Get createdTime
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getCreatedTime()
     {

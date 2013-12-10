@@ -1,16 +1,1 @@
-{% extends '::base.html.twig' %}
-
-{% block content %}
-  <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-    <div class="col-xs-3 col-3 col-sm-4 col-lg-3 list-group class-menu">
-      {% for classNumber in classes %}
-        <a href="{{ path('show_catalogue', {'class': classNumber}) }}" class="list-group-item"><span class="class-number">{{ classNumber }}</span>класс</a>
-      {% endfor %}
-    </div>
-    <div class="col-xs-8 col-5 col-sm-8 col-lg-9 list-group subject-menu">
-      {% for subject in subjects %}
-        <a href="{{ path('show_catalogue', {'class': '8', 'subjectName': subject.getUrlName}) }}" class="list-group-item">{{ subject.getName }}</a>
-      {% endfor %}
-    </div>
-  </div>
-{% endblock %}
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
