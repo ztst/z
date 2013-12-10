@@ -7,4 +7,8 @@
   {% if subject %}
     <h2>Вам интересен предмет - {{ subject.getName }}</h2>
   {% endif %}
+
+  {% for video in videos %}
+    <img src="//img.youtube.com/vi/{{ video.getUrl }}/mqdefault.jpg" alt="" />
+  {% endfor %}
 {% endblock %}

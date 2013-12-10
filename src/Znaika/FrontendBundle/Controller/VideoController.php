@@ -21,19 +21,23 @@ class VideoController extends Controller
 
     public function showVideoAction($class, $subjectName, $videoName)
     {
+        $subject = null;
         $video = null;
         if( $videoName )
         {
             $repository = $this->getDoctrine()
                                ->getRepository('ZnaikaFrontendBundle:Lesson\Content\Video');
             $video = $repository->findOneByUrlName($videoName);
+            $subject = $video->getSubject();
         }
-        $subject = $this->getSubjectByName($subjectName);
+
+        $isValidUrl = !is_null($video) && $subject->getUrlName() == $subjectName && $video->getGrade() == $class;
 
         return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
             'classNumber'   => $class,
             'subject'       => $subject,
-            'video'         => $video
+            'video'         => $video,
+            'isValidUrl'    => $isValidUrl
         ));
     }
 
@@ -53,5 +57,4 @@ class VideoController extends Controller
         }
         return $subject;
     }
-
 }
