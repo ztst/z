@@ -12,4 +12,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class VideoRepository extends EntityRepository
 {
+    public function getVideosForCatalog($classNumber = null, $subjectName = null)
+    {
+        $videos = $this->getEntityManager()
+                       ->createQueryBuilder()
+                       ->select('v')
+                       ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+                       ->innerJoin('v.subject','s')
+                       ->where('s.urlName = :subjectName')
+                       ->orWhere('v.grade = :classNumber')
+                       ->addOrderBy('v.createdTime', 'DESC')
+                       //->setMaxResults(3) TODO: set limit
+                       ->setParameter('subjectName', $subjectName)
+                       ->setParameter('classNumber', $classNumber)
+                       ->getQuery()
+                       ->getResult();
+
+        return $videos;
+    }
 }

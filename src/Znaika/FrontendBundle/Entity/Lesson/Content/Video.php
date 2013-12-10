@@ -5,6 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Video
 {
+    const THUMBNAIL_URL_PATTERN = "//img.youtube.com/vi/%VIDEO_URL%/mqdefault.jpg";
 
     /**
      * @var integer
@@ -188,5 +189,15 @@ class Video
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * Get thumbnail url
+     *
+     * @return string
+     */
+    public function getThumbnailUrl()
+    {
+        return str_replace("%VIDEO_URL%", $this->getUrl(), self::THUMBNAIL_URL_PATTERN);
     }
 }

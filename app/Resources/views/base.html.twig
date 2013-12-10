@@ -30,8 +30,12 @@
     <div class="wrap">
       {% block header %}{% endblock %}
       <div class="container">
-        {% block sidebarmenu %}{% endblock %}
-        {% block content %}{% endblock %}
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          {% block sidebarmenu %}{% endblock %}
+        </div>
+        <div class="col-xs-6 col-sm-9">
+          {% block content %}{% endblock %}
+        </div>
       </div>
     </div>
     {% block footer %}

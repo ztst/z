@@ -1,5 +1,13 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter='cssrewrite' '@ZnaikaFrontendBundle/Resources/public/css/catalog.css' %}
+  <link rel="stylesheet" type="text/css" charset="UTF-8" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
 {% block content %}
   {% if isValidClass %}
     <h1>Вы в {{ class }} классе</h1>
@@ -7,8 +15,24 @@
   {% if subject %}
     <h2>Вам интересен предмет - {{ subject.getName }}</h2>
   {% endif %}
-
-  {% for video in videos %}
-    <img src="//img.youtube.com/vi/{{ video.getUrl }}/mqdefault.jpg" alt="" />
-  {% endfor %}
+    {% for video in videos %}
+      <div class="video-description-container">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-5">
+          <a href="{{ path('show_video', {
+              'subjectName': video.getSubject.getUrlName,
+              'class': video.getGrade,
+              'videoName': video.getUrlName
+            }) }}" title="{{ video.getName }}">
+            <img src="{{ video.getThumbnailUrl }}" alt="{{ video.getName }}" />
+          </a>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-6 col-lg-7">
+          <h2>{{ video.getName }}</h2>
+          <h3>{{ video.getGrade }} класс</h3>
+          <h3>{{ video.getSubject.getName }}</h3>
+        </div>
+        <div class="clear"></div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}

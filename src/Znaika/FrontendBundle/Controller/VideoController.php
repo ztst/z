@@ -12,10 +12,14 @@ class VideoController extends Controller
         $isValidClass = ClassNumberUtil::isValidClassNumber($class);
         $subject = $this->getSubjectByName($subjectName);
 
+        $videoRepository = $this->getDoctrine()->getRepository('ZnaikaFrontendBundle:Lesson\Content\Video');
+        $videos = $videoRepository->getVideosForCatalog($class, $subjectName);
+
         return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
             'isValidClass' => $isValidClass,
             'class'        => $class,
-            'subject'      => $subject
+            'subject'      => $subject,
+            'videos'       => $videos
         ));
     }
 
