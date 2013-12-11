@@ -14,19 +14,17 @@
          */
         public function getVideosForCatalog($classNumber = null, $subjectName = null)
         {
-            $videos = $this->getEntityManager()
-                           ->createQueryBuilder()
-                           ->select('v')
-                           ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
-                           ->innerJoin('v.subject', 's')
-                           ->where('s.urlName = :subjectName OR :subjectName IS NULL')
-                           ->andWhere('v.grade = :classNumber OR :classNumber IS NULL')
-                           ->addOrderBy('v.createdTime', 'DESC')
-                //->setMaxResults(3) TODO: set limit
-                           ->setParameter('subjectName', $subjectName)
-                           ->setParameter('classNumber', $classNumber)
-                           ->getQuery()
-                           ->getResult();
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->select('v')
+                         ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+                         ->addOrderBy('v.createdTime', 'DESC');
+                        //->setMaxResults(3) TODO: set limit;
+
+            $this->prepareSubjectNameFilter($subjectName, $queryBuilder);
+            $this->prepareClassNumberFilter($classNumber, $queryBuilder);
+
+            $videos = $queryBuilder->getQuery()->getResult();
 
             return $videos;
         }
@@ -39,5 +37,28 @@
         public function getOneByUrlName($name)
         {
             return $this->findOneByUrlName($name);
+        }
+
+        /**
+         * @param $classNumber
+         * @param $queryBuilder
+         */
+        private function prepareClassNumberFilter($classNumber, $queryBuilder)
+        {
+            if ($classNumber)
+            {
+                $queryBuilder->andWhere('v.grade = :classNumber')
+                             ->setParameter('classNumber', $classNumber);
+            }
+        }
+
+        private function prepareSubjectNameFilter($subjectName, $queryBuilder)
+        {
+            if ( $subjectName )
+            {
+                $queryBuilder->innerJoin('v.subject', 's')
+                             ->andWhere('s.urlName = :subjectName')
+                             ->setParameter('subjectName', $subjectName);
+            }
         }
     }

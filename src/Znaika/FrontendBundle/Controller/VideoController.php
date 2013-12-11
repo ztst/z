@@ -4,22 +4,46 @@ namespace Znaika\FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class VideoController extends Controller
 {
+    public function getVideosAction(Request $request)
+    {
+        $subjectName = $request->request->get("subject");
+        $class = $request->request->get("class");
+
+        $videoRepository = $this->get("video_repository");
+        $videos = $videoRepository->getVideosForCatalog($class, $subjectName);
+
+        $response = new JsonResponse();
+        $content = $this->renderView('ZnaikaFrontendBundle:Video:video-catalog.html.twig', array(
+            'videos' => $videos
+        ));
+
+        $response->setData(array(
+            'content' => $content
+        ));
+
+        return $response;
+    }
+
     public function showCatalogueAction($class, $subjectName)
     {
-        $isValidClass = ClassNumberUtil::isValidClassNumber($class);
-        $subject = $this->getSubjectByName($subjectName);
+        $subjectRepository = $this->get("subject_repository");
+        $subjects = $subjectRepository->getAll();
+        $classes = ClassNumberUtil::getAvailableClasses();
 
-        $repository = $this->get("video_repository");
-        $videos = $repository->getVideosForCatalog($class, $subjectName);
+        $videoRepository = $this->get("video_repository");
+        $videos = $videoRepository->getVideosForCatalog($class, $subjectName);
 
         return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
-            'isValidClass' => $isValidClass,
-            'class'        => $class,
-            'subject'      => $subject,
-            'videos'       => $videos
+            'classes'            => $classes,
+            'currentClass'       => $class,
+            'currentSubjectName' => $subjectName,
+            'subjects'           => $subjects,
+            'videos'             => $videos,
         ));
     }
 

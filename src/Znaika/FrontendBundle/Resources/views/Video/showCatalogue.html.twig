@@ -4,35 +4,28 @@
   {{ parent() }}
 
   {% stylesheets filter='cssrewrite' '@ZnaikaFrontendBundle/Resources/public/css/catalog.css' %}
-  <link rel="stylesheet" type="text/css" charset="UTF-8" media="all" href="{{ asset_url }}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts
+    '../app/Resources/public/js/classes/util/EventDispatcher.class.js'
+    '../app/Resources/public/js/classes/page/VideoCatalogFilters.class.js'
+    '../app/Resources/public/js/classes/page/VideoCatalogPage.class.js'
+  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
 {% block content %}
-  {% if isValidClass %}
-    <h1>Вы в {{ class }} классе</h1>
-  {% endif %}
-  {% if subject %}
-    <h2>Вам интересен предмет - {{ subject.getName }}</h2>
-  {% endif %}
-    {% for video in videos %}
-      <div class="video-description-container">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-5">
-          <a href="{{ path('show_video', {
-              'subjectName': video.getSubject.getUrlName,
-              'class': video.getGrade,
-              'videoName': video.getUrlName
-            }) }}" title="{{ video.getName }}">
-            <img src="{{ video.getThumbnailUrl }}" alt="{{ video.getName }}" />
-          </a>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-6 col-lg-7">
-          <h2>{{ video.getName }}</h2>
-          <h3>{{ video.getGrade }} класс</h3>
-          <h3>{{ video.getSubject.getName }}</h3>
-        </div>
-        <div class="clear"></div>
-      </div>
-    {% endfor %}
+  {% include "ZnaikaFrontendBundle:Video:video-catalog-filter.html.twig"
+      with {'classes': classes, 'subjects': subjects, 'currentClass': currentClass, 'currentSubjectName': currentSubjectName}
+  %}
+  <div id="videoCatalogContainer">
+    {% include "ZnaikaFrontendBundle:Video:video-catalog.html.twig" with {'videos': videos} %}
   </div>
+  <input id="updateCatalogUrl" type="hidden" value="{{ path('get_videos') }}" />
 {% endblock %}
