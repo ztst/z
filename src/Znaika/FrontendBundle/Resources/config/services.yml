@@ -1,12 +1,21 @@
 parameters:
+    znaika_frontend.menu.class: Knp\Menu\MenuItem
 
 services:
+    video_repository:
+        class:        Znaika\FrontendBundle\Entity\Lesson\Content\VideoRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    subject_repository:
+        class:        Znaika\FrontendBundle\Entity\Lesson\Category\SubjectRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
     znaika_frontend.menu_builder:
         class: Znaika\FrontendBundle\Menu\MenuBuilder
         arguments: ["@knp_menu.factory"]
 
     znaika_frontend.menu.main:
-        class: Knp\Menu\MenuItem
+        class: "%znaika_frontend.menu.class%"
         factory_service: znaika_frontend.menu_builder
         factory_method: createMainMenu
         arguments: ["@request"]
@@ -15,7 +24,7 @@ services:
             - { name: knp_menu.menu, alias: main }
 
     znaika_frontend.menu.sidebar_grade_menu:
-        class: Knp\Menu\MenuItem
+        class: "%znaika_frontend.menu.class%"
         factory_service: znaika_frontend.menu_builder
         factory_method: createSidebarGradeMenu
         arguments: ["@request"]
@@ -24,10 +33,11 @@ services:
             - { name: knp_menu.menu, alias: sidebar_grade_menu }
 
     znaika_frontend.menu.sidebar_subject_menu:
-        class: Knp\Menu\MenuItem
+        class: "%znaika_frontend.menu.class%"
         factory_service: znaika_frontend.menu_builder
         factory_method: createSidebarSubjectMenu
-        arguments: ["@request", "@doctrine.orm.entity_manager"]
+        arguments: ["@request", "@subject_repository"]
         scope: request
         tags:
             - { name: knp_menu.menu, alias: sidebar_subject_menu }
+

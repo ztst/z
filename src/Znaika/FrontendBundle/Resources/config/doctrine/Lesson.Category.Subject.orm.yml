@@ -1,7 +1,7 @@
 Znaika\FrontendBundle\Entity\Lesson\Category\Subject:
     type: entity
     table: subject
-    repositoryClass: Znaika\FrontendBundle\Entity\Lesson\Category\SubjectRepository
+    repositoryClass: Znaika\FrontendBundle\Entity\Lesson\Category\SubjectDBRepository
     fields:
         subjectId:
             column: subject_id

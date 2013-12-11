@@ -12,8 +12,8 @@ class VideoController extends Controller
         $isValidClass = ClassNumberUtil::isValidClassNumber($class);
         $subject = $this->getSubjectByName($subjectName);
 
-        $videoRepository = $this->getDoctrine()->getRepository('ZnaikaFrontendBundle:Lesson\Content\Video');
-        $videos = $videoRepository->getVideosForCatalog($class, $subjectName);
+        $repository = $this->get("video_repository");
+        $videos = $repository->getVideosForCatalog($class, $subjectName);
 
         return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
             'isValidClass' => $isValidClass,
@@ -25,13 +25,12 @@ class VideoController extends Controller
 
     public function showVideoAction($class, $subjectName, $videoName)
     {
+        $repository = $this->get("video_repository");
+        $video = $repository->getOneByUrlName($videoName);
+
         $subject = null;
-        $video = null;
-        if( $videoName )
+        if( $video )
         {
-            $repository = $this->getDoctrine()
-                               ->getRepository('ZnaikaFrontendBundle:Lesson\Content\Video');
-            $video = $repository->findOneByUrlName($videoName);
             $subject = $video->getSubject();
         }
 
@@ -55,9 +54,8 @@ class VideoController extends Controller
         $subject = null;
         if( $subjectName )
         {
-            $repository = $this->getDoctrine()
-                               ->getRepository('ZnaikaFrontendBundle:Lesson\Category\Subject');
-            $subject = $repository->findOneByUrlName($subjectName);
+            $repository = $this->get('subject_repository');
+            $subject = $repository->getOneByUrlName($subjectName);
         }
         return $subject;
     }

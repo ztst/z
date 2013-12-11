@@ -4,6 +4,7 @@
     use Knp\Menu\FactoryInterface;
     use Symfony\Component\HttpFoundation\Request;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
+    use Znaika\FrontendBundle\Entity\Lesson\Category\ISubjectRepository;
 
     class MenuBuilder
     {
@@ -52,13 +53,11 @@
             return $menu;
         }
 
-        public function createSidebarSubjectMenu(Request $request, $doctrine)
+        public function createSidebarSubjectMenu(Request $request, ISubjectRepository $repository)
         {
+            $subjects = $repository->getAll();
+
             $menu = $this->factory->createItem("root");
-
-            $repository = $doctrine->getRepository('ZnaikaFrontendBundle:Lesson\Category\Subject');
-            $subjects = $repository->findAll();
-
             foreach ( $subjects as $subject )
             {
                 $menuItem = $menu->addChild($subject->getName(),
@@ -70,7 +69,6 @@
                     )
                 );
                 $menuItem->setLinkAttribute("class", "list-group-item");
-
             }
 
             return $menu;
