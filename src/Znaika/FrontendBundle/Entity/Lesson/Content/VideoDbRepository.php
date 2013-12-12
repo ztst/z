@@ -40,6 +40,17 @@
         }
 
         /**
+         * @param Video $video
+         *
+         * @return bool
+         */
+        public function save(Video $video)
+        {
+            $this->_em->persist($video);
+            $this->_em->flush();
+        }
+
+        /**
          * @param $classNumber
          * @param $queryBuilder
          */

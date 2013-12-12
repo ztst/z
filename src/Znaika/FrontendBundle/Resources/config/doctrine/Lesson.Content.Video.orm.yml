@@ -21,6 +21,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             type: string
             length: 128
             notnull: true
+            unique: true
         url:
             column: url
             type: string
@@ -29,7 +30,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
         createdTime:
             column: created_time
             type: datetime
-            notnull: true
+            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     manyToOne:
         subject:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Category\Subject

@@ -29,3 +29,7 @@ show_video:
     defaults: { _controller: ZnaikaFrontendBundle:Video:showVideo }
     requirements:
         class:  \d+
+
+add_video_form:
+    pattern: /video/add-form
+    defaults: { _controller: ZnaikaFrontendBundle:Video:addVideoForm }

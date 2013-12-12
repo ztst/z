@@ -2,6 +2,7 @@ parameters:
     znaika_frontend.menu.class: Knp\Menu\MenuItem
 
 services:
+#repository
     video_repository:
         class:        Znaika\FrontendBundle\Entity\Lesson\Content\VideoRepository
         arguments:    ["@doctrine.orm.entity_manager"]
@@ -10,6 +11,7 @@ services:
         class:        Znaika\FrontendBundle\Entity\Lesson\Category\SubjectRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
+#menu
     znaika_frontend.menu_builder:
         class: Znaika\FrontendBundle\Menu\MenuBuilder
         arguments: ["@knp_menu.factory"]

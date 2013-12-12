@@ -24,4 +24,15 @@
         {
             return null;
         }
+
+        /**
+         * @param Video $video
+         *
+         * @return bool
+         */
+        public function save(Video $video)
+        {
+            return true;
+        }
+
     }

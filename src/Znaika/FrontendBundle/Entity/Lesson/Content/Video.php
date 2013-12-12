@@ -1,6 +1,7 @@
 <?
 namespace Znaika\FrontendBundle\Entity\Lesson\Content;
 
+use \Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
 use Doctrine\ORM\Mapping as ORM;
 
 class Video
@@ -41,7 +42,6 @@ class Video
      * @var \Znaika\FrontendBundle\Entity\Lesson\Category\Subject
      */
     private $subject;
-
 
     /**
      * Get videoId
@@ -148,10 +148,10 @@ class Video
     /**
      * Set subject
      *
-     * @param \Znaika\FrontendBundle\Entity\Lesson\Category\Subject $subject
+     * @param Subject $subject
      * @return Video
      */
-    public function setSubject(\Znaika\FrontendBundle\Entity\Lesson\Category\Subject $subject = null)
+    public function setSubject(Subject $subject = null)
     {
         $this->subject = $subject;
 

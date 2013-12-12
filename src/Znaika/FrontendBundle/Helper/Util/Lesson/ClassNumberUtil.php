@@ -12,6 +12,12 @@ class ClassNumberUtil
         return $availableClasses;
     }
 
+    public static function getAvailableClassesForSelect()
+    {
+        $availableClasses = self::getAvailableClasses();
+        return array_combine($availableClasses, $availableClasses);
+    }
+
     public static function isValidClassNumber($number)
     {
         $availableClasses = self::getAvailableClasses();

@@ -54,4 +54,18 @@
             }
             return $result;
         }
+
+        /**
+         * @param Video $video
+         *
+         * @return bool
+         */
+        public function save(Video $video)
+        {
+            $this->redisRepository->save($video);
+            $success = $this->dbRepository->save($video);
+
+            return $success;
+        }
+
     }

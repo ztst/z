@@ -3,12 +3,32 @@
 namespace Znaika\FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+use Znaika\FrontendBundle\Form\Lesson\Content\VideoType;
 use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class VideoController extends Controller
 {
+    public function addVideoFormAction(Request $request)
+    {
+        $video = new Video();
+        $form = $this->createForm(new VideoType(), $video);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid())
+        {
+            $videoRepository = $this->get('video_repository');
+            $videoRepository->save($video);
+        }
+
+        return $this->render('ZnaikaFrontendBundle:Video:addVideoForm.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
     public function getVideosAction(Request $request)
     {
         $subjectName = $request->request->get("subject");

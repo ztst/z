@@ -1,0 +1,15 @@
+Znaika\FrontendBundle\Entity\Lesson\Content\Video:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [urlName]
+            message: 'not_unique'
+    properties:
+        name:
+            - NotBlank: { message: "not_blank" }
+        grade:
+            - NotBlank: { message: "not_blank" }
+            - Znaika\FrontendBundle\Validator\Constraints\ClassNumber: ~
+        urlName:
+            - NotBlank: { message: "not_blank" }
+        url:
+            - NotBlank: { message: "not_blank" }

@@ -18,4 +18,11 @@
          * @return Video|null
          */
         public function getOneByUrlName($name);
+
+        /**
+         * @param Video $video
+         *
+         * @return bool
+         */
+        public function save(Video $video);
     }
