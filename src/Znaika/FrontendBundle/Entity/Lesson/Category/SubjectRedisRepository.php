@@ -1,5 +1,4 @@
-<?php
-
+<?
     namespace Znaika\FrontendBundle\Entity\Lesson\Category;
 
     class SubjectRedisRepository implements ISubjectRepository

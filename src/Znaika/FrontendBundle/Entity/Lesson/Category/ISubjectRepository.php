@@ -1,4 +1,4 @@
-<?php
+<?
 
     namespace Znaika\FrontendBundle\Entity\Lesson\Category;
 

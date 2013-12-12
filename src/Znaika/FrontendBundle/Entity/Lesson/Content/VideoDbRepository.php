@@ -1,5 +1,4 @@
-<?php
-
+<?
     namespace Znaika\FrontendBundle\Entity\Lesson\Content;
 
     use Doctrine\ORM\EntityRepository;

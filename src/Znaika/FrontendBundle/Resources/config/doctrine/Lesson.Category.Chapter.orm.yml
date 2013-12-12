@@ -1,10 +1,10 @@
-Znaika\FrontendBundle\Entity\Lesson\Content\Video:
+Znaika\FrontendBundle\Entity\Lesson\Category\Chapter:
     type: entity
-    table: video
-    repositoryClass: Znaika\FrontendBundle\Entity\Lesson\Content\VideoDBRepository
+    table: chapter
+    repositoryClass: Znaika\FrontendBundle\Entity\Lesson\Category\ChapterDBRepository
     fields:
-        videoId:
-            column: video_id
+        chapterId:
+            column: chapter_id
             type: integer
             id: true
             generator:
@@ -13,32 +13,19 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             type: string
             length: 255
             notnull: true
-        grade:
-            type: integer
-            notnull: true
         urlName:
             column: url_name
             type: string
             length: 128
             notnull: true
-            unique: true
-        url:
-            column: url
-            type: string
-            length: 255
+        grade:
+            type: integer
             notnull: true
         createdTime:
             column: created_time
             type: datetime
             columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     manyToOne:
-        chapter:
-            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Category\Chapter
-            inversedBy: videos
-            joinColumn:
-                name: chapter_id
-                referencedColumnName: chapter_id
-                onDelete: CASCADE
         subject:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Category\Subject
             inversedBy: videos

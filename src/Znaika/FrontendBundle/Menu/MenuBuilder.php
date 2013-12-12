@@ -23,7 +23,7 @@
             $menu = $this->factory->createItem("root");
             $menu->setChildrenAttribute("class", "nav navbar-nav");
 
-            $menu->addChild("Видеоуроки", array("route" => "znaika_frontend_homepage"));
+            $menu->addChild("Видеоуроки", array("route" => "add_video_form"));
             $menu->addChild("Литература", array("route" => "znaika_frontend_homepage"));
             $menu->addChild("Поиск", array("route" => "znaika_frontend_homepage"));
 

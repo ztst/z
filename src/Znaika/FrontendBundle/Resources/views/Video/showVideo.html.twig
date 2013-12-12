@@ -11,6 +11,7 @@
     <a href="{{ path('show_catalogue', {'class': classNumber, 'subjectName': subject.getUrlName}) }}" class="">{{ subject.getName }}</a>
     >
     <span>{{ video.getName }}</span>
+    <div clas="clear"></div>
 
     <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video.getUrl }}" frameborder="0" allowfullscreen></iframe>
   {% else %}
