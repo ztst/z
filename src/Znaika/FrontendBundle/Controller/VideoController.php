@@ -2,7 +2,9 @@
     namespace Znaika\FrontendBundle\Controller;
 
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\FrontendBundle\Form\Lesson\Content\SynopsisType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoType;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Symfony\Component\HttpFoundation\Request;
@@ -10,6 +12,31 @@
 
     class VideoController extends Controller
     {
+        public function addSynopsisFormAction(Request $request)
+        {
+            $repository = $this->get("video_repository");
+            $video      = $repository->getOneByUrlName($request->get('videoName'));
+
+            $synopsis = new Synopsis();
+            $form  = $this->createForm(new SynopsisType(), $synopsis);
+
+            $form->handleRequest($request);
+
+            if ($form->isValid())
+            {
+                $synopsis->setVideo($video);
+                $video->setSynopsis($synopsis);
+
+                $synopsisRepository = $this->get('synopsis_repository');
+                $synopsisRepository->save($synopsis);
+            }
+
+            return $this->render('ZnaikaFrontendBundle:Video:addSynopsisForm.html.twig', array(
+                'form' => $form->createView(),
+                'video'=> $video,
+            ));
+        }
+
         public function addVideoFormAction(Request $request)
         {
             $video = new Video();

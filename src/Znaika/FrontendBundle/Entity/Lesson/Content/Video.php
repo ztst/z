@@ -49,6 +49,11 @@
         private $chapter;
 
         /**
+         * @var \Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis
+         */
+        private $synopsis;
+
+        /**
          * Get videoId
          *
          * @return integer
@@ -234,5 +239,29 @@
         public function getChapter()
         {
             return $this->chapter;
+        }
+
+        /**
+         * Set synopsis
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis $synopsis
+         *
+         * @return Video
+         */
+        public function setSynopsis(\Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis $synopsis = null)
+        {
+            $this->synopsis = $synopsis;
+
+            return $this;
+        }
+
+        /**
+         * Get synopsis
+         *
+         * @return \Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis
+         */
+        public function getSynopsis()
+        {
+            return $this->synopsis;
         }
     }

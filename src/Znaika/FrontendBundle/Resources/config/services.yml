@@ -7,6 +7,10 @@ services:
         class:        Znaika\FrontendBundle\Entity\Lesson\Content\VideoRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
+    synopsis_repository:
+        class:        Znaika\FrontendBundle\Entity\Lesson\Content\SynopsisRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
     subject_repository:
         class:        Znaika\FrontendBundle\Entity\Lesson\Category\SubjectRepository
         arguments:    ["@doctrine.orm.entity_manager"]

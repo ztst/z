@@ -31,6 +31,12 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             column: created_time
             type: datetime
             columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    oneToOne:
+        synopsis:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis
+            joinColumn:
+                name: synopsis_id
+                referencedColumnName: synopsis_id
     manyToOne:
         chapter:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Category\Chapter

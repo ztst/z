@@ -33,3 +33,7 @@ show_video:
 add_video_form:
     pattern: /video/add-form
     defaults: { _controller: ZnaikaFrontendBundle:Video:addVideoForm }
+
+add_synopsis_form:
+    pattern: /video/{videoName}/add-synopsis-form
+    defaults: { _controller: ZnaikaFrontendBundle:Video:addSynopsisForm }

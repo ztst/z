@@ -1,0 +1,25 @@
+Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis:
+    type: entity
+    table: synopsis
+    repositoryClass: Znaika\FrontendBundle\Entity\Lesson\Content\SynopsisDBRepository
+    fields:
+        synopsisId:
+            column: synopsis_id
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        text:
+            type: text
+            notnull: true
+        createdTime:
+            column: created_time
+            type: datetime
+            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    oneToOne:
+        video:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
+            joinColumn:
+                name: video_id
+                referencedColumnName: video_id
+    lifecycleCallbacks: {  }
