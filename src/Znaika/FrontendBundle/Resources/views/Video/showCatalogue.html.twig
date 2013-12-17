@@ -21,11 +21,11 @@
 {% endblock %}
 
 {% block content %}
-  {% include "ZnaikaFrontendBundle:Video:video-catalog-filter.html.twig"
+  {% include "ZnaikaFrontendBundle:Video:video_catalog_filter.html.twig"
       with {'classes': classes, 'subjects': subjects, 'currentClass': currentClass, 'currentSubjectName': currentSubjectName}
   %}
   <div id="videoCatalogContainer">
-    {% include "ZnaikaFrontendBundle:Video:video-catalog.html.twig" with {'videos': videos} %}
+    {% include "ZnaikaFrontendBundle:Video:video_catalog.html.twig" with {'videos': videos} %}
   </div>
   <input id="updateCatalogUrl" type="hidden" value="{{ path('get_videos') }}" />
 {% endblock %}

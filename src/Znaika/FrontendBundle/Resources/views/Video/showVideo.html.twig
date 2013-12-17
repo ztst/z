@@ -2,6 +2,14 @@
 
 {% block title %}{% if video %}{{ video.getName }}{% endif %}{% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter='cssrewrite' '@ZnaikaFrontendBundle/Resources/public/css/show_video.css' %}
+  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
 {% block content %}
   {% if isValidUrl %}
     <h1>{{ video.getName }}</h1>
@@ -13,9 +21,17 @@
     <span>{{ video.getName }}</span>
     <div clas="clear"></div>
 
-    <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video.getUrl }}" frameborder="0" allowfullscreen></iframe>
-    {% if not video.getSynopsis %}
+    <div class="video_player_container">
+      <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video.getUrl }}" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div clas="clear"></div>
+
+    {% if not synopsis %}
       <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить конспект</a>
+    {% else %}
+      <div>
+        {{ synopsis.getText }}
+      </div>
     {% endif %}
   {% else %}
     <img src="{{ asset('images/404.jpg') }}" alt="Видео не найдено"/>
