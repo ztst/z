@@ -20,7 +20,7 @@ services:
         arguments:    ["@doctrine.orm.entity_manager"]
 
     user_info_repository:
-        class:        Znaika\FrontendBundle\Repository\User\UserInfoRepository
+        class:        Znaika\FrontendBundle\Repository\Profile\UserRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
 #menu

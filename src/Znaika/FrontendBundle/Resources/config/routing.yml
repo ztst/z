@@ -53,3 +53,20 @@ show_user_profile:
 edit_user_profile:
     pattern: /edit-user-profile/{userId}
     defaults: { _controller: ZnaikaFrontendBundle:User:editUserProfile }
+
+login:
+    path: /user-login
+    defaults: { _controller: ZnaikaFrontendBundle:User:login }
+
+login_check:
+    path: /login-check
+
+try_login:
+    path: /login
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: add_video_form
+        permanent: true
+
+logout:
+    path: /logout

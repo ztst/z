@@ -1,6 +1,6 @@
 security:
     encoders:
-        Znaika\FrontendBundle\Entity\User\UserInfo:
+        Znaika\FrontendBundle\Entity\Profile\User:
             algorithm: sha1
             iterations: 9
             encode_as_base64: true
@@ -11,29 +11,30 @@ security:
 
     providers:
         main:
-            entity: { class: Znaika\FrontendBundle\Entity\User\UserInfo, property: email }
+            entity: { class: Znaika\FrontendBundle\Entity\Profile\User, property: email }
 
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        login:
-            pattern:  ^/login$
-            security: false
+#        login:
+#            pattern:  ^/login$
+#            security: false
 
         secured_area:
             pattern:    ^/
-#            form_login:
-#                check_path: _security_check
-#                login_path: _demo_login
-#            logout:
-#                path:   _logout
-#                target: _demo
+            form_login:
+                login_path:  login
+                check_path:  login_check
+            logout:
+                path:   /logout
+                target: /
+
             anonymous: ~
             http_basic:
-                realm: "Secured Area"
+                realm: "Необходима логинация"
 
     access_control:
-        - { path: ^/video, roles: ROLE_USER }
+        - { path: ^/login, roles: ROLE_USER }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

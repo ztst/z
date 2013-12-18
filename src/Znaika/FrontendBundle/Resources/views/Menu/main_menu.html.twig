@@ -14,10 +14,11 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="about_link"><a href="#">О проекте</a></li>
         {% if app.user %}
-          <li><a href="{{ path("show_user_profile", {"userId": app.user.userInfoId}) }}">{{ app.user.firstName }} {{ app.user.lastName }}</a></li>
+          <li><a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}">{{ app.user.firstName }} {{ app.user.lastName }}</a></li>
+          <li><a href="{{ path("logout") }}">Выйти</a></li>
         {% else %}
           <li><a href="{{ path("register") }}">Регистрация</a></li>
-          <li><a href="#">Вход</a></li>
+          <li><a href="{{ path("try_login") }}">Вход</a></li>
         {% endif %}
       </ul>
     </div>

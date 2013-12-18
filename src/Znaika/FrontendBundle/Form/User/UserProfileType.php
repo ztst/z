@@ -4,7 +4,7 @@
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-    class UserProfileType extends UserInfoType
+    class UserProfileType extends UserType
     {
         /**
          * @param FormBuilderInterface $builder

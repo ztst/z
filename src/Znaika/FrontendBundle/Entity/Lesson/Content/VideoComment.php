@@ -27,15 +27,15 @@
     private $video;
 
     /**
-     * @var \Znaika\FrontendBundle\Entity\User\UserInfo
+     * @var \Znaika\FrontendBundle\Entity\Profile\User
      */
-    private $userInfo;
+    private $user;
 
 
     /**
      * Get videoCommentId
      *
-     * @return integer 
+     * @return integer
      */
     public function getVideoCommentId()
     {
@@ -51,14 +51,14 @@
     public function setText($text)
     {
         $this->text = $text;
-    
+
         return $this;
     }
 
     /**
      * Get text
      *
-     * @return string 
+     * @return string
      */
     public function getText()
     {
@@ -74,14 +74,14 @@
     public function setCreatedTime($createdTime)
     {
         $this->createdTime = $createdTime;
-    
+
         return $this;
     }
 
     /**
      * Get createdTime
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedTime()
     {
@@ -97,14 +97,14 @@
     public function setVideo(\Znaika\FrontendBundle\Entity\Lesson\Content\Video $video = null)
     {
         $this->video = $video;
-    
+
         return $this;
     }
 
     /**
      * Get video
      *
-     * @return \Znaika\FrontendBundle\Entity\Lesson\Content\Video 
+     * @return \Znaika\FrontendBundle\Entity\Lesson\Content\Video
      */
     public function getVideo()
     {
@@ -112,25 +112,25 @@
     }
 
     /**
-     * Set userInfo
+     * Set user
      *
-     * @param \Znaika\FrontendBundle\Entity\User\UserInfo $userInfo
+     * @param \Znaika\FrontendBundle\Entity\Profile\User $user
      * @return VideoComment
      */
-    public function setUserInfo(\Znaika\FrontendBundle\Entity\User\UserInfo $userInfo = null)
+    public function setUser(\Znaika\FrontendBundle\Entity\Profile\User $user = null)
     {
-        $this->userInfo = $userInfo;
-    
+        $this->user = $user;
+
         return $this;
     }
 
     /**
-     * Get userInfo
+     * Get user
      *
-     * @return \Znaika\FrontendBundle\Entity\User\UserInfo 
+     * @return \Znaika\FrontendBundle\Entity\Profile\User
      */
-    public function getUserInfo()
+    public function getUser()
     {
-        return $this->userInfo;
+        return $this->user;
     }
 }

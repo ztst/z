@@ -53,7 +53,7 @@
 
             $videoComment = new VideoComment();
             $videoComment->setVideo($video);
-            $videoComment->setUserInfo($this->getUser());
+            $videoComment->setUser($this->getUser());
 
             $form  = $this->createForm(new VideoCommentType(), $videoComment);
 

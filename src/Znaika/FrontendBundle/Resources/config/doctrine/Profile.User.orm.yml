@@ -1,9 +1,9 @@
-Znaika\FrontendBundle\Entity\User\UserInfo:
+Znaika\FrontendBundle\Entity\Profile\User:
     type: entity
     table: user_info
-    repositoryClass: Znaika\FrontendBundle\Repository\User\UserInfoDBRepository
+    repositoryClass: Znaika\FrontendBundle\Repository\Profile\UserDBRepository
     fields:
-        userInfoId:
+        userId:
             column: user_info_id
             type: integer
             id: true
@@ -33,5 +33,5 @@ Znaika\FrontendBundle\Entity\User\UserInfo:
     oneToMany:
         videoComments:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
-            mappedBy: userInfo
+            mappedBy: user
     lifecycleCallbacks: {  }

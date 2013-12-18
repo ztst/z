@@ -26,14 +26,16 @@
     </div>
     <div class="clear"></div>
 
-    {% if not video.getSynopsis %}
-      <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить конспект</a>
-    {% else %}
+    {% if video.getSynopsis %}
       <div>
         <pre>
           {{ video.getSynopsis .getText }}
         </pre>
       </div>
+    {% else %}
+      {% if app.user %}
+          <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить конспект</a>
+      {% endif %}
     {% endif %}
     {% if not video.getVideoComments is empty %}
       {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': video.getVideoComments}  %}

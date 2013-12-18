@@ -1,16 +1,16 @@
 <?
-    namespace Znaika\FrontendBundle\Repository\User;
+    namespace Znaika\FrontendBundle\Repository\Profile;
 
-    use Znaika\FrontendBundle\Entity\User\UserInfo;
+    use Znaika\FrontendBundle\Entity\Profile\User;
 
-    class UserInfoRedisRepository implements IUserInfoRepository
+    class UserRedisRepository implements IUserRepository
     {
         /**
-         * @param UserInfo $userInfo
+         * @param User $user
          *
          * @return bool
          */
-        public function save(UserInfo $userInfo)
+        public function save(User $user)
         {
             return true;
         }
@@ -18,7 +18,7 @@
         /**
          * @param $userId
          *
-         * @return UserInfo|null
+         * @return User|null
          */
         public function getOneByUserId($userId)
         {
