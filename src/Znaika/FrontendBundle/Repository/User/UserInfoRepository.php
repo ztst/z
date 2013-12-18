@@ -1,7 +1,8 @@
 <?
-    namespace Znaika\FrontendBundle\Entity\User;
+    namespace Znaika\FrontendBundle\Repository\User;
 
-    use Znaika\FrontendBundle\Entity\BaseRepository;
+    use Znaika\FrontendBundle\Repository\BaseRepository;
+    use Znaika\FrontendBundle\Entity\User\UserInfo;
 
     class UserInfoRepository extends BaseRepository implements IUserInfoRepository
     {

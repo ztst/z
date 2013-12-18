@@ -1,7 +1,8 @@
 <?
-    namespace Znaika\FrontendBundle\Entity\Lesson\Content;
+    namespace Znaika\FrontendBundle\Repository\Lesson\Content;
 
-    use Znaika\FrontendBundle\Entity\BaseRepository;
+    use Znaika\FrontendBundle\Repository\BaseRepository;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
 
     class VideoRepository extends BaseRepository implements IVideoRepository
     {

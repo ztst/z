@@ -1,5 +1,5 @@
 <?
-    namespace Znaika\FrontendBundle\Entity;
+    namespace Znaika\FrontendBundle\Repository;
 
     class BaseRepository
     {

@@ -4,7 +4,7 @@
     use Knp\Menu\FactoryInterface;
     use Symfony\Component\HttpFoundation\Request;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
-    use Znaika\FrontendBundle\Entity\Lesson\Category\ISubjectRepository;
+    use Znaika\FrontendBundle\Repository\Lesson\Category\ISubjectRepository;
 
     class MenuBuilder
     {

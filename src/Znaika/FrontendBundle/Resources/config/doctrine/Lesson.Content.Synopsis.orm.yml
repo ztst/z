@@ -1,7 +1,7 @@
 Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis:
     type: entity
     table: synopsis
-    repositoryClass: Znaika\FrontendBundle\Entity\Lesson\Content\SynopsisDBRepository
+    repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Content\SynopsisDBRepository
     fields:
         synopsisId:
             column: synopsis_id

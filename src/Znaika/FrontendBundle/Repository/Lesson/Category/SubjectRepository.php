@@ -1,7 +1,8 @@
 <?
-    namespace Znaika\FrontendBundle\Entity\Lesson\Category;
+    namespace Znaika\FrontendBundle\Repository\Lesson\Category;
 
-    use Znaika\FrontendBundle\Entity\BaseRepository;
+    use Znaika\FrontendBundle\Repository\BaseRepository;
+    use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
 
     class SubjectRepository extends BaseRepository implements ISubjectRepository
     {
@@ -27,7 +28,7 @@
         /**
          * @param $name
          *
-         * @return Video|null
+         * @return Subject|null
          */
         public function getOneByUrlName($name)
         {

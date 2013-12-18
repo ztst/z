@@ -4,19 +4,19 @@ parameters:
 services:
 #repository
     video_repository:
-        class:        Znaika\FrontendBundle\Entity\Lesson\Content\VideoRepository
+        class:        Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
     synopsis_repository:
-        class:        Znaika\FrontendBundle\Entity\Lesson\Content\SynopsisRepository
+        class:        Znaika\FrontendBundle\Repository\Lesson\Content\SynopsisRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
     subject_repository:
-        class:        Znaika\FrontendBundle\Entity\Lesson\Category\SubjectRepository
+        class:        Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
     user_info_repository:
-        class:        Znaika\FrontendBundle\Entity\User\UserInfoRepository
+        class:        Znaika\FrontendBundle\Repository\User\UserInfoRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
 #menu

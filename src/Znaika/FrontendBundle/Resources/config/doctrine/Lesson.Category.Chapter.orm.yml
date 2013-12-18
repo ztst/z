@@ -1,7 +1,7 @@
 Znaika\FrontendBundle\Entity\Lesson\Category\Chapter:
     type: entity
     table: chapter
-    repositoryClass: Znaika\FrontendBundle\Entity\Lesson\Category\ChapterDBRepository
+    repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Category\ChapterDBRepository
     fields:
         chapterId:
             column: chapter_id

@@ -1,6 +1,8 @@
 <?
 
-    namespace Znaika\FrontendBundle\Entity\Lesson\Category;
+    namespace Znaika\FrontendBundle\Repository\Lesson\Category;
+
+    use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
 
     interface ISubjectRepository
     {

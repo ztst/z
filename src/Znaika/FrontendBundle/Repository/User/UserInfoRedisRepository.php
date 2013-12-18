@@ -1,5 +1,7 @@
 <?
-    namespace Znaika\FrontendBundle\Entity\User;
+    namespace Znaika\FrontendBundle\Repository\User;
+
+    use Znaika\FrontendBundle\Entity\User\UserInfo;
 
     class UserInfoRedisRepository implements IUserInfoRepository
     {

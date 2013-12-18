@@ -77,7 +77,7 @@
             $videos          = $videoRepository->getVideosForCatalog($class, $subjectName);
 
             $response = new JsonResponse();
-            $content  = $this->renderView('ZnaikaFrontendBundle:Video:video-catalog.html.twig', array(
+            $content  = $this->renderView('ZnaikaFrontendBundle:Video:video_catalog.html.twig', array(
                 'videos' => $videos
             ));
 

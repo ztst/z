@@ -1,7 +1,8 @@
 <?
-    namespace Znaika\FrontendBundle\Entity\Lesson\Content;
+    namespace Znaika\FrontendBundle\Repository\Lesson\Content;
 
     use Doctrine\ORM\EntityRepository;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
 
     class SynopsisDBRepository extends EntityRepository implements ISynopsisRepository
     {

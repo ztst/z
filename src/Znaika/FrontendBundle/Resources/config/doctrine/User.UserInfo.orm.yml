@@ -1,7 +1,7 @@
 Znaika\FrontendBundle\Entity\User\UserInfo:
     type: entity
     table: user_info
-    repositoryClass: Znaika\FrontendBundle\Entity\User\UserInfoDBRepository
+    repositoryClass: Znaika\FrontendBundle\Repository\User\UserInfoDBRepository
     fields:
         userInfoId:
             column: user_info_id

@@ -64,7 +64,7 @@
 
             if ( !$canEdit )
             {
-                throw $this->createNotFoundException('The product does not exist');
+                throw $this->createNotFoundException("Can't manage user");
             }
             $userInfoRepository = $this->get('user_info_repository');
             $userInfo           = $userInfoRepository->getOneByUserId($userId);

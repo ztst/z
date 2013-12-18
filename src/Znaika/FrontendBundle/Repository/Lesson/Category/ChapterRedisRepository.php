@@ -1,5 +1,5 @@
 <?
-    namespace Znaika\FrontendBundle\Entity\Lesson\Category;
+    namespace Znaika\FrontendBundle\Repository\Lesson\Category;
 
     class ChapterRedisRepository implements IChapterRepository
     {

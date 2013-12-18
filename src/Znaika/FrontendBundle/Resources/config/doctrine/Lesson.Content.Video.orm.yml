@@ -1,7 +1,7 @@
 Znaika\FrontendBundle\Entity\Lesson\Content\Video:
     type: entity
     table: video
-    repositoryClass: Znaika\FrontendBundle\Entity\Lesson\Content\VideoDBRepository
+    repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Content\VideoDBRepository
     fields:
         videoId:
             column: video_id

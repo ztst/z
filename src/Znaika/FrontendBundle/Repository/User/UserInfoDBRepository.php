@@ -1,7 +1,8 @@
 <?
-    namespace Znaika\FrontendBundle\Entity\User;
+    namespace Znaika\FrontendBundle\Repository\User;
 
     use Doctrine\ORM\EntityRepository;
+    use Znaika\FrontendBundle\Entity\User\UserInfo;
 
     class UserInfoDBRepository extends EntityRepository implements IUserInfoRepository
     {

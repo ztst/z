@@ -1,7 +1,7 @@
 <?
-    namespace Znaika\FrontendBundle\Entity\Lesson\Category;
+    namespace Znaika\FrontendBundle\Repository\Lesson\Category;
 
-    use Znaika\FrontendBundle\Entity\BaseRepository;
+    use Znaika\FrontendBundle\Repository\BaseRepository;
 
     class ChapterRepository extends BaseRepository implements IChapterRepository
     {

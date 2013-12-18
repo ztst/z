@@ -1,5 +1,7 @@
 <?
-    namespace Znaika\FrontendBundle\Entity\Lesson\Content;
+    namespace Znaika\FrontendBundle\Repository\Lesson\Content;
+
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
 
     class SynopsisRedisRepository implements ISynopsisRepository
     {
