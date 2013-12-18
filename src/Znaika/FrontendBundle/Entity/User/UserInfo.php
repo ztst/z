@@ -38,6 +38,19 @@
         private $password;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $videoComments;
+
+        /**
+         * Constructor
+         */
+        public function __construct()
+        {
+            $this->videoComments = new \Doctrine\Common\Collections\ArrayCollection();
+        }
+
+        /**
          * Get userInfoId
          *
          * @return integer
@@ -189,7 +202,6 @@
             return $this->email;
         }
 
-
         /**
          * @inheritDoc
          */
@@ -197,4 +209,37 @@
         {
         }
 
+        /**
+         * Add videoComments
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments
+         *
+         * @return UserInfo
+         */
+        public function addVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments)
+        {
+            $this->videoComments[] = $videoComments;
+
+            return $this;
+        }
+
+        /**
+         * Remove videoComments
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments
+         */
+        public function removeVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments)
+        {
+            $this->videoComments->removeElement($videoComments);
+        }
+
+        /**
+         * Get videoComments
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getVideoComments()
+        {
+            return $this->videoComments;
+        }
     }

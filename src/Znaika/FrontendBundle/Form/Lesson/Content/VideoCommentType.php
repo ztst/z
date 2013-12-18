@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SynopsisType extends AbstractType
+class VideoCommentType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -25,7 +25,7 @@ class SynopsisType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis'
+            'data_class' => 'Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment'
         ));
     }
 
@@ -34,6 +34,6 @@ class SynopsisType extends AbstractType
      */
     public function getName()
     {
-        return 'znaika_frontendbundle_lesson_content_synopsis';
+        return 'znaika_frontendbundle_lesson_content_videocomment';
     }
 }

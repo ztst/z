@@ -30,4 +30,8 @@ Znaika\FrontendBundle\Entity\User\UserInfo:
             column: created_time
             type: datetime
             columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    oneToMany:
+        videoComments:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
+            mappedBy: userInfo
     lifecycleCallbacks: {  }

@@ -14,26 +14,32 @@
   {% if isValidUrl %}
     <h1>{{ video.getName }}</h1>
 
-    <a href="{{ path('show_catalogue_by_class', {'class': classNumber}) }}" class="">{{ classNumber }} класс</a>
+    <a href="{{ path('show_catalogue_by_class', {'class': video.getGrade}) }}" class="">{{ video.getGrade }} класс</a>
     >
-    <a href="{{ path('show_catalogue', {'class': classNumber, 'subjectName': subject.getUrlName}) }}" class="">{{ subject.getName }}</a>
+    <a href="{{ path('show_catalogue', {'class': video.getGrade, 'subjectName': video.getSubject.getUrlName}) }}" class="">{{ video.getSubject.getName }}</a>
     >
     <span>{{ video.getName }}</span>
-    <div clas="clear"></div>
+    <div class="clear"></div>
 
     <div class="video_player_container">
       <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video.getUrl }}" frameborder="0" allowfullscreen></iframe>
     </div>
-    <div clas="clear"></div>
+    <div class="clear"></div>
 
-    {% if not synopsis %}
+    {% if not video.getSynopsis %}
       <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить конспект</a>
     {% else %}
       <div>
         <pre>
-          {{ synopsis.getText }}
+          {{ video.getSynopsis .getText }}
         </pre>
       </div>
+    {% endif %}
+    {% if not video.getVideoComments is empty %}
+      {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': video.getVideoComments}  %}
+    {% endif %}
+    {% if app.user %}
+      {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "videoName": video.getUrlName} %}
     {% endif %}
   {% else %}
     <img src="{{ asset('images/404.jpg') }}" alt="Видео не найдено"/>

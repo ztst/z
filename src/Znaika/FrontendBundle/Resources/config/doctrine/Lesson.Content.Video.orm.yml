@@ -50,4 +50,8 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
                 name: subject_id
                 referencedColumnName: subject_id
                 onDelete: CASCADE
+    oneToMany:
+        videoComments:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
+            mappedBy: video
     lifecycleCallbacks: {  }

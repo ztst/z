@@ -5,7 +5,9 @@
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
     use Znaika\FrontendBundle\Form\Lesson\Content\SynopsisType;
+    use Znaika\FrontendBundle\Form\Lesson\Content\VideoCommentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoType;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Symfony\Component\HttpFoundation\Request;
@@ -42,6 +44,31 @@
                 'form' => $form->createView(),
                 'video'=> $video,
             ));
+        }
+
+        public function addVideoCommentFormAction(Request $request)
+        {
+            $repository = $this->get("video_repository");
+            $video      = $repository->getOneByUrlName($request->get('videoName'));
+
+            $videoComment = new VideoComment();
+            $videoComment->setVideo($video);
+            $videoComment->setUserInfo($this->getUser());
+
+            $form  = $this->createForm(new VideoCommentType(), $videoComment);
+
+            $form->handleRequest($request);
+            if ($form->isValid())
+            {
+                $videoCommentRepository = $this->get('video_comment_repository');
+                $videoCommentRepository->save($videoComment);
+            }
+
+            return new RedirectResponse($this->generateUrl('show_video', array(
+                "class" => $video->getGrade(),
+                "subjectName" => $video->getSubject()->getUrlName(),
+                "videoName" => $video->getUrlName()
+            )));
         }
 
         public function addVideoFormAction(Request $request)
@@ -111,22 +138,20 @@
             $repository = $this->get("video_repository");
             $video      = $repository->getOneByUrlName($videoName);
 
-            $subject = null;
-            $synopsis = null;
+            $isValidUrl = false;
             if ($video)
             {
                 $subject = $video->getSubject();
-                $synopsis = $video->getSynopsis();
+                $isValidUrl = !is_null($video) && $subject->getUrlName() == $subjectName && $video->getGrade() == $class;
             }
 
-            $isValidUrl = !is_null($video) && $subject->getUrlName() == $subjectName && $video->getGrade() == $class;
+            $videoComment = new VideoComment();
+            $addVideoCommentForm  = $this->createForm(new VideoCommentType(), $videoComment);
 
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
-                'classNumber' => $class,
-                'subject'     => $subject,
-                'synopsis'    => $synopsis,
-                'video'       => $video,
-                'isValidUrl'  => $isValidUrl
+                'video'               => $video,
+                'isValidUrl'          => $isValidUrl,
+                'addVideoCommentForm' => $addVideoCommentForm->createView(),
             ));
         }
 

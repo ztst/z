@@ -54,6 +54,19 @@
         private $synopsis;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $videoComments;
+
+        /**
+         * Constructor
+         */
+        public function __construct()
+        {
+            $this->videoComments = new \Doctrine\Common\Collections\ArrayCollection();
+        }
+
+        /**
          * Get videoId
          *
          * @return integer
@@ -263,5 +276,39 @@
         public function getSynopsis()
         {
             return $this->synopsis;
+        }
+
+        /**
+         * Add videoComments
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments
+         *
+         * @return Video
+         */
+        public function addVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments)
+        {
+            $this->videoComments[] = $videoComments;
+
+            return $this;
+        }
+
+        /**
+         * Remove videoComments
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments
+         */
+        public function removeVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments)
+        {
+            $this->videoComments->removeElement($videoComments);
+        }
+
+        /**
+         * Get videoComments
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getVideoComments()
+        {
+            return $this->videoComments;
         }
     }
