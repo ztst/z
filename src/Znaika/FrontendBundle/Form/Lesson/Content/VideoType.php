@@ -28,8 +28,7 @@ class VideoType extends AbstractType
                 'class' => 'Znaika\FrontendBundle\Entity\Lesson\Category\Subject',
                 'property' => 'name'
             ))
-            ->add('save', 'submit')
-        ;
+            ->add('save', 'submit');
     }
 
     /**

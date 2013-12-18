@@ -13,8 +13,12 @@
       {{ knp_menu_render('main') }}
       <ul class="nav navbar-nav navbar-right">
         <li class="about_link"><a href="#">О проекте</a></li>
-        <li><a href="#">Регистрация</a></li>
-        <li><a href="#">Вход</a></li>
+        {% if app.user %}
+          <li><a href="{{ path("show_user_profile", {"userId": app.user.userInfoId}) }}">{{ app.user.firstName }} {{ app.user.lastName }}</a></li>
+        {% else %}
+          <li><a href="{{ path("register") }}">Регистрация</a></li>
+          <li><a href="#">Вход</a></li>
+        {% endif %}
       </ul>
     </div>
   </div>

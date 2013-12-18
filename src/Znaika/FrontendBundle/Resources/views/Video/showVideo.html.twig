@@ -30,7 +30,9 @@
       <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить конспект</a>
     {% else %}
       <div>
-        {{ synopsis.getText }}
+        <pre>
+          {{ synopsis.getText }}
+        </pre>
       </div>
     {% endif %}
   {% else %}
