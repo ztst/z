@@ -57,6 +57,21 @@
         }
 
         /**
+         * @param string $searchString
+         *
+         * @return array|null
+         */
+        public function getVideosBySearchString($searchString)
+        {
+            $result = $this->redisRepository->getVideosBySearchString($searchString);
+            if ( empty($result) )
+            {
+                $result = $this->dbRepository->getVideosBySearchString($searchString);
+            }
+            return $result;
+        }
+
+        /**
          * @param Video $video
          *
          * @return bool

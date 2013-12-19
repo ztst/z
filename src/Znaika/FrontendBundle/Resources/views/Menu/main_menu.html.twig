@@ -12,7 +12,11 @@
     <div class="navbar-collapse collapse">
       {{ knp_menu_render('main') }}
       <ul class="nav navbar-nav navbar-right">
-        <li class="about_link"><a href="#">О проекте</a></li>
+        <li class="about_link">
+          <form action="{{ path("search") }}" method="POST">
+            <input type="search" name="search_string" class="form-control" placeholder="Поиск" />
+          </form>
+        </li>
         {% if app.user %}
           <li><a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}">{{ app.user.firstName }} {{ app.user.lastName }}</a></li>
           <li><a href="{{ path("logout") }}">Выйти</a></li>

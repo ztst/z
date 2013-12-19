@@ -17,6 +17,16 @@
         }
 
         /**
+         * @param string $searchString
+         *
+         * @return array|null
+         */
+        public function getVideosBySearchString($searchString)
+        {
+            return null;
+        }
+
+        /**
          * @param $name
          *
          * @return Video|null

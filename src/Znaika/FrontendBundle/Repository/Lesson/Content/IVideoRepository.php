@@ -14,6 +14,13 @@
         public function getVideosForCatalog($classNumber = null, $subjectName = null);
 
         /**
+         * @param string $searchString
+         *
+         * @return array|null
+         */
+        public function getVideosBySearchString($searchString);
+
+        /**
          * @param $name
          *
          * @return Video|null

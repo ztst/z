@@ -1,0 +1,28 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter='cssrewrite' '@ZnaikaFrontendBundle/Resources/public/css/search.css' %}
+  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts
+  '../app/Resources/public/js/classes/util/EventDispatcher.class.js'
+  '../app/Resources/public/js/classes/page/VideoCatalogFilters.class.js'
+  '../app/Resources/public/js/classes/page/VideoCatalogPage.class.js'
+  %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+  <div id="videoCatalogContainer">
+    {% include "ZnaikaFrontendBundle:Search:search_video_list.html.twig" with {'videos': videos} %}
+  </div>
+  <input id="updateCatalogUrl" type="hidden" value="{{ path('get_videos') }}" />
+{% endblock %}

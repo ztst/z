@@ -40,6 +40,28 @@
         }
 
         /**
+         * @param string $searchString
+         *
+         * @return array|null
+         */
+        public function getVideosBySearchString($searchString)
+        {
+            $searchString = "%{$searchString}%";
+
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->select('v')
+                         ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+                         ->where('v.name LIKE :searchString')
+                         ->setParameter('searchString', $searchString)
+                         ->addOrderBy('v.createdTime', 'DESC');
+
+            $videos = $queryBuilder->getQuery()->getResult();
+
+            return $videos;
+        }
+
+        /**
          * @param Video $video
          *
          * @return bool
