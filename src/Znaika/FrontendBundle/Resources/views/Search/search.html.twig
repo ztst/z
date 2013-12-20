@@ -22,9 +22,18 @@
 
 {% block content %}
   <div>
+    <h2>Видео:</h2>
     {% include "ZnaikaFrontendBundle:Search:search_video_list.html.twig" with {'videos': videos} %}
   </div>
+  <div class="clear"></div>
   <div>
+    <h2>Конспекты:</h2>
+    {% include "ZnaikaFrontendBundle:Search:search_synopsises_list.html.twig" with {'synopsises': synopsises} %}
+  </div>
+  <div class="clear"></div>
+  <div>
+    <h2>Пользователи:</h2>
     {% include "ZnaikaFrontendBundle:Search:search_user_list.html.twig" with {'users': users} %}
   </div>
+  <div class="clear"></div>
 {% endblock %}

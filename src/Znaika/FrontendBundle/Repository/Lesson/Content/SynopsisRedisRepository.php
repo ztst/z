@@ -14,4 +14,14 @@
         {
             return true;
         }
+
+        /**
+         * @param string $searchString
+         *
+         * @return array|null
+         */
+        public function getSynopsisesBySearchString($searchString)
+        {
+            return null;
+        }
     }

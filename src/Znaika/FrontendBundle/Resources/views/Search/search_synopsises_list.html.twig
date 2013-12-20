@@ -1,0 +1,22 @@
+{% if synopsises %}
+  {% for synopsis in synopsises %}
+    <div class="search_result_container col-lg-6 col-xs-12">
+      <div>
+        <h5><strong>Класс: </strong>{{ synopsis.getVideo.getGrade }}</h5>
+        <h5><strong>Предмет: </strong>{{ synopsis.getVideo.getSubject.getName }}</h5>
+        <h5><strong>Тема: </strong>{{ synopsis.getVideo.getName }}</h5>
+        <h5><strong>Конспект: </strong>{{ synopsis.getText|slice(0, 80) }}...</h5>
+        <a href="{{ path('show_video', {
+                      'subjectName': synopsis.getVideo.getSubject.getUrlName,
+                      'class': synopsis.getVideo.getGrade,
+                      'videoName': synopsis.getVideo.getUrlName
+                      }) }}"
+           title="{{ synopsis.getVideo.getName }}">
+          Перейти к видео
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <h5>Не найдено</h5>
+{% endif %}

@@ -11,4 +11,11 @@
          * @return mixed
          */
         public function save(Synopsis $synopsis);
+
+        /**
+         * @param string $searchString
+         *
+         * @return array|null
+         */
+        public function getSynopsisesBySearchString($searchString);
     }

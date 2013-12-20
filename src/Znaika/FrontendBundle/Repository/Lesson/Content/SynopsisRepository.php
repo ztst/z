@@ -38,4 +38,19 @@
 
             return $success;
         }
+
+        /**
+         * @param string $searchString
+         *
+         * @return array|null
+         */
+        public function getSynopsisesBySearchString($searchString)
+        {
+            $result = $this->redisRepository->getSynopsisesBySearchString($searchString);
+            if ( empty($result) )
+            {
+                $result = $this->dbRepository->getSynopsisesBySearchString($searchString);
+            }
+            return $result;
+        }
     }

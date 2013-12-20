@@ -52,8 +52,7 @@
                                  ->createQueryBuilder();
             $queryBuilder->select('v')
                          ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
-                         ->where('v.name LIKE :searchString')
-                         ->setParameter('searchString', $searchString)
+                         ->where($queryBuilder->expr()->like( 'v.name', $queryBuilder->expr()->literal($searchString) ))
                          ->addOrderBy('v.createdTime', 'DESC');
 
             $videos = $queryBuilder->getQuery()->getResult();
