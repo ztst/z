@@ -53,7 +53,7 @@
                 $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
                 $user->setPassword($password);
 
-                $userRepository = $this->get('user_info_repository');
+                $userRepository = $this->get('user_repository');
                 $userRepository->save($user);
 
                 return new RedirectResponse($this->generateUrl('znaika_frontend_homepage'));
@@ -71,7 +71,7 @@
             $currentUser = $this->getUser();
             $canEdit     = ($currentUser && $currentUser->getUserId() == $userId);
 
-            $userRepository = $this->get('user_info_repository');
+            $userRepository = $this->get('user_repository');
             $user           = $userRepository->getOneByUserId($userId);
 
             $form = $this->createForm(new UserProfileType(), $user, array( 'readonly' => !$canEdit ));
@@ -94,7 +94,7 @@
             {
                 throw $this->createNotFoundException("Can't manage user");
             }
-            $userRepository = $this->get('user_info_repository');
+            $userRepository = $this->get('user_repository');
             $user           = $userRepository->getOneByUserId($userId);
 
             $form = $this->createForm(new UserProfileType(), $user, array( 'readonly' => !$canEdit ));

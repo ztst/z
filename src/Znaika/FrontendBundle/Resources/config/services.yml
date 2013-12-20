@@ -19,7 +19,7 @@ services:
         class:        Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    user_info_repository:
+    user_repository:
         class:        Znaika\FrontendBundle\Repository\Profile\UserRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 

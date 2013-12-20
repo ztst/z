@@ -18,4 +18,11 @@
          * @return User|null
          */
         public function getOneByUserId($userId);
+
+        /**
+         * @param string $searchString
+         *
+         * @return array|null
+         */
+        public function getUsersBySearchString($searchString);
     }

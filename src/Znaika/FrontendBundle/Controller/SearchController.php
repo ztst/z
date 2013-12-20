@@ -9,10 +9,13 @@ class SearchController extends Controller
 {
     public function searchAction(Request $request)
     {
-        $videos = $this->searchVideos($request->get("search_string"));
+        $searchString = $request->get("search_string");
+        $videos = $this->searchVideos($searchString);
+        $users = $this->searchUsers($searchString);
 
         return $this->render('ZnaikaFrontendBundle:Search:search.html.twig', array(
-            'videos' => $videos
+            'videos' => $videos,
+            'users'  => $users,
         ));
     }
 
@@ -27,5 +30,18 @@ class SearchController extends Controller
         $videos     = $repository->getVideosBySearchString($searchString);
 
         return $videos;
+    }
+
+    /**
+     * @param $searchString
+     *
+     * @return array
+     */
+    private function searchUsers($searchString)
+    {
+        $repository = $this->get("user_repository");
+        $users     = $repository->getUsersBySearchString($searchString);
+
+        return $users;
     }
 }

@@ -3,7 +3,7 @@
   {% for comment in comments %}
     <li class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" width="60" height="60" " src="{{ asset('images/404.jpg') }}" alt="Здесь будет аватар автора"/>
+        <img class="media-object" width="60" height="60" src="{{ asset('images/404.jpg') }}" alt="Здесь будет аватар автора"/>
       </a>
       <div class="media-body">
         <h4 class="media-heading">{{ comment.getUser.getFirstName }} {{ comment.getUser.getLastName }}</h4>

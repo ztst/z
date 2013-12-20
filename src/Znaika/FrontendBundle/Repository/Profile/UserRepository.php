@@ -45,11 +45,26 @@
          */
         public function getOneByUserId($userId)
         {
-            $user = $this->redisRepository->getOneByUserId($userId);
-            if ( empty($user) )
+            $result = $this->redisRepository->getOneByUserId($userId);
+            if ( empty($result) )
             {
-                $user = $this->dbRepository->getOneByUserId($userId);
+                $result = $this->dbRepository->getOneByUserId($userId);
             }
-            return $user;
+            return $result;
+        }
+
+        /**
+         * @param string $searchString
+         *
+         * @return array|null
+         */
+        public function getUsersBySearchString($searchString)
+        {
+            $result = $this->redisRepository->getUsersBySearchString($searchString);
+            if ( empty($result) )
+            {
+                $result = $this->dbRepository->getUsersBySearchString($searchString);
+            }
+            return $result;
         }
     }
