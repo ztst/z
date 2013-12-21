@@ -4,15 +4,15 @@
   <div class="col-12">
     <h1>{{ video.getName }}</h1>
     {{ form_start(form, {'method': 'POST'}) }}
-    {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
-    <div class="form-group">
-      {{ form_label(form.text, 'Конспект') }}
-      {{ form_errors(form.text) }}
-      {{ form_widget(form.text, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div>
-      {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
-    </div>
+      {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+      <div class="form-group">
+        {{ form_label(form.text, 'Конспект') }}
+        {{ form_errors(form.text) }}
+        {{ form_widget(form.text, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div>
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
+      </div>
     {{ form_end(form) }}
   </div>
 {% endblock %}

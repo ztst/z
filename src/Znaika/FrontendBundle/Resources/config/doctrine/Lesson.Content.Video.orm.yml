@@ -53,5 +53,10 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
     oneToMany:
         videoComments:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
-            mappedBy: video
+            mappedBy:     video
+            cascade:      [persist]
+        quizQuestions:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion
+            mappedBy:     video
+            cascade:      [persist]
     lifecycleCallbacks: {  }

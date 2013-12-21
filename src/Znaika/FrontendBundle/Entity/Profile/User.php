@@ -212,13 +212,14 @@
         /**
          * Add videoComments
          *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment
          *
          * @return User
          */
-        public function addVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments)
+        public function addVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment)
         {
-            $this->videoComments[] = $videoComments;
+            $videoComment->setUser($this);
+            $this->videoComments[] = $videoComment;
 
             return $this;
         }
@@ -226,11 +227,11 @@
         /**
          * Remove videoComments
          *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment
          */
-        public function removeVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments)
+        public function removeVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment)
         {
-            $this->videoComments->removeElement($videoComments);
+            $this->videoComments->removeElement($videoComment);
         }
 
         /**

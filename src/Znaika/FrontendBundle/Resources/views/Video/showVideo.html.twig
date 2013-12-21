@@ -34,15 +34,25 @@
       </div>
     {% else %}
       {% if app.user %}
-          <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить конспект</a>
+        <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить конспект</a>
       {% endif %}
     {% endif %}
+
+    {% if not video.getQuizQuestions is empty %}
+      {% include "ZnaikaFrontendBundle:Video:video_quiz.html.twig" with {'quizQuestions': video.getQuizQuestions}  %}
+    {% endif %}
+    {% if app.user %}
+      <a id="createQuiz" href="{{ path('add_quiz_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить вопрос</a>
+    {% endif %}
+
     {% if not video.getVideoComments is empty %}
       {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': video.getVideoComments}  %}
     {% endif %}
+
     {% if app.user %}
       {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "videoName": video.getUrlName} %}
     {% endif %}
+
   {% else %}
     <img src="{{ asset('images/404.jpg') }}" alt="Видео не найдено"/>
   {% endif %}

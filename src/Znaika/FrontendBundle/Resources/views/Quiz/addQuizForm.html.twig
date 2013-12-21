@@ -1,0 +1,61 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts
+    '../app/Resources/public/js/classes/util/EventDispatcher.class.js'
+    '../app/Resources/public/js/classes/util/QuizQuestionTypes.class.js'
+    '../app/Resources/public/js/classes/form/CreateQuizForm.class.js'
+    '../app/Resources/public/js/classes/page/CreateQuizPage.class.js'
+  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+  <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
+    <h2>Новый вопрос.</h2>
+
+    {{ form_start(form, {'method': 'POST'}) }}
+      {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+      <div class="form-group">
+        {{ form_label(form.text, 'Вопрос') }}
+        {{ form_errors(form.text) }}
+        {{ form_widget(form.text, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group" id="quizTypeSelectContainer">
+        {{ form_label(form.type, 'Тип вопроса') }}
+        {{ form_errors(form.type) }}
+        {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group">
+        <h3>Ответы:</h3>
+        <ul id="quizAnswers" class= "list-group"
+            data-prototype='
+                <div class="form-group">
+                  {{ form_label(form.quizAnswers.vars.prototype.text, 'Ответ') }}
+                  {{ form_errors(form.quizAnswers.vars.prototype.text) }}
+                  {{ form_widget(form.quizAnswers.vars.prototype.text, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                  {{ form_label(form.quizAnswers.vars.prototype.isRight, 'Верный ответ') }}
+                  {{ form_errors(form.quizAnswers.vars.prototype.isRight) }}
+                  {{ form_widget(form.quizAnswers.vars.prototype.isRight) }}
+                </div>
+                '
+          >
+          {% for answer in form.quizAnswers %}
+            <li class="list-group-item">
+              {{ form_row(answer.text) }}
+              {{ form_row(answer.isRight) }}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
+      </div>
+    {{ form_end(form) }}
+  </div>
+{% endblock %}

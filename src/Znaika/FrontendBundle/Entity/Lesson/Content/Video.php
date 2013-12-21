@@ -59,6 +59,11 @@
         private $videoComments;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $quizQuestions;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -281,13 +286,14 @@
         /**
          * Add videoComments
          *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment
          *
          * @return Video
          */
-        public function addVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments)
+        public function addVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment)
         {
-            $this->videoComments[] = $videoComments;
+            $videoComment->setVideo($this);
+            $this->videoComments[] = $videoComment;
 
             return $this;
         }
@@ -295,11 +301,11 @@
         /**
          * Remove videoComments
          *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment
          */
-        public function removeVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComments)
+        public function removeVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment)
         {
-            $this->videoComments->removeElement($videoComments);
+            $this->videoComments->removeElement($videoComment);
         }
 
         /**
@@ -310,5 +316,41 @@
         public function getVideoComments()
         {
             return $this->videoComments;
+        }
+
+
+        /**
+         * Add quizQuestions
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestions
+         *
+         * @return Video
+         */
+        public function addQuizQuestion(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestions)
+        {
+            $quizQuestions->setVideo($this);
+            $this->quizQuestions[] = $quizQuestions;
+
+            return $this;
+        }
+
+        /**
+         * Remove quizQuestions
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestions
+         */
+        public function removeQuizQuestion(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestions)
+        {
+            $this->quizQuestions->removeElement($quizQuestions);
+        }
+
+        /**
+         * Get quizQuestions
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getQuizQuestions()
+        {
+            return $this->quizQuestions;
         }
     }

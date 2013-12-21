@@ -1,0 +1,31 @@
+Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizAnswer:
+    type: entity
+    table: quiz_answer
+    repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\QuizAnswerDBRepository
+    fields:
+        quizAnswerId:
+            column: quiz_answer_id
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        text:
+            type: text
+            notnull: true
+        isRight:
+            column: is_right
+            type: boolean
+            notnull: true
+        createdTime:
+            column: created_time
+            type: datetime
+            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    manyToOne:
+        quizQuestion:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion
+            inversedBy: quizAnswers
+            joinColumn:
+                name: quiz_question_id
+                referencedColumnName: quiz_question_id
+                onDelete: CASCADE
+    lifecycleCallbacks: {  }
