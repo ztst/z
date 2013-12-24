@@ -9,7 +9,7 @@ use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
 
 class VideoType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -20,12 +20,16 @@ class VideoType extends AbstractType
         $builder
             ->add('name', 'text')
             ->add('grade', 'choice', array(
-                'choices'   => $classes
+                'choices' => $classes
             ))
             ->add('urlName', 'text')
             ->add('url', 'text')
             ->add('subject', 'entity', array(
-                'class' => 'Znaika\FrontendBundle\Entity\Lesson\Category\Subject',
+                'class'    => 'Znaika\FrontendBundle\Entity\Lesson\Category\Subject',
+                'property' => 'name'
+            ))
+            ->add('chapter', 'entity', array(
+                'class'    => 'Znaika\FrontendBundle\Entity\Lesson\Category\Chapter',
                 'property' => 'name'
             ))
             ->add('save', 'submit');

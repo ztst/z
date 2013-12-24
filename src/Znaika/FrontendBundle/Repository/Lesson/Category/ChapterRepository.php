@@ -2,6 +2,7 @@
     namespace Znaika\FrontendBundle\Repository\Lesson\Category;
 
     use Znaika\FrontendBundle\Repository\BaseRepository;
+    use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
 
     class ChapterRepository extends BaseRepository implements IChapterRepository
     {
@@ -33,6 +34,21 @@
             if ( empty($result) )
             {
                 $result = $this->dbRepository->getAll();
+            }
+            return $result;
+        }
+
+        /**
+         * @param $chapterId
+         *
+         * @return null|Chapter
+         */
+        public function getOneById($chapterId)
+        {
+            $result = $this->redisRepository->getOneById($chapterId);
+            if ( empty($result) )
+            {
+                $result = $this->dbRepository->getOneById($chapterId);
             }
             return $result;
         }

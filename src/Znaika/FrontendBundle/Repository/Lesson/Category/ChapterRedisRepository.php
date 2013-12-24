@@ -1,6 +1,8 @@
 <?
     namespace Znaika\FrontendBundle\Repository\Lesson\Category;
 
+    use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
+
     class ChapterRedisRepository implements IChapterRepository
     {
         /**
@@ -10,4 +12,15 @@
         {
             return null;
         }
+
+        /**
+         * @param $chapterId
+         *
+         * @return null|Chapter
+         */
+        public function getOneById($chapterId)
+        {
+            return null;
+        }
+
     }

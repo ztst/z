@@ -1,6 +1,7 @@
 <?
     namespace Znaika\FrontendBundle\Entity\Lesson\Content;
 
+    use Symfony\Component\Validator\ExecutionContextInterface;
     use \Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Doctrine\ORM\Mapping as ORM;
 
@@ -353,4 +354,17 @@
         {
             return $this->quizQuestions;
         }
+
+        public function isChapterValid(ExecutionContextInterface $context)
+        {
+            if ($this->getSubject()->getUrlName() != $this->getChapter()->getSubject()->getUrlName())
+            {
+                $context->addViolationAt('chapter', 'Выбранная глава не соответствует предмету.', array(), null); //TODO: text
+            }
+            if ($this->getGrade() != $this->getChapter()->getGrade())
+            {
+                $context->addViolationAt('chapter', 'Выбранная глава не соответствует классу.', array(), null); //TODO: text
+            }
+        }
+
     }

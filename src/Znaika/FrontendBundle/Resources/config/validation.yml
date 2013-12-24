@@ -3,6 +3,8 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
             fields: [urlName]
             message: 'not_unique'
+        - Callback:
+            methods:   [isChapterValid]
     properties:
         name:
             - NotBlank: { message: "not_blank" }

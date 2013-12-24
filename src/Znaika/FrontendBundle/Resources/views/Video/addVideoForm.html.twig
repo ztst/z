@@ -10,11 +10,6 @@
         {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
       </div>
       <div class="form-group">
-        {{ form_label(form.grade, 'Класс') }}
-        {{ form_errors(form.grade) }}
-        {{ form_widget(form.grade, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="form-group">
         {{ form_label(form.urlName, 'Ссылка') }}
         {{ form_errors(form.urlName) }}
         {{ form_widget(form.urlName, {'attr': {'class': 'form-control'}}) }}
@@ -25,9 +20,19 @@
         {{ form_widget(form.url, {'attr': {'class': 'form-control'}}) }}
       </div>
       <div class="form-group">
+        {{ form_label(form.grade, 'Класс') }}
+        {{ form_errors(form.grade) }}
+        {{ form_widget(form.grade, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group">
         {{ form_label(form.subject, 'Предмет') }}
         {{ form_errors(form.subject) }}
         {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(form.chapter, 'Глава') }}
+        {{ form_errors(form.chapter) }}
+        {{ form_widget(form.chapter, {'attr': {'class': 'form-control'}}) }}
       </div>
       <div>
         {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
