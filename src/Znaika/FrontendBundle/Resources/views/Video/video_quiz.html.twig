@@ -1,9 +1,0 @@
-<h3>Тест</h3>
-<ul class="media-list">
-  {% for quizQuestion in quizQuestions %}
-    <li class="media">
-      <h4>{{ quizQuestion.getText }}</h4>
-      {% include "ZnaikaFrontendBundle:Video:quiz_answers.html.twig" with {'quizQuestion': quizQuestion} %}
-    </li>
-  {% endfor %}
-</ul>

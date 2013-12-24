@@ -149,7 +149,6 @@
             $videoComment = new VideoComment();
             $addVideoCommentForm  = $this->createForm(new VideoCommentType(), $videoComment);
 
-
             $question = $video->getQuizQuestions();
             $question = $question[0];
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(

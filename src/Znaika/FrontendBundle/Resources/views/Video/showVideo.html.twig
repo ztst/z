@@ -39,7 +39,7 @@
     {% endif %}
 
     {% if not video.getQuizQuestions is empty %}
-      {% include "ZnaikaFrontendBundle:Video:video_quiz.html.twig" with {'quizQuestions': video.getQuizQuestions}  %}
+      <a id="addSynopsis" href="{{ path('show_quiz', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Пройти тест</a>
     {% endif %}
     {% if app.user %}
       <a id="createQuiz" href="{{ path('add_quiz_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить вопрос</a>

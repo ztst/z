@@ -10,6 +10,16 @@
 
     class QuizController extends Controller
     {
+        public function showQuizAction($videoName)
+        {
+            $repository = $this->get("video_repository");
+            $video      = $repository->getOneByUrlName($videoName);
+
+            return $this->render('ZnaikaFrontendBundle:Quiz:showQuiz.html.twig', array(
+                'quizQuestions'=> $video->getQuizQuestions(),
+            ));
+        }
+
         public function addQuizFormAction(Request $request)
         {
             $repository = $this->get("video_repository");
