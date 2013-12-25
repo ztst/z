@@ -28,7 +28,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment:
             targetEntity: Znaika\FrontendBundle\Entity\Profile\User
             inversedBy: videoComments
             joinColumn:
-                name: user_info_id
-                referencedColumnName: user_info_id
+                name: user_id
+                referencedColumnName: user_id
                 onDelete: "SET NULL"
     lifecycleCallbacks: {  }

@@ -1,10 +1,10 @@
 Znaika\FrontendBundle\Entity\Profile\User:
     type: entity
-    table: user_info
+    table: user
     repositoryClass: Znaika\FrontendBundle\Repository\Profile\UserDBRepository
     fields:
         userId:
-            column: user_info_id
+            column: user_id
             type: integer
             id: true
             generator:
