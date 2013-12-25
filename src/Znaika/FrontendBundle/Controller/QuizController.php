@@ -5,7 +5,10 @@
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\Request;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion;
+    use Znaika\FrontendBundle\Form\Lesson\Content\Quiz\Attempt\UserAttemptType;
     use Znaika\FrontendBundle\Form\Lesson\Content\Quiz\QuizQuestionType;
 
     class QuizController extends Controller
@@ -15,8 +18,26 @@
             $repository = $this->get("video_repository");
             $video      = $repository->getOneByUrlName($videoName);
 
+            $user = $this->getUser();
+
+            $userAttempt = new UserAttempt();
+            $userAttempt->setUser($user);
+            $userAttempt->setVideo($video);
+
+            $questions = $video->getQuizQuestions();
+
+            foreach( $questions as $question )
+            {
+                $questionAnswer = new UserQuestionAnswer();
+                $questionAnswer->setQuizQuestion($question);
+                $userAttempt->addUserQuestionAnswer($questionAnswer);
+            }
+
+            $form  = $this->createForm(new UserAttemptType($video), $userAttempt);
+
             return $this->render('ZnaikaFrontendBundle:Quiz:showQuiz.html.twig', array(
-                'quizQuestions'=> $video->getQuizQuestions(),
+                'quizQuestions' => $video->getQuizQuestions(),
+                'form'          => $form->createView(),
             ));
         }
 

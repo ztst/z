@@ -1,0 +1,37 @@
+Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer:
+    type: entity
+    table: user_question_answer
+    fields:
+        userAttemptId:
+            column: user_attempt_id
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        createdTime:
+            column: created_time
+            type: datetime
+            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    manyToOne:
+        userAttempt:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt
+            inversedBy: userQuestionAnswers
+            joinColumn:
+                name: user_attempt_id
+                referencedColumnName: user_attempt_id
+                onDelete: CASCADE
+        quizQuestion:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion
+            inversedBy: userQuestionAnswers
+            joinColumn:
+                name: quiz_question_id
+                referencedColumnName: quiz_question_id
+                onDelete: CASCADE
+        quizAnswer:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizAnswer
+            inversedBy: userQuestionAnswers
+            joinColumn:
+                name: quiz_answer_id
+                referencedColumnName: quiz_answer_id
+                onDelete: CASCADE
+    lifecycleCallbacks: {  }

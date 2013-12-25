@@ -367,4 +367,42 @@
             }
         }
 
+        /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $userAttempts;
+
+
+    /**
+     * Add userAttempts
+     *
+     * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempts
+     * @return Video
+     */
+    public function addUserAttempt(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempts)
+    {
+        $this->userAttempts[] = $userAttempts;
+    
+        return $this;
     }
+
+    /**
+     * Remove userAttempts
+     *
+     * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempts
+     */
+    public function removeUserAttempt(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempts)
+    {
+        $this->userAttempts->removeElement($userAttempts);
+    }
+
+    /**
+     * Get userAttempts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserAttempts()
+    {
+        return $this->userAttempts;
+    }
+}

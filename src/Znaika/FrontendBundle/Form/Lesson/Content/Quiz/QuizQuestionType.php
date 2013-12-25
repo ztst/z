@@ -27,7 +27,7 @@
                         'allow_add'    => true,
                         'allow_delete' => true,
                         'by_reference' => false,
-                        'label_attr'       => array('class' => 'hidden'),
+                        'label_attr'   => array('class' => 'hidden'),
                     )
                 )
                 ->add('save', 'submit');
