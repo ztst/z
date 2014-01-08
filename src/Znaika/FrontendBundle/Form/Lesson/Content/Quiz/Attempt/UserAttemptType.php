@@ -5,18 +5,11 @@
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-    use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
 
     class UserAttemptType extends AbstractType
     {
-        /**
-         * @var Video
-         */
-        private $video;
-
-        public function __construct(Video $video)
+        public function __construct()
         {
-            $this->video = $video;
         }
 
         /**
@@ -28,8 +21,13 @@
             $builder
                 ->add('userQuestionAnswers', 'collection', array(
                         'type' => new UserQuestionAnswerType(),
+                        'allow_add'    => true,
+                        'allow_delete' => true,
+                        'by_reference' => false,
+                        'label_attr'   => array('class' => 'hidden'),
                     )
-                );
+                )
+                ->add('save', 'submit');
         }
 
         /**

@@ -13,6 +13,24 @@
 
     class QuizController extends Controller
     {
+        public function addQuizAttemptAction(Request $request)
+        {
+            $userAttempt = new UserAttempt();
+
+            $form  = $this->createForm(new UserAttemptType(), $userAttempt);
+            $form->handleRequest($request);
+
+            if ($form->isValid())
+            {
+
+                var_dump($userAttempt);
+                die();
+            }
+            var_dump($request->request);
+            die();
+            die($form->getErrorsAsString());
+        }
+
         public function showQuizAction($videoName)
         {
             $repository = $this->get("video_repository");
@@ -33,7 +51,7 @@
                 $userAttempt->addUserQuestionAnswer($questionAnswer);
             }
 
-            $form  = $this->createForm(new UserAttemptType($video), $userAttempt);
+            $form  = $this->createForm(new UserAttemptType(), $userAttempt);
 
             return $this->render('ZnaikaFrontendBundle:Quiz:showQuiz.html.twig', array(
                 'quizQuestions' => $video->getQuizQuestions(),

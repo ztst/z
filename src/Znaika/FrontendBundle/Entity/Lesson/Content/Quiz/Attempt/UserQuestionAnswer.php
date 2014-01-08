@@ -31,6 +31,21 @@
          */
         private $quizAnswer;
 
+        /**
+         * @return string
+         */
+        public function getQuizQuestionText()
+        {
+            return $this->quizQuestion->getText();
+        }
+
+        /**
+         * @param $text
+         */
+        public function setQuizQuestionText($text)
+        {
+            $this->quizQuestion->setText($text);
+        }
 
         /**
          * Get userAttemptId

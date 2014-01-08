@@ -1,0 +1,13 @@
+@font-face
+{
+    font-family: "OpenSans";
+    src: local("OpenSans"),
+    url(/fonts/open_sans.ttf);
+}
+
+@font-face
+{
+    font-family: "OpenSans Italic";
+    src: local("OpenSans Italic")
+    url(/fonts/open_sans_italic.ttf);
+}

@@ -1,17 +1,27 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
 {% block content %}
-  <!--div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
-    <h3>Тест</h3>
-    <ul class="media-list">
-      {% for quizQuestion in quizQuestions %}
-        <li class="media">
-          <h4>{{ quizQuestion.getText }}</h4>
-          {% include "ZnaikaFrontendBundle:Video:quiz_answers.html.twig" with {'quizQuestion': quizQuestion} %}
-        </li>
-      {% endfor %}
-    </ul>
-  </div--!>
 
-  {{ form(form) }}
+
+  <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
+    <h3>Тест</h3>
+    {{ form_start(form, {'method': 'POST', 'action': path('add_quiz_attempt')}) }}
+      {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+      <ul class="media-list">
+        {% for userQuestionAnswer in form.userQuestionAnswers %}
+          <li class="media">
+            <h4>{{ userQuestionAnswer.vars.value.quizQuestionText }}</h4>
+            {% for answer in userQuestionAnswer.quizAnswer %}
+              {{ form_widget(answer) }}
+              {{ form_label(answer) }}
+              <br />
+            {% endfor %}
+          </li>
+        {% endfor %}
+      </ul>
+      <div>
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
+      </div>
+    {{ form_end(form, {'render_rest': false}) }}
+  </div>
 {% endblock %}
