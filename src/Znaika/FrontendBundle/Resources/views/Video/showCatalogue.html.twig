@@ -21,9 +21,9 @@
 {% endblock %}
 
 {% block content %}
-  {% include "ZnaikaFrontendBundle:Video:video_catalog_filter.html.twig"
+  {#{% include "ZnaikaFrontendBundle:Video:video_catalog_filter.html.twig"
       with {'classes': classes, 'subjects': subjects, 'currentClass': currentClass, 'currentSubjectName': currentSubjectName}
-  %}
+  %} //TODO: remove after New Year #}
   <div id="videoCatalogContainer">
     {% include "ZnaikaFrontendBundle:Video:video_catalog.html.twig" with {'videos': videos} %}
   </div>

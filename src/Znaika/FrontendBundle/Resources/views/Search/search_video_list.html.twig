@@ -7,8 +7,8 @@
                       'class': video.getGrade,
                       'videoName': video.getUrlName
                       }) }}"
-           title="{{ video.getName }}">
-          <img width="100" src="{{ video.getThumbnailUrl }}" alt="{{ video.getName }}" />
+           title="{{ video.getName|raw }}">
+          <img width="100" src="{{ video.getThumbnailUrl }}" alt="{{ video.getName|raw }}" />
         </a>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
@@ -17,13 +17,13 @@
         {% if video.getChapter %}<!-- TODO: remove after adding all chapter's features -->
           <h5><strong>Глава: </strong>{{ video.getChapter.getName }}</h5>
         {% endif %}
-        <h5><strong>Тема: </strong>{{ video.getName }}</h5>
+        <h5><strong>Тема: </strong>{{ video.getName|raw }}</h5>
         <a href="{{ path('show_video', {
                       'subjectName': video.getSubject.getUrlName,
                       'class': video.getGrade,
                       'videoName': video.getUrlName
                       }) }}"
-           title="{{ video.getName }}">
+           title="{{ video.getName|raw }}">
           Перейти к видео
         </a>
       </div>

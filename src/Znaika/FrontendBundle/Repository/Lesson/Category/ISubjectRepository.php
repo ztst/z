@@ -17,4 +17,18 @@
          * @return Subject|null
          */
         public function getOneByUrlName($name);
+
+        /**
+         * @param $grade
+         *
+         * @return array|null
+         */
+        public function getByGrade($grade);
+
+        /**
+         * @param Subject $subject
+         *
+         * @return array|null
+         */
+        public function getSubjectClasses(Subject $subject);
     }

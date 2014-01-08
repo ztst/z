@@ -4,14 +4,14 @@
       <div>
         <h5><strong>Класс: </strong>{{ synopsis.getVideo.getGrade }}</h5>
         <h5><strong>Предмет: </strong>{{ synopsis.getVideo.getSubject.getName }}</h5>
-        <h5><strong>Тема: </strong>{{ synopsis.getVideo.getName }}</h5>
+        <h5><strong>Тема: </strong>{{ synopsis.getVideo.getName|raw }}</h5>
         <h5><strong>Конспект: </strong>{{ synopsis.getText|slice(0, 80) }}...</h5>
         <a href="{{ path('show_video', {
                       'subjectName': synopsis.getVideo.getSubject.getUrlName,
                       'class': synopsis.getVideo.getGrade,
                       'videoName': synopsis.getVideo.getUrlName
                       }) }}"
-           title="{{ synopsis.getVideo.getName }}">
+           title="{{ synopsis.getVideo.getName|raw }}">
           Перейти к видео
         </a>
       </div>

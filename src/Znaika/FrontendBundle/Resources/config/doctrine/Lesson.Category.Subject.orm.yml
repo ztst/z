@@ -22,4 +22,9 @@ Znaika\FrontendBundle\Entity\Lesson\Category\Subject:
             column: created_time
             type: datetime
             columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    oneToMany:
+        videos:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
+            mappedBy:     subject
+            cascade:      [persist]
     lifecycleCallbacks: {  }

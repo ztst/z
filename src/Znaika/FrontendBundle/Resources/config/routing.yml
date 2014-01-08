@@ -7,6 +7,8 @@ show_catalogue:
     defaults: { _controller: ZnaikaFrontendBundle:Video:showCatalogue }
     requirements:
         class:  \d+
+    options:
+        expose: true
 
 show_catalogue_by_class:
     pattern: /catalog/{class}-klass
@@ -17,7 +19,6 @@ show_catalogue_by_class:
 show_catalogue_by_subject:
     pattern: /catalog/{subjectName}
     defaults: { _controller: ZnaikaFrontendBundle:Video:showCatalogue, class: null }
-
 
 get_videos:
     pattern: /get-videos
@@ -49,6 +50,10 @@ add_quiz_form:
 show_quiz:
     pattern: /video/{videoName}/quiz
     defaults: { _controller: ZnaikaFrontendBundle:Quiz:showQuiz }
+
+add_quiz_attempt:
+    pattern: /video/quiz_attempt
+    defaults: { _controller: ZnaikaFrontendBundle:Quiz:addQuizAttempt }
 
 register:
     pattern: /register
@@ -82,3 +87,10 @@ logout:
 search:
     pattern: /search
     defaults: { _controller: ZnaikaFrontendBundle:Search:search }
+
+get_class_subjects:
+    pattern: /class/subjects
+    defaults: { _controller: ZnaikaFrontendBundle:Default:getClassSubjects }
+    methods:  [POST]
+    options:
+        expose: true

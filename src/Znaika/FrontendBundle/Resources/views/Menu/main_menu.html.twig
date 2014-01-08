@@ -9,22 +9,29 @@
       </button>
       <a class="navbar-brand" href="{{ path("znaika_frontend_homepage") }}"><img src="{{ asset("images/logo.png") }}" alt='Знайка' /></a>
     </div>
-    <div class="navbar-collapse collapse">
+    <div class="navbar-collapse collapse col_right">
       {{ knp_menu_render('main') }}
-      <ul class="nav navbar-nav navbar-right">
-        <li class="about_link">
-          <form action="{{ path("search") }}" method="POST">
-            <input type="search" name="search_string" class="form-control" placeholder="Поиск" />
-          </form>
-        </li>
-        {% if app.user %}
-          <li><a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}">{{ app.user.firstName }} {{ app.user.lastName }}</a></li>
-          <li><a href="{{ path("logout") }}">Выйти</a></li>
-        {% else %}
-          <li><a href="{{ path("register") }}">Регистрация</a></li>
-          <li><a href="{{ path("try_login") }}">Вход</a></li>
-        {% endif %}
-      </ul>
+      <div class="main_menu_right">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="search_container">
+            <form action="{{ path("search") }}" method="POST">
+              <div class="input-group">
+                <input type="text" class="form-control search_input" placeholder="Поиск видеоуроков" name="search_string" value="">
+                <div class="input-group-btn search_button_containter">
+                  <button type="submit" class="btn btn-success search_button"><span class="search_icon"></span></button>
+                </div>
+              </div>
+            </form>
+            <div class="clear"></div>
+          </li>
+          {% if app.user %}
+            {# <li><a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}">{{ app.user.firstName }} {{ app.user.lastName }}</a></li> //TODO: remove after New Year #}
+            <li><a href="{{ path("logout") }}" class="btn btn-default login_button">Выйти</a></li>
+          {% else %}
+            <li><a href="{{ path("try_login") }}" class="btn btn-default login_button">Вход</a></li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
   </div>
 </div>

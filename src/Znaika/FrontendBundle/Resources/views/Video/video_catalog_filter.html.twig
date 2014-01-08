@@ -1,5 +1,5 @@
 <div class="catalogue_filters_container">
-  <div class="col-xs-12 col-sm-4">
+  <div class="col-xs-12 col-sm-4 col_left">
     <select id="classFilter" class="form-control">
       <option value="">Все классы</option>
       {% for classNumber in classes %}
@@ -9,7 +9,7 @@
       {% endfor %}
     </select>
   </div>
-  <div class="col-xs-12 col-sm-4">
+  <div class="col-xs-12 col-sm-4 col_left">
     <select id="subjectFilter" class="form-control">
       <option value="">Все предметы</option>
       {% for subject in subjects %}
@@ -19,8 +19,8 @@
       {% endfor %}
     </select>
   </div>
-  <div class="col-xs-12 col-sm-4">
-    <button id="filterUpdateButton" type="button" class="btn btn-primary">Найти</button>
+  <div class="col-xs-12 col-sm-4 col_left">
+    <button id="filterUpdateButton" type="button" class="btn btn-default">Найти</button>
   </div>
   <div class="clear"></div>
 </div>

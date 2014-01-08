@@ -1,6 +1,6 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
-{% block title %}{% if video %}{{ video.getName }}{% endif %}{% endblock %}
+{% block title %}{% if video %}{{ video.getName|raw }}{% endif %}{% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}
@@ -12,13 +12,13 @@
 
 {% block content %}
   {% if isValidUrl %}
-    <h1>{{ video.getName }}</h1>
+    <h1>{{ video.getName|raw }}</h1>
 
     <a href="{{ path('show_catalogue_by_class', {'class': video.getGrade}) }}" class="">{{ video.getGrade }} класс</a>
     >
     <a href="{{ path('show_catalogue', {'class': video.getGrade, 'subjectName': video.getSubject.getUrlName}) }}" class="">{{ video.getSubject.getName }}</a>
     >
-    <span>{{ video.getName }}</span>
+    <span>{{ video.getName|raw }}</span>
     <div class="clear"></div>
 
     <div class="video_player_container">

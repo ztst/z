@@ -41,6 +41,36 @@
         }
 
         /**
+         * @param $grade
+         *
+         * @return array|null
+         */
+        public function getByGrade($grade)
+        {
+            $result = $this->redisRepository->getByGrade($grade);
+            if ( empty($result) )
+            {
+                $result = $this->dbRepository->getByGrade($grade);
+            }
+            return $result;
+        }
+
+        /**
+         * @param Subject $subject
+         *
+         * @return array|null
+         */
+        public function getSubjectClasses(Subject $subject)
+        {
+            $result = $this->redisRepository->getSubjectClasses($subject);
+            if ( empty($result) )
+            {
+                $result = $this->dbRepository->getSubjectClasses($subject);
+            }
+            return $result;
+        }
+
+        /**
          * @return array|null
          */
         public function getAll()

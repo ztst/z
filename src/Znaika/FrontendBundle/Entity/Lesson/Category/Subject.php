@@ -108,4 +108,49 @@
         {
             return $this->createdTime;
         }
+        /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $videos;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->videos = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    
+    /**
+     * Add videos
+     *
+     * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Video $videos
+     * @return Subject
+     */
+    public function addVideo(\Znaika\FrontendBundle\Entity\Lesson\Content\Video $videos)
+    {
+        $this->videos[] = $videos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove videos
+     *
+     * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Video $videos
+     */
+    public function removeVideo(\Znaika\FrontendBundle\Entity\Lesson\Content\Video $videos)
+    {
+        $this->videos->removeElement($videos);
+    }
+
+    /**
+     * Get videos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVideos()
+    {
+        return $this->videos;
+    }
+}
