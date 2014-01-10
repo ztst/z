@@ -40,8 +40,6 @@ var SidebarMenu = EventDispatcher.extend({
         $(event.target).parent("li").addClass("selected");
 
         this.updateSubjects();
-
-        this._subjectsButtons.addClass("hidden");
     },
 
     getClass: function()
@@ -66,6 +64,7 @@ var SidebarMenu = EventDispatcher.extend({
 
     _onUploadSubjectsComplete: function(response)
     {
+        this._subjectsButtons.addClass("hidden");
         for ( i in response.subjectsNames )
         {
             this._subjectsButtons.filter("[id=" + response.subjectsNames[i] + "]").removeClass("hidden");

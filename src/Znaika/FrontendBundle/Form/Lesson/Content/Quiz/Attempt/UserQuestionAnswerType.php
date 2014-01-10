@@ -4,9 +4,12 @@
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
+    use Symfony\Component\Form\FormEvent;
     use Symfony\Component\Form\FormEvents;
+    use Symfony\Component\Form\FormInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer;
+    use Znaika\FrontendBundle\Helper\Util\Lesson\QuizQuestionUtil;
 
     class UserQuestionAnswerType extends AbstractType
     {
@@ -20,30 +23,39 @@
          */
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
-            $builder->addEventListener(FormEvents::PRE_SET_DATA, function ($event) use ($builder)
+
+            $builder->add('quizQuestion', 'entity', array(
+                'class'    => 'Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion',
+                'property' => 'text',
+            ));
+
+            $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
+        }
+
+        public function onPreSetData($event)
+        {
+            $form = $event->getForm();
+            $data = $event->getData();
+
+            if ($data instanceof UserQuestionAnswer)
             {
-                $form = $event->getForm();
-                $data = $event->getData();
+                $this->addQuizAnswersField($form, $data);
+            }
+        }
 
-                if ($data instanceof UserQuestionAnswer)
-                {
-                    $choices = array();
-                    $answers = $data->getQuizQuestion()->getQuizAnswers();
-                    foreach ( $answers as $answer )
-                    {
-                        $choices[$answer->getQuizAnswerId()] = $answer->getText();
-                    }
-
-                    $form
-                        ->add('quizQuestionText', 'text')
-                        ->add('quizAnswer', 'choice', array(
-                                'choices' => $choices,
-                                'expanded' => true,
-                                'multiple' => false,
-                            )
-                        );
-                }
-            });
+        private function addQuizAnswersField($form, UserQuestionAnswer $data = null)
+        {
+            $params = array(
+                'class'    => 'Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizAnswer',
+                'property' => 'text',
+                'expanded' => true,
+            );
+            if ($data)
+            {
+                $params['choices']  = $data->getQuizQuestion()->getQuizAnswers();
+                $params['multiple'] = $data->getQuizQuestion()->getType() == QuizQuestionUtil::MULTIPLE_CHOICE;
+            }
+            $form->add('quizAnswers', 'entity', $params);
         }
 
         /**

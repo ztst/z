@@ -15,23 +15,38 @@
     {
         public function addQuizAttemptAction(Request $request)
         {
-            $userAttempt = new UserAttempt();
+            $userAttempt = $this->prepareUserAttempt($request->get('videoName'));
 
-            $form  = $this->createForm(new UserAttemptType(), $userAttempt);
+            $form = $this->createForm(new UserAttemptType(), $userAttempt);
             $form->handleRequest($request);
 
             if ($form->isValid())
             {
+                $userAttemptRepository = $this->get('user_attempt_repository');
+                $userAttemptRepository->save($userAttempt);
 
-                var_dump($userAttempt);
-                die();
+                return $this->render('ZnaikaFrontendBundle:Quiz:addQuizAttempt.html.twig', array(
+                    'userAttempt'         => $userAttempt,
+                    'userQuestionAnswers' => $userAttempt->getUserQuestionAnswers(),
+                ));
             }
-            var_dump($request->request);
-            die();
-            die($form->getErrorsAsString());
+
+            throw $this->createNotFoundException("Can't add user quiz attempt");
         }
 
         public function showQuizAction($videoName)
+        {
+            $userAttempt = $this->prepareUserAttempt($videoName);
+
+            $form = $this->createForm(new UserAttemptType(), $userAttempt);
+
+            return $this->render('ZnaikaFrontendBundle:Quiz:showQuiz.html.twig', array(
+                'videoName' => $videoName,
+                'form'      => $form->createView(),
+            ));
+        }
+
+        private function prepareUserAttempt($videoName)
         {
             $repository = $this->get("video_repository");
             $video      = $repository->getOneByUrlName($videoName);
@@ -44,19 +59,14 @@
 
             $questions = $video->getQuizQuestions();
 
-            foreach( $questions as $question )
+            foreach ($questions as $question)
             {
                 $questionAnswer = new UserQuestionAnswer();
                 $questionAnswer->setQuizQuestion($question);
                 $userAttempt->addUserQuestionAnswer($questionAnswer);
             }
 
-            $form  = $this->createForm(new UserAttemptType(), $userAttempt);
-
-            return $this->render('ZnaikaFrontendBundle:Quiz:showQuiz.html.twig', array(
-                'quizQuestions' => $video->getQuizQuestions(),
-                'form'          => $form->createView(),
-            ));
+            return $userAttempt;
         }
 
         public function addQuizFormAction(Request $request)
@@ -65,7 +75,7 @@
             $video      = $repository->getOneByUrlName($request->get('videoName'));
 
             $quizQuestion = new QuizQuestion();
-            $form  = $this->createForm(new QuizQuestionType(), $quizQuestion);
+            $form         = $this->createForm(new QuizQuestionType(), $quizQuestion);
 
             $form->handleRequest($request);
 
@@ -78,14 +88,15 @@
                 $quizQuestionRepository->save($quizQuestion);
 
                 return new RedirectResponse($this->generateUrl('show_video', array(
-                    "class" => $video->getGrade(),
+                    "class"       => $video->getGrade(),
                     "subjectName" => $video->getSubject()->getUrlName(),
-                    "videoName" => $video->getUrlName()
+                    "videoName"   => $video->getUrlName()
                 )));
             }
+
             return $this->render('ZnaikaFrontendBundle:Quiz:addQuizForm.html.twig', array(
-                'form' => $form->createView(),
-                'video'=> $video,
+                'form'  => $form->createView(),
+                'video' => $video,
             ));
         }
 

@@ -28,7 +28,7 @@ Znaika\FrontendBundle\Entity\Lesson\Category\Chapter:
     manyToOne:
         subject:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Category\Subject
-            inversedBy: videos
+            inversedBy: chapters
             joinColumn:
                 name: subject_id
                 referencedColumnName: subject_id

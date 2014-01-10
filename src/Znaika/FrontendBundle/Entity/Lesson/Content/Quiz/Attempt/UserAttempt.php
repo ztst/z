@@ -76,13 +76,14 @@
         /**
          * Add userQuestionAnswers
          *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer $userQuestionAnswers
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer $userQuestionAnswer
          *
          * @return UserAttempt
          */
-        public function addUserQuestionAnswer(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer $userQuestionAnswers)
+        public function addUserQuestionAnswer(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer $userQuestionAnswer)
         {
-            $this->userQuestionAnswers[] = $userQuestionAnswers;
+            $userQuestionAnswer->setUserAttempt($this);
+            $this->userQuestionAnswers[] = $userQuestionAnswer;
 
             return $this;
         }
@@ -90,11 +91,11 @@
         /**
          * Remove userQuestionAnswers
          *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer $userQuestionAnswers
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer $userQuestionAnswer
          */
-        public function removeUserQuestionAnswer(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer $userQuestionAnswers)
+        public function removeUserQuestionAnswer(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer $userQuestionAnswer)
         {
-            $this->userQuestionAnswers->removeElement($userQuestionAnswers);
+            $this->userQuestionAnswers->removeElement($userQuestionAnswer);
         }
 
         /**

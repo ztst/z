@@ -32,14 +32,4 @@
         {
             return null;
         }
-
-        /**
-         * @param Subject $subject
-         *
-         * @return array|null
-         */
-        public function getSubjectClasses(Subject $subject)
-        {
-            return null;
-        }
     }

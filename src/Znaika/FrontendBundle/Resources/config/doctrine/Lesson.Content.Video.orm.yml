@@ -34,7 +34,10 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
     oneToOne:
         synopsis:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis
-            mappedBy: video
+            inversedBy: video
+            joinColumn:
+                name: synopsis_id
+                referencedColumnName: synopsis_id
     manyToOne:
         chapter:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Category\Chapter

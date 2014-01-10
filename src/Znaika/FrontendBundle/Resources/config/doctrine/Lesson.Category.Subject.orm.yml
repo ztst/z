@@ -27,4 +27,8 @@ Znaika\FrontendBundle\Entity\Lesson\Category\Subject:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
             mappedBy:     subject
             cascade:      [persist]
+        chapters:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Category\Chapter
+            mappedBy:     subject
+            cascade:      [persist]
     lifecycleCallbacks: {  }

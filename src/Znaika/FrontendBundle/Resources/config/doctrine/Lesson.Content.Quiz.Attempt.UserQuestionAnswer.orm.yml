@@ -1,9 +1,10 @@
 Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer:
     type: entity
     table: user_question_answer
+    repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\Attempt\UserQuestionAnswerDBRepository
     fields:
-        userAttemptId:
-            column: user_attempt_id
+        userQuestionAnswerId:
+            column: user_question_answer_id
             type: integer
             id: true
             generator:
@@ -27,11 +28,17 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer:
                 name: quiz_question_id
                 referencedColumnName: quiz_question_id
                 onDelete: CASCADE
-        quizAnswer:
+    manyToMany:
+        quizAnswers:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizAnswer
             inversedBy: userQuestionAnswers
-            joinColumn:
-                name: quiz_answer_id
-                referencedColumnName: quiz_answer_id
+            joinTable:
+                name: user_answer
+                joinColumns:
+                    user_question_answer_id:
+                        referencedColumnName: user_question_answer_id
+                inverseJoinColumns:
+                    quiz_answer_id:
+                        referencedColumnName: quiz_answer_id
                 onDelete: CASCADE
     lifecycleCallbacks: {  }

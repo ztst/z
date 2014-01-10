@@ -31,6 +31,19 @@
         private $quizQuestion;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $userQuestionAnswers;
+
+        /**
+         * Constructor
+         */
+        public function __construct()
+        {
+            $this->userQuestionAnswers = new \Doctrine\Common\Collections\ArrayCollection();
+        }
+
+        /**
          * Get quizAnswerId
          *
          * @return integer
@@ -134,5 +147,39 @@
         public function getQuizQuestion()
         {
             return $this->quizQuestion;
+        }
+
+        /**
+         * Add userQuestionAnswers
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer $userQuestionAnswers
+         *
+         * @return QuizAnswer
+         */
+        public function addUserQuestionAnswer(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer $userQuestionAnswers)
+        {
+            $this->userQuestionAnswers[] = $userQuestionAnswers;
+
+            return $this;
+        }
+
+        /**
+         * Remove userQuestionAnswers
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer $userQuestionAnswers
+         */
+        public function removeUserQuestionAnswer(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer $userQuestionAnswers)
+        {
+            $this->userQuestionAnswers->removeElement($userQuestionAnswers);
+        }
+
+        /**
+         * Get userQuestionAnswers
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getUserQuestionAnswers()
+        {
+            return $this->userQuestionAnswers;
         }
     }

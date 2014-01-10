@@ -52,7 +52,7 @@ show_quiz:
     defaults: { _controller: ZnaikaFrontendBundle:Quiz:showQuiz }
 
 add_quiz_attempt:
-    pattern: /video/quiz_attempt
+    pattern: /video/{videoName}/quiz_attempt
     defaults: { _controller: ZnaikaFrontendBundle:Quiz:addQuizAttempt }
 
 register:

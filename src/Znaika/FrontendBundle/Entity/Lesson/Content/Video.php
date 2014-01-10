@@ -65,6 +65,11 @@
         private $quizQuestions;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $userAttempts;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -323,14 +328,14 @@
         /**
          * Add quizQuestions
          *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestions
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestion
          *
          * @return Video
          */
-        public function addQuizQuestion(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestions)
+        public function addQuizQuestion(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestion)
         {
-            $quizQuestions->setVideo($this);
-            $this->quizQuestions[] = $quizQuestions;
+            $quizQuestion->setVideo($this);
+            $this->quizQuestions[] = $quizQuestion;
 
             return $this;
         }
@@ -338,11 +343,11 @@
         /**
          * Remove quizQuestions
          *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestions
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestion
          */
-        public function removeQuizQuestion(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestions)
+        public function removeQuizQuestion(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestion)
         {
-            $this->quizQuestions->removeElement($quizQuestions);
+            $this->quizQuestions->removeElement($quizQuestion);
         }
 
         /**
@@ -359,50 +364,47 @@
         {
             if ($this->getSubject()->getUrlName() != $this->getChapter()->getSubject()->getUrlName())
             {
-                $context->addViolationAt('chapter', 'Выбранная глава не соответствует предмету.', array(), null); //TODO: text
+                $context->addViolationAt('chapter', 'Выбранная глава не соответствует предмету.', array(),
+                    null); //TODO: text
             }
             if ($this->getGrade() != $this->getChapter()->getGrade())
             {
-                $context->addViolationAt('chapter', 'Выбранная глава не соответствует классу.', array(), null); //TODO: text
+                $context->addViolationAt('chapter', 'Выбранная глава не соответствует классу.', array(),
+                    null); //TODO: text
             }
         }
 
         /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $userAttempts;
+         * Add userAttempts
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempt
+         *
+         * @return Video
+         */
+        public function addUserAttempt(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempt)
+        {
+            $this->userAttempts[] = $userAttempt;
 
+            return $this;
+        }
 
-    /**
-     * Add userAttempts
-     *
-     * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempts
-     * @return Video
-     */
-    public function addUserAttempt(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempts)
-    {
-        $this->userAttempts[] = $userAttempts;
-    
-        return $this;
+        /**
+         * Remove userAttempts
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempt
+         */
+        public function removeUserAttempt(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempt)
+        {
+            $this->userAttempts->removeElement($userAttempt);
+        }
+
+        /**
+         * Get userAttempts
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getUserAttempts()
+        {
+            return $this->userAttempts;
+        }
     }
-
-    /**
-     * Remove userAttempts
-     *
-     * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempts
-     */
-    public function removeUserAttempt(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempts)
-    {
-        $this->userAttempts->removeElement($userAttempts);
-    }
-
-    /**
-     * Get userAttempts
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUserAttempts()
-    {
-        return $this->userAttempts;
-    }
-}

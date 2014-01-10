@@ -20,7 +20,7 @@
         {
             $builder
                 ->add('userQuestionAnswers', 'collection', array(
-                        'type' => new UserQuestionAnswerType(),
+                        'type'         => new UserQuestionAnswerType(),
                         'allow_add'    => true,
                         'allow_delete' => true,
                         'by_reference' => false,

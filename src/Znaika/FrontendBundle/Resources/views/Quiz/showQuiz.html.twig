@@ -5,13 +5,13 @@
 
   <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
     <h3>Тест</h3>
-    {{ form_start(form, {'method': 'POST', 'action': path('add_quiz_attempt')}) }}
+    {{ form_start(form, {'method': 'POST', 'action': path('add_quiz_attempt', {"videoName": videoName})}) }}
       {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
       <ul class="media-list">
         {% for userQuestionAnswer in form.userQuestionAnswers %}
           <li class="media">
-            <h4>{{ userQuestionAnswer.vars.value.quizQuestionText }}</h4>
-            {% for answer in userQuestionAnswer.quizAnswer %}
+            <h4>{{ userQuestionAnswer.vars.value.quizQuestion.text }}</h4>
+            {% for answer in userQuestionAnswer.quizAnswers %}
               {{ form_widget(answer) }}
               {{ form_label(answer) }}
               <br />
@@ -22,6 +22,7 @@
       <div>
         {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
       </div>
-    {{ form_end(form, {'render_rest': false}) }}
+      {{ form(form, {'attr': {'class': 'hidden'}}) }}
+    {{ form_end(form) }}
   </div>
 {% endblock %}

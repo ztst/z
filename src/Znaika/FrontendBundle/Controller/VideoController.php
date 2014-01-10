@@ -28,7 +28,6 @@
             if ($form->isValid())
             {
                 $synopsis->setVideo($video);
-                $video->setSynopsis($synopsis);
 
                 $synopsisRepository = $this->get('synopsis_repository');
                 $synopsisRepository->save($synopsis);
@@ -149,8 +148,6 @@
             $videoComment = new VideoComment();
             $addVideoCommentForm  = $this->createForm(new VideoCommentType(), $videoComment);
 
-            $question = $video->getQuizQuestions();
-            $question = $question[0];
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
                 'video'               => $video,
                 'isValidUrl'          => $isValidUrl,

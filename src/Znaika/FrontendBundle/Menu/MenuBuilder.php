@@ -38,12 +38,12 @@
             $menu->setChildrenAttribute("class", "nav nav-justified");
 
             $classes = ClassNumberUtil::getAvailableClasses();
-            foreach ( $classes as $classNumber )
+            foreach ($classes as $classNumber)
             {
                 $menuItem = $menu->addChild("$classNumber класс", array());
                 $menuItem->setAttribute("id", $classNumber);
 
-                if ( $currentClass && $currentClass == $classNumber )
+                if ($currentClass && $currentClass == $classNumber)
                 {
                     $menuItem->setAttribute("class", "selected");
                 }
@@ -54,19 +54,19 @@
 
         public function createSidebarSubjectMenu(Request $request, ISubjectRepository $repository)
         {
-            $currentClass = $this->getCurrentClass($request);
+            $currentGrade = $this->getCurrentClass($request);
 
             $menu = $this->factory->createItem("root");
             $menu->setChildrenAttribute("class", "nav nav-justified");
 
+            $currentSubjects = $repository->getByGrade($currentGrade);
             $subjects = $repository->getAll();
-            foreach ( $subjects as $subject )
+            foreach ($subjects as $subject)
             {
-                $menuItem = $menu->addChild($subject->getName(),array());
+                $menuItem = $menu->addChild($subject->getName(), array());
                 $menuItem->setAttribute("id", $subject->getUrlName());
 
-                $classes = $repository->getSubjectClasses($subject);
-                if ( !in_array($currentClass, $classes) )
+                if (!in_array($subject, $currentSubjects))
                 {
                     $menuItem->setAttribute("class", "hidden");
                 }

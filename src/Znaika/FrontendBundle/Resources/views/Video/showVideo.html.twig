@@ -28,9 +28,7 @@
 
     {% if video.getSynopsis %}
       <div>
-        <pre>
-          {{ video.getSynopsis .getText }}
-        </pre>
+        <pre>{{ video.getSynopsis .getText }}</pre>
       </div>
     {% else %}
       {% if app.user %}
@@ -38,10 +36,10 @@
       {% endif %}
     {% endif %}
 
-    {% if not video.getQuizQuestions is empty %}
-      <a id="addSynopsis" href="{{ path('show_quiz', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Пройти тест</a>
-    {% endif %}
     {% if app.user %}
+      {% if not video.getQuizQuestions is empty %}
+        <a id="addSynopsis" href="{{ path('show_quiz', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Пройти тест</a>
+      {% endif %}
       <a id="createQuiz" href="{{ path('add_quiz_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить вопрос</a>
     {% endif %}
 

@@ -183,4 +183,23 @@
         {
             return $this->quizAnswers;
         }
+
+        /**
+         * Get quizAnswers
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getRightAnswers()
+        {
+            $rightAnswers = array();
+            foreach ($this->quizAnswers as $answer)
+            {
+                if ($answer->getIsRight())
+                {
+                    array_push($rightAnswers, $answer);
+                }
+            }
+
+            return $rightAnswers;
+        }
     }

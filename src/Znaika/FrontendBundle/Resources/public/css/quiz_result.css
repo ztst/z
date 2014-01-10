@@ -1,0 +1,9 @@
+.quiz_attempt_result .right
+{
+    color: #009900;
+}
+
+.quiz_attempt_result .wrong
+{
+    color: #990000;
+}

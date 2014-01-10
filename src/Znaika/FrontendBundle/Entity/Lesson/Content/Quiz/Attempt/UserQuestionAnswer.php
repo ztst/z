@@ -5,11 +5,10 @@
 
     class UserQuestionAnswer
     {
-
         /**
          * @var integer
          */
-        private $userAttemptId;
+        private $userQuestionAnswerId;
 
         /**
          * @var \DateTime
@@ -27,34 +26,26 @@
         private $quizQuestion;
 
         /**
-         * @var \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizAnswer
+         * @var \Doctrine\Common\Collections\Collection
          */
-        private $quizAnswer;
+        private $quizAnswers;
 
         /**
-         * @return string
+         * Constructor
          */
-        public function getQuizQuestionText()
+        public function __construct()
         {
-            return $this->quizQuestion->getText();
+            $this->quizAnswers = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
-         * @param $text
-         */
-        public function setQuizQuestionText($text)
-        {
-            $this->quizQuestion->setText($text);
-        }
-
-        /**
-         * Get userAttemptId
+         * Get userQuestionAnswerId
          *
          * @return integer
          */
-        public function getUserAttemptId()
+        public function getUserQuestionAnswerId()
         {
-            return $this->userAttemptId;
+            return $this->userQuestionAnswerId;
         }
 
         /**
@@ -130,26 +121,62 @@
         }
 
         /**
-         * Set quizAnswer
+         * Add quizAnswer
          *
          * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizAnswer $quizAnswer
          *
          * @return UserQuestionAnswer
          */
-        public function setQuizAnswer(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizAnswer $quizAnswer = null)
+        public function addQuizAnswer(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizAnswer $quizAnswer)
         {
-            $this->quizAnswer = $quizAnswer;
+            $quizAnswer->addUserQuestionAnswer($this);
+            $this->quizAnswers[] = $quizAnswer;
 
             return $this;
         }
 
         /**
-         * Get quizAnswer
+         * Remove quizAnswer
          *
-         * @return \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizAnswer
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizAnswer $quizAnswer
          */
-        public function getQuizAnswer()
+        public function removeQuizAnswer(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizAnswer $quizAnswer)
         {
-            return $this->quizAnswer;
+            $this->quizAnswers->removeElement($quizAnswer);
+        }
+
+        /**
+         * Get quizAnswers
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getQuizAnswers()
+        {
+            return $this->quizAnswers;
+        }
+
+        /**
+         * @param $quizAnswers
+         *
+         * @return $this
+         */
+        public function setQuizAnswers($quizAnswers)
+        {
+            if ( $quizAnswers )
+            {
+                if ( is_array($quizAnswers) )
+                {
+                    foreach ( $quizAnswers as $answer )
+                    {
+                        $this->addQuizAnswer($answer);
+                    }
+                }
+                else
+                {
+                    $this->addQuizAnswer($quizAnswers);
+                }
+            }
+
+            return $this;
         }
     }

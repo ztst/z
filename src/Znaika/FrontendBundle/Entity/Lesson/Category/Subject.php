@@ -26,6 +26,10 @@
          */
         private $createdTime;
 
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $chapters;
 
         /**
          * Get subjectId
@@ -108,49 +112,85 @@
         {
             return $this->createdTime;
         }
+
         /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $videos;
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $videos;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->videos = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
-     * Add videos
-     *
-     * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Video $videos
-     * @return Subject
-     */
-    public function addVideo(\Znaika\FrontendBundle\Entity\Lesson\Content\Video $videos)
-    {
-        $this->videos[] = $videos;
-    
-        return $this;
-    }
+        /**
+         * Constructor
+         */
+        public function __construct()
+        {
+            $this->videos = new \Doctrine\Common\Collections\ArrayCollection();
+        }
 
-    /**
-     * Remove videos
-     *
-     * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Video $videos
-     */
-    public function removeVideo(\Znaika\FrontendBundle\Entity\Lesson\Content\Video $videos)
-    {
-        $this->videos->removeElement($videos);
-    }
+        /**
+         * Add videos
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Video $video
+         *
+         * @return Subject
+         */
+        public function addVideo(\Znaika\FrontendBundle\Entity\Lesson\Content\Video $video)
+        {
+            $this->videos[] = $video;
 
-    /**
-     * Get videos
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getVideos()
-    {
-        return $this->videos;
+            return $this;
+        }
+
+        /**
+         * Remove videos
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Video $video
+         */
+        public function removeVideo(\Znaika\FrontendBundle\Entity\Lesson\Content\Video $video)
+        {
+            $this->videos->removeElement($video);
+        }
+
+        /**
+         * Get videos
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getVideos()
+        {
+            return $this->videos;
+        }
+
+        /**
+         * Add chapters
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Category\Chapter $chapters
+         *
+         * @return Subject
+         */
+        public function addChapter(\Znaika\FrontendBundle\Entity\Lesson\Category\Chapter $chapters)
+        {
+            $this->chapters[] = $chapters;
+
+            return $this;
+        }
+
+        /**
+         * Remove chapters
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Category\Chapter $chapters
+         */
+        public function removeChapter(\Znaika\FrontendBundle\Entity\Lesson\Category\Chapter $chapters)
+        {
+            $this->chapters->removeElement($chapters);
+        }
+
+        /**
+         * Get chapters
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getChapters()
+        {
+            return $this->chapters;
+        }
     }
-}

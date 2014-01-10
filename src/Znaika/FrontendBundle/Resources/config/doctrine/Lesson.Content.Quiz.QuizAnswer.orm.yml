@@ -28,4 +28,8 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizAnswer:
                 name: quiz_question_id
                 referencedColumnName: quiz_question_id
                 onDelete: CASCADE
+    manyToMany:
+        userQuestionAnswers:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer
+            mappedBy: quizAnswers
     lifecycleCallbacks: {  }

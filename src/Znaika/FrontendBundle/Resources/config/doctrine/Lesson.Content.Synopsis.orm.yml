@@ -19,8 +19,5 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis:
     oneToOne:
         video:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
-            inversedBy: synopsis
-            joinColumn:
-                name: video_id
-                referencedColumnName: video_id
+            mappedBy: synopsis
     lifecycleCallbacks: {  }

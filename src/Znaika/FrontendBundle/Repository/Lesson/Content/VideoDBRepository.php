@@ -25,7 +25,6 @@
             $this->prepareClassNumberFilter($classNumber, $queryBuilder);
 
             $videos = $queryBuilder->getQuery()->getResult();
-
             return $videos;
         }
 

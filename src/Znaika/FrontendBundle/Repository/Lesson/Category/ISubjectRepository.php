@@ -24,11 +24,4 @@
          * @return array|null
          */
         public function getByGrade($grade);
-
-        /**
-         * @param Subject $subject
-         *
-         * @return array|null
-         */
-        public function getSubjectClasses(Subject $subject);
     }

@@ -1,0 +1,26 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter='cssrewrite' '@ZnaikaFrontendBundle/Resources/public/css/quiz_result.css' %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+  <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5 quiz_attempt_result">
+    <h3>Результат</h3>
+    <ul class="media-list">
+      {% for userQuestionAnswer in userQuestionAnswers %}
+        <li class="media">
+          <h4>{{ userQuestionAnswer.quizQuestion.text }}</h4>
+          {% for userAnswer in userQuestionAnswer.quizAnswers %}
+            <span class="{% if userAnswer.isRight %}right{% else %}wrong{% endif %}">{{ userAnswer.text }}</span>
+            <br />
+          {% endfor %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

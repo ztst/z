@@ -1,6 +1,7 @@
 Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt:
     type: entity
     table: user_attempt
+    repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\Attempt\UserAttemptDBRepository
     fields:
         userAttemptId:
             column: user_attempt_id
