@@ -6,7 +6,6 @@
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\Security\Core\SecurityContext;
-    use Symfony\Component\Translation\Exception\NotFoundResourceException;
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Form\Model\Registration;
     use Znaika\FrontendBundle\Form\Type\RegistrationType;
@@ -141,12 +140,11 @@
 
         private function registerUser(User $user)
         {
-            $user->setStatus(UserStatus::REGISTERED);
             $factory = $this->get('security.encoder_factory');
-
             $encoder  = $factory->getEncoder($user);
             $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
             $user->setPassword($password);
+            $user->setStatus(UserStatus::REGISTERED);
 
             $userRepository = $this->get('user_repository');
             $userRepository->save($user);

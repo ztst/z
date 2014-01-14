@@ -7,6 +7,8 @@
 
     class User implements AdvancedUserInterface
     {
+        const SALT = "iHc26#r8AQ6@Vyo6^23!hMm";
+
         /**
          * @var integer
          */
@@ -201,7 +203,7 @@
          */
         public function getSalt()
         {
-            return $this->getCreatedTime()->getTimestamp();
+            return $this->getCreatedTime()->getTimestamp() . User::SALT;
         }
 
         /**
