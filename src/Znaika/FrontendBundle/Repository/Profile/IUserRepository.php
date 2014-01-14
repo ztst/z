@@ -22,7 +22,14 @@
         /**
          * @param string $searchString
          *
-         * @return array|null
+         * @return User[]|null
          */
         public function getUsersBySearchString($searchString);
+
+        /**
+         * @param string $email
+         *
+         * @return User|null
+         */
+        public function getOneByEmail($email);
     }

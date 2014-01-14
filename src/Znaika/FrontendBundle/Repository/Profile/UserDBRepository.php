@@ -30,7 +30,7 @@
         /**
          * @param string $searchString
          *
-         * @return array|null
+         * @return User[]|null
          */
         public function getUsersBySearchString($searchString)
         {
@@ -57,5 +57,15 @@
             $videos = $qb->getQuery()->getResult();
 
             return $videos;
+        }
+
+        /**
+         * @param string $email
+         *
+         * @return User|null
+         */
+        public function getOneByEmail($email)
+        {
+            return $this->findOneByEmail($email);
         }
     }

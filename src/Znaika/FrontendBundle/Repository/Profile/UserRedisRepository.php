@@ -28,9 +28,19 @@
         /**
          * @param string $searchString
          *
-         * @return array|null
+         * @return User[]|null
          */
         public function getUsersBySearchString($searchString)
+        {
+            return null;
+        }
+
+        /**
+         * @param string $email
+         *
+         * @return User|null
+         */
+        public function getOneByEmail($email)
         {
             return null;
         }

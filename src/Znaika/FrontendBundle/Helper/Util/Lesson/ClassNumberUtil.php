@@ -9,18 +9,21 @@
         public static function getAvailableClasses()
         {
             $availableClasses = range(self::MIN_CLASS_NUMBER, self::MAX_CLASS_NUMBER);
+
             return $availableClasses;
         }
 
         public static function getAvailableClassesForSelect()
         {
             $availableClasses = self::getAvailableClasses();
+
             return array_combine($availableClasses, $availableClasses);
         }
 
         public static function isValidClassNumber($number)
         {
             $availableClasses = self::getAvailableClasses();
+
             return in_array($number, $availableClasses);
         }
     }

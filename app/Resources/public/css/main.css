@@ -132,14 +132,14 @@ body
     margin: 0;
 }
 
-.class_menu span
+.class_menu li>span
 {
     color: #555555;
     text-align: center;
     white-space: nowrap;
 
     height: 28px;
-    padding: 4px 5px 0px!important;
+    padding: 1px 5px 0px!important;
     margin-left: 3px;
     cursor: pointer;
     display: block;
@@ -157,7 +157,7 @@ body
     background: linear-gradient(#ffffff, #eeeff3);
 }
 
-.class_menu .selected span
+.class_menu .selected>span
 {
     border: 1px solid #33a2d6;
     border-bottom: 1px solid #82bada;
@@ -172,9 +172,14 @@ body
     background: linear-gradient(#33a2d6, #2f92c5);
 }
 
-.class_menu .first span
+.class_menu .first>span
 {
     margin: 0;
+}
+
+.class_menu .grade_number
+{
+    font-size: 16px;
 }
 
 .subject_menu ul

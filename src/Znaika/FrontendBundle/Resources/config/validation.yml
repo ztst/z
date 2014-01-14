@@ -15,3 +15,18 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             - NotBlank: { message: "not_blank" }
         url:
             - NotBlank: { message: "not_blank" }
+
+Znaika\FrontendBundle\Entity\Profile\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [email]
+            message: 'not_unique'
+    properties:
+        firstName:
+            - NotBlank: { message: "not_blank" }
+        lastName:
+            - NotBlank: { message: "not_blank" }
+        email:
+            - NotBlank: { message: "not_blank" }
+        password:
+            - NotBlank: { message: "not_blank" }

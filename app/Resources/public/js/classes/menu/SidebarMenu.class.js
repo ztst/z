@@ -21,6 +21,26 @@ var SidebarMenu = EventDispatcher.extend({
         this._updateSubjectsUrl = url;
     },
 
+    getClass: function()
+    {
+        return this._classesButtons.filter(".selected").prop("id");
+    },
+
+    updateSubjects: function()
+    {
+        var grade = this.getClass();
+        if ( !grade )
+        {
+            return;
+        }
+
+        var data = {
+            'class': grade
+        }
+
+        $.post( this._updateSubjectsUrl, data, handler( this, '_onUploadSubjectsComplete' ), 'json' );
+    },
+
     _onSubjectClick: function(event)
     {
         var grade = this.getClass();
@@ -40,26 +60,6 @@ var SidebarMenu = EventDispatcher.extend({
         $(event.target).parent("li").addClass("selected");
 
         this.updateSubjects();
-    },
-
-    getClass: function()
-    {
-        return this._classesButtons.filter(".selected").prop("id");
-    },
-
-    updateSubjects: function()
-    {
-        var grade = this.getClass();
-        if ( !grade )
-        {
-            return;
-        }
-
-        var data = {
-            'class': grade
-        }
-
-        $.post( this._updateSubjectsUrl, data, handler( this, '_onUploadSubjectsComplete' ), 'json' );
     },
 
     _onUploadSubjectsComplete: function(response)

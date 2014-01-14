@@ -2,6 +2,19 @@ parameters:
     znaika_frontend.menu.class: Knp\Menu\MenuItem
 
 services:
+    mail_helper:
+        class:     Znaika\FrontendBundle\Helper\Mail\MailHelper
+        arguments: ['@mailer']
+    user_mailer:
+        class:     Znaika\FrontendBundle\Helper\Mail\UserMailer
+        arguments:
+            - @mail_helper
+            - @twig
+    register_key_encoder:
+        class:     Znaika\FrontendBundle\Helper\Encode\RegisterKeyEncoder
+    user_authenticator:
+        class:     Znaika\FrontendBundle\Helper\Security\UserAuthenticator
+        arguments: ['@service_container']
 #repository
     video_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository
@@ -25,6 +38,10 @@ services:
 
     user_repository:
         class:        Znaika\FrontendBundle\Repository\Profile\UserRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    user_registration_repository:
+        class:        Znaika\FrontendBundle\Repository\Profile\UserRegistrationRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
     quiz_question_repository:

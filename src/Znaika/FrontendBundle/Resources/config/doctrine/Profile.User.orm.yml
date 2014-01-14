@@ -30,8 +30,14 @@ Znaika\FrontendBundle\Entity\Profile\User:
             column: created_time
             type: datetime
             columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        status:
+            type: integer
+            notnull: true
     oneToMany:
         videoComments:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
+            mappedBy: user
+        userRegistrations:
+            targetEntity: Znaika\FrontendBundle\Entity\Profile\UserRegistration
             mappedBy: user
     lifecycleCallbacks: {  }

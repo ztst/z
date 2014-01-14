@@ -1,0 +1,13 @@
+{% extends 'ZnaikaFrontendBundle::Email/emailLayout.html.twig' %}
+
+{% block subject %}
+  Подтверждение регистрации
+{% endblock %}
+
+{% block body %}
+  Добрый день! Вы зарегистрировались на сайте znaika.ru.
+  Для подтверждения регистрации, пройдите пожалуйста
+  <a href="{{ url('register_confirm', {'registerKey': registerKey}) }}" title="">по ссылке</a>.
+  <br/>
+  Если Вы не регистрировались на сайте, пожалуйста проигнорируйте это письмо.
+{% endblock %}

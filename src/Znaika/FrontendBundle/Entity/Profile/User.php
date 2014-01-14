@@ -1,46 +1,55 @@
 <?
     namespace Znaika\FrontendBundle\Entity\Profile;
 
-    use Symfony\Component\Security\Core\Role\Role;
-    use Symfony\Component\Security\Core\User\UserInterface;
+    use Symfony\Component\Security\Core\User\AdvancedUserInterface;
     use Doctrine\ORM\Mapping as ORM;
+    use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
 
-    class User implements UserInterface
+    class User implements AdvancedUserInterface
     {
         /**
          * @var integer
          */
-        private $userId;
+        protected $userId;
+        /**
+         * @var string
+         */
+        protected $firstName;
 
         /**
          * @var string
          */
-        private $firstName;
+        protected $lastName;
 
         /**
          * @var string
          */
-        private $lastName;
-
-        /**
-         * @var string
-         */
-        private $email;
+        protected $email;
 
         /**
          * @var \DateTime
          */
-        private $createdTime;
+        protected $createdTime;
 
         /**
          * @var string
          */
-        private $password;
+        protected $password;
+
+        /**
+         * @var integer
+         */
+        protected $status;
 
         /**
          * @var \Doctrine\Common\Collections\Collection
          */
-        private $videoComments;
+        protected $videoComments;
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        protected $userRegistrations;
 
         /**
          * Constructor
@@ -48,6 +57,7 @@
         public function __construct()
         {
             $this->videoComments = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->userRegistrations = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
@@ -191,7 +201,7 @@
          */
         public function getSalt()
         {
-            return null;
+            return $this->getCreatedTime()->getTimestamp();
         }
 
         /**
@@ -242,5 +252,135 @@
         public function getVideoComments()
         {
             return $this->videoComments;
+        }
+
+        /**
+         * @param int $status
+         */
+        public function setStatus($status)
+        {
+            $this->status = $status;
+        }
+
+        /**
+         * @return int
+         */
+        public function getStatus()
+        {
+            return $this->status;
+        }
+
+        /**
+         * Checks whether the user's account has expired.
+         *
+         * Internally, if this method returns false, the authentication system
+         * will throw an AccountExpiredException and prevent login.
+         *
+         * @return Boolean true if the user's account is non expired, false otherwise
+         *
+         * @see AccountExpiredException
+         */
+        public function isAccountNonExpired()
+        {
+            return true;
+        }
+
+        /**
+         * Checks whether the user is locked.
+         *
+         * Internally, if this method returns false, the authentication system
+         * will throw a LockedException and prevent login.
+         *
+         * @return Boolean true if the user is not locked, false otherwise
+         *
+         * @see LockedException
+         */
+        public function isAccountNonLocked()
+        {
+            return true;
+        }
+
+        /**
+         * Checks whether the user's credentials (password) has expired.
+         *
+         * Internally, if this method returns false, the authentication system
+         * will throw a CredentialsExpiredException and prevent login.
+         *
+         * @return Boolean true if the user's credentials are non expired, false otherwise
+         *
+         * @see CredentialsExpiredException
+         */
+        public function isCredentialsNonExpired()
+        {
+            return true;
+        }
+
+        /**
+         * Checks whether the user is enabled.
+         *
+         * Internally, if this method returns false, the authentication system
+         * will throw a DisabledException and prevent login.
+         *
+         * @return Boolean true if the user is enabled, false otherwise
+         *
+         * @see DisabledException
+         */
+        public function isEnabled()
+        {
+            return $this->status == UserStatus::ACTIVE;
+        }
+
+        /**
+         * Add userRegistrations
+         *
+         * @param \Znaika\FrontendBundle\Entity\Profile\UserRegistration $userRegistrations
+         *
+         * @return User
+         */
+        public function addUserRegistration(\Znaika\FrontendBundle\Entity\Profile\UserRegistration $userRegistrations)
+        {
+            $this->userRegistrations[] = $userRegistrations;
+
+            return $this;
+        }
+
+        /**
+         * Remove userRegistrations
+         *
+         * @param \Znaika\FrontendBundle\Entity\Profile\UserRegistration $userRegistrations
+         */
+        public function removeUserRegistration(\Znaika\FrontendBundle\Entity\Profile\UserRegistration $userRegistrations)
+        {
+            $this->userRegistrations->removeElement($userRegistrations);
+        }
+
+        /**
+         * Get userRegistrations
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getUserRegistrations()
+        {
+            return $this->userRegistrations;
+        }
+
+        /**
+         * Returns last user registration or new user registration object
+         *
+         * @return UserRegistration
+         */
+        public function getLastUserRegistration()
+        {
+            if ($this->userRegistrations->count())
+            {
+                $userRegistration = $this->userRegistrations->last();
+            }
+            else
+            {
+                $userRegistration = new UserRegistration();
+                $userRegistration->setUser($this);
+            }
+
+            return $userRegistration;
         }
     }

@@ -94,3 +94,7 @@ get_class_subjects:
     methods:  [POST]
     options:
         expose: true
+
+register_confirm:
+    pattern: /register-confirm/{registerKey}
+    defaults: { _controller: ZnaikaFrontendBundle:User:registerConfirm }

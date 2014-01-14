@@ -40,7 +40,8 @@
             $classes = ClassNumberUtil::getAvailableClasses();
             foreach ($classes as $classNumber)
             {
-                $menuItem = $menu->addChild("$classNumber класс", array());
+                $menuItem = $menu->addChild("<span class='grade_number'>$classNumber</span> класс");
+                $menuItem->setExtra('safe_label', true);
                 $menuItem->setAttribute("id", $classNumber);
 
                 if ($currentClass && $currentClass == $classNumber)

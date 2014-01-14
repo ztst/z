@@ -1,0 +1,30 @@
+Znaika\FrontendBundle\Entity\Profile\UserRegistration:
+    type: entity
+    table: user_registration
+    repositoryClass: Znaika\FrontendBundle\Repository\Profile\UserRegistrationDBRepository
+    fields:
+        userRegistrationId:
+            column: user_registration_id
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        registerKey:
+            column: register_key
+            type: string
+            length: 255
+            notnull: true
+            unique: true
+        createdTime:
+            column: created_time
+            type: datetime
+            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    manyToOne:
+        user:
+            targetEntity: Znaika\FrontendBundle\Entity\Profile\User
+            inversedBy: userRegistrations
+            joinColumn:
+                name: user_id
+                referencedColumnName: user_id
+                onDelete: "SET NULL"
+    lifecycleCallbacks: {  }

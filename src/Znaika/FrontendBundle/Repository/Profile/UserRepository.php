@@ -56,7 +56,7 @@
         /**
          * @param string $searchString
          *
-         * @return array|null
+         * @return User[]|null
          */
         public function getUsersBySearchString($searchString)
         {
@@ -64,6 +64,22 @@
             if ( empty($result) )
             {
                 $result = $this->dbRepository->getUsersBySearchString($searchString);
+            }
+            return $result;
+        }
+
+        /**
+         * @param string $email
+         *
+         * @return User|null
+         */
+        public function getOneByEmail($email)
+        {
+
+            $result = $this->redisRepository->getOneByEmail($email);
+            if ( empty($result) )
+            {
+                $result = $this->dbRepository->getOneByEmail($email);
             }
             return $result;
         }
