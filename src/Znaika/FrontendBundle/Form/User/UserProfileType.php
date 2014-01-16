@@ -17,7 +17,13 @@
             $builder
                 ->add('firstName', 'text', array( 'read_only' => $readonly ))
                 ->add('lastName', 'text', array( 'read_only' => $readonly ))
-                ->add('email', 'email', array( 'read_only' => $readonly ));
+                ->add('email', 'email', array( 'read_only' => $readonly ))
+                ->add('city', 'entity', array(
+                    'class'    => 'Znaika\FrontendBundle\Entity\Location\City',
+                    'property' => 'name',
+                    'empty_value' => '',
+                    'required' => false
+                ));
 
             if ( !$readonly )
             {

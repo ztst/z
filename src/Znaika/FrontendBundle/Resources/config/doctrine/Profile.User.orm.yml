@@ -40,4 +40,12 @@ Znaika\FrontendBundle\Entity\Profile\User:
         userRegistrations:
             targetEntity: Znaika\FrontendBundle\Entity\Profile\UserRegistration
             mappedBy: user
+    manyToOne:
+        city:
+            targetEntity: Znaika\FrontendBundle\Entity\Location\City
+            inversedBy: users
+            joinColumn:
+                name: city_id
+                referencedColumnName: city_id
+                onDelete: "SET NULL"
     lifecycleCallbacks: {  }

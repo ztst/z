@@ -54,6 +54,11 @@
         protected $userRegistrations;
 
         /**
+         * @var \Znaika\FrontendBundle\Entity\Location\City
+         */
+        private $city;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -384,5 +389,28 @@
             }
 
             return $userRegistration;
+        }
+
+        /**
+         * Set city
+         *
+         * @param \Znaika\FrontendBundle\Entity\Location\City $city
+         * @return User
+         */
+        public function setCity(\Znaika\FrontendBundle\Entity\Location\City $city = null)
+        {
+            $this->city = $city;
+
+            return $this;
+        }
+
+        /**
+         * Get city
+         *
+         * @return \Znaika\FrontendBundle\Entity\Location\City
+         */
+        public function getCity()
+        {
+            return $this->city;
         }
     }
