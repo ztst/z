@@ -5,10 +5,6 @@
     use Doctrine\ORM\Mapping as ORM;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
 
-    /**
-     * Class User
-     * @package Znaika\FrontendBundle\Entity\Profile
-     */
     class User implements AdvancedUserInterface
     {
         const SALT = "iHc26#r8AQ6@Vyo6^23!hMm";
@@ -63,16 +59,27 @@
         private $city;
 
         /**
+
+         * @var integer
+         */
+        protected $sex;
+
+        /**
          * @var \Znaika\FrontendBundle\Entity\Education\School
          */
         private $school;
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $videoViews;
 
         /**
          * Constructor
          */
         public function __construct()
         {
-            $this->videoComments = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->videoComments     = new \Doctrine\Common\Collections\ArrayCollection();
             $this->userRegistrations = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
@@ -404,6 +411,7 @@
          * Set city
          *
          * @param \Znaika\FrontendBundle\Entity\Location\City $city
+         *
          * @return User
          */
         public function setCity(\Znaika\FrontendBundle\Entity\Location\City $city = null)
@@ -444,5 +452,63 @@
         public function getSchool()
         {
             return $this->school;
+        }
+
+        /**
+         * Set sex
+         *
+         * @param integer $sex
+         *
+         * @return User
+         */
+        public function setSex($sex)
+        {
+            $this->sex = $sex;
+
+            return $this;
+        }
+
+        /**
+         * Get sex
+         *
+         * @return integer
+         */
+        public function getSex()
+        {
+            return $this->sex;
+        }
+
+        /**
+         * Add videoViews
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews
+         *
+         * @return User
+         */
+        public function addVideoView(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews)
+        {
+            $this->videoViews[] = $videoViews;
+
+            return $this;
+        }
+
+        /**
+         * Remove videoViews
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews
+         */
+        public function removeVideoView(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews)
+        {
+            $this->videoViews->removeElement($videoViews);
+        }
+
+        /**
+         * Get videoViews
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getVideoViews()
+        {
+            return $this->videoViews;
         }
     }

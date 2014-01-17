@@ -26,9 +26,15 @@
     </div>
     <div class="clear"></div>
 
+    {% if videoView %}
+      <div class="video_view">
+        Просмотрено: {{ videoView.getCreatedTime|date('Y-m-d H:i:s') }}
+      </div>
+    {% endif %}
+
     {% if video.getSynopsis %}
       <div>
-        <pre>{{ video.getSynopsis .getText }}</pre>
+        <pre>{{ video.getSynopsis.getText }}</pre>
       </div>
     {% else %}
       {% if app.user %}

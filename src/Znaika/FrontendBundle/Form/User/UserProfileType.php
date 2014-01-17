@@ -3,6 +3,7 @@
 
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Znaika\FrontendBundle\Helper\Util\Profile\UserSex;
 
     class UserProfileType extends UserType
     {
@@ -13,6 +14,8 @@
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $readonly = $options['readonly'];
+
+            $sexTypes = UserSex::getAvailableTypesTexts();
 
             $builder
                 ->add('firstName', 'text', array('read_only' => $readonly))
@@ -29,6 +32,9 @@
                     'property'    => 'name',
                     'empty_value' => '',
                     'required'    => false
+                ))
+                ->add('sex', 'choice', array(
+                    'choices' => $sexTypes
                 ));
 
             if (!$readonly)

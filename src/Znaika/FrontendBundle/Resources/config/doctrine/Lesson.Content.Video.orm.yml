@@ -66,4 +66,8 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt
             mappedBy:     video
             cascade:      [persist]
+        videoViews:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoView
+            mappedBy:     video
+            cascade:      [persist]
     lifecycleCallbacks: {  }
