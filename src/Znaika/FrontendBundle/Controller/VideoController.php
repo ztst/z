@@ -28,10 +28,11 @@
 
             if ($form->isValid())
             {
-                $synopsis->setVideo($video);
-
                 $synopsisRepository = $this->get('synopsis_repository');
                 $synopsisRepository->save($synopsis);
+
+                $video->setSynopsis($synopsis);
+                $repository->save($video);
 
                 return new RedirectResponse($this->generateUrl('show_video', array(
                     "class"       => $video->getGrade(),
@@ -149,12 +150,17 @@
             $videoComment        = new VideoComment();
             $addVideoCommentForm = $this->createForm(new VideoCommentType(), $videoComment);
 
-            $this->saveVideoView($video);
+            $videoView = $this->getVideoView($video);
+            if (!$videoView)
+            {
+                $this->saveVideoView($video);
+            }
 
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
                 'video'               => $video,
                 'isValidUrl'          => $isValidUrl,
                 'addVideoCommentForm' => $addVideoCommentForm->createView(),
+                'videoView'           => $videoView
             ));
         }
 
@@ -202,19 +208,24 @@
         /**
          * @param $video
          */
+        private function getVideoView($video)
+        {
+            $repository = $this->get("video_view_repository");
+
+            return $repository->getOneByVideoAndUser($video, $this->getUser());
+        }
+
+        /**
+         * @param $video
+         */
         private function saveVideoView($video)
         {
             $repository = $this->get("video_view_repository");
 
-            $videoView = $repository->getOneByVideoAndUser($video, $this->getUser());
-            if (!$videoView)
-            {
-                $videoView = new VideoView();
+            $videoView = new VideoView();
+            $videoView->setVideo($video);
+            $videoView->setUser($this->getUser());
 
-                $videoView->setVideo($video);
-                $videoView->setUser($this->getUser());
-
-                $repository->save($videoView);
-            }
+            $repository->save($videoView);
         }
     }
