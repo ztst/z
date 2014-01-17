@@ -48,4 +48,11 @@ Znaika\FrontendBundle\Entity\Profile\User:
                 name: city_id
                 referencedColumnName: city_id
                 onDelete: "SET NULL"
+        school:
+            targetEntity: Znaika\FrontendBundle\Entity\Education\School
+            inversedBy: users
+            joinColumn:
+                name: school_id
+                referencedColumnName: school_id
+                onDelete: "SET NULL"
     lifecycleCallbacks: {  }

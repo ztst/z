@@ -5,6 +5,10 @@
     use Doctrine\ORM\Mapping as ORM;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
 
+    /**
+     * Class User
+     * @package Znaika\FrontendBundle\Entity\Profile
+     */
     class User implements AdvancedUserInterface
     {
         const SALT = "iHc26#r8AQ6@Vyo6^23!hMm";
@@ -57,6 +61,11 @@
          * @var \Znaika\FrontendBundle\Entity\Location\City
          */
         private $city;
+
+        /**
+         * @var \Znaika\FrontendBundle\Entity\Education\School
+         */
+        private $school;
 
         /**
          * Constructor
@@ -412,5 +421,28 @@
         public function getCity()
         {
             return $this->city;
+        }
+
+        /**
+         * Set school
+         *
+         * @param \Znaika\FrontendBundle\Entity\Education\School $school
+         * @return User
+         */
+        public function setSchool(\Znaika\FrontendBundle\Entity\Education\School $school = null)
+        {
+            $this->school = $school;
+
+            return $this;
+        }
+
+        /**
+         * Get school
+         *
+         * @return \Znaika\FrontendBundle\Entity\Education\School
+         */
+        public function getSchool()
+        {
+            return $this->school;
         }
     }

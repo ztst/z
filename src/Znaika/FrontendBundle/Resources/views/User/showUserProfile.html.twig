@@ -24,6 +24,11 @@
         {{ form_errors(form.city) }}
         {{ form_widget(form.city, {'attr': {'class': 'form-control'}, 'disabled': not canEdit}) }}
       </div>
+      <div class="form-group">
+        {{ form_label(form.school, 'Школа') }}
+        {{ form_errors(form.school) }}
+        {{ form_widget(form.school, {'attr': {'class': 'form-control'}, 'disabled': not canEdit}) }}
+      </div>
       {% if canEdit %}
         <div>
           {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
