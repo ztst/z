@@ -6,6 +6,7 @@
     use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\VideoView;
     use Znaika\FrontendBundle\Form\Lesson\Content\SynopsisType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoCommentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoType;
@@ -21,7 +22,7 @@
             $video      = $repository->getOneByUrlName($request->get('videoName'));
 
             $synopsis = new Synopsis();
-            $form  = $this->createForm(new SynopsisType(), $synopsis);
+            $form     = $this->createForm(new SynopsisType(), $synopsis);
 
             $form->handleRequest($request);
 
@@ -33,15 +34,15 @@
                 $synopsisRepository->save($synopsis);
 
                 return new RedirectResponse($this->generateUrl('show_video', array(
-                    "class" => $video->getGrade(),
+                    "class"       => $video->getGrade(),
                     "subjectName" => $video->getSubject()->getUrlName(),
-                    "videoName" => $video->getUrlName()
+                    "videoName"   => $video->getUrlName()
                 )));
             }
 
             return $this->render('ZnaikaFrontendBundle:Video:addSynopsisForm.html.twig', array(
-                'form' => $form->createView(),
-                'video'=> $video,
+                'form'  => $form->createView(),
+                'video' => $video,
             ));
         }
 
@@ -54,7 +55,7 @@
             $videoComment->setVideo($video);
             $videoComment->setUser($this->getUser());
 
-            $form  = $this->createForm(new VideoCommentType(), $videoComment);
+            $form = $this->createForm(new VideoCommentType(), $videoComment);
 
             $form->handleRequest($request);
             if ($form->isValid())
@@ -64,9 +65,9 @@
             }
 
             return new RedirectResponse($this->generateUrl('show_video', array(
-                "class" => $video->getGrade(),
+                "class"       => $video->getGrade(),
                 "subjectName" => $video->getSubject()->getUrlName(),
-                "videoName" => $video->getUrlName()
+                "videoName"   => $video->getUrlName()
             )));
         }
 
@@ -83,9 +84,9 @@
                 $videoRepository->save($video);
 
                 return new RedirectResponse($this->generateUrl('show_video', array(
-                    "class" => $video->getGrade(),
+                    "class"       => $video->getGrade(),
                     "subjectName" => $video->getSubject()->getUrlName(),
-                    "videoName" => $video->getUrlName()
+                    "videoName"   => $video->getUrlName()
                 )));
             }
 
@@ -140,13 +141,15 @@
             $isValidUrl = false;
             if ($video)
             {
-                $subject = $video->getSubject();
+                $subject    = $video->getSubject();
                 $isValidUrl = !is_null($video) && $subject->getUrlName() == $subjectName && $video->getGrade() == $class;
 
             }
 
-            $videoComment = new VideoComment();
-            $addVideoCommentForm  = $this->createForm(new VideoCommentType(), $videoComment);
+            $videoComment        = new VideoComment();
+            $addVideoCommentForm = $this->createForm(new VideoCommentType(), $videoComment);
+
+            $this->saveVideoView($video);
 
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
                 'video'               => $video,
@@ -170,5 +173,48 @@
             }
 
             return $subject;
+        }
+
+        public function addVideoViewAction(Request $request)
+        {
+            $video = new Video();
+            $form  = $this->createForm(new VideoType(), $video);
+
+            $form->handleRequest($request);
+
+            if ($form->isValid())
+            {
+                $videoRepository = $this->get('video_repository');
+                $videoRepository->save($video);
+
+                return new RedirectResponse($this->generateUrl('show_video', array(
+                    "class"       => $video->getGrade(),
+                    "subjectName" => $video->getSubject()->getUrlName(),
+                    "videoName"   => $video->getUrlName()
+                )));
+            }
+
+            return $this->render('ZnaikaFrontendBundle:Video:addVideoForm.html.twig', array(
+                'form' => $form->createView(),
+            ));
+        }
+
+        /**
+         * @param $video
+         */
+        private function saveVideoView($video)
+        {
+            $repository = $this->get("video_view_repository");
+
+            $videoView = $repository->getOneByVideoAndUser($video, $this->getUser());
+            if (!$videoView)
+            {
+                $videoView = new VideoView();
+
+                $videoView->setVideo($video);
+                $videoView->setUser($this->getUser());
+
+                $repository->save($videoView);
+            }
         }
     }

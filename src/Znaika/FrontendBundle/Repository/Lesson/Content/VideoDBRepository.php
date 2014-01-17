@@ -19,12 +19,13 @@
             $queryBuilder->select('v')
                          ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
                          ->addOrderBy('v.createdTime', 'DESC');
-                        //->setMaxResults(3) TODO: set limit;
+            //->setMaxResults(3) TODO: set limit;
 
             $this->prepareSubjectNameFilter($subjectName, $queryBuilder);
             $this->prepareClassNumberFilter($classNumber, $queryBuilder);
 
             $videos = $queryBuilder->getQuery()->getResult();
+
             return $videos;
         }
 
@@ -51,7 +52,7 @@
                                  ->createQueryBuilder();
             $queryBuilder->select('v')
                          ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
-                         ->where($queryBuilder->expr()->like( 'v.name', $queryBuilder->expr()->literal($searchString) ))
+                         ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
                          ->addOrderBy('v.createdTime', 'DESC');
 
             $videos = $queryBuilder->getQuery()->getResult();
@@ -85,7 +86,7 @@
 
         private function prepareSubjectNameFilter($subjectName, $queryBuilder)
         {
-            if ( $subjectName )
+            if ($subjectName)
             {
                 $queryBuilder->innerJoin('v.subject', 's')
                              ->andWhere('s.urlName = :subjectName')

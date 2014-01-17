@@ -59,11 +59,16 @@
         private $city;
 
         /**
+         * @var integer
+         */
+        protected $sex;
+
+        /**
          * Constructor
          */
         public function __construct()
         {
-            $this->videoComments = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->videoComments     = new \Doctrine\Common\Collections\ArrayCollection();
             $this->userRegistrations = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
@@ -395,6 +400,7 @@
          * Set city
          *
          * @param \Znaika\FrontendBundle\Entity\Location\City $city
+         *
          * @return User
          */
         public function setCity(\Znaika\FrontendBundle\Entity\Location\City $city = null)
@@ -412,5 +418,69 @@
         public function getCity()
         {
             return $this->city;
+        }
+
+        /**
+         * Set sex
+         *
+         * @param integer $sex
+         *
+         * @return User
+         */
+        public function setSex($sex)
+        {
+            $this->sex = $sex;
+
+            return $this;
+        }
+
+        /**
+         * Get sex
+         *
+         * @return integer
+         */
+        public function getSex()
+        {
+            return $this->sex;
+        }
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $videoViews;
+
+
+        /**
+         * Add videoViews
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews
+         *
+         * @return User
+         */
+        public function addVideoView(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews)
+        {
+            $this->videoViews[] = $videoViews;
+
+            return $this;
+        }
+
+        /**
+         * Remove videoViews
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews
+         */
+        public function removeVideoView(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews)
+        {
+            $this->videoViews->removeElement($videoViews);
+        }
+
+        /**
+         * Get videoViews
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getVideoViews()
+        {
+            return $this->videoViews;
         }
     }
