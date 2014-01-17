@@ -36,7 +36,7 @@ var SidebarMenu = EventDispatcher.extend({
 
         var data = {
             'class': grade
-        }
+        };
 
         $.post( this._updateSubjectsUrl, data, handler( this, '_onUploadSubjectsComplete' ), 'json' );
     },

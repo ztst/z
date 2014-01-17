@@ -1,0 +1,25 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block content %}
+  <a href="{{ path('show_threads') }}">Мои сообщения</a>
+  <h2>Отправить новое сообщение</h2>
+
+  {{ form_start(form, {'action': url('new_message'), 'method': 'POST'}) }}
+    {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+    <div class="form-group">
+      {{ form_label(form.recipient, 'Получатель') }}
+      {{ form_widget(form.recipient, {'attr': {'class': 'form-control'}}) }}
+      <br />
+      <a href="{{ path('show_user_profile', {'userId': participant.userId}) }}" title="">{{ participant }}</a>
+    </div>
+    <div class="form-group">
+      {{ form_label(form.body, 'Сообщение') }}
+      {{ form_errors(form.body) }}
+      {{ form_widget(form.body, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Отправить</button>
+    </div>
+  {{ form_end(form) }}
+
+{% endblock %}

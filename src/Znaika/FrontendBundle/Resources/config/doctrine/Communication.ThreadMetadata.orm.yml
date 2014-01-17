@@ -1,0 +1,25 @@
+Znaika\FrontendBundle\Entity\Communication\ThreadMetadata:
+    type: entity
+    table: thread_metadata
+    fields:
+        threadMetadataId:
+            column: thread_metadata_id
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        thread:
+            targetEntity: Znaika\FrontendBundle\Entity\Communication\Thread
+            inversedBy: metadata
+            joinColumn:
+                name: thread_id
+                referencedColumnName: thread_id
+                onDelete: CASCADE
+        participant:
+            targetEntity: Znaika\FrontendBundle\Entity\Profile\User
+            joinColumn:
+                name: participant_id
+                referencedColumnName: user_id
+                onDelete: CASCADE
+    lifecycleCallbacks: {  }

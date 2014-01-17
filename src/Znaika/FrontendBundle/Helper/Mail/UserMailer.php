@@ -2,6 +2,7 @@
     namespace Znaika\FrontendBundle\Helper\Mail;
 
     use Znaika\FrontendBundle\Entity\Profile\UserRegistration;
+    use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
     class UserMailer
     {

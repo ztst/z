@@ -1,13 +1,13 @@
 <div class="col-sm-12 col_left">
   {{ form_start(form, {'action': path('add_video_comment_form', {"videoName": videoName}), 'method': 'POST'}) }}
-  {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
-  <div class="form-group">
-    {{ form_label(form.text, 'Ваш комментарий') }}
-    {{ form_errors(form.text) }}
-    {{ form_widget(form.text, {'attr': {'class': 'form-control'}}) }}
-  </div>
-  <div>
-    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Добавить комментарий'}) }}
-  </div>
+    {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+    <div class="form-group">
+      {{ form_label(form.text, 'Ваш комментарий') }}
+      {{ form_errors(form.text) }}
+      {{ form_widget(form.text, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div>
+      {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Добавить комментарий'}) }}
+    </div>
   {{ form_end(form) }}
 </div>

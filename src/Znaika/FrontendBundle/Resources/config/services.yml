@@ -1,63 +1,88 @@
 parameters:
+parameters:
     znaika_frontend.menu.class: Knp\Menu\MenuItem
 
 services:
-    mail_helper:
+    znaika_frontend.new_thread_form.type:
+        class:     Znaika\FrontendBundle\Form\Communication\NewThreadMessageFormType
+
+    znaika_frontend.mail_helper:
         class:     Znaika\FrontendBundle\Helper\Mail\MailHelper
         arguments: ['@mailer']
-    user_mailer:
+
+    znaika_frontend.user_mailer:
         class:     Znaika\FrontendBundle\Helper\Mail\UserMailer
         arguments:
-            - @mail_helper
+            - @znaika_frontend.mail_helper
             - @twig
-    register_key_encoder:
+
+    znaika_frontend.register_key_encoder:
         class:     Znaika\FrontendBundle\Helper\Encode\RegisterKeyEncoder
-    user_authenticator:
+
+    znaika_frontend.user_authenticator:
         class:     Znaika\FrontendBundle\Helper\Security\UserAuthenticator
         arguments: ['@service_container']
+
+    znaika_frontend.messages_provider:
+        class:     Znaika\FrontendBundle\Provider\MessagesProvider
+        arguments:
+            - @znaika_frontend.thread_repository
+            - @znaika_frontend.message_repository
+            - @fos_message.thread_reader
+            - @fos_message.authorizer
+            - @fos_message.participant_provider
+
 #repository
-    video_repository:
+    znaika_frontend.video_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    video_comment_repository:
+    znaika_frontend.video_comment_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    synopsis_repository:
+    znaika_frontend.synopsis_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\SynopsisRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    subject_repository:
+    znaika_frontend.subject_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    chapter_repository:
+    znaika_frontend.chapter_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Category\ChapterRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    user_repository:
+    znaika_frontend.user_repository:
         class:        Znaika\FrontendBundle\Repository\Profile\UserRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    user_registration_repository:
+    znaika_frontend.user_registration_repository:
         class:        Znaika\FrontendBundle\Repository\Profile\UserRegistrationRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    quiz_question_repository:
+    znaika_frontend.quiz_question_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\QuizQuestionRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    quiz_answer_repository:
+    znaika_frontend.quiz_answer_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\QuizAnswerRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    user_attempt_repository:
+    znaika_frontend.user_attempt_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\Attempt\UserAttemptRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    user_question_answer_repository:
+    znaika_frontend.user_question_answer_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\Attempt\UserQuestionAnswerRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika_frontend.message_repository:
+        class:        Znaika\FrontendBundle\Repository\Communication\MessageRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika_frontend.thread_repository:
+        class:        Znaika\FrontendBundle\Repository\Communication\ThreadRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
 #menu
@@ -87,8 +112,18 @@ services:
         class: "%znaika_frontend.menu.class%"
         factory_service: znaika_frontend.menu_builder
         factory_method: createSidebarSubjectMenu
-        arguments: ["@request", "@subject_repository"]
+        arguments: ["@request", "@znaika_frontend.subject_repository"]
         scope: request
         tags:
             - { name: knp_menu.menu, alias: sidebar_subject_menu }
 
+#form
+    znaika_frontend.recipient_type:
+        class:        Znaika\FrontendBundle\Form\Communication\RecipientType
+        arguments:    ["@znaika_frontend.user_to_id_transformer"]
+        tags:
+            - { name: form.type, alias: recipient_input }
+
+    znaika_frontend.user_to_id_transformer:
+        class:     Znaika\FrontendBundle\Form\DataTransformer\UserToIdTransformer
+        arguments: ['@znaika_frontend.user_repository']

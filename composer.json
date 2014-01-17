@@ -20,7 +20,8 @@
         "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
         "knplabs/knp-menu-bundle": "1.1.2",
-        "friendsofsymfony/jsrouting-bundle": "1.5.0"
+        "friendsofsymfony/jsrouting-bundle": "1.5.0",
+        "friendsofsymfony/message-bundle": "1.2.2"
     },
     "scripts": {
         "post-install-cmd": [

@@ -28,7 +28,7 @@ class SearchController extends Controller
      */
     private function searchVideos($searchString)
     {
-        $repository = $this->get("video_repository");
+        $repository = $this->get("znaika_frontend.video_repository");
         $videos     = $repository->getVideosBySearchString($searchString);
 
         return $videos;
@@ -41,7 +41,7 @@ class SearchController extends Controller
      */
     private function searchUsers($searchString)
     {
-        $repository = $this->get("user_repository");
+        $repository = $this->get("znaika_frontend.user_repository");
         $users      = $repository->getUsersBySearchString($searchString);
 
         return $users;
@@ -54,7 +54,7 @@ class SearchController extends Controller
      */
     private function searchSynopsises($searchString)
     {
-        $repository = $this->get("synopsis_repository");
+        $repository = $this->get("znaika_frontend.synopsis_repository");
         $synopsises = $repository->getSynopsisesBySearchString($searchString);
 
         return $synopsises;

@@ -73,3 +73,14 @@ knp_menu:
         template: knp_menu.html.twig
     templating: false # if true, enables the helper for PHP templates
     default_renderer: twig # The renderer to use, list is also available by default
+
+fos_message:
+    db_driver:        orm
+    thread_class:     Znaika\FrontendBundle\Entity\Communication\Thread
+    message_class:    Znaika\FrontendBundle\Entity\Communication\Message
+    message_manager:  znaika_frontend.message_repository
+    thread_manager:   znaika_frontend.thread_repository
+    user_transformer: znaika_frontend.user_to_id_transformer
+    provider:         znaika_frontend.messages_provider
+    new_thread_form:
+        type:         znaika_frontend.new_thread_form.type

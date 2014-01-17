@@ -22,7 +22,7 @@
 
             if ($form->isValid())
             {
-                $userAttemptRepository = $this->get('user_attempt_repository');
+                $userAttemptRepository = $this->get('znaika_frontend.user_attempt_repository');
                 $userAttemptRepository->save($userAttempt);
 
                 return $this->render('ZnaikaFrontendBundle:Quiz:addQuizAttempt.html.twig', array(
@@ -48,7 +48,7 @@
 
         private function prepareUserAttempt($videoName)
         {
-            $repository = $this->get("video_repository");
+            $repository = $this->get("znaika_frontend.video_repository");
             $video      = $repository->getOneByUrlName($videoName);
 
             $user = $this->getUser();
@@ -71,7 +71,7 @@
 
         public function addQuizFormAction(Request $request)
         {
-            $repository = $this->get("video_repository");
+            $repository = $this->get("znaika_frontend.video_repository");
             $video      = $repository->getOneByUrlName($request->get('videoName'));
 
             $quizQuestion = new QuizQuestion();
@@ -84,7 +84,7 @@
                 $quizQuestion->setVideo($video);
                 $video->addQuizQuestion($quizQuestion);
 
-                $quizQuestionRepository = $this->get('quiz_question_repository');
+                $quizQuestionRepository = $this->get('znaika_frontend.quiz_question_repository');
                 $quizQuestionRepository->save($quizQuestion);
 
                 return new RedirectResponse($this->generateUrl('show_video', array(

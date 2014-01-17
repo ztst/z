@@ -47,7 +47,7 @@
 
         public function registerConfirmAction($registerKey)
         {
-            $userRegistrationRepository = $this->get('user_registration_repository');
+            $userRegistrationRepository = $this->get('znaika_frontend.user_registration_repository');
             $userRegistration           = $userRegistrationRepository->getOneByRegisterKey($registerKey);
 
             if (!$userRegistration)
@@ -61,7 +61,7 @@
             $userRegistrationRepository->delete($userRegistration);
 
             /** @var UserAuthenticator $userAuthenticator */
-            $userAuthenticator = $this->get('user_authenticator');
+            $userAuthenticator = $this->get('znaika_frontend.user_authenticator');
             $userAuthenticator->authenticate($user);
 
             return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
@@ -71,7 +71,7 @@
         {
             $registration = new Registration();
             /** @var UserRepository $userRepository */
-            $userRepository = $this->get('user_repository');
+            $userRepository = $this->get('znaika_frontend.user_repository');
             $form           = $this->createForm(new RegistrationType($userRepository), $registration);
             $form->handleRequest($request);
 
@@ -94,18 +94,18 @@
         public function showUserProfileAction($userId)
         {
             $currentUser = $this->getUser();
-            $canEdit     = ($currentUser && $currentUser->getUserId() == $userId);
+            $ownProfile  = ($currentUser && $currentUser->getUserId() == $userId);
 
             /** @var UserRepository $userRepository */
-            $userRepository = $this->get('user_repository');
+            $userRepository = $this->get('znaika_frontend.user_repository');
             $user           = $userRepository->getOneByUserId($userId);
 
-            $form = $this->createForm(new UserProfileType($userRepository), $user, array('readonly' => !$canEdit));
+            $form = $this->createForm(new UserProfileType($userRepository), $user, array('readonly' => !$ownProfile));
 
             return $this->render('ZnaikaFrontendBundle:User:showUserProfile.html.twig', array(
-                'form'    => $form->createView(),
-                'canEdit' => $canEdit,
-                'userId'  => $userId,
+                'form'       => $form->createView(),
+                'ownProfile' => $ownProfile,
+                'userId'     => $userId,
             ));
         }
 
@@ -122,7 +122,7 @@
             }
 
             /** @var UserRepository $userRepository */
-            $userRepository = $this->get('user_repository');
+            $userRepository = $this->get('znaika_frontend.user_repository');
             $user           = $userRepository->getOneByUserId($userId);
 
             $form = $this->createForm(new UserProfileType($userRepository), $user, array('readonly' => !$canEdit));
@@ -140,18 +140,20 @@
 
         private function registerUser(User $user)
         {
-            $factory = $this->get('security.encoder_factory');
+            $user->setCreatedTime(new \DateTime());
+            $user->setStatus(UserStatus::REGISTERED);
+
+            $factory  = $this->get('security.encoder_factory');
             $encoder  = $factory->getEncoder($user);
             $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
             $user->setPassword($password);
-            $user->setStatus(UserStatus::REGISTERED);
 
-            $userRepository = $this->get('user_repository');
+            $userRepository = $this->get('znaika_frontend.user_repository');
             $userRepository->save($user);
 
             $userRegistration = $this->createUserRegistration($user);
 
-            $this->get('user_mailer')->sendRegisterConfirm($userRegistration);
+            $this->get('znaika_frontend.user_mailer')->sendRegisterConfirm($userRegistration);
         }
 
         private function createUserRegistration(User $user)
@@ -159,11 +161,11 @@
             $userRegistration = $user->getLastUserRegistration();
 
             /** @var RegisterKeyEncoder $encoder */
-            $encoder = $this->get('register_key_encoder');
+            $encoder = $this->get('znaika_frontend.register_key_encoder');
             $key     = $encoder->encode($user->getEmail(), $user->getSalt());
             $userRegistration->setRegisterKey($key);
 
-            $userRegistrationRepository = $this->get('user_registration_repository');
+            $userRegistrationRepository = $this->get('znaika_frontend.user_registration_repository');
             $userRegistrationRepository->save($userRegistration);
 
             return $userRegistration;

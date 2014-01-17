@@ -15,7 +15,7 @@
         public function getClassSubjectsAction(Request $request)
         {
             $class             = $request->request->get("class");
-            $subjectRepository = $this->get("subject_repository");
+            $subjectRepository = $this->get("znaika_frontend.subject_repository");
             $subjects          = $subjectRepository->getByGrade($class);
 
             $subjectsUrlNames = $this->prepareSubjectsUrlNames($subjects);

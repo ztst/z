@@ -1,0 +1,28 @@
+Znaika\FrontendBundle\Entity\Communication\Thread:
+    type: entity
+    table: thread
+    repositoryClass: Znaika\FrontendBundle\Repository\Communication\ThreadDBRepository
+    fields:
+        threadId:
+            column: thread_id
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        createdBy:
+            column: created_by
+            targetEntity: Znaika\FrontendBundle\Entity\Profile\User
+            joinColumn:
+                name: created_by
+                referencedColumnName: user_id
+                onDelete: CASCADE
+    oneToMany:
+        messages:
+            targetEntity: Znaika\FrontendBundle\Entity\Communication\Message
+            mappedBy:     thread
+        metadata:
+            targetEntity: Znaika\FrontendBundle\Entity\Communication\ThreadMetadata
+            mappedBy:     thread
+            cascade:      [all]
+    lifecycleCallbacks: {  }

@@ -1,11 +1,12 @@
 <?
     namespace Znaika\FrontendBundle\Entity\Profile;
 
-    use Symfony\Component\Security\Core\User\AdvancedUserInterface;
     use Doctrine\ORM\Mapping as ORM;
+    use Symfony\Component\Security\Core\User\AdvancedUserInterface;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
+    use FOS\MessageBundle\Model\ParticipantInterface;
 
-    class User implements AdvancedUserInterface
+    class User implements AdvancedUserInterface, ParticipantInterface
     {
         const SALT = "iHc26#r8AQ6@Vyo6^23!hMm";
 
@@ -384,5 +385,20 @@
             }
 
             return $userRegistration;
+        }
+
+        /**
+         * Gets the unique identifier of the participant
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->getUserId();
+        }
+
+        public function __toString()
+        {
+            return (string) $this->getFirstName() . "  " . $this->getLastName();
         }
     }

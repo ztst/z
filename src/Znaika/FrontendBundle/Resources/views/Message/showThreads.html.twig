@@ -1,0 +1,34 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block content %}
+  <h4>Мои сообщения</h4>
+
+  {% if threads %}
+    {% for thread in threads %}
+      {% set lastMessage = thread.getNotDeletedLastMessage(app.user) %}
+      {% if lastMessage %}
+        <div>
+          <a href="{{ url('show_user_profile', {'userId': thread.getOtherParticipant(app.user).getId}) }}">
+            {{ thread.getOtherParticipant(app.user) }}
+          </a>
+          <br />
+          {{ lastMessage.createdAt|date }}
+          <br />
+          <a href="{{ url('show_thread', {'threadId': thread.id}) }}" title="">
+            К диалогу
+          </a>
+          {% if not fos_message_is_read(thread) %}
+            (Есть новые)
+          {% endif %}
+          <br />
+          {{ lastMessage.sender|e }}
+          <br />
+          {{ lastMessage.body|e }}
+        </div>
+        <hr/>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    У вас нет сообщений
+  {% endif %}
+{% endblock %}

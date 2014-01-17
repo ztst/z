@@ -1,0 +1,39 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts
+    '../app/Resources/public/js/classes/page/ShowThreadPage.class.js'
+  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+  <a href="{{ path('show_threads') }}">Мои сообщения</a>
+  <h4>Диалог с <a href="{{ path('show_user_profile', {'userId': participant.userId}) }}" title="">{{ participant }}</a></h4>
+  {% for message in thread.getNotDeletedMessages(app.user) %}
+    <div class="messenger_thread_message">
+      <div class="messenger_thread_message_info">
+        {{ message.sender|e }}, {{ message.createdAt|date }}
+      </div>
+      <div class="messenger_thread_message_body" id="message_{{ message.id }}">
+        {{ message.body }}
+      </div>
+      <a href="javascript:void(0);" title="" class="delete_message_link" id="{{ message.id }}">Удалить</a>
+    </div>
+    <hr/>
+  {% endfor %}
+  {{ form_start(form, {'action': url('show_thread', {'threadId': thread.id}), 'method': 'POST'}) }}
+    {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+    <div class="form-group">
+      {{ form_errors(form.body) }}
+      {{ form_widget(form.body, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Ответить</button>
+    </div>
+  {{ form_end(form) }}
+
+{% endblock %}
