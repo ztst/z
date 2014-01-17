@@ -55,12 +55,33 @@
         protected $userRegistrations;
 
         /**
+         * @var \Znaika\FrontendBundle\Entity\Location\City
+         */
+        private $city;
+
+        /**
+         * @var integer
+         */
+        protected $sex;
+
+        /**
+         * @var \Znaika\FrontendBundle\Entity\Education\School
+         */
+        private $school;
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $videoViews;
+
+        /**
          * Constructor
          */
         public function __construct()
         {
-            $this->videoComments = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->videoComments     = new \Doctrine\Common\Collections\ArrayCollection();
             $this->userRegistrations = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->videoViews        = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
@@ -388,6 +409,112 @@
         }
 
         /**
+         * Set city
+         *
+         * @param \Znaika\FrontendBundle\Entity\Location\City $city
+         *
+         * @return User
+         */
+        public function setCity(\Znaika\FrontendBundle\Entity\Location\City $city = null)
+        {
+            $this->city = $city;
+
+            return $this;
+        }
+
+        /**
+         * Get city
+         *
+         * @return \Znaika\FrontendBundle\Entity\Location\City
+         */
+        public function getCity()
+        {
+            return $this->city;
+        }
+
+        /**
+         * Set school
+         *
+         * @param \Znaika\FrontendBundle\Entity\Education\School $school
+         *
+         * @return User
+         */
+        public function setSchool(\Znaika\FrontendBundle\Entity\Education\School $school = null)
+        {
+            $this->school = $school;
+
+            return $this;
+        }
+
+        /**
+         * Get school
+         *
+         * @return \Znaika\FrontendBundle\Entity\Education\School
+         */
+        public function getSchool()
+        {
+            return $this->school;
+        }
+
+        /**
+         * Set sex
+         *
+         * @param integer $sex
+         *
+         * @return User
+         */
+        public function setSex($sex)
+        {
+            $this->sex = $sex;
+
+            return $this;
+        }
+
+        /**
+         * Get sex
+         *
+         * @return integer
+         */
+        public function getSex()
+        {
+            return $this->sex;
+        }
+
+        /**
+         * Add videoViews
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews
+         *
+         * @return User
+         */
+        public function addVideoView(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews)
+        {
+            $this->videoViews[] = $videoViews;
+
+            return $this;
+        }
+
+        /**
+         * Remove videoViews
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews
+         */
+        public function removeVideoView(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews)
+        {
+            $this->videoViews->removeElement($videoViews);
+        }
+
+        /**
+         * Get videoViews
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getVideoViews()
+        {
+            return $this->videoViews;
+        }
+
+        /**
          * Gets the unique identifier of the participant
          *
          * @return integer
@@ -399,6 +526,6 @@
 
         public function __toString()
         {
-            return (string) $this->getFirstName() . "  " . $this->getLastName();
+            return (string)$this->getFirstName() . "  " . $this->getLastName();
         }
     }

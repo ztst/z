@@ -33,6 +33,9 @@ Znaika\FrontendBundle\Entity\Profile\User:
         status:
             type: integer
             notnull: true
+        sex:
+            type: smallint
+            notnull: true
     oneToMany:
         videoComments:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
@@ -40,4 +43,22 @@ Znaika\FrontendBundle\Entity\Profile\User:
         userRegistrations:
             targetEntity: Znaika\FrontendBundle\Entity\Profile\UserRegistration
             mappedBy: user
+        videoViews:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoView
+            mappedBy: user
+    manyToOne:
+        city:
+            targetEntity: Znaika\FrontendBundle\Entity\Location\City
+            inversedBy: users
+            joinColumn:
+                name: city_id
+                referencedColumnName: city_id
+                onDelete: "SET NULL"
+        school:
+            targetEntity: Znaika\FrontendBundle\Entity\Education\School
+            inversedBy: users
+            joinColumn:
+                name: school_id
+                referencedColumnName: school_id
+                onDelete: "SET NULL"
     lifecycleCallbacks: {  }

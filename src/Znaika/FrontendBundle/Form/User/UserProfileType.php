@@ -3,6 +3,7 @@
 
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Znaika\FrontendBundle\Helper\Util\Profile\UserSex;
 
     class UserProfileType extends UserType
     {
@@ -14,12 +15,29 @@
         {
             $readonly = $options['readonly'];
 
-            $builder
-                ->add('firstName', 'text', array( 'read_only' => $readonly ))
-                ->add('lastName', 'text', array( 'read_only' => $readonly ))
-                ->add('email', 'email', array( 'read_only' => $readonly ));
+            $sexTypes = UserSex::getAvailableTypesTexts();
 
-            if ( !$readonly )
+            $builder
+                ->add('firstName', 'text', array('read_only' => $readonly))
+                ->add('lastName', 'text', array('read_only' => $readonly))
+                ->add('email', 'email', array('read_only' => $readonly))
+                ->add('city', 'entity', array(
+                    'class'       => 'Znaika\FrontendBundle\Entity\Location\City',
+                    'property'    => 'name',
+                    'empty_value' => '',
+                    'required'    => false
+                ))
+                ->add('school', 'entity', array(
+                    'class'       => 'Znaika\FrontendBundle\Entity\Education\School',
+                    'property'    => 'name',
+                    'empty_value' => '',
+                    'required'    => false
+                ))
+                ->add('sex', 'choice', array(
+                    'choices' => $sexTypes
+                ));
+
+            if (!$readonly)
             {
                 $builder->add('save', 'submit');
             }
@@ -33,7 +51,7 @@
             parent::setDefaultOptions($resolver);
 
             $resolver->setDefaults(array(
-                'readonly'   => false
+                'readonly' => false
             ));
         }
 

@@ -41,6 +41,10 @@ services:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
+    znaika_frontend.video_view_repository:
+        class:        Znaika\FrontendBundle\Repository\Lesson\Content\VideoViewRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
     znaika_frontend.synopsis_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\SynopsisRepository
         arguments:    ["@doctrine.orm.entity_manager"]

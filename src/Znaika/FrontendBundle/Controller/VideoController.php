@@ -3,15 +3,18 @@
 
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\HttpFoundation\RedirectResponse;
+    use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\VideoView;
     use Znaika\FrontendBundle\Form\Lesson\Content\SynopsisType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoCommentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoType;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\JsonResponse;
+    use Znaika\FrontendBundle\Repository\Lesson\Content\VideoViewRepository;
 
     class VideoController extends Controller
     {
@@ -27,7 +30,7 @@
 
             if ($form->isValid())
             {
-                $synopsis->setVideo($video);
+                $video->setSynopsis($synopsis);
 
                 $synopsisRepository = $this->get('znaika_frontend.synopsis_repository');
                 $synopsisRepository->save($synopsis);
@@ -148,17 +151,24 @@
             $videoComment = new VideoComment();
             $addVideoCommentForm  = $this->createForm(new VideoCommentType(), $videoComment);
 
+            $videoView = $this->getVideoView($video);
+            if (!$videoView)
+            {
+                $this->saveVideoView($video);
+            }
+
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
                 'video'               => $video,
                 'isValidUrl'          => $isValidUrl,
                 'addVideoCommentForm' => $addVideoCommentForm->createView(),
+                'videoView'           => $videoView
             ));
         }
 
         /**
          * @param $subjectName
          *
-         * @return null
+         * @return Subject
          */
         protected function getSubjectByName($subjectName)
         {
@@ -170,5 +180,39 @@
             }
 
             return $subject;
+        }
+
+        /**
+         * @param $video
+         *
+         * @return VideoView
+         */
+        private function getVideoView($video)
+        {
+            $repository = $this->getVideoViewRepository();
+
+            return $repository->getOneByVideoAndUser($video, $this->getUser());
+        }
+
+        /**
+         * @param $video
+         */
+        private function saveVideoView($video)
+        {
+            $repository = $this->getVideoViewRepository();
+
+            $videoView = new VideoView();
+            $videoView->setVideo($video);
+            $videoView->setUser($this->getUser());
+
+            $repository->save($videoView);
+        }
+
+        /**
+         * @return VideoViewRepository
+         */
+        private function getVideoViewRepository()
+        {
+            return $this->get("znaika_frontend.video_view_repository");
         }
     }

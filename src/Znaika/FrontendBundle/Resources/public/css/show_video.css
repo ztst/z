@@ -1,4 +1,7 @@
-.video_player_container
-{
+.video_player_container {
     margin: 20px 0;
+}
+
+.video_view {
+    margin-bottom: 10px;
 }
