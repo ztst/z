@@ -155,7 +155,8 @@
             $addVideoCommentForm = $this->createForm(new VideoCommentType(), $videoComment);
 
             $userOperationProvider = $this->getUserOperationProvider();
-            $viewVideoOperation    = $userOperationProvider->onViewVideo($this->getUser(), $video);
+            $user                  = $this->getUser();
+            $viewVideoOperation    = ($user) ? $userOperationProvider->onViewVideo($user, $video) : null;
 
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
                 'video'               => $video,
