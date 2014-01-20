@@ -300,7 +300,8 @@ button.btn-default
 
 .search_container
 {
-    margin-right: 41px;
+    /*margin-right: 41px;*/
+    margin-right: 10px;
 }
 
 .main_menu_right
@@ -316,4 +317,12 @@ button.btn-default
 .search_button_containter
 {
     width: auto;
+}
+
+.user_profile_link
+{
+    font-size: 11px;
+    line-height: 12px !important;
+    width: 110px;
+    margin-right: 10px;
 }

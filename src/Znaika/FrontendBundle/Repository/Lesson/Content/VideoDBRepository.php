@@ -67,8 +67,8 @@
          */
         public function save(Video $video)
         {
-            $this->_em->persist($video);
-            $this->_em->flush();
+            $this->getEntityManager()->persist($video);
+            $this->getEntityManager()->flush();
         }
 
         /**

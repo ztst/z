@@ -246,10 +246,10 @@
         public function saveThread(ThreadInterface $thread, $andFlush = true)
         {
             $this->denormalize($thread);
-            $this->_em->persist($thread);
+            $this->getEntityManager()->persist($thread);
             if ($andFlush)
             {
-                $this->_em->flush();
+                $this->getEntityManager()->flush();
             }
         }
 
@@ -261,8 +261,8 @@
          */
         public function deleteThread(ThreadInterface $thread)
         {
-            $this->_em->remove($thread);
-            $this->_em->flush();
+            $this->getEntityManager()->remove($thread);
+            $this->getEntityManager()->flush();
         }
 
         /**

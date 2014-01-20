@@ -241,7 +241,6 @@
             {
                 $result = $this->dbRepository->findThreadByUsers($firstUser, $secondUser);
             }
-            var_dump($result->getId());
             return $result;
         }
 

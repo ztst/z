@@ -13,8 +13,8 @@
          */
         public function save(Synopsis $synopsis)
         {
-            $this->_em->persist($synopsis);
-            $this->_em->flush();
+            $this->getEntityManager()->persist($synopsis);
+            $this->getEntityManager()->flush();
         }
 
         /**

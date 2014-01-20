@@ -13,7 +13,7 @@
          */
         public function save(VideoComment $videoComment)
         {
-            $this->_em->persist($videoComment);
-            $this->_em->flush();
+            $this->getEntityManager()->persist($videoComment);
+            $this->getEntityManager()->flush();
         }
     }

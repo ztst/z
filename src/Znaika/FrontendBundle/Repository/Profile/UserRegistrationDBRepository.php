@@ -13,8 +13,8 @@
          */
         public function save(UserRegistration $userRegistration)
         {
-            $this->_em->persist($userRegistration);
-            $this->_em->flush();
+            $this->getEntityManager()->persist($userRegistration);
+            $this->getEntityManager()->flush();
         }
 
         /**
@@ -24,8 +24,8 @@
          */
         public function delete(UserRegistration $userRegistration)
         {
-            $this->_em->remove($userRegistration);
-            $this->_em->flush();
+            $this->getEntityManager()->remove($userRegistration);
+            $this->getEntityManager()->flush();
         }
 
         /**

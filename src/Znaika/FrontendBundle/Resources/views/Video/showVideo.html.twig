@@ -26,9 +26,9 @@
     </div>
     <div class="clear"></div>
 
-    {% if videoView %}
+    {% if viewVideoOperation %}
       <div class="video_view">
-        Просмотрено: {{ videoView.getCreatedTime|date('Y-m-d H:i:s') }}
+        Просмотрено: {{ viewVideoOperation.getCreatedTime|date('Y-m-d H:i:s') }}
       </div>
     {% endif %}
 

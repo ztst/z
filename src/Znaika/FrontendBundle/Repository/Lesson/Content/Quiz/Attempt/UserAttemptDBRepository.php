@@ -13,7 +13,7 @@
          */
         public function save(UserAttempt $userAttempt)
         {
-            $this->_em->persist($userAttempt);
-            $this->_em->flush();
+            $this->getEntityManager()->persist($userAttempt);
+            $this->getEntityManager()->flush();
         }
     }

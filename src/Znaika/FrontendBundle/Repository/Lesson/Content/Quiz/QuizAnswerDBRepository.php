@@ -13,7 +13,7 @@
          */
         public function save(QuizAnswer $quizAnswer)
         {
-            $this->_em->persist($quizAnswer);
-            $this->_em->flush();
+            $this->getEntityManager()->persist($quizAnswer);
+            $this->getEntityManager()->flush();
         }
     }

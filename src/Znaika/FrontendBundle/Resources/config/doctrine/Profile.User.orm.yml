@@ -36,15 +36,15 @@ Znaika\FrontendBundle\Entity\Profile\User:
         sex:
             type: smallint
             notnull: true
+        points:
+            type: integer
+            notnull: true
     oneToMany:
         videoComments:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
             mappedBy: user
         userRegistrations:
             targetEntity: Znaika\FrontendBundle\Entity\Profile\UserRegistration
-            mappedBy: user
-        videoViews:
-            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoView
             mappedBy: user
     manyToOne:
         city:

@@ -32,7 +32,6 @@
          */
         public function save(UserRegistration $userRegistration)
         {
-
             $this->redisRepository->save($userRegistration);
             $success = $this->dbRepository->save($userRegistration);
 
@@ -46,7 +45,6 @@
          */
         public function delete(UserRegistration $userRegistration)
         {
-
             $this->redisRepository->delete($userRegistration);
             $success = $this->dbRepository->delete($userRegistration);
 

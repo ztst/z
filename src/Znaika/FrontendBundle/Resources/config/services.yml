@@ -32,6 +32,10 @@ services:
             - @fos_message.authorizer
             - @fos_message.participant_provider
 
+    znaika_frontend.user_operation_provider:
+        class:     Znaika\FrontendBundle\Helper\UserOperation\UserOperationProvider
+        arguments: ['@znaika_frontend.user_operation_repository']
+
 #repository
     znaika_frontend.video_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository
@@ -39,10 +43,6 @@ services:
 
     znaika_frontend.video_comment_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
-    znaika_frontend.video_view_repository:
-        class:        Znaika\FrontendBundle\Repository\Lesson\Content\VideoViewRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
     znaika_frontend.synopsis_repository:
@@ -87,6 +87,10 @@ services:
 
     znaika_frontend.thread_repository:
         class:        Znaika\FrontendBundle\Repository\Communication\ThreadRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika_frontend.user_operation_repository:
+        class:        Znaika\FrontendBundle\Repository\Profile\Action\UserOperationRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
 #menu

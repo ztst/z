@@ -57,22 +57,22 @@
         /**
          * @var \Znaika\FrontendBundle\Entity\Location\City
          */
-        private $city;
+        protected $city;
 
         /**
          * @var integer
          */
-        protected $sex;
+        protected $sex = 0;
+
+        /**
+         * @var integer
+         */
+        protected $points = 0;
 
         /**
          * @var \Znaika\FrontendBundle\Entity\Education\School
          */
-        private $school;
-
-        /**
-         * @var \Doctrine\Common\Collections\Collection
-         */
-        private $videoViews;
+        protected $school;
 
         /**
          * Constructor
@@ -81,7 +81,6 @@
         {
             $this->videoComments     = new \Doctrine\Common\Collections\ArrayCollection();
             $this->userRegistrations = new \Doctrine\Common\Collections\ArrayCollection();
-            $this->videoViews        = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
@@ -481,40 +480,6 @@
         }
 
         /**
-         * Add videoViews
-         *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews
-         *
-         * @return User
-         */
-        public function addVideoView(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews)
-        {
-            $this->videoViews[] = $videoViews;
-
-            return $this;
-        }
-
-        /**
-         * Remove videoViews
-         *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews
-         */
-        public function removeVideoView(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews)
-        {
-            $this->videoViews->removeElement($videoViews);
-        }
-
-        /**
-         * Get videoViews
-         *
-         * @return \Doctrine\Common\Collections\Collection
-         */
-        public function getVideoViews()
-        {
-            return $this->videoViews;
-        }
-
-        /**
          * Gets the unique identifier of the participant
          *
          * @return integer
@@ -527,5 +492,21 @@
         public function __toString()
         {
             return (string)$this->getFirstName() . "  " . $this->getLastName();
+        }
+
+        /**
+         * @param int $points
+         */
+        public function setPoints($points)
+        {
+            $this->points = $points;
+        }
+
+        /**
+         * @return int
+         */
+        public function getPoints()
+        {
+            return $this->points;
         }
     }

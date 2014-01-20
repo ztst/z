@@ -25,7 +25,7 @@
             <div class="clear"></div>
           </li>
           {% if app.user %}
-            <li><a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}">{{ app.user }}</a></li>
+            <li><a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user_profile_link">{{ app.user }}, {{ app.user.getPoints }} баллов</a></li>
             <li><a href="{{ path("logout") }}" class="btn btn-default login_button">Выйти</a></li>
           {% else %}
             <li><a href="{{ path("try_login") }}" class="btn btn-default login_button">Вход</a></li>

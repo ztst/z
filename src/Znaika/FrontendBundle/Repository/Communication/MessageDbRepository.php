@@ -69,10 +69,10 @@
         public function saveMessage(MessageInterface $message, $andFlush = true)
         {
             $this->denormalize($message);
-            $this->_em->persist($message);
+            $this->getEntityManager()->persist($message);
             if ($andFlush)
             {
-                $this->_em->flush();
+                $this->getEntityManager()->flush();
             }
         }
 
@@ -92,7 +92,7 @@
                 return;
             }
 
-            $this->_em->createQueryBuilder()
+            $this->getEntityManager()->createQueryBuilder()
                       ->update('ZnaikaFrontendBundle:Communication\MessageMetadata', 'm')
                       ->set('m.isRead', '?1')
                       ->setParameter('1', (bool)$isRead, \PDO::PARAM_BOOL)
@@ -119,7 +119,7 @@
                 return false;
             }
 
-            $this->_em->createQueryBuilder()
+            $this->getEntityManager()->createQueryBuilder()
                       ->update('ZnaikaFrontendBundle:Communication\MessageMetadata', 'm')
                       ->set('m.isDeleted', '?1')
                       ->setParameter('1', true, \PDO::PARAM_BOOL)

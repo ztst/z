@@ -4,9 +4,6 @@
 
     use Doctrine\ORM\Mapping as ORM;
 
-    /**
-     * UserRegistration
-     */
     class UserRegistration
     {
         /**

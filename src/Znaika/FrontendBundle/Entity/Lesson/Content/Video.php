@@ -69,12 +69,6 @@
          */
         private $userAttempts;
 
-
-        /**
-         * @var \Doctrine\Common\Collections\Collection
-         */
-        private $videoViews;
-
         /**
          * Constructor
          */
@@ -411,39 +405,5 @@
         public function getUserAttempts()
         {
             return $this->userAttempts;
-        }
-
-        /**
-         * Add videoViews
-         *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews
-         *
-         * @return Video
-         */
-        public function addVideoView(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews)
-        {
-            $this->videoViews[] = $videoViews;
-
-            return $this;
-        }
-
-        /**
-         * Remove videoViews
-         *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews
-         */
-        public function removeVideoView(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoView $videoViews)
-        {
-            $this->videoViews->removeElement($videoViews);
-        }
-
-        /**
-         * Get videoViews
-         *
-         * @return \Doctrine\Common\Collections\Collection
-         */
-        public function getVideoViews()
-        {
-            return $this->videoViews;
         }
     }

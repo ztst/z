@@ -1,0 +1,46 @@
+Znaika\FrontendBundle\Entity\Profile\Action\BaseUserOperation:
+    type: entity
+    table: user_operation
+    repositoryClass: Znaika\FrontendBundle\Repository\Profile\Action\UserOperationDBRepository
+    fields:
+        userOperationId:
+            column: user_operation_id
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        createdTime:
+            column: created_time
+            type: datetime
+            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    manyToOne:
+        user:
+            targetEntity: Znaika\FrontendBundle\Entity\Profile\User
+            inversedBy: userOperations
+            joinColumn:
+                name: user_id
+                referencedColumnName: user_id
+                onDelete: "SET NULL"
+
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        fieldName: operationType
+        name: operation_type
+        type: smallint
+    discriminatorMap:
+        0: Znaika\FrontendBundle\Entity\Profile\Action\BaseUserOperation
+        1: Znaika\FrontendBundle\Entity\Profile\Action\AddCityInProfileOperation
+        2: Znaika\FrontendBundle\Entity\Profile\Action\ViewVideoOperation
+        3: Znaika\FrontendBundle\Entity\Profile\Action\PostVideoToSocialNetworkOperation
+        4: Znaika\FrontendBundle\Entity\Profile\Action\AddPhoneNumberInProfileOperation
+        5: Znaika\FrontendBundle\Entity\Profile\Action\AddBirthdayInProfileOperation
+        6: Znaika\FrontendBundle\Entity\Profile\Action\AddClassroomInProfileOperation
+        7: Znaika\FrontendBundle\Entity\Profile\Action\JoinSocialNetworkCommunityOperation
+        8: Znaika\FrontendBundle\Entity\Profile\Action\RegistrationReferralOperation
+        9: Znaika\FrontendBundle\Entity\Profile\Action\RegistrationOperation
+        10: Znaika\FrontendBundle\Entity\Profile\Action\AddSchoolInProfileOperation
+        11: Znaika\FrontendBundle\Entity\Profile\Action\AddVideoCommentOperation
+        12: Znaika\FrontendBundle\Entity\Profile\Action\RateVideoOperation
+        13: Znaika\FrontendBundle\Entity\Profile\Action\AddSexInProfileOperation
+
+    lifecycleCallbacks: {  }
