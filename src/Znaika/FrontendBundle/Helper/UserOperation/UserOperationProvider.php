@@ -13,6 +13,7 @@
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Helper\Util\Lesson\SocialNetworkUtil;
     use Znaika\FrontendBundle\Repository\Profile\Action\UserOperationRepository;
+    use Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository;
 
     class UserOperationProvider
     {
@@ -22,11 +23,18 @@
         protected $userOperationRepository;
 
         /**
-         * @param UserOperationRepository $userOperationRepository
+         * @var UserBadgeRepository
          */
-        public function __construct(UserOperationRepository $userOperationRepository)
+        protected $userBadgeRepository;
+
+        /**
+         * @param UserOperationRepository $userOperationRepository
+         * @param \Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository $userBadgeRepository
+         */
+        public function __construct(UserOperationRepository $userOperationRepository, UserBadgeRepository $userBadgeRepository)
         {
             $this->userOperationRepository = $userOperationRepository;
+            $this->userBadgeRepository = $userBadgeRepository;
         }
 
         /**
@@ -34,12 +42,12 @@
          */
         public function onEditProfile(User $user)
         {
-            $this->saveAddCityInProfileOperation($user);
-            $this->saveAddBirthdayInProfileOperation($user);
-            $this->saveAddClassroomInProfileOperation($user);
-            $this->saveAddPhoneNumberInProfileOperation($user);
-            $this->saveAddSchoolInProfileOperation($user);
-            $this->saveAddSexInProfileOperation($user);
+            $addCityOperation = $this->saveAddCityInProfileOperation($user);
+            $addBirthdayOperation = $this->saveAddBirthdayInProfileOperation($user);
+            $addClassroomOperation = $this->saveAddClassroomInProfileOperation($user);
+            $addPhoneNumberOperation = $this->saveAddPhoneNumberInProfileOperation($user);
+            $addSchoolOperation = $this->saveAddSchoolInProfileOperation($user);
+            $addSexOperation = $this->saveAddSexInProfileOperation($user);
         }
 
         /**
@@ -101,7 +109,8 @@
          */
         public function onViewVideo(User $user, Video $video)
         {
-            return $this->saveViewVideoOperation($user, $video);
+            $viewVideoOperation = $this->saveViewVideoOperation($user, $video);
+            return $viewVideoOperation;
         }
 
         /**
@@ -190,34 +199,46 @@
 
         /**
          * @param User $user
+         *
+         * @return null
          */
         private function saveAddSchoolInProfileOperation(User $user)
         {
             //TODO: add method
+            return null;
         }
 
         /**
          * @param User $user
+         *
+         * @return null
          */
         private function saveAddClassroomInProfileOperation(User $user)
         {
             //TODO: add method
+            return null;
         }
 
         /**
          * @param User $user
+         *
+         * @return null
          */
         private function saveAddBirthdayInProfileOperation(User $user)
         {
             //TODO: add method
+            return null;
         }
 
         /**
          * @param User $user
+         *
+         * @return null
          */
         private function saveAddPhoneNumberInProfileOperation(User $user)
         {
             //TODO: add method
+            return null;
         }
 
         /**

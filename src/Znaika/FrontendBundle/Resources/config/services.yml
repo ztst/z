@@ -34,7 +34,9 @@ services:
 
     znaika_frontend.user_operation_provider:
         class:     Znaika\FrontendBundle\Helper\UserOperation\UserOperationProvider
-        arguments: ['@znaika_frontend.user_operation_repository']
+        arguments:
+            - @znaika_frontend.user_operation_repository
+            - @znaika_frontend.user_badge_repository
 
 #repository
     znaika_frontend.video_repository:
@@ -91,6 +93,10 @@ services:
 
     znaika_frontend.user_operation_repository:
         class:        Znaika\FrontendBundle\Repository\Profile\Action\UserOperationRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika_frontend.user_badge_repository:
+        class:        Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
 #menu
