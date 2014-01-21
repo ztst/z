@@ -96,4 +96,34 @@
         {
             return null;
         }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countRateVideoOperations(User $user)
+        {
+            return null;
+        }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countReferralRegistrationOperations(User $user)
+        {
+            return null;
+        }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countPostVideoToSocialNetworkOperations(User $user)
+        {
+            return null;
+        }
     }

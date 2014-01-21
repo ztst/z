@@ -36,13 +36,13 @@
                 $newOperation->setVideo($video);
                 $this->userOperationRepository->save($newOperation);
 
-                $this->saveViewVideosBadge($user);
+                $this->saveVideoViewerBadge($user);
             }
 
             return $operation;
         }
 
-        private function saveViewVideosBadge(User $user)
+        private function saveVideoViewerBadge(User $user)
         {
             $countViewedVideos = $this->userOperationRepository->countViewVideoOperations($user);
             if ($countViewedVideos == VideoViewerBadge::MIN_VIEWED_VIDEOS)

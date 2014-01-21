@@ -3,6 +3,7 @@
 
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Profile\Action\PostVideoToSocialNetworkOperation;
+    use Znaika\FrontendBundle\Entity\Profile\Badge\SocialNetworkPosterBadge;
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Helper\Util\Lesson\SocialNetworkUtil;
 
@@ -40,8 +41,21 @@
                 $operation->setVideo($video);
                 $operation->setSocialNetwork($socialNetwork);
                 $this->userOperationRepository->save($operation);
+
+                $this->saveSocialNetworkPosterBadge($user);
             }
 
             return $operation;
+        }
+
+        private function saveSocialNetworkPosterBadge(User $user)
+        {
+            $countPosts = $this->userOperationRepository->countPostVideoToSocialNetworkOperations($user);
+            if ($countPosts == SocialNetworkPosterBadge::MIN_POSTS)
+            {
+                $badge = new SocialNetworkPosterBadge();
+                $badge->setUser($user);
+                $this->userBadgeRepository->save($badge);
+            }
         }
     }

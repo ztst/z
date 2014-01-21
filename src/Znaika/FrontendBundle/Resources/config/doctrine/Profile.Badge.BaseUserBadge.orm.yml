@@ -32,5 +32,8 @@ Znaika\FrontendBundle\Entity\Profile\Badge\BaseUserBadge:
         2: Znaika\FrontendBundle\Entity\Profile\Badge\VideoViewerBadge
         3: Znaika\FrontendBundle\Entity\Profile\Badge\LearnerBadge
         4: Znaika\FrontendBundle\Entity\Profile\Badge\CommentWriterBadge
+        5: Znaika\FrontendBundle\Entity\Profile\Badge\ReferralInviterBadge
+        6: Znaika\FrontendBundle\Entity\Profile\Badge\SocialNetworkPosterBadge
+        7: Znaika\FrontendBundle\Entity\Profile\Badge\VideoRaterBadge
 
     lifecycleCallbacks: {  }

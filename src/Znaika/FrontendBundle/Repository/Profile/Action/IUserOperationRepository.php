@@ -137,4 +137,25 @@
          * @return integer
          */
         public function countAddVideoCommentOperations(User $user);
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countRateVideoOperations(User $user);
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countReferralRegistrationOperations(User $user);
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countPostVideoToSocialNetworkOperations(User $user);
     }

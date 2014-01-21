@@ -135,6 +135,36 @@
             return $this->countUserOperations($user, 'ZnaikaFrontendBundle:Profile\Action\AddVideoCommentOperation');
         }
 
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countRateVideoOperations(User $user)
+        {
+            return $this->countUserOperations($user, 'ZnaikaFrontendBundle:Profile\Action\RateVideoOperation');
+        }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countReferralRegistrationOperations(User $user)
+        {
+            return $this->countUserOperations($user, 'ZnaikaFrontendBundle:Profile\Action\ReferralRegistrationOperation');
+        }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countPostVideoToSocialNetworkOperations(User $user)
+        {
+            return $this->countUserOperations($user, 'ZnaikaFrontendBundle:Profile\Action\PostVideoToSocialNetworkOperation');
+        }
+
         protected function getLastOperationByUser(User $user, $type)
         {
             $qb = $this->getEntityManager()

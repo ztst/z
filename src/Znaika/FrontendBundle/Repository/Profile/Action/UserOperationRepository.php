@@ -209,4 +209,52 @@
 
             return $result;
         }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countRateVideoOperations(User $user)
+        {
+            $result = $this->redisRepository->countRateVideoOperations($user);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->countRateVideoOperations($user);
+            }
+
+            return $result;
+        }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countReferralRegistrationOperations(User $user)
+        {
+            $result = $this->redisRepository->countReferralRegistrationOperations($user);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->countReferralRegistrationOperations($user);
+            }
+
+            return $result;
+        }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countPostVideoToSocialNetworkOperations(User $user)
+        {
+            $result = $this->redisRepository->countPostVideoToSocialNetworkOperations($user);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->countPostVideoToSocialNetworkOperations($user);
+            }
+
+            return $result;
+        }
     }
