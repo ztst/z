@@ -75,6 +75,16 @@
         protected $school;
 
         /**
+         * @var \Znaika\FrontendBundle\Entity\Education\Classroom
+         */
+        private $classroom;
+        
+        /**
+         * @var string
+         */
+        protected $birthDate;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -508,5 +518,44 @@
         public function getPoints()
         {
             return $this->points;
+        }
+        
+        /**
+         * Set classroom
+         *
+         * @param \Znaika\FrontendBundle\Entity\Education\Classroom $classroom
+         * @return User
+         */
+        public function setClassroom(\Znaika\FrontendBundle\Entity\Education\Classroom $classroom = null)
+        {
+            $this->classroom = $classroom;
+
+            return $this;
+        }
+
+        /**
+         * Get classroom
+         *
+         * @return \Znaika\FrontendBundle\Entity\Education\Classroom
+         */
+        public function getClassroom()
+        {
+            return $this->classroom;
+        }
+
+        /**
+         * @param string $birthDate
+         */
+        public function setBirthDate($birthDate)
+        {
+            $this->birthDate = $birthDate;
+        }
+
+        /**
+         * @return string
+         */
+        public function getBirthDate()
+        {
+            return $this->birthDate;
         }
     }

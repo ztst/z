@@ -31,9 +31,19 @@
         {{ form_widget(form.school, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
       </div>
       <div class="form-group">
+        {{ form_label(form.classroom, 'Класс') }}
+        {{ form_errors(form.classroom) }}
+        {{ form_widget(form.classroom, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
+      </div>
+      <div class="form-group">
           {{ form_label(form.sex, 'Пол') }}
           {{ form_errors(form.sex) }}
           {{ form_widget(form.sex, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(form.birthDate, 'Дата рождения') }}
+        {{ form_errors(form.birthDate) }}
+        {{ form_widget(form.birthDate, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
       </div>
       {% if ownProfile %}
         <div>

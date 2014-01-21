@@ -39,6 +39,9 @@ Znaika\FrontendBundle\Entity\Profile\User:
         points:
             type: integer
             notnull: true
+        birthDate:
+            column: birth_date
+            type: date
     oneToMany:
         videoComments:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
@@ -60,5 +63,12 @@ Znaika\FrontendBundle\Entity\Profile\User:
             joinColumn:
                 name: school_id
                 referencedColumnName: school_id
+                onDelete: "SET NULL"
+        classroom:
+            targetEntity: Znaika\FrontendBundle\Entity\Education\Classroom
+            inversedBy: users
+            joinColumn:
+                name: classroom_id
+                referencedColumnName: classroom_id
                 onDelete: "SET NULL"
     lifecycleCallbacks: {  }

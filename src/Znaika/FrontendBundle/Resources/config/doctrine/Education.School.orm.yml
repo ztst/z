@@ -12,6 +12,9 @@ Znaika\FrontendBundle\Entity\Education\School:
             type: string
             length: 255
     oneToMany:
+        classrooms:
+            targetEntity: Znaika\FrontendBundle\Entity\Education\Classroom
+            mappedBy: school
         users:
             targetEntity: Znaika\FrontendBundle\Entity\Profile\User
             mappedBy: school

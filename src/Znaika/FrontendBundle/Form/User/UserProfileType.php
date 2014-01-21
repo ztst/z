@@ -33,8 +33,18 @@
                     'empty_value' => '',
                     'required'    => false
                 ))
+                ->add('classroom', 'entity', array(
+                    'class'       => 'Znaika\FrontendBundle\Entity\Education\Classroom',
+                    'empty_value' => '',
+                    'required'    => false
+                ))
                 ->add('sex', 'choice', array(
                     'choices' => $sexTypes
+                ))
+                ->add('birthDate', 'birthday', array(
+                    'empty_value' => array('day' => 'День', 'month' => 'Месяц', 'year' => 'Год'),
+                    'required'    => false,
+                    'read_only'   => $readonly
                 ));
 
             if (!$readonly)
