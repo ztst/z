@@ -115,6 +115,26 @@
             return $qb->getQuery()->getOneOrNullResult();
         }
 
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countViewVideoOperations(User $user)
+        {
+            return $this->countUserOperations($user, 'ZnaikaFrontendBundle:Profile\Action\ViewVideoOperation');
+        }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countAddVideoCommentOperations(User $user)
+        {
+            return $this->countUserOperations($user, 'ZnaikaFrontendBundle:Profile\Action\AddVideoCommentOperation');
+        }
+
         protected function getLastOperationByUser(User $user, $type)
         {
             $qb = $this->getEntityManager()
@@ -145,5 +165,24 @@
                ->setMaxResults(1);
 
             return $qb->getQuery()->getOneOrNullResult();
+        }
+
+        /**
+         * @param $user
+         * @param $type
+         *
+         * @return int
+         */
+        protected function countUserOperations($user, $type)
+        {
+            $qb = $this->getEntityManager()
+                       ->createQueryBuilder();
+
+            $qb->select('count(uo.userOperationId)')
+               ->from($type, 'uo')
+               ->andWhere('uo.user = :user_id')
+               ->setParameter('user_id', $user->getUserId());
+
+            return intval($qb->getQuery()->getSingleScalarResult());
         }
     }

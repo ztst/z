@@ -12,7 +12,8 @@
     use Znaika\FrontendBundle\Form\User\UserProfileType;
     use Znaika\FrontendBundle\Helper\Encode\RegisterKeyEncoder;
     use Znaika\FrontendBundle\Helper\Security\UserAuthenticator;
-    use Znaika\FrontendBundle\Helper\UserOperation\UserOperationProvider;
+    use Znaika\FrontendBundle\Helper\UserOperation\UserOperationHandler;
+    use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
@@ -65,8 +66,8 @@
             $userAuthenticator = $this->get('znaika_frontend.user_authenticator');
             $userAuthenticator->authenticate($user);
 
-            $provider = $this->getUserOperationProvider();
-            $provider->onRegistration($user);
+            $listener = $this->getUserOperationListener();
+            $listener->onRegistration($user);
 
             return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
         }
@@ -134,8 +135,8 @@
             $form->handleRequest($request);
             if ($form->isValid())
             {
-                $provider = $this->getUserOperationProvider();
-                $provider->onEditProfile($user);
+                $listener = $this->getUserOperationListener();
+                $listener->onEditProfile($user);
 
                 $userRepository->save($user);
             }
@@ -146,11 +147,11 @@
         }
 
         /**
-         * @return UserOperationProvider
+         * @return UserOperationListener
          */
-        protected function getUserOperationProvider()
+        protected function getUserOperationListener()
         {
-            return $this->get('znaika_frontend.user_operation_provider');
+            return $this->get('znaika_frontend.user_operation_listener');
         }
 
         private function registerUser(User $user)

@@ -4,8 +4,10 @@
     use Doctrine\ORM\Mapping as ORM;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserBadgeType;
 
-    class ViewVideosBadge extends BaseUserBadge
+    class CommentWriterBadge extends BaseUserBadge
     {
+        const MIN_WRITTEN_COMMENTS = 10;
+
         /**
          * @param int $badgeType
          *
@@ -13,7 +15,7 @@
          */
         public function setBadgeType($badgeType)
         {
-            if ($badgeType != UserBadgeType::VIEW_VIDEOS)
+            if ($badgeType != UserBadgeType::COMMENT_WRITER)
             {
                 throw new \InvalidArgumentException();
             }
@@ -24,6 +26,6 @@
          */
         public function getBadgeType()
         {
-            return UserBadgeType::VIEW_VIDEOS;
+            return UserBadgeType::COMMENT_WRITER;
         }
     }

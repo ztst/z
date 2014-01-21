@@ -32,8 +32,8 @@ services:
             - @fos_message.authorizer
             - @fos_message.participant_provider
 
-    znaika_frontend.user_operation_provider:
-        class:     Znaika\FrontendBundle\Helper\UserOperation\UserOperationProvider
+    znaika_frontend.user_operation_listener:
+        class:     Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener
         arguments:
             - @znaika_frontend.user_operation_repository
             - @znaika_frontend.user_badge_repository

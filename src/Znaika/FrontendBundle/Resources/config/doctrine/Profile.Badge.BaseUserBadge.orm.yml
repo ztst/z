@@ -29,6 +29,8 @@ Znaika\FrontendBundle\Entity\Profile\Badge\BaseUserBadge:
     discriminatorMap:
         0: Znaika\FrontendBundle\Entity\Profile\Badge\BaseUserBadge
         1: Znaika\FrontendBundle\Entity\Profile\Badge\FilledOutProfileBadge
-        2: Znaika\FrontendBundle\Entity\Profile\Badge\ViewVideosBadge
+        2: Znaika\FrontendBundle\Entity\Profile\Badge\VideoViewerBadge
+        3: Znaika\FrontendBundle\Entity\Profile\Badge\LearnerBadge
+        4: Znaika\FrontendBundle\Entity\Profile\Badge\CommentWriterBadge
 
     lifecycleCallbacks: {  }

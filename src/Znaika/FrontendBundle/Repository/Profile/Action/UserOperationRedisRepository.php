@@ -76,4 +76,24 @@
         {
             return null;
         }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countViewVideoOperations(User $user)
+        {
+            return null;
+        }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countAddVideoCommentOperations(User $user)
+        {
+            return null;
+        }
     }

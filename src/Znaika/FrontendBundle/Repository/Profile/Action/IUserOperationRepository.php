@@ -123,4 +123,18 @@
          * @return JoinSocialNetworkCommunityOperation
          */
         public function getLastJoinSocialNetworkCommunityOperation(User $user, $network);
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countViewVideoOperations(User $user);
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countAddVideoCommentOperations(User $user);
     }

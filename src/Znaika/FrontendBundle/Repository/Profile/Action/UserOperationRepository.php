@@ -2,17 +2,7 @@
     namespace Znaika\FrontendBundle\Repository\Profile\Action;
 
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddBirthdayInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddClassroomInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddPhoneNumberInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddSchoolInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddSexInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddVideoCommentOperation;
     use Znaika\FrontendBundle\Entity\Profile\Action\BaseUserOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\JoinSocialNetworkCommunityOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\RateVideoOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\RegistrationOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\RegistrationReferralOperation;
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Repository\BaseRepository;
 
@@ -183,6 +173,38 @@
             if (empty($result))
             {
                 $result = $this->dbRepository->getLastJoinSocialNetworkCommunityOperation($user, $network);
+            }
+
+            return $result;
+        }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countViewVideoOperations(User $user)
+        {
+            $result = $this->redisRepository->countViewVideoOperations($user);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->countViewVideoOperations($user);
+            }
+
+            return $result;
+        }
+
+        /**
+         * @param User $user
+         *
+         * @return integer
+         */
+        public function countAddVideoCommentOperations(User $user)
+        {
+            $result = $this->redisRepository->countAddVideoCommentOperations($user);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->countAddVideoCommentOperations($user);
             }
 
             return $result;

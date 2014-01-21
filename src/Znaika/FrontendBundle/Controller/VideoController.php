@@ -10,7 +10,7 @@
     use Znaika\FrontendBundle\Form\Lesson\Content\SynopsisType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoCommentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoType;
-    use Znaika\FrontendBundle\Helper\UserOperation\UserOperationProvider;
+    use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\JsonResponse;
@@ -65,8 +65,8 @@
                 $videoCommentRepository = $this->get('znaika_frontend.video_comment_repository');
                 $videoCommentRepository->save($videoComment);
 
-                $provider = $this->getUserOperationProvider();
-                $provider->onAddVideoComment($this->getUser(), $video);
+                $listener = $this->getUserOperationListener();
+                $listener->onAddVideoComment($this->getUser(), $video);
             }
 
             return new RedirectResponse($this->generateUrl('show_video', array(
@@ -154,9 +154,9 @@
             $videoComment        = new VideoComment();
             $addVideoCommentForm = $this->createForm(new VideoCommentType(), $videoComment);
 
-            $userOperationProvider = $this->getUserOperationProvider();
-            $user                  = $this->getUser();
-            $viewVideoOperation    = ($user) ? $userOperationProvider->onViewVideo($user, $video) : null;
+            $user               = $this->getUser();
+            $listener           = $this->getUserOperationListener();
+            $viewVideoOperation = ($user) ? $listener->onViewVideo($user, $video) : null;
 
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
                 'video'               => $video,
@@ -167,11 +167,11 @@
         }
 
         /**
-         * @return UserOperationProvider
+         * @return UserOperationListener
          */
-        protected function getUserOperationProvider()
+        protected function getUserOperationListener()
         {
-            return $this->get('znaika_frontend.user_operation_provider');
+            return $this->get('znaika_frontend.user_operation_listener');
         }
 
         /**
