@@ -15,7 +15,7 @@
          */
         public function setBadgeType($badgeType)
         {
-            if ($badgeType != UserBadgeType::VIEW_VIDEOS)
+            if ($badgeType != UserBadgeType::VIDEO_VIEWER)
             {
                 throw new \InvalidArgumentException();
             }
@@ -26,6 +26,6 @@
          */
         public function getBadgeType()
         {
-            return UserBadgeType::VIEW_VIDEOS;
+            return UserBadgeType::VIDEO_VIEWER;
         }
     }

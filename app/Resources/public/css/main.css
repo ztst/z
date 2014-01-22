@@ -326,3 +326,12 @@ button.btn-default
     width: 110px;
     margin-right: 10px;
 }
+
+.new_user_badge_link
+{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+
+    background: url('/images/header/new_badge_icon.jpg');
+}

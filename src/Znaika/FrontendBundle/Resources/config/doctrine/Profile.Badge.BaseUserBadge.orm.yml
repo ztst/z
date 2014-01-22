@@ -9,6 +9,9 @@ Znaika\FrontendBundle\Entity\Profile\Badge\BaseUserBadge:
             id: true
             generator:
                 strategy: AUTO
+        isViewed:
+            column: is_viewed
+            type: boolean
         createdTime:
             column: created_time
             type: datetime

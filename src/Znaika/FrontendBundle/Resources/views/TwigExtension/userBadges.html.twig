@@ -1,0 +1,10 @@
+{% if badges %}
+  <a href="javascript:void(0);" title="" class="new_user_badge_link">&nbsp;</a>
+  <div id="badgesPopup" title="Поздравляем!" class="badges_popup">
+    <p>Ты получил новые бейджи!</p>
+    {% for badge in badges %}
+      {{ badge_name(badge) }}
+      <br/>
+    {% endfor %}
+  </div>
+{% endif %}

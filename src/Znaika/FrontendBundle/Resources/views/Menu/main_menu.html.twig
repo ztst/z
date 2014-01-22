@@ -1,4 +1,4 @@
-<div class="navbar navbar-container navbar-static-top" role="navigation">
+<div class="navbar navbar-container" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -25,7 +25,12 @@
             <div class="clear"></div>
           </li>
           {% if app.user %}
-            <li><a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user_profile_link">{{ app.user }}, {{ app.user.getPoints }} баллов</a></li>
+            <li>
+              <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user_profile_link">{{ app.user }}, {{ app.user.getPoints }} баллов</a>
+            </li>
+            <li>
+              {{ user_badges(app.user)|raw }}
+            </li>
             <li><a href="{{ path("logout") }}" class="btn btn-default login_button">Выйти</a></li>
           {% else %}
             <li><a href="{{ path("try_login") }}" class="btn btn-default login_button">Вход</a></li>

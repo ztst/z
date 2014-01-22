@@ -3,6 +3,7 @@
     namespace Znaika\FrontendBundle\Controller;
 
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\Security\Core\SecurityContext;
@@ -15,10 +16,26 @@
     use Znaika\FrontendBundle\Helper\UserOperation\UserOperationHandler;
     use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
+    use Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
     class UserController extends Controller
     {
+        public function hasViewedBadgesAction()
+        {
+            $user = $this->getUser();
+            $badgeRepository = $this->getUserBadgeRepository();
+            $badges = $badgeRepository->getUserNotViewedBadges($user);
+            foreach ($badges as $badge)
+            {
+                $badge->setIsViewed(true);
+                $badgeRepository->save($badge);
+            }
+
+            $success = true;
+            return new JsonResponse(array('success' => $success));
+        }
+
         public function loginAction(Request $request)
         {
             $session = $request->getSession();
@@ -149,9 +166,17 @@
         /**
          * @return UserOperationListener
          */
-        protected function getUserOperationListener()
+        private function getUserOperationListener()
         {
             return $this->get('znaika_frontend.user_operation_listener');
+        }
+
+        /**
+         * @return UserBadgeRepository
+         */
+        private function getUserBadgeRepository()
+        {
+            return $this->get('znaika_frontend.user_badge_repository');
         }
 
         private function registerUser(User $user)

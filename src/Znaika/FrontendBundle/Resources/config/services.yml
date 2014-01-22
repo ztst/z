@@ -141,3 +141,12 @@ services:
     znaika_frontend.user_to_id_transformer:
         class:     Znaika\FrontendBundle\Form\DataTransformer\UserToIdTransformer
         arguments: ['@znaika_frontend.user_repository']
+
+#twig
+    znaika_frontend.badge_extension:
+        class: Znaika\FrontendBundle\Twig\BadgeExtension
+        arguments:
+            - @twig
+            - @znaika_frontend.user_badge_repository
+        tags:
+            - { name: twig.extension }

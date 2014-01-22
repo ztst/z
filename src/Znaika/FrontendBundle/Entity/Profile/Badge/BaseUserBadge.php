@@ -27,6 +27,11 @@
         protected $createdTime;
 
         /**
+         * @var boolean
+         */
+        protected $isViewed = false;
+
+        /**
          * @param int $badgeType
          */
         abstract public function setBadgeType($badgeType);
@@ -76,4 +81,19 @@
             return $this->userBadgeId;
         }
 
+        /**
+         * @param boolean $isViewed
+         */
+        public function setIsViewed($isViewed)
+        {
+            $this->isViewed = $isViewed;
+        }
+
+        /**
+         * @return boolean
+         */
+        public function getIsViewed()
+        {
+            return $this->isViewed;
+        }
     }

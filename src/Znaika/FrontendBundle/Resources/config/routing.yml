@@ -123,3 +123,10 @@ get_class_subjects:
 register_confirm:
     pattern: /register-confirm/{registerKey}
     defaults: { _controller: ZnaikaFrontendBundle:User:registerConfirm }
+
+user_has_viewed_badges:
+    pattern: /user-has-viewed-badges
+    defaults: { _controller: ZnaikaFrontendBundle:User:hasViewedBadges }
+    methods:  [POST]
+    options:
+        expose: true
