@@ -78,7 +78,7 @@
          * @var \Znaika\FrontendBundle\Entity\Education\Classroom
          */
         private $classroom;
-        
+
         /**
          * @var \DateTime
          */
@@ -519,7 +519,7 @@
         {
             return $this->points;
         }
-        
+
         /**
          * Set classroom
          *

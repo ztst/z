@@ -42,6 +42,7 @@ Znaika\FrontendBundle\Entity\Profile\User:
         birthDate:
             column: birth_date
             type: date
+            nullable: true
     oneToMany:
         videoComments:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
