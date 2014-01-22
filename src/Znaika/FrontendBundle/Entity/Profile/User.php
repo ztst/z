@@ -80,7 +80,7 @@
         private $classroom;
         
         /**
-         * @var string
+         * @var \DateTime
          */
         protected $birthDate;
 
@@ -544,7 +544,7 @@
         }
 
         /**
-         * @param string $birthDate
+         * @param \DateTime $birthDate
          */
         public function setBirthDate($birthDate)
         {
@@ -552,7 +552,7 @@
         }
 
         /**
-         * @return string
+         * @return \DateTime
          */
         public function getBirthDate()
         {

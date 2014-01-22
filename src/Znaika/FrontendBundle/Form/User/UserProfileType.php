@@ -44,7 +44,7 @@
                 ->add('birthDate', 'birthday', array(
                     'empty_value' => array('day' => 'День', 'month' => 'Месяц', 'year' => 'Год'),
                     'required'    => false,
-                    'read_only'   => $readonly
+                    'disabled'   => $readonly
                 ));
 
             if (!$readonly)
