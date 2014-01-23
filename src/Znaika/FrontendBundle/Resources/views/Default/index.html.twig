@@ -1,14 +1,63 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter='cssrewrite' '@ZnaikaFrontendBundle/Resources/public/css/index.css' %}
+  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
 {% block content %}
-  <div class="col-xs-12 col_center">
-    <img src="{{ asset('images/index_background_dummy.jpg') }}" alt="Заглушка" />
+  <div class="index-content">
+    <div class="index-top-videos-block">
+      <div class="index-page-top-video">
+        <h2>
+          Смотрите видеоуроки от лучших учителей России на федеральном
+          образовательном портале Знайка.Ру
+        </h2>
+
+        <div>
+          <img src="{{ asset('images/pics__delete/video-center.jpg') }}" alt="Видео по центру"/>
+        </div>
+        <span class="learn-more">
+          <a href="#">Узнать подробнее о проекте Знайка.Ру</a>
+        </span>
+      </div>
+      <div class="index-page-videos-list">
+        {{ newest_video()|raw }}
+        <span class="get-more-videos">
+          <a href="#">Все новинки</a>
+        </span>
+      </div>
+      <div class="index-page-videos-list">
+        {{ popular_video()|raw }}
+        <span class="get-more-videos">
+          <a href="#">Все популярные</a>
+        </span>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="quick-enter">
+
+    </div>
+    <div class="ratings">
+      <div class="get-points">
+
+      </div>
+      <div class="get-rewards">
+
+      </div>
+      <div class="become-the-best">
+
+      </div>
+    </div>
+    <div class="subscribe">
+
+    </div>
   </div>
-  {{ newest_video()|raw }}
-  <div class="clear"></div>
   <hr/>
-  {{ popular_video()|raw }}
-  <div class="clear"></div>
+
   <hr/>
   {{ newest_user_operation()|raw }}
   {{ newest_user_badge()|raw }}

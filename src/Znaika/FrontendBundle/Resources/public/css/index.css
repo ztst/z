@@ -1,0 +1,73 @@
+.index-page-top-videos-block
+{
+    height: 351px;
+}
+
+.index-page-top-videos-block a
+{
+    text-decoration: underline;
+    color: red;
+}
+
+.index-top-videos-block h2
+{
+    font-family: "Candara";
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.index-page-top-video
+{
+    float: left;
+    margin-right: 27px;
+    width: 629px;
+}
+
+.index-page-top-video div
+{
+    margin-bottom: 18px;
+    border: 1px solid #b5b5b5;
+}
+
+.learn-more
+{
+    display: block;
+    text-align: center;
+    font-family: "OpenSans";
+    font-size: 14px;
+}
+
+.index-page-videos-list
+{
+    float: left;
+    width: 150px;
+}
+
+.index-page-videos-list h5
+{
+    font-family: "OpenSans";
+    font-size: 13px;
+}
+
+.index-page-videos-list h2
+{
+    padding-left: 27px;
+}
+
+.index-page-videos-list .list-item
+{
+    width: 100%;
+}
+
+.index-page-videos-list .list-item .video-preview
+{
+    display: block;
+    width: 100%;
+    height: 75px;
+}
+
+.index-page-videos-list .get-more-videos
+{
+    display: block;
+    text-align: right;
+}
