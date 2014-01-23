@@ -1,5 +1,5 @@
 <?
-    namespace Znaika\FrontendBundle\Helper\Util\Lesson;
+    namespace Znaika\FrontendBundle\Helper\Util;
 
     class SocialNetworkUtil
     {

@@ -6,8 +6,8 @@ security:
             encode_as_base64: true
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_MODERATOR: ROLE_USER
+        ROLE_ADMIN:     [ROLE_MODERATOR]
 
     providers:
         main:

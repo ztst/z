@@ -12,27 +12,27 @@
         /**
          * @var integer
          */
-        protected $classroomId;
+        private $classroomId;
 
         /**
          * @var integer
          */
-        protected $grade;
+        private $grade;
 
         /**
          * @var string
          */
-        protected $letter;
+        private $letter;
 
         /**
          * @var \Doctrine\Common\Collections\Collection
          */
-        protected $users;
+        private $users;
 
         /**
          * @var \Znaika\FrontendBundle\Entity\Education\School
          */
-        protected $school;
+        private $school;
 
         /**
          * Constructor

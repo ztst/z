@@ -4,43 +4,37 @@
 
     use Doctrine\ORM\Mapping as ORM;
 
-    /**
-     * School
-     */
     class School
     {
         /**
          * @var integer
          */
-        protected $schoolId;
+        private $schoolId;
 
         /**
          * @var string
          */
-        protected $name;
+        private $name;
 
         /**
          * @var \Doctrine\Common\Collections\Collection
          */
-        protected $users;
+        private $users;
 
         /**
          * @var \Znaika\FrontendBundle\Entity\Location\City
          */
-        protected $city;
-
-         /**
-         * @var \Doctrine\Common\Collections\Collection
-         */
-        protected $classrooms;
+        private $city;
 
         /**
-         * Constructor
+         * @var \Doctrine\Common\Collections\Collection
          */
+        private $classrooms;
+
         public function __construct()
         {
-            $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-			$this->$classrooms = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->users       = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->$classrooms = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
@@ -116,7 +110,7 @@
          *
          * @param \Znaika\FrontendBundle\Entity\Location\City $city
          *
-         * @return User
+         * @return School
          */
         public function setCity(\Znaika\FrontendBundle\Entity\Location\City $city = null)
         {
@@ -134,7 +128,8 @@
         {
             return $this->city;
         }
-		/**
+
+        /**
          * Add classrooms
          *
          * @param \Znaika\FrontendBundle\Entity\Education\Classroom $classrooms

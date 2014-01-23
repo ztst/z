@@ -36,24 +36,21 @@
       <div>
         <pre>{{ video.getSynopsis.getText }}</pre>
       </div>
-    {% else %}
-      {% if app.user %}
-        <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить конспект</a>
-      {% endif %}
+    {% elseif is_moderator() %}
+      <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить конспект</a>
     {% endif %}
 
-    {% if app.user %}
-      {% if not video.getQuizQuestions is empty %}
-        <a id="addSynopsis" href="{{ path('show_quiz', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Пройти тест</a>
-      {% endif %}
+    {% if is_user() and not video.getQuizQuestions is empty %}
+      <a id="addSynopsis" href="{{ path('show_quiz', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Пройти тест</a>
+    {% endif %}
+    {% if is_moderator() %}
       <a id="createQuiz" href="{{ path('add_quiz_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить вопрос</a>
     {% endif %}
 
     {% if not video.getVideoComments is empty %}
       {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': video.getVideoComments}  %}
     {% endif %}
-
-    {% if app.user %}
+    {% if is_user() %}
       {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "videoName": video.getUrlName} %}
     {% endif %}
 

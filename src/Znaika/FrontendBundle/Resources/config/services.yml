@@ -161,3 +161,10 @@ services:
             - @znaika_frontend.user_badge_repository
         tags:
             - { name: twig.extension }
+
+    znaika_frontend.security_extension:
+        class: Znaika\FrontendBundle\Twig\SecurityExtension
+        arguments:
+            - @security.context
+        tags:
+            - { name: twig.extension }

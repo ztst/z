@@ -3,76 +3,77 @@
 
     use Doctrine\ORM\Mapping as ORM;
     use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+    use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
     use FOS\MessageBundle\Model\ParticipantInterface;
 
-    class User implements AdvancedUserInterface, ParticipantInterface
+    class User implements AdvancedUserInterface, ParticipantInterface, \Serializable
     {
         const SALT = "iHc26#r8AQ6@Vyo6^23!hMm";
 
         /**
          * @var integer
          */
-        protected $userId;
+        private $userId;
         /**
          * @var string
          */
-        protected $firstName;
+        private $firstName;
 
         /**
          * @var string
          */
-        protected $lastName;
+        private $lastName;
 
         /**
          * @var string
          */
-        protected $email;
+        private $email;
 
         /**
          * @var \DateTime
          */
-        protected $createdTime;
+        private $createdTime;
 
         /**
          * @var string
          */
-        protected $password;
+        private $password;
 
         /**
          * @var integer
          */
-        protected $status;
+        private $status;
 
         /**
          * @var \Doctrine\Common\Collections\Collection
          */
-        protected $videoComments;
+        private $videoComments;
 
         /**
          * @var \Doctrine\Common\Collections\Collection
          */
-        protected $userRegistrations;
+        private $userRegistrations;
 
         /**
          * @var \Znaika\FrontendBundle\Entity\Location\City
          */
-        protected $city;
+        private $city;
 
         /**
          * @var integer
          */
-        protected $sex = 0;
+        private $sex = 0;
 
         /**
          * @var integer
          */
-        protected $points = 0;
+        private $points = 0;
 
         /**
          * @var \Znaika\FrontendBundle\Entity\Education\School
          */
-        protected $school;
+        private $school;
 
         /**
          * @var \Znaika\FrontendBundle\Entity\Education\Classroom
@@ -82,7 +83,12 @@
         /**
          * @var \DateTime
          */
-        protected $birthDate;
+        private $birthDate;
+
+        /**
+         * @var integer
+         */
+        private $role = 0;
 
         /**
          * Constructor
@@ -204,7 +210,7 @@
          */
         public function getRoles()
         {
-            return array('ROLE_USER');
+            return array(UserRole::getSecurityTextByRole($this->getRole()));
         }
 
         /**
@@ -524,6 +530,7 @@
          * Set classroom
          *
          * @param \Znaika\FrontendBundle\Entity\Education\Classroom $classroom
+         *
          * @return User
          */
         public function setClassroom(\Znaika\FrontendBundle\Entity\Education\Classroom $classroom = null)
@@ -557,5 +564,43 @@
         public function getBirthDate()
         {
             return $this->birthDate;
+        }
+
+        /**
+         * @param int $role
+         */
+        public function setRole($role)
+        {
+            $this->role = $role;
+        }
+
+        /**
+         * @return int
+         */
+        public function getRole()
+        {
+            return $this->role;
+        }
+
+        public function serialize()
+        {
+            return serialize(array(
+                $this->userId,
+                $this->password,
+                $this->firstName,
+                $this->lastName,
+                $this->createdTime,
+            ));
+        }
+
+        public function unserialize($serialized)
+        {
+            list(
+                $this->userId,
+                $this->password,
+                $this->firstName,
+                $this->lastName,
+                $this->createdTime,
+                ) = unserialize($serialized);
         }
     }

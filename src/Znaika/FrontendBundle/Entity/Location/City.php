@@ -12,22 +12,22 @@
         /**
          * @var integer
          */
-        protected $cityId;
+        private $cityId;
 
         /**
          * @var string
          */
-        protected $name;
+        private $name;
 
         /**
          * @var \Doctrine\Common\Collections\Collection
          */
-        protected $users;
+        private $users;
 
         /**
          * @var \Doctrine\Common\Collections\Collection
          */
-        protected $schools;
+        private $schools;
 
         /**
          * Constructor
@@ -127,7 +127,7 @@
          */
         public function removeSchool(\Znaika\FrontendBundle\Entity\Education\School $school)
         {
-            $this->school->removeElement($school);
+            $this->schools->removeElement($school);
         }
 
         /**

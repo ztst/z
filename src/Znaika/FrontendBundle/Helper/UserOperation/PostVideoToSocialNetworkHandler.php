@@ -5,7 +5,7 @@
     use Znaika\FrontendBundle\Entity\Profile\Action\PostVideoToSocialNetworkOperation;
     use Znaika\FrontendBundle\Entity\Profile\Badge\SocialNetworkPosterBadge;
     use Znaika\FrontendBundle\Entity\Profile\User;
-    use Znaika\FrontendBundle\Helper\Util\Lesson\SocialNetworkUtil;
+    use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
 
     class PostVideoToSocialNetworkHandler extends UserOperationHandler
     {
