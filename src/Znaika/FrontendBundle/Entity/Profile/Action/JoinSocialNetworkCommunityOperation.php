@@ -28,7 +28,7 @@
             return UserOperationType::JOIN_SOCIAL_NETWORK_COMMUNITY_OPERATION;
         }
 
-        protected function getAccruedPoints()
+        public function getAccruedPoints()
         {
             return UserOperationPoints::REGISTRATION;
         }

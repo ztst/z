@@ -28,7 +28,7 @@
             return UserOperationType::VIEW_VIDEO;
         }
 
-        protected function getAccruedPoints()
+        public function getAccruedPoints()
         {
             return UserOperationPoints::VIEW_VIDEO;
         }

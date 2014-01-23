@@ -72,6 +72,36 @@
         }
 
         /**
+         * @param $limit
+         *
+         * @return Video[]
+         */
+        public function getNewestVideo($limit)
+        {
+            $result = $this->redisRepository->getNewestVideo($limit);
+            if ( empty($result) )
+            {
+                $result = $this->dbRepository->getNewestVideo($limit);
+            }
+            return $result;
+        }
+
+        /**
+         * @param $limit
+         *
+         * @return Video[]
+         */
+        public function getPopularVideo($limit)
+        {
+            $result = $this->redisRepository->getPopularVideo($limit);
+            if ( empty($result) )
+            {
+                $result = $this->dbRepository->getPopularVideo($limit);
+            }
+            return $result;
+        }
+
+        /**
          * @param Video $video
          *
          * @return bool

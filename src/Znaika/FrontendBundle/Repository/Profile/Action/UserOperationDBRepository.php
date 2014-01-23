@@ -96,6 +96,19 @@
             return $qb->getQuery()->getOneOrNullResult();
         }
 
+        public function getViews(Video $video)
+        {
+            $qb = $this->getEntityManager()
+                       ->createQueryBuilder();
+
+            $qb->select('count(uo.userOperationId)')
+               ->from('ZnaikaFrontendBundle:Profile\Action\ViewVideoOperation', 'uo')
+               ->andWhere('uo.video = :video_id')
+               ->setParameter('video_id', $video->getVideoId());
+
+            return intval($qb->getQuery()->getSingleScalarResult());
+        }
+
         public function getLastPostVideoToSocialNetworkOperation(User $user, Video $video, $network)
         {
             $qb = $this->getEntityManager()
@@ -163,6 +176,24 @@
         public function countPostVideoToSocialNetworkOperations(User $user)
         {
             return $this->countUserOperations($user, 'ZnaikaFrontendBundle:Profile\Action\PostVideoToSocialNetworkOperation');
+        }
+
+        /**
+         * @param integer $limit
+         *
+         * @return BaseUserOperation[]
+         */
+        public function getNewestOperations($limit)
+        {
+            $qb = $this->getEntityManager()
+                       ->createQueryBuilder();
+
+            $qb->select('uo')
+               ->from('ZnaikaFrontendBundle:Profile\Action\BaseUserOperation', 'uo')
+               ->orderBy('uo.createdTime', 'DESC')
+               ->setMaxResults($limit);
+
+            return $qb->getQuery()->getResult();
         }
 
         protected function getLastOperationByUser(User $user, $type)

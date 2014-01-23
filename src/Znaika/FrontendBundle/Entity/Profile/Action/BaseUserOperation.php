@@ -47,7 +47,7 @@
          */
         abstract public function getOperationType();
 
-        abstract protected function getAccruedPoints();
+        abstract public function getAccruedPoints();
 
         /**
          * @param \DateTime $createdTime

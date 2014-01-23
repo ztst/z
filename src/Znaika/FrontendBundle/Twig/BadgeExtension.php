@@ -44,7 +44,7 @@
             if ($user)
             {
                 $badges          = $this->badgeRepository->getUserNotViewedBadges($user);
-                $templateFile    = "ZnaikaFrontendBundle:TwigExtension:userBadges.html.twig";
+                $templateFile    = "ZnaikaFrontendBundle:TwigExtension:user_badges.html.twig";
                 $templateContent = $this->twig->loadTemplate($templateFile);
 
                 $result = $templateContent->render(array("badges" => $badges));

@@ -27,6 +27,9 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             type: string
             length: 255
             notnull: true
+        views:
+            type: integer
+            notnull: true
         createdTime:
             column: created_time
             type: datetime

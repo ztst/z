@@ -158,4 +158,11 @@
          * @return integer
          */
         public function countPostVideoToSocialNetworkOperations(User $user);
+
+        /**
+         * @param integer $limit
+         *
+         * @return BaseUserOperation[]
+         */
+        public function getNewestOperations($limit);
     }

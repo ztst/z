@@ -28,7 +28,7 @@
             return UserOperationType::REGISTRATION_REFERRAL_OPERATION;
         }
 
-        protected function getAccruedPoints()
+        public function getAccruedPoints()
         {
             return UserOperationPoints::REGISTRATION;
         }

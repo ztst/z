@@ -38,4 +38,22 @@
 
             return $qb->getQuery()->getResult();
         }
+
+        /**
+         * @param integer $limit
+         *
+         * @return BaseUserBadge[]
+         */
+        public function getNewestBadges($limit)
+        {
+            $qb = $this->getEntityManager()
+                       ->createQueryBuilder();
+
+            $qb->select('ub')
+               ->from('ZnaikaFrontendBundle:Profile\Badge\BaseUserBadge', 'ub')
+               ->orderBy('ub.createdTime', 'DESC')
+               ->setMaxResults($limit);
+
+            return $qb->getQuery()->getResult();
+        }
     }

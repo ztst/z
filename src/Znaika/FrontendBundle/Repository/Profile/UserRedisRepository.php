@@ -44,4 +44,14 @@
         {
             return null;
         }
+
+        /**
+         * @param integer $limit
+         *
+         * @return User[]
+         */
+        public function getUsersTopByPoints($limit)
+        {
+            return null;
+        }
     }

@@ -25,4 +25,14 @@
         {
             return null;
         }
+
+        /**
+         * @param integer $limit
+         *
+         * @return BaseUserBadge[]
+         */
+        public function getNewestBadges($limit)
+        {
+            return null;
+        }
     }

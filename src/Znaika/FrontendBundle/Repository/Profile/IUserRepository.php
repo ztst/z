@@ -32,4 +32,11 @@
          * @return User|null
          */
         public function getOneByEmail($email);
+
+        /**
+         * @param integer $limit
+         *
+         * @return User[]
+         */
+        public function getUsersTopByPoints($limit);
     }

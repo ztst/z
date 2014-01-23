@@ -150,3 +150,14 @@ services:
             - @znaika_frontend.user_badge_repository
         tags:
             - { name: twig.extension }
+
+    znaika_frontend.index_page_extension:
+        class: Znaika\FrontendBundle\Twig\IndexPageExtension
+        arguments:
+            - @twig
+            - @znaika_frontend.video_repository
+            - @znaika_frontend.user_operation_repository
+            - @znaika_frontend.user_repository
+            - @znaika_frontend.user_badge_repository
+        tags:
+            - { name: twig.extension }

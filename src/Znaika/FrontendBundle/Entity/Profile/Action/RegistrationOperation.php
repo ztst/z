@@ -28,7 +28,7 @@
             return UserOperationType::REGISTRATION_OPERATION;
         }
 
-        protected function getAccruedPoints()
+        public function getAccruedPoints()
         {
             return UserOperationPoints::REGISTRATION;
         }

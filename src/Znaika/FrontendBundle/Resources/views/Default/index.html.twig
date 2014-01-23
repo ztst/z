@@ -4,4 +4,13 @@
   <div class="col-xs-12 col_center">
     <img src="{{ asset('images/index_background_dummy.jpg') }}" alt="Заглушка" />
   </div>
+  {{ newest_video()|raw }}
+  <div class="clear"></div>
+  <hr/>
+  {{ popular_video()|raw }}
+  <div class="clear"></div>
+  <hr/>
+  {{ newest_user_operation()|raw }}
+  {{ newest_user_badge()|raw }}
+  {{ top_user_by_points()|raw }}
 {% endblock %}

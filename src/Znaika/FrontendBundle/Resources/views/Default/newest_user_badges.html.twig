@@ -1,0 +1,18 @@
+<div class="col-lg-4 col-xs-12">
+  <h2>Последние бейджи:</h2>
+  {% if userBadges %}
+    {% for userBadge in userBadges %}
+      <div class="col-xs-12">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+          <h4>{{ badge_name(userBadge) }}</h4>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+          {{ userBadge.user }}
+        </div>
+      </div>
+      <div class="clear"></div>
+    {% endfor %}
+  {% else %}
+    <h5>Не найдено</h5>
+  {% endif %}
+</div>

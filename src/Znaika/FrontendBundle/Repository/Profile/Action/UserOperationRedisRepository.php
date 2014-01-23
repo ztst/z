@@ -126,4 +126,14 @@
         {
             return null;
         }
+
+        /**
+         * @param integer $limit
+         *
+         * @return BaseUserOperation[]
+         */
+        public function getNewestOperations($limit)
+        {
+            return null;
+        }
     }

@@ -257,4 +257,20 @@
 
             return $result;
         }
+
+        /**
+         * @param integer $limit
+         *
+         * @return BaseUserOperation[]
+         */
+        public function getNewestOperations($limit)
+        {
+            $result = $this->redisRepository->getNewestOperations($limit);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getNewestOperations($limit);
+            }
+
+            return $result;
+        }
     }

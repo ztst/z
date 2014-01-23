@@ -9,14 +9,14 @@
          * @param null $classNumber
          * @param null $subjectName
          *
-         * @return array|null
+         * @return Video[]|null
          */
         public function getVideosForCatalog($classNumber = null, $subjectName = null);
 
         /**
          * @param string $searchString
          *
-         * @return array|null
+         * @return Video[]|null
          */
         public function getVideosBySearchString($searchString);
 
@@ -26,6 +26,20 @@
          * @return Video|null
          */
         public function getOneByUrlName($name);
+
+        /**
+         * @param $limit
+         *
+         * @return Video[]
+         */
+        public function getNewestVideo($limit);
+
+        /**
+         * @param $limit
+         *
+         * @return Video[]
+         */
+        public function getPopularVideo($limit);
 
         /**
          * @param Video $video

@@ -28,7 +28,7 @@
             return UserOperationType::POST_VIDEO_TO_SOCIAL_NETWORK;
         }
 
-        protected function getAccruedPoints()
+        public function getAccruedPoints()
         {
             return UserOperationPoints::POST_VIDEO;
         }

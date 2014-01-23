@@ -72,6 +72,44 @@
         }
 
         /**
+         * @param $limit
+         *
+         * @return Video[]
+         */
+        public function getNewestVideo($limit)
+        {
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->select('v')
+                         ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+                         ->addOrderBy('v.createdTime', 'DESC')
+                         ->setMaxResults($limit);
+
+            $videos = $queryBuilder->getQuery()->getResult();
+
+            return $videos;
+        }
+
+        /**
+         * @param $limit
+         *
+         * @return Video[]
+         */
+        public function getPopularVideo($limit)
+        {
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->select('v')
+                         ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+                         ->addOrderBy('v.views', 'DESC')
+                         ->setMaxResults($limit);
+
+            $videos = $queryBuilder->getQuery()->getResult();
+
+            return $videos;
+        }
+
+        /**
          * @param $classNumber
          * @param $queryBuilder
          */

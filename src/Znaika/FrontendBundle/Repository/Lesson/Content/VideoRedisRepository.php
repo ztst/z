@@ -46,4 +46,24 @@
             return true;
         }
 
+        /**
+         * @param $limit
+         *
+         * @return Video[]
+         */
+        public function getNewestVideo($limit)
+        {
+            return null;
+        }
+
+        /**
+         * @param $limit
+         *
+         * @return Video[]
+         */
+        public function getPopularVideo($limit)
+        {
+            return null;
+        }
+
     }

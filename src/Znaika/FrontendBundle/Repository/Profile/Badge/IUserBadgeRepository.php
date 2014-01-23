@@ -19,4 +19,11 @@
          * @return BaseUserBadge[]
          */
         public function getUserNotViewedBadges(User $user);
+
+        /**
+         * @param integer $limit
+         *
+         * @return BaseUserBadge[]
+         */
+        public function getNewestBadges($limit);
     }

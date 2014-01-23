@@ -28,7 +28,7 @@
             return UserOperationType::ADD_SEX_IN_PROFILE_OPERATION;
         }
 
-        protected function getAccruedPoints()
+        public function getAccruedPoints()
         {
             return UserOperationPoints::ADD_PROFILE_FIELD;
         }

@@ -28,7 +28,7 @@
             return UserOperationType::ADD_VIDEO_COMMENT_OPERATION;
         }
 
-        protected function getAccruedPoints()
+        public function getAccruedPoints()
         {
             return UserOperationPoints::INTERESTED_IN_VIDEO;
         }

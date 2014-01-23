@@ -54,4 +54,20 @@
 
             return $result;
         }
+
+        /**
+         * @param integer $limit
+         *
+         * @return BaseUserBadge[]
+         */
+        public function getNewestBadges($limit)
+        {
+            $result = $this->redisRepository->getNewestBadges($limit);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getNewestBadges($limit);
+            }
+
+            return $result;
+        }
     }

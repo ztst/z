@@ -75,11 +75,25 @@
          */
         public function getOneByEmail($email)
         {
-
             $result = $this->redisRepository->getOneByEmail($email);
             if ( empty($result) )
             {
                 $result = $this->dbRepository->getOneByEmail($email);
+            }
+            return $result;
+        }
+
+        /**
+         * @param integer $limit
+         *
+         * @return User[]
+         */
+        public function getUsersTopByPoints($limit)
+        {
+            $result = $this->redisRepository->getUsersTopByPoints($limit);
+            if ( is_null($result) )
+            {
+                $result = $this->dbRepository->getUsersTopByPoints($limit);
             }
             return $result;
         }

@@ -70,6 +70,11 @@
         private $userAttempts;
 
         /**
+         * @var integer
+         */
+        private $views = 0;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -405,5 +410,21 @@
         public function getUserAttempts()
         {
             return $this->userAttempts;
+        }
+
+        /**
+         * @param int $views
+         */
+        public function setViews($views)
+        {
+            $this->views = $views;
+        }
+
+        /**
+         * @return int
+         */
+        public function getViews()
+        {
+            return $this->views;
         }
     }

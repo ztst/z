@@ -28,7 +28,7 @@
             return UserOperationType::ADD_CITY_IN_PROFILE;
         }
 
-        protected function getAccruedPoints()
+        public function getAccruedPoints()
         {
             return UserOperationPoints::ADD_PROFILE_FIELD;
         }
