@@ -1,11 +1,14 @@
 <div class="rating-newest-operations col_left col-lg-4 col-xs-12">
   <h2>Зарабатывай баллы!</h2>
-  <h5>
-    Смотри видео, выполняй тестовые задания
-    и зарабатывай больше баллов. Больше!
-  </h5>
+  <div class="table-description-text">
+    <h5>
+      Смотри видео, выполняй тестовые задания
+      и зарабатывай больше баллов. Больше!
+    </h5>
+  </div>
   {% if userOperations %}
     {% for userOperation in userOperations %}
+      <div class="delimiter"></div>
       <div class="operations-rating-list-item">
         <div class="user-photo"></div>
         <div class="acquired-points">
@@ -16,7 +19,6 @@
         </div>
       </div>
       <div class="clear"></div>
-      <div class="delimiter"></div>
     {% endfor %}
   {% else %}
     <h5>Не найдено</h5>

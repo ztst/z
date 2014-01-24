@@ -27,7 +27,6 @@
 .index-page-top-videos-block a
 {
     text-decoration: underline;
-    color: red;
 }
 
 .index-page-top-video
@@ -117,6 +116,14 @@
 {
     padding-left: 50px;
     height: 25px;
+}
+
+.ratings .table-description-text
+{
+    position: relative;
+    top: 4px;
+    height: 40px;
+    background: #fff;
 }
 
 .rating-newest-operations
