@@ -76,6 +76,16 @@
         private $userAttempts;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $similarVideos;
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $similarToVideos;
+
+        /**
          * @var integer
          */
         private $views = 0;
@@ -89,6 +99,8 @@
             $this->videoAttachments = new \Doctrine\Common\Collections\ArrayCollection();
             $this->userAttempts     = new \Doctrine\Common\Collections\ArrayCollection();
             $this->quizQuestions    = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->similarVideos    = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->similarToVideos  = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
@@ -459,12 +471,67 @@
         }
 
         /**
-         * Get userAttempts
-         *
          * @return \Doctrine\Common\Collections\Collection
          */
         public function getVideoAttachments()
         {
             return $this->videoAttachments;
+        }
+
+        /**
+         * @param Video $video
+         *
+         * @return Video
+         */
+        public function addSimilarVideo(Video $video)
+        {
+            if (!$this->similarVideos->contains($video))
+            {
+                $this->similarVideos[] = $video;
+            }
+
+            return $this;
+        }
+
+        /**
+         * @param Video $video
+         */
+        public function removeSimilarVideo(Video $video)
+        {
+            $this->similarVideos->removeElement($video);
+        }
+
+        /**
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getSimilarVideos()
+        {
+            return $this->similarVideos;
+        }
+
+        public function addSimilarToVideo(Video $video)
+        {
+            if (!$this->similarToVideos->contains($video))
+            {
+                $this->similarToVideos[] = $video;
+            }
+
+            return $this;
+        }
+
+        /**
+         * @param Video $video
+         */
+        public function removeSimilarToVideo(Video $video)
+        {
+            $this->similarToVideos->removeElement($video);
+        }
+
+        /**
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getSimilarToVideos()
+        {
+            return $this->similarToVideos;
         }
     }

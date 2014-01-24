@@ -16,12 +16,7 @@
             return null;
         }
 
-        /**
-         * @param string $searchString
-         *
-         * @return array|null
-         */
-        public function getVideosBySearchString($searchString)
+        public function getVideosBySearchString($searchString, $limit = null)
         {
             return null;
         }

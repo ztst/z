@@ -56,17 +56,12 @@
             return $result;
         }
 
-        /**
-         * @param string $searchString
-         *
-         * @return array|null
-         */
-        public function getVideosBySearchString($searchString)
+        public function getVideosBySearchString($searchString, $limit = null)
         {
-            $result = $this->redisRepository->getVideosBySearchString($searchString);
+            $result = $this->redisRepository->getVideosBySearchString($searchString, $limit);
             if ( empty($result) )
             {
-                $result = $this->dbRepository->getVideosBySearchString($searchString);
+                $result = $this->dbRepository->getVideosBySearchString($searchString, $limit);
             }
             return $result;
         }

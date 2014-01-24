@@ -25,16 +25,35 @@
 
     class VideoController extends Controller
     {
+        public function addSimilarVideoAction($videoName, $similarVideoName)
+        {
+            $repository   = $this->getVideoRepository();
+            $video        = $repository->getOneByUrlName($videoName);
+            $similarVideo = $repository->getOneByUrlName($similarVideoName);
+
+            if (!is_null($video) && !is_null($similarVideo))
+            {
+                $video->addSimilarVideo($similarVideo);
+                $repository->save($video);
+            }
+
+            return new RedirectResponse($this->generateUrl('show_video', array(
+                "class"       => $video->getGrade(),
+                "subjectName" => $video->getSubject()->getUrlName(),
+                "videoName"   => $video->getUrlName()
+            )));
+        }
+
         public function postVideoToSocialNetworkAction(Request $request)
         {
-            $repository = $this->getVideoRepository();
-            $video      = $repository->getOneByUrlName($request->get('videoName'));
-            $user = $this->getUser();
-            $network = $request->get('network');
+            $repository       = $this->getVideoRepository();
+            $video            = $repository->getOneByUrlName($request->get('videoName'));
+            $user             = $this->getUser();
+            $network          = $request->get('network');
             $canSaveOperation = SocialNetworkUtil::isValidSocialNetwork($network) && !is_null($user) && !is_null($video);
-            if($canSaveOperation)
+            if ($canSaveOperation)
             {
-                $listener           = $this->getUserOperationListener();
+                $listener = $this->getUserOperationListener();
                 $listener->onPostVideoToSocialNetwork($user, $video, $network);
             }
 
