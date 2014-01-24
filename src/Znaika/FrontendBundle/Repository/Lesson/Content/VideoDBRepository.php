@@ -39,12 +39,7 @@
             return $this->findOneByUrlName($name);
         }
 
-        /**
-         * @param string $searchString
-         *
-         * @return array|null
-         */
-        public function getVideosBySearchString($searchString)
+        public function getVideosBySearchString($searchString, $limit = null)
         {
             $searchString = "%{$searchString}%";
 
@@ -54,6 +49,11 @@
                          ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
                          ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
                          ->addOrderBy('v.createdTime', 'DESC');
+
+            if(!is_null($limit))
+            {
+                $queryBuilder->setMaxResults($limit);
+            }
 
             $videos = $queryBuilder->getQuery()->getResult();
 
