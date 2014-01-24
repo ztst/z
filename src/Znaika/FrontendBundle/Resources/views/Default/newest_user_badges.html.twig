@@ -1,8 +1,13 @@
-<div class="col-lg-4 col-xs-12">
-  <h2>Последние бейджи:</h2>
+<div class="rating-newest-badges col-lg-4 col-xs-12">
+  <h2>Получай награды!</h2>
+  <h5>
+    Смотри видео, выполняй задания и тесты
+    зарабатывай больше баллов.
+  </h5>
   {% if userBadges %}
     {% for userBadge in userBadges %}
-      <div class="col-xs-12">
+      <div class="badges-rating-list-item col-xs-12">
+        <div class="badge-icon"></div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
           <h4>{{ badge_name(userBadge) }}</h4>
         </div>

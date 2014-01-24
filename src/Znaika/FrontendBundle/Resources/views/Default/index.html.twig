@@ -40,7 +40,9 @@
     <div class="clear"></div>
     <div class="social-buttons-block">
       <div class="social-buttons-container">
-        <div class="social-buttons-text">Быстрый вход</div>
+        <div class="social-buttons-text">
+          <h5>Быстрый вход</h5>
+        </div>
         <div class="social-button">
           <a href="#">
             <img src="/images/index/social-buttons/vk.jpg" />
@@ -65,22 +67,13 @@
     </div>
     <div class="clear"></div>
     <div class="ratings">
-      <div class="get-points">
-
-      </div>
-      <div class="get-rewards">
-
-      </div>
-      <div class="become-the-best">
-
-      </div>
+      {{ newest_user_operation()|raw }}
+      {{ newest_user_badge()|raw }}
+      {{ top_user_by_points()|raw }}
     </div>
+    <div class="clear"></div>
     <div class="subscribe">
 
     </div>
   </div>
-
-  {{ newest_user_operation()|raw }}
-  {{ newest_user_badge()|raw }}
-  {{ top_user_by_points()|raw }}
 {% endblock %}
