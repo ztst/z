@@ -71,3 +71,34 @@
     display: block;
     text-align: right;
 }
+
+.social-buttons-block
+{
+    padding-top: 33px;
+    height: 100px;
+    background: url('/images/index/social-buttons/background-vertical-bar.jpg') repeat-x;
+}
+
+.social-buttons-container
+{
+    margin-left: 367px;
+    width: 278px;
+    height: 100%;
+    background: #fff;
+}
+
+.social-buttons-text
+{
+    float: left;
+    padding: 8px 15px 0;
+    font-family: "OpenSans";
+    font-size: 13px;
+}
+
+.social-button
+{
+    margin: 0 1px;
+    float: left;
+    width: 32px;
+    height: 32px;
+}
