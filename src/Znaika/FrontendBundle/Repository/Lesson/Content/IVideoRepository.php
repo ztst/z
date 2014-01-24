@@ -15,10 +15,11 @@
 
         /**
          * @param string $searchString
+         * @param $limit
          *
          * @return Video[]|null
          */
-        public function getVideosBySearchString($searchString);
+        public function getVideosBySearchString($searchString, $limit = null);
 
         /**
          * @param $name

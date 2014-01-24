@@ -113,6 +113,10 @@ search:
     pattern: /search
     defaults: { _controller: ZnaikaFrontendBundle:Search:search }
 
+search_similar_video:
+    pattern: /search-similar-video/{videoName}
+    defaults: { _controller: ZnaikaFrontendBundle:Search:searchSimilarVideo }
+
 get_class_subjects:
     pattern: /class/subjects
     defaults: { _controller: ZnaikaFrontendBundle:Default:getClassSubjects }
@@ -148,3 +152,6 @@ post_video_to_social_network:
     options:
         expose: true
 
+add_video_similar:
+    pattern: /add-similar-video/{videoName}/{similarVideoName}
+    defaults: { _controller: ZnaikaFrontendBundle:Video:addSimilarVideo }

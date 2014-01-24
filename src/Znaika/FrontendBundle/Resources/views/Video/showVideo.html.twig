@@ -23,37 +23,42 @@
 
 {% block content %}
   {% if isValidUrl %}
-    <h1>{{ video.getName|raw }}</h1>
+    <div class="col-lg-7 col_left">
+      <h1>{{ video.getName|raw }}</h1>
 
-    <a href="{{ path('show_catalogue_by_class', {'class': video.getGrade}) }}" class="">{{ video.getGrade }} класс</a>
-    >
-    <a href="{{ path('show_catalogue', {'class': video.getGrade, 'subjectName': video.getSubject.getUrlName}) }}" class="">{{ video.getSubject.getName }}</a>
-    >
-    <span>{{ video.getName|raw }}</span>
-    <div class="clear"></div>
+      <a href="{{ path('show_catalogue_by_class', {'class': video.getGrade}) }}" class="">{{ video.getGrade }} класс</a>
+      >
+      <a href="{{ path('show_catalogue', {'class': video.getGrade, 'subjectName': video.getSubject.getUrlName}) }}" class="">{{ video.getSubject.getName }}</a>
+      >
+      <span>{{ video.getName|raw }}</span>
+      <div class="clear"></div>
 
-    <div class="video_player_container">
-      <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video.getUrl }}" frameborder="0" allowfullscreen></iframe>
-    </div>
-    <div class="clear"></div>
-
-    {% if viewVideoOperation %}
-      <div class="video_view">
-        Просмотрено: {{ viewVideoOperation.getCreatedTime|date('Y-m-d H:i:s') }}
+      <div class="video_player_container">
+        <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video.getUrl }}" frameborder="0" allowfullscreen></iframe>
       </div>
-    {% endif %}
-    {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
-        'url': app.request.uri,
-        'title': video.name,
-        'img': "http:" ~ video.getThumbnailUrl,
-        'desc': ( video.synopsis ) ? video.synopsis.text : ""
-      }
-    %}
+      <div class="clear"></div>
 
-    {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
-    {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video} %}
-    {% include "ZnaikaFrontendBundle:Video:show_video_attachments_block.html.twig" with {'video': video} %}
-    {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video} %}
+      {% if viewVideoOperation %}
+        <div class="video_view">
+          Просмотрено: {{ viewVideoOperation.getCreatedTime|date('Y-m-d H:i:s') }}
+        </div>
+      {% endif %}
+      {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
+          'url': app.request.uri,
+          'title': video.name,
+          'img': "http:" ~ video.getThumbnailUrl,
+          'desc': ( video.synopsis ) ? video.synopsis.text : ""
+        }
+      %}
+
+      {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
+      {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video} %}
+      {% include "ZnaikaFrontendBundle:Video:show_video_attachments_block.html.twig" with {'video': video} %}
+      {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video} %}
+    </div>
+    <div class="col-lg-5 col_right">
+      {% include "ZnaikaFrontendBundle:Video:similar_videos_block.html.twig" with {'videos': video.getSimilarVideos} %}
+    </div>
   {% else %}
     <img src="{{ asset('images/404.jpg') }}" alt="Видео не найдено"/>
   {% endif %}
