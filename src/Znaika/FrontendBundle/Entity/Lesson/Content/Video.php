@@ -4,6 +4,7 @@
     use Symfony\Component\Validator\ExecutionContextInterface;
     use \Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Doctrine\ORM\Mapping as ORM;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment;
 
     class Video
     {
@@ -62,6 +63,11 @@
         /**
          * @var \Doctrine\Common\Collections\Collection
          */
+        private $videoAttachments;
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
         private $quizQuestions;
 
         /**
@@ -79,7 +85,10 @@
          */
         public function __construct()
         {
-            $this->videoComments = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->videoComments    = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->videoAttachments = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->userAttempts     = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->quizQuestions    = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
@@ -368,13 +377,13 @@
         {
             if ($this->getSubject()->getUrlName() != $this->getChapter()->getSubject()->getUrlName())
             {
-                $context->addViolationAt('chapter', 'Выбранная глава не соответствует предмету.', array(),
-                    null); //TODO: text
+                //TODO: text
+                $context->addViolationAt('chapter', 'Выбранная глава не соответствует предмету.', array(), null);
             }
             if ($this->getGrade() != $this->getChapter()->getGrade())
             {
-                $context->addViolationAt('chapter', 'Выбранная глава не соответствует классу.', array(),
-                    null); //TODO: text
+                //TODO: text
+                $context->addViolationAt('chapter', 'Выбранная глава не соответствует классу.', array(), null);
             }
         }
 
@@ -426,5 +435,36 @@
         public function getViews()
         {
             return $this->views;
+        }
+
+        /**
+         * @param VideoAttachment $videoAttachment
+         *
+         * @return Video
+         */
+        public function addVideoAttachment(VideoAttachment $videoAttachment)
+        {
+            $videoAttachment->setVideo($this);
+            $this->videoAttachments[] = $videoAttachment;
+
+            return $this;
+        }
+
+        /**
+         * @param VideoAttachment $videoAttachment
+         */
+        public function removeVideoAttachment(VideoAttachment $videoAttachment)
+        {
+            $this->videoAttachments->removeElement($videoAttachment);
+        }
+
+        /**
+         * Get userAttempts
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getVideoAttachments()
+        {
+            return $this->videoAttachments;
         }
     }

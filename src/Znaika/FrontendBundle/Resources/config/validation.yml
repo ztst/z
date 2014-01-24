@@ -32,3 +32,11 @@ Znaika\FrontendBundle\Entity\Profile\User:
                   checkMX: true
         password:
             - NotBlank: { message: "not_blank" }
+
+Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment:
+    properties:
+        file:
+            - File:
+                maxSize: 100M
+                mimeTypes: [application/pdf, application/x-pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword]
+                mimeTypesMessage: "invalid_file_format"

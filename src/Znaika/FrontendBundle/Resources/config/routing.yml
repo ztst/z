@@ -130,3 +130,14 @@ user_has_viewed_badges:
     methods:  [POST]
     options:
         expose: true
+
+add_video_attachment_form:
+    pattern: /video/{videoName}/add-video-attachment-form
+    defaults: { _controller: ZnaikaFrontendBundle:Video:addVideoAttachmentForm }
+
+download_video_attachment:
+    pattern: /video-attachment/{attachmentId}
+    defaults: { _controller: ZnaikaFrontendBundle:Video:downloadVideoAttachment }
+    requirements:
+        attachmentId:  \d+
+

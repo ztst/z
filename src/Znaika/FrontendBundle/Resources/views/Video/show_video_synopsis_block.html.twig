@@ -1,0 +1,9 @@
+{% if video.getSynopsis %}
+  <div>
+    <pre>{{ video.getSynopsis.getText }}</pre>
+  </div>
+{% elseif is_moderator() %}
+  <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">
+    Добавить конспект
+  </a>
+{% endif %}
