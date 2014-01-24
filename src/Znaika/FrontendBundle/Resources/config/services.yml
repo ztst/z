@@ -176,3 +176,8 @@ services:
             - @security.context
         tags:
             - { name: twig.extension }
+
+    znaika_frontend.social_networks_extension:
+        class: Znaika\FrontendBundle\Twig\SocialNetworksExtension
+        tags:
+            - { name: twig.extension }

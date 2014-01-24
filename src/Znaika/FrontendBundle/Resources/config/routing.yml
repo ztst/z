@@ -141,3 +141,10 @@ download_video_attachment:
     requirements:
         attachmentId:  \d+
 
+post_video_to_social_network:
+    pattern: /post-video/{videoName}
+    defaults: { _controller: ZnaikaFrontendBundle:Video:postVideoToSocialNetwork }
+    methods:  [POST]
+    options:
+        expose: true
+

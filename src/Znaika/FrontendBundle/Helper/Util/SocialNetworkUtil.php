@@ -5,6 +5,8 @@
     {
         const VK            = 1;
         const ODNOKLASSNIKI = 2;
+        const FACEBOOK      = 3;
+        const TWITTER       = 4;
 
         /**
          * @return array
@@ -14,6 +16,8 @@
             $availableClasses = array(
                 self::VK,
                 self::ODNOKLASSNIKI,
+                self::FACEBOOK,
+                self::TWITTER,
             );
 
             return $availableClasses;

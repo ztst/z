@@ -16,7 +16,6 @@ var ShowThreadPage = Base.extend({
                 'messageId': id
             };
 
-            console.log(data);
             $.post(that._deleteMessageUrl, data, handler(that, '_onDeleteMessageComplete'), 'json');
 
             return false;

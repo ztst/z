@@ -19,20 +19,36 @@
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\JsonResponse;
+    use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
     use Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\IVideoAttachmentRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
 
     class VideoController extends Controller
     {
+        public function postVideoToSocialNetworkAction(Request $request)
+        {
+            $repository = $this->getVideoRepository();
+            $video      = $repository->getOneByUrlName($request->get('videoName'));
+            $user = $this->getUser();
+            $network = $request->get('network');
+            $canSaveOperation = SocialNetworkUtil::isValidSocialNetwork($network) && !is_null($user) && !is_null($video);
+            if($canSaveOperation)
+            {
+                $listener           = $this->getUserOperationListener();
+                $listener->onPostVideoToSocialNetwork($user, $video, $network);
+            }
+
+            return new JsonResponse(array('success' => true));
+        }
+
         public function downloadVideoAttachmentAction($attachmentId)
         {
             $repository = $this->getVideoAttachmentRepository();
             $attachment = $repository->getOneByVideoAttachmentId($attachmentId);
 
-            $root = $this->container->getParameter('upload_file_dir');
             /** @var VideoAttachmentUploader $uploader */
             $uploader = $this->get('znaika_frontend.video_attachment_uploader');
-            $file = $uploader->getAbsoluteFilePath($attachment);
+            $file     = $uploader->getAbsoluteFilePath($attachment);
 
             $response = new BinaryFileResponse($file);
             $response->headers->set('Content-Type', mime_content_type($file));
