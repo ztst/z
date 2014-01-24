@@ -38,6 +38,10 @@ services:
             - @znaika_frontend.user_operation_repository
             - @znaika_frontend.user_badge_repository
 
+    znaika_frontend.video_attachment_uploader:
+        class:     Znaika\FrontendBundle\Helper\Uploader\VideoAttachmentUploader
+        arguments: ['@service_container']
+
 #repository
     znaika_frontend.video_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository
@@ -97,6 +101,10 @@ services:
 
     znaika_frontend.user_badge_repository:
         class:        Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika_frontend.video_attachment_repository:
+        class:        Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\VideoAttachmentRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
 #menu
@@ -159,5 +167,17 @@ services:
             - @znaika_frontend.user_operation_repository
             - @znaika_frontend.user_repository
             - @znaika_frontend.user_badge_repository
+        tags:
+            - { name: twig.extension }
+
+    znaika_frontend.security_extension:
+        class: Znaika\FrontendBundle\Twig\SecurityExtension
+        arguments:
+            - @security.context
+        tags:
+            - { name: twig.extension }
+
+    znaika_frontend.social_networks_extension:
+        class: Znaika\FrontendBundle\Twig\SocialNetworksExtension
         tags:
             - { name: twig.extension }

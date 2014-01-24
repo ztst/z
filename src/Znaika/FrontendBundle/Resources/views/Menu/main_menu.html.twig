@@ -24,7 +24,7 @@
             </form>
             <div class="clear"></div>
           </li>
-          {% if app.user %}
+          {% if is_user() %}
             <li>
               <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user_profile_link">{{ app.user }}, {{ app.user.getPoints }} баллов</a>
             </li>

@@ -6,8 +6,19 @@
   {{ parent() }}
 
   {% stylesheets filter='cssrewrite' '@ZnaikaFrontendBundle/Resources/public/css/show_video.css' %}
-  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
+{% endblock %}
+
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts
+    '../app/Resources/public/js/classes/ShareLinks.class.js'
+  %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
 {% endblock %}
 
 {% block content %}
@@ -31,33 +42,20 @@
         Просмотрено: {{ viewVideoOperation.getCreatedTime|date('Y-m-d H:i:s') }}
       </div>
     {% endif %}
+    {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
+        'url': app.request.uri,
+        'title': video.name,
+        'img': "http:" ~ video.getThumbnailUrl,
+        'desc': ( video.synopsis ) ? video.synopsis.text : ""
+      }
+    %}
 
-    {% if video.getSynopsis %}
-      <div>
-        <pre>{{ video.getSynopsis.getText }}</pre>
-      </div>
-    {% else %}
-      {% if app.user %}
-        <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить конспект</a>
-      {% endif %}
-    {% endif %}
-
-    {% if app.user %}
-      {% if not video.getQuizQuestions is empty %}
-        <a id="addSynopsis" href="{{ path('show_quiz', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Пройти тест</a>
-      {% endif %}
-      <a id="createQuiz" href="{{ path('add_quiz_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">Добавить вопрос</a>
-    {% endif %}
-
-    {% if not video.getVideoComments is empty %}
-      {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': video.getVideoComments}  %}
-    {% endif %}
-
-    {% if app.user %}
-      {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "videoName": video.getUrlName} %}
-    {% endif %}
-
+    {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
+    {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video} %}
+    {% include "ZnaikaFrontendBundle:Video:show_video_attachments_block.html.twig" with {'video': video} %}
+    {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video} %}
   {% else %}
     <img src="{{ asset('images/404.jpg') }}" alt="Видео не найдено"/>
   {% endif %}
+  <input id="videoName" type="hidden" value="{{ video.getUrlName }}" />
 {% endblock %}

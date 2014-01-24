@@ -2,22 +2,103 @@
     namespace Znaika\FrontendBundle\Controller;
 
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpFoundation\RedirectResponse;
+    use Symfony\Component\HttpFoundation\ResponseHeaderBag;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
+    use Znaika\FrontendBundle\Form\Lesson\Content\Attachment\VideoAttachmentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\SynopsisType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoCommentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoType;
+    use Znaika\FrontendBundle\Helper\Uploader\VideoAttachmentUploader;
     use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\JsonResponse;
+    use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
+    use Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\IVideoAttachmentRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
 
     class VideoController extends Controller
     {
+        public function postVideoToSocialNetworkAction(Request $request)
+        {
+            $repository = $this->getVideoRepository();
+            $video      = $repository->getOneByUrlName($request->get('videoName'));
+            $user = $this->getUser();
+            $network = $request->get('network');
+            $canSaveOperation = SocialNetworkUtil::isValidSocialNetwork($network) && !is_null($user) && !is_null($video);
+            if($canSaveOperation)
+            {
+                $listener           = $this->getUserOperationListener();
+                $listener->onPostVideoToSocialNetwork($user, $video, $network);
+            }
+
+            return new JsonResponse(array('success' => true));
+        }
+
+        public function downloadVideoAttachmentAction($attachmentId)
+        {
+            $repository = $this->getVideoAttachmentRepository();
+            $attachment = $repository->getOneByVideoAttachmentId($attachmentId);
+
+            /** @var VideoAttachmentUploader $uploader */
+            $uploader = $this->get('znaika_frontend.video_attachment_uploader');
+            $file     = $uploader->getAbsoluteFilePath($attachment);
+
+            $response = new BinaryFileResponse($file);
+            $response->headers->set('Content-Type', mime_content_type($file));
+            $response->headers->set('Content-length', filesize($file));
+            $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $attachment->getName());
+
+            return $response;
+        }
+
+        /**
+         * @return IVideoAttachmentRepository
+         */
+        private function getVideoAttachmentRepository()
+        {
+            return $this->get('znaika_frontend.video_attachment_repository');
+        }
+
+        public function addVideoAttachmentFormAction(Request $request)
+        {
+            $repository = $this->getVideoRepository();
+            $video      = $repository->getOneByUrlName($request->get('videoName'));
+
+            $videoAttachment = new VideoAttachment();
+            $form            = $this->createForm(new VideoAttachmentType(), $videoAttachment);
+
+            $form->handleRequest($request);
+
+            if ($form->isValid())
+            {
+                $video->addVideoAttachment($videoAttachment);
+
+                /** @var VideoAttachmentUploader $uploader */
+                $uploader = $this->get('znaika_frontend.video_attachment_uploader');
+                $uploader->upload($videoAttachment);
+
+                $repository->save($video);
+
+                return new RedirectResponse($this->generateUrl('show_video', array(
+                    "class"       => $video->getGrade(),
+                    "subjectName" => $video->getSubject()->getUrlName(),
+                    "videoName"   => $video->getUrlName()
+                )));
+            }
+
+            return $this->render('ZnaikaFrontendBundle:Video:addVideoAttachmentForm.html.twig', array(
+                'form'  => $form->createView(),
+                'video' => $video,
+            ));
+        }
+
         public function addSynopsisFormAction(Request $request)
         {
             $repository = $this->getVideoRepository();

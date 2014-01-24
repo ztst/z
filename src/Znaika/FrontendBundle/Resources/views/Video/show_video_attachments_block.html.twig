@@ -1,0 +1,19 @@
+{% if not video.getVideoAttachments is empty %}
+  <h3>Файлы</h3>
+  <ul class="media-list">
+    {% for attachment in video.getVideoAttachments %}
+      <li class="media">
+        <div class="media-body">
+          <a href="{{ path("download_video_attachment", {"attachmentId": attachment.getVideoAttachmentId}) }}" title="{{ attachment.getName }}">
+            {{ attachment.getName }}
+          </a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% if is_moderator() %}
+  <a href="{{ path('add_video_attachment_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">
+    Добавить файл
+  </a>
+{% endif %}

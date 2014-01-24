@@ -1,0 +1,6 @@
+{% if not video.getVideoComments is empty %}
+  {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': video.getVideoComments} %}
+{% endif %}
+{% if is_user() %}
+  {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "videoName": video.getUrlName} %}
+{% endif %}

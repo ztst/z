@@ -1,0 +1,10 @@
+{% if is_user() and not video.getQuizQuestions is empty %}
+  <a href="{{ path('show_quiz', {'videoName': video.getUrlName}) }}" class="btn btn-primary">
+    Пройти тест
+  </a>
+{% endif %}
+{% if is_moderator() %}
+  <a id="createQuiz" href="{{ path('add_quiz_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">
+    Добавить вопрос
+  </a>
+{% endif %}

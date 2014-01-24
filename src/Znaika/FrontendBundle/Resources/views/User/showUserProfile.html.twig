@@ -51,7 +51,7 @@
         </div>
       {% endif %}
     {{ form_end(form) }}
-    {% if app.user and not ownProfile %}
+    {% if is_user() and not ownProfile %}
       <form action="{{ path('send_message') }}" method="post">
         <input type="hidden" name="from" value="{{ app.user.getUserId }}" />
         <input type="hidden" name="to" value="{{  userId }}" />
