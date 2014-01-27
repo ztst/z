@@ -66,6 +66,16 @@
             return $result;
         }
 
+        public function getNotSimilarVideosBySearchString(Video $video, $searchString, $limit = null)
+        {
+            $result = $this->redisRepository->getNotSimilarVideosBySearchString($video, $searchString, $limit);
+            if ( empty($result) )
+            {
+                $result = $this->dbRepository->getNotSimilarVideosBySearchString($video, $searchString, $limit);
+            }
+            return $result;
+        }
+
         /**
          * @param $limit
          *
