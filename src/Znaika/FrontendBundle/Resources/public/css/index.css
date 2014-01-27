@@ -204,3 +204,85 @@
     margin-top: 3px;
     background: url('/images/index/rating-lists/horizontal-dotted-bar.jpg') repeat-x;
 }
+/* Ratings block END */
+
+/* Subscribe block BEGIN */
+.subscribe-block
+{
+    margin-top: 49px;
+    margin-bottom: 25px;
+}
+
+.subscribe-convert-sign
+{
+    float: left;
+    margin-right: 18px;
+    width: 34px;
+    height: 24px;
+    background: url('/images/index/subscribe-form/subscribe-convert-sign.jpg');
+}
+
+.subscribe-text
+{
+    float: left;
+    width: 31%;
+}
+
+.subscribe-text h4
+{
+    margin: 0;
+    padding: 0;
+    font-family: "ProximaNova Semibold";
+    font-size: 18px;
+}
+
+.subscribe-text h5
+{
+    margin: 0;
+    padding: 0;
+}
+
+.subscribe-form
+{
+    float: right;
+    width: 60%;
+}
+
+.subscribe-form input
+{
+    border: none;
+    outline: none;
+}
+
+.subscribe-form input[type=text]
+{
+    width: 100%;
+    font-family: "OpenSans";
+    font-style: italic;
+    font-size: 14px;
+    color: #9b9898;
+}
+
+.subscribe-email
+{
+    float: left;
+    width: 67%;
+    padding: 4px 12px;
+    border: 1px solid #a1a1a1;
+    border-radius: 3px 0 0 3px;
+    border-right: none;
+    height: 31px;
+}
+
+.subscribe-button
+{
+    float: left;
+    width: 130px;
+    height: 31px;
+    font-family: "MyRiadPro";
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    background: url('/images/index/subscribe-form/subscribe-button.jpg');
+}
+/* Subscribe block END */
