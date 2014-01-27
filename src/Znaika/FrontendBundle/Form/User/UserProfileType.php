@@ -7,6 +7,8 @@
 
     class UserProfileType extends UserType
     {
+        const MAX_YEARS_OLD = 90;
+
         /**
          * @param FormBuilderInterface $builder
          * @param array $options
@@ -44,7 +46,10 @@
                 ->add('birthDate', 'birthday', array(
                     'empty_value' => array('day' => 'День', 'month' => 'Месяц', 'year' => 'Год'),
                     'required'    => false,
-                    'disabled'   => $readonly
+                    'disabled'    => $readonly,
+                    'format'      => 'dd MMMM yyyy',
+                    'widget'      => 'choice',
+                    'years'       => range(date('Y'), date('Y') - self::MAX_YEARS_OLD)
                 ));
 
             if (!$readonly)
