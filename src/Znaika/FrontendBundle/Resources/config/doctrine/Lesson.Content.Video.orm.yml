@@ -78,7 +78,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
             inversedBy: similarToVideos
             joinTable:
-                name: friends
+                name: similar_videos
                 joinColumns:
                     video_id:
                         referencedColumnName: video_id
