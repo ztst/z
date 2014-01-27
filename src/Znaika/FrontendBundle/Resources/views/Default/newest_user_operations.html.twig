@@ -8,13 +8,13 @@
   </div>
   {% if userOperations %}
     {% for userOperation in userOperations %}
-      <div class="delimiter"></div>
-      <div class="operations-rating-list-item">
-        <div class="user-photo"></div>
-        <div class="acquired-points">
+      <div class="horizontal-dotted-bar"></div>
+      <div class="rating-list-item">
+        <div class="rating-list-item-userpic"></div>
+        <div class="rating-list-item-acquired-points">
           <h4>+{{ userOperation.getAccruedPoints }} знаков</h4>
         </div>
-        <div class="username">
+        <div class="rating-list-item-username">
           {{ userOperation.user }}
         </div>
       </div>
