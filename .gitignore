@@ -11,3 +11,13 @@
 /composer.phar
 /.idea/
 /composer.lock
+
+/web/css/19700b0*
+/web/css/9fe57cd*
+/web/css/dda7a16*
+/web/css/f209dda*
+
+/web/js/05db998*
+/web/js/548b86d*
+/web/js/9c86a57*
+/web/uploads/*

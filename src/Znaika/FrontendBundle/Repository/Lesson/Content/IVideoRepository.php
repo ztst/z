@@ -22,6 +22,15 @@
         public function getVideosBySearchString($searchString, $limit = null);
 
         /**
+         * @param Video $video
+         * @param $searchString
+         * @param integer $limit
+         *
+         * @return Video[]|null
+         */
+        public function getNotSimilarVideosBySearchString(Video $video, $searchString, $limit = null);
+
+        /**
          * @param $name
          *
          * @return Video|null

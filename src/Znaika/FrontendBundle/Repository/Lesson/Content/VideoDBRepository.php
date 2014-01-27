@@ -50,7 +50,37 @@
                          ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
                          ->addOrderBy('v.createdTime', 'DESC');
 
-            if(!is_null($limit))
+            if (!is_null($limit))
+            {
+                $queryBuilder->setMaxResults($limit);
+            }
+
+            $videos = $queryBuilder->getQuery()->getResult();
+
+            return $videos;
+        }
+
+        public function getNotSimilarVideosBySearchString(Video $video, $searchString, $limit = null)
+        {
+            $videoIds      = array($video->getVideoId());
+            $similarVideos = $video->getSimilarVideos();
+            foreach ($similarVideos as $similarVideo)
+            {
+                array_push($videoIds, $similarVideo->getVideoId());
+            }
+
+            $searchString = "%{$searchString}%";
+
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->select('v')
+                         ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+                         ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
+                         ->andWhere('v.videoId NOT IN (:video_ids)')
+                         ->setParameter('video_ids', $videoIds)
+                         ->addOrderBy('v.createdTime', 'DESC');
+
+            if (!is_null($limit))
             {
                 $queryBuilder->setMaxResults($limit);
             }
