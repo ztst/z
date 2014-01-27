@@ -1,7 +1,7 @@
 {% if videos %}
   {% for video in videos %}
-    <div class="list-item col-lg-6 col-xs-12">
-      <div class="video-preview col-xs-12 col-sm-6 col-md-4 col-lg-4">
+    <div class="list-item">
+      <div class="video-preview">
         <a href="{{ path('show_video', {
         'subjectName': video.getSubject.getUrlName,
         'class': video.getGrade,
@@ -11,7 +11,7 @@
           <img width="100" src="{{ video.getThumbnailUrl }}" alt="{{ video.getName|raw }}"/>
         </a>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+      <div class="">
         <h5>{{ video.getName|raw }}</h5>
       </div>
     </div>

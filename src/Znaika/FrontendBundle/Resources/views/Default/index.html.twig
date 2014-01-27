@@ -11,12 +11,11 @@
 {% block content %}
   <div class="index-content">
     <div class="index-top-videos-block">
-      <div class="index-page-top-video">
+      <div class="index-page-top-video col_center col-lg-8">
         <h2>
           Смотрите видеоуроки от лучших учителей России на федеральном
           образовательном портале Знайка.Ру
         </h2>
-
         <div>
           <img src="{{ asset('/images/pics__delete/video-center.jpg') }}" alt="Видео по центру"/>
         </div>
@@ -24,13 +23,13 @@
           <a href="#">Узнать подробнее о проекте Знайка.Ру</a>
         </span>
       </div>
-      <div class="index-page-videos-list">
+      <div class="index-page-videos-list col-lg-2 col-sm-6 col-xs-12">
         {{ newest_video()|raw }}
         <span class="get-more-videos">
           <a href="#">Все новинки</a>
         </span>
       </div>
-      <div class="index-page-videos-list">
+      <div class="index-page-videos-list col-lg-2 col-sm-6 col-xs-12">
         {{ popular_video()|raw }}
         <span class="get-more-videos">
           <a href="#">Все популярные</a>
@@ -39,7 +38,8 @@
     </div>
     <div class="clear"></div>
     <div class="social-buttons-block">
-      <div class="social-buttons-container">
+      <div class="col-lg-4"></div>
+      <div class="social-buttons-container col-lg-4 col-xs-12">
         <div class="social-buttons-text">
           <h5>Быстрый вход</h5>
         </div>
