@@ -69,7 +69,6 @@
 {
     width: 100%;
     height: 29px;
-    white-space: nowrap;
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -98,7 +97,7 @@
 
 .social-buttons-container
 {
-    width: 260px;
+    width: 272px;
     height: 32px;
     background: #fff;
 }
@@ -281,11 +280,21 @@
 
 
 /* Footer block BEGIN */
-.footer
+.footer-znaika-boy
 {
-    height: 207px;
-    background: -moz-linear-gradient(#404f5b, #2b343b);
-    background: -ms-linear-gradient(#404f5b, #2b343b);
-    background: linear-gradient(#404f5b, #2b343b);
+/*    float: right;
+    position: relative;
+    bottom: 139px;
+    width: 252px;
+    height: 146px;
+    background: url('/images/footer/znaika-boy.png') no-repeat;*/
+}
+
+.footer-logo
+{
+    margin-top: 23px;
+    background: url('/images/footer/footer-logo.png') no-repeat;
+    width: 121px;
+    height: 40px;
 }
 /* Footer block END */
