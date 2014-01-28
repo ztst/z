@@ -268,3 +268,14 @@
     background: url('/images/index/subscribe-form/subscribe-button.jpg') no-repeat;
 }
 /* Subscribe block END */
+
+
+/* Footer block BEGIN */
+.footer
+{
+    height: 207px;
+    background: -moz-linear-gradient(#404f5b, #2b343b);
+    background: -ms-linear-gradient(#404f5b, #2b343b);
+    background: linear-gradient(#404f5b, #2b343b);
+}
+/* Footer block END */
