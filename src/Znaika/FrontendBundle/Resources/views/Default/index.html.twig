@@ -11,7 +11,7 @@
 {% block content %}
   <div class="index-content">
     <div class="index-top-videos-block">
-      <div class="index-page-top-video col_center col-lg-8">
+      <div class="index-page-top-video col_center col-lg-8 col-md-12 col-sm-12 col-xs-12">
         <h2>
           Смотрите видеоуроки от лучших учителей России на федеральном
           образовательном портале Знайка.Ру
@@ -23,13 +23,13 @@
           <a href="#">Узнать подробнее о проекте Знайка.Ру</a>
         </span>
       </div>
-      <div class="index-page-videos-list col-lg-2 col-sm-6 col-xs-12">
+      <div class="index-page-videos-list col-lg-2 col-md-6 col-sm-6 col-xs-12">
         {{ newest_video()|raw }}
         <span class="get-more-videos">
           <a href="#">Все новинки</a>
         </span>
       </div>
-      <div class="index-page-videos-list col-lg-2 col-sm-6 col-xs-12">
+      <div class="index-page-videos-list col-lg-2 col-md-6 col-sm-6 col-xs-12">
         {{ popular_video()|raw }}
         <span class="get-more-videos">
           <a href="#">Все популярные</a>
@@ -37,9 +37,8 @@
       </div>
     </div>
     <div class="clear"></div>
-    <div class="social-buttons-block">
-      <div class="col-lg-4"></div>
-      <div class="social-buttons-container col-lg-4 col-xs-12">
+    <div class="social-buttons-block col-lg-12 col-xs-12">
+      <div class="social-buttons-container col-lg-4 col-md-4 col-sm-offset-4 col-sm-5 col-xs-12">
         <div class="social-buttons-text">
           <h5>Быстрый вход</h5>
         </div>
@@ -72,17 +71,16 @@
       {{ top_user_by_points()|raw }}
     </div>
     <div class="clear"></div>
-    <div class="subscribe-block col_center col-lg-8">
+    <div class="subscribe-block col_center col-lg-8 col-sm-12 col-xs-12">
       <hr />
-      <div class="subscribe-convert-sign"></div>
-      <div class="subscribe-text col_center col-lg-4">
+      <div class="subscribe-text col_center col-sm-5 col-xs-12">
         <h4>Видеоуроки на почту</h4>
         <h5>
           Получайте свежие видеоуроки
           прямо на свой e-mail
         </h5>
       </div>
-      <div class="subscribe-form">
+      <div class="subscribe-form col-sm-7 col-xs-12">
         <div class="subscribe-email">
           <input type="text" value="anna.petrova@mail.com" />
         </div>
