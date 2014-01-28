@@ -17,6 +17,7 @@ Znaika\FrontendBundle\Entity\Profile\User:
             column: last_name
             type: string
             length: 255
+            nullable: true
         email:
             type: string
             length: 255

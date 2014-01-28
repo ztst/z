@@ -23,9 +23,9 @@
     {
         public function hasViewedBadgesAction()
         {
-            $user = $this->getUser();
+            $user            = $this->getUser();
             $badgeRepository = $this->getUserBadgeRepository();
-            $badges = $badgeRepository->getUserNotViewedBadges($user);
+            $badges          = $badgeRepository->getUserNotViewedBadges($user);
             foreach ($badges as $badge)
             {
                 $badge->setIsViewed(true);
@@ -33,6 +33,7 @@
             }
 
             $success = true;
+
             return new JsonResponse(array('success' => $success));
         }
 
@@ -51,16 +52,20 @@
                 $session->remove(SecurityContext::AUTHENTICATION_ERROR);
             }
 
-            $referer = $request->headers->get('referer');
+            $userRepository = $this->get('znaika_frontend.user_repository');
+            $registerForm   = $this->createForm(new RegistrationType($userRepository), new Registration());
 
-            return $this->render(
-                        'ZnaikaFrontendBundle:User:login.html.twig',
-                            array(
-                                // last username entered by the user
-                                'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-                                'error'         => $error,
-                                'referer'       => $referer,
-                            )
+            $referrer      = $request->headers->get('referer');
+            $loginTemplate = ($request->isXmlHttpRequest()) ? 'ZnaikaFrontendBundle:User:loginAjax.html.twig' : 'ZnaikaFrontendBundle:User:login.html.twig';
+
+            return $this->render($loginTemplate,
+                array(
+                    // last username entered by the user
+                    'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+                    'error'         => $error,
+                    'referrer'      => $referrer,
+                    'registerForm'  => $registerForm->createView()
+                )
             );
         }
 
@@ -103,14 +108,43 @@
 
                 $this->registerUser($user);
 
-                return $this->render('ZnaikaFrontendBundle:User:registerSuccess.html.twig');
+                if ($request->isXmlHttpRequest())
+                {
+                    $html = $this->renderView('ZnaikaFrontendBundle:User:registration_success_block.html.twig',
+                        array(
+                            'form' => $form->createView()
+                        ));
+                    $array    = array('success' => true, 'html' => $html);
+                    $response = new JsonResponse($array);
+                }
+                else
+                {
+                    $response = $this->render('ZnaikaFrontendBundle:User:registerSuccess.html.twig');
+                }
+
+            }
+            else
+            {
+                if ($request->isXmlHttpRequest())
+                {
+                    $html = $this->renderView('ZnaikaFrontendBundle:User:register_form.html.twig',
+                        array(
+                            'form' => $form->createView()
+                        ));
+                    $array    = array('success' => false, 'html' => $html);
+                    $response = new JsonResponse($array);
+                }
+                else
+                {
+                    $response = $this->render('ZnaikaFrontendBundle:User:register.html.twig',
+                        array(
+                            'form' => $form->createView()
+                    ));
+                }
             }
 
-            return $this->render('ZnaikaFrontendBundle:User:register.html.twig',
-                array(
-                    'form' => $form->createView()
-                )
-            );
+            return $response;
+
         }
 
         public function showUserProfileAction($userId)

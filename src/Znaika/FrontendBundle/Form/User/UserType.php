@@ -31,7 +31,6 @@
         {
             $builder
                 ->add('firstName', 'text')
-                ->add('lastName', 'text')
                 ->add('email', 'email')
                 ->add('password', 'password');
 
@@ -58,7 +57,6 @@
         {
             $user->setCreatedTime(new \DateTime());
             $user->setFirstName($data['firstName']);
-            $user->setLastName($data['lastName']);
             $user->setPassword($data['password']);
         }
 

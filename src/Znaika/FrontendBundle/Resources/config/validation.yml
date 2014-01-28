@@ -24,8 +24,6 @@ Znaika\FrontendBundle\Entity\Profile\User:
     properties:
         firstName:
             - NotBlank: { message: "not_blank" }
-        lastName:
-            - NotBlank: { message: "not_blank" }
         email:
             - NotBlank: { message: "not_blank" }
             - Email:

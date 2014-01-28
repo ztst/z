@@ -103,7 +103,7 @@ try_login:
     path: /login
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
-        route: add_video_form
+        route: login
         permanent: true
 
 logout:

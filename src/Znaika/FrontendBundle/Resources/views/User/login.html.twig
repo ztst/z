@@ -2,27 +2,8 @@
 
 {% block content %}
   <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
-    {% if error %}
-      <div class="alert alert-danger">{{ error.message }}</div>
-    {% endif %}
-
-    <form action="{{ path('login_check') }}" method="post">
-      <div class="form-group">
-        <label for="username">Email:</label>
-        <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" />
-      </div>
-
-      <div class="form-group">
-        <label for="password">Пароль:</label>
-        <input class="form-control" type="password" id="password" name="_password" />
-      </div>
-      <input type="hidden" name="_target_path" value="{{ referer }}" />
-
-      <div>
-        <button class="btn btn-primary" type="submit">Войти</button>
-      </div>
-    </form>
+    {% include "ZnaikaFrontendBundle:User:login_form.html.twig" with {'last_username': last_username, 'error': error, 'referrer': referrer} %}
+    <br />
     <a href="{{ path("register") }}">Регистрация</a>
-
   </div>
 {% endblock %}

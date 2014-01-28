@@ -2,7 +2,5 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
 {% block content %}
-  <div>
-    На Ваш email отправлено письмо с ссылкой подтверждения регистрации.
-  </div>
+  {% include 'ZnaikaFrontendBundle:User:registration_success_block.html.twig' %}
 {% endblock %}

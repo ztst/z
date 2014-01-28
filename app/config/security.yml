@@ -25,8 +25,10 @@ security:
         secured_area:
             pattern:    ^/
             form_login:
-                login_path:  login
-                check_path:  login_check
+                login_path:      login
+                check_path:      login_check
+                success_handler: znaika_frontend.security.authentication_handler
+                failure_handler: znaika_frontend.security.authentication_handler
             logout:
                 path:   /logout
                 target: /

@@ -1,0 +1,12 @@
+<div class="popup">
+  <div id="loginFormContainer">
+    <h3>Войти</h3>
+    <a href="javascript:void(0);" title="" id="switchRegistrationLink">Зарегистрироваться</a>
+    {% include "ZnaikaFrontendBundle:User:login_form.html.twig" with {'last_username': last_username, 'error': error, 'referrer': referrer} %}
+  </div>
+  <div id="registrationFormContainer" class="hidden">
+    <h3>Зарегистрироваться</h3>
+    <a href="javascript:void(0);" title="" id="switchLoginLink">Войти</a>
+    {% include 'ZnaikaFrontendBundle:User:register_form.html.twig' with {'form': registerForm} %}
+  </div>
+</div>

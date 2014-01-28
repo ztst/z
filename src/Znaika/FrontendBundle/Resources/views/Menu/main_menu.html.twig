@@ -31,7 +31,7 @@
             <li>
               {{ user_badges(app.user)|raw }}
             </li>
-            <li><a href="{{ path("logout") }}" class="btn btn-default login_button">Выйти</a></li>
+            <li><a href="{{ path("logout") }}" class="btn btn-default logout_button">Выйти</a></li>
           {% else %}
             <li><a href="{{ path("try_login") }}" class="btn btn-default login_button">Вход</a></li>
           {% endif %}

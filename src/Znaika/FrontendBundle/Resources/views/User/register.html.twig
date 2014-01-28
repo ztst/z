@@ -2,36 +2,6 @@
 
 {% block content %}
   <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
-    {{ form_start(form, {'method': 'POST'}) }}
-      {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
-      <div class="form-group">
-        {{ form_label(form.user.firstName, 'Имя') }}
-        {{ form_errors(form.user.firstName) }}
-        {{ form_widget(form.user.firstName, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="form-group">
-        {{ form_label(form.user.lastName, 'Фамилия') }}
-        {{ form_errors(form.user.lastName) }}
-        {{ form_widget(form.user.lastName, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="form-group">
-        {{ form_label(form.user.email, 'Емайл') }}
-        {{ form_errors(form.user.email) }}
-        {{ form_widget(form.user.email, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="form-group">
-        {{ form_label(form.user.password, 'Пароль') }}
-        {{ form_errors(form.user.password) }}
-        {{ form_widget(form.user.password, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="form-group">
-        {{ form_label(form.terms, 'Принимаю соглашение') }}
-        {{ form_errors(form.terms) }}
-        {{ form_widget(form.terms, {'attr': {'class': 'checkbox'}}) }}
-      </div>
-      <div>
-        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
-      </div>
-    {{ form_end(form) }}
+    {% include 'ZnaikaFrontendBundle:User:register_form.html.twig' with {'form': form} %}
   </div>
 {% endblock %}
