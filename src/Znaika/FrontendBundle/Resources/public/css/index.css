@@ -35,6 +35,13 @@
     width: 629px;
 }
 
+.index-page-top-video h2
+{
+    padding-left: 45px;
+    background: url('/images/index/top-video-header-play-sign.jpg') no-repeat;
+    background-position: 0 4px;
+}
+
 .index-page-top-video div
 {
     margin-bottom: 18px;
