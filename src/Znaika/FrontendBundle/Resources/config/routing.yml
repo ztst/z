@@ -155,3 +155,23 @@ post_video_to_social_network:
 add_video_similar:
     pattern: /add-similar-video/{videoName}/{similarVideoName}
     defaults: { _controller: ZnaikaFrontendBundle:Video:addSimilarVideo }
+
+about:
+    pattern: /about
+    defaults: { _controller: ZnaikaFrontendBundle:Default:about }
+
+contacts:
+    pattern: /contacts
+    defaults: { _controller: ZnaikaFrontendBundle:Default:contacts }
+
+rules:
+    pattern: /rules
+    defaults: { _controller: ZnaikaFrontendBundle:Default:rules }
+
+agreement:
+    pattern: /agreement
+    defaults: { _controller: ZnaikaFrontendBundle:Default:agreement }
+
+support:
+    pattern: /support
+    defaults: { _controller: ZnaikaFrontendBundle:Default:support }

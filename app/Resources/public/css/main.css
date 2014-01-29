@@ -42,6 +42,7 @@ body
 
 .footer
 {
+    position: relative;
     height: 207px;
 
     background: #404f5b;
