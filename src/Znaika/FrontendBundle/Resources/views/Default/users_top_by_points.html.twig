@@ -1,12 +1,23 @@
-<div class="col-lg-4 col-xs-12">
-  <h2>Рейтинг баллов:</h2>
+<div class="rating-top-by-points col-lg-4 col-md-4 col-sm-12 col-xs-12">
+  <h2>Стань лучшим Знайкой!</h2>
+  <div class="table-description-text">
+    <h5>
+      Смотри видео, выполняй тестовые задания и
+      зарабатывай больше баллов и наград. Больше!
+    </h5>
+  </div>
   {% if users %}
     {% for user in users %}
-      <div class="col-xs-12">
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+      <div class="horizontal-dotted-bar"></div>
+      <div class="rating-list-item">
+        <div class="rating-list-item-userpic"></div>
+        <div class="zn-symbol">
+          <img src="/images/index/rating-lists/zn-symbol.jpg" />
+        </div>
+        <div class="rating-list-item-points-value">
           <h4>{{ user.points }}</h4>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+        <div class="rating-list-item-username">
           {{ user }}
         </div>
       </div>

@@ -1,12 +1,9 @@
-<?php
+<?
 
     namespace Znaika\FrontendBundle\Entity\Location;
 
     use Doctrine\ORM\Mapping as ORM;
 
-    /**
-     * City
-     */
     class City
     {
         /**
@@ -29,9 +26,6 @@
          */
         private $schools;
 
-        /**
-         * Constructor
-         */
         public function __construct()
         {
             $this->users   = new \Doctrine\Common\Collections\ArrayCollection();

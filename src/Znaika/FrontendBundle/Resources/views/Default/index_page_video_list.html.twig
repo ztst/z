@@ -1,0 +1,21 @@
+{% if videos %}
+  {% for video in videos %}
+    <div class="list-item">
+      <div class="video-preview">
+        <a href="{{ path('show_video', {
+        'subjectName': video.getSubject.getUrlName,
+        'class': video.getGrade,
+        'videoName': video.getUrlName
+        }) }}"
+           title="{{ video.getName|raw }}">
+          <img width="100" src="{{ video.getThumbnailUrl }}" alt="{{ video.getName|raw }}"/>
+        </a>
+      </div>
+      <div class="">
+        <h5>{{ video.getName|raw }}</h5>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <h5>Не найдено</h5>
+{% endif %}

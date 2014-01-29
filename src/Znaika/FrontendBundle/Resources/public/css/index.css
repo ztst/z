@@ -1,0 +1,291 @@
+.index-content h2
+{
+    font-family: "Candara";
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.index-content h4
+{
+    font-family: "OpenSans";
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.index-content h5
+{
+    font-family: "OpenSans";
+    font-size: 13px;
+}
+
+/* Top videos block BEGIN */
+.index-page-top-videos-block
+{
+    height: 351px;
+}
+
+.index-page-top-videos-block a
+{
+    text-decoration: underline;
+}
+
+.index-page-top-video
+{
+    margin-right: 27px;
+    width: 629px;
+}
+
+.index-page-top-video h2
+{
+    padding-left: 45px;
+    background: url('/images/index/top-video-header-play-sign.jpg') no-repeat;
+    background-position: 0 4px;
+}
+
+.index-page-top-video div
+{
+    margin-bottom: 18px;
+    border: 1px solid #b5b5b5;
+}
+
+.learn-more
+{
+    display: block;
+    text-align: center;
+    font-family: "OpenSans";
+    font-size: 14px;
+}
+
+.index-page-videos-list
+{
+}
+
+.index-page-videos-list .list-item
+{
+    height: 120px;
+}
+
+.index-page-videos-list .list-item h5
+{
+    width: 100%;
+    height: 29px;
+    white-space: nowrap;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.index-page-videos-list .list-item .video-preview
+{
+    display: block;
+    height: 75px;
+}
+
+.index-page-videos-list .get-more-videos
+{
+    display: block;
+    text-align: right;
+}
+/* Top videos block END */
+
+/* Social buttons block BEGIN */
+.social-buttons-block
+{
+    padding-top: 33px;
+    height: 100px;
+    background: url('/images/index/social-buttons/background-vertical-bar.jpg') repeat-x;
+}
+
+.social-buttons-container
+{
+    width: 272px;
+    height: 32px;
+    background: #fff;
+}
+
+.social-buttons-text
+{
+    float: left;
+    margin-right: 15px;
+}
+
+.social-button
+{
+    margin: 0 1px;
+    float: left;
+    width: 32px;
+    height: 32px;
+}
+/* Social buttons block END */
+
+/* Ratings block BEGIN */
+.ratings h2
+{
+    padding-left: 50px;
+    height: 25px;
+}
+
+.ratings .table-description-text
+{
+    position: relative;
+    top: 4px;
+    height: 40px;
+    background: #fff;
+}
+
+.rating-newest-operations
+{
+}
+
+.rating-newest-operations h2
+{
+    background: url('/images/index/rating-lists/newest-operations-header.jpg') no-repeat;
+}
+
+.rating-newest-badges h2
+{
+    background: url('/images/index/rating-lists/newest-badges-header.jpg') no-repeat;
+}
+
+.rating-top-by-points
+{
+}
+
+.rating-top-by-points h2
+{
+    background: url('/images/index/rating-lists/top-by-points-header.jpg') no-repeat;
+}
+
+.rating-list-item
+{
+    height: 38px;
+}
+
+.rating-list-item-acquired-points, .rating-list-item-points-value
+{
+    float: left;
+}
+
+.rating-list-item-points-value
+{
+    margin-top: 2px;
+    font-family: "OpenSans";
+    font-weight: lighter;
+}
+
+.rating-list-item-username
+{
+    display: block;
+    float: right;
+    margin-top: 7px;
+    text-align: right;
+}
+
+.rating-list-item-userpic
+{
+    float: left;
+    padding: 2px;
+    margin-right: 5px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #bebebe;
+    background: url('/images/404-32x31.jpg') no-repeat;
+    background-position: 2px 2px;
+}
+
+.zn-symbol
+{
+    float: left;
+    margin-top: 9px;
+    margin-right: 7px;
+}
+
+.points-value
+{
+    float: left;
+}
+
+.horizontal-dotted-bar
+{
+    height: 4px;
+    margin-top: 3px;
+    background: url('/images/index/rating-lists/horizontal-dotted-bar.jpg') repeat-x;
+}
+/* Ratings block END */
+
+/* Subscribe block BEGIN */
+.subscribe-block
+{
+    margin-top: 49px;
+    margin-bottom: 25px;
+}
+
+.subscribe-text
+{
+    padding-left: 50px;
+    background: url('/images/index/subscribe-form/subscribe-convert-sign.jpg') no-repeat;
+    background-position: 0 5px;
+}
+
+.subscribe-text h4
+{
+    margin: 0;
+    font-family: "ProximaNova Semibold";
+    font-size: 18px;
+}
+
+.subscribe-form
+{
+    float: right;
+    margin-top: 15px;
+}
+
+.subscribe-form input
+{
+    border: none;
+    outline: none;
+}
+
+.subscribe-form input[type=text]
+{
+    width: 100%;
+    font-family: "OpenSans";
+    font-style: italic;
+    font-size: 14px;
+    color: #9b9898;
+}
+
+.subscribe-email
+{
+    float: left;
+    width: 63%;
+    padding: 4px 12px;
+    border: 1px solid #a1a1a1;
+    border-radius: 3px 0 0 3px;
+    border-right: none;
+    height: 31px;
+}
+
+.subscribe-button
+{
+    float: left;
+    width: 130px;
+    height: 31px;
+    font-family: "MyRiadPro";
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    background: url('/images/index/subscribe-form/subscribe-button.jpg') no-repeat;
+}
+/* Subscribe block END */
+
+
+/* Footer block BEGIN */
+.footer
+{
+    height: 207px;
+    background: -moz-linear-gradient(#404f5b, #2b343b);
+    background: -ms-linear-gradient(#404f5b, #2b343b);
+    background: linear-gradient(#404f5b, #2b343b);
+}
+/* Footer block END */

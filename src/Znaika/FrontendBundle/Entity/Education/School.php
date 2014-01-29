@@ -1,4 +1,4 @@
-<?php
+<?
 
     namespace Znaika\FrontendBundle\Entity\Education;
 
@@ -72,7 +72,7 @@
         }
 
         /**
-         * Add users
+         * Add user
          *
          * @param \Znaika\FrontendBundle\Entity\Profile\User $users
          *
@@ -86,7 +86,7 @@
         }
 
         /**
-         * Remove users
+         * Remove user
          *
          * @param \Znaika\FrontendBundle\Entity\Profile\User $users
          */
@@ -132,13 +132,13 @@
         /**
          * Add classrooms
          *
-         * @param \Znaika\FrontendBundle\Entity\Education\Classroom $classrooms
+         * @param \Znaika\FrontendBundle\Entity\Education\Classroom $classroom
          *
          * @return School
          */
-        public function addClassroom(\Znaika\FrontendBundle\Entity\Education\Classroom $classrooms)
+        public function addClassroom(\Znaika\FrontendBundle\Entity\Education\Classroom $classroom)
         {
-            $this->classrooms[] = $classrooms;
+            $this->classrooms[] = $classroom;
 
             return $this;
         }
@@ -146,11 +146,11 @@
         /**
          * Remove classrooms
          *
-         * @param \Znaika\FrontendBundle\Entity\Education\Classroom $classrooms
+         * @param \Znaika\FrontendBundle\Entity\Education\Classroom $classroom
          */
-        public function removeClassroom(\Znaika\FrontendBundle\Entity\Education\Classroom $classrooms)
+        public function removeClassroom(\Znaika\FrontendBundle\Entity\Education\Classroom $classroom)
         {
-            $this->classrooms->removeElement($classrooms);
+            $this->classrooms->removeElement($classroom);
         }
 
         /**

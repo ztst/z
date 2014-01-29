@@ -78,7 +78,7 @@
                          ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
                          ->andWhere('v.videoId NOT IN (:video_ids)')
                          ->setParameter('video_ids', $videoIds)
-                         ->addOrderBy('v.createdTime', 'DESC');
+                         ->addOrderBy('v.name');
 
             if (!is_null($limit))
             {
