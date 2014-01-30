@@ -208,6 +208,15 @@
     height: 38px;
 }
 
+.badge-icon
+{
+    float: left;
+    margin: 7px 7px 0 5px;
+    width: 18px;
+    height: 18px;
+    background: url('/images/index/rating-lists/badge-example.jpg') no-repeat;
+}
+
 .rating-list-item-acquired-points, .rating-list-item-points-value
 {
     float: left;
