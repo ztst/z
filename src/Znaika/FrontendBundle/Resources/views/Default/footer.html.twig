@@ -4,10 +4,10 @@
     <div class="footer-logo col-lg-3"></div>
     <ul class="footer-links col-lg-3 col-lg-offset-1">
       <li>
-        <a href="about">О сайте Знайка.Ру</a>
+        <a href="{{ path('about') }}">О сайте Знайка.Ру</a>
       </li>
       <li>
-        <a href="contacts">Контакты</a>
+        <a href="{{ path('contacts') }}">Контакты</a>
       </li>
       <li>
         <a href="javascript:void(0)">Официальные документы</a>
@@ -51,7 +51,7 @@
     </div >
     <div class="clear"></div>
     <span class="footer-copyright">
-      &copy; 2013-1014 ООО "Знайка". Все права защищены. <a href="javascript:void(0)">Условия использования</a>
+      &copy; 2013-1014 ООО "Знайка". Все права защищены. <a href="{{ path('agreement') }}">Условия использования</a>
     </span>
   </div>
 {% endblock %}
