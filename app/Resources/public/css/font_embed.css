@@ -11,3 +11,10 @@
     src: local("OpenSans Italic")
     url(/font/open_sans_italic.ttf);
 }
+
+@font-face
+{
+    font-family: "OpenSans Bold";
+    src: local("OpenSans Bold")
+    url(/font/open_sans_bold.ttf);
+}

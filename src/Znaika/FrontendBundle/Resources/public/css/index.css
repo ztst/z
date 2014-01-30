@@ -21,18 +21,10 @@
 /* Top videos block BEGIN */
 .index-page-top-videos-block
 {
-    height: 351px;
-}
-
-.index-page-top-videos-block a
-{
-    text-decoration: underline;
 }
 
 .index-page-top-video
 {
-    margin-right: 27px;
-    width: 629px;
 }
 
 .index-page-top-video h2
@@ -42,10 +34,39 @@
     background-position: 0 4px;
 }
 
-.index-page-top-video div
+.index-page-top-video .top-video-preview
 {
     margin-bottom: 18px;
+    width: 100%;
+    height: auto;
     border: 1px solid #b5b5b5;
+}
+
+@media (min-width: 1200px)
+{
+    .index-page-top-video
+    {
+        padding: 0;
+    }
+    .index-page-top-video .top-video-preview
+    {
+        width: 95%;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px)
+{
+    .index-page-top-video h2
+    {
+        height: 30px;
+    }
+}
+
+.top-video-preview img
+{
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 .learn-more
@@ -56,34 +77,48 @@
     font-size: 14px;
 }
 
-.index-page-videos-list
+.learn-more a
 {
+    text-decoration: underline;
+}
+
+@media (min-width: 1199px)
+{
+    .index-page-videos-list
+    {
+        padding-right: 0;
+    }
 }
 
 .index-page-videos-list .list-item
 {
-    height: 120px;
 }
 
 .index-page-videos-list .list-item h5
 {
+    margin-top: 5px;
+    font-size: 12px;
     width: 100%;
-    height: 29px;
+    height: 27px;
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.index-page-videos-list .list-item .video-preview
+.index-page-videos-list .list-item .video-preview a,
+.index-page-videos-list .list-item .video-preview img
 {
     display: block;
-    height: 75px;
+    width: 100%;
+    height: auto;
 }
 
 .index-page-videos-list .get-more-videos
 {
     display: block;
+    font-size: 13px;
     text-align: right;
+    text-decoration: underline;
 }
 /* Top videos block END */
 
@@ -153,6 +188,19 @@
 .rating-top-by-points h2
 {
     background: url('/images/index/rating-lists/top-by-points-header.jpg') no-repeat;
+}
+
+@media (min-width: 1199px)
+{
+    .rating-newest-operations
+    {
+        padding-left: 0;
+    }
+
+    .rating-top-by-points
+    {
+        padding-right: 0;
+    }
 }
 
 .rating-list-item
@@ -248,8 +296,7 @@
 .input
 {
     width: 100%;
-    font-family: "OpenSans";
-    font-style: italic;
+    font-family: "OpenSans Italic";
     font-size: 14px;
     color: #9b9898;
 }
@@ -257,7 +304,7 @@
 .subscribe-email
 {
     float: left;
-    width: 63%;
+    width: 62%;
     padding: 4px 12px;
     border: 1px solid #a1a1a1;
     border-radius: 3px 0 0 3px;
@@ -294,16 +341,6 @@ button.subscribe-button, button.subscribe-button:active, button.subscribe-button
 {
     text-decoration: underline;
     color: #c8c8c8;
-}
-
-.footer-znaika-boy
-{
-    position: absolute;
-    right: 0;
-    bottom: 200px;
-    width: 252px;
-    height: 146px;
-    background: url('/images/footer/znaika-boy.png') no-repeat;
 }
 
 .footer-logo
@@ -355,5 +392,36 @@ button.subscribe-button, button.subscribe-button:active, button.subscribe-button
 {
     display: block;
     margin-top: 15px;
+}
+
+@media (min-width: 992px)
+{
+    .footer-znaika-boy
+    {
+        position: absolute;
+        right: 0;
+        bottom: 200px;
+        width: 252px;
+        height: 146px;
+        background: url('/images/footer/znaika-boy.png') no-repeat;
+    }
+}
+
+@media (max-width: 767px)
+{
+    .footer-logo, .footer-social-buttons-block
+    {
+        display: none;
+    }
+
+    .footer-links
+    {
+        padding-left: 15px;
+    }
+
+    .footer-links li a, .footer-copyright
+    {
+        font-size: 13px;
+    }
 }
 /* Footer block END */

@@ -4,32 +4,32 @@
   {{ parent() }}
 
   {% stylesheets '@ZnaikaFrontendBundle/Resources/public/css/index.css' %}
-  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
 
 {% block content %}
   <div class="index-content">
     <div class="index-top-videos-block">
-      <div class="index-page-top-video col_center col-lg-8 col-md-12 col-sm-12 col-xs-12">
+      <div class="index-page-top-video col-lg-8 col-md-12 col-sm-12 col-xs-12">
         <h2>
           Смотрите видеоуроки от лучших учителей России на федеральном
           образовательном портале Знайка.Ру
         </h2>
-        <div>
+        <div class="top-video-preview">
           <img src="{{ asset('/images/video-center-dummy.jpg') }}" alt="Видео по центру"/>
         </div>
         <span class="learn-more">
           <a href="javascript:void(0)">Узнать подробнее о проекте Знайка.Ру</a>
         </span>
       </div>
-      <div class="index-page-videos-list col-lg-2 col-md-6 col-sm-6 col-xs-12">
+      <div class="index-page-videos-list col-lg-2 col-md-5 col-sm-5 col-xs-12">
         {{ newest_video()|raw }}
         <span class="get-more-videos">
           <a href="javascript:void(0)">Все новинки</a>
         </span>
       </div>
-      <div class="index-page-videos-list col-lg-2 col-md-6 col-sm-6 col-xs-12">
+      <div class="index-page-videos-list col-lg-2 col-md-5 col-lg-offset-0 col-md-offset-2 col-sm-5 col-sm-offset-2 col-xs-12">
         {{ popular_video()|raw }}
         <span class="get-more-videos">
           <a href="javascript:void(0)">Все популярные</a>
@@ -71,7 +71,7 @@
       {{ top_user_by_points()|raw }}
     </div>
     <div class="clear"></div>
-    <div class="subscribe-block col_center col-lg-8 col-sm-12 col-xs-12">
+    <div class="subscribe-block col_right col-lg-8 col-md-8 col-sm-12 col-xs-12">
       <hr />
       <div class="subscribe-text col_center col-sm-5 col-xs-12">
         <h4>Видеоуроки на почту</h4>
@@ -80,7 +80,7 @@
           прямо на свой e-mail
         </h5>
       </div>
-      <form class="subscribe-form col-sm-7 col-xs-12" method="POST">
+      <form class="subscribe-form col_center col-sm-7 col-xs-12" method="POST">
         <div class="subscribe-email">
           <input type="text" placeholder="anna.petrova@mail.com" />
         </div>
