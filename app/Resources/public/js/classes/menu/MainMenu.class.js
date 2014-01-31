@@ -23,19 +23,19 @@ var MainMenu = EventDispatcher.extend({
 
     _initLoginPopup: function()
     {
-        this._loginPopupLink = $('.login_button');
+        this._loginPopupLink = $(".login_button");
         this._loginPopupLink.magnificPopup({
-            type: 'ajax',
-            callbacks: { ajaxContentAdded: handler(this, '_onLoginFormLoaded') }
+            type: "ajax",
+            callbacks: { ajaxContentAdded: handler(this, "_onLoginFormLoaded") }
         });
     },
 
     _onLoginFormLoaded: function()
     {
-        var switchLoginLink = $('#switchLoginLink');
+        var switchLoginLink = $("#switchLoginLink");
         switchLoginLink.click(handler(this, "_showLoginForm"));
 
-        var switchRegistrationLink = $('#switchRegistrationLink');
+        var switchRegistrationLink = $("#switchRegistrationLink");
         switchRegistrationLink.click(handler(this, "_showRegistrationForm"));
 
         this._initRegistrationForm();
@@ -44,32 +44,34 @@ var MainMenu = EventDispatcher.extend({
 
     _initLoginForm: function()
     {
-        var loginForm = $('#loginForm');
+        var loginForm = $("#loginForm");
         loginForm.submit(handler(this, "_onLoginFormSubmitted"));
     },
 
     _initRegistrationForm: function()
     {
-        var registrationForm = $('#registrationForm');
+        var registrationForm = $(".registration-form");
         registrationForm.submit(handler(this, "_onRegistrationFormSubmitted"));
+
+        this._initShowPasswordLink();
     },
 
     _showLoginForm: function()
     {
-        $('#registrationFormContainer').addClass('hidden');
-        $('#loginFormContainer').removeClass('hidden');
+        $("#registrationFormContainer").addClass("hidden");
+        $("#loginFormContainer").removeClass("hidden");
     },
 
     _showRegistrationForm: function()
     {
-        $('#loginFormContainer').addClass('hidden');
-        $('#registrationFormContainer').removeClass('hidden');
+        $("#loginFormContainer").addClass("hidden");
+        $("#registrationFormContainer").removeClass("hidden");
     },
 
     _onLoginFormSubmitted: function()
     {
-        var form = $('#loginForm');
-        var url = form.attr('action');
+        var form = $("#loginForm");
+        var url = form.attr("action");
         $.ajax({
             type: "POST",
             url: url,
@@ -94,8 +96,8 @@ var MainMenu = EventDispatcher.extend({
 
     _onRegistrationFormSubmitted: function()
     {
-        var form = $('#registrationForm');
-        var url = form.attr('action');
+        var form = $(".registration-form");
+        var url = form.attr("action");
         $.ajax({
             type: "POST",
             url: url,
@@ -110,12 +112,12 @@ var MainMenu = EventDispatcher.extend({
     {
         if (response.success)
         {
-            $('#registrationFormContainer').html(response.html);
+            $("#registrationFormContainer").html(response.html);
         }
         else
         {
-            $('#registrationForm').remove();
-            $('#switchLoginLink').after(response.html);
+            $(".registration-form").remove();
+            $("#registrationFormContainer .login-popup-header").after(response.html);
 
             this._initRegistrationForm();
         }
@@ -123,11 +125,11 @@ var MainMenu = EventDispatcher.extend({
 
     _initBadgesPopup: function()
     {
-        this._showBadgesPopupLink = $('.new_user_badge_link');
+        this._showBadgesPopupLink = $(".new_user_badge_link");
         this._showBadgesPopupLink.magnificPopup({
-            type: 'inline',
+            type: "inline",
             midClick: true,
-            callbacks: { open: handler(this, '_onShowUserBadgesLinkClick')}
+            callbacks: { open: handler(this, "_onShowUserBadgesLinkClick")}
         });
     },
 
@@ -135,7 +137,40 @@ var MainMenu = EventDispatcher.extend({
     {
         this._showBadgesPopupLink.remove();
 
-        $.post(this._userHasViewedBadgesUrl, null, handler(this, '_onSaveViewingBadgesComplete'), 'json');
+        $.post(this._userHasViewedBadgesUrl, null, handler(this, "_onSaveViewingBadgesComplete"), "json");
+    },
+
+    _initShowPasswordLink: function()
+    {
+        var showPasswordLink = $(".show-password-icon");
+        if (navigator.userAgent.search("MSIE") >= 0)
+        {
+            $(".show-password-icon").remove();
+            showPasswordLink.width(1);
+        }
+        else
+        {
+            showPasswordLink.click(handler(this, "_onShowPasswordLinkClick"));
+        }
+    },
+
+    _onShowPasswordLinkClick: function(event)
+    {
+        var link = $(event.target);
+        var container = link.parent();
+
+        var passwordInput = container.find(".password-input");
+        var currentType = passwordInput.attr("type");
+        if (currentType == "text")
+        {
+            passwordInput.attr("type", "password");
+            link.removeClass("opened");
+        }
+        else
+        {
+            passwordInput.attr("type", "text");
+            link.addClass("opened");
+        }
     },
 
     _onSaveViewingBadgesComplete: function(response)
@@ -147,5 +182,5 @@ $(function()
 {
     var mainMenu = new MainMenu();
 
-    mainMenu.setUserHasViewedBadgesUrl(Routing.generate('user_has_viewed_badges'))
+    mainMenu.setUserHasViewedBadgesUrl(Routing.generate("user_has_viewed_badges"))
 });

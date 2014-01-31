@@ -246,15 +246,6 @@
     outline: none;
 }
 
-.subscribe-form input[type=text]
-{
-    width: 100%;
-    font-family: "OpenSans";
-    font-style: italic;
-    font-size: 14px;
-    color: #9b9898;
-}
-
 .subscribe-email
 {
     float: left;

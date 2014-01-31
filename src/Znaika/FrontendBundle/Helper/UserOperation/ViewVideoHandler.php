@@ -31,6 +31,9 @@
             $operation = $this->userOperationRepository->getLastViewVideoOperation($user, $video);
             if (!$operation)
             {
+                $views = $video->getViews();
+                $video->setViews(++$views);
+
                 $newOperation = new ViewVideoOperation();
                 $newOperation->setUser($user);
                 $newOperation->setVideo($video);

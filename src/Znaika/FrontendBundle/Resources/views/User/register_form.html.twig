@@ -1,26 +1,29 @@
-{{ form_start(form, {'attr': {'id': 'registrationForm'}, 'action': path('register'), 'method': 'POST'}) }}
+{{ form_start(form, {'attr': {'id': 'registrationForm', 'class': 'registration-form'}, 'action': path('register'), 'method': 'POST'}) }}
   {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
-  <div class="form-group">
-    {{ form_label(form.user.firstName, 'Имя') }}
-    {{ form_errors(form.user.firstName) }}
-    {{ form_widget(form.user.firstName, {'attr': {'class': 'form-control' }}) }}
-  </div>
-  <div class="form-group">
+  <div class="form-group input-group">
     {{ form_label(form.user.email, 'Емайл') }}
+    {{ form_widget(form.user.email, {'attr': {'class': 'form-control', 'placeholder': 'anna.petrova@mail.com' }}) }}
     {{ form_errors(form.user.email) }}
-    {{ form_widget(form.user.email, {'attr': {'class': 'form-control' }}) }}
   </div>
-  <div class="form-group">
+  <div class="form-group input-group show-password-button-container">
     {{ form_label(form.user.password, 'Пароль') }}
+    {{ form_widget(form.user.password, {'attr': {'class': 'form-control password-input', 'placeholder': 'английские буквы, цифры и знаки' }}) }}
     {{ form_errors(form.user.password) }}
-    {{ form_widget(form.user.password, {'attr': {'class': 'form-control' }}) }}
+    <span class="show-password-icon"></span>
   </div>
-  <div class="form-group">
-    {{ form_label(form.terms, 'Принимаю соглашение') }}
+  <div class="form-group input-group">
+    {{ form_label(form.user.firstName, 'Имя') }}
+    {{ form_widget(form.user.firstName, {'attr': {'class': 'form-control', 'placeholder': 'Иван Иванов' }}) }}
+    {{ form_errors(form.user.firstName) }}
+  </div>
+  <div class="form-group agreement-block">
     {{ form_errors(form.terms) }}
     {{ form_widget(form.terms, {'attr': {'class': 'checkbox' }}) }}
+    <label for="{{ form.terms.vars.id }}">
+      Я принимаю <a href="{{ path('agreement') }}" target="_blank" title="">Пользовательское соглашение и условия использования сервиса</a>
+    </label>
   </div>
-  <div>
-    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
+  <div class="registration-button-container">
+    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Регистрация'}) }}
   </div>
 {{ form_end(form) }}
