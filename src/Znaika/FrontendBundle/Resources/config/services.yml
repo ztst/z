@@ -1,5 +1,4 @@
 parameters:
-parameters:
     znaika_frontend.menu.class: Knp\Menu\MenuItem
 
 services:
@@ -48,6 +47,20 @@ services:
         arguments:
             - @router
             - @session
+
+    znaika_frontend.content_thumbnail_updater:
+        class:     Znaika\FrontendBundle\Helper\Content\ContentThumbnailUpdater
+        arguments:
+            - '@znaika_frontend.video_repository'
+            - '@znaika_frontend.php_vimeo'
+
+    znaika_frontend.php_vimeo:
+        class:     Znaika\FrontendBundle\Helper\Vimeo
+        arguments:
+            - %vimeo_client_id%
+            - %vimeo_client_secret%
+            - %vimeo_access_token%
+            - %vimeo_access_token_secret%
 
 #repository
     znaika_frontend.video_repository:
