@@ -134,7 +134,9 @@
 
 .social-buttons-container
 {
-    width: 272px;
+    margin: 0 auto;
+    padding: 0 10px;
+    width: 262px;
     height: 32px;
     background: #fff;
 }
@@ -158,6 +160,7 @@
 /* Ratings block BEGIN */
 .ratings h2
 {
+    padding-top: 4px;
     padding-left: 50px;
     height: 25px;
 }
@@ -319,24 +322,25 @@
     float: left;
     width: 62%;
     padding: 4px 12px;
-    border: 1px solid #a1a1a1;
-    border-radius: 3px 0 0 3px;
+    border: 1px solid #a1a1a1 !important;
+    border-radius: 3px 0 0 3px !important;
     border-right: none;
     height: 31px;
 }
 
 button.subscribe-button, button.subscribe-button:active, button.subscribe-button:hover
 {
+    height: 31px;
     background: #f68a30;
     border-color: #dd731b;
     border-radius: 0 6px 6px 0;
     padding: 4px 0 0 0;
 }
 
-.subscribe-button .subscribe-icon
+.subscribe-button .subscribe-button-label
 {
     display: block;
-    width: 130px;
+    width: 115px;
     height: 25px;
 }
 
