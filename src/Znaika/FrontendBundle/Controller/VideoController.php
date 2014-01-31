@@ -14,6 +14,7 @@
     use Znaika\FrontendBundle\Form\Lesson\Content\SynopsisType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoCommentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoType;
+    use Znaika\FrontendBundle\Helper\Content\ContentThumbnailUpdater;
     use Znaika\FrontendBundle\Helper\Uploader\VideoAttachmentUploader;
     use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
@@ -185,6 +186,9 @@
 
             if ($form->isValid())
             {
+                $contentThumbnailUpdater = $this->getContentThumbnailUpdater();
+                $contentThumbnailUpdater->update($video);
+
                 $repository = $this->getVideoRepository();
                 $repository->save($video);
 
@@ -243,6 +247,17 @@
             $repository = $this->getVideoRepository();
             $video      = $repository->getOneByUrlName($videoName);
 
+            $videos = $repository->getNewestVideo(10000);
+            foreach ($videos as $v)
+            {
+                if (!$v->getSmallThumbnailUrl())
+                {
+                    $contentThumbnailUpdater = $this->getContentThumbnailUpdater();
+                    $contentThumbnailUpdater->update($v);
+                }
+            }
+
+
             $isValidUrl = false;
             if ($video)
             {
@@ -297,5 +312,13 @@
         private function getVideoRepository()
         {
             return $this->get("znaika_frontend.video_repository");
+        }
+
+        /**
+         * @return ContentThumbnailUpdater
+         */
+        private function getContentThumbnailUpdater()
+        {
+            return $this->get("znaika_frontend.content_thumbnail_updater");
         }
     }

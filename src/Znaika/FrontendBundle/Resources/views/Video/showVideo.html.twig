@@ -34,7 +34,7 @@
       <div class="clear"></div>
 
       <div class="video-player-container">
-        <iframe width="560" height="315" src="//www.youtube.com/embed/{{ video.getUrl }}" frameborder="0" allowfullscreen></iframe>
+        <iframe src="//player.vimeo.com/video/{{ video.getUrl }}" width="560" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
       </div>
       <div class="clear"></div>
 
@@ -46,7 +46,7 @@
       {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
           'url': app.request.uri,
           'title': video.name,
-          'img': "http:" ~ video.getThumbnailUrl,
+          'img': video.getLargeThumbnailUrl,
           'desc': ( video.synopsis ) ? video.synopsis.text : ""
         }
       %}

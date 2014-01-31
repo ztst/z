@@ -9,11 +9,16 @@ var SidebarMenu = EventDispatcher.extend({
     {
         this.base();
 
+        var that = this;
         this._classesButtons = $(".class-menu li");
-        this._classesButtons.click(handler(this, "_onClassChanged"));
+        this._classesButtons.click(function(){
+            that._onClassChanged($(this));
+        });
 
         this._subjectsButtons = $(".subject-menu li");
-        this._subjectsButtons.click(handler(this, "_onSubjectClick"));
+        this._subjectsButtons.click(function(){
+            that._onSubjectClick($(this));
+        });
     },
 
     setSubjectsUrl: function(url)
@@ -29,7 +34,7 @@ var SidebarMenu = EventDispatcher.extend({
     updateSubjects: function()
     {
         var grade = this.getClass();
-        if ( !grade )
+        if (!grade)
         {
             return;
         }
@@ -38,26 +43,22 @@ var SidebarMenu = EventDispatcher.extend({
             'class': grade
         };
 
-        $.post( this._updateSubjectsUrl, data, handler( this, '_onUploadSubjectsComplete' ), 'json' );
+        $.post(this._updateSubjectsUrl, data, handler(this, '_onUploadSubjectsComplete'), 'json');
     },
 
-    _onSubjectClick: function(event)
+    _onSubjectClick: function(item)
     {
         var grade = this.getClass();
-        var subject = $(event.target).parent().attr("id");
+        var subject = item.attr("id");
         var url = Routing.generate('show_catalogue', {'class': grade, 'subjectName': subject});
 
         window.location.href = url;
     },
 
-    _onClassChanged: function(event)
+    _onClassChanged: function(item)
     {
-        if ( event.target.tagName != "SPAN" ) //TODO: change this fix
-        {
-            return false;
-        }
         this._classesButtons.removeClass("selected");
-        $(event.target).parent("li").addClass("selected");
+        item.addClass("selected");
 
         this.updateSubjects();
     },
@@ -65,7 +66,7 @@ var SidebarMenu = EventDispatcher.extend({
     _onUploadSubjectsComplete: function(response)
     {
         this._subjectsButtons.addClass("hidden");
-        for ( i in response.subjectsNames )
+        for (i in response.subjectsNames)
         {
             this._subjectsButtons.filter("[id=" + response.subjectsNames[i] + "]").removeClass("hidden");
         }
@@ -74,7 +75,8 @@ var SidebarMenu = EventDispatcher.extend({
 
 });
 
-$(function(){
+$(function()
+{
     var sidebarMenu = new SidebarMenu();
 
     sidebarMenu.setSubjectsUrl(Routing.generate('get_class_subjects'));

@@ -27,6 +27,21 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             type: string
             length: 255
             notnull: true
+        smallThumbnailUrl:
+            column: small_thumbnail_url
+            type: string
+            length: 255
+            nullable: true
+        mediumThumbnailUrl:
+            column: medium_thumbnail_url
+            type: string
+            length: 255
+            nullable: true
+        largeThumbnailUrl:
+            column: large_thumbnail_url
+            type: string
+            length: 255
+            nullable: true
         views:
             type: integer
             notnull: true

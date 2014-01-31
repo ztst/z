@@ -8,8 +8,6 @@
 
     class Video
     {
-        const THUMBNAIL_URL_PATTERN = "//img.youtube.com/vi/%VIDEO_URL%/mqdefault.jpg";
-
         /**
          * @var integer
          */
@@ -89,6 +87,21 @@
          * @var integer
          */
         private $views = 0;
+
+        /**
+         * @var string
+         */
+        private $smallThumbnailUrl;
+
+        /**
+         * @var string
+         */
+        private $mediumThumbnailUrl;
+
+        /**
+         * @var string
+         */
+        private $largeThumbnailUrl;
 
         /**
          * Constructor
@@ -258,13 +271,57 @@
         }
 
         /**
-         * Get thumbnail url
+         * @param string $largeThumbnailUrl
+         */
+        public function setLargeThumbnailUrl($largeThumbnailUrl)
+        {
+            $this->largeThumbnailUrl = $largeThumbnailUrl;
+        }
+
+        /**
+         * 640x476
          *
          * @return string
          */
-        public function getThumbnailUrl()
+        public function getLargeThumbnailUrl()
         {
-            return str_replace("%VIDEO_URL%", $this->getUrl(), self::THUMBNAIL_URL_PATTERN);
+            return (empty($this->largeThumbnailUrl)) ? $this->getMediumThumbnailUrl() : $this->largeThumbnailUrl;
+        }
+
+        /**
+         * @param string $mediumThumbnailUrl
+         */
+        public function setMediumThumbnailUrl($mediumThumbnailUrl)
+        {
+            $this->mediumThumbnailUrl = $mediumThumbnailUrl;
+        }
+
+        /**
+         * 200x150
+         *
+         * @return string
+         */
+        public function getMediumThumbnailUrl()
+        {
+            return (empty($this->mediumThumbnailUrl)) ? $this->getSmallThumbnailUrl() : $this->mediumThumbnailUrl;
+        }
+
+        /**
+         * 100x75
+         *
+         * @param string $smallThumbnailUrl
+         */
+        public function setSmallThumbnailUrl($smallThumbnailUrl)
+        {
+            $this->smallThumbnailUrl = $smallThumbnailUrl;
+        }
+
+        /**
+         * @return string
+         */
+        public function getSmallThumbnailUrl()
+        {
+            return $this->smallThumbnailUrl;
         }
 
         /**
