@@ -125,7 +125,7 @@ var MainMenu = EventDispatcher.extend({
 
     _initBadgesPopup: function()
     {
-        this._showBadgesPopupLink = $(".new_user_badge_link");
+        this._showBadgesPopupLink = $(".new-user-badge-link");
         this._showBadgesPopupLink.magnificPopup({
             type: "inline",
             midClick: true,

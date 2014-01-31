@@ -1,7 +1,9 @@
-.video_player_container {
+.video-player-container
+{
     margin: 20px 0;
 }
 
-.video_view {
+.video-view
+{
     margin-bottom: 10px;
 }

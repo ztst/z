@@ -9,10 +9,10 @@ var SidebarMenu = EventDispatcher.extend({
     {
         this.base();
 
-        this._classesButtons = $(".class_menu li");
+        this._classesButtons = $(".class-menu li");
         this._classesButtons.click(handler(this, "_onClassChanged"));
 
-        this._subjectsButtons = $(".subject_menu li");
+        this._subjectsButtons = $(".subject-menu li");
         this._subjectsButtons.click(handler(this, "_onSubjectClick"));
     },
 

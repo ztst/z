@@ -3,7 +3,7 @@
   {% if not videos is empty %}
     {% for video in videos %}
     <div>
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col_left">
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-left">
       <a href="{{ path('show_video', {
       'subjectName': video.getSubject.getUrlName,
       'class': video.getGrade,
@@ -13,7 +13,7 @@
         <img width="100" src="{{ video.getThumbnailUrl }}" alt="{{ video.getName|raw }}"/>
       </a>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 col_right">
+      <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-right">
       <p><strong>Тема: </strong>{{ video.getName|raw }}</p>
       <a href="{{ path('show_video', {
         'subjectName': video.getSubject.getUrlName,

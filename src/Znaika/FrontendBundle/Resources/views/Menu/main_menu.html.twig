@@ -9,16 +9,16 @@
       </button>
       <a class="navbar-brand" href="{{ path("znaika_frontend_homepage") }}"><img src="{{ asset("images/logo.png") }}" alt='Знайка' /></a>
     </div>
-    <div class="navbar-collapse collapse col_right">
+    <div class="navbar-collapse collapse col-right">
       {{ knp_menu_render('main') }}
-      <div class="main_menu_right">
+      <div class="main-menu-right">
         <ul class="nav navbar-nav navbar-right">
-          <li class="search_container">
+          <li class="search-container">
             <form action="{{ path("search") }}" method="POST">
               <div class="input-group">
-                <input type="text" class="form-control search_input" placeholder="Поиск видеоуроков" name="search_string" value="">
-                <div class="input-group-btn search_button_containter">
-                  <button type="submit" class="btn btn-success search_button"><span class="search_icon"></span></button>
+                <input type="text" class="form-control search-input" placeholder="Поиск видеоуроков" name="search_string" value="">
+                <div class="input-group-btn search-button-containter">
+                  <button type="submit" class="btn btn-success search-button"><span class="search-icon"></span></button>
                 </div>
               </div>
             </form>
@@ -26,7 +26,7 @@
           </li>
           {% if is_user() %}
             <li>
-              <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user_profile_link">{{ app.user }}, {{ app.user.getPoints }} баллов</a>
+              <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link">{{ app.user }}, {{ app.user.getPoints }} баллов</a>
             </li>
             <li>
               {{ user_badges(app.user)|raw }}

@@ -21,7 +21,7 @@
         public function createMainMenu(Request $request)
         {
             $menu = $this->factory->createItem("root");
-            $menu->setChildrenAttribute("class", "nav navbar-nav main_menu");
+            $menu->setChildrenAttribute("class", "nav navbar-nav main-menu");
 
             $menu->addChild("ВИДЕОУРОКИ", array("route" => "add_video_form"));
             $menu->addChild("КОНСПЕКТЫ", array("route" => "znaika_frontend_homepage"));
@@ -40,7 +40,7 @@
             $classes = ClassNumberUtil::getAvailableClasses();
             foreach ($classes as $classNumber)
             {
-                $menuItem = $menu->addChild("<span class='grade_number'>$classNumber</span><span class='grade_word'>&nbsp;класс</span>");
+                $menuItem = $menu->addChild("<span class='grade-number'>$classNumber</span><span class='grade-word'>&nbsp;класс</span>");
                 $menuItem->setExtra('safe_label', true);
                 $menuItem->setAttribute("id", $classNumber);
 

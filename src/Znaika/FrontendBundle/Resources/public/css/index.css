@@ -48,6 +48,7 @@
     {
         padding: 0;
     }
+
     .index-page-top-video .top-video-preview
     {
         width: 95%;
@@ -84,10 +85,10 @@
 
 @media (min-width: 1199px)
 {
-.index-page-videos-list
-{
+    .index-page-videos-list
+    {
         padding-right: 0;
-}
+    }
 }
 
 .index-page-videos-list .list-item
@@ -120,6 +121,7 @@
     text-align: right;
     text-decoration: underline;
 }
+
 /* Top videos block END */
 
 /* Social buttons block BEGIN */
@@ -150,6 +152,7 @@
     width: 32px;
     height: 32px;
 }
+
 /* Social buttons block END */
 
 /* Ratings block BEGIN */
@@ -267,6 +270,7 @@
     margin-top: 3px;
     background: url('/images/index/rating-lists/horizontal-dotted-bar.jpg') repeat-x;
 }
+
 /* Ratings block END */
 
 /* Subscribe block BEGIN */
@@ -335,6 +339,7 @@ button.subscribe-button, button.subscribe-button:active, button.subscribe-button
     width: 130px;
     height: 25px;
 }
+
 /* Subscribe block END */
 
 /* Footer block BEGIN */
@@ -433,4 +438,5 @@ button.subscribe-button, button.subscribe-button:active, button.subscribe-button
         font-size: 13px;
     }
 }
+
 /* Footer block END */
