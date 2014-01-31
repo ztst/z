@@ -174,4 +174,4 @@ agreement:
 
 support:
     pattern: /support
-    defaults: { _controller: ZnaikaFrontendBundle:Default:support }
+    defaults: { _controller: ZnaikaFrontendBundle:Support:addSupportForm }

@@ -42,6 +42,7 @@ body
 
 .footer
 {
+    position: relative;
     height: 207px;
 
     background: #404f5b;
@@ -140,7 +141,7 @@ body
 
     height: 28px;
     padding: 1px 5px 0px !important;
-    margin-left: 3px;
+    margin-left: -1px;
     cursor: pointer;
     display: block;
     border: 1px solid #bababa;
@@ -413,4 +414,27 @@ label
 {
     font: bold 12px Verdana;
     color: #2a2a2a;
+}
+
+@media (max-width: 767px)
+{
+    span.grade_word
+    {
+        display: none;
+    }
+
+    .grade_number
+    {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 767px) {
+    .nav.nav-justified > li {
+        display: table-cell;
+        width: 1%;
+    }
+    .nav.nav-justified > li > a {
+        margin-bottom: 0;
+    }
 }

@@ -33,3 +33,10 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face
+{
+    font-family: "OpenSans Bold";
+    src: local("OpenSans Bold")
+    url(/font/open_sans_bold.ttf);
+}

@@ -21,18 +21,10 @@
 /* Top videos block BEGIN */
 .index-page-top-videos-block
 {
-    height: 351px;
-}
-
-.index-page-top-videos-block a
-{
-    text-decoration: underline;
 }
 
 .index-page-top-video
 {
-    margin-right: 27px;
-    width: 629px;
 }
 
 .index-page-top-video h2
@@ -42,10 +34,39 @@
     background-position: 0 4px;
 }
 
-.index-page-top-video div
+.index-page-top-video .top-video-preview
 {
     margin-bottom: 18px;
+    width: 100%;
+    height: auto;
     border: 1px solid #b5b5b5;
+}
+
+@media (min-width: 1200px)
+{
+    .index-page-top-video
+    {
+        padding: 0;
+    }
+    .index-page-top-video .top-video-preview
+    {
+        width: 95%;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px)
+{
+    .index-page-top-video h2
+    {
+        height: 30px;
+    }
+}
+
+.top-video-preview img
+{
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 .learn-more
@@ -56,35 +77,48 @@
     font-size: 14px;
 }
 
+.learn-more a
+{
+    text-decoration: underline;
+}
+
+@media (min-width: 1199px)
+{
 .index-page-videos-list
 {
+        padding-right: 0;
+}
 }
 
 .index-page-videos-list .list-item
 {
-    height: 120px;
 }
 
 .index-page-videos-list .list-item h5
 {
+    margin-top: 5px;
+    font-size: 12px;
     width: 100%;
-    height: 29px;
-    white-space: nowrap;
+    height: 27px;
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.index-page-videos-list .list-item .video-preview
+.index-page-videos-list .list-item .video-preview a,
+.index-page-videos-list .list-item .video-preview img
 {
     display: block;
-    height: 75px;
+    width: 100%;
+    height: auto;
 }
 
 .index-page-videos-list .get-more-videos
 {
     display: block;
+    font-size: 13px;
     text-align: right;
+    text-decoration: underline;
 }
 /* Top videos block END */
 
@@ -156,9 +190,31 @@
     background: url('/images/index/rating-lists/top-by-points-header.jpg') no-repeat;
 }
 
+@media (min-width: 1199px)
+{
+    .rating-newest-operations
+    {
+        padding-left: 0;
+    }
+
+    .rating-top-by-points
+    {
+        padding-right: 0;
+    }
+}
+
 .rating-list-item
 {
     height: 38px;
+}
+
+.badge-icon
+{
+    float: left;
+    margin: 7px 7px 0 5px;
+    width: 18px;
+    height: 18px;
+    background: url('/images/index/rating-lists/badge-example.jpg') no-repeat;
 }
 
 .rating-list-item-acquired-points, .rating-list-item-points-value
@@ -246,10 +302,18 @@
     outline: none;
 }
 
+.input
+{
+    width: 100%;
+    font-family: "OpenSans Italic";
+    font-size: 14px;
+    color: #9b9898;
+}
+
 .subscribe-email
 {
     float: left;
-    width: 63%;
+    width: 62%;
     padding: 4px 12px;
     border: 1px solid #a1a1a1;
     border-radius: 3px 0 0 3px;
@@ -257,26 +321,116 @@
     height: 31px;
 }
 
-.subscribe-button
+button.subscribe-button, button.subscribe-button:active, button.subscribe-button:hover
 {
-    float: left;
+    background: #f68a30;
+    border-color: #dd731b;
+    border-radius: 0 6px 6px 0;
+    padding: 4px 0 0 0;
+}
+
+.subscribe-button .subscribe-icon
+{
+    display: block;
     width: 130px;
-    height: 31px;
-    font-family: "MyRiadPro";
-    font-weight: bold;
-    font-size: 16px;
-    color: #fff;
-    background: url('/images/index/subscribe-form/subscribe-button.jpg') no-repeat;
+    height: 25px;
 }
 /* Subscribe block END */
 
-
 /* Footer block BEGIN */
-.footer
+.footer-container
 {
+    position: relative;
+    padding-top: 30px;
     height: 207px;
-    background: -moz-linear-gradient(#404f5b, #2b343b);
-    background: -ms-linear-gradient(#404f5b, #2b343b);
-    background: linear-gradient(#404f5b, #2b343b);
+    color: #c8c8c8;
+}
+
+.footer-container a
+{
+    text-decoration: underline;
+    color: #c8c8c8;
+}
+
+.footer-logo
+{
+    background: url('/images/footer/footer-logo.png') no-repeat;
+    height: 40px;
+}
+
+.footer-links
+{
+    padding-left: 23px;
+    list-style: none;
+}
+
+.footer-links li
+{
+    margin-bottom: 15px;
+}
+
+.footer-social-buttons-block
+{
+    float: right;
+    width: 136px;
+}
+
+.footer-social-buttons-text
+{
+    display: block;
+    text-align: right;
+}
+
+.footer-social-button
+{
+    float: left;
+    margin-top: 5px;
+    margin-left: 6px;
+}
+
+.footer-horizontal-bar
+{
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+    height: 1px;
+    background: #5d666d;
+}
+
+.footer-copyright
+{
+    display: block;
+    margin-top: 15px;
+}
+
+@media (min-width: 992px)
+{
+    .footer-znaika-boy
+    {
+        position: absolute;
+        right: 0;
+        bottom: 200px;
+        width: 252px;
+        height: 146px;
+        background: url('/images/footer/znaika-boy.png') no-repeat;
+    }
+}
+
+@media (max-width: 767px)
+{
+    .footer-logo, .footer-social-buttons-block
+    {
+        display: none;
+    }
+
+    .footer-links
+    {
+        padding-left: 15px;
+    }
+
+    .footer-links li a, .footer-copyright
+    {
+        font-size: 13px;
+    }
 }
 /* Footer block END */

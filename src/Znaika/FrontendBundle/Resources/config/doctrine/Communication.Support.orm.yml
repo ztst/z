@@ -1,0 +1,30 @@
+Znaika\FrontendBundle\Entity\Communication\Support:
+    type: entity
+    table: support
+    repositoryClass: Znaika\FrontendBundle\Repository\Communication\Support\SupportDBRepository
+    fields:
+        supportId:
+            column: support_id
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+            notnull: true
+        email:
+            type: string
+            length: 255
+            notnull: true
+        text:
+            type: text
+            notnull: true
+        status:
+            type: integer
+            notnull: true
+        createdTime:
+            column: created_time
+            type: datetime
+            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    lifecycleCallbacks: {  }

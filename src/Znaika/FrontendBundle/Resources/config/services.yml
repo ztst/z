@@ -114,6 +114,10 @@ services:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\VideoAttachmentRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
+    znaika_frontend.support_repository:
+            class:        Znaika\FrontendBundle\Repository\Communication\Support\SupportRepository
+            arguments:    ["@doctrine.orm.entity_manager"]
+
 #menu
     znaika_frontend.menu_builder:
         class: Znaika\FrontendBundle\Menu\MenuBuilder
