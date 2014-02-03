@@ -205,3 +205,10 @@ services:
         class: Znaika\FrontendBundle\Twig\SocialNetworksExtension
         tags:
             - { name: twig.extension }
+
+    znaika_frontend.menu_helper_extension:
+        class: Znaika\FrontendBundle\Twig\MenuHelperExtension
+        arguments:
+            - @znaika_frontend.subject_repository
+        tags:
+            - { name: twig.extension }

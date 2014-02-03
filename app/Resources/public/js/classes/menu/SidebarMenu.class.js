@@ -3,7 +3,7 @@ var SidebarMenu = EventDispatcher.extend({
     _classesButtons: null,
     _subjectsButtons: null,
 
-    _updateSubjectsUrl: null,
+    _gradesWithSubjects: null,
 
     constructor: function()
     {
@@ -21,9 +21,9 @@ var SidebarMenu = EventDispatcher.extend({
         });
     },
 
-    setSubjectsUrl: function(url)
+    setGradesWithSubjects: function(gradesWithSubjects)
     {
-        this._updateSubjectsUrl = url;
+        this._gradesWithSubjects = JSON.parse(gradesWithSubjects);
     },
 
     getClass: function()
@@ -33,17 +33,15 @@ var SidebarMenu = EventDispatcher.extend({
 
     updateSubjects: function()
     {
+        this._subjectsButtons.addClass("hidden");
+
         var grade = this.getClass();
-        if (!grade)
+        var subjects = this._gradesWithSubjects[grade];
+
+        for (var i in subjects)
         {
-            return;
+            this._subjectsButtons.filter("[id=" + subjects[i] + "]").removeClass("hidden");
         }
-
-        var data = {
-            'class': grade
-        };
-
-        $.post(this._updateSubjectsUrl, data, handler(this, '_onUploadSubjectsComplete'), 'json');
     },
 
     _onSubjectClick: function(item)
@@ -61,23 +59,12 @@ var SidebarMenu = EventDispatcher.extend({
         item.addClass("selected");
 
         this.updateSubjects();
-    },
-
-    _onUploadSubjectsComplete: function(response)
-    {
-        this._subjectsButtons.addClass("hidden");
-        for (i in response.subjectsNames)
-        {
-            this._subjectsButtons.filter("[id=" + response.subjectsNames[i] + "]").removeClass("hidden");
-        }
-
     }
-
 });
 
 $(function()
 {
     var sidebarMenu = new SidebarMenu();
 
-    sidebarMenu.setSubjectsUrl(Routing.generate('get_class_subjects'));
+    sidebarMenu.setGradesWithSubjects($('#gradesSubjects').val());
 });

@@ -117,13 +117,6 @@ search_similar_video:
     pattern: /search-similar-video/{videoName}
     defaults: { _controller: ZnaikaFrontendBundle:Search:searchSimilarVideo }
 
-get_class_subjects:
-    pattern: /class/subjects
-    defaults: { _controller: ZnaikaFrontendBundle:Default:getClassSubjects }
-    methods:  [POST]
-    options:
-        expose: true
-
 register_confirm:
     pattern: /register-confirm/{registerKey}
     defaults: { _controller: ZnaikaFrontendBundle:User:registerConfirm }
