@@ -442,3 +442,15 @@ label
         margin-bottom: 0;
     }
 }
+
+*+html .class-menu .nav-justified > li
+{
+    width: 9% !important;
+    float: left !important;
+}
+
+*+html .subject-menu .nav-justified > li
+{
+    width: 15% !important;
+    float: left !important;
+}
