@@ -10,7 +10,9 @@
       <a class="navbar-brand" href="{{ path("znaika_frontend_homepage") }}"><img src="{{ asset("images/logo.png") }}" alt='Знайка' /></a>
     </div>
     <div class="navbar-collapse collapse col-right">
-      {{ knp_menu_render('main') }}
+      <div class="col-md-5 col-sm-4 col-center">
+        {{ knp_menu_render('main') }}
+      </div>
       <div class="main-menu-right">
         <ul class="nav navbar-nav navbar-right">
           <li class="search-container">
