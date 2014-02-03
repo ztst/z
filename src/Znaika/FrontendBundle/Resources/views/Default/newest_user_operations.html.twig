@@ -1,26 +1,28 @@
-<div class="rating-newest-operations col-lg-4 col-md-4 col-sm-12 col-xs-12">
-  <h2>Зарабатывай баллы!</h2>
-  <div class="table-description-text">
-    <h5>
-      Смотри видео, выполняй тестовые задания
-      и зарабатывай больше баллов. Больше!
-    </h5>
+<div class="col-center col-lg-4 col-md-4 col-sm-12 col-xs-12">
+  <div class="rating-newest-operations">
+    <h2>Зарабатывай баллы!</h2>
+    <div class="table-description-text">
+      <h5>
+        Смотри видео, выполняй тестовые задания
+        и зарабатывай больше баллов. Больше!
+      </h5>
+    </div>
+    {% if userOperations %}
+      {% for userOperation in userOperations %}
+        <div class="horizontal-dotted-bar"></div>
+        <div class="rating-list-item">
+          <div class="rating-list-item-userpic"></div>
+          <div class="rating-list-item-acquired-points">
+            <h4>+{{ userOperation.getAccruedPoints }} знаков</h4>
+          </div>
+          <div class="rating-list-item-username">
+            {{ userOperation.user }}
+          </div>
+        </div>
+        <div class="clear"></div>
+      {% endfor %}
+    {% else %}
+      <h5>Не найдено</h5>
+    {% endif %}
   </div>
-  {% if userOperations %}
-    {% for userOperation in userOperations %}
-      <div class="horizontal-dotted-bar"></div>
-      <div class="rating-list-item">
-        <div class="rating-list-item-userpic"></div>
-        <div class="rating-list-item-acquired-points">
-          <h4>+{{ userOperation.getAccruedPoints }} знаков</h4>
-        </div>
-        <div class="rating-list-item-username">
-          {{ userOperation.user }}
-        </div>
-      </div>
-      <div class="clear"></div>
-    {% endfor %}
-  {% else %}
-    <h5>Не найдено</h5>
-  {% endif %}
 </div>

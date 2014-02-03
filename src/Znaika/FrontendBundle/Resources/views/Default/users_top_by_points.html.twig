@@ -1,29 +1,31 @@
-<div class="rating-top-by-points col-lg-4 col-md-4 col-sm-12 col-xs-12">
-  <h2>Стань лучшим Знайкой!</h2>
-  <div class="table-description-text">
-    <h5>
-      Смотри видео, выполняй тестовые задания и
-      зарабатывай больше баллов и наград. Больше!
-    </h5>
+<div class="col-center col-lg-4 col-md-4 col-sm-12 col-xs-12">
+  <div class="rating-top-by-points">
+    <h2>Стань лучшим Знайкой!</h2>
+    <div class="table-description-text">
+      <h5>
+        Смотри видео, выполняй тестовые задания и
+        зарабатывай больше баллов и наград. Больше!
+      </h5>
+    </div>
+    {% if users %}
+      {% for user in users %}
+        <div class="horizontal-dotted-bar"></div>
+        <div class="rating-list-item">
+          <div class="rating-list-item-userpic"></div>
+          <div class="zn-symbol">
+            <img src="{{ asset('/images/index/rating-lists/zn-symbol.jpg') }}" alt="" />
+          </div>
+          <div class="rating-list-item-points-value">
+            <h4>{{ user.points }}</h4>
+          </div>
+          <div class="rating-list-item-username">
+            {{ user }}
+          </div>
+        </div>
+        <div class="clear"></div>
+      {% endfor %}
+    {% else %}
+      <h5>Не найдено</h5>
+    {% endif %}
   </div>
-  {% if users %}
-    {% for user in users %}
-      <div class="horizontal-dotted-bar"></div>
-      <div class="rating-list-item">
-        <div class="rating-list-item-userpic"></div>
-        <div class="zn-symbol">
-          <img src="{{ asset('/images/index/rating-lists/zn-symbol.jpg') }}" alt="" />
-        </div>
-        <div class="rating-list-item-points-value">
-          <h4>{{ user.points }}</h4>
-        </div>
-        <div class="rating-list-item-username">
-          {{ user }}
-        </div>
-      </div>
-      <div class="clear"></div>
-    {% endfor %}
-  {% else %}
-    <h5>Не найдено</h5>
-  {% endif %}
 </div>

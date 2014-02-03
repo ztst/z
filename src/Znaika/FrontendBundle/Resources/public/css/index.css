@@ -83,6 +83,21 @@
     text-decoration: underline;
 }
 
+.index-page-videos-list
+{
+    padding: 0 15px;
+}
+
+*+html .index-page-videos-list
+{
+    padding-right: 0px;
+}
+
+*+html .index-page-videos-list-container
+{
+    width: 33%;
+}
+
 @media (min-width: 1199px)
 {
     .index-page-videos-list
@@ -173,8 +188,9 @@
     background: #fff;
 }
 
-.rating-newest-operations
+.rating-newest-operations, .rating-newest-badges, .rating-top-by-points
 {
+    padding: 0 15px;
 }
 
 .rating-newest-operations h2
@@ -185,10 +201,6 @@
 .rating-newest-badges h2
 {
     background: url('/images/index/rating-lists/newest-badges-header.jpg') no-repeat;
-}
-
-.rating-top-by-points
-{
 }
 
 .rating-top-by-points h2
@@ -419,6 +431,16 @@ button.subscribe-button, button.subscribe-button:active, button.subscribe-button
         position: absolute;
         right: 0;
         bottom: 200px;
+        width: 252px;
+        height: 146px;
+        background: url('/images/footer/znaika-boy.png') no-repeat;
+    }
+
+    *+html .footer-znaika-boy
+    {
+        position: absolute;
+        right: 0;
+        bottom: 230px;
         width: 252px;
         height: 146px;
         background: url('/images/footer/znaika-boy.png') no-repeat;

@@ -1,26 +1,28 @@
-<div class="rating-newest-badges col-lg-4 col-md-4 col-sm-12 col-xs-12">
-  <h2>Получай награды!</h2>
-  <div class="table-description-text">
-    <h5>
-      Смотри видео, выполняй задания и тесты
-      зарабатывай больше баллов.
-    </h5>
+<div class="col-center col-lg-4 col-md-4 col-sm-12 col-xs-12">
+  <div class="rating-newest-badges">
+    <h2>Получай награды!</h2>
+    <div class="table-description-text">
+      <h5>
+        Смотри видео, выполняй задания и тесты
+        зарабатывай больше баллов.
+      </h5>
+    </div>
+    {% if userBadges %}
+      {% for userBadge in userBadges %}
+        <div class="horizontal-dotted-bar"></div>
+        <div class="rating-list-item">
+          <div class="badge-icon"></div>
+          <div class="col-left col-lg-4 col-xs-4">
+            <h4>{{ badge_name(userBadge) }}</h4>
+          </div>
+          <div class="rating-list-item-username">
+            {{ userBadge.user }}
+          </div>
+        </div>
+        <div class="clear"></div>
+      {% endfor %}
+    {% else %}
+      <h5>Не найдено</h5>
+    {% endif %}
   </div>
-  {% if userBadges %}
-    {% for userBadge in userBadges %}
-      <div class="horizontal-dotted-bar"></div>
-      <div class="rating-list-item">
-        <div class="badge-icon"></div>
-        <div class="col-left col-lg-4 col-xs-4">
-          <h4>{{ badge_name(userBadge) }}</h4>
-        </div>
-        <div class="rating-list-item-username">
-          {{ userBadge.user }}
-        </div>
-      </div>
-      <div class="clear"></div>
-    {% endfor %}
-  {% else %}
-    <h5>Не найдено</h5>
-  {% endif %}
 </div>

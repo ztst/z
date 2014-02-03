@@ -5,54 +5,62 @@
 {% block footer %}
   <div class="footer-container">
     <div class="footer-znaika-boy"></div>
-    <div class="footer-logo col-lg-3 col-md-3 col-sm-2 col-xs-2"></div>
-    <ul class="footer-links col-lg-3 col-lg-offset-1 col-md-3 col-sm-4 col-xs-7">
-      <li>
-        <a href="{{ path('about') }}">О сайте Знайка.Ру</a>
-      </li>
-      <li>
-        <a href="{{ path('contacts') }}">Контакты</a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">Официальные документы</a>
-      </li>
-    </ul>
-    <ul class="footer-links col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-3 col-xs-5">
-      <li>
-        <a href="javascript:void(0)">Школы России</a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">Рейтинги школ</a>
-      </li>
-      <li>
-        <a href="javascript:void(0)">Олимпиады</a>
-      </li>
-    </ul>
-    <div class="footer-social-buttons-block">
-      <span class="footer-social-buttons-text">
-        Расскажи друзьям
-      </span>
-      <div class="footer-social-button">
-        <a href="javascript:void(0)">
-          <img src="{{ asset('/images/footer/footer-vk.png') }}" alt="Поделиться в ВК" />
-        </a>
-      </div>
-      <div class="footer-social-button">
-        <a href="javascript:void(0)">
-          <img src="{{ asset('/images/footer/footer-facebook.png') }}" alt="Поделиться в facebook" />
-        </a>
-      </div>
-      <div class="footer-social-button">
-        <a href="javascript:void(0)">
-          <img src="{{ asset('/images/footer/footer-twitter.png') }}" alt="Поделиться в twitter" />
-        </a>
-      </div>
-      <div class="footer-social-button">
-        <a href="javascript:void(0)">
-          <img src="{{ asset('/images/footer/footer-odnoklassniki.png') }}" alt="Поделиться в одноклассниках" />
-        </a>
-      </div>
-    </div >
+    <div class="col-center col-lg-3 col-md-3 col-sm-2">
+      <div class="footer-logo"></div>
+    </div>
+    <div class="col-center col-lg-3 col-lg-offset-1 col-md-3 col-sm-4 col-xs-7">
+      <ul class="footer-links">
+        <li>
+          <a href="{{ path('about') }}">О сайте Знайка.Ру</a>
+        </li>
+        <li>
+          <a href="{{ path('contacts') }}">Контакты</a>
+        </li>
+        <li>
+          <a href="javascript:void(0)">Официальные документы</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-center col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-3 col-xs-5">
+      <ul class="footer-links">
+        <li>
+          <a href="javascript:void(0)">Школы России</a>
+        </li>
+        <li>
+          <a href="javascript:void(0)">Рейтинги школ</a>
+        </li>
+        <li>
+          <a href="javascript:void(0)">Олимпиады</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-center col-lg-2 col-md-2">
+      <div class="footer-social-buttons-block">
+        <span class="footer-social-buttons-text">
+          Расскажи друзьям
+        </span>
+        <div class="footer-social-button">
+          <a href="javascript:void(0)">
+            <img src="{{ asset('/images/footer/footer-vk.png') }}" alt="Поделиться в ВК" />
+          </a>
+        </div>
+        <div class="footer-social-button">
+          <a href="javascript:void(0)">
+            <img src="{{ asset('/images/footer/footer-facebook.png') }}" alt="Поделиться в facebook" />
+          </a>
+        </div>
+        <div class="footer-social-button">
+          <a href="javascript:void(0)">
+            <img src="{{ asset('/images/footer/footer-twitter.png') }}" alt="Поделиться в twitter" />
+          </a>
+        </div>
+        <div class="footer-social-button">
+          <a href="javascript:void(0)">
+            <img src="{{ asset('/images/footer/footer-odnoklassniki.png') }}" alt="Поделиться в одноклассниках" />
+          </a>
+        </div>
+      </div >
+    </div>
     <div class="clear"></div>
     <span class="footer-copyright">
       &copy; 2013-1014 ООО "Знайка". Все права защищены. <a href="{{ path('agreement') }}">Условия использования</a>
