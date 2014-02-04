@@ -3,22 +3,9 @@ Znaika\FrontendBundle\Entity\Profile\UserRegistration:
     table: user_registration
     repositoryClass: Znaika\FrontendBundle\Repository\Profile\UserRegistrationDBRepository
     fields:
-        userRegistrationId:
-            column: user_registration_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-        registerKey:
-            column: register_key
-            type: string
-            length: 255
-            notnull: true
-            unique: true
-        createdTime:
-            column: created_time
-            type: datetime
-            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        userRegistrationId: { column: user_registration_id, type: integer, id: true, generator: { strategy: AUTO } }
+        registerKey: { column: register_key, type: string, length: 255, notnull: true, unique: true }
+        createdTime: { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     manyToOne:
         user:
             targetEntity: Znaika\FrontendBundle\Entity\Profile\User

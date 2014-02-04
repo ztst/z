@@ -3,19 +3,9 @@ Znaika\FrontendBundle\Entity\Profile\Badge\BaseUserBadge:
     table: user_badge
     repositoryClass: Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeDBRepository
     fields:
-        userBadgeId:
-            column: user_badge_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-        isViewed:
-            column: is_viewed
-            type: boolean
-        createdTime:
-            column: created_time
-            type: datetime
-            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        userBadgeId: { column: user_badge_id, type: integer, id: true, generator: { strategy: AUTO } }
+        isViewed:    { column: is_viewed, type: boolean }
+        createdTime: { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     manyToOne:
         user:
             targetEntity: Znaika\FrontendBundle\Entity\Profile\User

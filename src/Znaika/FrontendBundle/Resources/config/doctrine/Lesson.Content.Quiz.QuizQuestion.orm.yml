@@ -3,22 +3,10 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion:
     table: quiz_question
     repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\QuizQuestionDBRepository
     fields:
-        quizQuestionId:
-            column: quiz_question_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-        text:
-            type: text
-            notnull: true
-        type:
-            type: smallint
-            notnull: true
-        createdTime:
-            column: created_time
-            type: datetime
-            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        quizQuestionId: { column: quiz_question_id, type: integer, id: true, generator: { strategy: AUTO } }
+        text:           { type: text, notnull: true }
+        type:           { type: smallint, notnull: true }
+        createdTime:    { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     manyToOne:
         video:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video

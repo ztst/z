@@ -3,16 +3,8 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserQuestionAnswer:
     table: user_question_answer
     repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\Attempt\UserQuestionAnswerDBRepository
     fields:
-        userQuestionAnswerId:
-            column: user_question_answer_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-        createdTime:
-            column: created_time
-            type: datetime
-            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        userQuestionAnswerId: { column: user_question_answer_id, type: integer, id: true, generator: { strategy: AUTO } }
+        createdTime:          { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     manyToOne:
         userAttempt:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt

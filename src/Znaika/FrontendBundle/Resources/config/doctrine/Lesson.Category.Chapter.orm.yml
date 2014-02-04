@@ -3,28 +3,11 @@ Znaika\FrontendBundle\Entity\Lesson\Category\Chapter:
     table: chapter
     repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Category\ChapterDBRepository
     fields:
-        chapterId:
-            column: chapter_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-        name:
-            type: string
-            length: 255
-            notnull: true
-        urlName:
-            column: url_name
-            type: string
-            length: 128
-            notnull: true
-        grade:
-            type: integer
-            notnull: true
-        createdTime:
-            column: created_time
-            type: datetime
-            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        chapterId:   { column: chapter_id, type: integer, id: true, generator: { strategy: AUTO } }
+        name:        { type: string, length: 255, notnull: true }
+        urlName:     { column: url_name, type: string, length: 128, notnull: true }
+        grade:       { type: integer, notnull: true }
+        createdTime: { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     manyToOne:
         subject:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Category\Subject

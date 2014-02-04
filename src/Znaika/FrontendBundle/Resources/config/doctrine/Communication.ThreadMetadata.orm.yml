@@ -2,12 +2,7 @@ Znaika\FrontendBundle\Entity\Communication\ThreadMetadata:
     type: entity
     table: thread_metadata
     fields:
-        threadMetadataId:
-            column: thread_metadata_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
+        threadMetadataId: { column: thread_metadata_id, type: integer, id: true, generator: { strategy: AUTO } }
     manyToOne:
         thread:
             targetEntity: Znaika\FrontendBundle\Entity\Communication\Thread

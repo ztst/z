@@ -3,25 +3,10 @@ Znaika\FrontendBundle\Entity\Lesson\Category\Subject:
     table: subject
     repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Category\SubjectDBRepository
     fields:
-        subjectId:
-            column: subject_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-        name:
-            type: string
-            length: 255
-            notnull: true
-        urlName:
-            column: url_name
-            type: string
-            length: 128
-            notnull: true
-        createdTime:
-            column: created_time
-            type: datetime
-            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        subjectId:   { column: subject_id, type: integer, id: true, generator: { strategy: AUTO } }
+        name:        { type: string, length: 255, notnull: true }
+        urlName:     { column: url_name, type: string, length: 128, notnull: true }
+        createdTime: { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     oneToMany:
         videos:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video

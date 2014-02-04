@@ -3,57 +3,20 @@ Znaika\FrontendBundle\Entity\Profile\User:
     table: user
     repositoryClass: Znaika\FrontendBundle\Repository\Profile\UserDBRepository
     fields:
-        userId:
-            column: user_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-        firstName:
-            column: first_name
-            type: string
-            length: 255
-        lastName:
-            column: last_name
-            type: string
-            length: 255
-            nullable: true
-        email:
-            type: string
-            length: 255
-            unique: true
-            notnull: true
-        password:
-            type: string
-            length: 255
-            notnull: true
-        createdTime:
-            column: created_time
-            type: datetime
-            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        status:
-            type: integer
-            notnull: true
-        sex:
-            type: smallint
-            notnull: true
-        points:
-            type: integer
-            notnull: true
-        birthDate:
-            column: birth_date
-            type: date
-            nullable: true
-        role:
-            type: smallint
-            notnull: true
+        userId:      { column: user_id, type: integer, id: true, generator: { strategy: AUTO } }
+        firstName:   { column: first_name, type: string, length: 255 }
+        lastName:    { column: last_name, type: string, length: 255, nullable: true }
+        email:       { type: string, length: 255, unique: true, notnull: true }
+        password:    { type: string, length: 255, notnull: true }
+        createdTime: { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
+        status:      { type: integer, notnull: true }
+        sex:         { type: smallint, notnull: true }
+        points:      { type: integer, notnull: true }
+        birthDate:   { column: birth_date, type: date, nullable: true }
+        role:        { type: smallint, notnull: true }
     oneToMany:
-        videoComments:
-            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
-            mappedBy: user
-        userRegistrations:
-            targetEntity: Znaika\FrontendBundle\Entity\Profile\UserRegistration
-            mappedBy: user
+        videoComments:     { targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment, mappedBy: user }
+        userRegistrations: { targetEntity: Znaika\FrontendBundle\Entity\Profile\UserRegistration, mappedBy: user }
     manyToOne:
         city:
             targetEntity: Znaika\FrontendBundle\Entity\Location\City

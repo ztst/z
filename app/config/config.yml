@@ -90,3 +90,5 @@ parameters:
     vimeo_client_secret:       96b25f825a1999dbc0348e6559d958d5fd97521b
     vimeo_access_token:        3df2402843f89d75b015892c82734087
     vimeo_access_token_secret: d10d31c5c2f09053679b3e281b4424dc90445414
+
+    upload_file_dir: /var/www/znaika/web/uploads/
