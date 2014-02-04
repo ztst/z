@@ -459,3 +459,9 @@ label
     width: 15% !important;
     float: left !important;
 }
+
+*+html ul.nav.navbar-nav.main-menu
+{
+    margin-top: 31px !important;
+    width: 100% !important;
+}
