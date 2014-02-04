@@ -16,7 +16,12 @@
             return null;
         }
 
-        public function getVideosBySearchString($searchString, $limit = null)
+        public function getVideosBySearchString($searchString, $limit = null, $page = null)
+        {
+            return null;
+        }
+
+        public function countVideosBySearchString($searchString)
         {
             return null;
         }

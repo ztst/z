@@ -8,22 +8,19 @@
   {% endstylesheets %}
 {% endblock %}
 
-{% block javascripts %}
-  {{ parent() }}
-
-  {% javascripts
-  '../app/Resources/public/js/classes/util/EventDispatcher.class.js'
-  '../app/Resources/public/js/classes/page/VideoCatalogFilters.class.js'
-  '../app/Resources/public/js/classes/page/VideoCatalogPage.class.js'
-  %}
-  <script type="text/javascript" src="{{ asset_url }}"></script>
-  {% endjavascripts %}
-{% endblock %}
-
 {% block content %}
   <div>
     <h2>Видео:</h2>
+    {% if countVideos %}
+      <p>Найдено {{ countVideos }} видео</p>
+    {% else %}
+      <h5>Не найдено</h5>
+    {% endif %}
     {% include "ZnaikaFrontendBundle:Search:search_video_list.html.twig" with {'videos': videos} %}
+    <div class="clear"></div>
+    {% if countVideos %}
+      <a href="{{ path('search_video', {'searchString': searchString}) }}" title="">Перейти ко всем найденным видеоурокам</a>
+    {% endif %}
   </div>
   <div class="clear"></div>
   <div>

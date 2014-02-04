@@ -39,25 +39,31 @@
             return $this->findOneByUrlName($name);
         }
 
-        public function getVideosBySearchString($searchString, $limit = null)
+        public function getVideosBySearchString($searchString, $limit = null, $page = null)
         {
-            $searchString = "%{$searchString}%";
-
-            $queryBuilder = $this->getEntityManager()
-                                 ->createQueryBuilder();
-            $queryBuilder->select('v')
-                         ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
-                         ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
-                         ->addOrderBy('v.createdTime', 'DESC');
+            $queryBuilder = $this->prepareSearchQuery($searchString);
+            $queryBuilder->select('v');
 
             if (!is_null($limit))
             {
                 $queryBuilder->setMaxResults($limit);
+                if (!is_null($page))
+                {
+                    $queryBuilder->setFirstResult($limit * $page);
+                }
             }
 
             $videos = $queryBuilder->getQuery()->getResult();
 
             return $videos;
+        }
+
+        public function countVideosBySearchString($searchString)
+        {
+            $queryBuilder = $this->prepareSearchQuery($searchString);
+            $queryBuilder->select('count(v)');
+
+            return intval($queryBuilder->getQuery()->getSingleScalarResult());
         }
 
         public function getNotSimilarVideosBySearchString(Video $video, $searchString, $limit = null)
@@ -137,6 +143,24 @@
             $videos = $queryBuilder->getQuery()->getResult();
 
             return $videos;
+        }
+
+        /**
+         * @param $searchString
+         *
+         * @return \Doctrine\ORM\QueryBuilder
+         */
+        private function prepareSearchQuery($searchString)
+        {
+            $searchString = "%{$searchString}%";
+
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+                         ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
+                         ->addOrderBy('v.createdTime', 'DESC');
+
+            return $queryBuilder;
         }
 
         /**

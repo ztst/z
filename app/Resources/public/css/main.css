@@ -443,14 +443,48 @@ label
     }
 }
 
-*+html .class-menu .nav-justified > li
+* + html .class-menu .nav-justified > li
 {
     width: 9% !important;
     float: left !important;
 }
 
-*+html .subject-menu .nav-justified > li
+* + html .subject-menu .nav-justified > li
 {
     width: 15% !important;
     float: left !important;
+}
+
+.go-up, .go-down
+{
+    z-index: 9999;
+    background: #4F4F4F;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+
+    color: #fff;
+    font: normal normal 42px/42px sans-serif;
+    text-shadow: 0 1px 2px #000;
+    text-align: center;
+
+    opacity: 0.1;
+    padding: 3px 0;
+    margin-bottom: 5px;
+
+    display: none;
+    width: 4%;
+    min-width: 25px;
+    height: 100%;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.go-down:hover,
+.go-up:hover
+{
+    opacity: 0.4;
+    box-shadow: 0 5px 0.5em -1px #666;
 }

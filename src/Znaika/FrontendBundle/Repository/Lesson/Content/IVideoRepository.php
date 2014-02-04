@@ -16,10 +16,18 @@
         /**
          * @param string $searchString
          * @param $limit
+         * @param $page
          *
          * @return Video[]|null
          */
-        public function getVideosBySearchString($searchString, $limit = null);
+        public function getVideosBySearchString($searchString, $limit = null, $page = null);
+
+        /**
+         * @param string $searchString
+         *
+         * @return int
+         */
+        public function countVideosBySearchString($searchString);
 
         /**
          * @param Video $video

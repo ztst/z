@@ -56,12 +56,22 @@
             return $result;
         }
 
-        public function getVideosBySearchString($searchString, $limit = null)
+        public function getVideosBySearchString($searchString, $limit = null, $page = null)
         {
-            $result = $this->redisRepository->getVideosBySearchString($searchString, $limit);
+            $result = $this->redisRepository->getVideosBySearchString($searchString, $limit, $page);
             if ( empty($result) )
             {
-                $result = $this->dbRepository->getVideosBySearchString($searchString, $limit);
+                $result = $this->dbRepository->getVideosBySearchString($searchString, $limit, $page);
+            }
+            return $result;
+        }
+
+        public function countVideosBySearchString($searchString)
+        {
+            $result = $this->redisRepository->countVideosBySearchString($searchString);
+            if ( is_null($result) )
+            {
+                $result = $this->dbRepository->countVideosBySearchString($searchString);
             }
             return $result;
         }

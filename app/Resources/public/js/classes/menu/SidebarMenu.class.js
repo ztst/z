@@ -23,7 +23,7 @@ var SidebarMenu = EventDispatcher.extend({
 
     setGradesWithSubjects: function(gradesWithSubjects)
     {
-        this._gradesWithSubjects = JSON.parse(gradesWithSubjects);
+        this._gradesWithSubjects = $.parseJSON(gradesWithSubjects);
     },
 
     getClass: function()

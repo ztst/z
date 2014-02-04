@@ -113,6 +113,17 @@ search:
     pattern: /search
     defaults: { _controller: ZnaikaFrontendBundle:Search:search }
 
+search_video:
+    pattern: /search/video/{searchString}
+    defaults: { _controller: ZnaikaFrontendBundle:Search:searchVideo }
+
+search_video_ajax:
+    pattern: /search/next-videos
+    defaults: { _controller: ZnaikaFrontendBundle:Search:searchVideoAjax }
+    methods:  [POST]
+    options:
+        expose: true
+
 search_similar_video:
     pattern: /search-similar-video/{videoName}
     defaults: { _controller: ZnaikaFrontendBundle:Search:searchSimilarVideo }
