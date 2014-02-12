@@ -47,17 +47,4 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment
             mappedBy:     video
             cascade:      [persist]
-    manyToMany:
-        similarToVideos: { targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video, mappedBy: similarVideos }
-        similarVideos:
-            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
-            inversedBy: similarToVideos
-            joinTable:
-                name: similar_videos
-                joinColumns:
-                    video_id:
-                        referencedColumnName: video_id
-                inverseJoinColumns:
-                    similar_video_id:
-                        referencedColumnName: video_id
     lifecycleCallbacks: {  }

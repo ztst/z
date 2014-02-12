@@ -11,29 +11,8 @@
 
     class SearchController extends Controller
     {
-        const SIMILAR_VIDEOS_LIMIT   = 10;
         const RESULTS_ON_ALL_SEARCH  = 2;
         const RESULT_ON_SPECIAL_PAGE = 15;
-
-        public function searchSimilarVideoAction(Request $request)
-        {
-            $searchString = $request->get("similar_video_name_string");
-            $videoName    = $request->get("videoName");
-            $videos       = null;
-            if ($searchString)
-            {
-                $repository = $this->getVideoRepository();
-                $currentVideo = $repository->getOneByUrlName($videoName);
-                $videos       = $repository->getNotSimilarVideosBySearchString($currentVideo, $searchString,
-                    self::SIMILAR_VIDEOS_LIMIT);
-            }
-
-            return $this->render('ZnaikaFrontendBundle:Search:searchSimilarVideo.html.twig', array(
-                'videos'       => $videos,
-                'videoName'    => $videoName,
-                'searchString' => $searchString,
-            ));
-        }
 
         public function searchVideoAction(Request $request)
         {

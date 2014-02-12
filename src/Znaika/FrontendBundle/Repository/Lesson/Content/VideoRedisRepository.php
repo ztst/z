@@ -26,11 +26,6 @@
             return null;
         }
 
-        public function getNotSimilarVideosBySearchString(Video $video, $searchString, $limit = null)
-        {
-            return null;
-        }
-
         /**
          * @param $name
          *

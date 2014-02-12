@@ -57,7 +57,6 @@
       {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video} %}
     </div>
     <div class="col-lg-5 col-right">
-      {% include "ZnaikaFrontendBundle:Video:similar_videos_block.html.twig" with {'videos': video.getSimilarVideos} %}
     </div>
   {% else %}
     <img src="{{ asset('images/404.jpg') }}" alt="Видео не найдено"/>

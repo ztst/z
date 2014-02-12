@@ -124,10 +124,6 @@ search_video_ajax:
     options:
         expose: true
 
-search_similar_video:
-    pattern: /search-similar-video/{videoName}
-    defaults: { _controller: ZnaikaFrontendBundle:Search:searchSimilarVideo }
-
 register_confirm:
     pattern: /register-confirm/{registerKey}
     defaults: { _controller: ZnaikaFrontendBundle:User:registerConfirm }
@@ -155,10 +151,6 @@ post_video_to_social_network:
     methods:  [POST]
     options:
         expose: true
-
-add_video_similar:
-    pattern: /add-similar-video/{videoName}/{similarVideoName}
-    defaults: { _controller: ZnaikaFrontendBundle:Video:addSimilarVideo }
 
 about:
     pattern: /about
