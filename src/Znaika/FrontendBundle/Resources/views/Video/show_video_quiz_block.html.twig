@@ -1,5 +1,5 @@
-{% if is_user() and not video.getQuizQuestions is empty %}
-  <a href="{{ path('show_quiz', {'videoName': video.getUrlName}) }}" class="btn btn-primary">
+{% if not video.getQuizQuestions is empty %}
+  <a href="{% if is_user() %}{{ path('show_quiz', {'videoName': video.getUrlName}) }}{% else %}javascript:void(0);{% endif %}" class="btn btn-primary">
     Пройти тест
   </a>
 {% endif %}

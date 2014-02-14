@@ -39,6 +39,11 @@
             return $this->findOneByUrlName($name);
         }
 
+        public function getVideoByChapter($chapter)
+        {
+            return $this->findByChapter($chapter);
+        }
+
         public function getVideosBySearchString($searchString, $limit = null, $page = null)
         {
             $queryBuilder = $this->prepareSearchQuery($searchString);

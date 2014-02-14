@@ -23,40 +23,47 @@
 
 {% block content %}
   {% if isValidUrl %}
-    <div class="col-lg-7 col-left">
-      <h1>{{ video.getName|raw }}</h1>
-
+    <div class="col-md-8 col-left video-view-container">
       <a href="{{ path('show_catalogue_by_class', {'class': video.getGrade}) }}" class="">{{ video.getGrade }} класс</a>
       >
       <a href="{{ path('show_catalogue', {'class': video.getGrade, 'subjectName': video.getSubject.getUrlName}) }}" class="">{{ video.getSubject.getName }}</a>
       >
-      <span>{{ video.getName|raw }}</span>
+      <span>{{ video.chapter.getName|raw }}</span>
       <div class="clear"></div>
+      <h1>{{ video.getName|raw }}</h1>
 
       <div class="video-player-container">
-        <iframe src="//player.vimeo.com/video/{{ video.getUrl }}" width="560" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <iframe src="//player.vimeo.com/video/{{ video.getUrl }}" width="100%" height="375" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
       </div>
       <div class="clear"></div>
+      <div class="col-md-8">
+        <h4>{{ video.getAuthor }}</h4>
 
-      {% if viewVideoOperation %}
-        <div class="video-view">
-          Просмотрено: {{ viewVideoOperation.getCreatedTime|date('Y-m-d H:i:s') }}
-        </div>
-      {% endif %}
-      {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
-          'url': app.request.uri,
-          'title': video.name,
-          'img': video.getLargeThumbnailUrl,
-          'desc': ( video.synopsis ) ? video.synopsis.text : ""
-        }
-      %}
+        {% if viewVideoOperation %}
+          <div class="video-viewed">
+            Просмотрено: {{ viewVideoOperation.getCreatedTime|date('Y-m-d H:i:s') }}
+          </div>
+        {% endif %}
+        {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video} %}
 
-      {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
-      {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video} %}
-      {% include "ZnaikaFrontendBundle:Video:show_video_attachments_block.html.twig" with {'video': video} %}
-      {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video} %}
+      </div>
+
+      <div class="col-md-4 video-buttons-container">
+        <h4>Просмотров: {{ video.getViews }}</h4>
+        {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
+            'url': app.request.uri,
+            'title': video.name,
+            'img': video.getLargeThumbnailUrl,
+            'desc': ( video.synopsis ) ? video.synopsis.text : ""
+          }
+        %}
+        <a href="javascript:void(0);" class="btn btn-primary">Сообщить ошибку</a>
+        {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
+        {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video} %}
+      </div>
     </div>
-    <div class="col-lg-5 col-right">
+    <div class="col-md-4 col-right">
+      {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapterVideos, 'currentVideoId': video.getVideoId} %}
     </div>
   {% else %}
     <img src="{{ asset('images/404.jpg') }}" alt="Видео не найдено"/>

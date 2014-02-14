@@ -51,6 +51,13 @@
         public function getPopularVideo($limit);
 
         /**
+         * @param int $chapter
+         *
+         * @return Video[]
+         */
+        public function getVideoByChapter($chapter);
+
+        /**
          * @param Video $video
          *
          * @return bool

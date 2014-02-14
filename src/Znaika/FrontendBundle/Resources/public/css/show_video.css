@@ -1,9 +1,29 @@
 .video-player-container
 {
-    margin: 20px 0;
+    margin: 20px -15px 20px 0;
 }
 
-.video-view
+.video-viewed
 {
     margin-bottom: 10px;
+}
+
+.video-view-container
+{
+    border-right: 1px solid #BABABA;
+}
+
+.video-view-container .video-buttons-container .btn
+{
+    margin-bottom: 10px;
+}
+
+.video-social-buttons
+{
+    margin-bottom: 10px;
+}
+
+.chapter-selected-video
+{
+    outline: 3px solid #00aa00;
 }

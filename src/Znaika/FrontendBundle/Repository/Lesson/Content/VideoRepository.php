@@ -19,7 +19,7 @@
         public function __construct($doctrine)
         {
             $redisRepository = new VideoRedisRepository();
-            $dbRepository = $doctrine->getRepository('ZnaikaFrontendBundle:Lesson\Content\Video');
+            $dbRepository    = $doctrine->getRepository('ZnaikaFrontendBundle:Lesson\Content\Video');
 
             $this->setRedisRepository($redisRepository);
             $this->setDBRepository($dbRepository);
@@ -33,10 +33,11 @@
         public function getOneByUrlName($name)
         {
             $result = $this->redisRepository->getOneByUrlName($name);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->getOneByUrlName($name);
             }
+
             return $result;
         }
 
@@ -49,30 +50,33 @@
         public function getVideosForCatalog($classNumber = null, $subjectName = null)
         {
             $result = $this->redisRepository->getVideosForCatalog($classNumber, $subjectName);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->getVideosForCatalog($classNumber, $subjectName);
             }
+
             return $result;
         }
 
         public function getVideosBySearchString($searchString, $limit = null, $page = null)
         {
             $result = $this->redisRepository->getVideosBySearchString($searchString, $limit, $page);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->getVideosBySearchString($searchString, $limit, $page);
             }
+
             return $result;
         }
 
         public function countVideosBySearchString($searchString)
         {
             $result = $this->redisRepository->countVideosBySearchString($searchString);
-            if ( is_null($result) )
+            if (is_null($result))
             {
                 $result = $this->dbRepository->countVideosBySearchString($searchString);
             }
+
             return $result;
         }
 
@@ -84,10 +88,11 @@
         public function getNewestVideo($limit)
         {
             $result = $this->redisRepository->getNewestVideo($limit);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->getNewestVideo($limit);
             }
+
             return $result;
         }
 
@@ -99,10 +104,22 @@
         public function getPopularVideo($limit)
         {
             $result = $this->redisRepository->getPopularVideo($limit);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->getPopularVideo($limit);
             }
+
+            return $result;
+        }
+
+        public function getVideoByChapter($chapter)
+        {
+            $result = $this->redisRepository->getVideoByChapter($chapter);
+            if (empty($result))
+            {
+                $result = $this->dbRepository->getVideoByChapter($chapter);
+            }
+
             return $result;
         }
 

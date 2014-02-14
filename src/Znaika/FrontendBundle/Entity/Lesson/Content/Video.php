@@ -94,6 +94,11 @@
         private $largeThumbnailUrl;
 
         /**
+         * @var string
+         */
+        private $author;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -521,5 +526,21 @@
         public function getVideoAttachments()
         {
             return $this->videoAttachments;
+        }
+
+        /**
+         * @param string $author
+         */
+        public function setAuthor($author)
+        {
+            $this->author = $author;
+        }
+
+        /**
+         * @return string
+         */
+        public function getAuthor()
+        {
+            return $this->author;
         }
     }

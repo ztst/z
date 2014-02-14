@@ -228,17 +228,6 @@
             $repository = $this->getVideoRepository();
             $video      = $repository->getOneByUrlName($videoName);
 
-            $videos = $repository->getNewestVideo(10000);
-            foreach ($videos as $v)
-            {
-                if (!$v->getSmallThumbnailUrl())
-                {
-                    $contentThumbnailUpdater = $this->getContentThumbnailUpdater();
-                    $contentThumbnailUpdater->update($v);
-                }
-            }
-
-
             $isValidUrl = false;
             if ($video)
             {
@@ -254,11 +243,14 @@
             $listener           = $this->getUserOperationListener();
             $viewVideoOperation = ($user) ? $listener->onViewVideo($user, $video) : null;
 
+            $chapterVideos = $repository->getVideoByChapter($video->getChapter()->getChapterId());
+
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
                 'video'               => $video,
                 'isValidUrl'          => $isValidUrl,
                 'addVideoCommentForm' => $addVideoCommentForm->createView(),
-                'viewVideoOperation'  => $viewVideoOperation
+                'viewVideoOperation'  => $viewVideoOperation,
+                'chapterVideos'       => $chapterVideos,
             ));
         }
 

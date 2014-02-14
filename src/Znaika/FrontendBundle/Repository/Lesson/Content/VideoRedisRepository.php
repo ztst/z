@@ -66,4 +66,9 @@
             return null;
         }
 
+        public function getVideoByChapter($chapter)
+        {
+            return null;
+        }
+
     }
