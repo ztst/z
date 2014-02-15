@@ -36,6 +36,19 @@
         private $subject;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $videos;
+
+        /**
+         * Constructor
+         */
+        public function __construct()
+        {
+            $this->videos = new \Doctrine\Common\Collections\ArrayCollection();
+        }
+
+        /**
          * Get chapterId
          *
          * @return integer
@@ -163,5 +176,39 @@
         public function getSubject()
         {
             return $this->subject;
+        }
+
+        /**
+         * Add videos
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Video $video
+         *
+         * @return Subject
+         */
+        public function addVideo(\Znaika\FrontendBundle\Entity\Lesson\Content\Video $video)
+        {
+            $this->videos[] = $video;
+
+            return $this;
+        }
+
+        /**
+         * Remove videos
+         *
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Video $video
+         */
+        public function removeVideo(\Znaika\FrontendBundle\Entity\Lesson\Content\Video $video)
+        {
+            $this->videos->removeElement($video);
+        }
+
+        /**
+         * Get videos
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getVideos()
+        {
+            return $this->videos;
         }
     }

@@ -1,32 +1,29 @@
-{% if not videos is empty or is_moderator() %}
-  <h3>Все уроки этого раздела</h3>
-  {% if not videos is empty %}
-    {% for video in videos %}
-      <div>
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-left">
-          <a href="{{ path('show_video', {
-              'subjectName': video.getSubject.getUrlName,
-              'class': video.getGrade,
-              'videoName': video.getUrlName
-              }) }}"
-             title="{{ video.getName|raw }}">
-            <img src="{{ video.getSmallThumbnailUrl }}" alt="{{ video.getName|raw }}" {% if currentVideoId == video.getVideoId %}class="chapter-selected-video"{% endif %}/>
-          </a>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-right">
-          <p><strong>Тема: </strong>{{ video.getName|raw }}</p>
-          <a href="{{ path('show_video', {
-          'subjectName': video.getSubject.getUrlName,
-          'class': video.getGrade,
-          'videoName': video.getUrlName
-          }) }}"
-             title="{{ video.getName|raw }}">
-            Перейти к видео
-          </a>
-        </div>
+{% if not videos is empty %}
+  {% for video in videos %}
+    <div>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-left">
+        <a href="{{ path('show_video', {
+            'subjectName': video.getSubject.getUrlName,
+            'class': video.getGrade,
+            'videoName': video.getUrlName
+            }) }}"
+           title="{{ video.getName|raw }}">
+          <img
+            src="{{ video.getSmallThumbnailUrl }}"
+            alt="{{ video.getName|raw }}"
+            class="{% if currentVideoId is defined and currentVideoId == video.getVideoId %}chapter-selected-video{% endif %}"
+            />
+        </a>
       </div>
-      <div class="clear"></div>
-      <hr />
-    {% endfor %}
-  {% endif %}
+      <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-right">
+        <p>{{ video.getName|raw }}</p>
+        <p>{{ video.getAuthor|raw }}</p>
+        {% set month = video.getCreatedTime|date('F') %}
+        {% set year = video.getCreatedTime|date('Y') %}
+        <p>{{ '%s %s'|format(month|trans, year) }}</p>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <hr />
+  {% endfor %}
 {% endif %}

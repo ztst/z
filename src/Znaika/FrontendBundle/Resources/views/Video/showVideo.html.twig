@@ -63,6 +63,7 @@
       </div>
     </div>
     <div class="col-md-4 col-right">
+      <h3>Все уроки этого раздела</h3>
       {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapterVideos, 'currentVideoId': video.getVideoId} %}
     </div>
   {% else %}

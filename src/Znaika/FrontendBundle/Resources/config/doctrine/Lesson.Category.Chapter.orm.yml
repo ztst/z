@@ -16,4 +16,9 @@ Znaika\FrontendBundle\Entity\Lesson\Category\Chapter:
                 name: subject_id
                 referencedColumnName: subject_id
                 onDelete: CASCADE
+    oneToMany:
+        videos:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
+            mappedBy:     chapter
+            cascade:      [persist]
     lifecycleCallbacks: {  }

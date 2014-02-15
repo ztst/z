@@ -13,7 +13,6 @@
 
   {% javascripts
     '../app/Resources/public/js/classes/util/EventDispatcher.class.js'
-    '../app/Resources/public/js/classes/page/VideoCatalogFilters.class.js'
     '../app/Resources/public/js/classes/page/VideoCatalogPage.class.js'
   %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
@@ -21,11 +20,17 @@
 {% endblock %}
 
 {% block content %}
-  {#{% include "ZnaikaFrontendBundle:Video:video_catalog_filter.html.twig"
-      with {'classes': classes, 'subjects': subjects, 'currentClass': currentClass, 'currentSubjectName': currentSubjectName}
-  %} //TODO: remove after New Year #}
-  <div id="videoCatalogContainer">
-    {% include "ZnaikaFrontendBundle:Video:video_catalog.html.twig" with {'videos': videos} %}
+  <div class="show-catalog-page-container col-sm-12">
+    <div id="chapterCatalogContainer" class="col-md-8 col-left chapter-catalog-container">
+      {% include "ZnaikaFrontendBundle:Video:chapters_list.html.twig" with {'chapters': chapters, 'currentChapterId': currentChapterId} %}
+    </div>
+    <div id="videoCatalogContainer" class="col-md-4 col-right">
+      <h3>Все уроки этого раздела</h3>
+      {% for chapter in chapters %}
+        <div id="chapter_videos_{{ chapter.getChapterId }}" class="chapter-videos{% if currentChapterId != chapter.getChapterId %} hidden{% endif %}">
+          {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapter.getVideos} %}
+        </div>
+      {% endfor %}
+    </div>
   </div>
-  <input id="updateCatalogUrl" type="hidden" value="{{ path('get_videos') }}" />
 {% endblock %}

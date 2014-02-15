@@ -21,6 +21,7 @@
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
+    use Znaika\FrontendBundle\Repository\Lesson\Category\ChapterRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\IVideoAttachmentRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
 
@@ -207,19 +208,19 @@
 
         public function showCatalogueAction($class, $subjectName)
         {
-            $subjectRepository = $this->get("znaika_frontend.subject_repository");
-            $subjects          = $subjectRepository->getAll();
-            $classes           = ClassNumberUtil::getAvailableClasses();
+            $subject           = $this->getSubjectByName($subjectName);
+            $chapterRepository = $this->getChapterRepository();
+            $chapters          = $chapterRepository->getChaptersForCatalog($class, $subject->getSubjectId());
 
-            $repository = $this->getVideoRepository();
-            $videos     = $repository->getVideosForCatalog($class, $subjectName);
+            $currentChapterId = null;
+            if (!empty($chapters) && isset($chapters[0]))
+            {
+                $currentChapterId = $chapters[0]->getChapterId();
+            }
 
             return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
-                'classes'            => $classes,
-                'currentClass'       => $class,
-                'currentSubjectName' => $subjectName,
-                'subjects'           => $subjects,
-                'videos'             => $videos,
+                'currentChapterId' => $currentChapterId,
+                'chapters'         => $chapters,
             ));
         }
 
@@ -293,5 +294,13 @@
         private function getContentThumbnailUpdater()
         {
             return $this->get("znaika_frontend.content_thumbnail_updater");
+        }
+
+        /**
+         * @return ChapterRepository
+         */
+        private function getChapterRepository()
+        {
+            return $this->get("znaika_frontend.chapter_repository");
         }
     }
