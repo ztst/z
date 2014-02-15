@@ -133,7 +133,7 @@
                                  ->createQueryBuilder();
             $queryBuilder->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
                          ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
-                         ->addOrderBy('v.createdTime', 'DESC');
+                         ->addOrderBy('v.grade, v.chapter', 'ASC');
 
             return $queryBuilder;
         }

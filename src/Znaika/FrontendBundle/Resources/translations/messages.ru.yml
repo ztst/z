@@ -10,3 +10,7 @@ September: Сентябрь
 October:   Октябрь
 November:  Ноябрь
 December:  Декабрь
+
+founded_video_lessons: Найден %count% урок|Найдено %count% урока|Найдено %count% уроков
+in_chapters: в %count% разделе|в %count% разделах|в %count% разделах
+count_views: %count% просмотр|%count% просмотра|%count% просмотров

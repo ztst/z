@@ -49,7 +49,7 @@
       </div>
 
       <div class="col-md-4 video-buttons-container">
-        <h4>Просмотров: {{ video.getViews }}</h4>
+        <h4>{{ 'count_views'|transchoice(video.getViews) }}</h4>
         {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
             'url': app.request.uri,
             'title': video.name,

@@ -5,13 +5,13 @@
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\Request;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Repository\Lesson\Content\SynopsisRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
     class SearchController extends Controller
     {
-        const RESULTS_ON_ALL_SEARCH  = 2;
         const RESULT_ON_SPECIAL_PAGE = 15;
 
         public function searchVideoAction(Request $request)
@@ -40,7 +40,7 @@
                 'videos' => $videos
             ));
 
-            $array   = array(
+            $array = array(
                 'html'        => $html,
                 'isFinalPage' => $isFinalPage
             );
@@ -53,23 +53,30 @@
             $searchString = $request->get("search_string");
 
             $videos      = null;
-            $countVideos = 0;
-            $users       = null;
-            $synopsises  = null;
+            $chapters    = array();
             if ($searchString)
             {
-                $videos      = $this->searchVideos($searchString, self::RESULTS_ON_ALL_SEARCH);
-                $countVideos = $this->countFoundedVideos($searchString);
-                $users       = $this->searchUsers($searchString);
-                $synopsises  = $this->searchSynopsises($searchString);
+                $videos = $this->searchVideos($searchString);
+
+                foreach ($videos as $video)
+                {
+                    $chapter                            = $video->getChapter();
+                    $chapters[$chapter->getChapterId()] = $video->getChapter();
+                }
+            }
+
+            $currentChapterId = null;
+            if (!empty($chapters))
+            {
+                reset($chapters);
+                $currentChapterId = key($chapters);
             }
 
             return $this->render('ZnaikaFrontendBundle:Search:search.html.twig', array(
-                'searchString' => $searchString,
-                'videos'       => $videos,
-                'countVideos'  => $countVideos,
-                'users'        => $users,
-                'synopsises'   => $synopsises,
+                'searchString'     => $searchString,
+                'videos'           => $videos,
+                'chapters'         => $chapters,
+                'currentChapterId' => $currentChapterId,
             ));
         }
 
@@ -83,7 +90,7 @@
          * @param $limit
          * @param $page
          *
-         * @return array
+         * @return Video[]
          */
         private function searchVideos($searchString, $limit = null, $page = null)
         {

@@ -1,0 +1,23 @@
+{% if not chapters is empty %}
+  {% for chapter in chapters %}
+    <div class="chapter-description-container{% if currentChapterId == chapter.getChapterId %} selected{% endif %}">
+      <h4>
+        <a
+          href="javascript:void(0);"
+          title="{{ chapter.getName|raw }}"
+          id="show_chapter_{{ chapter.getChapterId }}"
+          class="chapter-link"
+          >
+          {{ chapter.getName|raw }}
+        </a>
+      </h4>
+      <a href="{{ path('show_catalogue_by_class', {'class': chapter.getGrade}) }}" class="">{{ chapter.getGrade }}
+        класс</a>
+      >
+      <a href="{{ path('show_catalogue', {'class': chapter.getGrade, 'subjectName': chapter.getSubject.getUrlName}) }}"
+         class="">{{ chapter.getSubject.getName }}</a>
+    </div>
+  {% endfor %}
+{% else %}
+  <h1>Пока что пусто</h1>
+{% endif %}

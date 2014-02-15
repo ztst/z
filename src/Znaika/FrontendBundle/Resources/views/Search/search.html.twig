@@ -7,30 +7,29 @@
   <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts
+    '../app/Resources/public/js/classes/page/SearchPage.class.js'
+  %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
 
 {% block content %}
-  <div>
-    <h2>Видео:</h2>
-    {% if countVideos %}
-      <p>Найдено {{ countVideos }} видео</p>
+  <div class="show-catalog-page-container col-sm-12">
+    {% if videos|length %}
+      <p>{{ 'founded_video_lessons'|transchoice(videos|length) }} {{ 'in_chapters'|transchoice(chapters|length) }}</p>
     {% else %}
       <h5>Не найдено</h5>
     {% endif %}
-    {% include "ZnaikaFrontendBundle:Search:search_video_list.html.twig" with {'videos': videos} %}
-    <div class="clear"></div>
-    {% if countVideos %}
-      <a href="{{ path('search_video', {'searchString': searchString}) }}" title="">Перейти ко всем найденным видеоурокам</a>
-    {% endif %}
+    <div id="chapterCatalogContainer" class="col-md-8 col-left chapter-catalog-container">
+      {% include "ZnaikaFrontendBundle:Search:chapters_list.html.twig" with {'chapters': chapters, 'currentChapterId': currentChapterId} %}
+    </div>
+    <div id="videoCatalogContainer" class="col-md-4 col-right">
+      <h3>Уроки раздела по запросу "{{ searchString }}"</h3>
+      {% include "ZnaikaFrontendBundle:Search:search_video_list.html.twig" with {'videos': videos, 'currentChapterId': currentChapterId} %}
+    </div>
   </div>
-  <div class="clear"></div>
-  <div>
-    <h2>Конспекты:</h2>
-    {% include "ZnaikaFrontendBundle:Search:search_synopsises_list.html.twig" with {'synopsises': synopsises} %}
-  </div>
-  <div class="clear"></div>
-  <div>
-    <h2>Пользователи:</h2>
-    {% include "ZnaikaFrontendBundle:Search:search_user_list.html.twig" with {'users': users} %}
-  </div>
-  <div class="clear"></div>
 {% endblock %}
