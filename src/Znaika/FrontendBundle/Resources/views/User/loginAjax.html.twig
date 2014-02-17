@@ -71,4 +71,9 @@
     </div>
     <div class="clear"></div>
   </div>
+  <div id="forgetPasswordFormContainer" class="hidden">
+    <h3>Восстановление пароля</h3>
+    <h5>Введите Вашу почту, указанную при регистрации – мы вышлем Вам пароль.</h5>
+    {% include "ZnaikaFrontendBundle:User:forget_password_form.html.twig" with {'last_username': last_username, 'error': error, 'referrer': referrer} %}
+  </div>
 </div>

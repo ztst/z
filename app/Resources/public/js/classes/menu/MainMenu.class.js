@@ -38,8 +38,12 @@ var MainMenu = EventDispatcher.extend({
         var switchRegistrationLink = $("#switchRegistrationLink");
         switchRegistrationLink.click(handler(this, "_showRegistrationForm"));
 
+        var switchForgetPasswordLink = $("#switchForgetPasswordLink");
+        switchForgetPasswordLink.click(handler(this, "_showForgetPasswordForm"));
+
         this._initRegistrationForm();
         this._initLoginForm();
+        this._initForgetPasswordForm();
     },
 
     _initLoginForm: function()
@@ -56,16 +60,34 @@ var MainMenu = EventDispatcher.extend({
         this._initShowPasswordLink();
     },
 
+    _initForgetPasswordForm: function()
+    {
+        var forgetPasswordForm = $(".forget-password-form");
+        forgetPasswordForm.submit(handler(this, "_onForgetPasswordFormSubmitted"));
+    },
+
     _showLoginForm: function()
     {
         $("#registrationFormContainer").addClass("hidden");
+        $("#forgetPasswordFormContainer").addClass("hidden");
+
         $("#loginFormContainer").removeClass("hidden");
     },
 
     _showRegistrationForm: function()
     {
         $("#loginFormContainer").addClass("hidden");
+        $("#forgetPasswordFormContainer").addClass("hidden");
+
         $("#registrationFormContainer").removeClass("hidden");
+    },
+
+    _showForgetPasswordForm: function()
+    {
+        $("#registrationFormContainer").addClass("hidden");
+        $("#loginFormContainer").addClass("hidden");
+
+        $("#forgetPasswordFormContainer").removeClass("hidden");
     },
 
     _onLoginFormSubmitted: function()
@@ -121,6 +143,34 @@ var MainMenu = EventDispatcher.extend({
 
             this._initRegistrationForm();
         }
+    },
+
+    _onForgetPasswordFormSubmitted: function()
+    {
+        var form = $("#forgetPasswordForm");
+        var url = form.attr("action");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+            success: handler(this, "_onSendPasswordSuccess")
+        });
+
+        return false;
+    },
+
+    _onSendPasswordSuccess: function(response)
+    {
+        if (response.success)
+        {
+            alert("Test message: e-mail correct");
+        }
+        else
+        {
+            alert("Неверный e-mail");
+        }
+
+        return false;
     },
 
     _initBadgesPopup: function()
