@@ -3,6 +3,7 @@
 
     use Doctrine\ORM\EntityRepository;
     use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
 
     class UserDBRepository extends EntityRepository implements IUserRepository
     {
@@ -25,6 +26,64 @@
         public function getOneByUserId($userId)
         {
             return $this->findOneByUserId($userId);
+        }
+
+        /**
+         * @param $vkId
+         *
+         * @return User
+         */
+        public function getOneByVkId($vkId)
+        {
+            $qb = $this->getEntityManager()
+                       ->createQueryBuilder();
+
+            $qb->select('u')
+               ->from('ZnaikaFrontendBundle:Profile\User', 'u')
+               ->andWhere("u.vkId = :vk_id")
+               ->setParameter('vk_id', $vkId)
+               ->andWhere('u.status = :status')
+               ->setParameter('status', UserStatus::ACTIVE)
+               ->setMaxResults(1);
+
+            return $qb->getQuery()->getOneOrNullResult();
+        }
+
+        /**
+         * @param $facebookId
+         *
+         * @return User
+         */
+        public function getOneByFacebookId($facebookId)
+        {
+            $qb = $this->getEntityManager()
+                       ->createQueryBuilder();
+
+            $qb->select('u')
+               ->from('ZnaikaFrontendBundle:Profile\User', 'u')
+               ->andWhere("u.facebookId = :facebook_id")
+               ->setParameter('facebook_id', $facebookId)
+               ->andWhere('u.status = :status')
+               ->setParameter('status', UserStatus::ACTIVE)
+               ->setMaxResults(1);
+
+            return $qb->getQuery()->getOneOrNullResult();
+        }
+
+        public function getOneByOdnoklassnikiId($odnoklassnikiId)
+        {
+            $qb = $this->getEntityManager()
+                       ->createQueryBuilder();
+
+            $qb->select('u')
+               ->from('ZnaikaFrontendBundle:Profile\User', 'u')
+               ->andWhere("u.odnoklassnikiId = :odnoklassniki_id")
+               ->setParameter('odnoklassniki_id', $odnoklassnikiId)
+               ->andWhere('u.status = :status')
+               ->setParameter('status', UserStatus::ACTIVE)
+               ->setMaxResults(1);
+
+            return $qb->getQuery()->getOneOrNullResult();
         }
 
         /**

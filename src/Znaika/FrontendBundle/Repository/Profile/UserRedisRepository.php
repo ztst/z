@@ -26,6 +26,36 @@
         }
 
         /**
+         * @param $vkId
+         *
+         * @return User
+         */
+        public function getOneByVkId($vkId)
+        {
+            return null;
+        }
+
+        /**
+         * @param $facebookId
+         *
+         * @return User
+         */
+        public function getOneByFacebookId($facebookId)
+        {
+            return null;
+        }
+
+        /**
+         * @param $odnoklassnikiId
+         *
+         * @return User
+         */
+        public function getOneByOdnoklassnikiId($odnoklassnikiId)
+        {
+            return null;
+        }
+
+        /**
          * @param string $searchString
          *
          * @return User[]|null

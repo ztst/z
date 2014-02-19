@@ -1,11 +1,12 @@
 <?
     namespace Znaika\FrontendBundle\Form\User;
 
+    use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserSex;
 
-    class UserProfileType extends UserType
+    class UserProfileType extends AbstractType
     {
         const MAX_YEARS_OLD = 90;
 
@@ -63,10 +64,9 @@
          */
         public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
-            parent::setDefaultOptions($resolver);
-
             $resolver->setDefaults(array(
-                'readonly' => false
+                'data_class' => 'Znaika\FrontendBundle\Entity\Profile\User',
+                'readonly'   => false
             ));
         }
 

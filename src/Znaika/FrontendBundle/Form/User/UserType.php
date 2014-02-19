@@ -2,11 +2,9 @@
     namespace Znaika\FrontendBundle\Form\User;
 
     use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\Form\Form;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\Form\FormEvents;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-    use Symfony\Component\Validator\Constraints\DateTime;
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
@@ -18,9 +16,15 @@
          */
         private $userRepository;
 
-        function __construct(UserRepository $userRepository)
+        /**
+         * @var bool
+         */
+        private $autoGeneratePassword;
+
+        function __construct(UserRepository $userRepository, $autoGeneratePassword = false)
         {
             $this->userRepository = $userRepository;
+            $this->autoGeneratePassword = $autoGeneratePassword;
         }
 
         /**
@@ -30,9 +34,10 @@
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $builder
-                ->add('firstName', 'text')
                 ->add('email', 'email')
-                ->add('password', 'password');
+                ->add('password', $this->autoGeneratePassword ? 'hidden' : 'password', array(
+                    'required' => !$this->autoGeneratePassword
+                ));
 
             $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPostBind'));
         }
@@ -41,6 +46,12 @@
         {
             $user = $event->getData();
             $form = $event->getForm();
+
+            if ($this->autoGeneratePassword)
+            {
+                $user['password'] = substr(md5(rand()), 0, 8);
+                $event->setData($user);
+            }
 
             $email = isset($user['email']) ? $user['email'] : "";
             $existingUser = $this->userRepository->getOneByEmail($email);
@@ -51,13 +62,6 @@
                 $this->updateUserFromArray($existingUser, $user);
                 $form->setData($existingUser);
             }
-        }
-
-        private function updateUserFromArray(User $user, $data)
-        {
-            $user->setCreatedTime(new \DateTime());
-            $user->setFirstName($data['firstName']);
-            $user->setPassword($data['password']);
         }
 
         /**
@@ -76,5 +80,11 @@
         public function getName()
         {
             return 'znaika_frontendbundle_user_userinfo';
+        }
+
+        private function updateUserFromArray(User $user, $data)
+        {
+            $user->setCreatedTime(new \DateTime());
+            $user->setPassword($data['password']);
         }
     }
