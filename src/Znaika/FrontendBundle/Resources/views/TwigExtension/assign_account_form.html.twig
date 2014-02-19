@@ -1,0 +1,16 @@
+<form action="{{ path('login_check') }}" method="post" id="loginForm" class="login-form">
+  <div class="form-group input-group">
+    <label for="username">Email:</label>
+    <input class="form-control" type="text" id="username" name="_username" placeholder="anna.petrova@mail.com" value=""/>
+  </div>
+
+  <div class="form-group input-group">
+    <label for="password">Пароль:</label>
+    <input class="form-control" type="password" id="password" name="_password" placeholder="английские буквы, цифры и знаки"/>
+  </div>
+
+  <input type="hidden" name="assign_social_account" value="1"/>
+  <div class="login-button-container">
+    <button class="btn btn-primary" type="submit">Вход</button>
+  </div>
+</form>

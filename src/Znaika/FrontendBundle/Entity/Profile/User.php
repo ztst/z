@@ -91,6 +91,26 @@
         private $role = 0;
 
         /**
+         * @var integer
+         */
+        private $vkId;
+
+        /**
+         * @var integer
+         */
+        private $facebookId;
+
+        /**
+         * @var integer
+         */
+        private $odnoklassnikiId;
+
+        /**
+         * @var string
+         */
+        private $nickname;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -507,7 +527,10 @@
 
         public function __toString()
         {
-            return (string)$this->getFirstName() . "  " . $this->getLastName();
+            $name = $this->getFirstName() . " " . $this->getLastName();
+            $name = trim($name);
+
+            return empty($name) ? $this->getNickname() : $name;
         }
 
         /**
@@ -580,6 +603,70 @@
         public function getRole()
         {
             return $this->role;
+        }
+
+        /**
+         * @param int $facebookId
+         */
+        public function setFacebookId($facebookId)
+        {
+            $this->facebookId = $facebookId;
+        }
+
+        /**
+         * @return int
+         */
+        public function getFacebookId()
+        {
+            return $this->facebookId;
+        }
+
+        /**
+         * @param int $vkId
+         */
+        public function setVkId($vkId)
+        {
+            $this->vkId = $vkId;
+        }
+
+        /**
+         * @return int
+         */
+        public function getVkId()
+        {
+            return $this->vkId;
+        }
+
+        /**
+         * @param int $odniklassnikiId
+         */
+        public function setOdnoklassnikiId($odniklassnikiId)
+        {
+            $this->odnoklassnikiId = $odniklassnikiId;
+        }
+
+        /**
+         * @return int
+         */
+        public function getOdnoklassnikiId()
+        {
+            return $this->odnoklassnikiId;
+        }
+
+        /**
+         * @param string $nickname
+         */
+        public function setNickname($nickname)
+        {
+            $this->nickname = $nickname;
+        }
+
+        /**
+         * @return string
+         */
+        public function getNickname()
+        {
+            return $this->nickname;
         }
 
         public function serialize()

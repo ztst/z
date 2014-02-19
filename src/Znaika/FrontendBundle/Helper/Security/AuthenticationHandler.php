@@ -12,6 +12,9 @@
     use Symfony\Component\Security\Core\SecurityContextInterface;
     use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
     use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
+    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
+    use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
     class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface
     {
@@ -26,13 +29,20 @@
         private $session;
 
         /**
+         * @var UserRepository
+         */
+        private $userRepository;
+
+        /**
          * @param RouterInterface $router
          * @param Session $session
+         * @param UserRepository $userRepository
          */
-        public function __construct(RouterInterface $router, Session $session)
+        public function __construct(RouterInterface $router, Session $session, UserRepository $userRepository)
         {
-            $this->router  = $router;
-            $this->session = $session;
+            $this->router         = $router;
+            $this->session        = $session;
+            $this->userRepository = $userRepository;
         }
 
         /**
@@ -43,6 +53,8 @@
          */
         public function onAuthenticationSuccess(Request $request, TokenInterface $token)
         {
+            $this->assignSocialId($request, $token);
+
             if ($request->isXmlHttpRequest())
             {
                 $array    = array('success' => true);
@@ -88,4 +100,24 @@
                 return new RedirectResponse($this->router->generate('login'));
             }
         }
+
+        /**
+         * @param Request $request
+         * @param TokenInterface $token
+         */
+        private function assignSocialId(Request $request, TokenInterface $token)
+        {
+            if ($request->get("assign_social_account", false))
+            {
+                $user         = $token->getUser();
+                $socialUserInfo = $this->session->get("socialUserInfo", null);
+                $socialType   = $this->session->get("socialType", null);
+                $this->session->remove("socialUserId");
+                $this->session->remove("socialType");
+
+                SocialNetworkUtil::addUserSocialInfo($user, $socialType, $socialUserInfo);
+                $this->userRepository->save($user);
+            }
+        }
+
     }

@@ -1,0 +1,28 @@
+<div id="completeSocialRegistrationPopup" class="popup mfp-hide">
+  <div id="completeSocialRegistrationForm" class="complete-registration-popup-content">
+    <h1>Вход в Знайка.ру</h1>
+    <p>Вы впервые на Знайка.ру или у Вас уже есть аккаунт?</p>
+    <a id="createNewUser" href="javascript:void(0);" class="btn btn-primary">Я новый пользователь</a>
+    <a id="attachUser" href="javascript:void(0);" class="btn btn-primary">У меня уже есть аккаунт</a>
+  </div>
+  <div id="attachUserForm" class="hidden complete-registration-popup-content">
+    <div class="form-header">
+      <h1>Связывание аккаунтов</h1>
+      <p>
+        Введите Вашу почту и пароль от Знайка.ру.<br/>
+        Чтобы зайти на Знайка.ру в следующий раз, будет достаточно просто нажать на кнопку быстрого входа.
+      </p>
+    </div>
+    {% include "ZnaikaFrontendBundle:TwigExtension:assign_account_form.html.twig" %}
+  </div>
+  <div id="registrationFormContainer" class="hidden complete-registration-popup-content">
+    <div class="form-header">
+      <h1>Создание аккаунта</h1>
+      <p>
+        Укажите любую удобную Вам почту - мы вышлем Вам пароль.<br/>
+        Чтобы зайти на Знайка.ру в следующий раз, будет достаточно просто нажать на кнопку быстрого входа.
+      </p>
+    </div>
+    {% include 'ZnaikaFrontendBundle:User:register_form.html.twig' with {'form': registerForm, 'autoGeneratePassword': true} %}
+  </div>
+</div>
