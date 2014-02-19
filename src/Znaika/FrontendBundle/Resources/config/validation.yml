@@ -22,8 +22,6 @@ Znaika\FrontendBundle\Entity\Profile\User:
             fields: [email]
             message: 'not_unique'
     properties:
-        firstName:
-            - NotBlank: { message: "not_blank" }
         email:
             - NotBlank: { message: "not_blank" }
             - Email:

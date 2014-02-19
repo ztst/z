@@ -20,6 +20,27 @@
         public function getOneByUserId($userId);
 
         /**
+         * @param $vkId
+         *
+         * @return User
+         */
+        public function getOneByVkId($vkId);
+
+        /**
+         * @param $facebookId
+         *
+         * @return User
+         */
+        public function getOneByFacebookId($facebookId);
+
+        /**
+         * @param $odnoklassnikiId
+         *
+         * @return User
+         */
+        public function getOneByOdnoklassnikiId($odnoklassnikiId);
+
+        /**
          * @param string $searchString
          *
          * @return User[]|null

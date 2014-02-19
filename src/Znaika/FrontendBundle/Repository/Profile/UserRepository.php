@@ -19,7 +19,7 @@
         public function __construct($doctrine)
         {
             $redisRepository = new UserRedisRepository();
-            $dbRepository = $doctrine->getRepository('ZnaikaFrontendBundle:Profile\User');
+            $dbRepository    = $doctrine->getRepository('ZnaikaFrontendBundle:Profile\User');
 
             $this->setRedisRepository($redisRepository);
             $this->setDBRepository($dbRepository);
@@ -46,10 +46,59 @@
         public function getOneByUserId($userId)
         {
             $result = $this->redisRepository->getOneByUserId($userId);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->getOneByUserId($userId);
             }
+
+            return $result;
+        }
+
+        /**
+         * @param $vkId
+         *
+         * @return User
+         */
+        public function getOneByVkId($vkId)
+        {
+            $result = $this->redisRepository->getOneByVkId($vkId);
+            if (empty($result))
+            {
+                $result = $this->dbRepository->getOneByVkId($vkId);
+            }
+
+            return $result;
+        }
+
+        /**
+         * @param $facebookId
+         *
+         * @return User
+         */
+        public function getOneByFacebookId($facebookId)
+        {
+            $result = $this->redisRepository->getOneByFacebookId($facebookId);
+            if (empty($result))
+            {
+                $result = $this->dbRepository->getOneByFacebookId($facebookId);
+            }
+
+            return $result;
+        }
+
+        /**
+         * @param $odnoklassnikiId
+         *
+         * @return User
+         */
+        public function getOneByOdnoklassnikiId($odnoklassnikiId)
+        {
+            $result = $this->redisRepository->getOneByOdnoklassnikiId($odnoklassnikiId);
+            if (empty($result))
+            {
+                $result = $this->dbRepository->getOneByOdnoklassnikiId($odnoklassnikiId);
+            }
+
             return $result;
         }
 
@@ -61,10 +110,11 @@
         public function getUsersBySearchString($searchString)
         {
             $result = $this->redisRepository->getUsersBySearchString($searchString);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->getUsersBySearchString($searchString);
             }
+
             return $result;
         }
 
@@ -76,10 +126,11 @@
         public function getOneByEmail($email)
         {
             $result = $this->redisRepository->getOneByEmail($email);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->getOneByEmail($email);
             }
+
             return $result;
         }
 
@@ -91,10 +142,11 @@
         public function getUsersTopByPoints($limit)
         {
             $result = $this->redisRepository->getUsersTopByPoints($limit);
-            if ( is_null($result) )
+            if (is_null($result))
             {
                 $result = $this->dbRepository->getUsersTopByPoints($limit);
             }
+
             return $result;
         }
     }

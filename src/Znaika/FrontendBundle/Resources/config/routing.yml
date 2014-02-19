@@ -113,6 +113,18 @@ try_login:
 logout:
     path: /logout
 
+vk_login:
+    path: /vk-auth
+    defaults: { _controller: ZnaikaFrontendBundle:User:vkLogin }
+
+facebook_login:
+    path: /facebook-auth
+    defaults: { _controller: ZnaikaFrontendBundle:User:facebookLogin }
+
+odnoklassniki_login:
+    path: /odnoklassniki-auth
+    defaults: { _controller: ZnaikaFrontendBundle:User:odnoklassnikiLogin }
+
 search:
     pattern: /search
     defaults: { _controller: ZnaikaFrontendBundle:Search:search }

@@ -26,6 +26,8 @@
             </form>
             <div class="clear"></div>
           </li>
+
+          {{ complete_social_registration_popup()|raw }}
           {% if is_user() %}
             <li>
               <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link">{{ app.user }}, {{ app.user.getPoints }} баллов</a>

@@ -22,6 +22,25 @@ services:
         class:     Znaika\FrontendBundle\Helper\Security\UserAuthenticator
         arguments: ['@service_container']
 
+    znaika_frontend.vkontakte:
+        class:     Znaika\FrontendBundle\Helper\Vkontakte
+        arguments: ['@service_container']
+
+    znaika_frontend.odnoklassniki:
+        class:     Znaika\FrontendBundle\Helper\Odnoklassniki
+        arguments:
+            config:
+                client_id:       %odnoklassniki_client_id%
+                application_key: %odnoklassniki_public_key%
+                client_secret:   %odnoklassniki_client_secret%
+
+    znaika_frontend.facebook:
+        class:     Facebook
+        arguments:
+            config:
+                appId: %facebook_client_id%
+                secret: %facebook_client_secret%
+
     znaika_frontend.messages_provider:
         class:     Znaika\FrontendBundle\Provider\MessagesProvider
         arguments:
@@ -47,6 +66,7 @@ services:
         arguments:
             - @router
             - @session
+            - @znaika_frontend.user_repository
 
     znaika_frontend.content_thumbnail_updater:
         class:     Znaika\FrontendBundle\Helper\Content\ContentThumbnailUpdater
@@ -211,6 +231,9 @@ services:
 
     znaika_frontend.social_networks_extension:
         class: Znaika\FrontendBundle\Twig\SocialNetworksExtension
+        arguments:
+            - @twig
+            - @service_container
         tags:
             - { name: twig.extension }
 
