@@ -3,6 +3,7 @@
 
     use Znaika\FrontendBundle\Entity\Profile\UserRegistration;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
+    use Znaika\FrontendBundle\Entity\Profile\PasswordRecovery;
 
     class UserMailer
     {
@@ -18,19 +19,35 @@
 
         public function __construct(MailHelper $mailHelper, \Twig_Environment $twig)
         {
-            $this->twig = $twig;
+            $this->twig       = $twig;
             $this->mailHelper = $mailHelper;
         }
 
         public function sendRegisterConfirm(UserRegistration $userRegistration)
         {
-            $templateFile = "ZnaikaFrontendBundle:Email:userRegistration.html.twig";
+            $templateFile    = "ZnaikaFrontendBundle:Email:userRegistration.html.twig";
             $templateContent = $this->twig->loadTemplate($templateFile);
-            $body = $templateContent->render(array("registerKey" => $userRegistration->getRegisterKey()));
+            $body            = $templateContent->render(array("registerKey" => $userRegistration->getRegisterKey()));
 
             $subject = ($templateContent->hasBlock("subject") ? $templateContent->renderBlock("subject", array()) : "");
             $subject = trim($subject);
 
             $this->mailHelper->sendEmail(null, $userRegistration->getUser()->getEmail(), $body, $subject);
+        }
+
+        public function sendPasswordRecoveryConfirm(PasswordRecovery $passwordRecovery)
+        {
+            $templateFile    = "ZnaikaFrontendBundle:Email:passwordRecovery.html.twig";
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $body            = $templateContent->render(
+                                               array(
+                                                   "recoveryKey" => $passwordRecovery->getRecoveryKey(),
+                                                   "email"       => $passwordRecovery->getUser()->getEmail()
+                                               ));
+
+            $subject = ($templateContent->hasBlock("subject") ? $templateContent->renderBlock("subject", array()) : "");
+            $subject = trim($subject);
+
+            $this->mailHelper->sendEmail(null, $passwordRecovery->getUser()->getEmail(), $body, $subject);
         }
     }

@@ -91,6 +91,10 @@ services:
         class:        Znaika\FrontendBundle\Repository\Profile\UserRegistrationRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
+    znaika_frontend.password_recovery_repository:
+        class:        Znaika\FrontendBundle\Repository\Profile\PasswordRecoveryRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
     znaika_frontend.quiz_question_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\QuizQuestionRepository
         arguments:    ["@doctrine.orm.entity_manager"]
@@ -172,6 +176,10 @@ services:
 
     znaika_frontend.user_to_id_transformer:
         class:     Znaika\FrontendBundle\Form\DataTransformer\UserToIdTransformer
+        arguments: ['@znaika_frontend.user_repository']
+
+    znaika_frontend.email_to_user_transformer:
+        class:     Znaika\FrontendBundle\Form\DataTransformer\EmailToUserTransformer
         arguments: ['@znaika_frontend.user_repository']
 
 #twig

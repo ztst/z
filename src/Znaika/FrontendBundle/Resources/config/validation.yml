@@ -38,3 +38,8 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment:
                 maxSize: 100M
                 mimeTypes: [application/pdf, application/x-pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword]
                 mimeTypesMessage: "invalid_file_format"
+
+Znaika\FrontendBundle\Entity\Profile\PasswordRecovery:
+    properties:
+        user:
+            - NotNull: { message: "not_null" }

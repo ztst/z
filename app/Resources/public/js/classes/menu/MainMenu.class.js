@@ -50,6 +50,10 @@ var MainMenu = EventDispatcher.extend({
     {
         var loginForm = $("#loginForm");
         loginForm.submit(handler(this, "_onLoginFormSubmitted"));
+        $("#switchForgetPasswordLink").click(function(){
+                return false;
+            }
+        )
     },
 
     _initRegistrationForm: function()
@@ -84,8 +88,8 @@ var MainMenu = EventDispatcher.extend({
 
     _showForgetPasswordForm: function()
     {
-        $("#registrationFormContainer").addClass("hidden");
         $("#loginFormContainer").addClass("hidden");
+        $("#registrationFormContainer").addClass("hidden");
 
         $("#forgetPasswordFormContainer").removeClass("hidden");
     },
@@ -163,14 +167,12 @@ var MainMenu = EventDispatcher.extend({
     {
         if (response.success)
         {
-            alert("Test message: e-mail correct");
+            location.reload();
         }
         else
         {
-            alert("Неверный e-mail");
+            alert('Неверный e-mail');
         }
-
-        return false;
     },
 
     _initBadgesPopup: function()

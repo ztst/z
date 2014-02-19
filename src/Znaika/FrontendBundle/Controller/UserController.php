@@ -8,8 +8,10 @@
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\Security\Core\SecurityContext;
     use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\FrontendBundle\Entity\Profile\PasswordRecovery;
     use Znaika\FrontendBundle\Form\Model\Registration;
     use Znaika\FrontendBundle\Form\Type\RegistrationType;
+    use Znaika\FrontendBundle\Form\User\PasswordRecoveryType;
     use Znaika\FrontendBundle\Form\User\UserProfileType;
     use Znaika\FrontendBundle\Helper\Encode\RegisterKeyEncoder;
     use Znaika\FrontendBundle\Helper\Security\UserAuthenticator;
@@ -18,6 +20,7 @@
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
     use Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
+    use Znaika\FrontendBundle\Repository\Profile\PasswordRecoveryRepository;
 
     class UserController extends Controller
     {
@@ -52,8 +55,11 @@
                 $session->remove(SecurityContext::AUTHENTICATION_ERROR);
             }
 
-            $userRepository = $this->get('znaika_frontend.user_repository');
-            $registerForm   = $this->createForm(new RegistrationType($userRepository), new Registration());
+            $userRepository             = $this->get('znaika_frontend.user_repository');
+            $passwordRecoveryRepository = $this->get('znaika_frontend.password_recovery_repository');
+            $registerForm               = $this->createForm(new RegistrationType($userRepository), new Registration());
+            $passwordRecoveryForm       = $this->createForm(new PasswordRecoveryType($userRepository),
+                new PasswordRecovery());
 
             $referrer      = $request->headers->get('referer');
             $loginTemplate = ($request->isXmlHttpRequest()) ? 'ZnaikaFrontendBundle:User:loginAjax.html.twig' : 'ZnaikaFrontendBundle:User:login.html.twig';
@@ -61,12 +67,63 @@
             return $this->render($loginTemplate,
                 array(
                     // last username entered by the user
-                    'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-                    'error'         => $error,
-                    'referrer'      => $referrer,
-                    'registerForm'  => $registerForm->createView()
+                    'last_username'        => $session->get(SecurityContext::LAST_USERNAME),
+                    'error'                => $error,
+                    'referrer'             => $referrer,
+                    'registerForm'         => $registerForm->createView(),
+                    'passwordRecoveryForm' => $passwordRecoveryForm->createView()
                 )
             );
+        }
+
+        public function passwordRecoveryAction(Request $request)
+        {
+            $passwordRecovery = new PasswordRecovery();
+            $userRepository   = $this->get('znaika_frontend.user_repository');
+
+            $form = $this->createForm(new PasswordRecoveryType($userRepository), $passwordRecovery);
+            $form->handleRequest($request);
+
+            if ($form->isValid())
+            {
+                $this->recoverUserPassword($passwordRecovery);
+
+                if ($request->isXmlHttpRequest())
+                {
+                    $html     = $this->renderView('ZnaikaFrontendBundle:User:forget_password_success_block.html.twig',
+                        array(
+                            'form' => $form->createView()
+                        ));
+                    $array    = array('success' => true, 'html' => $html);
+                    $response = new JsonResponse($array);
+                }
+                else
+                {
+                    $response = $this->render('ZnaikaFrontendBundle:User:forgetPasswordSuccess.html.twig');
+                }
+
+            }
+            else
+            {
+                if ($request->isXmlHttpRequest())
+                {
+                    $html     = $this->renderView('ZnaikaFrontendBundle:User:forget_password_form.html.twig',
+                        array(
+                            'form' => $form->createView()
+                        ));
+                    $array    = array('success' => false, 'html' => $html);
+                    $response = new JsonResponse($array);
+                }
+                else
+                {
+                    $response = $this->render('ZnaikaFrontendBundle:User:forget_password.html.twig',
+                        array(
+                            'form' => $form->createView()
+                        ));
+                }
+            }
+
+            return $response;
         }
 
         public function registerConfirmAction($registerKey)
@@ -110,7 +167,7 @@
 
                 if ($request->isXmlHttpRequest())
                 {
-                    $html = $this->renderView('ZnaikaFrontendBundle:User:registration_success_block.html.twig',
+                    $html     = $this->renderView('ZnaikaFrontendBundle:User:registration_success_block.html.twig',
                         array(
                             'form' => $form->createView()
                         ));
@@ -127,7 +184,7 @@
             {
                 if ($request->isXmlHttpRequest())
                 {
-                    $html = $this->renderView('ZnaikaFrontendBundle:User:register_form.html.twig',
+                    $html     = $this->renderView('ZnaikaFrontendBundle:User:register_form.html.twig',
                         array(
                             'form' => $form->createView()
                         ));
@@ -139,12 +196,11 @@
                     $response = $this->render('ZnaikaFrontendBundle:User:register.html.twig',
                         array(
                             'form' => $form->createView()
-                    ));
+                        ));
                 }
             }
 
             return $response;
-
         }
 
         public function showUserProfileAction($userId)
@@ -244,5 +300,21 @@
             $userRegistrationRepository->save($userRegistration);
 
             return $userRegistration;
+        }
+
+        private function recoverUserPassword(PasswordRecovery $passwordRecovery)
+        {
+            $passwordRecovery->setRecoveryTime(new \DateTime());
+
+            $user = $passwordRecovery->getUser();
+            /** @var RegisterKeyEncoder $encoder */
+            $encoder = $this->get('znaika_frontend.register_key_encoder');
+            $key     = $encoder->encode($user->getEmail() + time(), $user->getSalt());
+            $passwordRecovery->setRecoveryKey($key);
+
+            $passwordRecoveryRepository = $this->get('znaika_frontend.password_recovery_repository');
+            $passwordRecoveryRepository->save($passwordRecovery);
+
+            $this->get('znaika_frontend.user_mailer')->sendPasswordRecoveryConfirm($passwordRecovery);
         }
     }

@@ -571,6 +571,11 @@ img.mfp-img
     clear: right;
 }
 
+.forget-password-form-container
+{
+    padding-bottom: 32px;
+}
+
 .login-popup-content a
 {
     color: #1570af;
@@ -599,7 +604,8 @@ img.mfp-img
 }
 
 .login-form label,
-.registration-form label
+.registration-form label,
+.forget-password-form label
 {
     display: table-cell;
     text-align: right;
@@ -610,7 +616,8 @@ img.mfp-img
 }
 
 .login-button-container,
-.registration-button-container
+.registration-button-container,
+.forget-password-button-container
 {
     padding-left: 66px;
 }
@@ -626,7 +633,8 @@ img.mfp-img
 }
 
 .login-form .form-group,
-.registration-form .form-group
+.registration-form .form-group,
+.forget-password-form .form-group
 {
     width: 100%;
 }
@@ -643,6 +651,12 @@ img.mfp-img
 {
     float: left;
     margin-right: 6px;
+}
+
+.remember-me-block .forget-password-link
+{
+    float: right;
+    margin-top: -18px;
 }
 
 .agreement-block label
