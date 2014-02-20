@@ -63,6 +63,10 @@ password_recovery:
     pattern: /forget-password
     defaults: { _controller: ZnaikaFrontendBundle:User:passwordRecovery }
 
+generate_password:
+    pattern: /generate-new-password/{recoveryKey}
+    defaults: { _controller: ZnaikaFrontendBundle:User:generateNewPassword }
+
 show_user_profile:
     pattern: /user/{userId}
     defaults: { _controller: ZnaikaFrontendBundle:User:showUserProfile }

@@ -35,6 +35,6 @@
          */
         public function getOneByPasswordRecoveryKey($key)
         {
-            return $this->getOneByPasswordRecoveryKey($key);
+            return $this->findOneByRecoveryKey($key);
         }
     }

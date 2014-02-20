@@ -23,6 +23,7 @@
     use Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
     use Znaika\FrontendBundle\Repository\Profile\PasswordRecoveryRepository;
+    use Znaika\FrontendBundle\Form\User\GenerateNewPasswordType;
 
     class UserController extends Controller
     {
@@ -147,6 +148,11 @@
             );
         }
 
+        /**
+         * @param Request $request
+         *
+         * @return JsonResponse|\Symfony\Component\HttpFoundation\Response
+         */
         public function passwordRecoveryAction(Request $request)
         {
             $passwordRecovery = new PasswordRecovery();
@@ -157,41 +163,49 @@
 
             if ($form->isValid())
             {
-                $this->recoverUserPassword($passwordRecovery);
-
-                if ($request->isXmlHttpRequest())
-                {
-                    $html     = $this->renderView('ZnaikaFrontendBundle:User:forget_password_success_block.html.twig',
-                        array(
-                            'form' => $form->createView()
-                        ));
-                    $array    = array('success' => true, 'html' => $html);
-                    $response = new JsonResponse($array);
-                }
-                else
-                {
-                    $response = $this->render('ZnaikaFrontendBundle:User:forgetPasswordSuccess.html.twig');
-                }
-
+                $response = $this->getPasswordRecoverySuccessResponse($passwordRecovery, $form);
             }
             else
             {
-                if ($request->isXmlHttpRequest())
-                {
-                    $html     = $this->renderView('ZnaikaFrontendBundle:User:forget_password_form.html.twig',
-                        array(
-                            'form' => $form->createView()
-                        ));
-                    $array    = array('success' => false, 'html' => $html);
-                    $response = new JsonResponse($array);
-                }
-                else
-                {
-                    $response = $this->render('ZnaikaFrontendBundle:User:forget_password.html.twig',
-                        array(
-                            'form' => $form->createView()
-                        ));
-                }
+                $response = $this->getPasswordRecoveryFailedResponse($form);
+            }
+
+            return $response;
+        }
+
+        /**
+         * @param $recoveryKey
+         *
+         * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+         * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+         */
+        public function generateNewPasswordAction($recoveryKey)
+        {
+            $passwordRecoveryRepository = $this->getPasswordRecoveryRepository();
+            $passwordRecovery = $passwordRecoveryRepository->getOneByPasswordRecoveryKey($recoveryKey);
+
+            if (!$passwordRecovery)
+            {
+                throw $this->createNotFoundException("Not found password recovery");
+            }
+
+            $user = $passwordRecovery->getUser();
+            $form = $this->createForm(new GenerateNewPasswordType(), $user);
+
+            $request = $this->getRequest();
+            $form->handleRequest($request);
+
+            if ($request->isMethod("POST") && $form->isValid())
+            {
+                $response = $this->getGenerateNewPasswordSuccessResponse($user);
+                $passwordRecoveryRepository->delete($passwordRecovery);
+            }
+            else
+            {
+                $response = $this->render('ZnaikaFrontendBundle:User:getNewPassword.html.twig', array(
+                    'form'        => $form->createView(),
+                    'recoveryKey' => $recoveryKey
+                ));
             }
 
             return $response;
@@ -494,19 +508,118 @@
             }
         }
 
-        private function recoverUserPassword(PasswordRecovery $passwordRecovery)
+        /**
+         * @param User $user
+         */
+        private function recoverUserPassword(User $user)
         {
-            $passwordRecovery->setRecoveryTime(new \DateTime());
+            $request = $this->getRequest();
 
-            $user = $passwordRecovery->getUser();
+            $passwordRecovery = $user->getLastPasswordRecovery();
+
             /** @var RegisterKeyEncoder $encoder */
             $encoder = $this->get('znaika_frontend.register_key_encoder');
-            $key     = $encoder->encode($user->getEmail() + time(), $user->getSalt());
+            $key     = $encoder->encode($user->getEmail() . time(), $user->getSalt());
             $passwordRecovery->setRecoveryKey($key);
 
+            $passwordRecovery->setRecoveryTime(new \DateTime());
             $passwordRecoveryRepository = $this->get('znaika_frontend.password_recovery_repository');
             $passwordRecoveryRepository->save($passwordRecovery);
 
             $this->get('znaika_frontend.user_mailer')->sendPasswordRecoveryConfirm($passwordRecovery);
+        }
+
+        /**
+         * @param $passwordRecovery
+         * @param $form
+         *
+         * @internal param \Symfony\Component\HttpFoundation\Request $request
+         * @return JsonResponse|\Symfony\Component\HttpFoundation\Response
+         */
+        private function getPasswordRecoverySuccessResponse($passwordRecovery, $form)
+        {
+            $request = $this->getRequest();
+            $user = $passwordRecovery->getUser();
+            $this->recoverUserPassword($user);
+
+            if ($request->isXmlHttpRequest())
+            {
+                $html     = $this->renderView('ZnaikaFrontendBundle:User:forget_password_success_block.html.twig',
+                    array(
+                        'form' => $form->createView()
+                    ));
+                $array    = array('success' => true, 'html' => $html);
+                $response = new JsonResponse($array);
+
+                return $response;
+            }
+            else
+            {
+                $response = $this->render('ZnaikaFrontendBundle:User:forgetPasswordSuccess.html.twig');
+
+                return $response;
+            }
+        }
+
+        /**
+         * @param $form
+         *
+         * @internal param \Symfony\Component\HttpFoundation\Request $request
+         * @return JsonResponse|\Symfony\Component\HttpFoundation\Response
+         */
+        private function getPasswordRecoveryFailedResponse($form)
+        {
+            $request = $this->getRequest();
+            if ($request->isXmlHttpRequest())
+            {
+                $html     = $this->renderView('ZnaikaFrontendBundle:User:forget_password_form.html.twig',
+                    array(
+                        'form' => $form->createView()
+                    ));
+                $array    = array('success' => false, 'html' => $html);
+                $response = new JsonResponse($array);
+
+                return $response;
+            }
+            else
+            {
+                $response = $this->render('ZnaikaFrontendBundle:User:forget_password.html.twig',
+                    array(
+                        'form' => $form->createView()
+                    ));
+
+                return $response;
+            }
+        }
+
+        /**
+         * @param User $user
+         *
+         * @return RedirectResponse
+         */
+        private function getGenerateNewPasswordSuccessResponse(User $user)
+        {
+            $factory         = $this->get('security.encoder_factory');
+            $encoder         = $factory->getEncoder($user);
+            $encodedPassword = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+            $user->setPassword($encodedPassword);
+
+            $userRepository = $this->getUserRepository();
+            $userRepository->save($user);
+
+            $userAuthenticator = $this->getUserAuthenticator();
+            $userAuthenticator->authenticate($user);
+
+            return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
+        }
+
+        /**
+         * @return PasswordRecoveryRepository
+         */
+        private function getPasswordRecoveryRepository()
+        {
+            $passwordRecoveryRepository = $this->get('znaika_frontend.password_recovery_repository');
+
+            return $passwordRecoveryRepository;
         }
     }

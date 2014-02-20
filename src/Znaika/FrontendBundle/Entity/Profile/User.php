@@ -56,6 +56,11 @@
         private $userRegistrations;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $passwordRecoveries;
+
+        /**
          * @var \Znaika\FrontendBundle\Entity\Location\City
          */
         private $city;
@@ -441,6 +446,60 @@
             }
 
             return $userRegistration;
+        }
+
+        /**
+         * Add passwordRecoveries
+         *
+         * @param \Znaika\FrontendBundle\Entity\Profile\PasswordRecovery $passwordRecoveries
+         *
+         * @return User
+         */
+        public function addPasswordRecovery(\Znaika\FrontendBundle\Entity\Profile\PasswordRecovery $passwordRecoveries)
+        {
+            $this->passwordRecoveries[] = $passwordRecoveries;
+
+            return $this;
+        }
+
+        /**
+         * Remove passwordRecoveries
+         *
+         * @param \Znaika\FrontendBundle\Entity\Profile\PasswordRecovery $passwordRecoveries
+         */
+        public function removePasswordRecovery(\Znaika\FrontendBundle\Entity\Profile\PasswordRecovery $passwordRecoveries)
+        {
+            $this->passwordRecoveries->removeElement($passwordRecoveries);
+        }
+
+        /**
+         * Get passwordRecoveries
+         *
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getPasswordRecoveries()
+        {
+            return $this->passwordRecoveries;
+        }
+
+        /**
+         * Returns last password recovery or new user recovery object
+         *
+         * @return PasswordRecovery
+         */
+        public function getLastPasswordRecovery()
+        {
+            if ($this->passwordRecoveries->count())
+            {
+                $passwordRecovery = $this->passwordRecoveries->last();
+            }
+            else
+            {
+                $passwordRecovery = new PasswordRecovery();
+                $passwordRecovery->setUser($this);
+            }
+
+            return $passwordRecovery;
         }
 
         /**

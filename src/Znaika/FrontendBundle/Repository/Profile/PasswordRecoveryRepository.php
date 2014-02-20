@@ -13,8 +13,10 @@
 
         public function __construct($doctrine)
         {
+            $redisRepository = new PasswordRecoveryRedisRepository();
             $dbRepository    = $doctrine->getRepository('ZnaikaFrontendBundle:Profile\PasswordRecovery');
 
+            $this->setRedisRepository($redisRepository);
             $this->setDBRepository($dbRepository);
         }
 
@@ -25,6 +27,7 @@
          */
         public function save(PasswordRecovery $passwordRecovery)
         {
+            $this->redisRepository->save($passwordRecovery);
             $success = $this->dbRepository->save($passwordRecovery);
 
             return $success;
@@ -37,6 +40,7 @@
          */
         public function delete(PasswordRecovery $passwordRecovery)
         {
+            $this->redisRepository->delete($passwordRecovery);
             $success = $this->dbRepository->delete($passwordRecovery);
 
             return $success;
@@ -49,7 +53,11 @@
          */
         public function getOneByPasswordRecoveryKey($key)
         {
-            $result = $this->dbRepository->getOneByPasswordRecoveryKey($key);
+            $result = $this->redisRepository->getOneByPasswordRecoveryKey($key);
+            if (empty($result))
+            {
+                $result = $this->dbRepository->getOneByPasswordRecoveryKey($key);
+            }
 
             return $result;
         }

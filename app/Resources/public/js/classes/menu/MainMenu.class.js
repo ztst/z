@@ -167,7 +167,7 @@ var MainMenu = EventDispatcher.extend({
     {
         if (response.success)
         {
-            location.reload();
+            $("#forgetPasswordFormContainer").html(response.html);
         }
         else
         {

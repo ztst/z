@@ -21,6 +21,7 @@ Znaika\FrontendBundle\Entity\Profile\User:
     oneToMany:
         videoComments:     { targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment, mappedBy: user }
         userRegistrations: { targetEntity: Znaika\FrontendBundle\Entity\Profile\UserRegistration, mappedBy: user }
+        passwordRecoveries: { targetEntity: Znaika\FrontendBundle\Entity\Profile\PasswordRecovery, mappedBy: user }
     manyToOne:
         city:
             targetEntity: Znaika\FrontendBundle\Entity\Location\City
