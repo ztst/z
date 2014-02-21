@@ -9,6 +9,7 @@ var BaseForm = EventDispatcher.extend({
         this._form = $("#" + id);
 
         this._form.validate({
+            onkeyup: false,
             errorClass: "form-error-field",
             errorElement: "div",
             errorPlacement: function ($error, $element) {
@@ -49,6 +50,31 @@ var BaseForm = EventDispatcher.extend({
     getAction: function()
     {
         return this._form.attr("action");
+    },
+
+    _getInvalidEmailMessage: function(parameters, element)
+    {
+        var email = $(element).val();
+
+        var errorMessage = "Не верный емайл.";
+        if(email.indexOf("@") == -1)
+        {
+            errorMessage = "Адрес должен содержать символ \"@\". Адрес \"" + email + "\" не содержит символ \"@\"";
+        }
+        else if(email.indexOf("@") == email.length - 1)
+        {
+            errorMessage = "Введите часть адреса после \"@\". Адрес \"" + email + "\" неполный"
+        }
+        else if(/^.+\@\.$/.test(email))
+        {
+            errorMessage = "Недопустимое положение \".\"";
+        }
+        else if(email.indexOf(".") == email.length - 1)
+        {
+            errorMessage = "Введите часть адреса после \".\". Адрес \"" + email + "\" неполный";
+        }
+
+        return errorMessage;
     }
 },{
     event:
