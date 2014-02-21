@@ -1,19 +1,21 @@
 <div class="navbar navbar-container" role="navigation">
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{ path("znaika_frontend_homepage") }}"><img src="{{ asset("images/logo.png") }}" alt='Знайка' /></a>
+    <div class="col-md-2">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path("znaika_frontend_homepage") }}"><img src="{{ asset("images/logo.png") }}" alt='Знайка' /></a>
+      </div>
     </div>
     <div class="navbar-collapse collapse col-right">
-      <div class="col-md-5 col-sm-4 col-center">
+      <div class="col-md-4 col-sm-2 col-center">
         {{ knp_menu_render('main') }}
       </div>
-      <div class="main-menu-right col-md-5 col-sm-8 col-center">
+      <div class="main-menu-right col-md-6 col-sm-7 col-center">
         <ul class="nav navbar-nav navbar-right">
           <li class="search-container">
             <form action="{{ path("search") }}" method="POST">
