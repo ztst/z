@@ -3,6 +3,7 @@ var RegistrationForm = BaseForm.extend({
     {
         this.base(id);
 
+        var that = this;
         this._form.find("input").each(function () {
             $(this).rules('add', {
                 required: true,
@@ -11,7 +12,7 @@ var RegistrationForm = BaseForm.extend({
         });
         this._form.find("input[type='email']").rules('add', {
             email: true,
-            messages: { email: "Не верный адрес." }
+            messages: { email: handler(that, "_getInvalidEmailMessage") }
         });
         this._form.find("input[type='password']").rules('add', {
             passwordSymbols: true
