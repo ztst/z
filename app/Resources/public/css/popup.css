@@ -615,11 +615,26 @@ img.mfp-img
     width: 66px;
 }
 
+.get-new-password-form label
+{
+    display: table-cell;
+    text-align: right;
+
+    padding-right: 4px;
+
+    width: 103px;
+}
+
 .login-button-container,
 .registration-button-container,
 .forget-password-button-container
 {
     padding-left: 66px;
+}
+
+.recover-button-container
+{
+    padding-left: 103px;
 }
 
 .login-button-container .btn
@@ -634,7 +649,8 @@ img.mfp-img
 
 .login-form .form-group,
 .registration-form .form-group,
-.forget-password-form .form-group
+.forget-password-form .form-group,
+.get-new-password-form .form-group
 {
     width: 100%;
 }
