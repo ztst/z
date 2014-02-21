@@ -427,6 +427,14 @@ label
     color: #2a2a2a;
 }
 
+@media (max-width: 991px)
+{
+    ul.nav.navbar-nav.main-menu
+    {
+        margin-top: 10px;
+    }
+}
+
 @media (max-width: 767px)
 {
     .grade-word
@@ -438,10 +446,7 @@ label
     {
         font-size: 14px;
     }
-}
 
-@media (max-width: 767px)
-{
     .nav.nav-justified > li
     {
         display: table-cell;
@@ -464,6 +469,12 @@ label
 {
     width: 15% !important;
     float: left !important;
+}
+
+*+html ul.nav.navbar-nav.main-menu
+{
+    margin-top: 31px !important;
+    width: 100% !important;
 }
 
 .go-up, .go-down

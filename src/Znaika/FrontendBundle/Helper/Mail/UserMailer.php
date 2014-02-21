@@ -3,6 +3,7 @@
 
     use Znaika\FrontendBundle\Entity\Profile\UserRegistration;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
+    use Znaika\FrontendBundle\Entity\Profile\PasswordRecovery;
 
     class UserMailer
     {
@@ -58,5 +59,19 @@
             $subject = trim($subject);
 
             return $subject;
+        }
+
+        public function sendPasswordRecoveryConfirm(PasswordRecovery $passwordRecovery)
+        {
+            $templateFile    = "ZnaikaFrontendBundle:Email:passwordRecovery.html.twig";
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $body            = $templateContent->render(
+                                               array(
+                                                   "recoveryKey" => $passwordRecovery->getRecoveryKey(),
+                                                   "email"       => $passwordRecovery->getUser()->getEmail()
+                                               ));
+            $subject         = $this->getEmailSubject($templateContent);
+
+            $this->mailHelper->sendEmail(null, $passwordRecovery->getUser()->getEmail(), $body, $subject);
         }
     }

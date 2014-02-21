@@ -19,8 +19,9 @@ Znaika\FrontendBundle\Entity\Profile\User:
         facebookId:      { column: facebook_id, type: bigint, nullable: true }
         odnoklassnikiId: { column: odnoklassniki_id, type: bigint, nullable: true }
     oneToMany:
-        videoComments:     { targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment, mappedBy: user }
-        userRegistrations: { targetEntity: Znaika\FrontendBundle\Entity\Profile\UserRegistration, mappedBy: user }
+        videoComments:      { targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment, mappedBy: user }
+        userRegistrations:  { targetEntity: Znaika\FrontendBundle\Entity\Profile\UserRegistration, mappedBy: user }
+        passwordRecoveries: { targetEntity: Znaika\FrontendBundle\Entity\Profile\PasswordRecovery, mappedBy: user }
     manyToOne:
         city:
             targetEntity: Znaika\FrontendBundle\Entity\Location\City

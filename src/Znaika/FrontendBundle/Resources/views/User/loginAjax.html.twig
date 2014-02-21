@@ -31,4 +31,14 @@
     </div>
     <div class="clear"></div>
   </div>
+  <div id="forgetPasswordFormContainer" class="hidden">
+    <div class="col-xs-12 col-center forget-password-form-container">
+      <div class="login-popup-header">
+        <h3>Восстановление пароля</h3>
+        <h5>Укажите Вашу почту - мы вышлем Вам письмо со ссылкой для создания нового пароля.</h5>
+        <div class="clear"></div>
+      </div>
+      {% include "ZnaikaFrontendBundle:User:forget_password_form.html.twig" with {'form': passwordRecoveryForm} %}
+    </div>
+  </div>
 </div>

@@ -41,14 +41,22 @@ var MainMenu = EventDispatcher.extend({
         var switchRegistrationLink = $("#switchRegistrationLink");
         switchRegistrationLink.click(handler(this, "_showRegistrationForm"));
 
+        var switchForgetPasswordLink = $("#switchForgetPasswordLink");
+        switchForgetPasswordLink.click(handler(this, "_showForgetPasswordForm"));
+
         this._initRegistrationForm();
         this._initLoginForm();
+        this._initForgetPasswordForm();
     },
 
     _initLoginForm: function()
     {
         this._loginForm = new LoginForm("loginForm");
         this._loginForm.addListener(BaseForm.event.SUBMITTED, this, this._onLoginFormSubmitted);
+        $("#switchForgetPasswordLink").click(function(){
+                return false;
+            }
+        )
     },
 
     _initRegistrationForm: function()
@@ -59,16 +67,34 @@ var MainMenu = EventDispatcher.extend({
         this._initShowPasswordLink();
     },
 
+    _initForgetPasswordForm: function()
+    {
+        var forgetPasswordForm = $(".forget-password-form");
+        forgetPasswordForm.submit(handler(this, "_onForgetPasswordFormSubmitted"));
+    },
+
     _showLoginForm: function()
     {
         $("#registrationFormContainer").addClass("hidden");
+        $("#forgetPasswordFormContainer").addClass("hidden");
+
         $("#loginFormContainer").removeClass("hidden");
     },
 
     _showRegistrationForm: function()
     {
         $("#loginFormContainer").addClass("hidden");
+        $("#forgetPasswordFormContainer").addClass("hidden");
+
         $("#registrationFormContainer").removeClass("hidden");
+    },
+
+    _showForgetPasswordForm: function()
+    {
+        $("#loginFormContainer").addClass("hidden");
+        $("#registrationFormContainer").addClass("hidden");
+
+        $("#forgetPasswordFormContainer").removeClass("hidden");
     },
 
     _onLoginFormSubmitted: function()
@@ -121,6 +147,32 @@ var MainMenu = EventDispatcher.extend({
             $("#registrationFormContainer .login-popup-header").after(response.html);
 
             this._initRegistrationForm();
+        }
+    },
+
+    _onForgetPasswordFormSubmitted: function()
+    {
+        var form = $("#forgetPasswordForm");
+        var url = form.attr("action");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+            success: handler(this, "_onSendPasswordSuccess")
+        });
+
+        return false;
+    },
+
+    _onSendPasswordSuccess: function(response)
+    {
+        if (response.success)
+        {
+            $("#forgetPasswordFormContainer").html(response.html);
+        }
+        else
+        {
+            alert('Неверный e-mail');
         }
     },
 

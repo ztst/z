@@ -15,6 +15,7 @@
   <div class="form-group remember-me-block">
     <input type="checkbox" id="rememberMe" name="_remember_me"/>
     <label for="rememberMe">Запомнить меня</label>
+    <a href="{{ path("password_recovery") }}" class="forget-password-link right-link" title="" id="switchForgetPasswordLink">Забыли пароль?</a>
   </div>
 
   <input type="hidden" name="_target_path" value="{{ referrer }}"/>
