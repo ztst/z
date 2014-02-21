@@ -24,8 +24,15 @@ var BaseForm = EventDispatcher.extend({
         if (this._form.valid())
         {
             this.dispatchEvent(BaseForm.event.SUBMITTED);
+
+            return this._needToSubmit();
         }
 
+        return false;
+    },
+
+    _needToSubmit: function()
+    {
         return false;
     },
 

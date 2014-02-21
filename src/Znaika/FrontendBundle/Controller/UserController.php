@@ -191,6 +191,15 @@
                 throw $this->createNotFoundException("Not found password recovery");
             }
 
+            $expiredTime = $passwordRecovery->getRecoveryTime()->add(new \DateInterval(PasswordRecovery::EXPIRED_TIME));
+            $currentTime = new \DateTime("now");
+            if ($currentTime > $expiredTime)
+            {
+                $this->recoverUserPassword($passwordRecovery->getUser());
+
+                return $this->render('ZnaikaFrontendBundle:User:expiredRecoveryKey.html.twig');
+            }
+
             $user = $passwordRecovery->getUser();
             $form = $this->createForm(new GenerateNewPasswordType(), $user);
 

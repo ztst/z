@@ -6,6 +6,7 @@
 
     class PasswordRecovery
     {
+        const EXPIRED_TIME = "P3D";
         /**
          * @var integer
          */

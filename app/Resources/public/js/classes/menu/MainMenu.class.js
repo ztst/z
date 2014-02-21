@@ -10,6 +10,7 @@ var MainMenu = EventDispatcher.extend({
 
     _registrationForm: null,
     _loginForm: null,
+    _forgetPasswordForm: null,
 
     constructor: function()
     {
@@ -69,8 +70,8 @@ var MainMenu = EventDispatcher.extend({
 
     _initForgetPasswordForm: function()
     {
-        var forgetPasswordForm = $(".forget-password-form");
-        forgetPasswordForm.submit(handler(this, "_onForgetPasswordFormSubmitted"));
+        this._forgetPasswordForm = new ForgetPasswordForm("forgetPasswordForm");
+        this._forgetPasswordForm.addListener(BaseForm.event.SUBMITTED, this, this._onForgetPasswordFormSubmitted);
     },
 
     _showLoginForm: function()
