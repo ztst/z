@@ -3,7 +3,7 @@ Znaika\FrontendBundle\Entity\Communication\MessageMetadata:
     table: message_metadata
     fields:
         messageMetadataId: { column: message_metadata_id, type: integer, id: true, generator: { strategy: AUTO } }
-        isDeleted: { column: is_deleted, type: boolean }
+        isDeleted:         { column: is_deleted, type: boolean }
     manyToOne:
         message:
             targetEntity: Znaika\FrontendBundle\Entity\Communication\Message

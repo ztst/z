@@ -6,6 +6,7 @@
 
     class UserRegistration
     {
+        const EXPIRED_TIME = "P3D";
         /**
          * @var integer
          */

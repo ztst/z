@@ -8,6 +8,7 @@
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\Security\Core\SecurityContext;
     use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\FrontendBundle\Entity\Profile\UserRegistration;
     use Znaika\FrontendBundle\Form\Model\Registration;
     use Znaika\FrontendBundle\Form\Type\RegistrationType;
     use Znaika\FrontendBundle\Form\User\UserProfileType;
@@ -19,6 +20,7 @@
     use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
     use Znaika\FrontendBundle\Helper\Vkontakte;
     use Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository;
+    use Znaika\FrontendBundle\Repository\Profile\UserRegistrationRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
     class UserController extends Controller
@@ -142,15 +144,24 @@
 
         public function registerConfirmAction($registerKey)
         {
-            $userRegistrationRepository = $this->get('znaika_frontend.user_registration_repository');
+            $userRegistrationRepository = $this->getUserRegistrationRepository();
             $userRegistration           = $userRegistrationRepository->getOneByRegisterKey($registerKey);
 
             if (!$userRegistration)
             {
-                throw $this->createNotFoundException("Not found user registration");
+                throw $this->createNotFoundException("User Registration not found");
             }
 
-            $user = $userRegistration->getUser();
+            $user        = $userRegistration->getUser();
+            $expiredTime = $userRegistration->getCreatedTime()->add(new \DateInterval(UserRegistration::EXPIRED_TIME));
+            $currentTime = new \DateTime("now");
+            if ($currentTime > $expiredTime)
+            {
+                $this->registerUser($user);
+
+                return $this->render('ZnaikaFrontendBundle:User:expiredRegistrationKey.html.twig');
+            }
+
             $user->setStatus(UserStatus::ACTIVE);
 
             $userRegistrationRepository->delete($userRegistration);
@@ -160,6 +171,11 @@
 
             $listener = $this->getUserOperationListener();
             $listener->onRegistration($user);
+
+            $this->get('session')->getFlashBag()->add(
+                 'notice',
+                 $this->get('translator')->trans('congratulations_registration_success')
+            );
 
             return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
         }
@@ -300,8 +316,9 @@
             $encoder = $this->get('znaika_frontend.register_key_encoder');
             $key     = $encoder->encode($user->getEmail(), $user->getSalt());
             $userRegistration->setRegisterKey($key);
+            $userRegistration->setCreatedTime(new \DateTime());
 
-            $userRegistrationRepository = $this->get('znaika_frontend.user_registration_repository');
+            $userRegistrationRepository = $this->getUserRegistrationRepository();
             $userRegistrationRepository->save($userRegistration);
 
             return $userRegistration;
@@ -382,7 +399,7 @@
         private function getRegisterSuccessResponse($registration, $form)
         {
             $request = $this->getRequest();
-            $user = $registration->getUser();
+            $user    = $registration->getUser();
             $this->registerUser($user);
 
             if ($request->isXmlHttpRequest())
@@ -435,5 +452,15 @@
 
                 return $response;
             }
+        }
+
+        /**
+         * @return UserRegistrationRepository
+         */
+        private function getUserRegistrationRepository()
+        {
+            $userRegistrationRepository = $this->get('znaika_frontend.user_registration_repository');
+
+            return $userRegistrationRepository;
         }
     }

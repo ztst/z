@@ -23,6 +23,11 @@ security:
 #            security: false
 
         secured_area:
+            remember_me:
+                key:      "%secret%"
+                lifetime: 172800 # 48 hours in seconds
+                path:     /
+                domain:   ~
             pattern:    ^/
             form_login:
                 login_path:      login
