@@ -20,7 +20,7 @@ Znaika\FrontendBundle\Entity\Profile\User:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
             fields: [email]
-            message: 'not_unique'
+            message: 'not_unique_user_email'
     properties:
         email:
             - NotBlank: { message: "not_blank" }

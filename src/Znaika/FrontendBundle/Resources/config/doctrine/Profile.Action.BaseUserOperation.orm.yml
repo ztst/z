@@ -3,16 +3,8 @@ Znaika\FrontendBundle\Entity\Profile\Action\BaseUserOperation:
     table: user_operation
     repositoryClass: Znaika\FrontendBundle\Repository\Profile\Action\UserOperationDBRepository
     fields:
-        userOperationId:
-            column: user_operation_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-        createdTime:
-            column: created_time
-            type: datetime
-            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        userOperationId: { column: user_operation_id, type: integer, id: true, generator: { strategy: AUTO } }
+        createdTime: { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     manyToOne:
         user:
             targetEntity: Znaika\FrontendBundle\Entity\Profile\User

@@ -16,12 +16,12 @@
             return null;
         }
 
-        public function getVideosBySearchString($searchString, $limit = null)
+        public function getVideosBySearchString($searchString, $limit = null, $page = null)
         {
             return null;
         }
 
-        public function getNotSimilarVideosBySearchString(Video $video, $searchString, $limit = null)
+        public function countVideosBySearchString($searchString)
         {
             return null;
         }
@@ -62,6 +62,11 @@
          * @return Video[]
          */
         public function getPopularVideo($limit)
+        {
+            return null;
+        }
+
+        public function getVideoByChapter($chapter)
         {
             return null;
         }

@@ -21,30 +21,12 @@
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
+    use Znaika\FrontendBundle\Repository\Lesson\Category\ChapterRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\IVideoAttachmentRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
 
     class VideoController extends Controller
     {
-        public function addSimilarVideoAction($videoName, $similarVideoName)
-        {
-            $repository   = $this->getVideoRepository();
-            $video        = $repository->getOneByUrlName($videoName);
-            $similarVideo = $repository->getOneByUrlName($similarVideoName);
-
-            if (!is_null($video) && !is_null($similarVideo))
-            {
-                $video->addSimilarVideo($similarVideo);
-                $repository->save($video);
-            }
-
-            return new RedirectResponse($this->generateUrl('show_video', array(
-                "class"       => $video->getGrade(),
-                "subjectName" => $video->getSubject()->getUrlName(),
-                "videoName"   => $video->getUrlName()
-            )));
-        }
-
         public function postVideoToSocialNetworkAction(Request $request)
         {
             $repository       = $this->getVideoRepository();
@@ -226,19 +208,19 @@
 
         public function showCatalogueAction($class, $subjectName)
         {
-            $subjectRepository = $this->get("znaika_frontend.subject_repository");
-            $subjects          = $subjectRepository->getAll();
-            $classes           = ClassNumberUtil::getAvailableClasses();
+            $subject           = $this->getSubjectByName($subjectName);
+            $chapterRepository = $this->getChapterRepository();
+            $chapters          = $chapterRepository->getChaptersForCatalog($class, $subject->getSubjectId());
 
-            $repository = $this->getVideoRepository();
-            $videos     = $repository->getVideosForCatalog($class, $subjectName);
+            $currentChapterId = null;
+            if (!empty($chapters) && isset($chapters[0]))
+            {
+                $currentChapterId = $chapters[0]->getChapterId();
+            }
 
             return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
-                'classes'            => $classes,
-                'currentClass'       => $class,
-                'currentSubjectName' => $subjectName,
-                'subjects'           => $subjects,
-                'videos'             => $videos,
+                'currentChapterId' => $currentChapterId,
+                'chapters'         => $chapters,
             ));
         }
 
@@ -246,17 +228,6 @@
         {
             $repository = $this->getVideoRepository();
             $video      = $repository->getOneByUrlName($videoName);
-
-            $videos = $repository->getNewestVideo(10000);
-            foreach ($videos as $v)
-            {
-                if (!$v->getSmallThumbnailUrl())
-                {
-                    $contentThumbnailUpdater = $this->getContentThumbnailUpdater();
-                    $contentThumbnailUpdater->update($v);
-                }
-            }
-
 
             $isValidUrl = false;
             if ($video)
@@ -273,11 +244,14 @@
             $listener           = $this->getUserOperationListener();
             $viewVideoOperation = ($user) ? $listener->onViewVideo($user, $video) : null;
 
+            $chapterVideos = $repository->getVideoByChapter($video->getChapter()->getChapterId());
+
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
                 'video'               => $video,
                 'isValidUrl'          => $isValidUrl,
                 'addVideoCommentForm' => $addVideoCommentForm->createView(),
-                'viewVideoOperation'  => $viewVideoOperation
+                'viewVideoOperation'  => $viewVideoOperation,
+                'chapterVideos'       => $chapterVideos,
             ));
         }
 
@@ -320,5 +294,13 @@
         private function getContentThumbnailUpdater()
         {
             return $this->get("znaika_frontend.content_thumbnail_updater");
+        }
+
+        /**
+         * @return ChapterRepository
+         */
+        private function getChapterRepository()
+        {
+            return $this->get("znaika_frontend.chapter_repository");
         }
     }

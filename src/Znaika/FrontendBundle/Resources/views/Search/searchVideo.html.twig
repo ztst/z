@@ -1,0 +1,37 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter='cssrewrite' '@ZnaikaFrontendBundle/Resources/public/css/search.css' %}
+  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts
+    '../app/Resources/public/js/classes/page/SearchVideoPage.class.js'
+    '../app/Resources/public/js/classes/PageUpDownScroller.class.js'
+  %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+  <div id="videoContainer">
+    <h2>Видео:</h2>
+    {% include "ZnaikaFrontendBundle:Search:search_video_list.html.twig" with {'videos': videos} %}
+  </div>
+  <div class="clear"></div>
+  {% if not isFinalPage %}
+    <div>
+      <a id="moreVideos" href="javascript:void(0);" title="">Еще</a>
+      <span id="loadingIndicator" class="loading-indicator hidden">Загружается...</span>
+    </div>
+  {% endif %}
+  <input id="searchString" type="hidden" value="{{ searchString }}" />
+  <input id="isFinalPage" type="hidden" value="{{ isFinalPage }}" />
+  {% include "ZnaikaFrontendBundle:Default:up_down_scroll_block.html.twig" %}
+{% endblock %}

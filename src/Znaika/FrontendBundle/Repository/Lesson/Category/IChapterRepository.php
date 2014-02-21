@@ -7,14 +7,22 @@
     interface IChapterRepository
     {
         /**
-         * @return array|null
+         * @return Chapter[]
          */
         public function getAll();
 
         /**
          * @param $chapterId
          *
-         * @return Chapter|null
+         * @return Chapter
          */
         public function getOneById($chapterId);
+
+        /**
+         * @param int $grade
+         * @param int $subjectId
+         *
+         * @return Chapter[]
+         */
+        public function getChaptersForCatalog($grade, $subjectId);
     }

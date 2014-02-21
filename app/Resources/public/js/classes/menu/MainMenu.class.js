@@ -8,6 +8,9 @@ var MainMenu = EventDispatcher.extend({
 
     _userHasViewedBadgesUrl: null,
 
+    _registrationForm: null,
+    _loginForm: null,
+
     constructor: function()
     {
         this.base();
@@ -48,8 +51,8 @@ var MainMenu = EventDispatcher.extend({
 
     _initLoginForm: function()
     {
-        var loginForm = $("#loginForm");
-        loginForm.submit(handler(this, "_onLoginFormSubmitted"));
+        this._loginForm = new LoginForm("loginForm");
+        this._loginForm.addListener(BaseForm.event.SUBMITTED, this, this._onLoginFormSubmitted);
         $("#switchForgetPasswordLink").click(function(){
                 return false;
             }
@@ -58,8 +61,8 @@ var MainMenu = EventDispatcher.extend({
 
     _initRegistrationForm: function()
     {
-        var registrationForm = $(".registration-form");
-        registrationForm.submit(handler(this, "_onRegistrationFormSubmitted"));
+        this._registrationForm = new RegistrationForm("registrationForm");
+        this._registrationForm.addListener(BaseForm.event.SUBMITTED, this, this._onRegistrationFormSubmitted);
 
         this._initShowPasswordLink();
     },
@@ -96,12 +99,11 @@ var MainMenu = EventDispatcher.extend({
 
     _onLoginFormSubmitted: function()
     {
-        var form = $("#loginForm");
-        var url = form.attr("action");
+        var url = this._loginForm.getAction();
         $.ajax({
             type: "POST",
             url: url,
-            data: form.serialize(),
+            data: this._loginForm.serialize(),
             success: handler(this, "_onSendLoginSuccess")
         });
 
@@ -122,12 +124,11 @@ var MainMenu = EventDispatcher.extend({
 
     _onRegistrationFormSubmitted: function()
     {
-        var form = $(".registration-form");
-        var url = form.attr("action");
+        var url = this._registrationForm.getAction();
         $.ajax({
             type: "POST",
             url: url,
-            data: form.serialize(),
+            data: this._registrationForm.serialize(),
             success: handler(this, "_onSendRegistrationComplete")
         });
 
@@ -142,7 +143,7 @@ var MainMenu = EventDispatcher.extend({
         }
         else
         {
-            $(".registration-form").remove();
+            this._registrationForm.hide();
             $("#registrationFormContainer .login-popup-header").after(response.html);
 
             this._initRegistrationForm();

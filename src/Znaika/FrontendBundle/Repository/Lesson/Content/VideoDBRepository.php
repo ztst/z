@@ -39,20 +39,23 @@
             return $this->findOneByUrlName($name);
         }
 
-        public function getVideosBySearchString($searchString, $limit = null)
+        public function getVideoByChapter($chapter)
         {
-            $searchString = "%{$searchString}%";
+            return $this->findByChapter($chapter);
+        }
 
-            $queryBuilder = $this->getEntityManager()
-                                 ->createQueryBuilder();
-            $queryBuilder->select('v')
-                         ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
-                         ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
-                         ->addOrderBy('v.createdTime', 'DESC');
+        public function getVideosBySearchString($searchString, $limit = null, $page = null)
+        {
+            $queryBuilder = $this->prepareSearchQuery($searchString);
+            $queryBuilder->select('v');
 
             if (!is_null($limit))
             {
                 $queryBuilder->setMaxResults($limit);
+                if (!is_null($page))
+                {
+                    $queryBuilder->setFirstResult($limit * $page);
+                }
             }
 
             $videos = $queryBuilder->getQuery()->getResult();
@@ -60,34 +63,12 @@
             return $videos;
         }
 
-        public function getNotSimilarVideosBySearchString(Video $video, $searchString, $limit = null)
+        public function countVideosBySearchString($searchString)
         {
-            $videoIds      = array($video->getVideoId());
-            $similarVideos = $video->getSimilarVideos();
-            foreach ($similarVideos as $similarVideo)
-            {
-                array_push($videoIds, $similarVideo->getVideoId());
-            }
+            $queryBuilder = $this->prepareSearchQuery($searchString);
+            $queryBuilder->select('count(v)');
 
-            $searchString = "%{$searchString}%";
-
-            $queryBuilder = $this->getEntityManager()
-                                 ->createQueryBuilder();
-            $queryBuilder->select('v')
-                         ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
-                         ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
-                         ->andWhere('v.videoId NOT IN (:video_ids)')
-                         ->setParameter('video_ids', $videoIds)
-                         ->addOrderBy('v.name');
-
-            if (!is_null($limit))
-            {
-                $queryBuilder->setMaxResults($limit);
-            }
-
-            $videos = $queryBuilder->getQuery()->getResult();
-
-            return $videos;
+            return intval($queryBuilder->getQuery()->getSingleScalarResult());
         }
 
         /**
@@ -137,6 +118,24 @@
             $videos = $queryBuilder->getQuery()->getResult();
 
             return $videos;
+        }
+
+        /**
+         * @param $searchString
+         *
+         * @return \Doctrine\ORM\QueryBuilder
+         */
+        private function prepareSearchQuery($searchString)
+        {
+            $searchString = "%{$searchString}%";
+
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+                         ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
+                         ->addOrderBy('v.grade, v.chapter', 'ASC');
+
+            return $queryBuilder;
         }
 
         /**

@@ -16,19 +16,18 @@
         /**
          * @param string $searchString
          * @param $limit
+         * @param $page
          *
          * @return Video[]|null
          */
-        public function getVideosBySearchString($searchString, $limit = null);
+        public function getVideosBySearchString($searchString, $limit = null, $page = null);
 
         /**
-         * @param Video $video
-         * @param $searchString
-         * @param integer $limit
+         * @param string $searchString
          *
-         * @return Video[]|null
+         * @return int
          */
-        public function getNotSimilarVideosBySearchString(Video $video, $searchString, $limit = null);
+        public function countVideosBySearchString($searchString);
 
         /**
          * @param $name
@@ -50,6 +49,13 @@
          * @return Video[]
          */
         public function getPopularVideo($limit);
+
+        /**
+         * @param int $chapter
+         *
+         * @return Video[]
+         */
+        public function getVideoByChapter($chapter);
 
         /**
          * @param Video $video

@@ -1,9 +1,15 @@
-.video-description-container
+.chapter-description-container.selected
 {
-    margin-bottom: 20px;
+    background: #dbdbdb;
 }
 
-.catalogue-filters-container
+.show-catalog-page-container
 {
-    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.chapter-catalog-container
+{
+    border-right: 1px solid #BABABA;
+    height: 100%;
 }

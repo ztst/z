@@ -3,12 +3,7 @@ Znaika\FrontendBundle\Entity\Communication\Message:
     table: message
     repositoryClass: Znaika\FrontendBundle\Repository\Communication\MessageDBRepository
     fields:
-        messageId:
-            column: message_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
+        messageId: { column: message_id, type: integer, id: true, generator: { strategy: AUTO } }
     manyToOne:
         thread:
             targetEntity: Znaika\FrontendBundle\Entity\Communication\Thread
@@ -24,8 +19,5 @@ Znaika\FrontendBundle\Entity\Communication\Message:
                 referencedColumnName: user_id
                 onDelete: CASCADE
     oneToMany:
-        metadata:
-            targetEntity: Znaika\FrontendBundle\Entity\Communication\MessageMetadata
-            mappedBy:     message
-            cascade:      [all]
+        metadata: { targetEntity: Znaika\FrontendBundle\Entity\Communication\MessageMetadata, mappedBy: message, cascade: [all] }
     lifecycleCallbacks: {  }

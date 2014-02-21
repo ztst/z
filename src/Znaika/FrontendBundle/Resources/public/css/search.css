@@ -1,5 +1,10 @@
-.search-result-container
+.search-video-result-container
 {
     border: 1px solid #f9f9f9;
     border-radius: 5px;
+}
+
+.chapter-description-container.selected
+{
+    background: #dbdbdb;
 }

@@ -3,23 +3,10 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment:
     table: video_attachment
     repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\VideoAttachmentDBRepository
     fields:
-        videoAttachmentId:
-            column: video_attachment_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-        name:
-            type: text
-            notnull: true
-        realName:
-            column: real_name
-            type: text
-            notnull: true
-        createdTime:
-            column: created_time
-            type: datetime
-            columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        videoAttachmentId: { column: video_attachment_id, type: integer, id: true, generator: { strategy: AUTO } }
+        name:              { type: text, notnull: true }
+        realName:          { column: real_name, type: text, notnull: true }
+        createdTime:       { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     manyToOne:
         video:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video

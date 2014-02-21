@@ -1,6 +1,12 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
 {% block content %}
+  {% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="alert alert-info">
+      {{ flashMessage }}
+    </div>
+  {% endfor %}
+
   <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
     {% if ownProfile %}<a href="{{ path('show_threads') }}">Мои сообщения</a>{% endif %}
     {{ form_start(form, {'action': path('edit_user_profile', {'userId': userId}), 'method': 'POST'}) }}

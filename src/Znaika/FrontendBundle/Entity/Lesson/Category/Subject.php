@@ -32,6 +32,44 @@
         private $chapters;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $videos;
+
+        /**
+         * Constructor
+         */
+        public function __construct()
+        {
+            $this->chapters = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->videos   = new \Doctrine\Common\Collections\ArrayCollection();
+        }
+
+        /**
+         * Get createdTime
+         *
+         * @return \DateTime
+         */
+        public function getCreatedTime()
+        {
+            return $this->createdTime;
+        }
+
+        /**
+         * Set createdTime
+         *
+         * @param \DateTime $createdTime
+         *
+         * @return Subject
+         */
+        public function setCreatedTime($createdTime)
+        {
+            $this->createdTime = $createdTime;
+
+            return $this;
+        }
+
+        /**
          * Get subjectId
          *
          * @return integer
@@ -87,43 +125,6 @@
         public function getUrlName()
         {
             return $this->urlName;
-        }
-
-        /**
-         * Set createdTime
-         *
-         * @param \DateTime $createdTime
-         *
-         * @return Subject
-         */
-        public function setCreatedTime($createdTime)
-        {
-            $this->createdTime = $createdTime;
-
-            return $this;
-        }
-
-        /**
-         * Get createdTime
-         *
-         * @return \DateTime
-         */
-        public function getCreatedTime()
-        {
-            return $this->createdTime;
-        }
-
-        /**
-         * @var \Doctrine\Common\Collections\Collection
-         */
-        private $videos;
-
-        /**
-         * Constructor
-         */
-        public function __construct()
-        {
-            $this->videos = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**

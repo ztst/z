@@ -133,9 +133,16 @@ search:
     pattern: /search
     defaults: { _controller: ZnaikaFrontendBundle:Search:search }
 
-search_similar_video:
-    pattern: /search-similar-video/{videoName}
-    defaults: { _controller: ZnaikaFrontendBundle:Search:searchSimilarVideo }
+search_video:
+    pattern: /search/video/{searchString}
+    defaults: { _controller: ZnaikaFrontendBundle:Search:searchVideo }
+
+search_video_ajax:
+    pattern: /search/next-videos
+    defaults: { _controller: ZnaikaFrontendBundle:Search:searchVideoAjax }
+    methods:  [POST]
+    options:
+        expose: true
 
 register_confirm:
     pattern: /register-confirm/{registerKey}
@@ -164,10 +171,6 @@ post_video_to_social_network:
     methods:  [POST]
     options:
         expose: true
-
-add_video_similar:
-    pattern: /add-similar-video/{videoName}/{similarVideoName}
-    defaults: { _controller: ZnaikaFrontendBundle:Video:addSimilarVideo }
 
 about:
     pattern: /about

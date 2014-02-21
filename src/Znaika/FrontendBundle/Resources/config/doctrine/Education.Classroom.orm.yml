@@ -2,17 +2,9 @@ Znaika\FrontendBundle\Entity\Education\Classroom:
     type: entity
     table: classroom
     fields:
-        classroomId:
-            column: classroom_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-        grade:
-            type: integer
-        letter:
-            type: string
-            length: 255
+        classroomId: { column: classroom_id, type: integer, id: true, generator: { strategy: AUTO } }
+        grade:       { type: integer }
+        letter:      { type: string, length: 255 }
     oneToMany:
         users:
             targetEntity: Znaika\FrontendBundle\Entity\Profile\User

@@ -3,4 +3,6 @@
 {% endif %}
 {% if is_user() %}
   {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "videoName": video.getUrlName} %}
+{% else %}
+  <span>Только зарегистрированные и авторизованные пользователи могут оставлять комментарии</span>
 {% endif %}

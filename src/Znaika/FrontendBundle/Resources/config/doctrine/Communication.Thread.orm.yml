@@ -3,12 +3,7 @@ Znaika\FrontendBundle\Entity\Communication\Thread:
     table: thread
     repositoryClass: Znaika\FrontendBundle\Repository\Communication\ThreadDBRepository
     fields:
-        threadId:
-            column: thread_id
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
+        threadId: { column: thread_id, type: integer, id: true, generator: { strategy: AUTO } }
     manyToOne:
         createdBy:
             column: created_by
