@@ -586,10 +586,18 @@
 
         public function __toString()
         {
-            $name = $this->getFirstName() . " " . $this->getLastName();
-            $name = trim($name);
+            $firstName = $this->getFirstName();
+            if (trim($firstName) != "")
+            {
+                $name = $this->getFirstName() . " " . $this->getLastName();
+                $name = trim($name);
+            }
+            else
+            {
+                $name = $this->getNickname();
+            }
 
-            return empty($name) ? $this->getNickname() : $name;
+            return (string) $name;
         }
 
         /**

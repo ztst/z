@@ -1,10 +1,11 @@
 {% if not video.getVideoComments is empty %}
   <h3>Комментарии</h3>
-  {% if video.getVideoComments|length > 3 %}
+  {% if video.getVideoComments|length > constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE') %}
     <div class="alert alert-info">
-      <a href="{{ path('get_prev_comments', {'videoName': video.getUrlName}) }}" id="showPrevCommentsLink">
-        {{ 'show_prev_comments'|transchoice(video.getVideoComments|length - 3) }}
+      <a href="javascript:void(0);" id="showPrevCommentsLink">
+        {{ 'show_prev_comments'|transchoice(video.getVideoComments|length - constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE')) }}
       </a>
+      <input type="hidden" id="showPrevCommentsUrl" value="{{ path('get_prev_comments', {'videoName': video.getUrlName}) }}"/>
     </div>
     <div id="prevCommentsContainer"></div>
   {% endif %}

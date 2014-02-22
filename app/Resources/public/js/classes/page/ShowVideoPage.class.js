@@ -12,7 +12,7 @@ var ShowVideoPage = Base.extend({
 
     _onShowPrevCommentsLinkClick: function()
     {
-        $.post(this._showPrevCommentsLink.attr("href"), null, handler(this, '_onPrevCommentsLoaded'), 'json');
+        $.post($("#showPrevCommentsUrl").val(), null, handler(this, '_onPrevCommentsLoaded'), 'json');
 
         return false;
     },

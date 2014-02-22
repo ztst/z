@@ -6,7 +6,7 @@
       </a>
       <div class="media-body">
         <h4 class="media-heading">{{ comment.getUser.getFirstName }} {{ comment.getUser.getLastName }}</h4>
-        <h6 class="media-heading"><em>{{ comment.getCreatedTime|date('Y-m-d H:i:s') }}</em></h6>
+        <h6 class="media-heading"><em>{{ comment_date(comment.getCreatedTime) }}</em></h6>
         {{ comment.getText }}
       </div>
     </li>

@@ -211,6 +211,13 @@ services:
         tags:
             - { name: twig.extension }
 
+    znaika_frontend.date_extension:
+        class: Znaika\FrontendBundle\Twig\DateExtension
+        arguments:
+            - @translator
+        tags:
+            - { name: twig.extension }
+
     znaika_frontend.index_page_extension:
         class: Znaika\FrontendBundle\Twig\IndexPageExtension
         arguments:

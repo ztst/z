@@ -11,6 +11,19 @@ October:   Октябрь
 November:  Ноябрь
 December:  Декабрь
 
+month_Jan: янв
+month_Feb: фев
+month_Mar: мар
+month_Apr: апр
+month_May: май
+month_Jun: июн
+month_Jul: июл
+month_Aug: авг
+month_Sep: сен
+month_Oct: окт
+month_Nov: ноя
+month_Dec: дек
+
 founded_video_lessons: Найден %count% урок|Найдено %count% урока|Найдено %count% уроков
 in_chapters: в %count% разделе|в %count% разделах|в %count% разделах
 count_views: %count% просмотр|%count% просмотра|%count% просмотров
