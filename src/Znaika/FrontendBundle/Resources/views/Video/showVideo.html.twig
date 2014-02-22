@@ -16,6 +16,7 @@
 
   {% javascripts
     '../app/Resources/public/js/classes/ShareLinks.class.js'
+    '../app/Resources/public/js/classes/page/ShowVideoPage.class.js'
   %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
@@ -44,7 +45,7 @@
             Просмотрено: {{ viewVideoOperation.getCreatedTime|date('Y-m-d H:i:s') }}
           </div>
         {% endif %}
-        {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video} %}
+        {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video, 'comments': comments} %}
 
       </div>
 

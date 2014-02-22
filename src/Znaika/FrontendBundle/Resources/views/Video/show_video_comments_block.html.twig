@@ -1,5 +1,14 @@
 {% if not video.getVideoComments is empty %}
-  {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': video.getVideoComments} %}
+  <h3>Комментарии</h3>
+  {% if video.getVideoComments|length > 3 %}
+    <div class="alert alert-info">
+      <a href="{{ path('get_prev_comments', {'videoName': video.getUrlName}) }}" id="showPrevCommentsLink">
+        {{ 'show_prev_comments'|transchoice(video.getVideoComments|length - 3) }}
+      </a>
+    </div>
+    <div id="prevCommentsContainer"></div>
+  {% endif %}
+  {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': comments} %}
 {% endif %}
 {% if is_user() %}
   {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "videoName": video.getUrlName} %}
