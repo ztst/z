@@ -27,3 +27,32 @@
 {
     outline: 3px solid #00aa00;
 }
+
+.add-video-comment-container textarea
+{
+    padding-right: 25px;
+    resize: none;
+}
+
+.question-comment-button
+{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('/images/video/question-comment-button.png') no-repeat;
+
+    position: absolute;
+    right: 18px;
+    top: 28px;
+}
+
+.question-comment-button:hover
+{
+    text-decoration: none;
+    background: url('/images/video/question-comment-button-over.png') no-repeat;
+}
+
+.question-comment-button.selected
+{
+    background: url('/images/video/question-comment-button-selected.png') no-repeat;
+}

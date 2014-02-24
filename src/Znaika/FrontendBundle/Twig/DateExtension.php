@@ -24,7 +24,7 @@
         }
 
         /**
-         * @param User $user
+         * @param \DateTime $createdDate
          *
          * @return string
          */

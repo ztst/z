@@ -20,6 +20,7 @@
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\JsonResponse;
+    use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
     use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
     use Znaika\FrontendBundle\Repository\Lesson\Category\ChapterRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\IVideoAttachmentRepository;
@@ -148,6 +149,9 @@
             $form->handleRequest($request);
             if ($form->isValid())
             {
+                $isQuestion = $request->get("isQuestion", false);
+                $videoComment->setCommentType($isQuestion ? VideoCommentUtil::QUESTION : VideoCommentUtil::SIMPLE_COMMENT);
+
                 $videoCommentRepository = $this->get('znaika_frontend.video_comment_repository');
                 $videoCommentRepository->save($videoComment);
 

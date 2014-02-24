@@ -5,7 +5,7 @@
         <img class="media-object" width="60" height="60" src="{{ asset('images/404.jpg') }}" alt="Здесь будет аватар автора"/>
       </a>
       <div class="media-body">
-        <h4 class="media-heading">{{ comment.getUser.getFirstName }} {{ comment.getUser.getLastName }}</h4>
+        {{ comment_title(comment)|raw }}
         <h6 class="media-heading"><em>{{ comment_date(comment.getCreatedTime) }}</em></h6>
         {{ comment.getText }}
       </div>

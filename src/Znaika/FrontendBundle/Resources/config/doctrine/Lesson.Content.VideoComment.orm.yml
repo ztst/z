@@ -5,6 +5,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment:
     fields:
         videoCommentId: { column: video_comment_id, type: integer, id: true, generator: { strategy: AUTO } }
         text:           { type: text, notnull: true }
+        commentType:    { column: comment_type, type: smallint, notnull: true }
         createdTime:    { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     manyToOne:
         video:
@@ -21,4 +22,15 @@ Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment:
                 name: user_id
                 referencedColumnName: user_id
                 onDelete: "SET NULL"
+        question:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
+            inversedBy: answers
+            joinColumn:
+                name: quiestion_id
+                referencedColumnName: video_comment_id
+                onDelete: CASCADE
+    oneToMany:
+        answers:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
+            mappedBy: question
     lifecycleCallbacks: {  }

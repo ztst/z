@@ -2,12 +2,16 @@ var ShowVideoPage = Base.extend({
 
     _showPrevCommentsLink: null,
 
+    _addCommentForm: null,
+
     constructor: function()
     {
         this.base();
 
         this._showPrevCommentsLink = $("#showPrevCommentsLink");
         this._showPrevCommentsLink.click(handler(this, "_onShowPrevCommentsLinkClick"));
+
+        this._addCommentForm = new AddCommentForm("addCommentForm");
     },
 
     _onShowPrevCommentsLinkClick: function()
