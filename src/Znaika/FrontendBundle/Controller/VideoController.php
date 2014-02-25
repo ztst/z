@@ -234,7 +234,6 @@
             {
                 $subject    = $video->getSubject();
                 $isValidUrl = !is_null($video) && $subject->getUrlName() == $subjectName && $video->getGrade() == $class;
-
             }
 
             $videoComment        = new VideoComment();
