@@ -44,4 +44,8 @@ Znaika\FrontendBundle\Entity\Profile\User:
                 name: classroom_id
                 referencedColumnName: classroom_id
                 onDelete: "SET NULL"
+    manyToMany:
+        supervisedVideos:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
+            mappedBy: supervisors
     lifecycleCallbacks: {  }

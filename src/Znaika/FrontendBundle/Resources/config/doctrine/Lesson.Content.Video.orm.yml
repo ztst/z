@@ -53,4 +53,17 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment
             mappedBy:     video
             cascade:      [persist]
+    manyToMany:
+        supervisors:
+            targetEntity: Znaika\FrontendBundle\Entity\Profile\User
+            inversedBy: supervisedVideos
+            joinTable:
+                name: video_supervisor
+                joinColumns:
+                    video_id:
+                        referencedColumnName: video_id
+                inverseJoinColumns:
+                    user_id:
+                        referencedColumnName: user_id
+                onDelete: CASCADE
     lifecycleCallbacks: {  }

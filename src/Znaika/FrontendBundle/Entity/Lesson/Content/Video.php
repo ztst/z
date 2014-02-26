@@ -5,6 +5,7 @@
     use \Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Doctrine\ORM\Mapping as ORM;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment;
+    use Znaika\FrontendBundle\Entity\Profile\User;
 
     class Video
     {
@@ -99,6 +100,11 @@
         private $author;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $supervisors;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -107,6 +113,7 @@
             $this->videoAttachments = new \Doctrine\Common\Collections\ArrayCollection();
             $this->userAttempts     = new \Doctrine\Common\Collections\ArrayCollection();
             $this->quizQuestions    = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->supervisors      = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
@@ -542,5 +549,30 @@
         public function getAuthor()
         {
             return $this->author;
+        }
+
+        /**
+         * @param User $supervisor
+         *
+         * @return $this
+         */
+        public function addSuperVisor(User $supervisor)
+        {
+            $this->supervisors[] = $supervisor;
+
+            return $this;
+        }
+
+        public function removeSupervisor(User $supervisor)
+        {
+            $this->supervisors->removeElement($supervisor);
+        }
+
+        /**
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getSupervisors()
+        {
+            return $this->supervisors;
         }
     }

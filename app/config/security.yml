@@ -6,7 +6,8 @@ security:
             encode_as_base64: true
 
     role_hierarchy:
-        ROLE_MODERATOR: ROLE_USER
+        ROLE_TEACHER:   ROLE_USER
+        ROLE_MODERATOR: ROLE_TEACHER
         ROLE_ADMIN:     [ROLE_MODERATOR]
 
     providers:

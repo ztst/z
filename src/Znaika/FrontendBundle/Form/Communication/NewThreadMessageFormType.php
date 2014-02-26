@@ -19,12 +19,5 @@
                 ->add('recipient', 'recipient_input')
                 ->add('subject', 'hidden', array('data' => 'Empty'))
                 ->add('body', 'textarea');
-
-            $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'test'));
-        }
-        public function test($event)
-        {
-            $data = $event->getData();
-            var_dump($data);
         }
     }

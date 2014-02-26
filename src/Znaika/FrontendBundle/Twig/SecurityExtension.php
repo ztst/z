@@ -24,6 +24,11 @@
             return $this->isGranted(UserRole::getSecurityTextByRole(UserRole::ROLE_ADMIN));
         }
 
+        public function isTeacher()
+        {
+            return $this->isGranted(UserRole::getSecurityTextByRole(UserRole::ROLE_TEACHER));
+        }
+
         public function isUser()
         {
             return $this->isGranted(UserRole::getSecurityTextByRole(UserRole::ROLE_USER));
@@ -52,6 +57,7 @@
             return array(
                 new \Twig_SimpleFunction('is_admin', array($this, 'isAdmin')),
                 new \Twig_SimpleFunction('is_moderator', array($this, 'isModerator')),
+                new \Twig_SimpleFunction('is_teacher', array($this, 'isTeacher')),
                 new \Twig_SimpleFunction('is_user', array($this, 'isUser')),
             );
         }

@@ -1,4 +1,3 @@
-<h3>Комментарии</h3>
 <ul class="media-list">
   {% for comment in comments %}
     <li class="media">
@@ -6,9 +5,9 @@
         <img class="media-object" width="60" height="60" src="{{ asset('images/404.jpg') }}" alt="Здесь будет аватар автора"/>
       </a>
       <div class="media-body">
-        <h4 class="media-heading">{{ comment.getUser.getFirstName }} {{ comment.getUser.getLastName }}</h4>
-        <h6 class="media-heading"><em>{{ comment.getCreatedTime|date('Y-m-d H:i:s') }}</em></h6>
+        {{ comment_title(comment)|raw }}
         {{ comment.getText }}
+        <h6 class="media-heading"><em>{{ comment_date(comment.getCreatedTime) }}</em></h6>
       </div>
     </li>
   {% endfor %}

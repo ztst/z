@@ -211,6 +211,23 @@ services:
         tags:
             - { name: twig.extension }
 
+    znaika_frontend.video_comment_extension:
+        class: Znaika\FrontendBundle\Twig\Video\CommentExtenstion
+        arguments:
+            - @twig
+            - @security.context
+            - @znaika_frontend.video_comment_repository
+            - @form.factory
+        tags:
+            - { name: twig.extension }
+
+    znaika_frontend.date_extension:
+        class: Znaika\FrontendBundle\Twig\DateExtension
+        arguments:
+            - @translator
+        tags:
+            - { name: twig.extension }
+
     znaika_frontend.index_page_extension:
         class: Znaika\FrontendBundle\Twig\IndexPageExtension
         arguments:

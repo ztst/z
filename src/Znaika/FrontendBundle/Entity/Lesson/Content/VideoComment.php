@@ -17,6 +17,11 @@
         private $text;
 
         /**
+         * @var int
+         */
+        private $commentType;
+
+        /**
          * @var \DateTime
          */
         private $createdTime;
@@ -31,6 +36,27 @@
          */
         private $user;
 
+        /**
+         * @var VideoComment
+         */
+        private $question;
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $answers;
+
+        /**
+         * @var bool
+         */
+        private $isAnswered = false;
+        /**
+         * Constructor
+         */
+        public function __construct()
+        {
+            $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
+        }
 
         /**
          * Get videoCommentId
@@ -136,5 +162,70 @@
         public function getUser()
         {
             return $this->user;
+        }
+
+        /**
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $question
+         */
+        public function setQuestion($question)
+        {
+            $this->question = $question;
+        }
+
+        /**
+         * @return \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
+         */
+        public function getQuestion()
+        {
+            return $this->question;
+        }
+
+        public function addAnswer(VideoComment $answer)
+        {
+            $this->answers[] = $answer;
+
+            return $this;
+        }
+
+        public function removeAnswer(VideoComment $answer)
+        {
+            $this->answers->removeElement($answer);
+        }
+
+        public function getAnswers()
+        {
+            return $this->answers;
+        }
+
+        /**
+         * @param int $commentType
+         */
+        public function setCommentType($commentType)
+        {
+            $this->commentType = $commentType;
+        }
+
+        /**
+         * @return int
+         */
+        public function getCommentType()
+        {
+            return $this->commentType;
+        }
+
+        /**
+         * @param boolean $isAnswered
+         */
+        public function setIsAnswered($isAnswered)
+        {
+            $this->isAnswered = $isAnswered;
+        }
+
+        /**
+         * @return boolean
+         */
+        public function getIsAnswered()
+        {
+            return $this->isAnswered;
         }
     }

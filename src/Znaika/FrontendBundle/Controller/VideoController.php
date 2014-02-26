@@ -17,16 +17,19 @@
     use Znaika\FrontendBundle\Helper\Content\ContentThumbnailUpdater;
     use Znaika\FrontendBundle\Helper\Uploader\VideoAttachmentUploader;
     use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
-    use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\JsonResponse;
+    use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
     use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
     use Znaika\FrontendBundle\Repository\Lesson\Category\ChapterRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\IVideoAttachmentRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
+    use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
 
     class VideoController extends Controller
     {
+        const COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE = 3;
+
         public function postVideoToSocialNetworkAction(Request $request)
         {
             $repository       = $this->getVideoRepository();
@@ -133,6 +136,11 @@
 
         public function addVideoCommentFormAction(Request $request)
         {
+            if (!$this->getUser())
+            {
+                throw $this->createNotFoundException("Not logged user try save comment");
+            }
+
             $repository = $this->getVideoRepository();
             $video      = $repository->getOneByUrlName($request->get('videoName'));
 
@@ -145,7 +153,25 @@
             $form->handleRequest($request);
             if ($form->isValid())
             {
-                $videoCommentRepository = $this->get('znaika_frontend.video_comment_repository');
+                $videoCommentRepository = $this->getVideoCommentRepository();
+
+                $videoComment->setCommentType(VideoCommentUtil::SIMPLE_COMMENT);
+                $isQuestion = $request->get("isQuestion", false);
+                $isAnswer = $request->get("isAnswer", false);
+                if($isQuestion)
+                {
+                    $videoComment->setCommentType(VideoCommentUtil::QUESTION);
+                }
+                elseif($isAnswer)
+                {
+                    $videoComment->setCommentType(VideoCommentUtil::ANSWER);
+
+                    $questionId = $request->get("questionId", 0);
+                    $question = $videoCommentRepository->getOneByVideoCommentId($questionId);
+                    $question->setIsAnswered(true);
+                    $videoComment->setQuestion($question);
+                }
+
                 $videoCommentRepository->save($videoComment);
 
                 $listener = $this->getUserOperationListener();
@@ -244,14 +270,40 @@
             $viewVideoOperation = ($user) ? $listener->onViewVideo($user, $video) : null;
 
             $chapterVideos = $repository->getVideoByChapter($video->getChapter()->getChapterId());
+            $comments      = $this->getVideoCommentRepository()
+                                  ->getLastVideoComments($video, self::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE);
+            $comments      = array_reverse($comments);
 
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
                 'video'               => $video,
+                'comments'            => $comments,
                 'isValidUrl'          => $isValidUrl,
                 'addVideoCommentForm' => $addVideoCommentForm->createView(),
                 'viewVideoOperation'  => $viewVideoOperation,
                 'chapterVideos'       => $chapterVideos,
             ));
+        }
+
+        public function getPrevCommentsAction(Request $request)
+        {
+            $repository = $this->getVideoRepository();
+            $video      = $repository->getOneByUrlName($request->get('videoName'));
+
+            $commentsCount = count($video->getVideoComments()) - self::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE;
+            $comments      = $this->getVideoCommentRepository()
+                                  ->getVideoComments($video, self::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE, $commentsCount);
+            $comments      = array_reverse($comments);
+
+            $html = $this->renderView('ZnaikaFrontendBundle:Video:video_comments.html.twig', array(
+                'comments' => $comments
+            ));
+
+            $array = array(
+                'html'    => $html,
+                'success' => true
+            );
+
+            return new JsonResponse($array);
         }
 
         /**
@@ -301,5 +353,13 @@
         private function getChapterRepository()
         {
             return $this->get("znaika_frontend.chapter_repository");
+        }
+
+        /**
+         * @return VideoCommentRepository
+         */
+        private function getVideoCommentRepository()
+        {
+            return $this->get('znaika_frontend.video_comment_repository');
         }
     }
