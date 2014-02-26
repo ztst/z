@@ -56,3 +56,8 @@
 {
     background: url('/images/video/question-comment-button-selected.png') no-repeat;
 }
+
+.user-question-container
+{
+    display: none;
+}

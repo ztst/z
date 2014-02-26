@@ -17,6 +17,16 @@
         }
 
         /**
+         * @param $videoCommentId
+         *
+         * @return VideoComment
+         */
+        public function getOneByVideoCommentId($videoCommentId)
+        {
+            return null;
+        }
+
+        /**
          * @param Video $video
          * @param $limit
          *
@@ -35,6 +45,16 @@
          * @return VideoComment[]
          */
         public function getVideoComments($video, $offset, $limit)
+        {
+            return null;
+        }
+
+        /**
+         * @param $video
+         *
+         * @return VideoComment[]
+         */
+        public function getVideoNotAnsweredQuestionComments($video)
         {
             return null;
         }

@@ -1,0 +1,5 @@
+<h4 class="media-heading">{{ comment.getUser }}</h4>
+<h5 class="media-heading">
+  <img src="{{ asset('/images/video/answer-comment.png') }}" alt="Вопрос" />
+  {{ comment.getQuestion.getUser }} {{ comment_date(comment.getQuestion.getCreatedTime) }}
+</h5>

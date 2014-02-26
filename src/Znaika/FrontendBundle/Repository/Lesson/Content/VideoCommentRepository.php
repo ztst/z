@@ -40,6 +40,22 @@
         }
 
         /**
+         * @param $videoCommentId
+         *
+         * @return VideoComment
+         */
+        public function getOneByVideoCommentId($videoCommentId)
+        {
+            $result = $this->redisRepository->getOneByVideoCommentId($videoCommentId);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getOneByVideoCommentId($videoCommentId);
+            }
+
+            return $result;
+        }
+
+        /**
          * @param Video $video
          * @param $limit
          *
@@ -74,4 +90,19 @@
             return $result;
         }
 
+        /**
+         * @param $video
+         *
+         * @return VideoComment[]
+         */
+        public function getVideoNotAnsweredQuestionComments($video)
+        {
+            $result = $this->redisRepository->getVideoNotAnsweredQuestionComments($video);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getVideoNotAnsweredQuestionComments($video);
+            }
+
+            return $result;
+        }
     }

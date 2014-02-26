@@ -17,7 +17,6 @@
     use Znaika\FrontendBundle\Helper\Content\ContentThumbnailUpdater;
     use Znaika\FrontendBundle\Helper\Uploader\VideoAttachmentUploader;
     use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
-    use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
@@ -137,6 +136,11 @@
 
         public function addVideoCommentFormAction(Request $request)
         {
+            if (!$this->getUser())
+            {
+                throw $this->createNotFoundException("Not logged user try save comment");
+            }
+
             $repository = $this->getVideoRepository();
             $video      = $repository->getOneByUrlName($request->get('videoName'));
 
@@ -149,10 +153,25 @@
             $form->handleRequest($request);
             if ($form->isValid())
             {
-                $isQuestion = $request->get("isQuestion", false);
-                $videoComment->setCommentType($isQuestion ? VideoCommentUtil::QUESTION : VideoCommentUtil::SIMPLE_COMMENT);
+                $videoCommentRepository = $this->getVideoCommentRepository();
 
-                $videoCommentRepository = $this->get('znaika_frontend.video_comment_repository');
+                $videoComment->setCommentType(VideoCommentUtil::SIMPLE_COMMENT);
+                $isQuestion = $request->get("isQuestion", false);
+                $isAnswer = $request->get("isAnswer", false);
+                if($isQuestion)
+                {
+                    $videoComment->setCommentType(VideoCommentUtil::QUESTION);
+                }
+                elseif($isAnswer)
+                {
+                    $videoComment->setCommentType(VideoCommentUtil::ANSWER);
+
+                    $questionId = $request->get("questionId", 0);
+                    $question = $videoCommentRepository->getOneByVideoCommentId($questionId);
+                    $question->setIsAnswered(true);
+                    $videoComment->setQuestion($question);
+                }
+
                 $videoCommentRepository->save($videoComment);
 
                 $listener = $this->getUserOperationListener();
@@ -241,7 +260,6 @@
             {
                 $subject    = $video->getSubject();
                 $isValidUrl = !is_null($video) && $subject->getUrlName() == $subjectName && $video->getGrade() == $class;
-
             }
 
             $videoComment        = new VideoComment();

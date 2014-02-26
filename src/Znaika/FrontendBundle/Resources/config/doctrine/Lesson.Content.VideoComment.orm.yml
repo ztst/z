@@ -7,6 +7,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment:
         text:           { type: text, notnull: true }
         commentType:    { column: comment_type, type: smallint, notnull: true }
         createdTime:    { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
+        isAnswered:     { column: is_answered, type: boolean }
     manyToOne:
         video:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video

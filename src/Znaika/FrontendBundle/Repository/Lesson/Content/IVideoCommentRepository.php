@@ -14,6 +14,13 @@
         public function save(VideoComment $videoComment);
 
         /**
+         * @param $videoCommentId
+         *
+         * @return VideoComment
+         */
+        public function getOneByVideoCommentId($videoCommentId);
+
+        /**
          * @param Video $video
          * @param $limit
          *
@@ -29,4 +36,11 @@
          * @return VideoComment[]
          */
         public function getVideoComments($video, $offset, $limit);
+
+        /**
+         * @param $video
+         *
+         * @return VideoComment[]
+         */
+        public function getVideoNotAnsweredQuestionComments($video);
     }

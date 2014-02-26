@@ -6,13 +6,15 @@
         const ROLE_USER      = 0;
         const ROLE_MODERATOR = 1;
         const ROLE_ADMIN     = 2;
+        const ROLE_TEACHER   = 3;
 
         public static function getAvailableRoles()
         {
             $availableRoles = array(
                 self::ROLE_USER,
                 self::ROLE_MODERATOR,
-                self::ROLE_ADMIN
+                self::ROLE_ADMIN,
+                self::ROLE_TEACHER,
             );
 
             return $availableRoles;
@@ -24,6 +26,7 @@
                 self::ROLE_USER      => "ROLE_USER",
                 self::ROLE_MODERATOR => "ROLE_MODERATOR",
                 self::ROLE_ADMIN     => "ROLE_ADMIN",
+                self::ROLE_TEACHER   => "ROLE_TEACHER",
             );
 
             return $availableRoles;

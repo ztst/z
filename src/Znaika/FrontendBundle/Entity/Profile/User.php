@@ -3,6 +3,7 @@
 
     use Doctrine\ORM\Mapping as ORM;
     use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
     use FOS\MessageBundle\Model\ParticipantInterface;
@@ -116,12 +117,18 @@
         private $nickname;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $supervisedVideos;
+
+        /**
          * Constructor
          */
         public function __construct()
         {
             $this->videoComments     = new \Doctrine\Common\Collections\ArrayCollection();
             $this->userRegistrations = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->supervisedVideos  = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
@@ -597,7 +604,7 @@
                 $name = $this->getNickname();
             }
 
-            return (string) $name;
+            return (string)$name;
         }
 
         /**
@@ -756,5 +763,33 @@
                 $this->lastName,
                 $this->createdTime,
                 ) = unserialize($serialized);
+        }
+
+        /**
+         * @param Video $supervisedVideo
+         *
+         * @return $this
+         */
+        public function addSupervisedVideo(Video $supervisedVideo)
+        {
+            $this->supervisedVideos[] = $supervisedVideo;
+
+            return $this;
+        }
+
+        /**
+         * @param Video $supervisedVideo
+         */
+        public function removeSupervisedVideo(Video $supervisedVideo)
+        {
+            $this->supervisedVideos->removeElement($supervisedVideo);
+        }
+
+        /**
+         * @return \Doctrine\Common\Collections\ArrayCollection|\Doctrine\Common\Collections\Collection
+         */
+        public function getSupervisedVideos()
+        {
+            return $this->supervisedVideos;
         }
     }

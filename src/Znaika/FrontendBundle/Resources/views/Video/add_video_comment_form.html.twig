@@ -1,12 +1,17 @@
 <div class="col-sm-12 col-left">
-  {{ form_start(form, {'attr': {'id': 'addCommentForm'}, 'action': path('add_video_comment_form', {"videoName": videoName}), 'method': 'POST'}) }}
+  {{ form_start(form, {'attr': {'id': 'addCommentForm'}, 'action': path('add_video_comment_form', {"videoName": video.getUrlName}), 'method': 'POST'}) }}
     {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
     <div class="form-group add-video-comment-container">
       {{ form_label(form.text, 'Ваш комментарий') }}
       {{ form_errors(form.text) }}
       {{ form_widget(form.text, {'attr': {'class': 'form-control'}}) }}
-      <a href="javascript:void(0);" id="isQuestionButton" class="question-comment-button">&nbsp;</a>
-      <input type="hidden" name="isQuestion" value="0" id="isQuestionInput" />
+      {% if has_question_for_current_user(video) %}
+        <input type="hidden" name="isAnswer" value="1" id="isQuestionInput" />
+        <input type="hidden" name="questionId" value="0" id="questionIdInput" />
+      {% elseif not is_teacher() %}
+        <a href="javascript:void(0);" id="isQuestionButton" class="question-comment-button">&nbsp;</a>
+        <input type="hidden" name="isQuestion" value="0" id="isQuestionInput" />
+      {% endif %}
     </div>
     <div>
       {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Добавить комментарий'}) }}

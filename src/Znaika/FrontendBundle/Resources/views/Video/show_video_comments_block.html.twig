@@ -11,8 +11,10 @@
   {% endif %}
   {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': comments} %}
 {% endif %}
-{% if is_user() %}
-  {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "videoName": video.getUrlName} %}
+{% if has_question_for_current_user(video) %}
+  {{ video_questions_block(video)|raw }}
+{% elseif is_user() %}
+  {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "video": video} %}
 {% else %}
   <span>Только зарегистрированные и авторизованные пользователи могут оставлять комментарии</span>
 {% endif %}

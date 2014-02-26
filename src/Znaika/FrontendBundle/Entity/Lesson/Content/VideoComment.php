@@ -47,6 +47,10 @@
         private $answers;
 
         /**
+         * @var bool
+         */
+        private $isAnswered = false;
+        /**
          * Constructor
          */
         public function __construct()
@@ -207,5 +211,21 @@
         public function getCommentType()
         {
             return $this->commentType;
+        }
+
+        /**
+         * @param boolean $isAnswered
+         */
+        public function setIsAnswered($isAnswered)
+        {
+            $this->isAnswered = $isAnswered;
+        }
+
+        /**
+         * @return boolean
+         */
+        public function getIsAnswered()
+        {
+            return $this->isAnswered;
         }
     }

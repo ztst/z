@@ -215,6 +215,9 @@ services:
         class: Znaika\FrontendBundle\Twig\Video\CommentExtenstion
         arguments:
             - @twig
+            - @security.context
+            - @znaika_frontend.video_comment_repository
+            - @form.factory
         tags:
             - { name: twig.extension }
 
