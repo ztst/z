@@ -19,14 +19,6 @@
 }
 
 /* Top videos block BEGIN */
-.index-page-top-videos-block
-{
-}
-
-.index-page-top-video
-{
-}
-
 .index-page-top-video h2
 {
     padding-left: 45px;
@@ -104,10 +96,6 @@
     {
         padding-right: 0;
     }
-}
-
-.index-page-videos-list .list-item
-{
 }
 
 .index-page-videos-list .list-item h5

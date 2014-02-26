@@ -12,14 +12,12 @@
       </div>
     </div>
     <div class="navbar-collapse collapse col-right">
-      <div class="col-md-4 col-sm-2 col-center">
-        {{ knp_menu_render('main') }}
-      </div>
-      <div class="main-menu-right col-md-6 col-sm-7 col-center">
+      <div class="main-menu-right col-md-7 col-sm-7 col-center">
         <ul class="nav navbar-nav navbar-right">
           <li class="search-container">
             <form action="{{ path("search") }}" method="POST">
               <div class="input-group">
+                <span class="search-icon"></span>
                 <input type="text" class="form-control search-input" placeholder="Поиск видеоуроков" name="search_string" value="">
                 <div class="input-group-btn search-button-containter">
                   <button type="submit" class="btn btn-success search-button"><span class="search-icon"></span></button>
@@ -32,12 +30,17 @@
           {{ complete_social_registration_popup()|raw }}
           {% if is_user() %}
             <li>
-              <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link">{{ app.user }}, {{ app.user.getPoints }} баллов</a>
+              <div class="user-pic">
+                <img src="/images/header/404-30x30.png" alt="" />
+              </div>
+            </li>
+            <li>
+              <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link">{{ app.user }}{#, {{ app.user.getPoints }} баллов#}</a>
             </li>
             <li>
               {{ user_badges(app.user)|raw }}
             </li>
-            <li><a href="{{ path("logout") }}" class="btn btn-default logout_button">Выйти</a></li>
+            {#<li><a href="{{ path("logout") }}" class="btn btn-default logout_button">Выйти</a></li>#}
           {% else %}
             <li><a href="{{ path("try_login") }}" class="btn btn-default login_button">Вход</a></li>
           {% endif %}
@@ -46,3 +49,5 @@
     </div>
   </div>
 </div>
+<hr class="class-hr" />
+<hr class="subjects-hr" />
