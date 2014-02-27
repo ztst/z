@@ -43,7 +43,7 @@ body
 .footer
 {
     position: relative;
-    height: 207px;
+    height: 54px;
 
     background: #404f5b;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#404f5b), to(#2b343b));
@@ -457,9 +457,9 @@ input
 {
     margin-right: 10px;
     margin-top: 9px;
-    font-size: 11px;
+    color: #1d1d1d;
+    font-size: 13px;
     line-height: 12px !important;
-    width: 220px;
 }
 
 .user-pic

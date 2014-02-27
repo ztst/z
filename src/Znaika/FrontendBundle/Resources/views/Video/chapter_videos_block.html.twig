@@ -2,25 +2,30 @@
   {% for video in videos %}
     <div>
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-left">
-        <a href="{{ path('show_video', {
-            'subjectName': video.getSubject.getUrlName,
-            'class': video.getGrade,
-            'videoName': video.getUrlName
-            }) }}"
-           title="{{ video.getName|raw }}">
-          <img
-            src="{{ video.getSmallThumbnailUrl }}"
-            alt="{{ video.getName|raw }}"
-            class="{% if currentVideoId is defined and currentVideoId == video.getVideoId %}chapter-selected-video{% endif %}"
-            />
-        </a>
+        <div class="{% if currentVideoId is defined and currentVideoId == video.getVideoId %}chapter-selected-video{% endif %}">
+          <a href="{{ path('show_video', {
+              'subjectName': video.getSubject.getUrlName,
+              'class': video.getGrade,
+              'videoName': video.getUrlName
+              }) }}"
+             title="{{ video.getName|raw }}">
+            <img
+              src="{{ video.getSmallThumbnailUrl }}"
+              alt="{{ video.getName|raw }}"
+              class="{% if currentVideoId is defined and currentVideoId == video.getVideoId %}chapter-selected-video{% endif %}"
+              />
+          </a>
+        </div>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-right">
-        <p>{{ video.getName|raw }}</p>
-        <p>{{ video.getAuthor|raw }}</p>
-        {% set month = video.getCreatedTime|date('F') %}
-        {% set year = video.getCreatedTime|date('Y') %}
-        <p>{{ '%s %s'|format(month|trans, year) }}</p>
+        <p class="video-title">{{ video.getName|raw }}</p>
+        <p class="video-author-in-list">{{ video.getAuthor|raw }}</p>
+        <div>
+          <div class="video-has-abstract"></div>
+          <div class="icons-delimiter"></div>
+          <div class="video-has-test"></div>
+        </div>
+        <div class="clear"></div>
       </div>
     </div>
     <div class="clear"></div>

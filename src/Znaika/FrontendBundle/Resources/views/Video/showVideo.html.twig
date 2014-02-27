@@ -33,15 +33,15 @@
         <div class="col-center">
           <ul class="nav nav-tabs select-content-tab">
             <li class="video active">
-              <div class="video-icon"></div>
+              <div class="video-tab-icon"></div>
               <a data-toggle="tab">Видеоурок</a>
             </li>
             <li class="abstract">
-              <div class="abstract-icon"></div>
+              <div class="abstract-tab-icon"></div>
               <a data-toggle="tab">Конспект</a>
             </li>
             <li class="test">
-              <div class="test-icon"></div>
+              <div class="test-tab-icon"></div>
               <a data-toggle="tab">Тест</a>
             </li>
             <li class="video-buttons-container">
@@ -65,15 +65,27 @@
         <div class="clear"></div>
         <div class="col-md-12">
           <h5 class="video-author">{{ video.getAuthor }}</h5>
-          <h5 class="views-amount">{{ 'count_views'|transchoice(video.getViews) }}</h5>
+          <h5 class="video-views-amount">{{ 'count_views'|transchoice(video.getViews) }}</h5>
           <div class="clear"></div>
+          {% set month = video.getCreatedTime|date('F') %}
+          {% set year = video.getCreatedTime|date('Y') %}
+          <div class="video-date">{{ '%s %s'|format(month|trans, year) }}</div>
           {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video, 'comments': comments} %}
         </div>
       </div>
     </div>
-    <div class="col-md-4 col-right">
-      <h3>Все уроки этого раздела</h3>
-      {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapterVideos, 'currentVideoId': video.getVideoId} %}
+    <div class="col-md-4 col-center">
+      <div class="chapter-videos-block-container">
+        <div class="label-all-chapters">
+          <a href="javascript:void(0);">Все разделы</a>
+        </div>
+        <div class="chapter-name">{{ video.chapter.name }}</div>
+        <h5>Уроки этого раздела</h5>
+        <div class="show-more-videos">
+          <a href="javascript:void(0);">Показать предыдущие (69)</a>
+        </div>
+        {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapterVideos, 'currentVideoId': video.getVideoId} %}
+      </div>
     </div>
   {% else %}
     <img src="{{ asset('images/404.jpg') }}" alt="Видео не найдено"/>
