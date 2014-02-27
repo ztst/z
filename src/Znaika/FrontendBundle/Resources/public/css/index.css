@@ -350,15 +350,18 @@ button.subscribe-button, button.subscribe-button:active, button.subscribe-button
 .footer-container
 {
     position: relative;
-    padding-top: 30px;
     height: 54px;
-    color: #c8c8c8;
+    color: #c9c8c8;
 }
 
-.footer-container a
+.footer-container a,
+.footer-copyright
 {
-    text-decoration: underline;
-    color: #c8c8c8;
+    display: block;
+    color: #c9c8c8;
+    font-size: 13px;
+    font-family: "OpenSans Semibold";
+    text-decoration: none;
 }
 
 .footer-logo
@@ -367,21 +370,15 @@ button.subscribe-button, button.subscribe-button:active, button.subscribe-button
     height: 40px;
 }
 
-.footer-links
+.footer-link,
+.footer-copyright
 {
-    padding-left: 23px;
-    list-style: none;
-}
-
-.footer-links li
-{
-    margin-bottom: 15px;
+    margin-top: 18px;
 }
 
 .footer-social-buttons-block
 {
-    float: right;
-    width: 136px;
+    margin-top: 12px;
 }
 
 .footer-social-buttons-text
@@ -393,8 +390,8 @@ button.subscribe-button, button.subscribe-button:active, button.subscribe-button
 .footer-social-button
 {
     float: left;
-    margin-top: 5px;
     margin-left: 6px;
+    margin-top: 0;
 }
 
 .footer-horizontal-bar
@@ -406,48 +403,13 @@ button.subscribe-button, button.subscribe-button:active, button.subscribe-button
     background: #5d666d;
 }
 
-.footer-copyright
-{
-    display: block;
-    margin-top: 15px;
-}
-
-/*@media (min-width: 992px)
-{
-    .footer-znaika-boy
-    {
-        position: absolute;
-        right: 0;
-        bottom: 200px;
-        width: 252px;
-        height: 146px;
-        background: url('/images/footer/znaika-boy.png') no-repeat;
-    }
-
-    *+html .footer-znaika-boy
-    {
-        position: absolute;
-        right: 0;
-        bottom: 230px;
-        width: 252px;
-        height: 146px;
-        background: url('/images/footer/znaika-boy.png') no-repeat;
-    }
-}*/
-
 @media (max-width: 767px)
 {
     .footer-logo, .footer-social-buttons-block
     {
         display: none;
     }
-
-    .footer-links
-    {
-        padding-left: 15px;
-    }
-
-    .footer-links li a, .footer-copyright
+    .footer-container a, .footer-copyright
     {
         font-size: 13px;
     }
