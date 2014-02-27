@@ -19,4 +19,9 @@
         {
             return null;
         }
+
+        public function getOne($name, $grade, $subjectId)
+        {
+            return null;
+        }
     }

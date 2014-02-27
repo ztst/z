@@ -25,4 +25,13 @@
          * @return Chapter[]
          */
         public function getChaptersForCatalog($grade, $subjectId);
+
+        /**
+         * @param $name
+         * @param $grade
+         * @param $subjectId
+         *
+         * @return Chapter
+         */
+        public function getOne($name, $grade, $subjectId);
     }

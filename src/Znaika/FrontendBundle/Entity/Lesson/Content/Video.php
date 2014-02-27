@@ -2,6 +2,7 @@
     namespace Znaika\FrontendBundle\Entity\Lesson\Content;
 
     use Symfony\Component\Validator\ExecutionContextInterface;
+    use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use \Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Doctrine\ORM\Mapping as ORM;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment;
@@ -103,6 +104,11 @@
          * @var \Doctrine\Common\Collections\Collection
          */
         private $supervisors;
+
+        /**
+         * @var integer
+         */
+        private $orderPriority;
 
         /**
          * Constructor
@@ -442,20 +448,6 @@
             return $this->quizQuestions;
         }
 
-        public function isChapterValid(ExecutionContextInterface $context)
-        {
-            if ($this->getSubject()->getUrlName() != $this->getChapter()->getSubject()->getUrlName())
-            {
-                //TODO: text
-                $context->addViolationAt('chapter', 'Выбранная глава не соответствует предмету.', array(), null);
-            }
-            if ($this->getGrade() != $this->getChapter()->getGrade())
-            {
-                //TODO: text
-                $context->addViolationAt('chapter', 'Выбранная глава не соответствует классу.', array(), null);
-            }
-        }
-
         /**
          * Add userAttempts
          *
@@ -574,5 +566,28 @@
         public function getSupervisors()
         {
             return $this->supervisors;
+        }
+
+        public function setInfoFromChapter(Chapter $chapter)
+        {
+            $this->setChapter($chapter);
+            $this->setGrade($chapter->getGrade());
+            $this->setSubject($chapter->getSubject());
+        }
+
+        /**
+         * @param int $orderPriority
+         */
+        public function setOrderPriority($orderPriority)
+        {
+            $this->orderPriority = $orderPriority;
+        }
+
+        /**
+         * @return int
+         */
+        public function getOrderPriority()
+        {
+            return $this->orderPriority;
         }
     }

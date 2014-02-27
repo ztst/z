@@ -2,6 +2,7 @@
     namespace Znaika\FrontendBundle\Repository\Lesson\Content;
 
     use Doctrine\ORM\EntityRepository;
+    use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
 
     class VideoDBRepository extends EntityRepository implements IVideoRepository
@@ -41,7 +42,15 @@
 
         public function getVideoByChapter($chapter)
         {
-            return $this->findByChapter($chapter);
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->select('v')
+                         ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+                         ->andWhere('v.chapter = :chapter_id')
+                         ->setParameter('chapter_id', $chapter)
+                         ->addOrderBy('v.orderPriority', 'ASC');
+
+            return $queryBuilder->getQuery()->getResult();
         }
 
         public function getVideosBySearchString($searchString, $limit = null, $page = null)
@@ -118,6 +127,95 @@
             $videos = $queryBuilder->getQuery()->getResult();
 
             return $videos;
+        }
+
+        /**
+         * @param Chapter $chapter
+         *
+         * @return int
+         */
+        public function getMaxChapterOrderPriority(Chapter $chapter)
+        {
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->select('max(v.orderPriority)')
+                         ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+                         ->andWhere('v.chapter = :chapter_id')
+                         ->setParameter('chapter_id', $chapter->getChapterId());
+
+            return intval($queryBuilder->getQuery()->getSingleScalarResult());
+        }
+
+        public function moveVideo(Video $video, $direction)
+        {
+            $isMoved = false;
+            if ($direction == "up")
+            {
+                $prevVideo = $this->getPrevVideo($video);
+                if ($prevVideo)
+                {
+                    $currentOrder = $video->getOrderPriority();
+                    $video->setOrderPriority($currentOrder - 1);
+                    $prevVideo->setOrderPriority($currentOrder);
+
+                    $this->save($video);
+                    $this->save($prevVideo);
+                    $isMoved = true;
+                }
+            }
+            else
+            {
+                $nextVideo = $this->getNextVideo($video);
+                if ($nextVideo)
+                {
+                    $currentOrder = $video->getOrderPriority();
+                    $video->setOrderPriority($currentOrder + 1);
+                    $nextVideo->setOrderPriority($currentOrder);
+
+                    $this->save($video);
+                    $this->save($nextVideo);
+                    $isMoved = true;
+                }
+            }
+            return $isMoved;
+        }
+
+        /**
+         * @param Video $video
+         *
+         * @return Video
+         */
+        private function getNextVideo(Video $video)
+        {
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->select('v')
+                         ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+                         ->andWhere('v.chapter = :chapter_id')
+                         ->setParameter('chapter_id', $video->getChapter()->getChapterId())
+                         ->andWhere('v.orderPriority = :order_priority')
+                         ->setParameter('order_priority', $video->getOrderPriority() + 1);
+
+            return $queryBuilder->getQuery()->getOneOrNullResult();
+        }
+
+        /**
+         * @param Video $video
+         *
+         * @return Video
+         */
+        private function getPrevVideo(Video $video)
+        {
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->select('v')
+                         ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+                         ->andWhere('v.chapter = :chapter_id')
+                         ->setParameter('chapter_id', $video->getChapter()->getChapterId())
+                         ->andWhere('v.orderPriority = :order_priority')
+                         ->setParameter('order_priority', $video->getOrderPriority() - 1);
+
+            return $queryBuilder->getQuery()->getOneOrNullResult();
         }
 
         /**

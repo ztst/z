@@ -13,6 +13,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
         largeThumbnailUrl:  { column: large_thumbnail_url, type: string, length: 255, nullable: true }
         views:              { type: integer, notnull: true }
         author:             { type: string, length: 255, notnull: true }
+        orderPriority:      { column: order_priority, type: integer, notnull: true }
         createdTime:        { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     oneToOne:
         synopsis:
@@ -62,8 +63,9 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
                 joinColumns:
                     video_id:
                         referencedColumnName: video_id
+                        onDelete: CASCADE
                 inverseJoinColumns:
                     user_id:
                         referencedColumnName: user_id
-                onDelete: CASCADE
+                        onDelete: CASCADE
     lifecycleCallbacks: {  }

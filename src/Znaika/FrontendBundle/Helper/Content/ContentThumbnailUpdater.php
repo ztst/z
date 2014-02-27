@@ -48,8 +48,6 @@
                 $video->setSmallThumbnailUrl($smallThumbnailUrl);
                 $video->setMediumThumbnailUrl($mediumThumbnailUrl);
                 $video->setLargeThumbnailUrl($largeThumbnailUrl);
-
-                $this->videoRepository->save($video);
             }
 
         }

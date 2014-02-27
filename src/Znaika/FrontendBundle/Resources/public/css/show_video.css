@@ -292,14 +292,14 @@
     border-left: 1px solid #ccc;
 }
 
-div.chapter-selected-video
+.chapter-selected-video .chapter-video-preview-container
 {
     position: relative;
     left: -6px;
     outline: 3px solid #ee974e;
 }
 
-img.chapter-selected-video
+.chapter-selected-video .chapter-video-preview
 {
     margin: 3px;
 }
@@ -384,4 +384,9 @@ img.chapter-selected-video
     width: 12px;
     height: 11px;
     background: url('/images/video/test-tab-icon.png') no-repeat;
+}
+
+.chapter-videos-list
+{
+    list-style-type: none;
 }

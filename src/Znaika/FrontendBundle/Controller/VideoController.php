@@ -5,6 +5,7 @@
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+    use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
@@ -25,6 +26,7 @@
     use Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\IVideoAttachmentRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
+    use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
     class VideoController extends Controller
     {
@@ -155,22 +157,7 @@
             {
                 $videoCommentRepository = $this->getVideoCommentRepository();
 
-                $videoComment->setCommentType(VideoCommentUtil::SIMPLE_COMMENT);
-                $isQuestion = $request->get("isQuestion", false);
-                $isAnswer = $request->get("isAnswer", false);
-                if($isQuestion)
-                {
-                    $videoComment->setCommentType(VideoCommentUtil::QUESTION);
-                }
-                elseif($isAnswer)
-                {
-                    $videoComment->setCommentType(VideoCommentUtil::ANSWER);
-
-                    $questionId = $request->get("questionId", 0);
-                    $question = $videoCommentRepository->getOneByVideoCommentId($questionId);
-                    $question->setIsAnswered(true);
-                    $videoComment->setQuestion($question);
-                }
+                $this->prepareVideoCommentType($videoComment, $videoCommentRepository);
 
                 $videoCommentRepository->save($videoComment);
 
@@ -185,10 +172,43 @@
             )));
         }
 
+        public function editVideoFormAction($videoName)
+        {
+            $repository = $this->getVideoRepository();
+            $video      = $repository->getOneByUrlName($videoName);
+
+            $form    = $this->createForm(new VideoType($this->getUserRepository()), $video);
+            $request = $this->getRequest();
+            $form->handleRequest($request);
+            if ($form->isValid())
+            {
+                $contentThumbnailUpdater = $this->getContentThumbnailUpdater();
+                $contentThumbnailUpdater->update($video);
+
+                $repository->save($video);
+
+                return new RedirectResponse($this->generateUrl('show_video', array(
+                    "class"       => $video->getGrade(),
+                    "subjectName" => $video->getSubject()->getUrlName(),
+                    "videoName"   => $video->getUrlName(),
+                )));
+            }
+
+            return $this->render('ZnaikaFrontendBundle:Video:editVideoForm.html.twig', array(
+                "form"      => $form->createView(),
+                "videoName" => $videoName
+            ));
+        }
+
         public function addVideoFormAction(Request $request)
         {
+            $grade       = $request->get("class");
+            $subject     = $this->getSubjectByName($request->get("subjectName"));
+            $chapterName = $request->get("chapterName");
+            $chapter     = $this->getChapterRepository()->getOne($chapterName, $grade, $subject->getSubjectId());
+
             $video = new Video();
-            $form  = $this->createForm(new VideoType(), $video);
+            $form  = $this->createForm(new VideoType($this->getUserRepository()), $video);
 
             $form->handleRequest($request);
 
@@ -197,18 +217,20 @@
                 $contentThumbnailUpdater = $this->getContentThumbnailUpdater();
                 $contentThumbnailUpdater->update($video);
 
+                $video->setInfoFromChapter($chapter);
                 $repository = $this->getVideoRepository();
                 $repository->save($video);
 
                 return new RedirectResponse($this->generateUrl('show_video', array(
                     "class"       => $video->getGrade(),
                     "subjectName" => $video->getSubject()->getUrlName(),
-                    "videoName"   => $video->getUrlName()
+                    "videoName"   => $video->getUrlName(),
                 )));
             }
 
             return $this->render('ZnaikaFrontendBundle:Video:addVideoForm.html.twig', array(
-                'form' => $form->createView(),
+                "form"    => $form->createView(),
+                "chapter" => $chapter,
             ));
         }
 
@@ -250,13 +272,33 @@
             ));
         }
 
+        public function moveVideoAjaxAction(Request $request)
+        {
+            $videoRepository = $this->getVideoRepository();
+            $video = $videoRepository->getOneByUrlName($request->get("videoName"));
+            $direction = $request->get("direction");
+
+            $success = false;
+
+            if ($video)
+            {
+                $success = $videoRepository->moveVideo($video, $direction);
+            }
+
+            return new JsonResponse(array("success" => $success));
+        }
+
         public function showVideoAction($class, $subjectName, $videoName)
         {
             $repository = $this->getVideoRepository();
             $video      = $repository->getOneByUrlName($videoName);
 
             $isValidUrl = false;
-            if ($video)
+            if (!$video)
+            {
+                throw $this->createNotFoundException("Video not found");
+            }
+            else
             {
                 $subject    = $video->getSubject();
                 $isValidUrl = !is_null($video) && $subject->getUrlName() == $subjectName && $video->getGrade() == $class;
@@ -361,5 +403,39 @@
         private function getVideoCommentRepository()
         {
             return $this->get('znaika_frontend.video_comment_repository');
+        }
+
+        /**
+         * @return UserRepository
+         */
+        private function getUserRepository()
+        {
+            return $this->get('znaika_frontend.user_repository');
+        }
+
+        /**
+         * @param $videoComment
+         * @param $videoCommentRepository
+         */
+        private function prepareVideoCommentType($videoComment, $videoCommentRepository)
+        {
+            $request = $this->getRequest();
+
+            $videoComment->setCommentType(VideoCommentUtil::SIMPLE_COMMENT);
+            $isQuestion = $request->get("isQuestion", false);
+            $isAnswer   = $request->get("isAnswer", false);
+            if ($isQuestion)
+            {
+                $videoComment->setCommentType(VideoCommentUtil::QUESTION);
+            }
+            elseif ($isAnswer)
+            {
+                $videoComment->setCommentType(VideoCommentUtil::ANSWER);
+
+                $questionId = $request->get("questionId", 0);
+                $question   = $videoCommentRepository->getOneByVideoCommentId($questionId);
+                $question->setIsAnswered(true);
+                $videoComment->setQuestion($question);
+            }
         }
     }
