@@ -57,4 +57,15 @@
 
             return $result;
         }
+
+        public function getOne($name, $grade, $subjectId)
+        {
+            $result = $this->redisRepository->getOne($name, $grade, $subjectId);
+            if (empty($result))
+            {
+                $result = $this->dbRepository->getOne($name, $grade, $subjectId);
+            }
+
+            return $result;
+        }
     }

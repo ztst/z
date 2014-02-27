@@ -1,6 +1,7 @@
 <?
     namespace Znaika\FrontendBundle\Repository\Lesson\Content;
 
+    use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
 
     interface IVideoRepository
@@ -63,4 +64,19 @@
          * @return bool
          */
         public function save(Video $video);
+
+        /**
+         * @param Video $video
+         * @param string $direction
+         *
+         * @return bool
+         */
+        public function moveVideo(Video $video, $direction);
+
+        /**
+         * @param Chapter $chapter
+         *
+         * @return int
+         */
+        public function getMaxChapterOrderPriority(Chapter $chapter);
     }

@@ -3,17 +3,12 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
             fields: [urlName]
             message: 'not_unique'
-        - Callback:
-            methods:   [isChapterValid]
     properties:
         name:
             - NotBlank: { message: "not_blank" }
-        grade:
-            - NotBlank: { message: "not_blank" }
-            - Znaika\FrontendBundle\Validator\Constraints\ClassNumber: ~
-        urlName:
-            - NotBlank: { message: "not_blank" }
         url:
+            - NotBlank: { message: "not_blank" }
+        author:
             - NotBlank: { message: "not_blank" }
 
 Znaika\FrontendBundle\Entity\Profile\User:

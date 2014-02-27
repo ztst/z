@@ -1,6 +1,16 @@
+{% if is_moderator() %}
+  <a class="add-video-link" href="{{ path('add_video_form', {"chapterName": chapter.urlName, "class": chapter.grade, "subjectName": chapter.subject.urlName}) }}" title="">Добавить видеоурок</a>
+  {% if currentVideo is defined and currentVideo == video %}
+    <br/>
+    <a class="video-up" href="javascript:void(0);">Переместить выше</a>
+    <br/>
+    <a class="video-down" href="javascript:void(0);">Переместить ниже</a>
+    <input type="hidden" value="{{ currentVideo.urlName }}" id="currentVideoName" />
+  {% endif %}
+{% endif %}
 {% if not videos is empty %}
   {% for video in videos %}
-    <div>
+    <div class="chapter-video{% if currentVideo is defined and currentVideo == video %} chapter-selected-video{% endif %}">
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-left">
         <a href="{{ path('show_video', {
             'subjectName': video.getSubject.getUrlName,
@@ -11,7 +21,7 @@
           <img
             src="{{ video.getSmallThumbnailUrl }}"
             alt="{{ video.getName|raw }}"
-            class="{% if currentVideoId is defined and currentVideoId == video.getVideoId %}chapter-selected-video{% endif %}"
+            class="chapter-video-preview"
             />
         </a>
       </div>
@@ -21,6 +31,9 @@
         {% set month = video.getCreatedTime|date('F') %}
         {% set year = video.getCreatedTime|date('Y') %}
         <p>{{ '%s %s'|format(month|trans, year) }}</p>
+        {% if not video.synopsis is empty %}
+          <img src="{{ asset("images/video/video-has-synopsis.png") }}" alt='Конспект' />
+        {% endif %}
       </div>
     </div>
     <div class="clear"></div>

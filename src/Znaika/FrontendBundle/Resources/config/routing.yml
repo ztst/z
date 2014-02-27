@@ -32,8 +32,12 @@ show_video:
         class:  \d+
 
 add_video_form:
-    pattern: /video/add-form
+    pattern: /video/{class}-klass/{subjectName}/{chapterName}/add-video-form
     defaults: { _controller: ZnaikaFrontendBundle:Video:addVideoForm }
+
+edit_video_form:
+    pattern: /video/{videoName}/edit-video-form
+    defaults: { _controller: ZnaikaFrontendBundle:Video:editVideoForm }
 
 add_video_comment_form:
     pattern: /{videoName}/add_video_comment_form
@@ -42,6 +46,13 @@ add_video_comment_form:
 get_prev_comments:
     pattern: /{videoName}/prev-comments
     defaults: { _controller: ZnaikaFrontendBundle:Video:getPrevComments }
+
+move_video:
+    pattern: /move-video-ajax
+    defaults: { _controller: ZnaikaFrontendBundle:Video:moveVideoAjax }
+    methods:  [POST]
+    options:
+        expose: true
 
 add_synopsis_form:
     pattern: /video/{videoName}/add-synopsis-form

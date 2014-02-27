@@ -531,3 +531,15 @@ label
     opacity: 0.4;
     box-shadow: 0 5px 0.5em -1px #666;
 }
+
+.add-video-link
+{
+    display: inline-block;
+    padding-top: 15px;
+    width: 100px;
+    height: 75px;
+    background: #dbdbdb;
+    border: 1px solid #868686;
+
+    text-align: center;
+}

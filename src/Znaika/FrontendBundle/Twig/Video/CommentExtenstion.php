@@ -124,7 +124,7 @@
             $videoSupervisors = $video->getSupervisors();
             $user             = $this->getUser();
 
-            if (!$videoSupervisors->contains($user) || $this->context->isGranted(UserRole::getSecurityTextByRole(UserRole::ROLE_MODERATOR)))
+            if (!$videoSupervisors->contains($user) && !$this->context->isGranted(UserRole::getSecurityTextByRole(UserRole::ROLE_MODERATOR)))
             {
                 return false;
             }

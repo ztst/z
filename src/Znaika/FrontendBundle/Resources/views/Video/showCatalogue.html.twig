@@ -27,7 +27,7 @@
       <h3>Все уроки этого раздела</h3>
       {% for chapter in chapters %}
         <div id="chapter_videos_{{ chapter.getChapterId }}" class="chapter-videos{% if currentChapterId != chapter.getChapterId %} hidden{% endif %}">
-          {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapter.getVideos} %}
+          {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapter.getVideos, "chapter": chapter} %}
         </div>
       {% endfor %}
     </div>

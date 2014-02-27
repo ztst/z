@@ -1,6 +1,7 @@
 <?
     namespace Znaika\FrontendBundle\Repository\Lesson\Content;
 
+    use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
 
     class VideoRedisRepository implements IVideoRepository
@@ -71,4 +72,18 @@
             return null;
         }
 
+        public function moveVideo(Video $video, $direction)
+        {
+            return true;
+        }
+
+        /**
+         * @param Chapter $chapter
+         *
+         * @return int
+         */
+        public function getMaxChapterOrderPriority(Chapter $chapter)
+        {
+            return null;
+        }
     }

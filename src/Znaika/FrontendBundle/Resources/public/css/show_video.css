@@ -23,7 +23,7 @@
     margin-bottom: 10px;
 }
 
-.chapter-selected-video
+.chapter-selected-video .chapter-video-preview
 {
     outline: 3px solid #00aa00;
 }

@@ -1,6 +1,7 @@
 <?
     namespace Znaika\FrontendBundle\Repository\Lesson\Content;
 
+    use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Repository\BaseRepository;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
 
@@ -136,4 +137,27 @@
             return $success;
         }
 
+        public function moveVideo(Video $video, $direction)
+        {
+            $this->redisRepository->moveVideo($video, $direction);
+            $success = $this->dbRepository->moveVideo($video, $direction);
+
+            return $success;
+        }
+
+        /**
+         * @param Chapter $chapter
+         *
+         * @return int
+         */
+        public function getMaxChapterOrderPriority(Chapter $chapter)
+        {
+            $result = $this->redisRepository->getMaxChapterOrderPriority($chapter);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getMaxChapterOrderPriority($chapter);
+            }
+
+            return $result;
+        }
     }

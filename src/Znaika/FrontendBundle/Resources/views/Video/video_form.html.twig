@@ -1,0 +1,28 @@
+<div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
+  {{ form_start(form, {'action': url, 'method': 'POST'}) }}
+  {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+  <div class="form-group">
+    {{ form_label(form.name, 'Название') }}
+    {{ form_errors(form.name) }}
+    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(form.url, 'Ссылка') }}
+    {{ form_errors(form.url) }}
+    {{ form_widget(form.url, {'attr': {'class': 'form-control'}}) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(form.author, 'Автор') }}
+    {{ form_errors(form.author) }}
+    {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(form.supervisors, 'Кураторы') }}
+    {{ form_errors(form.supervisors) }}
+    {{ form_widget(form.supervisors, {'attr': {'class': 'form-control'}}) }}
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary">Cохранить</button>
+  </div>
+  {{ form_end(form) }}
+</div>
