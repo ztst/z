@@ -6,8 +6,8 @@
       </a>
       <div class="media-body">
         {{ comment_title(comment)|raw }}
-        {{ comment.getText }}
-        <h6 class="media-heading"><em>{{ comment_date(comment.getCreatedTime) }}</em></h6>
+        <span class="comment-body">{{ comment.getText }}</span>
+        <h6 class="media-heading comment-date">{{ comment_date(comment.getCreatedTime) }}</h6>
       </div>
     </li>
   {% endfor %}

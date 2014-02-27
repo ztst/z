@@ -19,14 +19,6 @@
 }
 
 /* Top videos block BEGIN */
-.index-page-top-videos-block
-{
-}
-
-.index-page-top-video
-{
-}
-
 .index-page-top-video h2
 {
     padding-left: 45px;
@@ -104,10 +96,6 @@
     {
         padding-right: 0;
     }
-}
-
-.index-page-videos-list .list-item
-{
 }
 
 .index-page-videos-list .list-item h5
@@ -363,7 +351,7 @@ button.subscribe-button, button.subscribe-button:active, button.subscribe-button
 {
     position: relative;
     padding-top: 30px;
-    height: 207px;
+    height: 54px;
     color: #c8c8c8;
 }
 
@@ -424,7 +412,7 @@ button.subscribe-button, button.subscribe-button:active, button.subscribe-button
     margin-top: 15px;
 }
 
-@media (min-width: 992px)
+/*@media (min-width: 992px)
 {
     .footer-znaika-boy
     {
@@ -445,7 +433,7 @@ button.subscribe-button, button.subscribe-button:active, button.subscribe-button
         height: 146px;
         background: url('/images/footer/znaika-boy.png') no-repeat;
     }
-}
+}*/
 
 @media (max-width: 767px)
 {

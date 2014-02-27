@@ -24,6 +24,30 @@
 
 @font-face
 {
+    font-family: 'OpenSans Bold';
+    src: url('/font/opensans-bold.eot');
+    src: url('/font/opensans-bold.eot?#iefix') format('embedded-opentype'),
+    url('/font/opensans-bold.woff') format('woff'),
+    url('/font/opensans-bold.ttf') format('truetype'),
+    url('/font/opensans-bold.svg#open_sansbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face
+{
+    font-family: 'OpenSans Semibold';
+    src: url('/font/opensans-semibold.eot');
+    src: url('/font/opensans-semibold.eot?#iefix') format('embedded-opentype'),
+    url('/font/opensans-semibold.woff') format('woff'),
+    url('/font/opensans-semibold.ttf') format('truetype'),
+    url('/font/opensans-semibold.svg#open_sanssemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face
+{
     font-family: 'MyriadPro Bold';
     src: url('/font/myriadpro_bold.eot');
     src: url('/font/myriadpro_bold.eot?#iefix') format('embedded-opentype'),
@@ -32,11 +56,4 @@
          url('/font/myriadpro_bold.svg#myriad_probold') format('svg');
     font-weight: normal;
     font-style: normal;
-}
-
-@font-face
-{
-    font-family: "OpenSans Bold";
-    src: local("OpenSans Bold")
-    url(/font/open_sans_bold.ttf);
 }
