@@ -39,6 +39,10 @@ var ShowVideoPage = Base.extend({
 
     _onMoveVideoUpClick: function()
     {
+        if (this._isMoving)
+        {
+            return false;
+        }
         this._isMoving = true;
 
         var url = Routing.generate("move_video");
@@ -53,6 +57,10 @@ var ShowVideoPage = Base.extend({
 
     _onMoveVideoDownClick: function()
     {
+        if (this._isMoving)
+        {
+            return false;
+        }
         this._isMoving = true;
 
         var url = Routing.generate("move_video");
@@ -71,7 +79,7 @@ var ShowVideoPage = Base.extend({
         if (response.success)
         {
             var current = $('.chapter-selected-video');
-            current.prev(".chapter-video").before(current);
+            current.prev().before(current);
         }
     },
 
@@ -81,7 +89,7 @@ var ShowVideoPage = Base.extend({
         if (response.success)
         {
             var current = $('.chapter-selected-video');
-            current.next(".chapter-video").after(current);
+            current.next().after(current);
         }
     },
 

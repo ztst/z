@@ -6,7 +6,7 @@
   {{ parent() }}
 
   {% stylesheets filter='cssrewrite' '@ZnaikaFrontendBundle/Resources/public/css/show_video.css' %}
-    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
 
@@ -27,12 +27,9 @@
   {% if isValidUrl %}
     <div class="col-md-8 col-center">
       <div class="video-view-container">
-      <div class="clear"></div>
-      <h1>{{ video.getName|raw }}</h1>
+        <div class="clear"></div>
+        <h1>{{ video.getName|raw }}</h1>
 
-        {% if is_moderator() %}
-          <a class="btn btn-primary" href="{{ path("edit_video_form", {"videoName": video.urlName}) }}">Редактировать видеоурок</a>
-        {% endif %}
         <div class="col-center">
           <ul class="nav nav-tabs select-content-tab">
             <li class="video active">
@@ -48,27 +45,31 @@
               <a data-toggle="tab">Тест</a>
             </li>
             <li class="video-buttons-container">
-        {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
-            'url': app.request.uri,
-            'title': video.name,
-            'img': video.getLargeThumbnailUrl,
-            'desc': ( video.synopsis ) ? video.synopsis.text : ""
-          }
-        %}
-        {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
-        {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video} %}
+              {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
+                'url': app.request.uri,
+                'title': video.name,
+                'img': video.getLargeThumbnailUrl,
+                'desc': ( video.synopsis ) ? video.synopsis.text : ""
+              } %}
+              {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
+              {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video} %}
+              {% if is_moderator() %}
+                <a class="btn btn-primary" href="{{ path("edit_video_form", {"videoName": video.urlName}) }}">Редактировать
+                  видеоурок</a>
+              {% endif %}
             </li>
           </ul>
-      </div>
+        </div>
         <div class="clear"></div>
-
         <div class="video-player-container">
-          <iframe src="//player.vimeo.com/video/{{ video.getUrl }}" width="100%" height="375" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-    </div>
+          <iframe src="//player.vimeo.com/video/{{ video.getUrl }}" width="100%" height="375" frameborder="0"
+                  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
         <div class="clear"></div>
         <div class="col-md-12">
           <h5 class="video-author">{{ video.getAuthor }}</h5>
           <h5 class="video-views-amount">{{ 'count_views'|transchoice(video.getViews) }}</h5>
+
           <div class="clear"></div>
           {% set month = video.getCreatedTime|date('F') %}
           {% set year = video.getCreatedTime|date('Y') %}
@@ -84,14 +85,15 @@
         </div>
         <div class="chapter-name">{{ video.chapter.name }}</div>
         <h5>Уроки этого раздела</h5>
+
         <div class="show-more-videos">
           <a href="javascript:void(0);">Показать предыдущие (69)</a>
         </div>
-      {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapterVideos, 'currentVideo': video, "chapter": video.chapter} %}
-    </div>
+        {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapterVideos, 'currentVideo': video, "chapter": video.chapter} %}
+      </div>
     </div>
   {% else %}
     <img src="{{ asset('images/404.jpg') }}" alt="Видео не найдено"/>
   {% endif %}
-  <input id="videoName" type="hidden" value="{{ video.getUrlName }}" />
+  <input id="videoName" type="hidden" value="{{ video.getUrlName }}"/>
 {% endblock %}

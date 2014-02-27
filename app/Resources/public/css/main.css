@@ -251,9 +251,6 @@ body
     display: block;
     text-align: center;
     cursor: pointer;
-
-    background: url("/images/subject_menu_separator.png") no-repeat;
-    background-position: right;
 }
 
 .main-menu

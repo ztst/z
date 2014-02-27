@@ -9,61 +9,41 @@
   {% endif %}
 {% endif %}
 {% if not videos is empty %}
+  <ul class="chapter-videos-list">
   {% for video in videos %}
-    <div class="chapter-video{% if currentVideo is defined and currentVideo == video %} chapter-selected-video{% endif %}">
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-left">
-<<<<<<< HEAD
-        <a href="{{ path('show_video', {
-            'subjectName': video.getSubject.getUrlName,
-            'class': video.getGrade,
-            'videoName': video.getUrlName
-            }) }}"
-           title="{{ video.getName|raw }}">
-          <img
-            src="{{ video.getSmallThumbnailUrl }}"
-            alt="{{ video.getName|raw }}"
-            class="chapter-video-preview"
-            />
-        </a>
-      </div>
-      <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-right">
-        <p>{{ video.getName|raw }}</p>
-        <p>{{ video.getAuthor|raw }}</p>
-        {% set month = video.getCreatedTime|date('F') %}
-        {% set year = video.getCreatedTime|date('Y') %}
-        <p>{{ '%s %s'|format(month|trans, year) }}</p>
-        {% if not video.synopsis is empty %}
-          <img src="{{ asset("images/video/video-has-synopsis.png") }}" alt='Конспект' />
-        {% endif %}
-=======
-        <div class="{% if currentVideoId is defined and currentVideoId == video.getVideoId %}chapter-selected-video{% endif %}">
-          <a href="{{ path('show_video', {
-              'subjectName': video.getSubject.getUrlName,
-              'class': video.getGrade,
-              'videoName': video.getUrlName
-              }) }}"
-             title="{{ video.getName|raw }}">
-            <img
-              src="{{ video.getSmallThumbnailUrl }}"
-              alt="{{ video.getName|raw }}"
-              class="{% if currentVideoId is defined and currentVideoId == video.getVideoId %}chapter-selected-video{% endif %}"
-              />
-          </a>
+    <li class="{% if currentVideo is defined and currentVideo == video %}chapter-selected-video{% endif %}">
+      <div class="chapter-video">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-left">
+          <div class="chapter-video-preview-container">
+            <a href="{{ path('show_video', {
+                'subjectName': video.getSubject.getUrlName,
+                'class': video.getGrade,
+                'videoName': video.getUrlName
+                }) }}"
+               title="{{ video.getName|raw }}">
+              <img
+                src="{{ video.getSmallThumbnailUrl }}"
+                alt="{{ video.getName|raw }}"
+                class="chapter-video-preview"
+                />
+            </a>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-right">
+          <p class="video-title">{{ video.getName|raw }}</p>
+          <p class="video-author-in-list">{{ video.getAuthor|raw }}</p>
+          <div>
+            {% if not video.synopsis is empty %}
+              <div class="video-has-abstract"></div>
+              <div class="icons-delimiter"></div>
+            {% endif %}
+            <div class="video-has-test"></div>
+          </div>
+          <div class="clear"></div>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-right">
-        <p class="video-title">{{ video.getName|raw }}</p>
-        <p class="video-author-in-list">{{ video.getAuthor|raw }}</p>
-        <div>
-          <div class="video-has-abstract"></div>
-          <div class="icons-delimiter"></div>
-          <div class="video-has-test"></div>
-        </div>
-        <div class="clear"></div>
->>>>>>> master
-      </div>
-    </div>
-    <div class="clear"></div>
-    <hr />
+      <div class="clear"></div>
+      <hr />
+    </li>
   {% endfor %}
 {% endif %}
