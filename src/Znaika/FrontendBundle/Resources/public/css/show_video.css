@@ -1,5 +1,6 @@
 .video-player-container,
 .nav-tabs.select-content-tab,
+.video-buttons-container,
 .video-info,
 .comments-container
 {
@@ -19,7 +20,7 @@
 .video-view-container h1
 {
     width: 85%;
-    margin: 0 18px -20px;
+    margin: 0 18px;
     font-family: "OpenSans Semibold";
     font-size: 22px;
 }
@@ -27,6 +28,21 @@
 .video-view-container .video-buttons-container .btn
 {
     margin-bottom: 10px;
+}
+
+.tabs-and-social-buttons-container
+{
+    display: inline-block;
+    margin-bottom: 15px;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+.select-content-tab
+{
+    float: left;
+    margin-top: 20px;
+    margin-bottom: -1px;
 }
 
 .nav-tabs.select-content-tab > li > a
@@ -63,9 +79,10 @@
     margin-top: -1px;
 }
 
-.nav-tabs > li.video-buttons-container
+.video-buttons-container
 {
     float: right;
+    height: 29px;
 }
 
 .video-tab-icon,
@@ -105,7 +122,8 @@
 
 .video-social-buttons
 {
-    margin-top: 5px;
+    float: right;
+    margin-top: 25px;
     margin-bottom: 10px;
 }
 

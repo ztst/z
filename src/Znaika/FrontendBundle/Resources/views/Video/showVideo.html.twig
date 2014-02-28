@@ -31,34 +31,36 @@
         <h1>{{ video.getName|raw }}</h1>
 
         <div class="col-center">
-          <ul class="nav nav-tabs select-content-tab">
-            <li class="video active">
-              <div class="video-tab-icon"></div>
-              <a data-toggle="tab">Видеоурок</a>
-            </li>
-            <li class="synopsis">
-              <div class="synopsis-tab-icon"></div>
-              <a data-toggle="tab">Конспект</a>
-            </li>
-            <li class="test">
-              <div class="test-tab-icon"></div>
-              <a data-toggle="tab">Тест</a>
-            </li>
-            <li class="video-buttons-container">
-              {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
-                'url': app.request.uri,
-                'title': video.name,
-                'img': video.getLargeThumbnailUrl,
-                'desc': ( video.synopsis ) ? video.synopsis.text : ""
-              } %}
+          <div class="tabs-and-social-buttons-container">
+            <ul class="nav nav-tabs select-content-tab">
+              <li class="video active">
+                <div class="video-tab-icon"></div>
+                <a data-toggle="tab">Видеоурок</a>
+              </li>
+              <li class="synopsis">
+                <div class="synopsis-tab-icon"></div>
+                <a data-toggle="tab">Конспект</a>
+              </li>
+              <li class="test">
+                <div class="test-tab-icon"></div>
+                <a data-toggle="tab">Тест</a>
+              </li>
+            </ul>
+              <div class="video-buttons-container">
+                {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
+                  'url': app.request.uri,
+                  'title': video.name,
+                  'img': video.getLargeThumbnailUrl,
+                  'desc': ( video.synopsis ) ? video.synopsis.text : ""
+                } %}
+              </div>
+          </div>
               {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
               {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video} %}
               {% if is_moderator() %}
                 {#<a class="btn btn-primary" href="{{ path("edit_video_form", {"videoName": video.urlName}) }}">Редактировать#}
                   {#видеоурок</a>#}
               {% endif %}
-            </li>
-          </ul>
         </div>
         <div class="clear"></div>
         <div class="video-player-container">
