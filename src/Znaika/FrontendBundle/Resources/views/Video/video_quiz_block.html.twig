@@ -1,0 +1,11 @@
+{% if video.quiz %}
+  {% if is_moderator() %}
+    <a class="btn btn-primary" href="javascript:void(0);">Редактировать тест</a>
+  {% endif %}
+  <div>
+    Тут отображается тест
+  </div>
+{% endif %}
+{% if is_moderator() %}
+  <a class="btn btn-primary" href="javascript:void(0);">Добавить тест</a>
+{% endif %}

@@ -5,6 +5,7 @@
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use \Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Doctrine\ORM\Mapping as ORM;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment;
     use Znaika\FrontendBundle\Entity\Profile\User;
 
@@ -99,6 +100,11 @@
          * @var integer
          */
         private $orderPriority;
+
+        /**
+         * @var Quiz
+         */
+        private $quiz;
 
         /**
          * Constructor
@@ -508,5 +514,21 @@
         public function getOrderPriority()
         {
             return $this->orderPriority;
+        }
+
+        /**
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz $quiz
+         */
+        public function setQuiz($quiz)
+        {
+            $this->quiz = $quiz;
+        }
+
+        /**
+         * @return \Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz
+         */
+        public function getQuiz()
+        {
+            return $this->quiz;
         }
     }

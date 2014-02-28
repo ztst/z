@@ -7,10 +7,12 @@
     use Symfony\Component\HttpFoundation\ResponseHeaderBag;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
+    use Znaika\FrontendBundle\Form\Lesson\Content\Attachment\QuizType;
     use Znaika\FrontendBundle\Form\Lesson\Content\Attachment\VideoAttachmentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\SynopsisType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoCommentType;
@@ -275,8 +277,8 @@
         public function moveVideoAjaxAction(Request $request)
         {
             $videoRepository = $this->getVideoRepository();
-            $video = $videoRepository->getOneByUrlName($request->get("videoName"));
-            $direction = $request->get("direction");
+            $video           = $videoRepository->getOneByUrlName($request->get("videoName"));
+            $direction       = $request->get("direction");
 
             $success = false;
 
@@ -301,20 +303,13 @@
             else
             {
                 $subject    = $video->getSubject();
-                $isValidUrl = !is_null($video) && $subject->getUrlName() == $subjectName && $video->getGrade() == $class;
+                $isValidUrl = $subject->getUrlName() == $subjectName && $video->getGrade() == $class;
             }
 
-            $videoComment        = new VideoComment();
-            $addVideoCommentForm = $this->createForm(new VideoCommentType(), $videoComment);
-
-            $user               = $this->getUser();
-            $listener           = $this->getUserOperationListener();
-            $viewVideoOperation = ($user) ? $listener->onViewVideo($user, $video) : null;
-
-            $chapterVideos = $repository->getVideoByChapter($video->getChapter()->getChapterId());
-            $comments      = $this->getVideoCommentRepository()
-                                  ->getLastVideoComments($video, self::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE);
-            $comments      = array_reverse($comments);
+            $addVideoCommentForm = $this->getAddVideoCommentForm();
+            $viewVideoOperation  = $this->saveViewVideoOperation($video);
+            $chapterVideos       = $repository->getVideoByChapter($video->getChapter()->getChapterId());
+            $comments            = $this->getLastVideoComments($video);
 
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
                 'video'               => $video,
@@ -437,5 +432,57 @@
                 $question->setIsAnswered(true);
                 $videoComment->setQuestion($question);
             }
+        }
+
+        /**
+         * @param $video
+         *
+         * @return array|\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment[]
+         */
+        private function getLastVideoComments($video)
+        {
+            $comments = $this->getVideoCommentRepository()
+                             ->getLastVideoComments($video, self::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE);
+            $comments = array_reverse($comments);
+
+            return $comments;
+        }
+
+        /**
+         * @param $video
+         *
+         * @return null|\Znaika\FrontendBundle\Entity\Profile\Action\ViewVideoOperation
+         */
+        private function saveViewVideoOperation($video)
+        {
+            $user               = $this->getUser();
+            $listener           = $this->getUserOperationListener();
+            $viewVideoOperation = ($user) ? $listener->onViewVideo($user, $video) : null;
+
+            return $viewVideoOperation;
+        }
+
+        /**
+         * @return \Symfony\Component\Form\Form
+         */
+        private function getAddVideoCommentForm()
+        {
+            $videoComment        = new VideoComment();
+            $addVideoCommentForm = $this->createForm(new VideoCommentType(), $videoComment);
+
+            return $addVideoCommentForm;
+        }
+
+        /**
+         * @param $video
+         *
+         * @return \Symfony\Component\Form\Form
+         */
+        private function getAddQuizForm($video)
+        {
+            $quiz        = is_null($video->getQuiz()) ? new Quiz() : $video->getQuiz();
+            $addQuizForm = $this->createForm(new QuizType(), $quiz);
+
+            return $addQuizForm;
         }
     }

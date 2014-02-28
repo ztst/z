@@ -22,6 +22,12 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             joinColumn:
                 name: synopsis_id
                 referencedColumnName: synopsis_id
+        quiz:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz
+            inversedBy: video
+            joinColumn:
+                name: quiz_id
+                referencedColumnName: quiz_id
     manyToOne:
         chapter:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Category\Chapter

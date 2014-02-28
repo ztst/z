@@ -1,0 +1,12 @@
+Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz:
+    type: entity
+    table: quiz
+    repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\QuizDBRepository
+    fields:
+        quizId:      { column: quiz_id, type: integer, id: true, generator: { strategy: AUTO } }
+        createdTime: { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
+    oneToOne:
+        video:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
+            mappedBy: quiz
+    lifecycleCallbacks: {  }
