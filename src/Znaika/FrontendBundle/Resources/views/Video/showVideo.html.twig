@@ -36,8 +36,8 @@
               <div class="video-tab-icon"></div>
               <a data-toggle="tab">Видеоурок</a>
             </li>
-            <li class="abstract">
-              <div class="abstract-tab-icon"></div>
+            <li class="synopsis">
+              <div class="synopsis-tab-icon"></div>
               <a data-toggle="tab">Конспект</a>
             </li>
             <li class="test">
@@ -54,8 +54,8 @@
               {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
               {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video} %}
               {% if is_moderator() %}
-                <a class="btn btn-primary" href="{{ path("edit_video_form", {"videoName": video.urlName}) }}">Редактировать
-                  видеоурок</a>
+                {#<a class="btn btn-primary" href="{{ path("edit_video_form", {"videoName": video.urlName}) }}">Редактировать#}
+                  {#видеоурок</a>#}
               {% endif %}
             </li>
           </ul>
@@ -66,14 +66,16 @@
                   webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         </div>
         <div class="clear"></div>
-        <div class="col-md-12">
-          <h5 class="video-author">{{ video.getAuthor }}</h5>
-          <h5 class="video-views-amount">{{ 'count_views'|transchoice(video.getViews) }}</h5>
+        <div class="col-md-12 col-center">
+          <div class="video-info">
+            <h5 class="video-author">{{ video.getAuthor }}</h5>
+            <h5 class="video-views-amount">{{ 'count_views'|transchoice(video.getViews) }}</h5>
 
-          <div class="clear"></div>
-          {% set month = video.getCreatedTime|date('F') %}
-          {% set year = video.getCreatedTime|date('Y') %}
-          <div class="video-date">{{ '%s %s'|format(month|trans, year) }}</div>
+            <div class="clear"></div>
+            {% set month = video.getCreatedTime|date('F') %}
+            {% set year = video.getCreatedTime|date('Y') %}
+            <div class="video-date">{{ '%s %s'|format(month|trans, year) }}</div>
+          </div>
           {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video, 'comments': comments} %}
         </div>
       </div>

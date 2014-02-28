@@ -1,7 +1,7 @@
 {% if not video.getQuizQuestions is empty %}
-  <a href="{% if is_user() %}{{ path('show_quiz', {'videoName': video.getUrlName}) }}{% else %}javascript:void(0);{% endif %}" class="btn btn-primary">
+{#  <a href="{% if is_user() %}{{ path('show_quiz', {'videoName': video.getUrlName}) }}{% else %}javascript:void(0);{% endif %}" class="btn btn-primary">
     Пройти тест
-  </a>
+  </a>#}
 {% endif %}
 {% if is_moderator() %}
   <a id="createQuiz" href="{{ path('add_quiz_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">

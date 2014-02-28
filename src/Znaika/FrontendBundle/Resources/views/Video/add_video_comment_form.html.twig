@@ -1,4 +1,4 @@
-<div class="col-sm-11 col-left">
+<div class="col-sm-11 col-left col-center">
   {{ form_start(form, {'attr': {'id': 'addCommentForm'}, 'action': path('add_video_comment_form', {"videoName": video.getUrlName}), 'method': 'POST'}) }}
     {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
     <div class="form-group add-video-comment-container">
