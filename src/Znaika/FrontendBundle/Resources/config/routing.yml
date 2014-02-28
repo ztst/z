@@ -58,18 +58,6 @@ add_synopsis_form:
     pattern: /video/{videoName}/add-synopsis-form
     defaults: { _controller: ZnaikaFrontendBundle:Video:addSynopsisForm }
 
-add_quiz_form:
-    pattern: /video/{videoName}/add-quiz-form
-    defaults: { _controller: ZnaikaFrontendBundle:Quiz:addQuizForm }
-
-show_quiz:
-    pattern: /video/{videoName}/quiz
-    defaults: { _controller: ZnaikaFrontendBundle:Quiz:showQuiz }
-
-add_quiz_attempt:
-    pattern: /video/{videoName}/quiz_attempt
-    defaults: { _controller: ZnaikaFrontendBundle:Quiz:addQuizAttempt }
-
 register:
     pattern: /register
     defaults: { _controller: ZnaikaFrontendBundle:User:register }

@@ -52,7 +52,6 @@
                 'desc': ( video.synopsis ) ? video.synopsis.text : ""
               } %}
               {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
-              {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video} %}
               {% if is_moderator() %}
                 <a class="btn btn-primary" href="{{ path("edit_video_form", {"videoName": video.urlName}) }}">Редактировать
                   видеоурок</a>

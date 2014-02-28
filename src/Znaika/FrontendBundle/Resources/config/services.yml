@@ -115,22 +115,6 @@ services:
         class:        Znaika\FrontendBundle\Repository\Profile\PasswordRecoveryRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika_frontend.quiz_question_repository:
-        class:        Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\QuizQuestionRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
-    znaika_frontend.quiz_answer_repository:
-        class:        Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\QuizAnswerRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
-    znaika_frontend.user_attempt_repository:
-        class:        Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\Attempt\UserAttemptRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
-    znaika_frontend.user_question_answer_repository:
-        class:        Znaika\FrontendBundle\Repository\Lesson\Content\Quiz\Attempt\UserQuestionAnswerRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
     znaika_frontend.message_repository:
         class:        Znaika\FrontendBundle\Repository\Communication\MessageRepository
         arguments:    ["@doctrine.orm.entity_manager"]

@@ -42,14 +42,6 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
             mappedBy:     video
             cascade:      [persist]
-        quizQuestions:
-            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion
-            mappedBy:     video
-            cascade:      [persist]
-        userAttempts:
-            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt
-            mappedBy:     video
-            cascade:      [persist]
         videoAttachments:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment
             mappedBy:     video

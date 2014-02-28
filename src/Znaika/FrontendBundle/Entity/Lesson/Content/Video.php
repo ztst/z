@@ -66,16 +66,6 @@
         private $videoAttachments;
 
         /**
-         * @var \Doctrine\Common\Collections\Collection
-         */
-        private $quizQuestions;
-
-        /**
-         * @var \Doctrine\Common\Collections\Collection
-         */
-        private $userAttempts;
-
-        /**
          * @var integer
          */
         private $views = 0;
@@ -117,8 +107,6 @@
         {
             $this->videoComments    = new \Doctrine\Common\Collections\ArrayCollection();
             $this->videoAttachments = new \Doctrine\Common\Collections\ArrayCollection();
-            $this->userAttempts     = new \Doctrine\Common\Collections\ArrayCollection();
-            $this->quizQuestions    = new \Doctrine\Common\Collections\ArrayCollection();
             $this->supervisors      = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
@@ -411,75 +399,6 @@
         public function getVideoComments()
         {
             return $this->videoComments;
-        }
-
-        /**
-         * Add quizQuestions
-         *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestion
-         *
-         * @return Video
-         */
-        public function addQuizQuestion(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestion)
-        {
-            $quizQuestion->setVideo($this);
-            $this->quizQuestions[] = $quizQuestion;
-
-            return $this;
-        }
-
-        /**
-         * Remove quizQuestions
-         *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestion
-         */
-        public function removeQuizQuestion(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestion)
-        {
-            $this->quizQuestions->removeElement($quizQuestion);
-        }
-
-        /**
-         * Get quizQuestions
-         *
-         * @return \Doctrine\Common\Collections\Collection
-         */
-        public function getQuizQuestions()
-        {
-            return $this->quizQuestions;
-        }
-
-        /**
-         * Add userAttempts
-         *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempt
-         *
-         * @return Video
-         */
-        public function addUserAttempt(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempt)
-        {
-            $this->userAttempts[] = $userAttempt;
-
-            return $this;
-        }
-
-        /**
-         * Remove userAttempts
-         *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempt
-         */
-        public function removeUserAttempt(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempt)
-        {
-            $this->userAttempts->removeElement($userAttempt);
-        }
-
-        /**
-         * Get userAttempts
-         *
-         * @return \Doctrine\Common\Collections\Collection
-         */
-        public function getUserAttempts()
-        {
-            return $this->userAttempts;
         }
 
         /**
