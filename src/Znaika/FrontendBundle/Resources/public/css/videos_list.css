@@ -1,0 +1,81 @@
+.chapter-videos-block-container
+{
+    margin: -20px 0;
+    padding: 20px 18px;
+    border-left: 1px solid #ccc;
+}
+
+.chapter-selected-video
+{
+    position: relative;
+    right: 2px;
+}
+
+
+.chapter-name
+{
+    margin-bottom: 15px;
+    color: #303030;
+    font-size: 15px;
+    font-family: "OpenSans Semibold";
+}
+
+.chapter-videos-block-container h5
+{
+    margin-bottom: 15px;
+    color: #262626;
+    font-size: 15px;
+}
+
+.video-title
+{
+    margin-top: -1px;
+    margin-bottom: 5px;
+    color: #222;
+    font-size: 12px;
+    font-family: "OpenSans Semibold";
+}
+
+.video-author-in-list
+{
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 11px;
+}
+
+.video-has-synopsis
+{
+    float: left;
+    margin-top: 2px;
+    width: 9px;
+    height: 8px;
+    background: url('/images/video/synopsis-tab-icon.png') no-repeat;
+}
+
+.icons-delimiter
+{
+    float: left;
+    margin-left: 5px;
+    margin-right: 6px;
+    width: 1px;
+    height: 11px;
+    background: #f0f0f0;
+}
+
+.video-has-quiz
+{
+    float: left;
+    width: 12px;
+    height: 12px;
+    background: url('/images/video/quiz-tab-icon.png') no-repeat;
+}
+
+.chapter-videos-list
+{
+    list-style-type: none;
+}
+
+.chapter-videos-list > li
+{
+    margin-bottom: 20px;
+}

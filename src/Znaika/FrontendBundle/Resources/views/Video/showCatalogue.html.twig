@@ -3,7 +3,10 @@
 {% block stylesheets %}
   {{ parent() }}
 
-  {% stylesheets filter='cssrewrite' '@ZnaikaFrontendBundle/Resources/public/css/catalog.css' %}
+  {% stylesheets filter='cssrewrite'
+    '@ZnaikaFrontendBundle/Resources/public/css/catalog.css'
+    '@ZnaikaFrontendBundle/Resources/public/css/videos_list.css'
+  %}
     <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
@@ -13,23 +16,26 @@
 
   {% javascripts
     '../app/Resources/public/js/classes/page/VideoCatalogPage.class.js'
+    '../app/Resources/public/js/classes/page/VideosList.class.js'
   %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
 {% endblock %}
 
 {% block content %}
-  <div class="show-catalog-page-container col-sm-12">
-    <div id="chapterCatalogContainer" class="col-md-8 col-left chapter-catalog-container">
+  <div class="show-catalog-page-container col-sm-12 col-center">
+    <div id="chapterCatalogContainer" class="col-md-8 col-left">
       {% include "ZnaikaFrontendBundle:Video:chapters_list.html.twig" with {'chapters': chapters, 'currentChapterId': currentChapterId} %}
     </div>
-    <div id="videoCatalogContainer" class="col-md-4 col-right">
-      <h3>Все уроки этого раздела</h3>
-      {% for chapter in chapters %}
-        <div id="chapter_videos_{{ chapter.getChapterId }}" class="chapter-videos{% if currentChapterId != chapter.getChapterId %} hidden{% endif %}">
-          {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapter.getVideos, "chapter": chapter} %}
-        </div>
-      {% endfor %}
+    <div id="videoCatalogContainer" class="col-md-4 col-center">
+      <div class="chapter-videos-block-container">
+        <h5>Уроки этого раздела ({{ videosAmount }})</h5>
+        {% for chapter in chapters %}
+          <div id="chapter_videos_{{ chapter.getChapterId }}" class="chapter-videos{% if currentChapterId != chapter.getChapterId %} hidden{% endif %}">
+            {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapter.getVideos, "chapter": chapter} %}
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 {% endblock %}

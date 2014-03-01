@@ -21,7 +21,8 @@ body
     min-height: 100%;
     height: auto;
     margin: 0 auto -60px;
-    padding: 0 0 60px;
+    padding: 0 0 54px;
+    background: #fcfcfc;
 }
 
 .col-left
@@ -59,6 +60,7 @@ body
     padding: 0 0 15px 0;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
+    background: #fff;
 }
 
 .content-container
@@ -80,7 +82,8 @@ body
 
 .class-hr
 {
-    position: absolute;
+    position: relative;
+    top: 9px;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -100,8 +103,8 @@ body
 
 .subjects-hr
 {
-    position: absolute;
-    top: 101px;
+    position: relative;
+    top: 9px;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -473,9 +476,16 @@ input
 .user-menu-button
 {
     margin-top: 13px;
-    width: 8px;
-    height: 5px;
+    width: 10px;
+    height: 10px;
     background: url('/images/header/user-menu-button.png') no-repeat;
+}
+
+.user-menu-button a,
+.user-menu-button a:hover
+{
+    display: block;
+    text-decoration: none;
 }
 
 .new-user-badge-link

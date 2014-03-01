@@ -41,7 +41,7 @@
               {{ user_badges(app.user)|raw }}
             </li>
             <li>
-              <div class="user-menu-button"></div>
+              <div class="user-menu-button"><a href="{{ path('logout') }}" title="Выход">&nbsp;</a></div>
             </li>
             {#<li><a href="{{ path("logout") }}" class="btn btn-default logout_button">Выйти</a></li>#}
           {% else %}
@@ -51,6 +51,6 @@
       </div>
     </div>
   </div>
-</div>
 <hr class="class-hr" />
 <hr class="subjects-hr" />
+</div>

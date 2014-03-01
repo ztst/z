@@ -33,7 +33,6 @@
 .tabs-and-social-buttons-container
 {
     display: inline-block;
-    margin-bottom: 15px;
     width: 100%;
     border-bottom: 1px solid #ccc;
 }
@@ -87,13 +86,23 @@
 
 .video-tab-icon,
 .synopsis-tab-icon,
-.test-tab-icon
+.quiz-tab-icon
 {
     float: left;
     position: relative;
     z-index: 1;
     width: 12px;
     height: 12px;
+}
+
+.tab-pane
+{
+    display: none;
+}
+
+.tab-pane.active
+{
+    display: block;
 }
 
 .select-content-tab .video-tab-icon
@@ -112,12 +121,12 @@
     background: url('/images/video/synopsis-tab-icon.png') no-repeat;
 }
 
-.select-content-tab .test-tab-icon
+.select-content-tab .quiz-tab-icon
 {
     top: 10px;
     left: 12px;
 
-    background: url('/images/video/test-tab-icon.png') no-repeat;
+    background: url('/images/video/quiz-tab-icon.png') no-repeat;
 }
 
 .video-social-buttons
@@ -182,6 +191,7 @@
 
 .video-date
 {
+    margin-top: 3px;
     margin-bottom: 15px;
     color: #666;
     font-size: 12px;
@@ -227,24 +237,28 @@
 .question-comment-button
 {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     background: url('/images/video/question-comment-button.png') no-repeat;
 
     position: absolute;
-    right: 16px;
+    right: 4px;
+    right: 4px;
     top: 30px;
+    text-decoration: none;
 }
 
 .question-comment-button:hover
 {
     text-decoration: none;
-    background: url('/images/video/question-comment-button.png') no-repeat;
+    background: url('/images/video/question-comment-button-over.png') no-repeat;
 }
+
 
 .question-comment-button.selected
 {
-    background: url('/images/video/question-comment-button.png') no-repeat;
+    text-decoration: none;
+    background: url('/images/video/question-comment-button-over.png') no-repeat;
 }
 
 .comment-text-field
@@ -304,19 +318,7 @@
     font-weight: normal;
 }
 
-.chapter-videos-block-container
-{
-    margin: -20px 0;
-    padding: 20px 18px;
-    border-left: 1px solid #ccc;
-}
-
-.chapter-selected-video
-{
-    position: relative;
-    right: 2px;
-}
-
+/* Chapter videos list additional styles BEGIN */
 .chapter-selected-video .video-preview-image
 {
     border: 2px solid #fff;
@@ -346,13 +348,6 @@
     font-family: "OpenSans Semibold";
 }
 
-.chapter-videos-block-container h5
-{
-    margin-bottom: 15px;
-    color: #262626;
-    font-size: 15px;
-}
-
 .show-more-videos
 {
     margin-bottom: 20px;
@@ -363,64 +358,4 @@
 {
     font-size: 12px;
 }
-
-.video-title
-{
-    margin-top: -1px;
-    margin-bottom: 5px;
-    height: 35px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: #222;
-    font-size: 12px;
-    font-family: "OpenSans Semibold";
-}
-
-.video-title::after
-{
-    content: "...";
-}
-
-.video-author-in-list
-{
-    margin-bottom: 5px;
-    color: #666;
-    font-size: 11px;
-}
-
-.video-has-synopsis
-{
-    float: left;
-    margin-top: 2px;
-    width: 9px;
-    height: 8px;
-    background: url('/images/video/synopsis-tab-icon.png') no-repeat;
-}
-
-.icons-delimiter
-{
-    float: left;
-    margin-left: 5px;
-    margin-right: 6px;
-    width: 1px;
-    height: 11px;
-    background: #f0f0f0;
-}
-
-.video-has-test
-{
-    float: left;
-    width: 12px;
-    height: 12px;
-    background: url('/images/video/test-tab-icon.png') no-repeat;
-}
-
-.chapter-videos-list
-{
-    list-style-type: none;
-}
-
-.chapter-videos-list > li
-{
-    margin-bottom: 20px;
-}
+/* Chapter videos list additional styles END */
