@@ -45,18 +45,20 @@ body
     position: relative;
     height: 54px;
 
-    background: #404f5b;
-    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#404f5b), to(#2b343b));
-    background: -webkit-linear-gradient(#404f5b, #2b343b);
-    background: -moz-linear-gradient(#404f5b, #2b343b);
-    background: -ms-linear-gradient(#404f5b, #2b343b);
-    background: -o-linear-gradient(#404f5b, #2b343b);
-    background: linear-gradient(#404f5b, #2b343b);
+    background: #444444;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#444444), to(#2b2b2b));
+    background: -webkit-linear-gradient(#444444, #2b2b2b);
+    background: -moz-linear-gradient(#444444, #2b2b2b);
+    background: -ms-linear-gradient(#444444, #2b2b2b);
+    background: -o-linear-gradient(#444444, #2b2b2b);
+    background: linear-gradient(#444444, #2b2b2b);
 }
 
 .wrap > .container
 {
     padding: 0 0 15px 0;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
 }
 
 .content-container
@@ -67,12 +69,6 @@ body
 .container .credit
 {
     margin: 20px 0;
-}
-
-.footer > .container
-{
-    padding-left: 15px;
-    padding-right: 15px;
 }
 
 .navbar-container
@@ -164,13 +160,15 @@ body
 
 .class-menu li > span
 {
+    position: relative;
+
     color: #fff;
     text-align: center;
     white-space: nowrap;
     border-bottom: 1px solid #0074a5;
 
     height: 36px;
-    padding: 3px 5px 0px !important;
+    padding: 3px 5px 0 !important;
     cursor: pointer;
     display: block;
 
@@ -193,10 +191,10 @@ body
 .class-menu .arrow
 {
     display: none;
-    position: relative;
-    top: 4px;
+    position: absolute;
+    bottom: -2px;
     left: 45%;
-    width: 11px;
+    width: 9px;
     height: 6px;
     background: url('/images/header/arrow.png') no-repeat;
 }
@@ -204,6 +202,11 @@ body
 .class-menu .selected .arrow
 {
     display: block;
+}
+
+.class-menu .nav.nav-justified > li.selected > span
+{
+    position: relative;
 }
 
 .class-menu .first > span
@@ -452,8 +455,8 @@ input
 
 .user-profile-link
 {
-    margin-right: 10px;
     margin-top: 9px;
+    padding-right: 9px !important;
     color: #1d1d1d;
     font-size: 13px;
     line-height: 12px !important;
@@ -465,6 +468,14 @@ input
     height: 32px;
     border: 1px solid #b5bdc1;
     border-radius: 3px;
+}
+
+.user-menu-button
+{
+    margin-top: 13px;
+    width: 8px;
+    height: 5px;
+    background: url('/images/header/user-menu-button.png') no-repeat;
 }
 
 .new-user-badge-link

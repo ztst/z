@@ -31,33 +31,34 @@
         <h1>{{ video.getName|raw }}</h1>
 
         <div class="col-center">
-          <ul class="nav nav-tabs select-content-tab view-video-tab-menu">
-            <li class="video active">
-              <div class="video-tab-icon"></div>
-              <a id="showVideoContainerButton">Видеоурок</a>
-            </li>
-            <li class="abstract">
-              <div class="abstract-tab-icon"></div>
-              <a id="showSynopsisContainerButton">Конспект</a>
-            </li>
-            <li class="test">
-              <div class="test-tab-icon"></div>
-              <a id="showQuizContainerButton">Тест</a>
-            </li>
-            <li class="video-buttons-container">
-              {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
-                'url': app.request.uri,
-                'title': video.name,
-                'img': video.getLargeThumbnailUrl,
-                'desc': ( video.synopsis ) ? video.synopsis.text : ""
-              } %}
-              {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
-              {% if is_moderator() %}
-                <a class="btn btn-primary" href="{{ path("edit_video_form", {"videoName": video.urlName}) }}">Редактировать
-                  видеоурок</a>
-              {% endif %}
-            </li>
-          </ul>
+          <div class="tabs-and-social-buttons-container">
+            <ul class="nav nav-tabs select-content-tab view-video-tab-menu">
+              <li class="video active">
+                <div class="video-tab-icon"></div>
+                <a id="showVideoContainerButton">Видеоурок</a>
+              </li>
+              <li class="synopsis">
+                <div class="synopsis-tab-icon"></div>
+                <a data-toggle="tab">Конспект</a>
+              </li>
+              <li class="test">
+                <div class="test-tab-icon"></div>
+                <a id="showQuizContainerButton">Тест</a>
+              </li>
+            </ul>
+            <div class="video-buttons-container">
+                {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
+                  'url': app.request.uri,
+                  'title': video.name,
+                  'img': video.getLargeThumbnailUrl,
+                  'desc': ( video.synopsis ) ? video.synopsis.text : ""
+                } %}
+                {% if is_moderator() %}
+                  <a class="btn btn-primary" href="{{ path("edit_video_form", {"videoName": video.urlName}) }}">Редактировать
+                    видеоурок</a>
+                {% endif %}
+            </div>
+          </div>
         </div>
         <div class="clear"></div>
         <div class="video-page-left-column-content video-content">
@@ -78,13 +79,13 @@
           </div>
         </div>
         <div class="video-page-left-column-content synopsis-content hidden">
-          Тут будет конспект
+          {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
         </div>
         <div class="video-page-left-column-content quiz-content hidden">
           {% include "ZnaikaFrontendBundle:Video:video_quiz_block.html.twig" with {'video': video} %}
         </div>
       </div>
-    </div>
+      </div>
     <div class="col-md-4 col-center">
       <div class="chapter-videos-block-container">
         <div class="label-all-chapters">

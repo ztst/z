@@ -1,6 +1,6 @@
 <div class="navbar navbar-container" role="navigation">
   <div class="container">
-    <div class="col-md-2">
+    <div class="col-md-2 col-center">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
@@ -35,10 +35,13 @@
               </div>
             </li>
             <li>
-              <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link">{{ app.user }}{#, {{ app.user.getPoints }} баллов#}</a>
+              <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link">{{ app.user }}</a>
             </li>
             <li>
               {{ user_badges(app.user)|raw }}
+            </li>
+            <li>
+              <div class="user-menu-button"></div>
             </li>
             {#<li><a href="{{ path("logout") }}" class="btn btn-default logout_button">Выйти</a></li>#}
           {% else %}
