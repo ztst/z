@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="navbar-collapse collapse col-right">
-      <div class="main-menu-right col-md-7 col-sm-7 col-center">
+      <div class="main-menu-right col-md-9 col-sm-9 col-center">
         <ul class="nav navbar-nav navbar-right">
           <li class="search-container">
             <form action="{{ path("search") }}" method="POST">
@@ -41,7 +41,10 @@
               {{ user_badges(app.user)|raw }}
             </li>
             <li>
-              <div class="user-menu-button"><a href="{{ path('logout') }}" title="Выход">&nbsp;</a></div>
+              <a href="{{ path('logout') }}" title="Выход" class="logout-button">
+                <div class="logout-button-icon"></div>
+                <span>Выход</span>
+              </a>
             </li>
             {#<li><a href="{{ path("logout") }}" class="btn btn-default logout_button">Выйти</a></li>#}
           {% else %}
@@ -51,6 +54,6 @@
       </div>
     </div>
   </div>
-<hr class="class-hr" />
-<hr class="subjects-hr" />
+  <div class="class-horizontal-bar"></div>
+  <div class="subjects-horizontal-bar"></div>
 </div>

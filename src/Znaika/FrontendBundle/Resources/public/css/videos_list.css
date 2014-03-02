@@ -11,7 +11,6 @@
     right: 2px;
 }
 
-
 .chapter-name
 {
     margin-bottom: 15px;
@@ -34,6 +33,12 @@
     color: #222;
     font-size: 12px;
     font-family: "OpenSans Semibold";
+    cursor: pointer;
+}
+
+.video-title:hover
+{
+    text-decoration: underline;
 }
 
 .video-author-in-list
