@@ -482,6 +482,11 @@ input
     margin-top: 17px;
 }
 
+.main-menu-right .navbar-right
+{
+    margin-right: 0 !important;
+}
+
 .search-button-containter
 {
     width: auto;
@@ -511,30 +516,74 @@ input
     border-radius: 3px;
 }
 
-.logout-button
+.login-registration-buttons-container
+{
+    margin-top: 5px;
+}
+
+.login-button,
+.login-button-icon,
+.login-registration-buttons-delimiter,
+.registration-button,
+.logout-button,
+.logout-button-icon
 {
     display: block;
+    float: left;
+}
+
+.login-button,
+.registration-button
+{
+    font-size: 13px;
+    color: #036995 !important;
+}
+
+.login-button,
+.registration-button,
+.logout-button
+{
+    background: #eef9fe !important;
+}
+
+.login-button:hover,
+.registration-button:hover
+{
+    text-decoration: underline !important;
+}
+
+.login-button-icon
+{
+    margin-right: 5px;
+    margin-top: 4px;
+    width: 14px;
+    height: 14px;
+    background: url('/images/header/login-button-icon.png') no-repeat;
+}
+
+.login-registration-buttons-delimiter
+{
+    margin: 0 5px;
+    width: 2px;
+    height: 20px;
+    background: url('/images/header/login-registration-buttons-delimiter.png') no-repeat;
+}
+
+.logout-button
+{
     margin-top: 6px;
+    padding-right: 0 !important;
     font-size: 13px;
     color: #555;
-    background: #eef9fe !important;
 }
 
 .logout-button-icon
 {
-    float: left;
     margin-right: 5px;
     margin-top: 4px;
     width: 15px;
     height: 13px;
     background: url('/images/header/logout-button-icon.png') no-repeat;
-}
-
-.logout-button a,
-.logout-button a:hover
-{
-    display: block;
-    text-decoration: none;
 }
 
 .new-user-badge-link
