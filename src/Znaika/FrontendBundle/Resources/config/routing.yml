@@ -39,6 +39,10 @@ edit_video_form:
     pattern: /video/{videoName}/edit-video-form
     defaults: { _controller: ZnaikaFrontendBundle:Video:editVideoForm }
 
+add_quiz_form:
+    pattern: /video/{videoName}/quiz-form
+    defaults: { _controller: ZnaikaFrontendBundle:Video:addQuizForm }
+
 add_video_comment_form:
     pattern: /{videoName}/add_video_comment_form
     defaults: { _controller: ZnaikaFrontendBundle:Video:addVideoCommentForm }

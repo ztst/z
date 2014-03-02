@@ -290,6 +290,32 @@
             return new JsonResponse(array("success" => $success));
         }
 
+        public function addQuizFormAction($videoName)
+        {
+            $videoRepository = $this->getVideoRepository();
+            $video = $videoRepository->getOneByUrlName($videoName);
+            $quiz  = is_null($video->getQuiz()) ? new Quiz() : $video->getQuiz();
+            $form  = $this->createForm(new QuizType(), $quiz);
+
+            $form->handleRequest($this->getRequest());
+
+            if ($form->isValid())
+            {
+                $quiz->setVideo($video);
+
+                /** @var VideoAttachmentUploader $uploader */
+                $uploader = $this->get('znaika_frontend.quiz_uploader');
+                $uploader->upload($quiz);
+
+                $this->get("znaika_frontend.quiz_repository")->save($quiz);
+            }
+
+            return $this->render('ZnaikaFrontendBundle:Video:addQuizForm.html.twig', array(
+                "form"  => $form->createView(),
+                "video" => $video,
+            ));
+        }
+
         public function showVideoAction($class, $subjectName, $videoName)
         {
             $repository = $this->getVideoRepository();
@@ -471,18 +497,5 @@
             $addVideoCommentForm = $this->createForm(new VideoCommentType(), $videoComment);
 
             return $addVideoCommentForm;
-        }
-
-        /**
-         * @param $video
-         *
-         * @return \Symfony\Component\Form\Form
-         */
-        private function getAddQuizForm($video)
-        {
-            $quiz        = is_null($video->getQuiz()) ? new Quiz() : $video->getQuiz();
-            $addQuizForm = $this->createForm(new QuizType(), $quiz);
-
-            return $addQuizForm;
         }
     }

@@ -33,7 +33,7 @@
             }
 
             $fileName = $this->getFileName($attachment);
-            $fileDir  = VideoAttachmentUploader::getFileDir($attachment);
+            $fileDir  = $this->getFileDir($attachment);
             $attachment->getFile()->move($fileDir, $fileName);
 
             $attachment->setRealName($fileName);
