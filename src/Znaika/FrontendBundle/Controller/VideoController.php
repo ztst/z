@@ -269,6 +269,7 @@
             }
 
             return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
+                'videosAmount'     => $chapters[0]->GetVideos()->count(),
                 'currentChapterId' => $currentChapterId,
                 'chapters'         => $chapters,
             ));
