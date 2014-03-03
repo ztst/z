@@ -11,6 +11,11 @@ body
     font-family: "OpenSans";
 }
 
+a:focus
+{
+    outline: none;
+}
+
 .clear
 {
     clear: both;
@@ -76,7 +81,6 @@ body
 .content-container
 {
     display: inline-block;
-    min-height: 90%;
     margin-bottom: -10px;
     padding-top: 20px;
     padding-bottom: 10px;
@@ -281,6 +285,7 @@ body
 
 .subject-menu .selected > span
 {
+    font-family: "OpenSans Semibold";
     color: #d35306;
 }
 

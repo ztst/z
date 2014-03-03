@@ -57,6 +57,8 @@
         {
             $currentGrade = $this->getCurrentClass($request);
 
+            $currentSubjectUrlName = $this->getCurrentSubjectUrlName($request);
+
             $menu = $this->factory->createItem("root");
             $menu->setChildrenAttribute("class", "nav nav-justified");
 
@@ -71,6 +73,10 @@
                 {
                     $menuItem->setAttribute("class", "hidden");
                 }
+                if ($currentSubjectUrlName && $currentSubjectUrlName == $subject->getUrlName())
+                {
+                    $menuItem->setAttribute("class", "selected");
+                }
             }
 
             return $menu;
@@ -81,5 +87,10 @@
             $currentClass = $request->get("class", null);
 
             return $currentClass ? $currentClass : 1; //TODO: add user class by default
+        }
+
+        protected function getCurrentSubjectUrlName(Request $request)
+        {
+            return $request->get("subjectName", "");
         }
     }

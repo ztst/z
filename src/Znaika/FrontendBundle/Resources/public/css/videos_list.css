@@ -5,6 +5,44 @@
     border-left: 1px solid #ccc;
 }
 
+.chapter-video-preview-container,
+.chapter-video-preview-container a
+{
+    display: block;
+}
+
+.over-elements-container
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.over-play-sign
+{
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25%;
+    width: 38px;
+    height: 25px;
+    background: url('/images/video/video-preview-over.png') no-repeat;
+}
+
+.over-video-length
+{
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    color: #fff;
+    font-family: "Arial";
+    font-weight: bold;
+    font-size: 10px;
+    background: url('/images/video/video-length-background.png') repeat-x;
+}
+
 .chapter-selected-video
 {
     position: relative;
@@ -36,7 +74,7 @@
     cursor: pointer;
 }
 
-.video-title:hover
+.video-title.over
 {
     text-decoration: underline;
 }
@@ -64,6 +102,11 @@
     background: url('/images/video/synopsis-tab-icon.png') no-repeat;
 }
 
+.video-has-synopsis:hover
+{
+    background: url('/images/video/video-has-synopsis-icon-over.png') no-repeat;
+}
+
 .icons-delimiter
 {
     margin-left: 5px;
@@ -78,6 +121,11 @@
     width: 12px;
     height: 12px;
     background: url('/images/video/quiz-tab-icon.png') no-repeat;
+}
+
+.video-has-quiz:hover
+{
+    background: url('/images/video/video-has-quiz-icon-over.png') no-repeat;
 }
 
 .chapter-videos-list

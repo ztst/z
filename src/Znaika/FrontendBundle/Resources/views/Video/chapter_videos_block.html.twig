@@ -13,7 +13,7 @@
   {% for video in videos %}
     <li class="{% if currentVideo is defined and currentVideo == video %}chapter-selected-video{% endif %}">
       <div class="chapter-video">
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-left">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-center">
           <div class="chapter-video-preview-container">
             <a href="{{ path('show_video', {
                 'subjectName': video.getSubject.getUrlName,
@@ -21,6 +21,10 @@
                 'videoName': video.getUrlName
                 }) }}"
                title="{{ video.getName|raw }}">
+              <div class="over-elements-container">
+                <div class="over-play-sign"></div>
+                <div class="over-video-length">12345</div>
+              </div>
               <img
                 src="{{ video.getSmallThumbnailUrl }}"
                 alt="{{ video.getName|raw }}"
