@@ -48,9 +48,16 @@
     font-size: 11px;
 }
 
+.video-has-quiz,
+.video-has-synopsis,
+.icons-delimiter
+{
+    display: block;
+    float: left;
+}
+
 .video-has-synopsis
 {
-    float: left;
     margin-top: 2px;
     width: 9px;
     height: 8px;
@@ -59,7 +66,6 @@
 
 .icons-delimiter
 {
-    float: left;
     margin-left: 5px;
     margin-right: 6px;
     width: 1px;
@@ -69,7 +75,6 @@
 
 .video-has-quiz
 {
-    float: left;
     width: 12px;
     height: 12px;
     background: url('/images/video/quiz-tab-icon.png') no-repeat;
@@ -82,5 +87,5 @@
 
 .chapter-videos-list > li
 {
-    margin-bottom: 20px;
+    margin-bottom: 19px;
 }

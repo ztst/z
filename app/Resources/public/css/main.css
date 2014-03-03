@@ -67,6 +67,12 @@ body
     background: #fff;
 }
 
+.header-container
+{
+    position: relative;
+    z-index: 2;
+}
+
 .content-container
 {
     display: inline-block;
@@ -92,8 +98,6 @@ body
 
 .class-horizontal-bar
 {
-    position: relative;
-    top: 9px;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -113,14 +117,13 @@ body
 
 .subjects-horizontal-bar
 {
-    position: relative;
-    top: 9px;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 32px;
 
     background: #f4f4f4;
+    box-shadow: 0 5px 10px -8px;
 }
 
 .navbar-brand
@@ -179,8 +182,9 @@ body
     text-align: center;
     white-space: nowrap;
     border-bottom: 1px solid #0074a5;
+    border-left: 1px solid #1181b3;
 
-    height: 34px;
+    height: 33px;
     padding: 5px 5px 0 !important;
     cursor: pointer;
     display: block;
@@ -194,8 +198,15 @@ body
     background: linear-gradient(#31a0d4, #208bbd);
 }
 
-.class-menu li > span:hover
+.class-menu li.first > span
 {
+    border-left: none;
+}
+
+.class-menu li > .selected:hover
+{
+    top: -1px;
+    height: 34px;
     background: #2199cd;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#2199cd), to(#1484b6));
     background: -webkit-linear-gradient(#2199cd, #1484b6);
@@ -224,7 +235,7 @@ body
 {
     display: block;
     position: absolute;
-    bottom: -1px;
+    bottom: -2px;
     left: 45%;
     width: 9px;
     height: 6px;
@@ -643,9 +654,18 @@ label
 
 @media (min-width: 1024px)
 {
-    .container
+    .container,
+    .class-menu,
+    .subject-menu
     {
         width: 1000px;
+    }
+
+    .class-menu,
+    .subject-menu
+    {
+        margin-right: auto;
+        margin-left: auto;
     }
 }
 

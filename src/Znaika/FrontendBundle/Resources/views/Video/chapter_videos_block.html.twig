@@ -34,10 +34,16 @@
           <p class="video-author-in-list">{{ video.getAuthor|raw }}</p>
           <div>
             {% if not video.synopsis is empty %}
-              <div class="video-has-synopsis"></div>
+              <a
+                href="javascript:void(0);"
+                class="video-has-synopsis">
+              </a>
               <div class="icons-delimiter"></div>
             {% endif %}
-            <div class="video-has-quiz"></div>
+            <a
+              href="{% if is_user() %}{{ path('show_quiz', {'videoName': video.getUrlName}) }}{% else %}javascript:void(0);{% endif %}"
+              class="video-has-quiz">
+            </a>
           </div>
           <div class="clear"></div>
         </div>
