@@ -203,9 +203,8 @@ body
     border-left: none;
 }
 
-.class-menu li > .selected:hover
+.class-menu li > span:hover
 {
-    top: -1px;
     height: 34px;
     background: #2199cd;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#2199cd), to(#1484b6));
@@ -221,7 +220,8 @@ body
     border-top: 1px solid #0074A5
 }
 
-.class-menu .selected > span
+.class-menu .selected > span,
+.class-menu .selected > span:hover
 {
     position: relative;
     padding: 3px 5px 0 !important;;
@@ -301,6 +301,7 @@ body
 {
     background: #ebebeb;
 }
+
 .main-menu
 {
     padding-left: 18px;
