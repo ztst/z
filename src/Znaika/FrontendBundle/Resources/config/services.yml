@@ -143,6 +143,10 @@ services:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\QuizRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
+    znaika_frontend.quiz_attempt_repository:
+        class:        Znaika\FrontendBundle\Repository\Lesson\Content\Stat\QuizAttemptRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
     znaika_frontend.support_repository:
             class:        Znaika\FrontendBundle\Repository\Communication\Support\SupportRepository
             arguments:    ["@doctrine.orm.entity_manager"]
@@ -204,12 +208,20 @@ services:
             - { name: twig.extension }
 
     znaika_frontend.video_comment_extension:
-        class: Znaika\FrontendBundle\Twig\Video\CommentExtenstion
+        class: Znaika\FrontendBundle\Twig\Video\CommentExtension
         arguments:
             - @twig
             - @security.context
             - @znaika_frontend.video_comment_repository
             - @form.factory
+        tags:
+            - { name: twig.extension }
+
+    znaika_frontend.quiz_extension:
+        class: Znaika\FrontendBundle\Twig\Video\QuizExtension
+        arguments:
+            - @twig
+            - @znaika_frontend.quiz_uploader
         tags:
             - { name: twig.extension }
 

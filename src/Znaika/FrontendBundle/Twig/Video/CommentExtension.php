@@ -11,7 +11,7 @@
     use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
 
-    class CommentExtenstion extends \Twig_Extension
+    class CommentExtension extends \Twig_Extension
     {
         /**
          * @var \Twig_Environment

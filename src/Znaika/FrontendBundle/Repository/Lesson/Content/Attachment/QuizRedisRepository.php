@@ -5,22 +5,17 @@
 
     class QuizRedisRepository implements IQuizRepository
     {
-        /**
-         * @param Quiz $quiz
-         *
-         * @return boolean
-         */
         public function save(Quiz $quiz)
         {
             return true;
         }
 
-        /**
-         * @param $videoId
-         *
-         * @return Quiz
-         */
         public function getOneByVideoId($videoId)
+        {
+            return null;
+        }
+
+        public function getOneByName($name)
         {
             return null;
         }

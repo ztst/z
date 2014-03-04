@@ -18,4 +18,11 @@
          * @return Quiz
          */
         public function getOneByVideoId($videoId);
+
+        /**
+         * @param $name
+         *
+         * @return Quiz
+         */
+        public function getOneByName($name);
     }

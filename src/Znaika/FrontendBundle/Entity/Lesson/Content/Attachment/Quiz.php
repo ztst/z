@@ -18,6 +18,11 @@
         private $video;
 
         /**
+         * @var string
+         */
+        private $name;
+
+        /**
          * @var \DateTime
          */
         private $createdTime;
@@ -102,5 +107,21 @@
         public function getVideo()
         {
             return $this->video;
+        }
+
+        /**
+         * @param string $name
+         */
+        public function setName($name)
+        {
+            $this->name = $name;
+        }
+
+        /**
+         * @return string
+         */
+        public function getName()
+        {
+            return $this->name;
         }
     }

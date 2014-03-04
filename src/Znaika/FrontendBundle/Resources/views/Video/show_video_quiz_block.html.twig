@@ -1,0 +1,14 @@
+{% if video.quiz %}
+  {% if is_moderator() %}
+    <a class="btn btn-primary" href="{{ path("add_quiz_form", {"videoName": video.urlName}) }}">Редактировать тест</a>
+  {% endif %}
+  <div>
+    {{ show_quiz(video)|raw }}
+    {% if userQuizScore is not null %}
+      <p>Ваш последний результат: {{ userQuizScore }}%</p>
+    {% endif %}
+  </div>
+{% elseif is_moderator() %}
+  <a class="btn btn-primary" href="{{ path("add_quiz_form", {"videoName": video.urlName}) }}">Добавить тест</a>
+{% endif %}
+

@@ -26,11 +26,6 @@
             $this->setDBRepository($dbRepository);
         }
 
-        /**
-         * @param Quiz $quiz
-         *
-         * @return boolean
-         */
         public function save(Quiz $quiz)
         {
             $this->redisRepository->save($quiz);
@@ -39,17 +34,23 @@
             return $result;
         }
 
-        /**
-         * @param $videoId
-         *
-         * @return Quiz
-         */
         public function getOneByVideoId($videoId)
         {
             $result = $this->redisRepository->getOneByVideoId($videoId);
             if (is_null($result))
             {
                 $result = $this->dbRepository->getOneByVideoId($videoId);
+            }
+
+            return $result;
+        }
+
+        public function getOneByName($name)
+        {
+            $result = $this->redisRepository->getOneByName($name);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getOneByName($name);
             }
 
             return $result;
