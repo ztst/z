@@ -1,59 +1,72 @@
-<div class="navbar navbar-container" role="navigation">
-  <div class="container">
-    <div class="col-md-2 col-center">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="{{ path("znaika_frontend_homepage") }}"><img src="{{ asset("images/logo.png") }}" alt='Знайка' /></a>
+<div class="header-container">
+  <div class="navbar navbar-container" role="navigation">
+    <div class="container col-right">
+      <div class="col-md-2 col-center">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ path("znaika_frontend_homepage") }}"><img src="{{ asset("images/logo.png") }}" alt='Знайка' /></a>
+        </div>
       </div>
-    </div>
-    <div class="navbar-collapse collapse col-right">
-      <div class="main-menu-right col-md-9 col-sm-9 col-center">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="search-container">
-            <form action="{{ path("search") }}" method="POST">
-              <div class="input-group">
-                <span class="search-icon"></span>
-                <input type="text" class="form-control search-input" placeholder="Поиск видеоуроков" name="search_string" value="">
-                <div class="input-group-btn search-button-containter">
-                  <button type="submit" class="btn btn-success search-button"><span class="search-icon"></span></button>
+      <div class="navbar-collapse collapse col-right">
+        <div class="main-menu-right col-md-9 col-sm-9 col-center">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="search-container">
+              <form action="{{ path("search") }}" method="POST">
+                <div class="input-group">
+                  <span class="search-icon"></span>
+                  <input type="text" class="form-control search-input" placeholder="Поиск видеоуроков" name="search_string" value="">
+                  <div class="input-group-btn search-button-containter">
+                    <button type="submit" class="btn btn-success search-button"><span class="search-icon"></span></button>
+                  </div>
                 </div>
-              </div>
-            </form>
-            <div class="clear"></div>
-          </li>
+              </form>
+              <div class="clear"></div>
+            </li>
 
-          {{ complete_social_registration_popup()|raw }}
-          {% if is_user() %}
-            <li>
-              <div class="user-pic">
-                <img src="/images/header/404-30x30.png" alt="" />
-              </div>
-            </li>
-            <li>
-              <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link">{{ app.user }}</a>
-            </li>
-            <li>
-              {{ user_badges(app.user)|raw }}
-            </li>
-            <li>
-              <a href="{{ path('logout') }}" title="Выход" class="logout-button">
-                <div class="logout-button-icon"></div>
-                <span>Выход</span>
-              </a>
-            </li>
-            {#<li><a href="{{ path("logout") }}" class="btn btn-default logout_button">Выйти</a></li>#}
-          {% else %}
-            <li><a href="{{ path("try_login") }}" class="btn btn-default login_button">Вход</a></li>
-          {% endif %}
-        </ul>
+            {{ complete_social_registration_popup()|raw }}
+            {% if is_user() %}
+              <li>
+                <div class="user-pic">
+                  <img src="/images/header/404-30x30.png" alt="" />
+                </div>
+              </li>
+              <li>
+                <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link">{{ app.user }}</a>
+              </li>
+              <li>
+                {{ user_badges(app.user)|raw }}
+              </li>
+              <li>
+                <a href="{{ path('logout') }}" title="Выход" class="logout-button">
+                  <div class="logout-button-icon"></div>
+                  <span>Выход</span>
+                </a>
+              </li>
+            {% else %}
+              <li>
+                <div class="login-registration-buttons-container">
+                  <a href="{{ path("try_login") }}" class="login-button">
+                    <div class="login-button-icon"></div>
+                    <span>Вход</span>
+                  </a>
+                  <div class="login-registration-buttons-delimiter"></div>
+                  <a href="{{ path("register") }}" class="registration-button">
+                    <span>Регистрация</span>
+                  </a>
+                </div>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-  <div class="class-horizontal-bar"></div>
-  <div class="subjects-horizontal-bar"></div>
+  {% block sidebarmenu %}
+    {% include "ZnaikaFrontendBundle:Menu:sidebar_menu.html.twig" %}
+  {% endblock %}
 </div>

@@ -11,6 +11,11 @@ body
     font-family: "OpenSans";
 }
 
+a:focus
+{
+    outline: none;
+}
+
 .clear
 {
     clear: both;
@@ -67,10 +72,15 @@ body
     background: #fff;
 }
 
+.header-container
+{
+    position: relative;
+    z-index: 2;
+}
+
 .content-container
 {
     display: inline-block;
-    min-height: 90%;
     margin-bottom: -10px;
     padding-top: 20px;
     padding-bottom: 10px;
@@ -92,8 +102,6 @@ body
 
 .class-horizontal-bar
 {
-    position: relative;
-    top: 9px;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -113,14 +121,13 @@ body
 
 .subjects-horizontal-bar
 {
-    position: relative;
-    top: 9px;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 32px;
 
     background: #f4f4f4;
+    box-shadow: 0 5px 10px -8px;
 }
 
 .navbar-brand
@@ -179,8 +186,9 @@ body
     text-align: center;
     white-space: nowrap;
     border-bottom: 1px solid #0074a5;
+    border-left: 1px solid #1181b3;
 
-    height: 34px;
+    height: 33px;
     padding: 5px 5px 0 !important;
     cursor: pointer;
     display: block;
@@ -194,8 +202,14 @@ body
     background: linear-gradient(#31a0d4, #208bbd);
 }
 
+.class-menu li.first > span
+{
+    border-left: none;
+}
+
 .class-menu li > span:hover
 {
+    height: 34px;
     background: #2199cd;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#2199cd), to(#1484b6));
     background: -webkit-linear-gradient(#2199cd, #1484b6);
@@ -210,7 +224,8 @@ body
     border-top: 1px solid #0074A5
 }
 
-.class-menu .selected > span
+.class-menu .selected > span,
+.class-menu .selected > span:hover
 {
     position: relative;
     padding: 3px 5px 0 !important;;
@@ -224,7 +239,7 @@ body
 {
     display: block;
     position: absolute;
-    bottom: -1px;
+    bottom: -2px;
     left: 45%;
     width: 9px;
     height: 6px;
@@ -270,6 +285,7 @@ body
 
 .subject-menu .selected > span
 {
+    font-family: "OpenSans Semibold";
     color: #d35306;
 }
 
@@ -290,6 +306,7 @@ body
 {
     background: #ebebeb;
 }
+
 .main-menu
 {
     padding-left: 18px;
@@ -482,6 +499,11 @@ input
     margin-top: 17px;
 }
 
+.main-menu-right .navbar-right
+{
+    margin-right: 0 !important;
+}
+
 .search-button-containter
 {
     width: auto;
@@ -511,30 +533,74 @@ input
     border-radius: 3px;
 }
 
-.logout-button
+.login-registration-buttons-container
+{
+    margin-top: 5px;
+}
+
+.login-button,
+.login-button-icon,
+.login-registration-buttons-delimiter,
+.registration-button,
+.logout-button,
+.logout-button-icon
 {
     display: block;
+    float: left;
+}
+
+.login-button,
+.registration-button
+{
+    font-size: 13px;
+    color: #036995 !important;
+}
+
+.login-button,
+.registration-button,
+.logout-button
+{
+    background: #eef9fe !important;
+}
+
+.login-button:hover,
+.registration-button:hover
+{
+    text-decoration: underline !important;
+}
+
+.login-button-icon
+{
+    margin-right: 5px;
+    margin-top: 4px;
+    width: 14px;
+    height: 14px;
+    background: url('/images/header/login-button-icon.png') no-repeat;
+}
+
+.login-registration-buttons-delimiter
+{
+    margin: 0 5px;
+    width: 2px;
+    height: 20px;
+    background: url('/images/header/login-registration-buttons-delimiter.png') no-repeat;
+}
+
+.logout-button
+{
     margin-top: 6px;
+    padding-right: 0 !important;
     font-size: 13px;
     color: #555;
-    background: #eef9fe !important;
 }
 
 .logout-button-icon
 {
-    float: left;
     margin-right: 5px;
     margin-top: 4px;
     width: 15px;
     height: 13px;
     background: url('/images/header/logout-button-icon.png') no-repeat;
-}
-
-.logout-button a,
-.logout-button a:hover
-{
-    display: block;
-    text-decoration: none;
 }
 
 .new-user-badge-link
@@ -594,9 +660,18 @@ label
 
 @media (min-width: 1024px)
 {
-    .container
+    .container,
+    .class-menu,
+    .subject-menu
     {
         width: 1000px;
+    }
+
+    .class-menu,
+    .subject-menu
+    {
+        margin-right: auto;
+        margin-left: auto;
     }
 }
 

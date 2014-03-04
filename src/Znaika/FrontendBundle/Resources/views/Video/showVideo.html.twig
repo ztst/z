@@ -38,19 +38,28 @@
           <div class="tabs-and-social-buttons-container">
             <ul class="nav nav-tabs select-content-tab view-video-tab-menu">
               <li class="video active">
-                <div class="video-tab-icon"></div>
-                <a href="#video-tab" data-toggle="tab">Видеоурок</a>
+                <div class="active-top-border"></div>
+                <a href="#video-tab" data-toggle="tab">
+                  <div class="video-tab-icon"></div>
+                  <span>Видеоурок</span>
+                </a>
               </li>
               {% if ( video.getSynopsis and is_user() ) or is_moderator() %}
                 <li class="synopsis">
-                  <div class="synopsis-tab-icon"></div>
-                  <a href="#synopsis-tab" data-toggle="tab">Конспект</a>
+                  <div class="active-top-border"></div>
+                  <a href="#synopsis-tab" data-toggle="tab">
+                    <div class="synopsis-tab-icon"></div>
+                    <span>Конспект</span>
+                  </a>
                 </li>
               {% endif %}
               {% if ( video.getQuiz and is_user() ) or is_moderator() %}
                 <li class="quiz">
-                  <div class="quiz-tab-icon"></div>
-                  <a href="#quiz-tab" data-toggle="tab">Тест</a>
+                  <div class="active-top-border"></div>
+                  <a href="#quiz-tab" data-toggle="tab">
+                    <div class="quiz-tab-icon"></div>
+                    <span>Тест</span>
+                  </a>
                 </li>
               {% endif %}
             </ul>

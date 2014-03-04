@@ -27,7 +27,7 @@ var MainMenu = EventDispatcher.extend({
 
     _initLoginPopup: function()
     {
-        this._loginPopupLink = $(".login_button");
+        this._loginPopupLink = $(".login-button");
         this._loginPopupLink.magnificPopup({
             type: "ajax",
             callbacks: { ajaxContentAdded: handler(this, "_onLoginFormLoaded") }
