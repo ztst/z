@@ -3,8 +3,11 @@
 {% block stylesheets %}
   {{ parent() }}
 
-  {% stylesheets filter='cssrewrite' '@ZnaikaFrontendBundle/Resources/public/css/search.css' %}
-  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% stylesheets filter='cssrewrite'
+    '@ZnaikaFrontendBundle/Resources/public/css/search.css'
+    '@ZnaikaFrontendBundle/Resources/public/css/videos_list.css'
+  %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
 {% block javascripts %}
@@ -12,24 +15,31 @@
 
   {% javascripts
     '../app/Resources/public/js/classes/page/SearchPage.class.js'
+    '../app/Resources/public/js/classes/page/VideosList.class.js'
   %}
   <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
 {% endblock %}
 
 {% block content %}
-  <div class="show-catalog-page-container col-sm-12">
-    {% if videos|length %}
-      <p>{{ 'founded_video_lessons'|transchoice(videos|length) }} {{ 'in_chapters'|transchoice(chapters|length) }}</p>
-    {% else %}
-      <h5>Не найдено</h5>
-    {% endif %}
-    <div id="chapterCatalogContainer" class="col-md-8 col-left chapter-catalog-container">
-      {% include "ZnaikaFrontendBundle:Search:chapters_list.html.twig" with {'chapters': chapters, 'currentChapterId': currentChapterId} %}
-    </div>
-    <div id="videoCatalogContainer" class="col-md-4 col-right">
-      <h3>Уроки раздела по запросу "{{ searchString }}"</h3>
+  <div class="show-catalog-page-container col-sm-12 col-center">
+    {#<div id="chapterCatalogContainer" class="col-md-8 col-left chapter-catalog-container">#}
+      {#{% include "ZnaikaFrontendBundle:Search:filters_block.html.twig" with {'chapters': chapters, 'currentChapterId': currentChapterId} %}#}
+    {#</div>#}
+    {#<div id="videoCatalogContainer" class="col-md-4 col-right">#}
+      {#<h3>Уроки раздела по запросу "{{ searchString }}"</h3>#}
+      {#{% include "ZnaikaFrontendBundle:Search:search_video_list.html.twig" with {'videos': videos, 'currentChapterId': currentChapterId} %}#}
+    {#</div>#}
+    <div id="videoCatalogContainer" class="col-md-8 col-left chapter-catalog-container">
+      {% if videos|length %}
+        <h4>{{ 'founded_video_lessons'|transchoice(videos|length) }}</h4>
+      {% else %}
+        <h5>Не найдено</h5>
+      {% endif %}
       {% include "ZnaikaFrontendBundle:Search:search_video_list.html.twig" with {'videos': videos, 'currentChapterId': currentChapterId} %}
+    </div>
+    <div class="col-md-4 col-center">
+      {% include "ZnaikaFrontendBundle:Search:filters_block.html.twig" %}
     </div>
   </div>
 {% endblock %}

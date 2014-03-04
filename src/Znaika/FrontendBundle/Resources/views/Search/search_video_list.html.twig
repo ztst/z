@@ -4,27 +4,31 @@
                 search-video-chapter-{{ video.getChapter.getChapterId }}
                 {% if video.getChapter.getChapterId != currentChapterId %}hidden{% endif %}"
       >
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-left">
-        <a href="{{ path('show_video', {
-            'subjectName': video.getSubject.getUrlName,
-            'class': video.getGrade,
-            'videoName': video.getUrlName
-            }) }}"
-           title="{{ video.getName|raw }}">
-          <img
-            src="{{ video.getSmallThumbnailUrl }}"
-            alt="{{ video.getName|raw }}"
-            class="{% if currentVideoId is defined and currentVideoId == video.getVideoId %}chapter-selected-video{% endif %}"
-            />
-        </a>
+      <div class="col-center">
+        <div class="chapter-video-preview-container">
+          <a href="{{ path('show_video', {
+          'subjectName': video.getSubject.getUrlName,
+          'class': video.getGrade,
+          'videoName': video.getUrlName
+          }) }}"
+             title="{{ video.getName|raw }}">
+            <div class="over-elements-container">
+              <div class="over-play-sign"></div>
+              <div class="over-video-length">12345</div>
+            </div>
+            <img
+              src="{{ video.getSmallThumbnailUrl }}"
+              alt="{{ video.getName|raw }}"
+              class="video-preview-image"
+              />
+          </a>
+        </div>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-right">
-        <p>{{ video.getName|raw }}</p>
-        <p>{{ video.getAuthor|raw }}</p>
-        {% set month = video.getCreatedTime|date('F') %}
-        {% set year = video.getCreatedTime|date('Y') %}
-        <p>{{ '%s %s'|format(month|trans, year) }}</p>
+      <div class="video-text-block">
+        <p class="video-title">{{ video.getName|raw }}</p>
+        <p class="search-video-breadcrumbs">%d класс > Предмет > Глава</p>
       </div>
+      <div class="clear"></div>
     </div>
   {% endfor %}
 {% endif %}

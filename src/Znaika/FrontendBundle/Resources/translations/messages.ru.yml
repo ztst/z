@@ -24,7 +24,7 @@ month_Oct: окт
 month_Nov: ноя
 month_Dec: дек
 
-founded_video_lessons: Найден %count% урок|Найдено %count% урока|Найдено %count% уроков
+founded_video_lessons: Найден %count% видеоурок|Найдено %count% видеоурока|Найдено %count% видеоуроков
 in_chapters: в %count% разделе|в %count% разделах|в %count% разделах
 count_views: %count% просмотр|%count% просмотра|%count% просмотров
 show_prev_comments:  Показать еще %count% коментарий|Показать еще %count% коментария|Показать еще %count% коментариев
