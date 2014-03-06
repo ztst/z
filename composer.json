@@ -22,7 +22,8 @@
         "knplabs/knp-menu-bundle": "1.1.2",
         "friendsofsymfony/jsrouting-bundle": "1.5.0",
         "friendsofsymfony/message-bundle": "1.2.2",
-        "facebook/php-sdk": "@stable"
+        "facebook/php-sdk": "@stable",
+        "tobie/ua-parser": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

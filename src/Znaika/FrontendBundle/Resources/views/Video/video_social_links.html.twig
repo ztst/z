@@ -3,28 +3,28 @@
   {% set prefix = "video_social_link_" %}
   <a
     id="{{ vk_button_id(prefix) }}"
-    href="http://vk.com/share.php?url={{ url }}&title={{ title }}&description={{ desc }}&image={{ img }}&noparse=true"
+    href="http://vk.com/share.php?url={{ url }}&amp;title={{ title|url_encode }}&amp;description={{ desc|url_encode }}&amp;image={{ img }}&amp;noparse=true"
     target="_blank"
     class="social_share_link vk">&nbsp;
   </a>
   <a
     id="{{ odnoklassniki_button_id(prefix) }}"
-    href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st.comments={{ desc }}&st._surl={{ url }}"
+    href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st.s=1&amp;st.comments={{ desc|url_encode }}&amp;st._surl={{ url }}"
     target="_blank"
     class="social_share_link odnoklassniki">&nbsp;
   </a>
   <a
     id="{{ facebook_button_id(prefix) }}"
-    href="http://www.facebook.com/sharer/sharer.php?s=100&p%5Btitle%5D={{ title }}&p%5Bsummary%5D={{ desc }}&p%5Burl%5D={{ url }}&p%5Bimages%5D%5B0%5D={{ img }}"
+    href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p%5Btitle%5D={{ title|url_encode }}&amp;p%5Bsummary%5D={{ desc|url_encode }}&amp;p%5Burl%5D={{ url }}&amp;p%5Bimages%5D%5B0%5D={{ img }}"
     target="_blank"
     class="social_share_link facebook">&nbsp;
   </a>
   <a
     id="{{ twitter_button_id(prefix) }}"
-    href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Ffiddle.jshell.net%2F_display%2F&text={{ title }}&url={{ url }}"
+    href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Ffiddle.jshell.net%2F_display%2F&amp;text={{ title|url_encode }}&amp;url={{ url }}"
     target="_blank"
     class="social_share_link twitter">&nbsp;
   </a>
-  {#<a href="javascript:void(0);" class="social_share_link mailru">&nbsp;</a>#}
+
 </div>
 <div class="clear"></div>

@@ -25,6 +25,38 @@ var ShowVideoPage = Base.extend({
             this._initTeacherAnswerBlock();
         }
         this._initVideoOrderButtons();
+        this._initNavMenu();
+    },
+
+    _initNavMenu: function()
+    {
+        $("#showVideoContainerButton").click(handler(this, "_showVideoContainer"));
+        $("#showSynopsisContainerButton").click(handler(this, "_showSynopsisContainer"));
+        $("#showQuizContainerButton").click(handler(this, "_showQuizContainer"));
+    },
+
+    _showVideoContainer: function()
+    {
+        $(".view-video-tab-menu li").removeClass("active");
+        $(".view-video-tab-menu .video").addClass("active");
+        $(".video-page-left-column-content").addClass("hidden");
+        $(".video-content").removeClass("hidden");
+    },
+
+    _showSynopsisContainer: function()
+    {
+        $(".view-video-tab-menu li").removeClass("active");
+        $(".view-video-tab-menu .abstract").addClass("active");
+        $(".video-page-left-column-content").addClass("hidden");
+        $(".synopsis-content").removeClass("hidden");
+    },
+
+    _showQuizContainer: function()
+    {
+        $(".view-video-tab-menu li").removeClass("active");
+        $(".view-video-tab-menu .test").addClass("active");
+        $(".video-page-left-column-content").addClass("hidden");
+        $(".quiz-content").removeClass("hidden");
     },
 
     _initVideoOrderButtons: function()
@@ -78,7 +110,7 @@ var ShowVideoPage = Base.extend({
         this._isMoving = false;
         if (response.success)
         {
-            var current = $('.chapter-selected-video');
+            var current = $(".chapter-selected-video");
             current.prev().before(current);
         }
     },
@@ -88,7 +120,7 @@ var ShowVideoPage = Base.extend({
         this._isMoving = false;
         if (response.success)
         {
-            var current = $('.chapter-selected-video');
+            var current = $(".chapter-selected-video");
             current.next().after(current);
         }
     },

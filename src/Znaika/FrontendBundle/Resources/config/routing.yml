@@ -39,6 +39,14 @@ edit_video_form:
     pattern: /video/{videoName}/edit-video-form
     defaults: { _controller: ZnaikaFrontendBundle:Video:editVideoForm }
 
+add_quiz_form:
+    pattern: /video/{videoName}/quiz-form
+    defaults: { _controller: ZnaikaFrontendBundle:Video:addQuizForm }
+
+save_quiz_stat_form:
+    pattern: /save-quiz-stat
+    defaults: { _controller: ZnaikaFrontendBundle:Video:saveQuizStat }
+
 add_video_comment_form:
     pattern: /{videoName}/add_video_comment_form
     defaults: { _controller: ZnaikaFrontendBundle:Video:addVideoCommentForm }
@@ -57,18 +65,6 @@ move_video:
 add_synopsis_form:
     pattern: /video/{videoName}/add-synopsis-form
     defaults: { _controller: ZnaikaFrontendBundle:Video:addSynopsisForm }
-
-add_quiz_form:
-    pattern: /video/{videoName}/add-quiz-form
-    defaults: { _controller: ZnaikaFrontendBundle:Quiz:addQuizForm }
-
-show_quiz:
-    pattern: /video/{videoName}/quiz
-    defaults: { _controller: ZnaikaFrontendBundle:Quiz:showQuiz }
-
-add_quiz_attempt:
-    pattern: /video/{videoName}/quiz_attempt
-    defaults: { _controller: ZnaikaFrontendBundle:Quiz:addQuizAttempt }
 
 register:
     pattern: /register

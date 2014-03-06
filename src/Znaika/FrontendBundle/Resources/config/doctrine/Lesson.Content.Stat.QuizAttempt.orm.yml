@@ -1,0 +1,22 @@
+Znaika\FrontendBundle\Entity\Lesson\Content\Stat\QuizAttempt:
+    type: entity
+    table: quiz_attempt
+    repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Content\Stat\QuizAttemptDBRepository
+    fields:
+        quizAttemptId: { column: quiz_attempt_id, type: integer, id: true, generator: { strategy: AUTO } }
+        score:         { type: float, notnull: true }
+        createdTime:   { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
+    manyToOne:
+        quiz:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz
+            joinColumn:
+                name: quiz_id
+                referencedColumnName: quiz_id
+                onDelete: CASCADE
+        user:
+            targetEntity: Znaika\FrontendBundle\Entity\Profile\User
+            joinColumn:
+                name: user_id
+                referencedColumnName: user_id
+                onDelete: CASCADE
+    lifecycleCallbacks: {  }

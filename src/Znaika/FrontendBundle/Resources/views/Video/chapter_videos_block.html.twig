@@ -45,7 +45,7 @@
               <div class="icons-delimiter"></div>
             {% endif %}
             <a
-              href="{% if is_user() %}{{ path('show_quiz', {'videoName': video.getUrlName}) }}{% else %}javascript:void(0);{% endif %}"
+              href="{% if is_user() %}{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) }}{% else %}javascript:void(0);{% endif %}"
               class="video-has-quiz">
             </a>
           </div>
@@ -55,4 +55,5 @@
       <div class="clear"></div>
     </li>
   {% endfor %}
+  </ul>
 {% endif %}

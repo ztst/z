@@ -22,6 +22,14 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             joinColumn:
                 name: synopsis_id
                 referencedColumnName: synopsis_id
+                onDelete: "SET NULL"
+        quiz:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz
+            inversedBy: video
+            joinColumn:
+                name: quiz_id
+                referencedColumnName: quiz_id
+                onDelete: "SET NULL"
     manyToOne:
         chapter:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Category\Chapter
@@ -40,14 +48,6 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
     oneToMany:
         videoComments:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment
-            mappedBy:     video
-            cascade:      [persist]
-        quizQuestions:
-            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion
-            mappedBy:     video
-            cascade:      [persist]
-        userAttempts:
-            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt
             mappedBy:     video
             cascade:      [persist]
         videoAttachments:

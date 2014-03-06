@@ -1,0 +1,18 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block content %}
+  <div class="col-sm-12">
+    <h1>{{ video.getName|raw }}</h1>
+    {{ form_start(form, {'method': 'POST'}) }}
+      {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+      <div class="form-group">
+        {{ form_label(form.file, 'Укажите архив') }}
+        {{ form_errors(form.file) }}
+        {{ form_widget(form.file) }}
+      </div>
+      <div>
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+      </div>
+    {{ form_end(form) }}
+  </div>
+{% endblock %}

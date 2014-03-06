@@ -5,6 +5,7 @@
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use \Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Doctrine\ORM\Mapping as ORM;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment;
     use Znaika\FrontendBundle\Entity\Profile\User;
 
@@ -66,16 +67,6 @@
         private $videoAttachments;
 
         /**
-         * @var \Doctrine\Common\Collections\Collection
-         */
-        private $quizQuestions;
-
-        /**
-         * @var \Doctrine\Common\Collections\Collection
-         */
-        private $userAttempts;
-
-        /**
          * @var integer
          */
         private $views = 0;
@@ -111,14 +102,17 @@
         private $orderPriority;
 
         /**
+         * @var Quiz
+         */
+        private $quiz;
+
+        /**
          * Constructor
          */
         public function __construct()
         {
             $this->videoComments    = new \Doctrine\Common\Collections\ArrayCollection();
             $this->videoAttachments = new \Doctrine\Common\Collections\ArrayCollection();
-            $this->userAttempts     = new \Doctrine\Common\Collections\ArrayCollection();
-            $this->quizQuestions    = new \Doctrine\Common\Collections\ArrayCollection();
             $this->supervisors      = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
@@ -414,75 +408,6 @@
         }
 
         /**
-         * Add quizQuestions
-         *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestion
-         *
-         * @return Video
-         */
-        public function addQuizQuestion(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestion)
-        {
-            $quizQuestion->setVideo($this);
-            $this->quizQuestions[] = $quizQuestion;
-
-            return $this;
-        }
-
-        /**
-         * Remove quizQuestions
-         *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestion
-         */
-        public function removeQuizQuestion(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\QuizQuestion $quizQuestion)
-        {
-            $this->quizQuestions->removeElement($quizQuestion);
-        }
-
-        /**
-         * Get quizQuestions
-         *
-         * @return \Doctrine\Common\Collections\Collection
-         */
-        public function getQuizQuestions()
-        {
-            return $this->quizQuestions;
-        }
-
-        /**
-         * Add userAttempts
-         *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempt
-         *
-         * @return Video
-         */
-        public function addUserAttempt(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempt)
-        {
-            $this->userAttempts[] = $userAttempt;
-
-            return $this;
-        }
-
-        /**
-         * Remove userAttempts
-         *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempt
-         */
-        public function removeUserAttempt(\Znaika\FrontendBundle\Entity\Lesson\Content\Quiz\Attempt\UserAttempt $userAttempt)
-        {
-            $this->userAttempts->removeElement($userAttempt);
-        }
-
-        /**
-         * Get userAttempts
-         *
-         * @return \Doctrine\Common\Collections\Collection
-         */
-        public function getUserAttempts()
-        {
-            return $this->userAttempts;
-        }
-
-        /**
          * @param int $views
          */
         public function setViews($views)
@@ -589,5 +514,21 @@
         public function getOrderPriority()
         {
             return $this->orderPriority;
+        }
+
+        /**
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz $quiz
+         */
+        public function setQuiz($quiz)
+        {
+            $this->quiz = $quiz;
+        }
+
+        /**
+         * @return \Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz
+         */
+        public function getQuiz()
+        {
+            return $this->quiz;
         }
     }

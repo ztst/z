@@ -1,0 +1,127 @@
+<?
+    namespace Znaika\FrontendBundle\Entity\Lesson\Content\Attachment;
+
+    use Doctrine\ORM\Mapping as ORM;
+    use Symfony\Component\HttpFoundation\File\UploadedFile;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+
+    class Quiz
+    {
+        /**
+         * @var integer
+         */
+        private $quizId;
+
+        /**
+         * @var Video
+         */
+        private $video;
+
+        /**
+         * @var string
+         */
+        private $name;
+
+        /**
+         * @var \DateTime
+         */
+        private $createdTime;
+
+        private $file;
+
+        /**
+         * Sets file.
+         *
+         * @param UploadedFile $file
+         */
+        public function setFile(UploadedFile $file = null)
+        {
+            $this->file = $file;
+        }
+
+        /**
+         * Get file.
+         *
+         * @return UploadedFile
+         */
+        public function getFile()
+        {
+            return $this->file;
+        }
+
+        /**
+         * @param string $name
+         */
+
+        /**
+         * @return string
+         */
+        public function getPath()
+        {
+            return $this->video->getVideoId();
+        }
+
+        /**
+         * @param int $videoAttachmentId
+         */
+        public function setQuizId($videoAttachmentId)
+        {
+            $this->quizId = $videoAttachmentId;
+        }
+
+        /**
+         * @return int
+         */
+        public function getQuizId()
+        {
+            return $this->quizId;
+        }
+
+        /**
+         * @param \DateTime $createdTime
+         */
+        public function setCreatedTime($createdTime)
+        {
+            $this->createdTime = $createdTime;
+        }
+
+        /**
+         * @return \DateTime
+         */
+        public function getCreatedTime()
+        {
+            return $this->createdTime;
+        }
+
+        /**
+         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Video $video
+         */
+        public function setVideo($video)
+        {
+            $this->video = $video;
+        }
+
+        /**
+         * @return \Znaika\FrontendBundle\Entity\Lesson\Content\Video
+         */
+        public function getVideo()
+        {
+            return $this->video;
+        }
+
+        /**
+         * @param string $name
+         */
+        public function setName($name)
+        {
+            $this->name = $name;
+        }
+
+        /**
+         * @return string
+         */
+        public function getName()
+        {
+            return $this->name;
+        }
+    }
