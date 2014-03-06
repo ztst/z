@@ -16,9 +16,4 @@
         {
             return $this->findOneByVideo($videoId);
         }
-
-        public function getOneByName($name)
-        {
-            return $this->findOneByName($name);
-        }
     }

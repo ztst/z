@@ -15,7 +15,8 @@ class SynopsisType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('text', 'textarea')
+            ->add('msWordFile', 'file')
+            ->add('htmlFile', 'file')
             ->add('save', 'submit');
     }
 

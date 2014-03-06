@@ -64,6 +64,10 @@ services:
         class:     Znaika\FrontendBundle\Helper\Uploader\QuizUploader
         arguments: ['@service_container']
 
+    znaika_frontend.synopsis_uploader:
+        class:     Znaika\FrontendBundle\Helper\Uploader\SynopsisUploader
+        arguments: ['@service_container']
+
     znaika_frontend.security.authentication_handler:
         class: Znaika\FrontendBundle\Helper\Security\AuthenticationHandler
         public: false
@@ -222,6 +226,14 @@ services:
         arguments:
             - @twig
             - @znaika_frontend.quiz_uploader
+        tags:
+            - { name: twig.extension }
+
+    znaika_frontend.synopsis_extension:
+        class: Znaika\FrontendBundle\Twig\Video\SynopsisExtension
+        arguments:
+            - @twig
+            - @znaika_frontend.synopsis_uploader
         tags:
             - { name: twig.extension }
 

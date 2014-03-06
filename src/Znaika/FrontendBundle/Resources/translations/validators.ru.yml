@@ -5,3 +5,5 @@ not_null:              Такой пользователь не найден.
 
 invalid_attachment_file_format:   Поддерживаются только pdf, doc и docx форматы файлов.
 invalid_quiz_file_format:         Поддерживается только zip формат файлов.
+invalid_ms_synopsis_file_format:  Поддерживается только doc и docx форматы файлов.
+invalid_zip_synopsis_file_format: Поддерживается только zip формат файлов.
