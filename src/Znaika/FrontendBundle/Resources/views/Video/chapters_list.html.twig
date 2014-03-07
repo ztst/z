@@ -1,21 +1,19 @@
-<div class="chapters-list-container">
-  <h3>Разделы</h3>
-  {% if not chapters is empty %}
-    <div class="chapters-list">
-      <div class="chapters-list-vertical-line"></div>
-      {% for chapter in chapters %}
-        <div class="chapter-description-container{% if currentChapterId == chapter.getChapterId %} selected{% endif %}">
-          <div class="chapter-list-marker">&nbsp;</div>
-          <a href="javascript:void(0);" title="{{ chapter.getName|raw }}" id="show_chapter_{{ chapter.getChapterId }}">
-            {{ chapter.getName|raw }}
-          </a>
-          <div class="chapter-selected-item-arrow"></div>
-        </div>
-        <div class="clear"></div>
-      {% endfor %}
-      <div class="placeholder"></div>
-    </div>
-  {% else %}
-    <h1>Пока что пусто</h1>
+<h3>Разделы</h3>
+{% if not chapters is empty %}
+  <div class="chapters-list">
+    <div class="chapters-list-vertical-line"></div>
+    {% for chapter in chapters %}
+      <div class="chapter-description-container{% if currentChapterId == chapter.getChapterId %} selected{% endif %}">
+        <div class="chapter-list-marker">&nbsp;</div>
+        <a href="javascript:void(0);" title="{{ chapter.getName|raw }}" id="show_chapter_{{ chapter.getChapterId }}">
+          {{ chapter.getName|raw }}
+        </a>
+        <div class="chapter-selected-item-arrow"></div>
+      </div>
+      <div class="clear"></div>
+    {% endfor %}
+    <div class="placeholder"></div>
+  </div>
+{% else %}
+  <h1>Пока что пусто</h1>
 {% endif %}
-</div>
