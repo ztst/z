@@ -2,12 +2,14 @@
     namespace Znaika\FrontendBundle\Helper\Uploader;
 
     use Symfony\Component\DependencyInjection\ContainerInterface;
+    use Symfony\Component\Security\Core\Util\SecureRandom;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
     use Znaika\FrontendBundle\Helper\Util\FileSystem\UnixSystemUtils;
 
     class SynopsisUploader
     {
-        const UPLOAD_PATH = "synopsis/";
+        const UPLOAD_PATH             = "synopsis/";
+        const RANDOM_FILE_NAME_LENGTH = 27;
 
         /**
          * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -21,6 +23,7 @@
 
         public function upload(Synopsis $synopsis)
         {
+            $synopsis->setLocationName($this->generateDirName());
             $fileDir = $this->getFileDir($synopsis);
             UnixSystemUtils::clearDirectory($fileDir);
 
@@ -31,14 +34,14 @@
         public function getFileDir(Synopsis $synopsis)
         {
             $root    = $this->container->getParameter('upload_file_dir');
-            $fileDir = $root . self::UPLOAD_PATH . $synopsis->getVideo()->getUrlName() . "/";
+            $fileDir = $root . self::UPLOAD_PATH . $synopsis->getLocationName() . "/";
 
             return $fileDir;
         }
 
         public function getHtmlFilePath(Synopsis $synopsis)
         {
-            return $this->getFileDir($synopsis) . "/" .$synopsis->getName();
+            return $this->getFileDir($synopsis) . "/" . $synopsis->getHtmlFileName();
         }
 
         private function uploadHtmlZipFile(Synopsis $synopsis)
@@ -79,7 +82,7 @@
             $htmlFiles = UnixSystemUtils::getDirectoryFiles($fileDir, "/[^\.]+\.(htm|html)/");
             if (count($htmlFiles) == 1)
             {
-                $synopsis->setName($htmlFiles[0]);
+                $synopsis->setHtmlFileName($htmlFiles[0]);
 
                 $this->processHtmlFile($synopsis);
             }
@@ -101,19 +104,26 @@
                 "/\<meta[^>]*>/",
                 "/\<\/meta[^>]*>/",
             );
-            $content = preg_replace($patterns, "", $content);
+            $content  = preg_replace($patterns, "", $content);
 
             $patterns = array(
                 "/\<style([^>]*)>/",
             );
-            $content = preg_replace($patterns, "<style scoped $1>", $content);
+            $content  = preg_replace($patterns, "<style scoped $1>", $content);
 
-            $patterns = array(
+            $patterns   = array(
                 "/src=\"([^\.]+)\.(png|jpg|jpeg|gif)/",
             );
-            $replaceStr = "src=\"/synopsis_content/" . $synopsis->getVideo()->getUrlName() . "/$1.$2";
-            $content = preg_replace($patterns, $replaceStr, $content);
+            $replaceStr = "src=\"/synopsis_content/" . $synopsis->getLocationName() . "/$1.$2";
+            $content    = preg_replace($patterns, $replaceStr, $content);
 
             UnixSystemUtils::setFileContents($path, $content);
+        }
+
+        private function generateDirName()
+        {
+            $generator = new SecureRandom();
+
+            return bin2hex($generator->nextBytes(self::RANDOM_FILE_NAME_LENGTH));
         }
     }

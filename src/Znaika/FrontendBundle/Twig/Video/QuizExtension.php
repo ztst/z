@@ -50,7 +50,7 @@
 
         private function prepareUrl(Quiz $quiz)
         {
-            return "/quiz_content/" . $quiz->getVideo()->getUrlName() . "/index.html";
+            return "/quiz_content/" . $quiz->getLocationName() . "/index.html";
         }
 
         /**

@@ -107,6 +107,11 @@
         private $quiz;
 
         /**
+         * @var integer
+         */
+        private $duration = 0;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -530,5 +535,21 @@
         public function getQuiz()
         {
             return $this->quiz;
+        }
+
+        /**
+         * @param int $duration
+         */
+        public function setDuration($duration)
+        {
+            $this->duration = $duration;
+        }
+
+        /**
+         * @return int
+         */
+        public function getDuration()
+        {
+            return $this->duration;
         }
     }

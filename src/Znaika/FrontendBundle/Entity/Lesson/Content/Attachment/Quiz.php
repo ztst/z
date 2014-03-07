@@ -25,6 +25,11 @@
         private $file;
 
         /**
+         * @var string
+         */
+        private $locationName;
+
+        /**
          * Sets file.
          *
          * @param UploadedFile $file
@@ -90,5 +95,21 @@
         public function getVideo()
         {
             return $this->video;
+        }
+
+        /**
+         * @param string $locationName
+         */
+        public function setLocationName($locationName)
+        {
+            $this->locationName = $locationName;
+        }
+
+        /**
+         * @return string
+         */
+        public function getLocationName()
+        {
+            return $this->locationName;
         }
     }

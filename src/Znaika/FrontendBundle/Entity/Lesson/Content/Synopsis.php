@@ -33,7 +33,12 @@
         /**
          * @var string
          */
-        private $name;
+        private $htmlFileName;
+
+        /**
+         * @var string
+         */
+        private $locationName;
 
         /**
          * @param \Symfony\Component\HttpFoundation\File\UploadedFile $htmlFile
@@ -128,16 +133,32 @@
         /**
          * @param string $name
          */
-        public function setName($name)
+        public function setHtmlFileName($name)
         {
-            $this->name = $name;
+            $this->htmlFileName = $name;
         }
 
         /**
          * @return string
          */
-        public function getName()
+        public function getHtmlFileName()
         {
-            return $this->name;
+            return $this->htmlFileName;
+        }
+
+        /**
+         * @param string $locationName
+         */
+        public function setLocationName($locationName)
+        {
+            $this->locationName = $locationName;
+        }
+
+        /**
+         * @return string
+         */
+        public function getLocationName()
+        {
+            return $this->locationName;
         }
     }

@@ -51,7 +51,7 @@
 
         private function getSource(Synopsis $synopsis)
         {
-            $path = $this->synopsisUploader->getFileDir($synopsis) . "/" . $synopsis->getName();
+            $path = $this->synopsisUploader->getHtmlFilePath($synopsis);
             return UnixSystemUtils::getFileContents($path);
         }
 

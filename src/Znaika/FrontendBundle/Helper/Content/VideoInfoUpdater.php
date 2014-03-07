@@ -6,8 +6,10 @@
     use Znaika\FrontendBundle\Helper\Vimeo;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
 
-    class ContentThumbnailUpdater
+    class VideoInfoUpdater
     {
+        const SMALL_THUMBNAIL_WIDTH = 100;
+
         /**
          * @var VideoRepository
          */
@@ -36,19 +38,35 @@
                 return;
             }
 
-            $result = $this->vimeo->call('vimeo.videos.getThumbnailUrls', array('video_id' => $video->getUrl()));
+            $result = $this->vimeo->call('vimeo.videos.getInfo', array('video_id' => $video->getUrl()));
 
-
-            if ($result->thumbnails && $result->thumbnails->thumbnail && count($result->thumbnails->thumbnail) >= 3)
+            if ($result && $result->stat == "ok")
             {
-                $smallThumbnailUrl  = $result->thumbnails->thumbnail[0]->_content;
-                $mediumThumbnailUrl = $result->thumbnails->thumbnail[1]->_content;
-                $largeThumbnailUrl  = $result->thumbnails->thumbnail[2]->_content;
+                if (is_array($result->video) && count($result->video) > 0)
+                {
+                    $videoInfo = $result->video[0];
+                    $video->setDuration($videoInfo->duration);
+                    $this->updateThumbnails($video, $videoInfo);
+                }
+            }
+
+        }
+
+        /**
+         * @param Video $video
+         * @param $videoInfo
+         */
+        private function updateThumbnails(Video $video, $videoInfo)
+        {
+            if ($videoInfo->thumbnails && $videoInfo->thumbnails->thumbnail && count($videoInfo->thumbnails->thumbnail) >= 3)
+            {
+                $smallThumbnailUrl  = $videoInfo->thumbnails->thumbnail[0]->_content;
+                $mediumThumbnailUrl = $videoInfo->thumbnails->thumbnail[1]->_content;
+                $largeThumbnailUrl  = $videoInfo->thumbnails->thumbnail[2]->_content;
 
                 $video->setSmallThumbnailUrl($smallThumbnailUrl);
                 $video->setMediumThumbnailUrl($mediumThumbnailUrl);
                 $video->setLargeThumbnailUrl($largeThumbnailUrl);
             }
-
         }
     }

@@ -76,8 +76,8 @@ services:
             - @session
             - @znaika_frontend.user_repository
 
-    znaika_frontend.content_thumbnail_updater:
-        class:     Znaika\FrontendBundle\Helper\Content\ContentThumbnailUpdater
+    znaika_frontend.video_info_updater:
+        class:     Znaika\FrontendBundle\Helper\Content\VideoInfoUpdater
         arguments:
             - '@znaika_frontend.video_repository'
             - '@znaika_frontend.php_vimeo'
