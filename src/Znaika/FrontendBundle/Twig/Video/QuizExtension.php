@@ -2,11 +2,9 @@
 
     namespace Znaika\FrontendBundle\Twig\Video;
 
-    use Symfony\Component\DependencyInjection\ContainerInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Helper\Uploader\QuizUploader;
-    use Znaika\FrontendBundle\Helper\Util\UserAgentInfoProvider;
 
     class QuizExtension extends \Twig_Extension
     {
@@ -52,7 +50,7 @@
 
         private function prepareUrl(Quiz $quiz)
         {
-            return "/quiz_content/" . $quiz->getName() . "/index.html";
+            return "/quiz_content/" . $quiz->getVideo()->getUrlName() . "/index.html";
         }
 
         /**

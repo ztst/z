@@ -14,9 +14,4 @@
         {
             return null;
         }
-
-        public function getOneByName($name)
-        {
-            return null;
-        }
     }

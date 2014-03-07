@@ -44,15 +44,4 @@
 
             return $result;
         }
-
-        public function getOneByName($name)
-        {
-            $result = $this->redisRepository->getOneByName($name);
-            if (is_null($result))
-            {
-                $result = $this->dbRepository->getOneByName($name);
-            }
-
-            return $result;
-        }
     }

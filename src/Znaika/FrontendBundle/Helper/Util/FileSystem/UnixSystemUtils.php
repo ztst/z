@@ -20,6 +20,15 @@
             return null;
         }
 
+        public static function setFileContents($filePath, $content)
+        {
+            if (file_exists($filePath))
+            {
+                return file_put_contents($filePath, $content);
+            }
+
+            return null;
+        }
 
         /**
          * Removes resource in specified path.

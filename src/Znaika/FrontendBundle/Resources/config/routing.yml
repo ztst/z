@@ -41,11 +41,11 @@ edit_video_form:
 
 add_quiz_form:
     pattern: /video/{videoName}/quiz-form
-    defaults: { _controller: ZnaikaFrontendBundle:Video:addQuizForm }
+    defaults: { _controller: ZnaikaFrontendBundle:Quiz:addQuizForm }
 
 save_quiz_stat_form:
     pattern: /save-quiz-stat
-    defaults: { _controller: ZnaikaFrontendBundle:Video:saveQuizStat }
+    defaults: { _controller: ZnaikaFrontendBundle:Quiz:saveQuizStat }
 
 add_video_comment_form:
     pattern: /{videoName}/add_video_comment_form

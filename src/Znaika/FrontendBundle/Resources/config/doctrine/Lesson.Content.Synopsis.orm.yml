@@ -4,7 +4,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis:
     repositoryClass: Znaika\FrontendBundle\Repository\Lesson\Content\SynopsisDBRepository
     fields:
         synopsisId:  { column: synopsis_id, type: integer, id: true, generator: { strategy: AUTO } }
-        text:        { type: text, notnull: true }
+        name:        { type: string, notnull: true }
         createdTime: { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     oneToOne:
         video:

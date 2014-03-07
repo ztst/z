@@ -2,6 +2,7 @@
     namespace Znaika\FrontendBundle\Entity\Lesson\Content;
 
     use Doctrine\ORM\Mapping as ORM;
+    use Symfony\Component\HttpFoundation\File\UploadedFile;
 
     class Synopsis
     {
@@ -9,11 +10,6 @@
          * @var integer
          */
         private $synopsisId;
-
-        /**
-         * @var string
-         */
-        private $text;
 
         /**
          * @var \DateTime
@@ -24,7 +20,52 @@
          * @var \Znaika\FrontendBundle\Entity\Lesson\Content\Video
          */
         private $video;
+        /**
+         * @var UploadedFile
+         */
+        private $msWordFile;
 
+        /**
+         * @var UploadedFile
+         */
+        private $htmlFile;
+
+        /**
+         * @var string
+         */
+        private $name;
+
+        /**
+         * @param \Symfony\Component\HttpFoundation\File\UploadedFile $htmlFile
+         */
+        public function setHtmlFile($htmlFile)
+        {
+            $this->htmlFile = $htmlFile;
+        }
+
+        /**
+         * @return \Symfony\Component\HttpFoundation\File\UploadedFile
+         */
+        public function getHtmlFile()
+        {
+            return $this->htmlFile;
+        }
+
+        /**
+         * @param \Symfony\Component\HttpFoundation\File\UploadedFile $msWordFile
+         */
+        public function setMsWordFile($msWordFile)
+        {
+            $this->msWordFile = $msWordFile;
+        }
+
+        /**
+         * @return \Symfony\Component\HttpFoundation\File\UploadedFile
+         */
+        public function getMsWordFile()
+        {
+            return $this->msWordFile;
+        }
 
         /**
          * Get synopsisId
@@ -34,30 +75,6 @@
         public function getSynopsisId()
         {
             return $this->synopsisId;
-        }
-
-        /**
-         * Set text
-         *
-         * @param string $text
-         *
-         * @return Synopsis
-         */
-        public function setText($text)
-        {
-            $this->text = $text;
-
-            return $this;
-        }
-
-        /**
-         * Get text
-         *
-         * @return string
-         */
-        public function getText()
-        {
-            return $this->text;
         }
 
         /**
@@ -106,5 +123,21 @@
         public function getVideo()
         {
             return $this->video;
+        }
+
+        /**
+         * @param string $name
+         */
+        public function setName($name)
+        {
+            $this->name = $name;
+        }
+
+        /**
+         * @return string
+         */
+        public function getName()
+        {
+            return $this->name;
         }
     }

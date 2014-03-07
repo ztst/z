@@ -24,17 +24,6 @@
          */
         public function getSynopsisesBySearchString($searchString)
         {
-            $searchString = "%{$searchString}%";
-
-            $queryBuilder = $this->getEntityManager()
-                                 ->createQueryBuilder();
-            $queryBuilder->select('s')
-                         ->from('ZnaikaFrontendBundle:Lesson\Content\Synopsis', 's')
-                         ->where($queryBuilder->expr()->like( 's.text', $queryBuilder->expr()->literal($searchString) ))
-                         ->addOrderBy('s.createdTime', 'DESC');
-
-            $synopsises = $queryBuilder->getQuery()->getResult();
-
-            return $synopsises;
+            return array();
         }
     }

@@ -13,12 +13,12 @@
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
     use Znaika\FrontendBundle\Entity\Profile\User;
-    use Znaika\FrontendBundle\Form\Lesson\Content\Attachment\QuizType;
     use Znaika\FrontendBundle\Form\Lesson\Content\Attachment\VideoAttachmentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\SynopsisType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoCommentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoType;
     use Znaika\FrontendBundle\Helper\Content\ContentThumbnailUpdater;
+    use Znaika\FrontendBundle\Helper\Uploader\SynopsisUploader;
     use Znaika\FrontendBundle\Helper\Uploader\VideoAttachmentUploader;
     use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
     use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +27,6 @@
     use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
     use Znaika\FrontendBundle\Repository\Lesson\Category\ChapterRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\IVideoAttachmentRepository;
-    use Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\QuizRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\Stat\QuizAttemptRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
@@ -116,7 +115,7 @@
             $repository = $this->getVideoRepository();
             $video      = $repository->getOneByUrlName($request->get('videoName'));
 
-            $synopsis = new Synopsis();
+            $synopsis = $video->getSynopsis() ? $video->getSynopsis() : new Synopsis();
             $form     = $this->createForm(new SynopsisType(), $synopsis);
 
             $form->handleRequest($request);
@@ -124,6 +123,10 @@
             if ($form->isValid())
             {
                 $video->setSynopsis($synopsis);
+
+                /** @var SynopsisUploader $uploader */
+                $uploader = $this->get('znaika_frontend.synopsis_uploader');
+                $uploader->upload($synopsis);
 
                 $synopsisRepository = $this->get('znaika_frontend.synopsis_repository');
                 $synopsisRepository->save($synopsis);
@@ -295,72 +298,6 @@
             return new JsonResponse(array("success" => $success));
         }
 
-        public function addQuizFormAction($videoName)
-        {
-            $videoRepository = $this->getVideoRepository();
-            $video           = $videoRepository->getOneByUrlName($videoName);
-            $quiz            = is_null($video->getQuiz()) ? new Quiz() : $video->getQuiz();
-            $form            = $this->createForm(new QuizType(), $quiz);
-
-            $form->handleRequest($this->getRequest());
-
-            if ($form->isValid())
-            {
-                $quiz->setVideo($video);
-                $video->setQuiz($quiz);
-
-                /** @var VideoAttachmentUploader $uploader */
-                $uploader = $this->get('znaika_frontend.quiz_uploader');
-                $uploader->upload($quiz);
-
-                $this->getQuizRepository()->save($quiz);
-
-                return new RedirectResponse($this->generateUrl('show_video', array(
-                    "class"       => $video->getGrade(),
-                    "subjectName" => $video->getSubject()->getUrlName(),
-                    "videoName"   => $video->getUrlName()
-                )));
-            }
-
-            return $this->render('ZnaikaFrontendBundle:Video:addQuizForm.html.twig', array(
-                "form"  => $form->createView(),
-                "video" => $video,
-            ));
-        }
-
-        public function saveQuizStatAction(Request $request)
-        {
-            $referrer = $request->headers->get('referer');
-            $pattern  = '/quiz_content\/([^\/]*)\//i';
-            if (!preg_match($pattern, $referrer, $matches))
-            {
-                return $this->createNotFoundException("Bad url for save quiz stat");
-            }
-
-            $quizName = $matches[1];
-            $quiz     = $this->getQuizRepository()->getOneByName($quizName);
-            if (is_null($quiz))
-            {
-                return $this->createNotFoundException("Quiz not found");
-            }
-
-            $user = $this->getUser();
-            if (is_null($user))
-            {
-                return $this->createNotFoundException("Not logged user view quiz");
-            }
-
-            $quizAttemptRepository = $this->getQuizAttemptRepository();
-            $quizAttempt           = $this->prepareUserQuizAttempt($user, $quiz);
-            $quizAttemptRepository->save($quizAttempt);
-
-            $array = array(
-                'success' => true
-            );
-
-            return new JsonResponse($array);
-        }
-
         public function showVideoAction($class, $subjectName, $videoName)
         {
             $repository = $this->getVideoRepository();
@@ -485,7 +422,7 @@
          * @param $videoComment
          * @param $videoCommentRepository
          */
-        private function prepareVideoCommentType($videoComment, $videoCommentRepository)
+        private function prepareVideoCommentType(VideoComment $videoComment, VideoCommentRepository $videoCommentRepository)
         {
             $request = $this->getRequest();
 
@@ -547,36 +484,11 @@
         }
 
         /**
-         * @return QuizRepository
-         */
-        private function getQuizRepository()
-        {
-            return $this->get("znaika_frontend.quiz_repository");
-        }
-
-        /**
          * @return QuizAttemptRepository
          */
         private function getQuizAttemptRepository()
         {
             return $this->get("znaika_frontend.quiz_attempt_repository");
-        }
-
-        /**
-         * @param User $user
-         * @param Quiz $quiz
-         *
-         * @return QuizAttempt
-         */
-        private function prepareUserQuizAttempt(User $user, Quiz $quiz)
-        {
-            $quizAttempt = $this->getUserQuizAttempt($user, $quiz);
-            $quizAttempt->setQuiz($quiz);
-            $quizAttempt->setUser($user);
-            $quizAttempt->setCreatedTime(new \DateTime());
-            $this->setQuizAttemptScore($quizAttempt);
-
-            return is_null($quizAttempt) ? new QuizAttempt() : $quizAttempt;
         }
 
         /**
@@ -598,7 +510,7 @@
          *
          * @return mixed|null
          */
-        private function getCurrentUserQuizScore($video)
+        private function getCurrentUserQuizScore(Video $video)
         {
             $userQuizScore = null;
             $user          = $this->getUser();
@@ -613,17 +525,5 @@
             }
 
             return $userQuizScore;
-        }
-
-        /**
-         * @param $quizAttempt
-         */
-        private function setQuizAttemptScore(QuizAttempt $quizAttempt)
-        {
-            $request    = $this->getRequest();
-            $userPoint  = $request->get("sp", 0);
-            $totalPoint = $request->get("tp", 1);
-            $score      = $userPoint * 100 / $totalPoint;
-            $quizAttempt->setScore($score);
         }
     }
