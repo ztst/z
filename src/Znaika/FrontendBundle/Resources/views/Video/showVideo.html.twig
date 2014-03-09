@@ -92,7 +92,7 @@
     <div class="col-md-4 col-center">
       <div class="chapter-videos-block-container">
         <div class="label-all-chapters">
-          <a href="{{ path('show_catalogue_by_subject', {"subjectName": video.getSubject.getUrlName}) }}">Все разделы</a>
+          <a href="{{ path('show_catalogue', {"class": class, "subjectName": video.getSubject.getUrlName}) }}">Все разделы</a>
         </div>
         <div class="chapter-name">{{ video.chapter.name }}</div>
         <h5>Уроки этого раздела</h5>

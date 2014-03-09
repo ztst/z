@@ -1,6 +1,12 @@
 .show-catalog-page-container
 {
     display: inline-block;
+    padding-top: 129px;
+    margin-top: -129px;
+
+    width: 100%;
+    height: auto !important;
+    min-height: 100%;
 }
 
 .chapter-catalog-container
@@ -101,7 +107,8 @@
 {
     position: absolute;
     margin: -1px 18px 0;
-    height: 200px;
+    width: 100%;
+    min-height: 100%;
     background: url('/images/chapters-list/chapter-list-row-background.png') repeat-y;
 }
 

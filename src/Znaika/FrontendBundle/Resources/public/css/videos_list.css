@@ -5,17 +5,23 @@
     border-left: 1px solid #ccc;
 }
 
-.chapter-video-preview-container,
-.chapter-video-preview-container a
+.chapter-videos-list,
+.chapter-videos-list a,
+.chapter-videos-list img
 {
     display: block;
+}
+
+.chapter-video-preview-container,
+.over-elements-container
+{
+    width: 104px;
+    height: 79px;
 }
 
 .over-elements-container
 {
     position: absolute;
-    width: 100%;
-    height: 100%;
 }
 
 .over-play-sign
@@ -33,14 +39,20 @@
 {
     display: block;
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: 4px;
+    bottom: 4px;
 
     color: #fff;
     font-family: "Arial";
     font-weight: bold;
     font-size: 10px;
     background: url('/images/video/video-length-background.png') repeat-x;
+}
+
+.chapter-selected-video .over-video-length
+{
+    right: 2px;
+    bottom: 2px;
 }
 
 .chapter-selected-video
@@ -76,6 +88,7 @@
 
 .video-title.over
 {
+    color: #222;
     text-decoration: underline;
 }
 

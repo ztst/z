@@ -56,7 +56,6 @@
         public function createSidebarSubjectMenu(Request $request, ISubjectRepository $repository)
         {
             $currentGrade = $this->getCurrentClass($request);
-
             $currentSubjectUrlName = $this->getCurrentSubjectUrlName($request);
 
             $menu = $this->factory->createItem("root");
