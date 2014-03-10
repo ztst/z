@@ -540,15 +540,74 @@ img.mfp-img
     padding-top: 0;
 }
 
+/** checkbox styles */
+.icheckbox,
+.iradio{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    width: 15px;
+    height: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.icheckbox {background: transparent url('/images/checkbox/checkbox-login-form.png') no-repeat;}
+
+.icheckbox {
+    background-position: 0 0;
+}
+/*.icheckbox.hover {
+    background-position: 0px -54px;
+}*/
+.icheckbox.checked {
+    background-position: 0 -21px;
+}
+/*.icheckbox.checked.hover {
+    background-position: 0px -126px;
+}
+
+.icheckbox.disabled {
+    background-position: 0px 0px;
+}
+.icheckbox.checked.disabled {
+    background-position: 0px -72px;
+}*/
+/** ~checkbox styles **/
+
+/** radiobutton styles */
+.iradio {background: transparent url('/images/radiobutton/radio.gif') no-repeat;}
+
+.iradio {
+    background-position: 0px -36px;
+}
+.iradio.hover {
+    background-position: 0px -54px;
+}
+.iradio.checked {
+    background-position: 0px -108px;
+}
+.iradio.checked.hover {
+    background-position: 0px -126px;
+}
+
+.iradio.disabled {
+    background-position: 0px 0px;
+}
+.iradio.checked.disabled {
+    background-position: 0px -72px;
+}
+/** ~radiobuttons styles **/
+
 /* Znaika Login Popup*/
 
 .popup
 {
     position: relative;
     background: #ffffff;
-    padding: 20px 20px;
     width: auto;
-    max-width: 573px;
+    max-width: 583px;
     margin: 20px auto;
     border-radius: 4px;
     box-shadow: 0 0 8px #000000;
@@ -556,7 +615,7 @@ img.mfp-img
 
 .login-popup-content
 {
-    padding: 0 20px;
+    width: 583px;
 }
 
 .login-popup-container
@@ -566,9 +625,9 @@ img.mfp-img
 
 .login-popup-content .form-container
 {
-    padding-bottom: 32px;
-    border-right: 1px solid #dedede;
-    clear: right;
+    float: left;
+    padding: 25px 0 22px;
+    width: 379px;
 }
 
 .forget-password-form-container
@@ -583,13 +642,14 @@ img.mfp-img
 
 .login-popup-header
 {
-    padding: 26px 0 29px 64px;
+    padding: 0 0 25px 85px;
 }
 
 .login-popup-content h3
 {
-    font: normal 20px/24px Arial;
-    color: #1b1b1b;
+    color: #222;
+    font-size: 20px;
+    font-family: "OpenSans Semibold";
 
     margin: 0;
     display: inline-block;
@@ -597,9 +657,12 @@ img.mfp-img
 
 .login-popup-content .right-link
 {
-    font: normal 12px/24px Verdana;
-
+    margin-top: 2px;
     float: right;
+
+    color: #036995;
+    font-size: 14px;
+    font-family: "OpenSans Semibold";
     text-decoration: underline;
 }
 
@@ -610,9 +673,13 @@ img.mfp-img
     display: table-cell;
     text-align: right;
 
-    padding-right: 4px;
+    padding-right: 7px;
 
-    width: 66px;
+    width: 85px;
+
+    font-weight: normal;
+    font-size: 13px;
+    font-family: "OpenSans Semibold";
 }
 
 .get-new-password-form label
@@ -629,7 +696,7 @@ img.mfp-img
 .registration-button-container,
 .forget-password-button-container
 {
-    padding-left: 66px;
+    padding-left: 85px;
 }
 
 .recover-button-container
@@ -637,14 +704,36 @@ img.mfp-img
     padding-left: 103px;
 }
 
-.login-button-container .btn
-{
-    width: 60%;
-}
-
+.login-button-container .btn,
 .registration-button-container .btn
 {
     width: 100%;
+    height: 33px;
+
+    border: 1px solid #64bfe0 !important;
+    font-size: 15px !important;
+    font-family: "OpenSans Semibold" !important;
+    text-shadow: 2px 1px 1px #4c6da9;
+    background: linear-gradient(#4fb1d8, #389dca);
+}
+
+.outer-border
+{
+    border: 1px solid #399dc0;
+    border-radius: 4px;
+}
+
+.login-button-container .btn:hover,
+.registration-button-container .btn:hover
+{
+    border: 1px solid #72cbec !important;
+    background: linear-gradient(#5fbfe7, #389dcb);
+}
+
+.outer-border:hover
+{
+    border: 1px solid #158bb5;
+    border-radius: 4px;
 }
 
 .login-form .form-group,
@@ -654,11 +743,13 @@ img.mfp-img
 {
     width: 100%;
 }
+
+.login-form
 .agreement-block,
 .remember-me-block
 {
-    margin-top: -9px;
-    padding-left: 66px;
+    margin-top: -6px;
+    padding-left: 85px;
     margin-bottom: 18px;
 }
 
@@ -669,10 +760,26 @@ img.mfp-img
     margin-right: 6px;
 }
 
+.remember-me-block label
+{
+    padding-top: 2px;
+}
+
+.remember-me-block .icheckbox
+{
+    display: block;
+    float: left;
+    margin-top: 2px;
+    margin-right: 3px;
+}
+
 .remember-me-block .forget-password-link
 {
     float: right;
     margin-top: -18px;
+
+    font-size: 12px;
+    font-family: "OpenSans";
 }
 
 .agreement-block label
@@ -692,20 +799,25 @@ img.mfp-img
 
 .remember-me-block label
 {
-    padding-top: 2px;
+    padding-left: 2px;
     width: auto;
-    font: normal 11px/16px Verdana;
-}
-
-.login-popup-right-column
-{
-    padding-top: 34px;
-    padding-left: 30px;
+    font-size: 12px;
+    font-family: "OpenSans";
 }
 
 .login-popup-left-column
 {
-    padding-right: 27px;
+    padding-right: 32px;
+    padding-bottom: 16px;
+    background: url("/images/popup/login-form-border.png") repeat-y;
+    background-position: 100% 0;
+}
+
+.login-popup-content .social-login-buttons-container
+{
+    float: right;
+    padding: 25px 32px 0 30px;
+    width: 204px;
 }
 
 .login-popup-content .social-login-buttons-container a
@@ -715,22 +827,53 @@ img.mfp-img
 
 .login-popup-content .social-login-buttons-container div
 {
-    padding-bottom: 9px;
+    padding-bottom: 15px;
 }
 
 .login-popup-content .social-login-buttons-container span
 {
-    font: normal 11px Verdana;
     position: relative;
     left: 4px;
     top: 1px;
+
+    color: #fff;
+    font-size: 12px;
+    font-family: "OpenSans Semibold";
 }
 
 .login-popup-content .social-login-buttons-container h5
 {
-    font: bold 13px Arial;
+    margin-top: 15px;
+    margin-bottom: 14px;
+
     color: #313030;
-    margin-bottom: 18px;
+    font-size: 16px;
+    font-family: "OpenSans Semibold";
+    text-align: center;
+}
+
+.vk-login,
+.facebook-login,
+.odnoklassniki-login
+{
+    display: block;
+    width: 142px;
+    height: 33px;
+}
+
+.vk-login
+{
+    background: url('/images/popup/vk-login-button.png') no-repeat;
+}
+
+.facebook-login
+{
+    background: url('/images/popup/facebook-login-button.png') no-repeat;
+}
+
+.odnoklassniki-login
+{
+    background: url('/images/popup/odnoklassniki-login-button.png') no-repeat;
 }
 
 .input-group .password-input
@@ -752,17 +895,19 @@ img.mfp-img
 {
     cursor: pointer;
     display: inline-block;
-    width: 28px;
-    height: 23px;
+    width: 23px;
+    height: 32px;
 
     position: absolute;
-    right: 1px;
-    top: 1px;
+    right: 0;
+    top: 0;
 
-    background: url('/images/popup/show_password_icon_closed.png');
+    background: url('/images/popup/show-password-icon.png') no-repeat;
+    background-position: 0 9px;
 }
 
 .show-password-button-container .show-password-icon.opened
 {
-    background: url('/images/popup/show_password_icon.png');
+    background: url('/images/popup/show-password-icon-opened.png') no-repeat;
+    background-position: 0 10px;
 }

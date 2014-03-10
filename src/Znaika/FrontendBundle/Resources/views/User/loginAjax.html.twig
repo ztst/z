@@ -1,16 +1,16 @@
 <div class="popup login-popup-content">
   <div id="loginFormContainer">
-    <div class="col-xs-8 col-center form-container">
+    <div class="form-container">
       <div class="login-popup-left-column">
         <div class="login-popup-header">
-          <h3>Войти</h3>
-          <a href="javascript:void(0);" class="right-link" title="" id="switchRegistrationLink">Зарегистрироваться</a>
+          <h3>Вход</h3>
+          <a href="javascript:void(0);" class="right-link" title="" id="switchRegistrationLink">Регистрация</a>
           <div class="clear"></div>
         </div>
         {% include "ZnaikaFrontendBundle:User:login_form.html.twig" with {'last_username': last_username, 'error': error, 'referrer': referrer} %}
       </div>
     </div>
-    <div class="col-xs-4 col-center social-login-buttons-container">
+    <div class="social-login-buttons-container">
       {% include 'ZnaikaFrontendBundle:User:login_popup_social_buttons.html.twig' %}
     </div>
     <div class="clear"></div>
@@ -19,7 +19,7 @@
     <div class="col-xs-8 col-center form-container">
       <div class="login-popup-left-column">
         <div class="login-popup-header">
-          <h3>Зарегистрироваться</h3>
+          <h3>Регистрация</h3>
           <a href="javascript:void(0);" class="right-link" title="" id="switchLoginLink">Войти</a>
           <div class="clear"></div>
         </div>

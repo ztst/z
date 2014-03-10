@@ -416,13 +416,20 @@ button.btn-primary
 
 div.form-error-field
 {
-    margin: -10px 0 16px;
+    position: absolute;
+    z-index: 3;
+    padding: 5px 10px 9px 32px;
+    width: 253px;
 
-    border-radius: 4px;
-    padding: 15px;
-    background-color: #F2DEDE;
-    border-color: #EBCCD1;
-    color: #B94A48;
+    color: #505050;
+    font-size: 12px;
+
+    border: 1px solid #f79076;
+    border-radius: 3px;
+    background-color: #fff9f1;
+    background-image: url('/images/popup/error-sign.png');
+    background-repeat: no-repeat;
+    background-position: 9px 8px;
 }
 
 .form-control

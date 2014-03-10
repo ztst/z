@@ -78,7 +78,7 @@ var ShowVideoPage = Base.extend({
         this._isMoving = false;
         if (response.success)
         {
-            var current = $('.chapter-selected-video');
+            var current = $(".chapter-selected-video");
             current.prev().before(current);
         }
     },
@@ -88,7 +88,7 @@ var ShowVideoPage = Base.extend({
         this._isMoving = false;
         if (response.success)
         {
-            var current = $('.chapter-selected-video');
+            var current = $(".chapter-selected-video");
             current.next().after(current);
         }
     },
