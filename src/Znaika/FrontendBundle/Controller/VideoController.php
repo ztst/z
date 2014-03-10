@@ -5,6 +5,7 @@
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+    use Symfony\Component\Security\Core\Util\SecureRandom;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment;
@@ -17,7 +18,7 @@
     use Znaika\FrontendBundle\Form\Lesson\Content\SynopsisType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoCommentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoType;
-    use Znaika\FrontendBundle\Helper\Content\ContentThumbnailUpdater;
+    use Znaika\FrontendBundle\Helper\Content\VideoInfoUpdater;
     use Znaika\FrontendBundle\Helper\Uploader\SynopsisUploader;
     use Znaika\FrontendBundle\Helper\Uploader\VideoAttachmentUploader;
     use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
@@ -35,6 +36,7 @@
     class VideoController extends Controller
     {
         const COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE = 3;
+        const VIDEO_CONTENT_DIR_NAME_LENGTH = 27;
 
         public function postVideoToSocialNetworkAction(Request $request)
         {
@@ -190,8 +192,8 @@
             $form->handleRequest($request);
             if ($form->isValid())
             {
-                $contentThumbnailUpdater = $this->getContentThumbnailUpdater();
-                $contentThumbnailUpdater->update($video);
+                $videoInfoUpdater = $this->getVideoInfoUpdater();
+                $videoInfoUpdater->update($video);
 
                 $repository->save($video);
 
@@ -222,11 +224,15 @@
 
             if ($form->isValid())
             {
-                $contentThumbnailUpdater = $this->getContentThumbnailUpdater();
-                $contentThumbnailUpdater->update($video);
+                $repository = $this->getVideoRepository();
+                $video->setOrderPriority($repository->getMaxChapterOrderPriority($chapter) + 1);
 
                 $video->setInfoFromChapter($chapter);
-                $repository = $this->getVideoRepository();
+                $this->setVideoContentDir($video);
+
+                $videoInfoUpdater = $this->getVideoInfoUpdater();
+                $videoInfoUpdater->update($video);
+
                 $repository->save($video);
 
                 return new RedirectResponse($this->generateUrl('show_video', array(
@@ -387,11 +393,11 @@
         }
 
         /**
-         * @return ContentThumbnailUpdater
+         * @return VideoInfoUpdater
          */
-        private function getContentThumbnailUpdater()
+        private function getVideoInfoUpdater()
         {
-            return $this->get("znaika_frontend.content_thumbnail_updater");
+            return $this->get("znaika_frontend.video_info_updater");
         }
 
         /**
@@ -525,5 +531,15 @@
             }
 
             return $userQuizScore;
+        }
+
+        /**
+         * @param $video
+         */
+        private function setVideoContentDir($video)
+        {
+            $generator = new SecureRandom();
+            $dirName   = bin2hex($generator->nextBytes(self::VIDEO_CONTENT_DIR_NAME_LENGTH));
+            $video->setContentDir($dirName);
         }
     }

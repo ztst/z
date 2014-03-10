@@ -1,8 +1,10 @@
 {% if video.getSynopsis %}
-  <a href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">
-    Редактировать конспект
-  </a>
-  <br/>
+  {% if is_moderator() %}
+    <a href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">
+      Редактировать конспект
+    </a>
+    <br/>
+  {% endif %}
   {{ show_synopsis(video)|raw }}
 {% elseif is_moderator() %}
   <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">

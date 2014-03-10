@@ -67,7 +67,7 @@
               {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
                 'url': app.request.uri,
                 'title': video.name,
-                'img': video.getLargeThumbnailUrl,
+                'img': large_video_thumbnail(video),
                 'desc': video.name
               } %}
             </div>
@@ -96,10 +96,6 @@
         </div>
         <div class="chapter-name">{{ video.chapter.name }}</div>
         <h5>Уроки этого раздела</h5>
-
-        <div class="show-more-videos">
-          <a href="javascript:void(0);">Показать предыдущие (69)</a>
-        </div>
         {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapterVideos, 'currentVideo': video, "chapter": video.chapter} %}
       </div>
     </div>

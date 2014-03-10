@@ -22,6 +22,9 @@
          */
         private $createdTime;
 
+        /**
+         * @var UploadedFile
+         */
         private $file;
 
         /**
