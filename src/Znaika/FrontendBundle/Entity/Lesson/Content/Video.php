@@ -74,21 +74,6 @@
         /**
          * @var string
          */
-        private $smallThumbnailUrl;
-
-        /**
-         * @var string
-         */
-        private $mediumThumbnailUrl;
-
-        /**
-         * @var string
-         */
-        private $largeThumbnailUrl;
-
-        /**
-         * @var string
-         */
         private $author;
 
         /**
@@ -110,6 +95,11 @@
          * @var integer
          */
         private $duration = 0;
+
+        /**
+         * @var string
+         */
+        private $contentDir;
 
         /**
          * Constructor
@@ -276,60 +266,6 @@
         }
 
         /**
-         * @param string $largeThumbnailUrl
-         */
-        public function setLargeThumbnailUrl($largeThumbnailUrl)
-        {
-            $this->largeThumbnailUrl = $largeThumbnailUrl;
-        }
-
-        /**
-         * 640x476
-         *
-         * @return string
-         */
-        public function getLargeThumbnailUrl()
-        {
-            return (empty($this->largeThumbnailUrl)) ? $this->getMediumThumbnailUrl() : $this->largeThumbnailUrl;
-        }
-
-        /**
-         * @param string $mediumThumbnailUrl
-         */
-        public function setMediumThumbnailUrl($mediumThumbnailUrl)
-        {
-            $this->mediumThumbnailUrl = $mediumThumbnailUrl;
-        }
-
-        /**
-         * 200x150
-         *
-         * @return string
-         */
-        public function getMediumThumbnailUrl()
-        {
-            return (empty($this->mediumThumbnailUrl)) ? $this->getSmallThumbnailUrl() : $this->mediumThumbnailUrl;
-        }
-
-        /**
-         * 100x75
-         *
-         * @param string $smallThumbnailUrl
-         */
-        public function setSmallThumbnailUrl($smallThumbnailUrl)
-        {
-            $this->smallThumbnailUrl = $smallThumbnailUrl;
-        }
-
-        /**
-         * @return string
-         */
-        public function getSmallThumbnailUrl()
-        {
-            return $this->smallThumbnailUrl;
-        }
-
-        /**
          * Set chapter
          *
          * @param \Znaika\FrontendBundle\Entity\Lesson\Category\Chapter $chapter
@@ -362,6 +298,7 @@
          */
         public function setSynopsis(\Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis $synopsis = null)
         {
+            $synopsis->setVideo($this);
             $this->synopsis = $synopsis;
 
             return $this;
@@ -551,5 +488,21 @@
         public function getDuration()
         {
             return $this->duration;
+        }
+
+        /**
+         * @param string $contentDir
+         */
+        public function setContentDir($contentDir)
+        {
+            $this->contentDir = $contentDir;
+        }
+
+        /**
+         * @return string
+         */
+        public function getContentDir()
+        {
+            return $this->contentDir;
         }
     }

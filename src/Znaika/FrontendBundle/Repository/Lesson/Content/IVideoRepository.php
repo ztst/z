@@ -19,7 +19,7 @@
          * @param $limit
          * @param $page
          *
-         * @return Video[]|null
+         * @return Video[]
          */
         public function getVideosBySearchString($searchString, $limit = null, $page = null);
 

@@ -2,14 +2,12 @@
     namespace Znaika\FrontendBundle\Helper\Uploader;
 
     use Symfony\Component\DependencyInjection\ContainerInterface;
-    use Symfony\Component\Security\Core\Util\SecureRandom;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
     use Znaika\FrontendBundle\Helper\Util\FileSystem\UnixSystemUtils;
 
     class SynopsisUploader
     {
-        const UPLOAD_PATH             = "synopsis/";
-        const RANDOM_FILE_NAME_LENGTH = 27;
+        const UPLOAD_PATH = "synopsis/";
 
         /**
          * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -23,7 +21,6 @@
 
         public function upload(Synopsis $synopsis)
         {
-            $synopsis->setLocationName($this->generateDirName());
             $fileDir = $this->getFileDir($synopsis);
             UnixSystemUtils::clearDirectory($fileDir);
 
@@ -34,7 +31,7 @@
         public function getFileDir(Synopsis $synopsis)
         {
             $root    = $this->container->getParameter('upload_file_dir');
-            $fileDir = $root . self::UPLOAD_PATH . $synopsis->getLocationName() . "/";
+            $fileDir = $root . self::UPLOAD_PATH . $synopsis->getVideo()->getContentDir() . "/";
 
             return $fileDir;
         }
@@ -93,9 +90,17 @@
             $path = $this->getHtmlFilePath($synopsis);
 
             $content = UnixSystemUtils::getFileContents($path);
+            $content = $this->prepareStyles($content);
+            $content = $this->removeExcessTags($content);
+            $content = $this->prepareImagesUrls($synopsis, $content);
+            UnixSystemUtils::setFileContents($path, $content);
+        }
 
+        private function removeExcessTags($content)
+        {
             $patterns = array(
                 "/\<html[^>]*>/",
+                "/\<\!DOCTYPE[^>]*>/",
                 "/\<\/html[^>]*>/",
                 "/\<head[^>]*>/",
                 "/\<\/head[^>]*>/",
@@ -106,24 +111,54 @@
             );
             $content  = preg_replace($patterns, "", $content);
 
-            $patterns = array(
-                "/\<style([^>]*)>/",
-            );
-            $content  = preg_replace($patterns, "<style scoped $1>", $content);
+            return $content;
+        }
 
+        /**
+         * @param Synopsis $synopsis
+         * @param $content
+         *
+         * @return mixed
+         */
+        private function prepareImagesUrls(Synopsis $synopsis, $content)
+        {
             $patterns   = array(
                 "/src=\"([^\.]+)\.(png|jpg|jpeg|gif)/",
             );
-            $replaceStr = "src=\"/synopsis_content/" . $synopsis->getLocationName() . "/$1.$2";
+            $replaceStr = "src=\"/synopsis_content/" . $synopsis->getVideo()->getContentDir() . "/$1.$2";
             $content    = preg_replace($patterns, $replaceStr, $content);
 
-            UnixSystemUtils::setFileContents($path, $content);
+            return $content;
         }
 
-        private function generateDirName()
+        /**
+         * @param $content
+         *
+         * @return string
+         */
+        private function prepareStyles($content)
         {
-            $generator = new SecureRandom();
+            $doc = new \DOMDocument();
+            $doc->loadHTML($content);
+            $styles = $doc->getElementsByTagName("style");
 
-            return bin2hex($generator->nextBytes(self::RANDOM_FILE_NAME_LENGTH));
+            for ($i = 0; $i < $styles->length; $i++)
+            {
+                $style   = $styles->item($i);
+                $content = $style->nodeValue;
+
+                $patterns         = array(
+                    "/([\}|,][\s]+)([^,\@\{]+)/"
+                );
+                $style->nodeValue = preg_replace($patterns, "$1 .synopsis-container $2", $content);
+            }
+            $content = $doc->saveHTML();
+
+            $pattern = array(
+                "/\<style([^>]*)>/",
+            );
+            $content = preg_replace($pattern, "<style scoped $1>", $content);
+
+            return $content;
         }
     }

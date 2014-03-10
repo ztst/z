@@ -8,7 +8,7 @@
         'videoName': video.getUrlName
         }) }}"
            title="{{ video.getName|raw }}">
-          <img src="{{ video.getLargeThumbnailUrl }}" alt="{{ video.getName|raw }}"/>
+          <img src="{{ large_video_thumbnail(video) }}" alt="{{ video.getName|raw }}"/>
         </a>
       </div>
       <div class="">

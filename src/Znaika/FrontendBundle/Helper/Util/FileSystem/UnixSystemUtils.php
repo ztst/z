@@ -3,6 +3,24 @@
 
     class UnixSystemUtils
     {
+
+        /**
+         * Creates directory.
+         *
+         * @param string $dirPath
+         * @param int $mode
+         * @param bool $recursive
+         *
+         * @return bool
+         */
+        public static function createDirectory( $dirPath, $mode = 0770, $recursive = false )
+        {
+            if (file_exists($dirPath) && is_dir($dirPath))
+                return true;
+            umask(0);
+            return @mkdir($dirPath, $mode, $recursive);
+        }
+
         /**
          * Returns file contents.
          * If file doesn't exists return null.
@@ -22,12 +40,7 @@
 
         public static function setFileContents($filePath, $content)
         {
-            if (file_exists($filePath))
-            {
-                return file_put_contents($filePath, $content);
-            }
-
-            return null;
+            return file_put_contents($filePath, $content);
         }
 
         /**

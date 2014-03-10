@@ -5,6 +5,7 @@
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+    use Symfony\Component\Security\Core\Util\SecureRandom;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment;
@@ -35,6 +36,7 @@
     class VideoController extends Controller
     {
         const COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE = 3;
+        const VIDEO_CONTENT_DIR_NAME_LENGTH = 27;
 
         public function postVideoToSocialNetworkAction(Request $request)
         {
@@ -222,11 +224,15 @@
 
             if ($form->isValid())
             {
+                $repository = $this->getVideoRepository();
+                $video->setOrderPriority($repository->getMaxChapterOrderPriority($chapter) + 1);
+
+                $video->setInfoFromChapter($chapter);
+                $this->setVideoContentDir($video);
+
                 $videoInfoUpdater = $this->getVideoInfoUpdater();
                 $videoInfoUpdater->update($video);
 
-                $video->setInfoFromChapter($chapter);
-                $repository = $this->getVideoRepository();
                 $repository->save($video);
 
                 return new RedirectResponse($this->generateUrl('show_video', array(
@@ -525,5 +531,15 @@
             }
 
             return $userQuizScore;
+        }
+
+        /**
+         * @param $video
+         */
+        private function setVideoContentDir($video)
+        {
+            $generator = new SecureRandom();
+            $dirName   = bin2hex($generator->nextBytes(self::VIDEO_CONTENT_DIR_NAME_LENGTH));
+            $video->setContentDir($dirName);
         }
     }

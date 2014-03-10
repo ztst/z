@@ -22,12 +22,10 @@
          */
         private $createdTime;
 
-        private $file;
-
         /**
-         * @var string
+         * @var UploadedFile
          */
-        private $locationName;
+        private $file;
 
         /**
          * Sets file.
@@ -95,21 +93,5 @@
         public function getVideo()
         {
             return $this->video;
-        }
-
-        /**
-         * @param string $locationName
-         */
-        public function setLocationName($locationName)
-        {
-            $this->locationName = $locationName;
-        }
-
-        /**
-         * @return string
-         */
-        public function getLocationName()
-        {
-            return $this->locationName;
         }
     }

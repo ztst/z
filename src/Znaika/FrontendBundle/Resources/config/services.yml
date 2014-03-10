@@ -79,8 +79,9 @@ services:
     znaika_frontend.video_info_updater:
         class:     Znaika\FrontendBundle\Helper\Content\VideoInfoUpdater
         arguments:
-            - '@znaika_frontend.video_repository'
-            - '@znaika_frontend.php_vimeo'
+            - @znaika_frontend.video_repository
+            - @znaika_frontend.php_vimeo
+            - @service_container
 
     znaika_frontend.php_vimeo:
         class:     Znaika\FrontendBundle\Helper\Vimeo
@@ -226,6 +227,11 @@ services:
         arguments:
             - @twig
             - @znaika_frontend.quiz_uploader
+        tags:
+            - { name: twig.extension }
+
+    znaika_frontend.thumbnail_extension:
+        class: Znaika\FrontendBundle\Twig\Video\ThumbnailExtension
         tags:
             - { name: twig.extension }
 
