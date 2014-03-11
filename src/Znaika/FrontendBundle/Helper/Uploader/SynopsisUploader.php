@@ -31,14 +31,14 @@
         public function getFileDir(Synopsis $synopsis)
         {
             $root    = $this->container->getParameter('upload_file_dir');
-            $fileDir = $root . self::UPLOAD_PATH . $synopsis->getVideo()->getUrlName() . "/";
+            $fileDir = $root . self::UPLOAD_PATH . $synopsis->getVideo()->getContentDir() . "/";
 
             return $fileDir;
         }
 
         public function getHtmlFilePath(Synopsis $synopsis)
         {
-            return $this->getFileDir($synopsis) . "/" .$synopsis->getName();
+            return $this->getFileDir($synopsis) . "/" . $synopsis->getHtmlFileName();
         }
 
         private function uploadHtmlZipFile(Synopsis $synopsis)
@@ -79,7 +79,7 @@
             $htmlFiles = UnixSystemUtils::getDirectoryFiles($fileDir, "/[^\.]+\.(htm|html)/");
             if (count($htmlFiles) == 1)
             {
-                $synopsis->setName($htmlFiles[0]);
+                $synopsis->setHtmlFileName($htmlFiles[0]);
 
                 $this->processHtmlFile($synopsis);
             }
@@ -90,9 +90,17 @@
             $path = $this->getHtmlFilePath($synopsis);
 
             $content = UnixSystemUtils::getFileContents($path);
+            $content = $this->prepareStyles($content);
+            $content = $this->removeExcessTags($content);
+            $content = $this->prepareImagesUrls($synopsis, $content);
+            UnixSystemUtils::setFileContents($path, $content);
+        }
 
+        private function removeExcessTags($content)
+        {
             $patterns = array(
                 "/\<html[^>]*>/",
+                "/\<\!DOCTYPE[^>]*>/",
                 "/\<\/html[^>]*>/",
                 "/\<head[^>]*>/",
                 "/\<\/head[^>]*>/",
@@ -101,19 +109,56 @@
                 "/\<meta[^>]*>/",
                 "/\<\/meta[^>]*>/",
             );
-            $content = preg_replace($patterns, "", $content);
+            $content  = preg_replace($patterns, "", $content);
 
-            $patterns = array(
-                "/\<style([^>]*)>/",
-            );
-            $content = preg_replace($patterns, "<style scoped $1>", $content);
+            return $content;
+        }
 
-            $patterns = array(
+        /**
+         * @param Synopsis $synopsis
+         * @param $content
+         *
+         * @return mixed
+         */
+        private function prepareImagesUrls(Synopsis $synopsis, $content)
+        {
+            $patterns   = array(
                 "/src=\"([^\.]+)\.(png|jpg|jpeg|gif)/",
             );
-            $replaceStr = "src=\"/synopsis_content/" . $synopsis->getVideo()->getUrlName() . "/$1.$2";
-            $content = preg_replace($patterns, $replaceStr, $content);
+            $replaceStr = "src=\"/synopsis_content/" . $synopsis->getVideo()->getContentDir() . "/$1.$2";
+            $content    = preg_replace($patterns, $replaceStr, $content);
 
-            UnixSystemUtils::setFileContents($path, $content);
+            return $content;
+        }
+
+        /**
+         * @param $content
+         *
+         * @return string
+         */
+        private function prepareStyles($content)
+        {
+            $doc = new \DOMDocument();
+            $doc->loadHTML($content);
+            $styles = $doc->getElementsByTagName("style");
+
+            for ($i = 0; $i < $styles->length; $i++)
+            {
+                $style   = $styles->item($i);
+                $content = $style->nodeValue;
+
+                $patterns         = array(
+                    "/([\}|,][\s]+)([^,\@\{]+)/"
+                );
+                $style->nodeValue = preg_replace($patterns, "$1 .synopsis-container $2", $content);
+            }
+            $content = $doc->saveHTML();
+
+            $pattern = array(
+                "/\<style([^>]*)>/",
+            );
+            $content = preg_replace($pattern, "<style scoped $1>", $content);
+
+            return $content;
         }
     }

@@ -269,8 +269,17 @@ a:focus
     height: 33px;
 }
 
+.subject-menu .subject-menu-more-link
+{
+    float: right;
+}
+
 .subject-menu ul
 {
+    width: 935px;
+    height: 32px;
+    float: left;
+
     margin: 0;
     overflow: hidden;
 
@@ -286,13 +295,13 @@ a:focus
     border-right: 1px solid #fcfcfc;
 }
 
-.subject-menu .selected > span
+.subject-menu .selected > a
 {
     font-family: "OpenSans Semibold";
     color: #d35306;
 }
 
-.subject-menu span
+.subject-menu a
 {
     font-size: 13px;
     color: #000;
@@ -305,7 +314,7 @@ a:focus
     cursor: pointer;
 }
 
-.subject-menu span:hover
+.subject-menu a:hover
 {
     background: #ebebeb;
 }

@@ -27,7 +27,6 @@
             }
 
             $fileDir = $this->getFileDir($quiz);
-
             UnixSystemUtils::clearDirectory($fileDir);
 
             $zip = new \ZipArchive();
@@ -43,7 +42,7 @@
         public function getFileDir(Quiz $quiz)
         {
             $root    = $this->container->getParameter('upload_file_dir');
-            $fileDir = $root . self::UPLOAD_PATH . $quiz->getVideo()->getUrlName() . "/";
+            $fileDir = $root . self::UPLOAD_PATH . $quiz->getVideo()->getContentDir() . "/";
 
             return $fileDir;
         }

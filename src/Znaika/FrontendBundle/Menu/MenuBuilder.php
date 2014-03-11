@@ -65,7 +65,12 @@
             $subjects = $repository->getAll();
             foreach ($subjects as $subject)
             {
-                $menuItem = $menu->addChild($subject->getName(), array());
+                $menuItem = $menu->addChild(
+                    $subject->getName(),
+                    array("route" => "show_catalogue",
+                          "routeParameters" => array("class" => $currentGrade, "subjectName" => $subject->getUrlName())
+                    )
+                );
                 $menuItem->setAttribute("id", $subject->getUrlName());
 
                 if (!in_array($subject, $currentSubjects))

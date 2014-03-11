@@ -43,6 +43,14 @@
          */
         public function getAll()
         {
-            return $this->findAll();
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->select('s')
+                         ->from('ZnaikaFrontendBundle:Lesson\Category\Subject', 's')
+                         ->addOrderBy('s.createdTime', 'ASC');
+
+            $subjects = $queryBuilder->getQuery()->getResult();
+
+            return $subjects;
         }
     }
