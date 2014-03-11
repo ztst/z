@@ -39,9 +39,6 @@
                 <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link">{{ app.user }}</a>
               </li>
               <li>
-                {{ user_badges(app.user)|raw }}
-              </li>
-              <li>
                 <a href="{{ path('logout') }}" title="Выход" class="logout-button">
                   <div class="logout-button-icon"></div>
                   <span>Выход</span>

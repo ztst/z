@@ -9,11 +9,8 @@
 
     class IndexPageExtension extends \Twig_Extension
     {
-        const MAX_NEWEST_VIDEO          = 3;
-        const MAX_POPULAR_VIDEO         = 3;
-        const MAX_NEWEST_USER_OPERATION = 5;
-        const MAX_NEWEST_USER_BADGE     = 5;
-        const MAX_USERS_TOP             = 5;
+        const MAX_NEWEST_VIDEO  = 8;
+        const MAX_POPULAR_VIDEO = 8;
 
         /**
          * @var VideoRepository
@@ -56,9 +53,6 @@
             return array(
                 'newest_video'          => new \Twig_Function_Method($this, 'renderNewestVideo'),
                 'popular_video'         => new \Twig_Function_Method($this, 'renderPopularVideo'),
-                'newest_user_operation' => new \Twig_Function_Method($this, 'renderNewestUserOperation'),
-                'newest_user_badge'     => new \Twig_Function_Method($this, 'renderNewestUserBadge'),
-                'top_user_by_points'    => new \Twig_Function_Method($this, 'renderUsersTop'),
             );
         }
 
@@ -84,45 +78,6 @@
             $templateFile    = "ZnaikaFrontendBundle:Default:popular_videos.html.twig";
             $templateContent = $this->twig->loadTemplate($templateFile);
             $result          = $templateContent->render(array("videos" => $videos));
-
-            return $result;
-        }
-
-        /**
-         * @return string
-         */
-        public function renderNewestUserOperation()
-        {
-            $userOperations  = $this->userOperationRepository->getNewestOperations(self::MAX_NEWEST_USER_OPERATION);
-            $templateFile    = "ZnaikaFrontendBundle:Default:newest_user_operations.html.twig";
-            $templateContent = $this->twig->loadTemplate($templateFile);
-            $result          = $templateContent->render(array("userOperations" => $userOperations));
-
-            return $result;
-        }
-
-        /**
-         * @return string
-         */
-        public function renderUsersTop()
-        {
-            $users           = $this->userRepository->getUsersTopByPoints(self::MAX_USERS_TOP);
-            $templateFile    = "ZnaikaFrontendBundle:Default:users_top_by_points.html.twig";
-            $templateContent = $this->twig->loadTemplate($templateFile);
-            $result          = $templateContent->render(array("users" => $users));
-
-            return $result;
-        }
-
-        /**
-         * @return string
-         */
-        public function renderNewestUserBadge()
-        {
-            $userBadges      = $this->userBadgeRepository->getNewestBadges(self::MAX_NEWEST_USER_BADGE);
-            $templateFile    = "ZnaikaFrontendBundle:Default:newest_user_badges.html.twig";
-            $templateContent = $this->twig->loadTemplate($templateFile);
-            $result          = $templateContent->render(array("userBadges" => $userBadges));
 
             return $result;
         }

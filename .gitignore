@@ -15,3 +15,7 @@
 /web/css/*
 /web/js/*
 /web/uploads/*
+/web/css
+/web/js
+/web/images/*.db
+/web/images/*.db

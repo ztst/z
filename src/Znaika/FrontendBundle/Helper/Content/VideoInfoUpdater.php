@@ -11,7 +11,7 @@
     class VideoInfoUpdater
     {
         const UPLOAD_PATH           = "video_thumbnail/";
-        const SMALL_THUMBNAIL_WIDTH = 100;
+        const SMALL_THUMBNAIL_WIDTH = 120;
 
         /**
          * @var VideoRepository
