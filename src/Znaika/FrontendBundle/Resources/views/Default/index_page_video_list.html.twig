@@ -10,12 +10,22 @@
            title="{{ video.getName|raw }}">
           <img src="{{ large_video_thumbnail(video) }}" alt="{{ video.getName|raw }}"/>
         </a>
+        <div class="video-duration">{{ video.duration|date("i:s") }}</div>
       </div>
-      <div class="">
+      <div class="video-description">
         <h5>{{ video.getName|raw }}</h5>
+        <div class="video-info-line">
+          <span>{{ video.getSubject.getName }}</span>
+          <span>{{ video.getGrade }} класс</span>
+          {% set month = "month_" ~ video.getCreatedTime|date("M") %}
+          {% set year = video.getCreatedTime|date('Y') %}
+          <span class="video-date">{{ '%s %s'|format(month|trans, year) }}</span>
+          <div class="clear"></div>
+        </div>
       </div>
     </div>
   {% endfor %}
+  <div class="clear"></div>
 {% else %}
   <h5>Не найдено</h5>
 {% endif %}
