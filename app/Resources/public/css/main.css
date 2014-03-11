@@ -427,6 +427,8 @@ div.form-error-field
 {
     position: absolute;
     z-index: 3;
+    margin-top: -9px;
+    margin-left: 280px;
     padding: 5px 10px 9px 32px;
     width: 253px;
 
@@ -439,6 +441,16 @@ div.form-error-field
     background-image: url('/images/popup/error-sign.png');
     background-repeat: no-repeat;
     background-position: 9px 8px;
+}
+
+div.form-error-field .arrow
+{
+    position: absolute;
+    top: -9px;
+    left: 12px;
+    width: 15px;
+    height: 9px;
+    background: url('/images/popup/form-error-field-arrow.png') no-repeat;
 }
 
 .form-control
