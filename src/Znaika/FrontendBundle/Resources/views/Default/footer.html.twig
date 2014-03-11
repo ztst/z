@@ -1,49 +1,44 @@
-{% stylesheets '@ZnaikaFrontendBundle/Resources/public/css/index.css' %}
-  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
-{% endstylesheets %}
-
 {% block footer %}
+  <div class="footer-horizontal-bar"></div>
   <div class="footer-container">
-      <div class="col-lg-2">
-        <div class="footer-social-buttons-block">
-          <div class="footer-social-button">
-            <a href="javascript:void(0)">
-              <img src="{{ asset('/images/footer/footer-vk.png') }}" alt="Поделиться в ВК" />
-            </a>
-          </div>
-          <div class="footer-social-button">
-            <a href="javascript:void(0)">
-              <img src="{{ asset('/images/footer/footer-facebook.png') }}" alt="Поделиться в facebook" />
-            </a>
-          </div>
-          <div class="footer-social-button">
-            <a href="javascript:void(0)">
-              <img src="{{ asset('/images/footer/footer-twitter.png') }}" alt="Поделиться в twitter" />
-            </a>
-          </div>
-          <div class="footer-social-button">
-            <a href="javascript:void(0)">
-              <img src="{{ asset('/images/footer/footer-odnoklassniki.png') }}" alt="Поделиться в одноклассниках" />
-            </a>
-          </div>
-        </div >
+    <div class="footer-social-buttons-block">
+      <div class="footer-social-button">
+        <a href="javascript:void(0);">
+          <img src="{{ asset('/images/footer/footer-vk.png') }}" alt="Поделиться в ВК" />
+        </a>
       </div>
-      <div class="col-lg-2 col-lg-offset-1">
-        <a href="{{ path('about') }}" class="footer-link">О сайте Знайка.Ру</a>
+      <div class="footer-social-button">
+        <a href="javascript:void(0);">
+          <img src="{{ asset('/images/footer/footer-facebook.png') }}" alt="Поделиться в facebook" />
+        </a>
       </div>
-      <div class="col-lg-1">
-        <a href="javascript:void(0);" class="footer-link">Помощь</a>
+      <div class="footer-social-button">
+        <a href="javascript:void(0);">
+          <img src="{{ asset('/images/footer/footer-twitter.png') }}" alt="Поделиться в twitter" />
+        </a>
       </div>
-      <div class="col-lg-1">
-        <a href="{{ path('rules') }}" class="footer-link">Правила</a>
+      <div class="footer-social-button">
+        <a href="javascript:void(0);">
+          <img src="{{ asset('/images/footer/footer-odnoklassniki.png') }}" alt="Поделиться в одноклассниках" />
+        </a>
       </div>
-      <div class="col-lg-1">
-        <a href="{{ path('contacts') }}" class="footer-link">Контакты</a>
-      </div>
-      <div class="col-lg-3 col-lg-offset-1">
-        <span class="footer-copyright">
-          &copy; 2013-1014 ООО "Знайка"
-        </span>
-      </div>
+    </div>
+    <div class="col-lg-2 col-lg-offset-1">
+      <a href="{{ path('about') }}" class="footer-link">О сайте Знайка.Ру</a>
+    </div>
+    <div class="col-lg-1">
+      <a href="javascript:void(0);" class="footer-link">Помощь</a>
+    </div>
+    <div class="col-lg-1">
+      <a href="{{ path('rules') }}" class="footer-link">Правила</a>
+    </div>
+    <div class="col-lg-1">
+      <a href="{{ path('contacts') }}" class="footer-link">Контакты</a>
+    </div>
+    <div class="col-lg-3 col-lg-offset-1">
+      <span class="footer-copyright">
+        &copy; 2013-1014 ООО "Знайка"
+      </span>
+    </div>
   </div>
 {% endblock %}

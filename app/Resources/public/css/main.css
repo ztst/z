@@ -26,7 +26,7 @@ a:focus
 {
     display: inline-block;
     min-height: 100%;
-    height: 100%;
+    height: auto !important;
     width: 100%;
     margin: 0 auto -54px;
     padding: 0 0 54px;
@@ -53,13 +53,13 @@ a:focus
     position: relative;
     height: 54px;
 
-    background: #444444;
-    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#444444), to(#2b2b2b));
-    background: -webkit-linear-gradient(#444444, #2b2b2b);
-    background: -moz-linear-gradient(#444444, #2b2b2b);
-    background: -ms-linear-gradient(#444444, #2b2b2b);
-    background: -o-linear-gradient(#444444, #2b2b2b);
-    background: linear-gradient(#444444, #2b2b2b);
+    background: #25658a;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#25658a), to(#0b567a));
+    background: -webkit-linear-gradient(#25658a, #0b567a);
+    background: -moz-linear-gradient(#25658a, #0b567a);
+    background: -ms-linear-gradient(#25658a, #0b567a);
+    background: -o-linear-gradient(#25658a, #0b567a);
+    background: linear-gradient(#25658a, #0b567a);
 }
 
 .wrap > .container
@@ -107,7 +107,7 @@ a:focus
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 34px;
+    height: 36px;
 
     border-bottom: 1px solid #0074a5;
     border-top: 1px solid #4fb4e9;
@@ -126,7 +126,7 @@ a:focus
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 32px;
+    height: 33px;
 
     background: #f4f4f4;
     box-shadow: 0 5px 10px -8px;
@@ -168,11 +168,12 @@ a:focus
 .subject-menu
 {
     padding: 0;
+    width: 100%;
 }
 
 .class-menu
 {
-    height: 34px;
+    height: 36px;
 }
 
 .class-menu ul
@@ -190,7 +191,7 @@ a:focus
     border-bottom: 1px solid #0074a5;
     border-left: 1px solid #1181b3;
 
-    height: 33px;
+    height: 35px;
     padding: 5px 5px 0 !important;
     cursor: pointer;
     display: block;
@@ -211,7 +212,7 @@ a:focus
 
 .class-menu li > span:hover
 {
-    height: 34px;
+    height: 35px;
     background: #2199cd;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#2199cd), to(#1484b6));
     background: -webkit-linear-gradient(#2199cd, #1484b6);
@@ -231,7 +232,7 @@ a:focus
 {
     position: relative;
     padding: 3px 5px 0 !important;;
-    height: 33px;
+    height: 34px;
     color: #fefefe;
     background: #0074a6;
     border-top: 1px solid #0074a5;
@@ -265,7 +266,7 @@ a:focus
 
 .subject-menu
 {
-    height: 32px;
+    height: 33px;
 }
 
 .subject-menu .subject-menu-more-link
@@ -307,7 +308,7 @@ a:focus
     text-decoration: none;
     white-space: nowrap;
 
-    padding: 7px 18px 6px !important;
+    padding: 7px 18px !important;
     display: block;
     text-align: center;
     cursor: pointer;
@@ -424,13 +425,20 @@ button.btn-primary
 
 div.form-error-field
 {
-    margin: -10px 0 16px;
+    position: absolute;
+    z-index: 3;
+    padding: 5px 10px 9px 32px;
+    width: 253px;
 
-    border-radius: 4px;
-    padding: 15px;
-    background-color: #F2DEDE;
-    border-color: #EBCCD1;
-    color: #B94A48;
+    color: #505050;
+    font-size: 12px;
+
+    border: 1px solid #f79076;
+    border-radius: 3px;
+    background-color: #fff9f1;
+    background-image: url('/images/popup/error-sign.png');
+    background-repeat: no-repeat;
+    background-position: 9px 8px;
 }
 
 .form-control
@@ -583,7 +591,7 @@ input
 .login-button-icon
 {
     margin-right: 5px;
-    margin-top: 4px;
+    margin-top: 2px;
     width: 14px;
     height: 14px;
     background: url('/images/header/login-button-icon.png') no-repeat;
@@ -749,3 +757,77 @@ label
 
     text-align: center;
 }
+
+/* Footer block BEGIN */
+.footer-container
+{
+    position: relative;
+    height: 54px;
+    color: #c9c8c8;
+}
+
+.footer-container a,
+.footer-copyright
+{
+    display: block;
+    color: #c9c8c8;
+    font-size: 13px;
+    font-family: "OpenSans Semibold";
+    text-decoration: none;
+}
+
+.footer-logo
+{
+    background: url('/images/footer/footer-logo.png') no-repeat;
+    height: 40px;
+}
+
+.footer-link,
+.footer-copyright
+{
+    margin-top: 18px;
+}
+
+.footer-social-buttons-block
+{
+    float: left;
+    width: 140px;
+    margin-top: 12px;
+}
+
+.footer-social-buttons-text
+{
+    display: block;
+    text-align: right;
+}
+
+.footer-social-button
+{
+    float: left;
+    margin-left: 6px;
+    margin-top: 0;
+}
+
+.footer-horizontal-bar
+{
+    position: absolute;
+    left: 0;
+    bottom: 52px;
+    width: 100%;
+    height: 1px;
+    background: #5690b7;
+}
+
+@media (max-width: 767px)
+{
+    .footer-logo, .footer-social-buttons-block
+    {
+        display: none;
+    }
+    .footer-container a, .footer-copyright
+    {
+        font-size: 13px;
+    }
+}
+
+/* Footer block END */

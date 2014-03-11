@@ -17,5 +17,10 @@ var LoginForm = BaseForm.extend({
         this._form.find("input[type='password']").rules('add', {
             passwordSymbols: true
         });
+
+        $('input').iCheck({
+            checkboxClass: 'icheckbox',
+            radioClass: 'iradio'
+            });
     }
 });

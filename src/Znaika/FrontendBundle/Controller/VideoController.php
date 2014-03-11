@@ -281,7 +281,7 @@
             }
 
             return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
-                'videosAmount'     => $chapters[0]->GetVideos()->count(),
+                'class'            => $class,
                 'currentChapterId' => $currentChapterId,
                 'chapters'         => $chapters,
                 'videoRepository'  => $this->getVideoRepository()
@@ -327,6 +327,7 @@
             $userQuizScore       = $this->getCurrentUserQuizScore($video);
 
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
+                'class'               => $class,
                 'video'               => $video,
                 'comments'            => $comments,
                 'isValidUrl'          => $isValidUrl,

@@ -40,13 +40,15 @@
           </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-right">
-          <a
-            href="{{ path('show_video', {
-              'subjectName': video.getSubject.getUrlName,
-              'class': video.getGrade,
-              'videoName': video.getUrlName
-              }) }}"
-             class="video-title">{{ video.getName|raw }}</a>
+            <a href="{{ path('show_video', {
+            'subjectName': video.getSubject.getUrlName,
+            'class': video.getGrade,
+            'videoName': video.getUrlName
+            }) }}"
+            title="{{ video.getName|raw }}"
+            class="video-title">
+            {{ video.getName|raw }}
+            </a>
           <p class="video-author-in-list">{{ video.getAuthor|raw }}</p>
           <div>
             {% if not video.synopsis is empty %}

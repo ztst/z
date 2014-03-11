@@ -1,21 +1,12 @@
 <div class="login-popup-right-column">
-  <h5>Войти через соцсеть</h5>
+  <h5>Быстрый вход</h5>
   <div>
-    <a href="{{ path("vk_login") }}">
-      <img src="{{ asset("images/popup/vk_button.gif") }}" alt='Вконтакте'/>
-    </a>
-    <span>Вконтакте</span>
+    <a href="{{ path("vk_login") }}" class="vk-login" title="Войти через В контакте"></a>
   </div>
   <div>
-    <a href="{{ path("facebook_login") }}">
-      <img src="{{ asset("images/popup/facebook_button.gif") }}" alt='Facebook'/>
-    </a>
-    <span>Facebook</span>
+    <a href="{{ path("odnoklassniki_login") }}" class="odnoklassniki-login" title="Войти через Одноклассники"></a>
   </div>
   <div>
-    <a href="{{ path("odnoklassniki_login") }}">
-      <img src="{{ asset("images/popup/odnoklassniki_button.gif") }}" alt='Одноклассники'/>
-    </a>
-    <span>Одноклассники</span>
+    <a href="{{ path("facebook_login") }}" class="facebook-login" title="Войти через Facebook"></a>
   </div>
 </div>
