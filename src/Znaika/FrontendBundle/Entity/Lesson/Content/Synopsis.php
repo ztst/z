@@ -33,7 +33,7 @@
         /**
          * @var string
          */
-        private $name;
+        private $htmlFileName;
 
         /**
          * @param \Symfony\Component\HttpFoundation\File\UploadedFile $htmlFile
@@ -128,16 +128,16 @@
         /**
          * @param string $name
          */
-        public function setName($name)
+        public function setHtmlFileName($name)
         {
-            $this->name = $name;
+            $this->htmlFileName = $name;
         }
 
         /**
          * @return string
          */
-        public function getName()
+        public function getHtmlFileName()
         {
-            return $this->name;
+            return $this->htmlFileName;
         }
     }

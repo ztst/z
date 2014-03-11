@@ -12,6 +12,8 @@ var ShowVideoPage = Base.extend({
     {
         this.base();
 
+        this._showCurrentTab();
+
         this._showPrevCommentsLink = $("#showPrevCommentsLink");
         this._showPrevCommentsLink.click(handler(this, "_onShowPrevCommentsLinkClick"));
 
@@ -25,6 +27,23 @@ var ShowVideoPage = Base.extend({
             this._initTeacherAnswerBlock();
         }
         this._initVideoOrderButtons();
+
+        $("#showMoreChapterVideos").click(handler(this, "_showMoreChapterVideos"));
+    },
+
+    _showMoreChapterVideos: function()
+    {
+        $(".chapter-videos-list li.hidden").removeClass("hidden");
+        $(".show-more-videos").hide();
+    },
+
+    _showCurrentTab: function()
+    {
+        if(window.location.hash)
+        {
+            var hash = window.location.hash.substring(1);
+            $('.nav-tabs a[href="#' + hash + '"]').tab('show');
+        }
     },
 
     _initVideoOrderButtons: function()
