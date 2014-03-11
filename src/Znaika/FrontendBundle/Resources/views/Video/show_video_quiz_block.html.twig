@@ -1,14 +1,21 @@
 {% if video.quiz %}
   {% if is_moderator() %}
-    <a class="btn btn-primary" href="{{ path("add_quiz_form", {"videoName": video.urlName}) }}">Редактировать тест</a>
+    <a class="edit-button" href="{{ path("add_quiz_form", {"videoName": video.urlName}) }}">
+      <span class="edit-button-icon"></span>
+      <span class="edit-button-label">Редактировать тест</span>
+    </a>
+    <div class="clear"></div>
   {% endif %}
-  <div>
+  <div class="quiz-container">
     {{ show_quiz(video)|raw }}
     {% if userQuizScore is not null %}
       <p>Ваш последний результат: {{ userQuizScore }}%</p>
     {% endif %}
   </div>
 {% elseif is_moderator() %}
-  <a class="btn btn-primary" href="{{ path("add_quiz_form", {"videoName": video.urlName}) }}">Добавить тест</a>
+  <a href="{{ path("add_quiz_form", {"videoName": video.urlName}) }}" class="add-video-button">
+    <span class="add-video-button-icon"></span>
+    <span class="add-video-button-label">Добавить тест</span>
+  </a>
 {% endif %}
 

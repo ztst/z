@@ -39,7 +39,7 @@
             <ul class="nav nav-tabs select-content-tab view-video-tab-menu">
               <li class="video active">
                 <div class="active-top-border"></div>
-                <a href="#video-tab" data-toggle="tab">
+                <a href="#video_tab" data-toggle="tab">
                   <div class="video-tab-icon"></div>
                   <span>Видеоурок</span>
                 </a>
@@ -47,7 +47,7 @@
               {% if ( video.getSynopsis and is_user() ) or is_moderator() %}
                 <li class="synopsis">
                   <div class="active-top-border"></div>
-                  <a href="#synopsis-tab" data-toggle="tab">
+                  <a href="#synopsis_tab" data-toggle="tab">
                     <div class="synopsis-tab-icon"></div>
                     <span>Конспект</span>
                   </a>
@@ -56,7 +56,7 @@
               {% if ( video.getQuiz and is_user() ) or is_moderator() %}
                 <li class="quiz">
                   <div class="active-top-border"></div>
-                  <a href="#quiz-tab" data-toggle="tab">
+                  <a href="#quiz_tab" data-toggle="tab">
                     <div class="quiz-tab-icon"></div>
                     <span>Тест</span>
                   </a>
@@ -74,17 +74,13 @@
           </div>
         </div>
         <div class="clear"></div>
-        <div class="tab-pane active" id="video-tab">
-          {% if is_moderator() %}
-            <a class="btn btn-primary" href="{{ path("edit_video_form", {"videoName": video.urlName}) }}">Редактировать
-              видеоурок</a>
-          {% endif %}
+        <div class="tab-pane active video-tab" id="video_tab">
           {% include "ZnaikaFrontendBundle:Video:show_video_block.html.twig" with {'video': video} %}
         </div>
-        <div class="tab-pane" id="synopsis-tab">
+        <div class="tab-pane synopsis-tab" id="synopsis_tab">
           {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
         </div>
-        <div class="tab-pane" id="quiz-tab">
+        <div class="tab-pane quiz-tab" id="quiz_tab">
           {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video, 'userQuizScore': userQuizScore} %}
         </div>
       </div>
