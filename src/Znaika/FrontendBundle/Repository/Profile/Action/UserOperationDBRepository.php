@@ -3,17 +3,7 @@
 
     use Doctrine\ORM\EntityRepository;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddBirthdayInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddClassroomInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddPhoneNumberInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddSchoolInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddSexInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddVideoCommentOperation;
     use Znaika\FrontendBundle\Entity\Profile\Action\BaseUserOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\JoinSocialNetworkCommunityOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\RateVideoOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\RegistrationOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\RegistrationReferralOperation;
     use Znaika\FrontendBundle\Entity\Profile\User;
 
     class UserOperationDBRepository extends EntityRepository implements IUserOperationRepository
@@ -42,16 +32,6 @@
         public function getLastAddBirthdayInProfileOperation(User $user)
         {
             return $this->getLastOperationByUser($user, 'ZnaikaFrontendBundle:Profile\Action\AddBirthdayInProfileOperation');
-        }
-
-        public function getLastAddClassroomInProfileOperation(User $user)
-        {
-            return $this->getLastOperationByUser($user, 'ZnaikaFrontendBundle:Profile\Action\AddClassroomInProfileOperation');
-        }
-
-        public function getLastAddSchoolInProfileOperation(User $user)
-        {
-            return $this->getLastOperationByUser($user, 'ZnaikaFrontendBundle:Profile\Action\AddSchoolInProfileOperation');
         }
 
         public function getLastAddSexInProfileOperation(User $user)

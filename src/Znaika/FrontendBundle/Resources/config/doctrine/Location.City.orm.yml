@@ -8,7 +8,4 @@ Znaika\FrontendBundle\Entity\Location\City:
         users:
             targetEntity: Znaika\FrontendBundle\Entity\Profile\User
             mappedBy: city
-        schools:
-            targetEntity: Znaika\FrontendBundle\Entity\Education\School
-            mappedBy: city
     lifecycleCallbacks: {  }

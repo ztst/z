@@ -90,28 +90,6 @@
             return $result;
         }
 
-        public function getLastAddClassroomInProfileOperation(User $user)
-        {
-            $result = $this->redisRepository->getLastAddClassroomInProfileOperation($user);
-            if (empty($result))
-            {
-                $result = $this->dbRepository->getLastAddClassroomInProfileOperation($user);
-            }
-
-            return $result;
-        }
-
-        public function getLastAddSchoolInProfileOperation(User $user)
-        {
-            $result = $this->redisRepository->getLastAddSchoolInProfileOperation($user);
-            if (empty($result))
-            {
-                $result = $this->dbRepository->getLastAddSchoolInProfileOperation($user);
-            }
-
-            return $result;
-        }
-
         public function getLastAddSexInProfileOperation(User $user)
         {
             $result = $this->redisRepository->getLastAddSexInProfileOperation($user);

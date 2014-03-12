@@ -21,15 +21,9 @@
          */
         private $users;
 
-        /**
-         * @var \Doctrine\Common\Collections\Collection
-         */
-        private $schools;
-
         public function __construct()
         {
             $this->users   = new \Doctrine\Common\Collections\ArrayCollection();
-            $this->schools = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
@@ -98,39 +92,5 @@
         public function getUsers()
         {
             return $this->users;
-        }
-
-        /**
-         * Add schools
-         *
-         * @param \Znaika\FrontendBundle\Entity\Education\School $school
-         *
-         * @return City
-         */
-        public function addSchool(\Znaika\FrontendBundle\Entity\Education\School $school)
-        {
-            $this->schools[] = $school;
-
-            return $this;
-        }
-
-        /**
-         * Remove schools
-         *
-         * @param \Znaika\FrontendBundle\Entity\Education\School $school
-         */
-        public function removeSchool(\Znaika\FrontendBundle\Entity\Education\School $school)
-        {
-            $this->schools->removeElement($school);
-        }
-
-        /**
-         * Get schools
-         *
-         * @return \Doctrine\Common\Collections\Collection
-         */
-        public function getSchools()
-        {
-            return $this->schools;
         }
     }

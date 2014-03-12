@@ -37,16 +37,6 @@
             return null;
         }
 
-        public function getLastAddClassroomInProfileOperation(User $user)
-        {
-            return null;
-        }
-
-        public function getLastAddSchoolInProfileOperation(User $user)
-        {
-            return null;
-        }
-
         public function getLastAddSexInProfileOperation(User $user)
         {
             return null;

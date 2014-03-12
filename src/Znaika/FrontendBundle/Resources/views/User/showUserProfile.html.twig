@@ -32,16 +32,6 @@
         {{ form_widget(form.city, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
       </div>
       <div class="form-group">
-        {{ form_label(form.school, 'Школа') }}
-        {{ form_errors(form.school) }}
-        {{ form_widget(form.school, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
-      </div>
-      <div class="form-group">
-        {{ form_label(form.classroom, 'Класс') }}
-        {{ form_errors(form.classroom) }}
-        {{ form_widget(form.classroom, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
-      </div>
-      <div class="form-group">
           {{ form_label(form.sex, 'Пол') }}
           {{ form_errors(form.sex) }}
           {{ form_widget(form.sex, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}

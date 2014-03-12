@@ -30,17 +30,6 @@
                     'empty_value' => '',
                     'required'    => false
                 ))
-                ->add('school', 'entity', array(
-                    'class'       => 'Znaika\FrontendBundle\Entity\Education\School',
-                    'property'    => 'name',
-                    'empty_value' => '',
-                    'required'    => false
-                ))
-                ->add('classroom', 'entity', array(
-                    'class'       => 'Znaika\FrontendBundle\Entity\Education\Classroom',
-                    'empty_value' => '',
-                    'required'    => false
-                ))
                 ->add('sex', 'choice', array(
                     'choices' => $sexTypes
                 ))

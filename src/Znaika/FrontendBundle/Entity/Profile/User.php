@@ -77,16 +77,6 @@
         private $points = 0;
 
         /**
-         * @var \Znaika\FrontendBundle\Entity\Education\School
-         */
-        private $school;
-
-        /**
-         * @var \Znaika\FrontendBundle\Entity\Education\Classroom
-         */
-        private $classroom;
-
-        /**
          * @var \DateTime
          */
         private $birthDate;
@@ -534,30 +524,6 @@
         }
 
         /**
-         * Set school
-         *
-         * @param \Znaika\FrontendBundle\Entity\Education\School $school
-         *
-         * @return User
-         */
-        public function setSchool(\Znaika\FrontendBundle\Entity\Education\School $school = null)
-        {
-            $this->school = $school;
-
-            return $this;
-        }
-
-        /**
-         * Get school
-         *
-         * @return \Znaika\FrontendBundle\Entity\Education\School
-         */
-        public function getSchool()
-        {
-            return $this->school;
-        }
-
-        /**
          * Set sex
          *
          * @param integer $sex
@@ -621,30 +587,6 @@
         public function getPoints()
         {
             return $this->points;
-        }
-
-        /**
-         * Set classroom
-         *
-         * @param \Znaika\FrontendBundle\Entity\Education\Classroom $classroom
-         *
-         * @return User
-         */
-        public function setClassroom(\Znaika\FrontendBundle\Entity\Education\Classroom $classroom = null)
-        {
-            $this->classroom = $classroom;
-
-            return $this;
-        }
-
-        /**
-         * Get classroom
-         *
-         * @return \Znaika\FrontendBundle\Entity\Education\Classroom
-         */
-        public function getClassroom()
-        {
-            return $this->classroom;
         }
 
         /**

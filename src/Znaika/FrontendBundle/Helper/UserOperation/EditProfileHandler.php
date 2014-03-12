@@ -14,14 +14,11 @@
 
             $addCityOperation        = $this->saveAddCityInProfileOperation($user);
             $addBirthdayOperation    = $this->saveAddBirthdayInProfileOperation($user);
-            $addClassroomOperation   = $this->saveAddClassroomInProfileOperation($user);
             $addPhoneNumberOperation = $this->saveAddPhoneNumberInProfileOperation($user);
-            $addSchoolOperation      = $this->saveAddSchoolInProfileOperation($user);
             $addSexOperation         = $this->saveAddSexInProfileOperation($user);
 
             $isFilledOutProfile = !is_null($addCityOperation) && !is_null($addBirthdayOperation) &&
-                !is_null($addClassroomOperation) && !is_null($addPhoneNumberOperation) &&
-                !is_null($addSchoolOperation) && !is_null($addSexOperation);
+                !is_null($addPhoneNumberOperation) && !is_null($addSexOperation);
             $this->saveFilledOutProfileBadge($isFilledOutProfile);
         }
 
@@ -47,28 +44,6 @@
             }
 
             return $operation;
-        }
-
-        /**
-         * @param User $user
-         *
-         * @return null
-         */
-        private function saveAddSchoolInProfileOperation(User $user)
-        {
-            //TODO: add method
-            return null;
-        }
-
-        /**
-         * @param User $user
-         *
-         * @return null
-         */
-        private function saveAddClassroomInProfileOperation(User $user)
-        {
-            //TODO: add method
-            return null;
         }
 
         /**

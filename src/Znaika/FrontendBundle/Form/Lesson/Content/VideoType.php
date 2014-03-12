@@ -32,7 +32,7 @@
          */
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
-            $emailsTransformer = new EmailsToUsersTransformer($this->userRepository);
+            $emailsTransformer   = new EmailsToUsersTransformer($this->userRepository);
             $videoUrlTransformer = new VideoUrlTransformer();
 
             $builder
@@ -43,8 +43,9 @@
                             ->addModelTransformer($videoUrlTransformer)
                 )
                 ->add(
-                    $builder->create('supervisors', 'text')
-                            ->addModelTransformer($emailsTransformer)
+                    $builder->create('supervisors', 'text', array(
+                        'required' => false
+                    ))->addModelTransformer($emailsTransformer)
                 );
 
             $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
@@ -53,7 +54,7 @@
         public function onPreSubmit($event)
         {
             $formData = $event->getData();
-            $form = $event->getForm();
+            $form     = $event->getForm();
 
             $video = $form->getData();
             if ($video instanceof Video)
