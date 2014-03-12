@@ -1,7 +1,7 @@
 {{ form_start(form, {'attr': {'id': 'registrationForm', 'class': 'registration-form'}, 'action': path('register'), 'method': 'POST'}) }}
   {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
   <div class="form-group input-group">
-    {{ form_label(form.user.email, 'Емайл') }}
+    {{ form_label(form.user.email, 'E-mail') }}
     {{ form_widget(form.user.email, {'attr': {'class': 'form-control', 'placeholder': 'anna.petrova@mail.com' }}) }}
     {{ form_errors(form.user.email) }}
   </div>
@@ -12,14 +12,15 @@
     <span class="show-password-icon"></span>
   </div>
   <div class="form-group agreement-block">
-    {{ form_errors(form.terms) }}
-    {{ form_widget(form.terms, {'attr': {'class': 'checkbox' }}) }}
-    <label for="{{ form.terms.vars.id }}">
-      Я принимаю <a href="{{ path('agreement') }}" target="_blank" title="">Пользовательское соглашение и условия использования сервиса</a>
-    </label>
+    <span>
+      Регистрируясь, вы принимаете<br />
+      <a href="{{ path('agreement') }}" target="_blank" title="">Пользовательское соглашение Знайка.ру</a>
+    </span>
   </div>
   <input type="hidden" name="autoGeneratePassword" value="{% if autoGeneratePassword is defined and autoGeneratePassword %}1{% endif %}" />
   <div class="registration-button-container">
-    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Регистрация'}) }}
+    <div class="outer-border">
+      {{ form_widget(form.save, {'attr': {'class': 'form-submit-button'}, 'label': 'Зарегистрироваться'}) }}
+    </div>
   </div>
 {{ form_end(form) }}

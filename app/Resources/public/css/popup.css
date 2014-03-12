@@ -704,16 +704,19 @@ img.mfp-img
     padding-left: 103px;
 }
 
-.login-button-container .btn,
-.registration-button-container .btn
+.form-submit-button
 {
     width: 100%;
     height: 33px;
 
     border: 1px solid #64bfe0 !important;
+    border-radius: 4px;
+
+    color: #fff;
     font-size: 15px !important;
     font-family: "OpenSans Semibold" !important;
     text-shadow: 2px 1px 1px #4c6da9;
+
     background: linear-gradient(#4fb1d8, #389dca);
 }
 
@@ -723,8 +726,7 @@ img.mfp-img
     border-radius: 4px;
 }
 
-.login-button-container .btn:hover,
-.registration-button-container .btn:hover
+.form-submit-button:hover
 {
     border: 1px solid #72cbec !important;
     background: linear-gradient(#5fbfe7, #389dcb);
@@ -782,19 +784,30 @@ img.mfp-img
     font-family: "OpenSans";
 }
 
-.agreement-block label
+.agreement-block
 {
-    width: auto;
-    font: normal 10px/14px Verdana;
-    display: inline;
+    margin-top: -9px;
+    margin-bottom: 11px;
+    padding-left: 85px;
 
-    position: relative;
-    top: 2px;
+    line-height: 13px;
 }
 
-.agreement-block label a
+.agreement-block span
 {
-    text-decoration: underline;
+    display: inline;
+    position: relative;
+    top: 2px;
+    width: auto;
+
+    font-size: 11px;
+    font-family: "OpenSans";
+}
+
+.agreement-block span a
+{
+    color: #036995;
+    text-decoration: none;
 }
 
 .remember-me-block label
@@ -844,7 +857,7 @@ img.mfp-img
 .login-popup-content .social-login-buttons-container h5
 {
     margin-top: 15px;
-    margin-bottom: 14px;
+    margin-bottom: 15px;
 
     color: #313030;
     font-size: 16px;
@@ -874,6 +887,21 @@ img.mfp-img
 .odnoklassniki-login
 {
     background: url('/images/popup/odnoklassniki-login-button.png') no-repeat;
+}
+
+.vk-login:hover
+{
+    background: url('/images/popup/vk-login-button-over.png') no-repeat;
+}
+
+.facebook-login:hover
+{
+    background: url('/images/popup/facebook-login-button-over.png') no-repeat;
+}
+
+.odnoklassniki-login:hover
+{
+    background: url('/images/popup/odnoklassniki-login-button-over.png') no-repeat;
 }
 
 .input-group .password-input
@@ -911,3 +939,189 @@ img.mfp-img
     background: url('/images/popup/show-password-icon-opened.png') no-repeat;
     background-position: 0 10px;
 }
+
+/* Additional forms styles BEGIN */
+.additional-form-container
+{
+    padding: 33px 51px 42px;
+}
+
+.additional-form-header,
+.additional-form-container h5
+{
+    text-align: center;
+}
+
+.additional-form-header h3
+{
+    display: inline-block;
+    margin-bottom: 20px;
+    padding-left: 41px;
+
+    height: 32px;
+
+    color: #222;
+    font-size: 20px;
+    font-family: "OpenSans Semibold";
+}
+
+.additional-form-container h5
+{
+    margin: 15px 0;
+
+    font-family: "OpenSans";
+}
+
+.additional-form-header-horizontal-bar
+{
+    width: 100%;
+    height: 1px;
+
+    background: url('/images/popup/additional-form-header-horizontal-bar.png') repeat-x;
+}
+
+.additional-form
+{
+    width: 374px;
+}
+
+.additional-form label
+{
+    display: table-cell;
+
+    padding-right: 7px;
+    width: 113px;
+
+    text-align: right;
+    font-family: "OpenSans Semibold";
+    font-weight: normal;
+}
+
+.additional-form .form-group
+{
+    width: 100%;
+}
+
+.additional-form-button-container
+{
+    padding-left: 113px;
+}
+
+.recover-password-request-header h3
+{
+    background: url('/images/popup/password-form-header-icon.png') no-repeat;
+    background-position: 7px 0;
+}
+
+.registration-successful-header h3
+{
+    background: url('/images/popup/registration-successful-header-icon.png') no-repeat;
+    background-position: 7px 0;
+}
+
+.login-form-header h3
+{
+    margin-top: 0;
+    line-height: 1.6;
+    background: url('/images/popup/login-form-header-icon.png') no-repeat;
+    background-position: 3px 0;
+}
+
+.account-linkage-form-header h3
+{
+    margin-top: 0;
+    background: url('/images/popup/account-linkage-form-header-icon.png') no-repeat;
+    background-position: 7px 0;
+}
+
+.logination-check-container h5
+{
+    margin: 18px 0;
+}
+
+.have-account-button,
+.newuser-button,
+.logination-check-container .outer-border
+{
+    display: inline-block;
+
+}
+
+.have-account-button,
+.newuser-button
+{
+    padding-top: 4px;
+    height: 35px;
+    width: 200px;
+
+    text-align: center;
+}
+
+.logination-check-container .outer-border
+{
+    margin-left: 21px;
+
+    width: 202px;
+    height: 37px;
+}
+
+.newuser-button
+{
+    margin-left: 26px;
+
+    color: #717070;
+    text-shadow: none;
+    border: 1px solid #b4b4b4;
+    background: #fdfdfd;
+    background-image: linear-gradient(#fdfdfd, #f0f0f0);
+}
+
+.newuser-button:hover
+{
+    border: 1px solid #f0f0f0;
+    background: #ffffff;
+    background-image: linear-gradient(#ffffff, #fcfcfc);
+}
+
+.newuser-button:hover,
+.newuser-button:focus
+{
+    color: #717070;
+    text-decoration: none;
+}
+
+.have-account-button:hover,
+.have-account-button:focus
+{
+    color: #fff;
+    text-decoration: none;
+}
+
+.get-new-password-form-container
+{
+    width: 583px;
+}
+
+.account-linkage-form-container .forget-password-link
+{
+    display: block;
+    margin-bottom: 10px;
+    margin-top: -10px;
+    padding-left: 113px;
+
+    color: #036995;
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+.account-creation-form-container h5
+{
+    padding: 0 25px;
+}
+
+.account-creation-form-container .agreement-block,
+.account-creation-form-container .registration-button-container
+{
+    padding-left: 113px;
+}
+/* Additional forms styles END */

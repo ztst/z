@@ -1,6 +1,7 @@
 .wrap > .container
 {
-    background: url('/images/gray-border.png') repeat-y 661px 0 #ffffff;
+    background: url("/images/chapters-list/chapter-list-row-background.png") repeat-y;
+    background-position: 0 -5px;
 }
 
 .show-catalog-page-container
@@ -27,16 +28,24 @@
     height: 100%;
 }
 
+.chapters-list
+{
+    margin-right: 1px;
+}
+
 .chapters-list-container h3,
 .chapter-description-container
 {
-    padding: 0 18px;
+    margin-right: 1px;
+    padding: 18px;
+    background: #fff;
 }
 
 .chapters-list-container h3
 {
-    margin-top: 0;
-    margin-bottom: 18px;
+    margin-top: -18px;
+    margin-bottom: 0;
+    padding-bottom: 15px;
 }
 
 .chapter-list-marker
@@ -57,14 +66,16 @@
 .chapter-description-container
 {
     display: inline-block;
+    padding: 0 18px;
     width: 100%;
+    background: none;
 }
 
 .chapter-description-container.selected
 {
-    position: relative;
+    /*position: relative;*/
     margin-bottom: -5px;
-    z-index: 1;
+    /*z-index: 1;*/
     border-top: 1px solid #c3d6e1;
     border-bottom: 1px solid #c3d6e1;
     background: #eef9fe;
@@ -73,21 +84,26 @@
 .chapter-description-container,
 .chapter-description-container.selected
 {
-    margin-top: -1px;
+    /*margin-top: -1px;*/
 }
 
 .chapter-description-container a,
 .chapter-description-container.selected a
 {
-    padding: 8px 0;
+    padding: 8px 0 9px;
+    width: 550px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .chapter-description-container a
 {
     display: block;
     color: #555;
-    border-top: 1px solid #d8e5ed;
-    border-bottom: 1px solid #d8e5ed;
+    /*border-top: 1px solid #d8e5ed;*/
+    /*border-bottom: 1px solid #d8e5ed;*/
 
     font-size: 15px;
     font-family: "OpenSans Semibold";
@@ -115,19 +131,19 @@
     display: block;
 }
 
-.placeholder
-{
-    position: absolute;
-    margin: -1px 18px 0;
-    width: 100%;
-    min-height: 100%;
-    background: url('/images/chapters-list/chapter-list-row-background.png') repeat-y;
-}
+/*.placeholder*/
+/*{*/
+    /*position: relative;*/
+    /*margin: -1px 18px 0;*/
+    /*width: 661px;*/
+    /*min-height: 100%;*/
+    /*background: url('/images/chapters-list/chapter-list-row-background.png') repeat-y;*/
+/*}*/
 
 .chapters-list-vertical-line
 {
     position: absolute;
-    right: 70px;
+    right: 52px;
     width: 3px;
     height: 90%;
     z-index: 3;

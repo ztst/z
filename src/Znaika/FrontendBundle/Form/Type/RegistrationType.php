@@ -28,8 +28,7 @@
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $builder->add('user', new UserType($this->userRepository, $this->autoGeneratePassword));
-            $builder->add('terms', 'checkbox', array('property_path' => 'termsAccepted'))
-                    ->add('save', 'submit');
+            $builder->add('save', 'submit');
         }
 
         public function getName()

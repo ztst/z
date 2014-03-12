@@ -361,12 +361,17 @@
 
 .synopsis-container
 {
-    margin: 22px 3px 0;
+    margin: 10px 18px 18px 18px;
 }
 
 .quiz-container
 {
-    margin: 22px 18px 0;
+    margin: 18px;
+}
+
+.quiz-container iframe
+{
+    border: none;
 }
 
 .chapter-selected-video .video-preview-image
