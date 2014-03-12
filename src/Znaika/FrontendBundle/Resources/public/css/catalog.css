@@ -126,3 +126,183 @@
 {
     padding: 20px 18px 40px !important;
 }
+
+/* moderator styles BEGIN */
+.moderator-buttons-block a,
+.moderator-buttons-block span
+{
+    display: block;
+}
+
+.moderator-buttons-block
+{
+    padding-left: 5px;
+    margin-top: -5px;
+    margin-bottom: 15px;
+    height: 26px;
+}
+
+.moderator-buttons-block a
+{
+    margin-left: 13px;
+    height: 26px;
+}
+
+.moderator-buttons-block span,
+.add-chapter-button,
+.edit-chapter-button,
+.save-changes-button,
+.chapter-down,
+.chapter-up
+{
+    float: left;
+}
+
+.add-chapter-button,
+.edit-chapter-button,
+.save-changes-button,
+.chapter-down,
+.chapter-up
+{
+    border: 1px solid #78b9d8;
+    border-radius: 3px;
+    background: #fdfdfd;
+    background: linear-gradient(#fdfdfd, #f0f0f0);
+}
+
+.add-chapter-button.disabled,
+.edit-chapter-button.disabled,
+.save-changes-button.disabled,
+.chapter-down.disabled,
+.chapter-up.disabled
+{
+    border: 1px solid #c8ddf5;
+    border-radius: 3px;
+    background: #f8f8f8;
+    background: linear-gradient(#f8f8f8, #f2f2f2);
+}
+
+.add-chapter-button-label,
+.edit-chapter-button-label,
+.save-changes-button-label
+{
+    margin-top: 4px;
+    margin-left: 5px;
+
+    color: #0373a8;
+    font-size: 11px;
+    font-family: "OpenSans Semibold";
+}
+
+.disabled .add-chapter-button-label,
+.disabled .edit-chapter-button-label,
+.disabled .save-changes-button-label
+{
+    color: #cbd6dc;
+    font-family: "OpenSans";
+}
+
+.add-chapter-button
+{
+    width: 130px;
+}
+
+.edit-chapter-button
+{
+    width: 158px;
+}
+
+.save-changes-button
+{
+    width: 161px;
+}
+
+.add-chapter-button-icon
+{
+    margin-top: 7px;
+    margin-left: 9px;
+
+    width: 9px;
+    height: 10px;
+    background: url('/images/chapters-list/add-chapter-button-icon.png') no-repeat;
+}
+
+.edit-chapter-button-icon
+{
+    margin-top: 6px;
+    margin-left: 7px;
+
+    width: 12px;
+    height: 13px;
+    background: url('/images/video/edit-button-icon.png') no-repeat;
+}
+
+.save-changes-button-icon
+{
+    margin-top: 7px;
+    margin-left: 9px;
+
+    width: 11px;
+    height: 11px;
+    background: url('/images/chapters-list/save-changes-button-icon.png') no-repeat;
+}
+
+.disabled .add-chapter-button-icon
+{
+    background: url('/images/chapters-list/add-chapter-button-icon-disabled.png') no-repeat;
+}
+
+.disabled .edit-chapter-button-icon
+{
+    background: url('/images/video/edit-button-icon-disabled.png') no-repeat;
+}
+
+.disabled .save-changes-button-icon
+{
+    background: url('/images/chapters-list/save-changes-button-icon-disabled.png') no-repeat;
+}
+
+.chapter-down,
+.chapter-up
+{
+    width: 26px;
+}
+
+.chapter-up
+{
+    margin-left: 5px !important;
+}
+
+.chapter-down-icon,
+.chapter-up-icon
+{
+    width: 12px;
+    height: 13px;
+}
+
+.chapter-down-icon
+{
+    margin-top: 6px;
+    margin-left: 6px;
+
+    background: url('/images/chapters-list/chapter-down-icon.png') no-repeat;
+}
+
+.chapter-up-icon
+{
+    margin-top: 5px;
+    margin-left: 6px;
+
+    background: url('/images/chapters-list/chapter-up-icon.png') no-repeat;
+}
+
+.disabled .chapter-down-icon
+{
+    background: url('/images/chapters-list/chapter-down-icon-disabled.png') no-repeat;
+}
+
+.disabled .chapter-up-icon
+{
+    background: url('/images/chapters-list/chapter-up-icon-disabled.png') no-repeat;
+}
+/* moderator styles END */

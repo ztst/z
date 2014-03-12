@@ -1,13 +1,15 @@
 {% if video.getSynopsis %}
   {% if is_moderator() %}
-    <a href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">
-      Редактировать конспект
+    <a class="edit-button" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}">
+      <span class="edit-button-icon"></span>
+      <span class="edit-button-label">Редактировать конспект</span>
     </a>
-    <br/>
+    <div class="clear"></div>
   {% endif %}
   {{ show_synopsis(video)|raw }}
 {% elseif is_moderator() %}
-  <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="btn btn-primary">
-    Добавить конспект
+  <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="add-video-button">
+    <span class="add-video-button-icon"></span>
+    <span class="add-video-button-label">Добавить конспект</span>
   </a>
 {% endif %}

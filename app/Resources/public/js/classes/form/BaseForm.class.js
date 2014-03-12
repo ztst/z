@@ -14,6 +14,8 @@ var BaseForm = EventDispatcher.extend({
             errorElement: "div",
             errorPlacement: function ($error, $element) {
                 $element.closest("div").after($error);
+                var errorFields = $($element.parents().get(1)).find(".form-error-field");
+                errorFields.append('<div class="arrow"></div>');
             }
         });
 

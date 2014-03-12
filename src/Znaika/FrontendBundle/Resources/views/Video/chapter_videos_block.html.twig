@@ -1,12 +1,20 @@
 {% if is_moderator() %}
-  <a class="add-video-link" href="{{ path('add_video_form', {"chapterName": chapter.urlName, "class": chapter.grade, "subjectName": chapter.subject.urlName}) }}" title="">Добавить видеоурок</a>
-  {% if currentVideo is defined and currentVideo == video %}
-    <br/>
-    <a class="video-up" href="javascript:void(0);">Переместить выше</a>
-    <br/>
-    <a class="video-down" href="javascript:void(0);">Переместить ниже</a>
-    <input type="hidden" value="{{ currentVideo.urlName }}" id="currentVideoName" />
-  {% endif %}
+  <div class="chapter-list-moderator-buttons-block">
+    <a class="add-video-button" href="{{ path('add_video_form', {"chapterName": chapter.urlName, "class": chapter.grade, "subjectName": chapter.subject.urlName}) }}" title="">
+      <span class="add-video-button-icon"></span>
+      <span class="add-video-button-label">Добавить видеоурок</span>
+    </a>
+    {% if currentVideo is defined and currentVideo == video %}
+      <a class="video-down" href="javascript:void(0);">
+        <span class="video-down-icon"></span>
+      </a>
+      <a class="video-up" href="javascript:void(0);">
+        <span class="video-up-icon"></span>
+      </a>
+      <input type="hidden" value="{{ currentVideo.urlName }}" id="currentVideoName" />
+    {% endif %}
+  </div>
+  <div class="clear"></div>
 {% endif %}
 {% if currentVideo is defined and currentVideo.orderPriority > 2 and not is_moderator()%}
   <div class="show-more-videos">
@@ -53,14 +61,14 @@
           <div>
             {% if not video.synopsis is empty %}
               <a
-                href="{% if is_user() %}{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#synopsis-tab" }}{% else %}javascript:void(0);{% endif %}"
+                href="{% if is_user() %}{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#synopsis_tab" }}{% else %}javascript:void(0);{% endif %}"
                 class="video-has-synopsis">
               </a>
               <div class="icons-delimiter"></div>
             {% endif %}
             {% if not video.quiz is empty %}
               <a
-                href="{% if is_user() %}{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#quiz-tab" }}{% else %}javascript:void(0);{% endif %}"
+                href="{% if is_user() %}{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#quiz_tab" }}{% else %}javascript:void(0);{% endif %}"
                 class="video-has-quiz">
               </a>
             {% endif %}
