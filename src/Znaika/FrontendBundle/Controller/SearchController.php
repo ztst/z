@@ -16,24 +16,36 @@
 
         public function searchVideoAction(Request $request)
         {
-            $searchString = $request->get("searchString");
-            $videos       = $this->searchVideos($searchString, self::RESULT_ON_SPECIAL_PAGE);
-            $countVideos  = $this->countFoundedVideos($searchString);
-            $isFinalPage  = $this->isFinalPage($countVideos, 0, self::RESULT_ON_SPECIAL_PAGE);
+            $searchString = $request->get("q", "");
+            $subject      = $request->get("s", "");
+            $grade        = $request->get("g", "");
+            $videos       = null;
+            $countVideos  = 0;
+            if ($searchString)
+            {
+                $videos      = $this->searchVideos($searchString, $subject, $grade, self::RESULT_ON_SPECIAL_PAGE);
+                $countVideos = $this->countFoundedVideos($searchString, $subject, $grade);
+            }
+            $isFinalPage = $this->isFinalPage($countVideos, 0, self::RESULT_ON_SPECIAL_PAGE);
 
             return $this->render('ZnaikaFrontendBundle:Search:searchVideo.html.twig', array(
                 'videos'       => $videos,
                 'searchString' => $searchString,
-                'isFinalPage'  => $isFinalPage
+                'subject'      => $subject,
+                'grade'        => $grade,
+                'isFinalPage'  => $isFinalPage,
+                'countVideos'  => $countVideos,
             ));
         }
 
         public function searchVideoAjaxAction(Request $request)
         {
-            $searchString = $request->get("searchString");
+            $searchString = $request->get("q", "");
+            $subject      = $request->get("s", "");
+            $grade        = $request->get("g", "");
             $page         = intval($request->get("page"));
-            $videos       = $this->searchVideos($searchString, self::RESULT_ON_SPECIAL_PAGE, $page);
-            $countVideos  = $this->countFoundedVideos($searchString);
+            $videos       = $this->searchVideos($searchString, $subject, $grade, self::RESULT_ON_SPECIAL_PAGE, $page);
+            $countVideos  = $this->countFoundedVideos($searchString, $subject, $grade);
             $isFinalPage  = $this->isFinalPage($countVideos, $page, self::RESULT_ON_SPECIAL_PAGE);
 
             $html = $this->renderView('ZnaikaFrontendBundle:Search:search_video_list.html.twig', array(
@@ -52,11 +64,11 @@
         {
             $searchString = $request->get("search_string");
 
-            $videos      = null;
-            $chapters    = array();
+            $videos   = null;
+            $chapters = array();
             if ($searchString)
             {
-                $videos = $this->searchVideos($searchString);
+                $videos = $this->searchVideos($searchString, "", "");
 
                 foreach ($videos as $video)
                 {
@@ -87,15 +99,17 @@
 
         /**
          * @param $searchString
-         * @param $limit
-         * @param $page
+         * @param $subject
+         * @param $grade
+         * @param null $limit
+         * @param null $page
          *
          * @return Video[]
          */
-        private function searchVideos($searchString, $limit = null, $page = null)
+        private function searchVideos($searchString, $subject, $grade, $limit = null, $page = null)
         {
             $repository = $this->getVideoRepository();
-            $videos     = $repository->getVideosBySearchString($searchString, $limit, $page);
+            $videos     = $repository->getVideosBySearchString($searchString, $subject, $grade, $limit, $page);
 
             return $videos;
         }
@@ -126,10 +140,10 @@
             return $synopsises;
         }
 
-        private function countFoundedVideos($searchString)
+        private function countFoundedVideos($searchString, $subject, $grade)
         {
             $repository  = $this->getVideoRepository();
-            $countVideos = $repository->countVideosBySearchString($searchString);
+            $countVideos = $repository->countVideosBySearchString($searchString, $subject, $grade);
 
             return $countVideos;
         }

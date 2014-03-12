@@ -276,6 +276,14 @@ services:
         tags:
             - { name: twig.extension }
 
+    znaika_frontend.search_extension:
+        class: Znaika\FrontendBundle\Twig\SearchExtension
+        arguments:
+            - @twig
+            - @service_container
+        tags:
+            - { name: twig.extension }
+
     znaika_frontend.menu_helper_extension:
         class: Znaika\FrontendBundle\Twig\MenuHelperExtension
         arguments:

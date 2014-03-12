@@ -16,19 +16,23 @@
 
         /**
          * @param string $searchString
+         * @param $subjectName
+         * @param $grade
          * @param $limit
          * @param $page
          *
          * @return Video[]
          */
-        public function getVideosBySearchString($searchString, $limit = null, $page = null);
+        public function getVideosBySearchString($searchString, $subjectName, $grade, $limit = null, $page = null);
 
         /**
          * @param string $searchString
+         * @param $subjectName
+         * @param $grade
          *
          * @return int
          */
-        public function countVideosBySearchString($searchString);
+        public function countVideosBySearchString($searchString, $subjectName, $grade);
 
         /**
          * @param $name

@@ -1,3 +1,8 @@
+.wrap > .container
+{
+    background: url('/images/gray-border.png') repeat-y 662px 0 #ffffff;
+}
+
 .video-player-container,
 .nav-tabs.select-content-tab,
 .video-buttons-container,

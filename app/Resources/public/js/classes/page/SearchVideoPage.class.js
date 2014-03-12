@@ -29,11 +29,29 @@ var SearchVideoPage = Base.extend({
 
             this._initScrollLoading();
         }
+        this._initFilterSelect();
+
+        $('.filters-block').followTo(150);
     },
 
     setSearchVideoAjaxUrl: function(url)
     {
         this._searchVideoAjaxUrl = url;
+    },
+
+    _initFilterSelect: function()
+    {
+        $('.dropdown-toggle').dropdown();
+
+        $(".grade-select .dropdown-menu li").click(function(){
+            $("#searchGradeInput").val($(this).find("input[type='hidden']").val());
+            $("#searchForm").submit();
+        });
+
+        $(".subject-select .dropdown-menu li").click(function(){
+            $("#searchSubjectInput").val($(this).find("input[type='hidden']").val());
+            $("#searchForm").submit();
+        });
     },
 
     _initScrollLoading: function()
@@ -67,7 +85,9 @@ var SearchVideoPage = Base.extend({
 
         this._page++;
         var data = {
-            searchString: this._searchString,
+            q: this._searchString,
+            s: $("#searchSubjectInput").val(),
+            g: $("#searchGradeInput").val(),
             page: this._page
         };
 
@@ -77,10 +97,9 @@ var SearchVideoPage = Base.extend({
     _onLoadVideosComplete: function(response)
     {
         this._loadingIndicator.addClass("hidden");
+        this._videoContainer.append(response.html);
         if (!response.isFinalPage)
         {
-            this._videoContainer.append(response.html);
-
             this._isLoading = false;
 
             this._showMoreLink.removeClass("hidden");

@@ -4,8 +4,6 @@ var SearchPage = Base.extend({
     {
         this.base();
 
-        $('.dropdown-toggle').dropdown();
-
         $(".chapter-description-container .chapter-link").click(function(){
             var link = $(this);
             var id = link.attr("id").replace("show_chapter_", "");
@@ -16,8 +14,10 @@ var SearchPage = Base.extend({
             link.closest(".chapter-description-container").addClass("selected");
         });
 
+        $('.dropdown-toggle').dropdown();
+
         $(".filter .dropdown-menu li").click(function(){
-            jQuery($(this).parents().get(1)).find(".dropdown-toggle .filter-label").html($(this).find("a").html());
+            $($(this).parents().get(1)).find(".dropdown-toggle .filter-label").html($(this).find("a").html());
         });
     }
 });

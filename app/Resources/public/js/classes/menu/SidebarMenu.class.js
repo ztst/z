@@ -1,5 +1,8 @@
 var SidebarMenu = EventDispatcher.extend({
 
+    _currentGrade: null,
+    _currentSubject: null,
+
     _classesButtons: null,
     _subjectsButtons: null,
 
@@ -11,23 +14,40 @@ var SidebarMenu = EventDispatcher.extend({
     {
         this.base();
 
-        var that = this;
-        this._classesButtons = $(".class-menu li");
-        this._classesButtons.click(function(){
-            that._onClassChanged($(this));
-        });
-
-        this._subjectsButtons = $(".subject-menu li");
-        this._subjectsButtons.click(function(){
-            that._onSubjectClick($(this));
-        });
-
+        this._initClassesButtons();
+        this._initSubjectsButtons();
         this._initMoreSubjectsLink();
+
+        this._currentGrade = this._getClass();
+        this._currentSubject = this._getSubject();
     },
 
     setGradesWithSubjects: function(gradesWithSubjects)
     {
         this._gradesWithSubjects = $.parseJSON(gradesWithSubjects);
+    },
+
+    _initClassesButtons: function()
+    {
+        var that = this;
+        this._classesButtons = $(".class-menu li");
+        this._classesButtons.click(function(){
+            that._onClassChanged($(this));
+        });
+    },
+
+    _initSubjectsButtons: function()
+    {
+        var that = this;
+
+        this._subjectsButtons = $(".subject-menu li");
+        this._subjectsButtons.click(function(event){
+            if (event.which == 2) //middle button click
+            {
+                return true;
+            }
+            that._onSubjectClick($(this));
+        });
     },
 
     _initMoreSubjectsLink: function()
@@ -70,6 +90,11 @@ var SidebarMenu = EventDispatcher.extend({
         return this._classesButtons.filter(".selected").prop("id");
     },
 
+    _getSubject: function()
+    {
+        return this._subjectsButtons.filter(".selected").prop("id");
+    },
+
     _updateSubjects: function()
     {
         this._subjectsButtons.addClass("hidden");
@@ -77,10 +102,17 @@ var SidebarMenu = EventDispatcher.extend({
         var grade = this._getClass();
         var subjects = this._gradesWithSubjects[grade];
 
+        this._subjectsButtons.removeClass("selected");
+
         for (var i in subjects)
         {
-            this._subjectsButtons.filter("[id=" + subjects[i] + "]").removeClass("hidden");
-            $("#" + subjects[i]).find("a").attr("href", Routing.generate('show_catalogue', {'class': grade, 'subjectName': subjects[i]}));
+            var subject = $("#" + subjects[i]);
+            subject.removeClass("hidden").find("a").attr("href", Routing.generate('show_catalogue', {'class': grade, 'subjectName': subjects[i]}));
+
+            if (subjects[i] == this._currentSubject && this._getClass() == this._currentGrade)
+            {
+                subject.addClass("selected");
+            }
         }
     },
 
@@ -95,9 +127,7 @@ var SidebarMenu = EventDispatcher.extend({
     {
         this._classesButtons.removeClass("selected");
         item.addClass("selected");
-
         this._updateSubjects();
-
         this._toggleMoreSubjectLinkView();
     }
 });

@@ -24,12 +24,12 @@ a:focus
 
 .wrap
 {
-    display: inline-block;
+    display: inline;
     min-height: 100%;
-    height: auto !important;
+    height: 100%;
     width: 100%;
-    margin: 0 auto -54px;
-    padding: 0 0 54px;
+    margin: 0;
+    padding: 0;
 }
 
 .col-left
@@ -68,8 +68,8 @@ a:focus
     position: relative;
     min-height: 100%;
     height: auto !important;
-    margin-top: -129px;
-    padding: 149px 0 15px;
+    margin: -132px auto -54px;
+    padding: 149px 0 69px;
 
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
@@ -523,7 +523,7 @@ input
     margin-right: 0 !important;
 }
 
-.search-button-containter
+.search-button-container
 {
     width: auto;
 }

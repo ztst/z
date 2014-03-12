@@ -1,8 +1,7 @@
 {% if not videos is empty %}
   {% for video in videos %}
     <div class="search-video-result-container
-                search-video-chapter-{{ video.getChapter.getChapterId }}
-                {% if video.getChapter.getChapterId != currentChapterId %}hidden{% endif %}"
+                search-video-chapter-{{ video.getChapter.getChapterId }}"
       >
       <div class="col-center">
         <div class="chapter-video-preview-container">
@@ -14,7 +13,7 @@
              title="{{ video.getName|raw }}">
             <div class="over-elements-container">
               <div class="over-play-sign"></div>
-              <div class="over-video-length">12345</div>
+              <div class="over-video-length">{{ video.duration|date("i:s") }}</div>
             </div>
             <img
               src="{{ small_video_thumbnail(video) }}"
@@ -26,7 +25,7 @@
       </div>
       <div class="video-text-block">
         <p class="video-title">{{ video.getName|raw }}</p>
-        <p class="search-video-breadcrumbs">%d класс > Предмет > Глава</p>
+        <p class="search-video-breadcrumbs">{{ video.grade }} класс > {{ video.subject.name }} > {{ video.chapter.name }}</p>
       </div>
       <div class="clear"></div>
     </div>

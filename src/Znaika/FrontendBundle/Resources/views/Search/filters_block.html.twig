@@ -1,29 +1,7 @@
 <div class="filters-block">
   <h5>Расширенный поиск</h5>
-  <div class="btn-group filter">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      <span class="filter-label">Предмет</span>
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-      <li><a href="#">Чтение</a></li>
-      <li><a href="#">Русский язык</a></li>
-      <li><a href="#">Термодинамика</a></li>
-    </ul>
-  </div>
-  <div class="btn-group filter">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      <span class="filter-label">Класс</span>
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-      <li><a href="#">8 класс</a></li>
-      <li><a href="#">9 класс</a></li>
-      <li><a href="#">10 класс</a></li>
-      <li><a href="#">11 класс</a></li>
-    </ul>
-  </div>
-  <div class="clear"></div>
-
+  {{ search_subject_filter()|raw }}
+  {{ search_grade_filter()|raw }}
   <div class="advertisement"></div>
+  <div class="clear"></div>
 </div>

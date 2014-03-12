@@ -3,8 +3,11 @@
 {% block stylesheets %}
   {{ parent() }}
 
-  {% stylesheets filter='cssrewrite' '@ZnaikaFrontendBundle/Resources/public/css/search.css' %}
-  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% stylesheets filter='cssrewrite'
+    '@ZnaikaFrontendBundle/Resources/public/css/search.css'
+    '@ZnaikaFrontendBundle/Resources/public/css/videos_list.css'
+  %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
 
@@ -20,9 +23,18 @@
 {% endblock %}
 
 {% block content %}
-  <div id="videoContainer">
-    <h2>Видео:</h2>
-    {% include "ZnaikaFrontendBundle:Search:search_video_list.html.twig" with {'videos': videos} %}
+  <div class="show-catalog-page-container">
+    <div id="videoContainer" class="chapter-catalog-container">
+      {% if videos|length %}
+        <h4>{{ 'founded_video_lessons'|transchoice(countVideos) }}</h4>
+      {% else %}
+        <h5>По запросу "{{ searchString }}" ничего не найдено</h5>
+      {% endif %}
+      {% include "ZnaikaFrontendBundle:Search:search_video_list.html.twig" with {'videos': videos} %}
+    </div>
+    <div class="filters-block-container">
+      {% include "ZnaikaFrontendBundle:Search:filters_block.html.twig" %}
+    </div>
   </div>
   <div class="clear"></div>
   {% if not isFinalPage %}

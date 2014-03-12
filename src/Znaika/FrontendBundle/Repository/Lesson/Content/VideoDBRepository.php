@@ -53,9 +53,9 @@
             return $queryBuilder->getQuery()->getResult();
         }
 
-        public function getVideosBySearchString($searchString, $limit = null, $page = null)
+        public function getVideosBySearchString($searchString, $subjectName, $grade, $limit = null, $page = null)
         {
-            $queryBuilder = $this->prepareSearchQuery($searchString);
+            $queryBuilder = $this->prepareSearchQuery($searchString, $subjectName, $grade);
             $queryBuilder->select('v');
 
             if (!is_null($limit))
@@ -72,9 +72,9 @@
             return $videos;
         }
 
-        public function countVideosBySearchString($searchString)
+        public function countVideosBySearchString($searchString, $subjectName, $grade)
         {
-            $queryBuilder = $this->prepareSearchQuery($searchString);
+            $queryBuilder = $this->prepareSearchQuery($searchString, $subjectName, $grade);
             $queryBuilder->select('count(v)');
 
             return intval($queryBuilder->getQuery()->getSingleScalarResult());
@@ -220,10 +220,12 @@
 
         /**
          * @param $searchString
+         * @param $subjectName
+         * @param $grade
          *
          * @return \Doctrine\ORM\QueryBuilder
          */
-        private function prepareSearchQuery($searchString)
+        private function prepareSearchQuery($searchString, $subjectName, $grade)
         {
             $searchString = "%{$searchString}%";
 
@@ -232,6 +234,9 @@
             $queryBuilder->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
                          ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
                          ->addOrderBy('v.grade, v.chapter', 'ASC');
+
+            $this->prepareSubjectNameFilter($subjectName, $queryBuilder);
+            $this->prepareClassNumberFilter($grade, $queryBuilder);
 
             return $queryBuilder;
         }
