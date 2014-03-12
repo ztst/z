@@ -31,7 +31,7 @@
         {
             if (null === $value)
             {
-                return null;
+                return new ArrayCollection();
             }
 
             if (!is_string($value))

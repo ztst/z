@@ -1,6 +1,8 @@
 {% if is_moderator() %}
   <div class="chapter-list-moderator-buttons-block">
-    <a class="add-video-button" href="{{ path('add_video_form', {"chapterName": chapter.urlName, "class": chapter.grade, "subjectName": chapter.subject.urlName}) }}" title="">
+    <a class="add-video-button"
+       href="{{ path('add_video_form', {"chapterName": chapter.urlName, "class": chapter.grade, "subjectName": chapter.subject.urlName}) }}"
+       title="">
       <span class="add-video-button-icon"></span>
       <span class="add-video-button-label">Добавить видеоурок</span>
     </a>
@@ -11,31 +13,31 @@
       <a class="video-up" href="javascript:void(0);">
         <span class="video-up-icon"></span>
       </a>
-      <input type="hidden" value="{{ currentVideo.urlName }}" id="currentVideoName" />
+      <input type="hidden" value="{{ currentVideo.urlName }}" id="currentVideoName"/>
     {% endif %}
   </div>
-  <div class="clear"></div>
 {% endif %}
-{% if currentVideo is defined and currentVideo.orderPriority > 2 and not is_moderator()%}
+{% if currentVideo is defined and currentVideo.orderPriority > 2 and not is_moderator() %}
   <div class="show-more-videos">
-    <a id="showMoreChapterVideos" href="javascript:void(0);">Показать предыдущие ({{ currentVideo.orderPriority - 2 }})</a>
+    <a id="showMoreChapterVideos" href="javascript:void(0);">
+      Показать предыдущие ({{ currentVideo.orderPriority - 2 }})
+    </a>
   </div>
 {% endif %}
 {% if not videos is empty %}
   <ul class="chapter-videos-list">
-  {% for video in videos %}
-    <li class="{% if currentVideo is defined and currentVideo == video %}chapter-selected-video{% endif %}
+    {% for video in videos %}
+      <li class="{% if currentVideo is defined and currentVideo == video %}chapter-selected-video{% endif %}
                {% if currentVideo is defined and currentVideo.orderPriority > video.orderPriority + 1 and not is_moderator() %}hidden{% endif %}">
-      <div class="chapter-video">
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-center">
+        <div class="chapter-video">
           <div class="chapter-video-preview-container">
             <a href="{{ path('show_video', {
-                'subjectName': video.getSubject.getUrlName,
-                'class': video.getGrade,
-                'videoName': video.getUrlName
-                }) }}"
+            'subjectName': video.getSubject.getUrlName,
+            'class': video.getGrade,
+            'videoName': video.getUrlName
+            }) }}"
                title="{{ video.getName|raw }}">
-              <div class="over-elements-container">
+              <div class="">
                 <div class="over-play-sign"></div>
                 <div class="over-video-length">{{ video.duration|date("i:s") }}</div>
               </div>
@@ -46,38 +48,39 @@
                 />
             </a>
           </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 col-right">
+          <div class="chapter-video-description-container">
             <a href="{{ path('show_video', {
             'subjectName': video.getSubject.getUrlName,
             'class': video.getGrade,
             'videoName': video.getUrlName
             }) }}"
-            title="{{ video.getName|raw }}"
-            class="video-title">
-            {{ video.getName|raw }}
+               title="{{ video.getName|raw }}"
+               class="video-title">
+              {{ video.getName|raw|length > 40 ? video.getName|raw|slice(0, 40) ~ '...' : video.getName|raw }}
             </a>
-          <p class="video-author-in-list">{{ video.getAuthor|raw }}</p>
-          <div>
-            {% if not video.synopsis is empty %}
-              <a
-                href="{% if is_user() %}{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#synopsis_tab" }}{% else %}javascript:void(0);{% endif %}"
-                class="video-has-synopsis">
-              </a>
-              <div class="icons-delimiter"></div>
-            {% endif %}
-            {% if not video.quiz is empty %}
-              <a
-                href="{% if is_user() %}{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#quiz_tab" }}{% else %}javascript:void(0);{% endif %}"
-                class="video-has-quiz">
-              </a>
-            {% endif %}
+
+            <p class="video-author-in-list">{{ video.getAuthor|raw }}</p>
+
+            <div>
+              {% if not video.synopsis is empty %}
+                <a
+                  {% if currentVideo is defined and currentVideo == video %}id="currentVideoSynopsisLink"{% endif %}
+                  href="{% if is_user() %}{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#synopsis_tab" }}{% else %}javascript:void(0);{% endif %}"
+                  class="video-has-synopsis">
+                </a>
+                <div class="icons-delimiter"></div>
+              {% endif %}
+              {% if not video.quiz is empty %}
+                <a
+                  {% if currentVideo is defined and currentVideo == video %}id="currentVideoQuizLink"{% endif %}
+                  href="{% if is_user() %}{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#quiz_tab" }}{% else %}javascript:void(0);{% endif %}"
+                  class="video-has-quiz">
+                </a>
+              {% endif %}
+            </div>
           </div>
-          <div class="clear"></div>
         </div>
-      </div>
-      <div class="clear"></div>
-    </li>
-  {% endfor %}
+      </li>
+    {% endfor %}
   </ul>
 {% endif %}

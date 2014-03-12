@@ -29,6 +29,18 @@ var ShowVideoPage = Base.extend({
         this._initVideoOrderButtons();
 
         $("#showMoreChapterVideos").click(handler(this, "_showMoreChapterVideos"));
+        $("#currentVideoSynopsisLink").click(handler(this, "_onCurrentVideoSynopsisLinkClick"));
+        $("#currentVideoQuizLink").click(handler(this, "_onCurrentVideoQuizLinkClick"));
+    },
+
+    _onCurrentVideoSynopsisLinkClick: function()
+    {
+        $("#synopsisTab").click();
+    },
+
+    _onCurrentVideoQuizLinkClick: function()
+    {
+        $("#quizTab").click();
     },
 
     _showMoreChapterVideos: function()

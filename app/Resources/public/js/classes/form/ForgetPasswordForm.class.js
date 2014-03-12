@@ -3,7 +3,7 @@ var ForgetPasswordForm = BaseForm.extend({
     {
         this.base(id);
 
-        this._form.find("input[type='email']").rules('add', {
+        this._form.find("#password_recovery_user").rules('add', {
             email: true,
             messages: { email: "Не верный адрес." }
         });

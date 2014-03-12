@@ -3,8 +3,13 @@
     margin: -20px 0;
     padding: 20px 18px;
 
-    width: 338px;
-    border-left: 1px solid #ccc;
+    width: 337px;
+}
+
+.videos-list-container
+{
+    margin-left: 661px;
+    width: 337px;
 }
 
 .chapter-videos-list,
@@ -14,25 +19,30 @@
     display: block;
 }
 
+.chapter-video-description-container
+{
+    margin-left: 135px;
+}
+
+.chapter-video-preview-container
+{
+    width: 120px;
+    float: left;
+}
+
 .chapter-video-preview-container,
 .chapter-video-preview-container a
 {
     display: inline-block;
-}
-
-.over-elements-container
-{
-    width: 100%;
-    height: 100%;
-    position: absolute;
+    position: relative;
 }
 
 .chapter-video-preview-container a .over-play-sign
 {
     display: none;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 44px;
     margin-top: 22px;
+    position: absolute;
     width: 38px;
     height: 25px;
     background: url('/images/video/video-preview-over.png') no-repeat;
@@ -157,6 +167,7 @@
 .chapter-videos-list > li
 {
     margin-bottom: 19px;
+    display: inline-block;
 }
 
 /* moderator styles BEGIN */

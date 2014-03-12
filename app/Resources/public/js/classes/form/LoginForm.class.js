@@ -10,11 +10,11 @@ var LoginForm = BaseForm.extend({
                 messages: { required: "Это поле обязательно для заполнения" }
             });
         });
-        this._form.find("input[type='email']").rules('add', {
+        this._form.find("#username").rules('add', {
             email: true,
             messages: { email: handler(that, "_getInvalidEmailMessage") }
         });
-        this._form.find("input[type='password']").rules('add', {
+        this._form.find("#password").rules('add', {
             passwordSymbols: true
         });
 

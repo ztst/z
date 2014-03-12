@@ -1,3 +1,8 @@
+.wrap > .container
+{
+    background: url('/images/gray-border.png') repeat-y 661px 0 #ffffff;
+}
+
 .show-catalog-page-container
 {
     display: inline-block;
@@ -7,6 +12,13 @@
     width: 100%;
     height: auto !important;
     min-height: 100%;
+}
+
+.show-catalog-page-container .chapters-list-container
+{
+    width: 661px;
+    float: left;
+    position: relative;
 }
 
 .chapter-catalog-container

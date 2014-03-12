@@ -22,6 +22,12 @@
     margin-bottom: 10px;
 }
 
+.video-view-container
+{
+    width: 661px;
+    float: left;
+}
+
 .video-view-container h1
 {
     width: 85%;
