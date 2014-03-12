@@ -73,18 +73,10 @@
 
 .chapter-description-container.selected
 {
-    /*position: relative;*/
     margin-bottom: -5px;
-    /*z-index: 1;*/
     border-top: 1px solid #c3d6e1;
     border-bottom: 1px solid #c3d6e1;
     background: #eef9fe;
-}
-
-.chapter-description-container,
-.chapter-description-container.selected
-{
-    /*margin-top: -1px;*/
 }
 
 .chapter-description-container a,
@@ -102,8 +94,6 @@
 {
     display: block;
     color: #555;
-    /*border-top: 1px solid #d8e5ed;*/
-    /*border-bottom: 1px solid #d8e5ed;*/
 
     font-size: 15px;
     font-family: "OpenSans Semibold";
@@ -130,15 +120,6 @@
 {
     display: block;
 }
-
-/*.placeholder*/
-/*{*/
-    /*position: relative;*/
-    /*margin: -1px 18px 0;*/
-    /*width: 661px;*/
-    /*min-height: 100%;*/
-    /*background: url('/images/chapters-list/chapter-list-row-background.png') repeat-y;*/
-/*}*/
 
 .chapters-list-vertical-line
 {
