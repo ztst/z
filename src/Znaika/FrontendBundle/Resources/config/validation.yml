@@ -23,6 +23,12 @@ Znaika\FrontendBundle\Entity\Profile\User:
                   checkMX: true
         password:
             - NotBlank: { message: "not_blank" }
+        photo:
+            - File:
+                maxSize: 10M
+                mimeTypes: [image/gif, image/jpeg, image/png]
+                mimeTypesMessage: "invalid_user_photo_format"
+            - Znaika\FrontendBundle\Validator\Constraints\UserPhoto: ~
 
 Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment:
     properties:

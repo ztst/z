@@ -35,17 +35,6 @@
             return $success;
         }
 
-        public function getLastAddCityInProfileOperation(User $user)
-        {
-            $result = $this->redisRepository->getLastAddCityInProfileOperation($user);
-            if (empty($result))
-            {
-                $result = $this->dbRepository->getLastAddCityInProfileOperation($user);
-            }
-
-            return $result;
-        }
-
         public function getLastViewVideoOperation(User $user, Video $video)
         {
             $result = $this->redisRepository->getLastViewVideoOperation($user, $video);
@@ -85,28 +74,6 @@
             if (empty($result))
             {
                 $result = $this->dbRepository->getLastAddBirthdayInProfileOperation($user);
-            }
-
-            return $result;
-        }
-
-        public function getLastAddClassroomInProfileOperation(User $user)
-        {
-            $result = $this->redisRepository->getLastAddClassroomInProfileOperation($user);
-            if (empty($result))
-            {
-                $result = $this->dbRepository->getLastAddClassroomInProfileOperation($user);
-            }
-
-            return $result;
-        }
-
-        public function getLastAddSchoolInProfileOperation(User $user)
-        {
-            $result = $this->redisRepository->getLastAddSchoolInProfileOperation($user);
-            if (empty($result))
-            {
-                $result = $this->dbRepository->getLastAddSchoolInProfileOperation($user);
             }
 
             return $result;

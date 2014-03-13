@@ -21,16 +21,13 @@ Znaika\FrontendBundle\Entity\Profile\Action\BaseUserOperation:
         type: smallint
     discriminatorMap:
         0: Znaika\FrontendBundle\Entity\Profile\Action\BaseUserOperation
-        1: Znaika\FrontendBundle\Entity\Profile\Action\AddCityInProfileOperation
         2: Znaika\FrontendBundle\Entity\Profile\Action\ViewVideoOperation
         3: Znaika\FrontendBundle\Entity\Profile\Action\PostVideoToSocialNetworkOperation
         4: Znaika\FrontendBundle\Entity\Profile\Action\AddPhoneNumberInProfileOperation
         5: Znaika\FrontendBundle\Entity\Profile\Action\AddBirthdayInProfileOperation
-        6: Znaika\FrontendBundle\Entity\Profile\Action\AddClassroomInProfileOperation
         7: Znaika\FrontendBundle\Entity\Profile\Action\JoinSocialNetworkCommunityOperation
         8: Znaika\FrontendBundle\Entity\Profile\Action\RegistrationReferralOperation
         9: Znaika\FrontendBundle\Entity\Profile\Action\RegistrationOperation
-        10: Znaika\FrontendBundle\Entity\Profile\Action\AddSchoolInProfileOperation
         11: Znaika\FrontendBundle\Entity\Profile\Action\AddVideoCommentOperation
         12: Znaika\FrontendBundle\Entity\Profile\Action\RateVideoOperation
         13: Znaika\FrontendBundle\Entity\Profile\Action\AddSexInProfileOperation

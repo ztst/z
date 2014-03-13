@@ -15,6 +15,10 @@ Znaika\FrontendBundle\Entity\Profile\User:
         points:          { type: integer, notnull: true }
         birthDate:       { column: birth_date, type: date, nullable: true }
         role:            { type: smallint, notnull: true }
+        grade:           { type: smallint, nullable: true }
+        city:            { type: string, length: 150, nullable: true }
+        city:            { type: string, length: 150, nullable: true }
+        hasPhoto:        { column: has_photo, type: boolean }
         vkId:            { column: vk_id, type: bigint, nullable: true }
         facebookId:      { column: facebook_id, type: bigint, nullable: true }
         odnoklassnikiId: { column: odnoklassniki_id, type: bigint, nullable: true }
@@ -22,28 +26,7 @@ Znaika\FrontendBundle\Entity\Profile\User:
         videoComments:      { targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment, mappedBy: user }
         userRegistrations:  { targetEntity: Znaika\FrontendBundle\Entity\Profile\UserRegistration, mappedBy: user }
         passwordRecoveries: { targetEntity: Znaika\FrontendBundle\Entity\Profile\PasswordRecovery, mappedBy: user }
-    manyToOne:
-        city:
-            targetEntity: Znaika\FrontendBundle\Entity\Location\City
-            inversedBy: users
-            joinColumn:
-                name: city_id
-                referencedColumnName: city_id
-                onDelete: "SET NULL"
-        school:
-            targetEntity: Znaika\FrontendBundle\Entity\Education\School
-            inversedBy: users
-            joinColumn:
-                name: school_id
-                referencedColumnName: school_id
-                onDelete: "SET NULL"
-        classroom:
-            targetEntity: Znaika\FrontendBundle\Entity\Education\Classroom
-            inversedBy: users
-            joinColumn:
-                name: classroom_id
-                referencedColumnName: classroom_id
-                onDelete: "SET NULL"
+        changeUserEmails:   { targetEntity: Znaika\FrontendBundle\Entity\Profile\ChangeUserEmail, mappedBy: user }
     manyToMany:
         supervisedVideos:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video

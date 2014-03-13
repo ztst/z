@@ -25,14 +25,14 @@
 {% block content %}
   <div class="show-catalog-page-container">
     <div id="chapterCatalogContainer" class="chapters-list-container">
-      {% include "ZnaikaFrontendBundle:Video:chapters_list.html.twig" with {'chapters': chapters, 'currentChapterId': currentChapterId} %}
+      {% include "ZnaikaFrontendBundle:Video:chapters_list.html.twig" with {'chapters': chapters, 'currentChapterId': currentChapter.chapterId} %}
     </div>
     {#<div class="placeholder"></div>#}
     <div id="videoCatalogContainer" class="videos-list-container">
       <div class="chapter-videos-block-container">
-        <h5>Уроки этого раздела (videos_number)</h5>
+        <h5>Уроки этого раздела (<span class="chapter-videos-count">{{ videoRepository.getVideoByChapter(currentChapter)|length }}</span>)</h5>
         {% for chapter in chapters %}
-          <div id="chapter_videos_{{ chapter.getChapterId }}" class="chapter-videos{% if currentChapterId != chapter.getChapterId %} hidden{% endif %}">
+          <div id="chapter_videos_{{ chapter.getChapterId }}" class="chapter-videos{% if currentChapter != chapter %} hidden{% endif %}">
             {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': videoRepository.getVideoByChapter(chapter), "chapter": chapter} %}
           </div>
         {% endfor %}
