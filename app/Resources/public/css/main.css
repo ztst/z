@@ -782,7 +782,7 @@ label
 .footer-copyright
 {
     display: block;
-    color: #c9c8c8;
+    color: #fff;
     font-size: 13px;
     font-family: "OpenSans Semibold";
     text-decoration: none;
@@ -804,7 +804,7 @@ label
 {
     float: left;
     width: 140px;
-    margin-top: 12px;
+    margin-top: 17px;
 }
 
 .footer-social-buttons-text
