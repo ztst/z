@@ -36,7 +36,7 @@
     class VideoController extends Controller
     {
         const COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE = 3;
-        const VIDEO_CONTENT_DIR_NAME_LENGTH = 27;
+        const VIDEO_CONTENT_DIR_NAME_LENGTH     = 27;
 
         public function postVideoToSocialNetworkAction(Request $request)
         {
@@ -274,17 +274,17 @@
             $chapterRepository = $this->getChapterRepository();
             $chapters          = $chapterRepository->getChaptersForCatalog($class, $subject->getSubjectId());
 
-            $currentChapterId = null;
+            $currentChapter = null;
             if (!empty($chapters) && isset($chapters[0]))
             {
-                $currentChapterId = $chapters[0]->getChapterId();
+                $currentChapter = $chapters[0];
             }
 
             return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
-                'class'            => $class,
-                'currentChapterId' => $currentChapterId,
-                'chapters'         => $chapters,
-                'videoRepository'  => $this->getVideoRepository()
+                'class'           => $class,
+                'currentChapter'  => $currentChapter,
+                'chapters'        => $chapters,
+                'videoRepository' => $this->getVideoRepository()
             ));
         }
 

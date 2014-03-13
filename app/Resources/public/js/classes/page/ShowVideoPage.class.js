@@ -84,6 +84,7 @@ var ShowVideoPage = Base.extend({
         };
 
         $.post(url, data, handler(this, "_onVideoMovedUp"), "json");
+        return true;
     },
 
     _onMoveVideoDownClick: function()
@@ -102,6 +103,7 @@ var ShowVideoPage = Base.extend({
         };
 
         $.post(url, data, handler(this, "_onVideoMovedDown"), "json");
+        return true;
     },
 
     _onVideoMovedUp: function(response)
@@ -110,8 +112,23 @@ var ShowVideoPage = Base.extend({
         if (response.success)
         {
             var current = $(".chapter-selected-video");
+            this._changeVideoTitleIndexUp(current);
             current.prev().before(current);
         }
+    },
+
+    _changeVideoTitleIndexUp: function(elem)
+    {
+        var currentTitle = elem.find(".video-title");
+        var currentTitleText = currentTitle.text();
+        var currentOrder = currentTitleText.split('.')[0];
+        currentTitleText = (+currentOrder - 1) + "." + currentTitleText.split('.')[1];
+        currentTitle.text(currentTitleText);
+
+        var prevTitle = elem.prev().find(".video-title");
+        var prevTitleText = prevTitle.text();
+        prevTitleText = (currentOrder) + "." + prevTitleText.split('.')[1];
+        prevTitle.text(prevTitleText);
     },
 
     _onVideoMovedDown: function(response)
@@ -120,8 +137,23 @@ var ShowVideoPage = Base.extend({
         if (response.success)
         {
             var current = $(".chapter-selected-video");
+            this._changeVideoTitleIndexDown(current);
             current.next().after(current);
         }
+    },
+
+    _changeVideoTitleIndexDown: function(elem)
+    {
+        var currentTitle = elem.find(".video-title");
+        var currentTitleText = currentTitle.text();
+        var currentOrder = currentTitleText.split('.')[0];
+        currentTitleText = (+currentOrder + 1) + "." + currentTitleText.split('.')[1];
+        currentTitle.text(currentTitleText);
+
+        var nextTitle = elem.next().find(".video-title");
+        var nextTitleText = nextTitle.text();
+        nextTitleText = (currentOrder) + "." + nextTitleText.split('.')[1];
+        nextTitle.text(nextTitleText);
     },
 
     _initTeacherAnswerBlock: function()
@@ -158,12 +190,12 @@ var ShowVideoPage = Base.extend({
     {
         if (response.success)
         {
-            $("#prevCommentsContainer").html(response.html)
+            $("#prevCommentsContainer").html(response.html);
             this._showPrevCommentsLink.closest(".alert").remove();
         }
     }
 });
 
 $(function(){
-    var showVideoPage = new ShowVideoPage();
+    new ShowVideoPage();
 });

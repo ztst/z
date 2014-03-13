@@ -12,5 +12,5 @@ var VideosList = Base.extend({
 });
 
 $(function(){
-    var videosList = new VideosList();
+    new VideosList();
 });
