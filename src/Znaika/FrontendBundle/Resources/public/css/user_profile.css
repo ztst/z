@@ -88,3 +88,8 @@
     font-size: 13px;
     cursor: pointer;
 }
+
+.change-password-popup
+{
+    width: 400px;
+}

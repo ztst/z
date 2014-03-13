@@ -128,6 +128,10 @@ services:
         class:        Znaika\FrontendBundle\Repository\Profile\PasswordRecoveryRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
+    znaika_frontend.change_user_email_repository:
+        class:        Znaika\FrontendBundle\Repository\Profile\ChangeUserEmailRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
     znaika_frontend.message_repository:
         class:        Znaika\FrontendBundle\Repository\Communication\MessageRepository
         arguments:    ["@doctrine.orm.entity_manager"]

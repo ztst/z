@@ -1,10 +1,12 @@
 <?
     namespace Znaika\FrontendBundle\Entity\Profile;
 
+    use Doctrine\Common\Collections\ArrayCollection;
     use Doctrine\ORM\Mapping as ORM;
     use Symfony\Component\HttpFoundation\File\UploadedFile;
     use Symfony\Component\Security\Core\User\AdvancedUserInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
     use FOS\MessageBundle\Model\ParticipantInterface;
@@ -56,6 +58,11 @@
          * @var \Doctrine\Common\Collections\Collection
          */
         private $userRegistrations;
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $changeUserEmails;
 
         /**
          * @var \Doctrine\Common\Collections\Collection
@@ -132,9 +139,10 @@
          */
         public function __construct()
         {
-            $this->videoComments     = new \Doctrine\Common\Collections\ArrayCollection();
-            $this->userRegistrations = new \Doctrine\Common\Collections\ArrayCollection();
-            $this->supervisedVideos  = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->videoComments     = new ArrayCollection();
+            $this->userRegistrations = new ArrayCollection();
+            $this->changeUserEmails  = new ArrayCollection();
+            $this->supervisedVideos  = new ArrayCollection();
         }
 
         /**
@@ -303,7 +311,7 @@
          *
          * @return User
          */
-        public function addVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment)
+        public function addVideoComment(VideoComment $videoComment)
         {
             $videoComment->setUser($this);
             $this->videoComments[] = $videoComment;
@@ -316,7 +324,7 @@
          *
          * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment
          */
-        public function removeVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment)
+        public function removeVideoComment(VideoComment $videoComment)
         {
             $this->videoComments->removeElement($videoComment);
         }
@@ -414,7 +422,7 @@
          *
          * @return User
          */
-        public function addUserRegistration(\Znaika\FrontendBundle\Entity\Profile\UserRegistration $userRegistrations)
+        public function addUserRegistration(UserRegistration $userRegistrations)
         {
             $this->userRegistrations[] = $userRegistrations;
 
@@ -426,7 +434,7 @@
          *
          * @param \Znaika\FrontendBundle\Entity\Profile\UserRegistration $userRegistrations
          */
-        public function removeUserRegistration(\Znaika\FrontendBundle\Entity\Profile\UserRegistration $userRegistrations)
+        public function removeUserRegistration(UserRegistration $userRegistrations)
         {
             $this->userRegistrations->removeElement($userRegistrations);
         }
@@ -468,7 +476,7 @@
          *
          * @return User
          */
-        public function addPasswordRecovery(\Znaika\FrontendBundle\Entity\Profile\PasswordRecovery $passwordRecoveries)
+        public function addPasswordRecovery(PasswordRecovery $passwordRecoveries)
         {
             $this->passwordRecoveries[] = $passwordRecoveries;
 
@@ -480,7 +488,7 @@
          *
          * @param \Znaika\FrontendBundle\Entity\Profile\PasswordRecovery $passwordRecoveries
          */
-        public function removePasswordRecovery(\Znaika\FrontendBundle\Entity\Profile\PasswordRecovery $passwordRecoveries)
+        public function removePasswordRecovery(PasswordRecovery $passwordRecoveries)
         {
             $this->passwordRecoveries->removeElement($passwordRecoveries);
         }
@@ -798,5 +806,37 @@
         public function getPhotoUrl()
         {
             return "/user-photo/" . $this->getUserId() . "/photo";
+        }
+
+        public function addChangeUserEmail(ChangeUserEmail $changeUserEmail)
+        {
+            $this->changeUserEmails[] = $changeUserEmail;
+
+            return $this;
+        }
+
+        public function removeChangeUserEmail(ChangeUserEmail $changeUserEmail)
+        {
+            $this->changeUserEmails->removeElement($changeUserEmail);
+        }
+
+        public function getChangeUserEmails()
+        {
+            return $this->changeUserEmails;
+        }
+
+        public function getLastChangeUserEmail()
+        {
+            if ($this->changeUserEmails->count())
+            {
+                $changeUserEmail = $this->changeUserEmails->last();
+            }
+            else
+            {
+                $changeUserEmail = new ChangeUserEmail();
+                $changeUserEmail->setUser($this);
+            }
+
+            return $changeUserEmail;
         }
     }

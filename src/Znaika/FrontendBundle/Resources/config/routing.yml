@@ -97,6 +97,20 @@ delete_user_photo:
     options:
         expose: true
 
+change_password:
+    pattern: /change-password/{userId}
+    defaults: { _controller: ZnaikaFrontendBundle:User:changePassword }
+    methods:  [POST]
+
+change_email:
+    pattern: /change-email/{userId}
+    defaults: { _controller: ZnaikaFrontendBundle:User:changeEmail }
+    methods:  [POST]
+
+complete_change_email:
+    pattern: /complete-change-email/{key}
+    defaults: { _controller: ZnaikaFrontendBundle:User:completeChangeEmail }
+
 show_threads:
     pattern: /messages
     defaults: { _controller: ZnaikaFrontendBundle:Message:showThreads }

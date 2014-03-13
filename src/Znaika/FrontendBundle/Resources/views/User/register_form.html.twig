@@ -18,7 +18,7 @@
       Я принимаю <a href="{{ path('agreement') }}" target="_blank" title="">Пользовательское соглашение и условия использования сервиса</a>
     </label>
   </div>
-  <input type="hidden" name="autoGeneratePassword" value="{% if autoGeneratePassword is defined and autoGeneratePassword %}1{% endif %}" />
+  <input type="hidden" name="autogeneratepassword" value="{% if autoGeneratePassword is defined and autoGeneratePassword %}1{% endif %}" />
   <div class="registration-button-container">
     {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Регистрация'}) }}
   </div>

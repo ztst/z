@@ -38,8 +38,6 @@ var SidebarMenu = EventDispatcher.extend({
 
     _initSubjectsButtons: function()
     {
-        var that = this;
-
         this._subjectsButtons = $(".subject-menu li");
     },
 
@@ -70,12 +68,13 @@ var SidebarMenu = EventDispatcher.extend({
 
     _onMoreSubjectsLinkClick: function()
     {
-        $(".subject-menu-more-container").html("");
+        var subjectMenuMore = $(".subject-menu-more-container");
+        subjectMenuMore.html("");
 
         this._subjectsButtons.filter(":not(.hidden)").filter(":not(:visible)").each(function(){
             $(".subject-menu-more-container").append($(this));
         });
-        $(".subject-menu-more-container").toggleClass("hidden");
+        subjectMenuMore.toggleClass("hidden");
     },
 
     _getClass: function()

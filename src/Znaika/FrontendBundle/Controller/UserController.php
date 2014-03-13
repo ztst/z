@@ -8,16 +8,23 @@
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\Security\Core\Encoder\EncoderFactory;
+    use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
     use Symfony\Component\Security\Core\SecurityContext;
+    use Znaika\FrontendBundle\Entity\Profile\ChangeUserEmail;
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Entity\Profile\PasswordRecovery;
     use Znaika\FrontendBundle\Entity\Profile\UserRegistration;
+    use Znaika\FrontendBundle\Form\Model\ChangePassword;
     use Znaika\FrontendBundle\Form\Model\Registration;
+    use Znaika\FrontendBundle\Form\Type\ChangePasswordType;
     use Znaika\FrontendBundle\Form\Type\RegistrationType;
+    use Znaika\FrontendBundle\Form\User\ChangeUserEmailType;
     use Znaika\FrontendBundle\Form\User\PasswordRecoveryType;
     use Znaika\FrontendBundle\Form\User\UserPhotoType;
     use Znaika\FrontendBundle\Form\User\UserProfileType;
     use Znaika\FrontendBundle\Helper\Encode\RegisterKeyEncoder;
+    use Znaika\FrontendBundle\Helper\Mail\UserMailer;
     use Znaika\FrontendBundle\Helper\Odnoklassniki;
     use Znaika\FrontendBundle\Helper\Security\UserAuthenticator;
     use Znaika\FrontendBundle\Helper\Uploader\UserPhotoUploader;
@@ -28,6 +35,7 @@
     use Znaika\FrontendBundle\Helper\Util\UserAgentInfoProvider;
     use Znaika\FrontendBundle\Helper\Vkontakte;
     use Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository;
+    use Znaika\FrontendBundle\Repository\Profile\ChangeUserEmailRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRegistrationRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
     use Znaika\FrontendBundle\Repository\Profile\PasswordRecoveryRepository;
@@ -135,9 +143,9 @@
                 $session->remove(SecurityContext::AUTHENTICATION_ERROR);
             }
 
-            $userRepository             = $this->getUserRepository();
-            $registerForm               = $this->createForm(new RegistrationType($userRepository), new Registration());
-            $passwordRecoveryForm       = $this->createForm(new PasswordRecoveryType($userRepository),
+            $userRepository       = $this->getUserRepository();
+            $registerForm         = $this->createForm(new RegistrationType($userRepository), new Registration());
+            $passwordRecoveryForm = $this->createForm(new PasswordRecoveryType($userRepository),
                 new PasswordRecovery());
 
             $referrer      = $request->headers->get('referer');
@@ -257,10 +265,10 @@
             $listener = $this->getUserOperationListener();
             $listener->onRegistration($user);
 
-            $this->get('session')->getFlashBag()->add(
-                 'notice',
-                     $this->get('translator')->trans('congratulations_registration_success')
-            );
+            $this->get('session')->getFlashBag()
+                 ->add('notice', $this->get('translator')->trans('congratulations_registration_success'));
+
+            $this->setIsSocialRegisterComplete($user);
 
             return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
         }
@@ -293,9 +301,7 @@
 
             if ($ownProfile)
             {
-                return new RedirectResponse($this->generateUrl('edit_user_profile', array(
-                    'userId' => $userId
-                )));
+                return new RedirectResponse($this->generateUrl('edit_user_profile', array('userId' => $userId)));
             }
 
             $userRepository = $this->getUserRepository();
@@ -311,46 +317,130 @@
             ));
         }
 
-
-        public function editUserProfileAction(Request $request)
+        public function editUserProfileAction()
         {
-            $userId      = $request->get('userId');
-            $currentUser = $this->getUser();
-            $canEdit     = ($currentUser && $currentUser->getUserId() == $userId);
+            $isSocialRegisterComplete = $this->getIsSocialRegisterComplete();
+            $user                     = $this->canEditProfile();
+            $userRepository           = $this->getUserRepository();
 
-            if (!$canEdit)
-            {
-                throw $this->createNotFoundException("Can't manage user");
-            }
-
-            $userRepository = $this->getUserRepository();
-            $user           = $currentUser;
-
-            $profileForm = $this->handleProfileForm($user, $userRepository);
-
-            $userPhotoForm = $this->createForm(new UserPhotoType(), $user);
+            $profileForm                          = $this->handleProfileForm($user, $userRepository);
+            $userPhotoForm                        = $this->createForm(new UserPhotoType(), $user);
+            $changeUserEmail                      = $this->createForm(new ChangeUserEmailType(), new ChangeUserEmail());
+            $changePasswordOnRegisterCompleteForm = $this->createForm(new ChangePasswordType(), new ChangePassword());
+            $changePasswordForm                   = $this->createForm(new ChangePasswordType(), new ChangePassword());
 
             return $this->render('ZnaikaFrontendBundle:User:editUserProfile.html.twig', array(
-                'profileForm'   => $profileForm->createView(),
-                'userPhotoForm' => $userPhotoForm->createView(),
-                'user'          => $user,
-                'userId'        => $userId,
+                'profileForm'                          => $profileForm->createView(),
+                'userPhotoForm'                        => $userPhotoForm->createView(),
+                'changePasswordForm'                   => $changePasswordForm->createView(),
+                'changePasswordOnRegisterCompleteForm' => $changePasswordOnRegisterCompleteForm->createView(),
+                'changeUserEmailFrom'                  => $changeUserEmail->createView(),
+                'user'                                 => $user,
+                'userId'                               => $user->getUserId(),
+                'isSocialRegisterComplete'             => $isSocialRegisterComplete,
+            ));
+        }
+
+        public function changeEmailAction(Request $request)
+        {
+            $currentUser = $this->canEditProfile();
+
+            $changeEmail = $this->createChangeUserEmail($currentUser);
+            $form        = $this->createForm(new ChangeUserEmailType(), $changeEmail);
+
+            $form->handleRequest($request);
+
+            $success   = false;
+            $emailBusy = false;
+            if ($form->isSubmitted() && $form->isValid())
+            {
+                $userWithEmail = $this->getUserRepository()->getOneByEmail($changeEmail->getNewEmail());
+                if ($userWithEmail && $userWithEmail->getStatus() == UserStatus::ACTIVE)
+                {
+                    $emailBusy = true;
+                }
+                else
+                {
+                    $changeEmailRepository = $this->getChangeUserEmailRepository();
+
+                    $changeEmailRepository->save($changeEmail);
+                    $this->getUserMailer()->sendChangeEmailConfirm($changeEmail);
+                    $success = true;
+                }
+            }
+
+            return JsonResponse::create(array(
+                "success"   => $success,
+                "emailBusy" => $emailBusy
+            ));
+        }
+
+        public function completeChangeEmailAction($key)
+        {
+            $changeEmailRepository = $this->getChangeUserEmailRepository();
+            $changeEmail           = $changeEmailRepository->getOneByChangeKey($key);
+            if (!$changeEmail)
+            {
+                return $this->createNotFoundException("change email not found");
+            }
+
+            $user        = $changeEmail->getUser();
+            $expiredTime = $changeEmail->getCreatedTime()->add(new \DateInterval(ChangeUserEmail::EXPIRED_TIME));
+            $currentTime = new \DateTime("now");
+            if ($currentTime > $expiredTime)
+            {
+                $changeEmail           = $this->createChangeUserEmail($user);
+                $changeEmailRepository = $this->getChangeUserEmailRepository();
+                $changeEmailRepository->save($changeEmail);
+                $this->getUserMailer()->sendChangeEmailConfirm($changeEmail);
+
+                return $this->render('ZnaikaFrontendBundle:User:expiredUserChangeEmailKey.html.twig');
+            }
+
+            $user->setEmail($changeEmail->getNewEmail());
+            $this->getUserRepository()->save($user);
+
+            $changeEmailRepository->delete($changeEmail);
+
+            $userAuthenticator = $this->getUserAuthenticator();
+            $userAuthenticator->authenticate($user);
+
+            $this->get('session')->getFlashBag()
+                 ->add('notice', $this->get('translator')->trans('congratulations_change_email_success'));
+
+            return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
+        }
+
+        public function changePasswordAction(Request $request)
+        {
+            $currentUser = $this->canEditProfile();
+
+            $changePasswordModel = new ChangePassword();
+            $form                = $this->createForm(new ChangePasswordType(), $changePasswordModel);
+
+            $form->handleRequest($request);
+
+            $success = false;
+            if ($form->isSubmitted() && $form->isValid())
+            {
+                $encoder = $this->getPasswordEncoder($currentUser);
+                $currentUser->setPassword($encoder->encodePassword($changePasswordModel->getNewPassword(),
+                    $currentUser->getSalt()));
+                $userRepository = $this->getUserRepository();
+                $userRepository->save($currentUser);
+
+                $success = true;
+            }
+
+            return JsonResponse::create(array(
+                "success" => $success
             ));
         }
 
         public function editUserPhotoAction(Request $request)
         {
-            $userId      = $request->get('userId');
-            $currentUser = $this->getUser();
-            $canEdit     = ($currentUser && $currentUser->getUserId() == $userId);
-
-            if (!$canEdit)
-            {
-                throw $this->createNotFoundException("Can't manage user");
-            }
-
+            $user           = $this->canEditProfile();
             $userRepository = $this->getUserRepository();
-            $user           = $currentUser;
 
             $userPhotoForm = $this->createForm(new UserPhotoType(), $user);
             $userPhotoForm->handleRequest($request);
@@ -385,12 +475,12 @@
             }
 
             $userRepository = $this->getUserRepository();
-            $user = $currentUser;
+            $user           = $currentUser;
             $user->setHasPhoto(false);
             $userRepository->save($user);
 
             $userPhotoUploader = $this->getUserPhotoUploader();
-            $filePath = $userPhotoUploader->getFilePath($user);
+            $filePath          = $userPhotoUploader->getFilePath($user);
             UnixSystemUtils::remove($filePath);
 
             return JsonResponse::create(array("success" => true));
@@ -420,8 +510,7 @@
             $user->setCreatedTime(new \DateTime());
             $user->setStatus(UserStatus::REGISTERED);
 
-            $factory         = $this->get('security.encoder_factory');
-            $encoder         = $factory->getEncoder($user);
+            $encoder         = $this->getPasswordEncoder($user);
             $password        = $user->getPassword();
             $encodedPassword = $encoder->encodePassword($user->getPassword(), $user->getSalt());
             $user->setPassword($encodedPassword);
@@ -431,14 +520,15 @@
 
             $userRegistration = $this->createUserRegistration($user);
 
+            $userMailer = $this->getUserMailer();
             if ($request->get("autoGeneratePassword", false))
             {
-                $this->get('znaika_frontend.user_mailer')
-                     ->sendRegisterWithPasswordGenerateConfirm($userRegistration, $password);
+                $userMailer
+                    ->sendRegisterWithPasswordGenerateConfirm($userRegistration, $password);
             }
             else
             {
-                $this->get('znaika_frontend.user_mailer')->sendRegisterConfirm($userRegistration);
+                $userMailer->sendRegisterConfirm($userRegistration);
             }
         }
 
@@ -469,6 +559,19 @@
             $userRegistrationRepository->save($userRegistration);
 
             return $userRegistration;
+        }
+
+        private function createChangeUserEmail(User $user)
+        {
+            $changeUserEmail = $user->getLastChangeUserEmail();
+
+            /** @var RegisterKeyEncoder $encoder */
+            $encoder = $this->get('znaika_frontend.register_key_encoder');
+            $key     = $encoder->encode($user->getEmail(), time());
+            $changeUserEmail->setChangeKey($key);
+            $changeUserEmail->setCreatedTime(new \DateTime());
+
+            return $changeUserEmail;
         }
 
         /**
@@ -627,7 +730,7 @@
             $passwordRecoveryRepository = $this->get('znaika_frontend.password_recovery_repository');
             $passwordRecoveryRepository->save($passwordRecovery);
 
-            $this->get('znaika_frontend.user_mailer')->sendPasswordRecoveryConfirm($passwordRecovery);
+            $this->getUserMailer()->sendPasswordRecoveryConfirm($passwordRecovery);
         }
 
         /**
@@ -700,8 +803,7 @@
          */
         private function getGenerateNewPasswordSuccessResponse(User $user)
         {
-            $factory         = $this->get('security.encoder_factory');
-            $encoder         = $factory->getEncoder($user);
+            $encoder         = $this->getPasswordEncoder($user);
             $encodedPassword = $encoder->encodePassword($user->getPassword(), $user->getSalt());
             $user->setPassword($encodedPassword);
 
@@ -710,6 +812,9 @@
 
             $userAuthenticator = $this->getUserAuthenticator();
             $userAuthenticator->authenticate($user);
+
+            $this->get('session')->getFlashBag()
+                 ->add('notice', $this->get('translator')->trans('congratulations_password_changed_success'));
 
             return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
         }
@@ -758,5 +863,73 @@
             $userPhotoUploader = $this->get('znaika_frontend.user_photo_uploader');
 
             return $userPhotoUploader;
+        }
+
+        /**
+         * @param User $user
+         *
+         * @return PasswordEncoderInterface
+         */
+        private function getPasswordEncoder(User $user)
+        {
+            /** @var EncoderFactory $factory */
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+
+            return $encoder;
+        }
+
+        /**
+         * @return User
+         * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+         */
+        private function canEditProfile()
+        {
+            $request     = $this->getRequest();
+            $userId      = $request->get('userId');
+            $currentUser = $this->getUser();
+            $canEdit     = ($currentUser && $currentUser->getUserId() == $userId);
+
+            if (!$canEdit)
+            {
+                throw $this->createNotFoundException("Can't manage user");
+            }
+
+            return $currentUser;
+        }
+
+        /**
+         * @return ChangeUserEmailRepository
+         */
+        private function getChangeUserEmailRepository()
+        {
+            $changeUserEmailRepository = $this->get("znaika_frontend.change_user_email_repository");
+
+            return $changeUserEmailRepository;
+        }
+
+        /**
+         * @return UserMailer
+         */
+        private function getUserMailer()
+        {
+            $userMailer = $this->get('znaika_frontend.user_mailer');
+
+            return $userMailer;
+        }
+
+        private function setIsSocialRegisterComplete(User $user)
+        {
+            $isSocialRegisterComplete = $user->getVkId() || $user->getOdnoklassnikiId() || $user->getFacebookId();
+            $request                  = $this->getRequest();
+            $session                  = $request->getSession();
+            $session->set("isSocialRegisterComplete", $isSocialRegisterComplete);
+        }
+
+        private function getIsSocialRegisterComplete()
+        {
+            $request = $this->getRequest();
+            $session = $request->getSession();
+            return $session->get("isSocialRegisterComplete", false);
         }
     }
