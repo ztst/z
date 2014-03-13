@@ -1,6 +1,6 @@
 {% if video.getSynopsis %}
   {% if is_moderator() %}
-    <a class="edit-button" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}">
+    <a class="semi-active-button edit-button" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}">
       <span class="edit-button-icon"></span>
       <span class="edit-button-label">Редактировать конспект</span>
     </a>
@@ -8,8 +8,8 @@
   {% endif %}
   {{ show_synopsis(video)|raw }}
 {% elseif is_moderator() %}
-  <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="add-video-button">
-    <span class="add-video-button-icon"></span>
-    <span class="add-video-button-label">Добавить конспект</span>
+  <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="active-button add-button">
+    <span class="add-button-icon"></span>
+    <span class="add-button-label">Добавить конспект</span>
   </a>
 {% endif %}

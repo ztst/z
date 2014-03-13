@@ -1,5 +1,13 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets '@ZnaikaFrontendBundle/Resources/public/css/user_profile.css' %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
 {% block content %}
   {% for flashMessage in app.session.flashbag.get('notice') %}
     <div class="alert alert-info">
@@ -7,62 +15,77 @@
     </div>
   {% endfor %}
 
-  <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
-    {% if ownProfile %}<a href="{{ path('show_threads') }}">Мои сообщения</a>{% endif %}
-    {{ form_start(form, {'action': path('edit_user_profile', {'userId': userId}), 'method': 'POST'}) }}
-      {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
-      <div class="form-group">
-        {{ form_label(form.firstName, 'Имя') }}
-        {{ form_errors(form.firstName) }}
-        {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
+  <div class="user-profile-container">
+    <div class="photo-column-container">
+      <div class="photo-container">
+
       </div>
-      <div class="form-group">
-        {{ form_label(form.lastName, 'Фамилия') }}
-        {{ form_errors(form.lastName) }}
-        {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
-      </div>
-      <div class="form-group">
-        {{ form_label(form.email, 'Емайл') }}
-        {{ form_errors(form.email) }}
-        {{ form_widget(form.email, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
-      </div>
-      <div class="form-group">
-        {{ form_label(form.city, 'Город') }}
-        {{ form_errors(form.city) }}
-        {{ form_widget(form.city, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
-      </div>
-      <div class="form-group">
-        {{ form_label(form.school, 'Школа') }}
-        {{ form_errors(form.school) }}
-        {{ form_widget(form.school, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
-      </div>
-      <div class="form-group">
-        {{ form_label(form.classroom, 'Класс') }}
-        {{ form_errors(form.classroom) }}
-        {{ form_widget(form.classroom, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
-      </div>
-      <div class="form-group">
-          {{ form_label(form.sex, 'Пол') }}
-          {{ form_errors(form.sex) }}
-          {{ form_widget(form.sex, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
-      </div>
-      <div class="form-group">
-        {{ form_label(form.birthDate, 'Дата рождения') }}
-        {{ form_errors(form.birthDate) }}
-        {{ form_widget(form.birthDate, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
-      </div>
-      {% if ownProfile %}
-        <div>
-          {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
+      <a class="add-photo-button">
+        <span>Добавить фото</span>
+      </a>
+    </div>
+    <div class="info-column-container">
+      {#{% if ownProfile %}<a href="{{ path('show_threads') }}">Мои сообщения</a>{% endif %}#}
+      <h3>Личная информация</h3>
+      {{ form_start(form, {'action': path('edit_user_profile', {'userId': userId}), 'method': 'POST'}) }}
+        {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+        <div class="form-group">
+          {{ form_label(form.firstName, 'Имя') }}
+          {{ form_errors(form.firstName) }}
+          {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
         </div>
+        <div class="form-group">
+          {{ form_label(form.lastName, 'Фамилия') }}
+          {{ form_errors(form.lastName) }}
+          {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.email, 'Емайл') }}
+          {{ form_errors(form.email) }}
+          {{ form_widget(form.email, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.city, 'Город') }}
+          {{ form_errors(form.city) }}
+          {{ form_widget(form.city, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.school, 'Школа') }}
+          {{ form_errors(form.school) }}
+          {{ form_widget(form.school, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.classroom, 'Класс') }}
+          {{ form_errors(form.classroom) }}
+          {{ form_widget(form.classroom, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.sex, 'Пол') }}
+            {{ form_errors(form.sex) }}
+            {{ form_widget(form.sex, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.birthDate, 'Дата рождения') }}
+          {{ form_errors(form.birthDate) }}
+          {{ form_widget(form.birthDate, {'attr': {'class': 'form-control'}, 'disabled': not ownProfile}) }}
+        </div>
+        {% if ownProfile %}
+          <div>
+            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
+          </div>
+        {% endif %}
+      {{ form_end(form) }}
+      {% if is_user() and not ownProfile %}
+        <form action="{{ path('send_message') }}" method="post">
+          <input type="hidden" name="from" value="{{ app.user.getUserId }}" />
+          <input type="hidden" name="to" value="{{  userId }}" />
+          <button type="submit" class="btn btn-primary">Написать</button>
+        </form>
       {% endif %}
-    {{ form_end(form) }}
-    {% if is_user() and not ownProfile %}
-      <form action="{{ path('send_message') }}" method="post">
-        <input type="hidden" name="from" value="{{ app.user.getUserId }}" />
-        <input type="hidden" name="to" value="{{  userId }}" />
-        <button type="submit" class="btn btn-primary">Написать</button>
-      </form>
-    {% endif %}
+    </div>
+    <div class="settings-column-container">
+      <h3>Настройки аккаунта</h3>
+    </div>
   </div>
+  <div class="clear"></div>
 {% endblock %}

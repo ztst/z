@@ -1,0 +1,36 @@
+.user-profile-container
+{
+    margin-top: 28px;
+}
+
+.photo-column-container,
+.info-column-container,
+.settings-column-container
+{
+    float: left;
+}
+
+.photo-column-container
+{
+    width: 245px;
+}
+
+.photo-container
+{
+    width: 200px;
+    height: 200px;
+
+    border: 1px solid grey;
+}
+
+.add-photo-button{}
+
+.info-column-container
+{
+    width: 365px;
+}
+
+.settings-column-container
+{
+    width: 387px;
+}

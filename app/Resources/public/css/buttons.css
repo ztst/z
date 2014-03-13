@@ -1,0 +1,60 @@
+.active-button,
+.semi-active-button,
+.non-active-button
+{
+    display: block;
+    width: 100%;
+    height: 35px;
+
+    border-radius: 3px;
+    font-size: 15px;
+    font-family: "OpenSans";
+}
+
+.active-button:hover,
+.semi-active-button:hover,
+.non-active-button:hover
+{
+    text-decoration: none;
+}
+
+.active-button
+{
+    color: #fff;
+
+    border: none;
+    background: #32a1d5;
+    background: linear-gradient(#32a1d5, #1e89bb);
+}
+
+.active-button:hover
+{
+    color: #fff;
+
+    border: none;
+    background: #31a7de;
+    background: linear-gradient(#31a7de, #0692c8);
+}
+
+.semi-active-button
+{
+    border: 1px solid #d6d6d6;
+    color: #0373a8;
+
+    background: #fff;
+}
+
+.semi-active-button:hover
+{
+    border-color: #a9a9a9;
+    color: #0373a8;
+    box-shadow: 0 3px 6px -6px #000;
+}
+
+.non-active-button
+{
+    border: 1px solid #d6d6d6;
+    color: #cbd6dc;
+
+    background: #fff;
+}

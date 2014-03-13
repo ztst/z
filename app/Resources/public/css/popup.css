@@ -558,47 +558,15 @@ img.mfp-img
 .icheckbox {
     background-position: 0 0;
 }
-/*.icheckbox.hover {
-    background-position: 0px -54px;
-}*/
+.icheckbox.hover {
+    background-position: 0px -20px;
+}
 .icheckbox.checked {
-    background-position: 0 -21px;
+    background-position: 0 -40px;
 }
-/*.icheckbox.checked.hover {
-    background-position: 0px -126px;
+.icheckbox.checked.hover {
+    background-position: 0px -60px;
 }
-
-.icheckbox.disabled {
-    background-position: 0px 0px;
-}
-.icheckbox.checked.disabled {
-    background-position: 0px -72px;
-}*/
-/** ~checkbox styles **/
-
-/** radiobutton styles */
-.iradio {background: transparent url('/images/radiobutton/radio.gif') no-repeat;}
-
-.iradio {
-    background-position: 0px -36px;
-}
-.iradio.hover {
-    background-position: 0px -54px;
-}
-.iradio.checked {
-    background-position: 0px -108px;
-}
-.iradio.checked.hover {
-    background-position: 0px -126px;
-}
-
-.iradio.disabled {
-    background-position: 0px 0px;
-}
-.iradio.checked.disabled {
-    background-position: 0px -72px;
-}
-/** ~radiobuttons styles **/
 
 /* Znaika Login Popup*/
 
@@ -704,40 +672,6 @@ img.mfp-img
     padding-left: 103px;
 }
 
-.form-submit-button
-{
-    width: 100%;
-    height: 33px;
-
-    border: 1px solid #64bfe0 !important;
-    border-radius: 4px;
-
-    color: #fff;
-    font-size: 15px !important;
-    font-family: "OpenSans Semibold" !important;
-    text-shadow: 2px 1px 1px #4c6da9;
-
-    background: linear-gradient(#4fb1d8, #389dca);
-}
-
-.outer-border
-{
-    border: 1px solid #399dc0;
-    border-radius: 4px;
-}
-
-.form-submit-button:hover
-{
-    border: 1px solid #72cbec !important;
-    background: linear-gradient(#5fbfe7, #389dcb);
-}
-
-.outer-border:hover
-{
-    border: 1px solid #158bb5;
-    border-radius: 4px;
-}
-
 .login-form .form-group,
 .registration-form .form-group,
 .forget-password-form .form-group,
@@ -779,7 +713,6 @@ img.mfp-img
 {
     float: right;
     margin-top: -18px;
-
     font-size: 12px;
     font-family: "OpenSans";
 }
@@ -822,8 +755,7 @@ img.mfp-img
 {
     padding-right: 32px;
     padding-bottom: 16px;
-    background: url("/images/popup/login-form-border.png") repeat-y;
-    background-position: 100% 0;
+    background: url("/images/popup/login-form-border.png") repeat-y 100% 0;
 }
 
 .login-popup-content .social-login-buttons-container
@@ -921,8 +853,8 @@ img.mfp-img
 
 .show-password-button-container .show-password-icon
 {
-    cursor: pointer;
     display: inline-block;
+    cursor: pointer;
     width: 23px;
     height: 32px;
 
@@ -930,14 +862,12 @@ img.mfp-img
     right: 0;
     top: 0;
 
-    background: url('/images/popup/show-password-icon.png') no-repeat;
-    background-position: 0 9px;
+    background: url('/images/popup/show-password-icon.png') no-repeat 0 9px;
 }
 
 .show-password-button-container .show-password-icon.opened
 {
-    background: url('/images/popup/show-password-icon-opened.png') no-repeat;
-    background-position: 0 10px;
+    background: url('/images/popup/show-password-icon-opened.png') no-repeat 0 10px;
 }
 
 /* Additional forms styles BEGIN */
@@ -957,7 +887,6 @@ img.mfp-img
     display: inline-block;
     margin-bottom: 20px;
     padding-left: 41px;
-
     height: 32px;
 
     color: #222;
@@ -976,7 +905,6 @@ img.mfp-img
 {
     width: 100%;
     height: 1px;
-
     background: url('/images/popup/additional-form-header-horizontal-bar.png') repeat-x;
 }
 
@@ -988,7 +916,6 @@ img.mfp-img
 .additional-form label
 {
     display: table-cell;
-
     padding-right: 7px;
     width: 113px;
 
@@ -1002,36 +929,35 @@ img.mfp-img
     width: 100%;
 }
 
-.additional-form-button-container
+.additional-form-button-container,
+.account-linkage-form-container .forget-password-link,
+.account-creation-form-container .agreement-block,
+.account-creation-form-container .registration-button-container
 {
     padding-left: 113px;
 }
 
 .recover-password-request-header h3
 {
-    background: url('/images/popup/password-form-header-icon.png') no-repeat;
-    background-position: 7px 0;
+    background: url('/images/popup/password-form-header-icon.png') no-repeat 7px 0;
 }
 
 .registration-successful-header h3
 {
-    background: url('/images/popup/registration-successful-header-icon.png') no-repeat;
-    background-position: 7px 0;
+    background: url('/images/popup/registration-successful-header-icon.png') no-repeat 7px 0;
 }
 
 .login-form-header h3
 {
     margin-top: 0;
     line-height: 1.6;
-    background: url('/images/popup/login-form-header-icon.png') no-repeat;
-    background-position: 3px 0;
+    background: url('/images/popup/login-form-header-icon.png') no-repeat 3px 0;
 }
 
 .account-linkage-form-header h3
 {
     margin-top: 0;
-    background: url('/images/popup/account-linkage-form-header-icon.png') no-repeat;
-    background-position: 7px 0;
+    background: url('/images/popup/account-linkage-form-header-icon.png') no-repeat 7px 0;
 }
 
 .logination-check-container h5
@@ -1039,62 +965,29 @@ img.mfp-img
     margin: 18px 0;
 }
 
-.have-account-button,
-.newuser-button,
-.logination-check-container .outer-border
+.newuser-button-container,
+.have-account-button-container
 {
-    display: inline-block;
-
-}
-
-.have-account-button,
-.newuser-button
-{
-    padding-top: 4px;
+    float: left;
     height: 35px;
     width: 200px;
-
-    text-align: center;
 }
 
-.logination-check-container .outer-border
-{
-    margin-left: 21px;
-
-    width: 202px;
-    height: 37px;
-}
-
-.newuser-button
+.newuser-button-container
 {
     margin-left: 26px;
-
-    color: #717070;
-    text-shadow: none;
-    border: 1px solid #b4b4b4;
-    background: #fdfdfd;
-    background-image: linear-gradient(#fdfdfd, #f0f0f0);
 }
 
-.newuser-button:hover
+.have-account-button-container
 {
-    border: 1px solid #f0f0f0;
-    background: #ffffff;
-    background-image: linear-gradient(#ffffff, #fcfcfc);
+    margin-left: 21px;
 }
 
-.newuser-button:hover,
-.newuser-button:focus
+.have-account-button,
+.newuser-button
 {
-    color: #717070;
-    text-decoration: none;
-}
-
-.have-account-button:hover,
-.have-account-button:focus
-{
-    color: #fff;
-    text-decoration: none;
+    padding-top: 5px;
+    text-align: center;
 }
 
 .get-new-password-form-container
@@ -1107,7 +1000,6 @@ img.mfp-img
     display: block;
     margin-bottom: 10px;
     margin-top: -10px;
-    padding-left: 113px;
 
     color: #036995;
     font-size: 12px;
@@ -1117,11 +1009,5 @@ img.mfp-img
 .account-creation-form-container h5
 {
     padding: 0 25px;
-}
-
-.account-creation-form-container .agreement-block,
-.account-creation-form-container .registration-button-container
-{
-    padding-left: 113px;
 }
 /* Additional forms styles END */

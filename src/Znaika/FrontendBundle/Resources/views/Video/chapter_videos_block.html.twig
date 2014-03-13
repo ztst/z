@@ -1,16 +1,16 @@
 {% if is_moderator() %}
   <div class="chapter-list-moderator-buttons-block">
-    <a class="add-video-button"
+    <a class="active-button add-button"
        href="{{ path('add_video_form', {"chapterName": chapter.urlName, "class": chapter.grade, "subjectName": chapter.subject.urlName}) }}"
        title="">
-      <span class="add-video-button-icon"></span>
-      <span class="add-video-button-label">Добавить видеоурок</span>
+      <span class="add-button-icon"></span>
+      <span class="add-button-label">Добавить видеоурок</span>
     </a>
     {% if currentVideo is defined and currentVideo == video %}
-      <a class="video-down" href="javascript:void(0);">
+      <a class="semi-active-button video-down" href="javascript:void(0);">
         <span class="video-down-icon"></span>
       </a>
-      <a class="video-up" href="javascript:void(0);">
+      <a class="semi-active-button video-up" href="javascript:void(0);">
         <span class="video-up-icon"></span>
       </a>
       <input type="hidden" value="{{ currentVideo.urlName }}" id="currentVideoName"/>
