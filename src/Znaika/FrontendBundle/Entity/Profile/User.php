@@ -1,9 +1,12 @@
 <?
     namespace Znaika\FrontendBundle\Entity\Profile;
 
+    use Doctrine\Common\Collections\ArrayCollection;
     use Doctrine\ORM\Mapping as ORM;
+    use Symfony\Component\HttpFoundation\File\UploadedFile;
     use Symfony\Component\Security\Core\User\AdvancedUserInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
     use FOS\MessageBundle\Model\ParticipantInterface;
@@ -59,12 +62,12 @@
         /**
          * @var \Doctrine\Common\Collections\Collection
          */
-        private $passwordRecoveries;
+        private $changeUserEmails;
 
         /**
-         * @var \Znaika\FrontendBundle\Entity\Location\City
+         * @var \Doctrine\Common\Collections\Collection
          */
-        private $city;
+        private $passwordRecoveries;
 
         /**
          * @var integer
@@ -75,16 +78,6 @@
          * @var integer
          */
         private $points = 0;
-
-        /**
-         * @var \Znaika\FrontendBundle\Entity\Education\School
-         */
-        private $school;
-
-        /**
-         * @var \Znaika\FrontendBundle\Entity\Education\Classroom
-         */
-        private $classroom;
 
         /**
          * @var \DateTime
@@ -122,13 +115,34 @@
         private $supervisedVideos;
 
         /**
+         * @var integer
+         */
+        private $grade;
+
+        /**
+         * @var string
+         */
+        private $city;
+
+        /**
+         * @var UploadedFile
+         */
+        private $photo;
+
+        /**
+         * @var bool
+         */
+        private $hasPhoto = false;
+
+        /**
          * Constructor
          */
         public function __construct()
         {
-            $this->videoComments     = new \Doctrine\Common\Collections\ArrayCollection();
-            $this->userRegistrations = new \Doctrine\Common\Collections\ArrayCollection();
-            $this->supervisedVideos  = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->videoComments     = new ArrayCollection();
+            $this->userRegistrations = new ArrayCollection();
+            $this->changeUserEmails  = new ArrayCollection();
+            $this->supervisedVideos  = new ArrayCollection();
         }
 
         /**
@@ -297,7 +311,7 @@
          *
          * @return User
          */
-        public function addVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment)
+        public function addVideoComment(VideoComment $videoComment)
         {
             $videoComment->setUser($this);
             $this->videoComments[] = $videoComment;
@@ -310,7 +324,7 @@
          *
          * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment
          */
-        public function removeVideoComment(\Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $videoComment)
+        public function removeVideoComment(VideoComment $videoComment)
         {
             $this->videoComments->removeElement($videoComment);
         }
@@ -408,7 +422,7 @@
          *
          * @return User
          */
-        public function addUserRegistration(\Znaika\FrontendBundle\Entity\Profile\UserRegistration $userRegistrations)
+        public function addUserRegistration(UserRegistration $userRegistrations)
         {
             $this->userRegistrations[] = $userRegistrations;
 
@@ -420,7 +434,7 @@
          *
          * @param \Znaika\FrontendBundle\Entity\Profile\UserRegistration $userRegistrations
          */
-        public function removeUserRegistration(\Znaika\FrontendBundle\Entity\Profile\UserRegistration $userRegistrations)
+        public function removeUserRegistration(UserRegistration $userRegistrations)
         {
             $this->userRegistrations->removeElement($userRegistrations);
         }
@@ -462,7 +476,7 @@
          *
          * @return User
          */
-        public function addPasswordRecovery(\Znaika\FrontendBundle\Entity\Profile\PasswordRecovery $passwordRecoveries)
+        public function addPasswordRecovery(PasswordRecovery $passwordRecoveries)
         {
             $this->passwordRecoveries[] = $passwordRecoveries;
 
@@ -474,7 +488,7 @@
          *
          * @param \Znaika\FrontendBundle\Entity\Profile\PasswordRecovery $passwordRecoveries
          */
-        public function removePasswordRecovery(\Znaika\FrontendBundle\Entity\Profile\PasswordRecovery $passwordRecoveries)
+        public function removePasswordRecovery(PasswordRecovery $passwordRecoveries)
         {
             $this->passwordRecoveries->removeElement($passwordRecoveries);
         }
@@ -507,54 +521,6 @@
             }
 
             return $passwordRecovery;
-        }
-
-        /**
-         * Set city
-         *
-         * @param \Znaika\FrontendBundle\Entity\Location\City $city
-         *
-         * @return User
-         */
-        public function setCity(\Znaika\FrontendBundle\Entity\Location\City $city = null)
-        {
-            $this->city = $city;
-
-            return $this;
-        }
-
-        /**
-         * Get city
-         *
-         * @return \Znaika\FrontendBundle\Entity\Location\City
-         */
-        public function getCity()
-        {
-            return $this->city;
-        }
-
-        /**
-         * Set school
-         *
-         * @param \Znaika\FrontendBundle\Entity\Education\School $school
-         *
-         * @return User
-         */
-        public function setSchool(\Znaika\FrontendBundle\Entity\Education\School $school = null)
-        {
-            $this->school = $school;
-
-            return $this;
-        }
-
-        /**
-         * Get school
-         *
-         * @return \Znaika\FrontendBundle\Entity\Education\School
-         */
-        public function getSchool()
-        {
-            return $this->school;
         }
 
         /**
@@ -621,30 +587,6 @@
         public function getPoints()
         {
             return $this->points;
-        }
-
-        /**
-         * Set classroom
-         *
-         * @param \Znaika\FrontendBundle\Entity\Education\Classroom $classroom
-         *
-         * @return User
-         */
-        public function setClassroom(\Znaika\FrontendBundle\Entity\Education\Classroom $classroom = null)
-        {
-            $this->classroom = $classroom;
-
-            return $this;
-        }
-
-        /**
-         * Get classroom
-         *
-         * @return \Znaika\FrontendBundle\Entity\Education\Classroom
-         */
-        public function getClassroom()
-        {
-            return $this->classroom;
         }
 
         /**
@@ -791,5 +733,110 @@
         public function getSupervisedVideos()
         {
             return $this->supervisedVideos;
+        }
+
+        /**
+         * @param int $grade
+         */
+        public function setGrade($grade)
+        {
+            $this->grade = $grade;
+        }
+
+        /**
+         * @return int
+         */
+        public function getGrade()
+        {
+            return $this->grade;
+        }
+
+        /**
+         * @param string $city
+         */
+        public function setCity($city)
+        {
+            $this->city = $city;
+        }
+
+        /**
+         * @return string
+         */
+        public function getCity()
+        {
+            return $this->city;
+        }
+
+        /**
+         * Sets file.
+         *
+         * @param UploadedFile $file
+         */
+        public function setPhoto(UploadedFile $file = null)
+        {
+            $this->photo = $file;
+        }
+
+        /**
+         * Get file.
+         *
+         * @return UploadedFile
+         */
+        public function getPhoto()
+        {
+            return $this->photo;
+        }
+
+        /**
+         * @param boolean $hasPhoto
+         */
+        public function setHasPhoto($hasPhoto)
+        {
+            $this->hasPhoto = $hasPhoto;
+        }
+
+        /**
+         * @return boolean
+         */
+        public function getHasPhoto()
+        {
+            return $this->hasPhoto;
+        }
+
+        public function getPhotoUrl()
+        {
+            return "/user-photo/" . $this->getUserId() . "/photo";
+        }
+
+        public function addChangeUserEmail(ChangeUserEmail $changeUserEmail)
+        {
+            $this->changeUserEmails[] = $changeUserEmail;
+
+            return $this;
+        }
+
+        public function removeChangeUserEmail(ChangeUserEmail $changeUserEmail)
+        {
+            $this->changeUserEmails->removeElement($changeUserEmail);
+        }
+
+        public function getChangeUserEmails()
+        {
+            return $this->changeUserEmails;
+        }
+
+        public function getLastChangeUserEmail()
+        {
+            if ($this->changeUserEmails->count())
+            {
+                $changeUserEmail = $this->changeUserEmails->last();
+            }
+            else
+            {
+                $changeUserEmail = new ChangeUserEmail();
+                $changeUserEmail->setUser($this);
+            }
+
+            return $changeUserEmail;
         }
     }

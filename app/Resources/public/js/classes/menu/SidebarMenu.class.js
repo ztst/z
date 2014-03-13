@@ -38,16 +38,7 @@ var SidebarMenu = EventDispatcher.extend({
 
     _initSubjectsButtons: function()
     {
-        var that = this;
-
         this._subjectsButtons = $(".subject-menu li");
-        this._subjectsButtons.click(function(event){
-            if (event.which == 2) //middle button click
-            {
-                return true;
-            }
-            that._onSubjectClick($(this));
-        });
     },
 
     _initMoreSubjectsLink: function()
@@ -77,12 +68,13 @@ var SidebarMenu = EventDispatcher.extend({
 
     _onMoreSubjectsLinkClick: function()
     {
-        $(".subject-menu-more-container").html("");
+        var subjectMenuMore = $(".subject-menu-more-container");
+        subjectMenuMore.html("");
 
         this._subjectsButtons.filter(":not(.hidden)").filter(":not(:visible)").each(function(){
             $(".subject-menu-more-container").append($(this));
         });
-        $(".subject-menu-more-container").toggleClass("hidden");
+        subjectMenuMore.toggleClass("hidden");
     },
 
     _getClass: function()
@@ -114,13 +106,6 @@ var SidebarMenu = EventDispatcher.extend({
                 subject.addClass("selected");
             }
         }
-    },
-
-    _onSubjectClick: function(item)
-    {
-        var grade = this._getClass();
-        var subject = item.attr("id");
-        window.location.href = Routing.generate('show_catalogue', {'class': grade, 'subjectName': subject});
     },
 
     _onClassChanged: function(item)

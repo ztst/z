@@ -3,10 +3,7 @@
 
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Profile\Action\AddBirthdayInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddCityInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddClassroomInProfileOperation;
     use Znaika\FrontendBundle\Entity\Profile\Action\AddPhoneNumberInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddSchoolInProfileOperation;
     use Znaika\FrontendBundle\Entity\Profile\Action\AddSexInProfileOperation;
     use Znaika\FrontendBundle\Entity\Profile\Action\AddVideoCommentOperation;
     use Znaika\FrontendBundle\Entity\Profile\Action\BaseUserOperation;
@@ -30,13 +27,6 @@
         /**
          * @param User $user
          *
-         * @return AddCityInProfileOperation
-         */
-        public function getLastAddCityInProfileOperation(User $user);
-
-        /**
-         * @param User $user
-         *
          * @return AddPhoneNumberInProfileOperation
          */
         public function getLastAddPhoneNumberInProfileOperation(User $user);
@@ -47,20 +37,6 @@
          * @return AddBirthdayInProfileOperation
          */
         public function getLastAddBirthdayInProfileOperation(User $user);
-
-        /**
-         * @param User $user
-         *
-         * @return AddClassroomInProfileOperation
-         */
-        public function getLastAddClassroomInProfileOperation(User $user);
-
-        /**
-         * @param User $user
-         *
-         * @return AddSchoolInProfileOperation
-         */
-        public function getLastAddSchoolInProfileOperation(User $user);
 
         /**
          * @param User $user

@@ -1,6 +1,7 @@
 <?
     namespace Znaika\FrontendBundle\Helper\Mail;
 
+    use Znaika\FrontendBundle\Entity\Profile\ChangeUserEmail;
     use Znaika\FrontendBundle\Entity\Profile\UserRegistration;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
     use Znaika\FrontendBundle\Entity\Profile\PasswordRecovery;
@@ -48,19 +49,6 @@
             $this->mailHelper->sendEmail(null, $sendTo, $body, $subject);
         }
 
-        /**
-         * @param $templateContent
-         *
-         * @return string
-         */
-        private function getEmailSubject($templateContent)
-        {
-            $subject = ($templateContent->hasBlock("subject") ? $templateContent->renderBlock("subject", array()) : "");
-            $subject = trim($subject);
-
-            return $subject;
-        }
-
         public function sendPasswordRecoveryConfirm(PasswordRecovery $passwordRecovery)
         {
             $templateFile    = "ZnaikaFrontendBundle:Email:passwordRecovery.html.twig";
@@ -72,5 +60,31 @@
             $subject         = $this->getEmailSubject($templateContent);
 
             $this->mailHelper->sendEmail(null, $passwordRecovery->getUser()->getEmail(), $body, $subject);
+        }
+
+        public function sendChangeEmailConfirm(ChangeUserEmail $changeUserEmail)
+        {
+            $templateFile    = "ZnaikaFrontendBundle:Email:changeEmail.html.twig";
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $body            = $templateContent->render(
+                                               array(
+                                                   "changeKey" => $changeUserEmail->getChangeKey(),
+                                               ));
+            $subject         = $this->getEmailSubject($templateContent);
+
+            $this->mailHelper->sendEmail(null, $changeUserEmail->getNewEmail(), $body, $subject);
+        }
+
+        /**
+         * @param $templateContent
+         *
+         * @return string
+         */
+        private function getEmailSubject($templateContent)
+        {
+            $subject = ($templateContent->hasBlock("subject") ? $templateContent->renderBlock("subject", array()) : "");
+            $subject = trim($subject);
+
+            return $subject;
         }
     }

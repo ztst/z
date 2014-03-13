@@ -56,6 +56,7 @@
             }) }}"
                title="{{ video.getName|raw }}"
                class="video-title">
+              {{ video.orderPriority }}.
               {{ video.getName|raw|length > 40 ? video.getName|raw|slice(0, 40) ~ '...' : video.getName|raw }}
             </a>
 

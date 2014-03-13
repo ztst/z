@@ -55,9 +55,8 @@ var MainMenu = EventDispatcher.extend({
         this._loginForm = new LoginForm("loginForm");
         this._loginForm.addListener(BaseForm.event.SUBMITTED, this, this._onLoginFormSubmitted);
         $("#switchForgetPasswordLink").click(function(){
-                return false;
-            }
-        )
+            return false;
+        });
     },
 
     _initRegistrationForm: function()

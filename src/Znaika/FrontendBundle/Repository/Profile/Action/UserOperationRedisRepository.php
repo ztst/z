@@ -12,11 +12,6 @@
             return true;
         }
 
-        public function getLastAddCityInProfileOperation(User $user)
-        {
-            return null;
-        }
-
         public function getLastViewVideoOperation(User $user, Video $video)
         {
             return null;
@@ -33,16 +28,6 @@
         }
 
         public function getLastAddBirthdayInProfileOperation(User $user)
-        {
-            return null;
-        }
-
-        public function getLastAddClassroomInProfileOperation(User $user)
-        {
-            return null;
-        }
-
-        public function getLastAddSchoolInProfileOperation(User $user)
         {
             return null;
         }

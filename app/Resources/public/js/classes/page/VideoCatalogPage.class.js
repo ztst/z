@@ -12,10 +12,12 @@ var VideoCatalogPage = Base.extend({
             $("#chapter_videos_" + id).removeClass("hidden");
             $(".chapter-description-container").removeClass("selected");
             link.parent().addClass("selected");
+
+            $(".chapter-videos-count").html($(".chapter-videos-block-container li:visible").length);
         });
     }
 });
 
 $(function(){
-    var videoCatalogPage = new VideoCatalogPage();
+    new VideoCatalogPage();
 });

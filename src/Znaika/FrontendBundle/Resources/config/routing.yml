@@ -86,6 +86,31 @@ edit_user_profile:
     pattern: /edit-user-profile/{userId}
     defaults: { _controller: ZnaikaFrontendBundle:User:editUserProfile }
 
+edit_user_photo:
+    pattern: /edit-user-photo/{userId}
+    defaults: { _controller: ZnaikaFrontendBundle:User:editUserPhoto }
+
+delete_user_photo:
+    pattern: /delete-user-photo/{userId}
+    defaults: { _controller: ZnaikaFrontendBundle:User:deleteUserPhoto }
+    methods:  [POST]
+    options:
+        expose: true
+
+change_password:
+    pattern: /change-password/{userId}
+    defaults: { _controller: ZnaikaFrontendBundle:User:changePassword }
+    methods:  [POST]
+
+change_email:
+    pattern: /change-email/{userId}
+    defaults: { _controller: ZnaikaFrontendBundle:User:changeEmail }
+    methods:  [POST]
+
+complete_change_email:
+    pattern: /complete-change-email/{key}
+    defaults: { _controller: ZnaikaFrontendBundle:User:completeChangeEmail }
+
 show_threads:
     pattern: /messages
     defaults: { _controller: ZnaikaFrontendBundle:Message:showThreads }

@@ -1,0 +1,25 @@
+{{ form_start(form, {'attr': {'id': 'changeEmailForm'}, 'action': path('change_email', {'userId': userId}), 'method': 'POST'}) }}
+  {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
+  <div class="form-group">
+    {{ form_label(form.oldPassword, 'Текущий пароль') }}
+    {{ form_errors(form.oldPassword) }}
+    {{ form_widget(form.oldPassword, {'id': 'oldPasswordNewEmailField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(form.newEmail, 'Новый емайл') }}
+    {{ form_errors(form.newEmail) }}
+    {{ form_widget(form.newEmail, {'id': 'newEmail', 'attr': {'class': 'form-control'}}) }}
+  </div>
+  <button class="btn btn-primary">Изменить</button>
+{{ form_end(form) }}
+
+
+<div id="changeEmailSendSuccessPopup" class="popup mfp-hide">
+  <div class="popup-content">
+    <h1>Завершение изменения email</h1>
+    <p>
+      На новый email отправлено письмо со ссылкой подтверждения изменения почтового адреса.
+    </p>
+    <div class="clear"></div>
+  </div>
+</div>

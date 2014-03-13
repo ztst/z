@@ -22,6 +22,21 @@ var BaseForm = EventDispatcher.extend({
         this._form.submit(handler(this, "_onFormSubmitted"));
     },
 
+    hide: function()
+    {
+        this._form.hide();
+    },
+
+    serialize: function()
+    {
+        return this._form.serialize();
+    },
+
+    getAction: function()
+    {
+        return this._form.attr("action");
+    },
+
     _onFormSubmitted: function()
     {
         if (this._form.valid())
@@ -39,21 +54,38 @@ var BaseForm = EventDispatcher.extend({
         return false;
     },
 
-    hide: function()
+    _initShowPasswordLink: function()
     {
-        this._form.hide();
+        var showPasswordLink = this._form.find(".show-password-icon");
+        if (navigator.userAgent.search("MSIE") >= 0)
+        {
+            showPasswordLink.remove();
+            showPasswordLink.width(1);
+        }
+        else
+        {
+            showPasswordLink.click(handler(this, "_onShowPasswordLinkClick"));
+        }
     },
 
-    serialize: function()
+    _onShowPasswordLinkClick: function(event)
     {
-        return this._form.serialize();
-    },
+        var link = $(event.target);
+        var container = link.parent();
 
-    getAction: function()
-    {
-        return this._form.attr("action");
+        var passwordInput = container.find(".password-input");
+        var currentType = passwordInput.attr("type");
+        if (currentType == "text")
+        {
+            passwordInput.attr("type", "password");
+            link.removeClass("opened");
+        }
+        else
+        {
+            passwordInput.attr("type", "text");
+            link.addClass("opened");
+        }
     },
-
     _getInvalidEmailMessage: function(parameters, element)
     {
         var email = $(element).val();
