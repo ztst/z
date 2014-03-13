@@ -4,11 +4,12 @@
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserSex;
 
     class UserProfileType extends AbstractType
     {
-        const MAX_YEARS_OLD = 90;
+        const MAX_YEARS_OLD = 64;
 
         /**
          * @param FormBuilderInterface $builder
@@ -16,36 +17,41 @@
          */
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
-            $readonly = $options['readonly'];
-
             $sexTypes = UserSex::getAvailableTypesTexts();
+            $grades   = ClassNumberUtil::getAvailableClassesForSelect();
 
             $builder
-                ->add('firstName', 'text', array('read_only' => $readonly))
-                ->add('lastName', 'text', array('read_only' => $readonly))
-                ->add('email', 'email', array('read_only' => $readonly))
-                ->add('city', 'entity', array(
-                    'class'       => 'Znaika\FrontendBundle\Entity\Location\City',
-                    'property'    => 'name',
-                    'empty_value' => '',
-                    'required'    => false
+                ->add("firstName", "text", array(
+                    "required" => false,
                 ))
-                ->add('sex', 'choice', array(
-                    'choices' => $sexTypes
+                ->add("lastName", "text", array(
+                    "required" => false,
                 ))
-                ->add('birthDate', 'birthday', array(
-                    'empty_value' => array('day' => 'День', 'month' => 'Месяц', 'year' => 'Год'),
-                    'required'    => false,
-                    'disabled'    => $readonly,
-                    'format'      => 'dd MMMM yyyy',
-                    'widget'      => 'choice',
-                    'years'       => range(date('Y'), date('Y') - self::MAX_YEARS_OLD)
-                ));
-
-            if (!$readonly)
-            {
-                $builder->add('save', 'submit');
-            }
+                ->add("sex", "choice", array(
+                    "choices"     => $sexTypes,
+                    "expanded"    => true,
+                    "multiple"    => false,
+                    "empty_value" => false,
+                    "required"    => false,
+                ))
+                ->add("grade", "choice", array(
+                    "choices"     => $grades,
+                    "empty_data"  => null,
+                    "empty_value" => "",
+                    "required"    => false,
+                ))
+                ->add("city", "text", array(
+                    "required" => false,
+                ))
+                ->add("nickname", "text")
+                ->add("birthDate", "birthday", array(
+                    "empty_value" => array("day" => "День", "month" => "Месяц", "year" => "Год"),
+                    "required"    => false,
+                    "format"      => "dd MMMM yyyy",
+                    "widget"      => "choice",
+                    "years"       => range(date("Y"), date("Y") - self::MAX_YEARS_OLD)
+                ))
+                ->add("save", "submit");
         }
 
         /**
@@ -54,8 +60,7 @@
         public function setDefaultOptions(OptionsResolverInterface $resolver)
         {
             $resolver->setDefaults(array(
-                'data_class' => 'Znaika\FrontendBundle\Entity\Profile\User',
-                'readonly'   => false
+                "data_class" => "Znaika\\FrontendBundle\\Entity\\Profile\\User",
             ));
         }
 
@@ -64,6 +69,6 @@
          */
         public function getName()
         {
-            return 'znaika_frontendbundle_user_userprofile';
+            return "znaika_frontendbundle_user_userprofile";
         }
     }

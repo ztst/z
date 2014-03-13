@@ -2,6 +2,7 @@
     namespace Znaika\FrontendBundle\Entity\Profile;
 
     use Doctrine\ORM\Mapping as ORM;
+    use Symfony\Component\HttpFoundation\File\UploadedFile;
     use Symfony\Component\Security\Core\User\AdvancedUserInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
@@ -62,11 +63,6 @@
         private $passwordRecoveries;
 
         /**
-         * @var \Znaika\FrontendBundle\Entity\Location\City
-         */
-        private $city;
-
-        /**
          * @var integer
          */
         private $sex = 0;
@@ -110,6 +106,26 @@
          * @var \Doctrine\Common\Collections\Collection
          */
         private $supervisedVideos;
+
+        /**
+         * @var integer
+         */
+        private $grade;
+
+        /**
+         * @var string
+         */
+        private $city;
+
+        /**
+         * @var UploadedFile
+         */
+        private $photo;
+
+        /**
+         * @var bool
+         */
+        private $hasPhoto = false;
 
         /**
          * Constructor
@@ -500,30 +516,6 @@
         }
 
         /**
-         * Set city
-         *
-         * @param \Znaika\FrontendBundle\Entity\Location\City $city
-         *
-         * @return User
-         */
-        public function setCity(\Znaika\FrontendBundle\Entity\Location\City $city = null)
-        {
-            $this->city = $city;
-
-            return $this;
-        }
-
-        /**
-         * Get city
-         *
-         * @return \Znaika\FrontendBundle\Entity\Location\City
-         */
-        public function getCity()
-        {
-            return $this->city;
-        }
-
-        /**
          * Set sex
          *
          * @param integer $sex
@@ -733,5 +725,78 @@
         public function getSupervisedVideos()
         {
             return $this->supervisedVideos;
+        }
+
+        /**
+         * @param int $grade
+         */
+        public function setGrade($grade)
+        {
+            $this->grade = $grade;
+        }
+
+        /**
+         * @return int
+         */
+        public function getGrade()
+        {
+            return $this->grade;
+        }
+
+        /**
+         * @param string $city
+         */
+        public function setCity($city)
+        {
+            $this->city = $city;
+        }
+
+        /**
+         * @return string
+         */
+        public function getCity()
+        {
+            return $this->city;
+        }
+
+        /**
+         * Sets file.
+         *
+         * @param UploadedFile $file
+         */
+        public function setPhoto(UploadedFile $file = null)
+        {
+            $this->photo = $file;
+        }
+
+        /**
+         * Get file.
+         *
+         * @return UploadedFile
+         */
+        public function getPhoto()
+        {
+            return $this->photo;
+        }
+
+        /**
+         * @param boolean $hasPhoto
+         */
+        public function setHasPhoto($hasPhoto)
+        {
+            $this->hasPhoto = $hasPhoto;
+        }
+
+        /**
+         * @return boolean
+         */
+        public function getHasPhoto()
+        {
+            return $this->hasPhoto;
+        }
+
+        public function getPhotoUrl()
+        {
+            return "/user-photo/" . $this->getUserId() . "/photo";
         }
     }

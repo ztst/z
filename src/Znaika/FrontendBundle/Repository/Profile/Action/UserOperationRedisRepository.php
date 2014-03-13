@@ -12,11 +12,6 @@
             return true;
         }
 
-        public function getLastAddCityInProfileOperation(User $user)
-        {
-            return null;
-        }
-
         public function getLastViewVideoOperation(User $user, Video $video)
         {
             return null;

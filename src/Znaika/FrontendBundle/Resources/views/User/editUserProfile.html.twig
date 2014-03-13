@@ -1,0 +1,38 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter='cssrewrite'
+    '@ZnaikaFrontendBundle/Resources/public/css/user_profile.css'
+  %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts
+    '../app/Resources/public/js/classes/form/profile/EditProfileForm.class.js'
+    '../app/Resources/public/js/classes/form/profile/UserPhotoForm.class.js'
+    '../app/Resources/public/js/classes/page/UserProfilePage.class.js'
+  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+  {% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="alert alert-info">
+      {{ flashMessage }}
+    </div>
+  {% endfor %}
+
+  <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
+    {% include "ZnaikaFrontendBundle:User:user_profile_form.html.twig" with {'form': profileForm} %}
+  </div>
+  <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
+    {% include "ZnaikaFrontendBundle:User:user_photo_form.html.twig" with {'form': userPhotoForm} %}
+  </div>
+{% endblock %}

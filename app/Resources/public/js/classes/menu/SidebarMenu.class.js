@@ -41,13 +41,6 @@ var SidebarMenu = EventDispatcher.extend({
         var that = this;
 
         this._subjectsButtons = $(".subject-menu li");
-        this._subjectsButtons.click(function(event){
-            if (event.which == 2) //middle button click
-            {
-                return true;
-            }
-            that._onSubjectClick($(this));
-        });
     },
 
     _initMoreSubjectsLink: function()
@@ -114,13 +107,6 @@ var SidebarMenu = EventDispatcher.extend({
                 subject.addClass("selected");
             }
         }
-    },
-
-    _onSubjectClick: function(item)
-    {
-        var grade = this._getClass();
-        var subject = item.attr("id");
-        window.location.href = Routing.generate('show_catalogue', {'class': grade, 'subjectName': subject});
     },
 
     _onClassChanged: function(item)

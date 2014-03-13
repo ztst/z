@@ -14,11 +14,6 @@
             $this->getEntityManager()->flush();
         }
 
-        public function getLastAddCityInProfileOperation(User $user)
-        {
-            return $this->getLastOperationByUser($user, 'ZnaikaFrontendBundle:Profile\Action\AddCityInProfileOperation');
-        }
-
         public function getLastViewVideoOperation(User $user, Video $video)
         {
             return $this->getLastOperationByUserAndVideo($user, $video, 'ZnaikaFrontendBundle:Profile\Action\ViewVideoOperation');

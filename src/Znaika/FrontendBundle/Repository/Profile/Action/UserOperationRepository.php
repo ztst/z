@@ -35,17 +35,6 @@
             return $success;
         }
 
-        public function getLastAddCityInProfileOperation(User $user)
-        {
-            $result = $this->redisRepository->getLastAddCityInProfileOperation($user);
-            if (empty($result))
-            {
-                $result = $this->dbRepository->getLastAddCityInProfileOperation($user);
-            }
-
-            return $result;
-        }
-
         public function getLastViewVideoOperation(User $user, Video $video)
         {
             $result = $this->redisRepository->getLastViewVideoOperation($user, $video);

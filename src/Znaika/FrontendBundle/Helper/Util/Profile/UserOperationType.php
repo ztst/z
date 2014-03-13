@@ -3,7 +3,6 @@
 
     class UserOperationType
     {
-        const ADD_CITY_IN_PROFILE                     = 1;
         const VIEW_VIDEO                              = 2;
         const POST_VIDEO_TO_SOCIAL_NETWORK            = 3;
         const ADD_PHONE_NUMBER_IN_PROFILE_OPERATION   = 4;

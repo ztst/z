@@ -3,7 +3,6 @@
 
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Profile\Action\AddBirthdayInProfileOperation;
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddCityInProfileOperation;
     use Znaika\FrontendBundle\Entity\Profile\Action\AddPhoneNumberInProfileOperation;
     use Znaika\FrontendBundle\Entity\Profile\Action\AddSexInProfileOperation;
     use Znaika\FrontendBundle\Entity\Profile\Action\AddVideoCommentOperation;
@@ -24,13 +23,6 @@
          * @return bool
          */
         public function save(BaseUserOperation $operation);
-
-        /**
-         * @param User $user
-         *
-         * @return AddCityInProfileOperation
-         */
-        public function getLastAddCityInProfileOperation(User $user);
 
         /**
          * @param User $user

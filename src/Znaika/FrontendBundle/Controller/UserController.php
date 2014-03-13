@@ -3,9 +3,11 @@
     namespace Znaika\FrontendBundle\Controller;
 
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    use Symfony\Component\Form\Form;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Security\Core\SecurityContext;
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Entity\Profile\PasswordRecovery;
@@ -13,13 +15,17 @@
     use Znaika\FrontendBundle\Form\Model\Registration;
     use Znaika\FrontendBundle\Form\Type\RegistrationType;
     use Znaika\FrontendBundle\Form\User\PasswordRecoveryType;
+    use Znaika\FrontendBundle\Form\User\UserPhotoType;
     use Znaika\FrontendBundle\Form\User\UserProfileType;
     use Znaika\FrontendBundle\Helper\Encode\RegisterKeyEncoder;
     use Znaika\FrontendBundle\Helper\Odnoklassniki;
     use Znaika\FrontendBundle\Helper\Security\UserAuthenticator;
+    use Znaika\FrontendBundle\Helper\Uploader\UserPhotoUploader;
     use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
+    use Znaika\FrontendBundle\Helper\Util\FileSystem\UnixSystemUtils;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
     use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
+    use Znaika\FrontendBundle\Helper\Util\UserAgentInfoProvider;
     use Znaika\FrontendBundle\Helper\Vkontakte;
     use Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRegistrationRepository;
@@ -129,9 +135,8 @@
                 $session->remove(SecurityContext::AUTHENTICATION_ERROR);
             }
 
-            $userRepository = $this->getUserRepository();
-            $passwordRecoveryRepository = $this->get('znaika_frontend.password_recovery_repository');
-            $registerForm   = $this->createForm(new RegistrationType($userRepository), new Registration());
+            $userRepository             = $this->getUserRepository();
+            $registerForm               = $this->createForm(new RegistrationType($userRepository), new Registration());
             $passwordRecoveryForm       = $this->createForm(new PasswordRecoveryType($userRepository),
                 new PasswordRecovery());
 
@@ -141,9 +146,9 @@
             return $this->render($loginTemplate,
                 array(
                     // last username entered by the user
-                    'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-                    'error'         => $error,
-                    'referrer'      => $referrer,
+                    'last_username'        => $session->get(SecurityContext::LAST_USERNAME),
+                    'error'                => $error,
+                    'referrer'             => $referrer,
                     'registerForm'         => $registerForm->createView(),
                     'passwordRecoveryForm' => $passwordRecoveryForm->createView()
                 )
@@ -158,7 +163,7 @@
         public function passwordRecoveryAction(Request $request)
         {
             $passwordRecovery = new PasswordRecovery();
-            $userRepository   = $this->get('znaika_frontend.user_repository');
+            $userRepository   = $this->getUserRepository();
 
             $form = $this->createForm(new PasswordRecoveryType($userRepository), $passwordRecovery);
             $form->handleRequest($request);
@@ -184,7 +189,7 @@
         public function generateNewPasswordAction($recoveryKey)
         {
             $passwordRecoveryRepository = $this->getPasswordRecoveryRepository();
-            $passwordRecovery = $passwordRecoveryRepository->getOneByPasswordRecoveryKey($recoveryKey);
+            $passwordRecovery           = $passwordRecoveryRepository->getOneByPasswordRecoveryKey($recoveryKey);
 
             if (!$passwordRecovery)
             {
@@ -254,7 +259,7 @@
 
             $this->get('session')->getFlashBag()->add(
                  'notice',
-                 $this->get('translator')->trans('congratulations_registration_success')
+                     $this->get('translator')->trans('congratulations_registration_success')
             );
 
             return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
@@ -286,15 +291,23 @@
             $currentUser = $this->getUser();
             $ownProfile  = ($currentUser && $currentUser->getUserId() == $userId);
 
+            if ($ownProfile)
+            {
+                return new RedirectResponse($this->generateUrl('edit_user_profile', array(
+                    'userId' => $userId
+                )));
+            }
+
             $userRepository = $this->getUserRepository();
             $user           = $userRepository->getOneByUserId($userId);
 
-            $form = $this->createForm(new UserProfileType(), $user, array('readonly' => !$ownProfile));
+            if (!$user)
+            {
+                return $this->createNotFoundException("User not found");
+            }
 
             return $this->render('ZnaikaFrontendBundle:User:showUserProfile.html.twig', array(
-                'form'       => $form->createView(),
-                'ownProfile' => $ownProfile,
-                'userId'     => $userId,
+                'user' => $user,
             ));
         }
 
@@ -311,22 +324,76 @@
             }
 
             $userRepository = $this->getUserRepository();
-            $user           = $userRepository->getOneByUserId($userId);
+            $user           = $currentUser;
 
-            $form = $this->createForm(new UserProfileType(), $user, array('readonly' => !$canEdit));
+            $profileForm = $this->handleProfileForm($user, $userRepository);
 
-            $form->handleRequest($request);
-            if ($form->isValid())
+            $userPhotoForm = $this->createForm(new UserPhotoType(), $user);
+
+            return $this->render('ZnaikaFrontendBundle:User:editUserProfile.html.twig', array(
+                'profileForm'   => $profileForm->createView(),
+                'userPhotoForm' => $userPhotoForm->createView(),
+                'user'          => $user,
+                'userId'        => $userId,
+            ));
+        }
+
+        public function editUserPhotoAction(Request $request)
+        {
+            $userId      = $request->get('userId');
+            $currentUser = $this->getUser();
+            $canEdit     = ($currentUser && $currentUser->getUserId() == $userId);
+
+            if (!$canEdit)
             {
-                $listener = $this->getUserOperationListener();
-                $listener->onEditProfile($user);
-
-                $userRepository->save($user);
+                throw $this->createNotFoundException("Can't manage user");
             }
 
-            return new RedirectResponse($this->generateUrl('show_user_profile', array(
-                'userId' => $userId
-            )));
+            $userRepository = $this->getUserRepository();
+            $user           = $currentUser;
+
+            $userPhotoForm = $this->createForm(new UserPhotoType(), $user);
+            $userPhotoForm->handleRequest($request);
+            $success = false;
+            if ($userPhotoForm->isValid())
+            {
+                $userPhotoUploader = $this->getUserPhotoUploader();
+                $userPhotoUploader->upload($user);
+                $userRepository->save($user);
+                $success = true;
+            }
+
+            $data       = array(
+                "photoUrl" => $user->getPhotoUrl() . "?" . time(),
+                "success"  => $success
+            );
+            $uaProvider = new UserAgentInfoProvider();
+            $uaProvider->parse($request->headers->get('User-Agent'));
+
+            return $uaProvider->getUaFamily() == "IE" ? new Response(json_encode($data)) : JsonResponse::create($data);
+        }
+
+        public function deleteUserPhotoAction($userId)
+        {
+            /** @var User $currentUser */
+            $currentUser = $this->getUser();
+            $canEdit     = ($currentUser && $currentUser->getUserId() == $userId);
+
+            if (!$canEdit)
+            {
+                throw $this->createNotFoundException("Can't manage user");
+            }
+
+            $userRepository = $this->getUserRepository();
+            $user = $currentUser;
+            $user->setHasPhoto(false);
+            $userRepository->save($user);
+
+            $userPhotoUploader = $this->getUserPhotoUploader();
+            $filePath = $userPhotoUploader->getFilePath($user);
+            UnixSystemUtils::remove($filePath);
+
+            return JsonResponse::create(array("success" => true));
         }
 
         /**
@@ -476,7 +543,7 @@
          * @internal param \Symfony\Component\HttpFoundation\Request $request
          * @return JsonResponse|\Symfony\Component\HttpFoundation\Response
          */
-        private function getRegisterSuccessResponse($registration, $form)
+        private function getRegisterSuccessResponse(Registration $registration, Form $form)
         {
             $request = $this->getRequest();
             $user    = $registration->getUser();
@@ -502,13 +569,23 @@
         }
 
         /**
+         * @return UserRegistrationRepository
+         */
+        private function getUserRegistrationRepository()
+        {
+            $userRegistrationRepository = $this->get('znaika_frontend.user_registration_repository');
+
+            return $userRegistrationRepository;
+        }
+
+        /**
          * @param $form
          * @param $autoGeneratePassword
          *
          * @internal param \Symfony\Component\HttpFoundation\Request $request
          * @return JsonResponse|\Symfony\Component\HttpFoundation\Response
          */
-        private function getRegisterFailedResponse($form, $autoGeneratePassword)
+        private function getRegisterFailedResponse(Form $form, $autoGeneratePassword)
         {
             $request = $this->getRequest();
             if ($request->isXmlHttpRequest())
@@ -535,22 +612,10 @@
         }
 
         /**
-         * @return UserRegistrationRepository
-         */
-        private function getUserRegistrationRepository()
-        {
-            $userRegistrationRepository = $this->get('znaika_frontend.user_registration_repository');
-
-            return $userRegistrationRepository;
-        }
-
-        /**
          * @param User $user
          */
         private function recoverUserPassword(User $user)
         {
-            $request = $this->getRequest();
-
             $passwordRecovery = $user->getLastPasswordRecovery();
 
             /** @var RegisterKeyEncoder $encoder */
@@ -572,10 +637,10 @@
          * @internal param \Symfony\Component\HttpFoundation\Request $request
          * @return JsonResponse|\Symfony\Component\HttpFoundation\Response
          */
-        private function getPasswordRecoverySuccessResponse($passwordRecovery, $form)
+        private function getPasswordRecoverySuccessResponse(PasswordRecovery $passwordRecovery, Form $form)
         {
             $request = $this->getRequest();
-            $user = $passwordRecovery->getUser();
+            $user    = $passwordRecovery->getUser();
             $this->recoverUserPassword($user);
 
             if ($request->isXmlHttpRequest())
@@ -603,7 +668,7 @@
          * @internal param \Symfony\Component\HttpFoundation\Request $request
          * @return JsonResponse|\Symfony\Component\HttpFoundation\Response
          */
-        private function getPasswordRecoveryFailedResponse($form)
+        private function getPasswordRecoveryFailedResponse(Form $form)
         {
             $request = $this->getRequest();
             if ($request->isXmlHttpRequest())
@@ -657,5 +722,41 @@
             $passwordRecoveryRepository = $this->get('znaika_frontend.password_recovery_repository');
 
             return $passwordRecoveryRepository;
+        }
+
+        /**
+         * @param $user
+         * @param $userRepository
+         *
+         * @return \Symfony\Component\Form\Form
+         */
+        private function handleProfileForm(User $user, UserRepository $userRepository)
+        {
+            $request = $this->getRequest();
+            $form    = $this->createForm(new UserProfileType(), $user);
+
+            if ($request->request->has('znaika_frontendbundle_user_userprofile'))
+            {
+                $form->handleRequest($request);
+                if ($form->isValid())
+                {
+                    $listener = $this->getUserOperationListener();
+                    $listener->onEditProfile($user);
+
+                    $userRepository->save($user);
+                }
+            }
+
+            return $form;
+        }
+
+        /**
+         * @return UserPhotoUploader
+         */
+        private function getUserPhotoUploader()
+        {
+            $userPhotoUploader = $this->get('znaika_frontend.user_photo_uploader');
+
+            return $userPhotoUploader;
         }
     }

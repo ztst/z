@@ -21,7 +21,6 @@ Znaika\FrontendBundle\Entity\Profile\Action\BaseUserOperation:
         type: smallint
     discriminatorMap:
         0: Znaika\FrontendBundle\Entity\Profile\Action\BaseUserOperation
-        1: Znaika\FrontendBundle\Entity\Profile\Action\AddCityInProfileOperation
         2: Znaika\FrontendBundle\Entity\Profile\Action\ViewVideoOperation
         3: Znaika\FrontendBundle\Entity\Profile\Action\PostVideoToSocialNetworkOperation
         4: Znaika\FrontendBundle\Entity\Profile\Action\AddPhoneNumberInProfileOperation

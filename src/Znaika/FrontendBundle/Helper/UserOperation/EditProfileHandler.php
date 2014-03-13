@@ -1,7 +1,6 @@
 <?
     namespace Znaika\FrontendBundle\Helper\UserOperation;
 
-    use Znaika\FrontendBundle\Entity\Profile\Action\AddCityInProfileOperation;
     use Znaika\FrontendBundle\Entity\Profile\Action\AddSexInProfileOperation;
     use Znaika\FrontendBundle\Entity\Profile\Badge\FilledOutProfileBadge;
     use Znaika\FrontendBundle\Entity\Profile\User;
@@ -12,38 +11,13 @@
         {
             $user = $this->getUser();
 
-            $addCityOperation        = $this->saveAddCityInProfileOperation($user);
             $addBirthdayOperation    = $this->saveAddBirthdayInProfileOperation($user);
             $addPhoneNumberOperation = $this->saveAddPhoneNumberInProfileOperation($user);
             $addSexOperation         = $this->saveAddSexInProfileOperation($user);
 
-            $isFilledOutProfile = !is_null($addCityOperation) && !is_null($addBirthdayOperation) &&
+            $isFilledOutProfile = !is_null($addBirthdayOperation) &&
                 !is_null($addPhoneNumberOperation) && !is_null($addSexOperation);
             $this->saveFilledOutProfileBadge($isFilledOutProfile);
-        }
-
-
-        /**
-         * @param User $user
-         *
-         * @return null|\Znaika\FrontendBundle\Entity\Profile\Action\AddCityInProfileOperation
-         */
-        private function saveAddCityInProfileOperation(User $user)
-        {
-            if (!$user->getCity())
-            {
-                return null;
-            }
-
-            $operation = $this->userOperationRepository->getLastAddCityInProfileOperation($user);
-            if (!$operation)
-            {
-                $operation = new AddCityInProfileOperation();
-                $operation->setUser($user);
-                $this->userOperationRepository->save($operation);
-            }
-
-            return $operation;
         }
 
         /**
