@@ -3,7 +3,9 @@
 
     use Knp\Menu\FactoryInterface;
     use Symfony\Component\HttpFoundation\Request;
+    use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
+    use Znaika\FrontendBundle\Helper\Util\Lesson\SubjectUtil;
     use Znaika\FrontendBundle\Repository\Lesson\Category\ISubjectRepository;
 
     class MenuBuilder
@@ -18,7 +20,7 @@
             $this->factory = $factory;
         }
 
-        public function createMainMenu(Request $request)
+        public function createMainMenu()
         {
             $menu = $this->factory->createItem("root");
             $menu->setChildrenAttribute("class", "nav navbar-nav main-menu");
@@ -55,25 +57,28 @@
 
         public function createSidebarSubjectMenu(Request $request, ISubjectRepository $repository)
         {
-            $currentGrade = $this->getCurrentClass($request);
+            $currentGrade          = $this->getCurrentClass($request);
             $currentSubjectUrlName = $this->getCurrentSubjectUrlName($request);
 
             $menu = $this->factory->createItem("root");
-            $menu->setChildrenAttribute("class", "nav nav-justified");
+            $menu->setChildrenAttribute("class", "subject-menu-list");
 
-            $currentSubjects = $repository->getByGrade($currentGrade);
-            $subjects = $repository->getAll();
+            $gradesSubjects  = SubjectUtil::getGradesSubjects();
+            $currentSubjects = $gradesSubjects[$currentGrade];
+            $subjects        = $repository->getAll();
+            $subjects = $this->prepareSubjectsOrder($subjects, $currentSubjects);
             foreach ($subjects as $subject)
             {
-                $menuItem = $menu->addChild(
-                    $subject->getName(),
-                    array("route" => "show_catalogue",
+                /** @var Subject $subject */
+                $menuItem = $menu->addChild($subject->getName(),
+                    array("route"           => "show_catalogue",
                           "routeParameters" => array("class" => $currentGrade, "subjectName" => $subject->getUrlName())
                     )
                 );
+
                 $menuItem->setAttribute("id", $subject->getUrlName());
 
-                if (!in_array($subject, $currentSubjects))
+                if (!in_array($subject->getUrlName(), $currentSubjects))
                 {
                     $menuItem->setAttribute("class", "hidden");
                 }
@@ -84,6 +89,42 @@
             }
 
             return $menu;
+        }
+
+        protected function prepareSubjectsOrder($subjects, $currentSubjects)
+        {
+            $result = array();
+            foreach ($currentSubjects as $subjectUrlName)
+            {
+                $subject = $this->findSubjectByUrlName($subjects, $subjectUrlName);
+                if (!is_null($subject))
+                {
+                    array_push($result, $subject);
+                }
+            }
+            foreach ($subjects as $subject)
+            {
+                if (!in_array($subject, $result))
+                {
+                    array_push($result, $subject);
+                }
+            }
+
+            return $result;
+        }
+
+        protected function findSubjectByUrlName($subjects, $urlName)
+        {
+            foreach ($subjects as $subject)
+            {
+                /** @var Subject $subject */
+                if ($subject->getUrlName() == $urlName)
+                {
+                    return $subject;
+                }
+            }
+
+            return null;
         }
 
         protected function getCurrentClass(Request $request)

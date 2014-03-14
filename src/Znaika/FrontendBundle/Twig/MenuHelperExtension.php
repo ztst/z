@@ -2,7 +2,7 @@
 
     namespace Znaika\FrontendBundle\Twig;
 
-    use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
+    use Znaika\FrontendBundle\Helper\Util\Lesson\SubjectUtil;
     use Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository;
 
     class MenuHelperExtension extends \Twig_Extension
@@ -26,30 +26,9 @@
 
         public function renderGradesWithSubjects()
         {
-            $grades = ClassNumberUtil::getAvailableClasses();
-
-            $result = array();
-            foreach ($grades as $grade)
-            {
-                $subjects = $this->subjectRepository->getByGrade($grade);
-
-                $subjectsUrlNames = $this->prepareSubjectsUrlNames($subjects);
-
-                $result[$grade] = $subjectsUrlNames;
-            }
+            $result = SubjectUtil::getGradesSubjects();
 
             return json_encode($result);
-        }
-
-        private function prepareSubjectsUrlNames($subjects)
-        {
-            $subjectsUrlNames = array();
-            foreach ($subjects as $subject)
-            {
-                array_push($subjectsUrlNames, $subject->getUrlName());
-            }
-
-            return $subjectsUrlNames;
         }
 
         /**
