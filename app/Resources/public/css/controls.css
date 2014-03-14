@@ -12,8 +12,11 @@
 }
 
 .active-button:hover,
+.active-button:focus,
 .semi-active-button:hover,
-.non-active-button:hover
+.semi-active-button:focus,
+.non-active-button:hover,
+.non-active-button:focus
 {
     text-decoration: none;
 }
@@ -57,6 +60,26 @@
     color: #cbd6dc;
 
     background: #fff;
+}
+
+.edit-account-setting-button,
+.edit-account-setting-button:hover,
+.edit-account-setting-button:hover
+{
+    display: inline-block;
+    text-decoration: none;
+    width: 16px;
+    height: 16px;
+}
+
+.edit-account-setting-button
+{
+    background: url('/images/user-profile/edit-profile-setting-icon.png') no-repeat;
+}
+
+.edit-account-setting-button:hover
+{
+    background: url('/images/user-profile/edit-profile-setting-icon-over.png') no-repeat;
 }
 
 /* select style BEGIN */

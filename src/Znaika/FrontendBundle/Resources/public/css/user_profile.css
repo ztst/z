@@ -25,11 +25,11 @@
 
 .upload-photo-button-container
 {
-    margin-top: 10px;
+    margin-top: 14px;
 
     text-align: center;
     overflow: hidden;
-    width: 208px;
+    width: 200px;
     height: 30px;
 }
 
@@ -96,11 +96,22 @@
 
 .user-profile-container
 {
-    margin-top: 28px;
+    margin-top: 9px;
+}
+
+.user-profile-container .form-control
+{
+    padding: 0 6px;
+    height: 27px;
+}
+.user-profile-container .form-group
+{
+    margin-bottom: 14px;
 }
 
 .user-profile-container h3,
-.user-profile-container label
+.user-profile-container label,
+.setting-label
 {
     font-family: "OpenSans Semibold",sans-serif;
     font-weight: normal;
@@ -108,12 +119,16 @@
 
 .user-profile-container h3
 {
-    margin: 20px 0;
+    margin-top: 1px;
+    margin-bottom: 0;
+    padding-bottom: 25px;
     color: #000;
     font-size: 16px;
 }
 
-.user-profile-container label
+.user-profile-container label,
+.setting-label,
+.current-setting-value
 {
     color: #2a2a2a;
     font-size: 12px;
@@ -142,11 +157,18 @@
     border-radius: 4px;
 }
 
+.add-photo-button
+{
+    height: 31px;
+    background: url('/images/user-profile/add-photo-button-icon.png') no-repeat;
+    background-position: 39px 7px;
+}
+
 .user-profile-column-container
 {
-    width: 378px;
-    padding-left: 24px;
-    padding-right: 16px;
+    width: 370px;
+    padding-left: 26px;
+    padding-right: 15px;
 }
 
 .form-control,
@@ -160,19 +182,21 @@
     width: 100%;
 }
 
-.edit-user-profile-form input[type="text"]
+.edit-user-profile-form input[type="text"],
+.save-user-profile-button
 {
-    width: 230px;
+    width: 222px;
 }
 
 .edit-user-profile-form label
 {
-    width: 108px;
+    width: 107px;
 }
 
 
 .edit-user-profile-form .input-group input,
-.sex-field label
+.sex-field label,
+.current-setting-value
 {
     font-family: "OpenSans",serif;
 }
@@ -182,6 +206,11 @@
 {
     display: block;
     float: left;
+}
+
+.sex-form
+{
+    margin-bottom: 7px;
 }
 
 .sex-field
@@ -198,8 +227,9 @@
     width: 78px;
 }
 
-.grade-select
+.form-control.grade-select
 {
+    padding: 0;
     width: 82px !important;
     border-radius: 4px !important;
 }
@@ -212,15 +242,45 @@
     border-radius: 4px;
 }
 
-.date-select-block
+.form-control.date-select-block
 {
     padding: 0;
     width: 220px;
     border: none;
 }
 
+.save-user-profile-button-container
+{
+    padding-left: 108px;
+}
+
+.save-user-profile-button
+{
+    font-family: "OpenSans Semibold",sans-serif;
+    background: url('/images/user-profile/save-user-profile-button-icon.png') no-repeat 54px 10px;
+}
+
 .settings-column-container
 {
-    padding-left: 16px;
-    width: 373px;
+    padding-left: 19px;
+    padding-right: 2px;
+    width: 378px;
+}
+
+.change-email-controller
+{
+    margin-top: 2px;
+    margin-bottom: 21px;
+}
+
+.setting-label
+{
+    display: inline-block;
+    width: 62px;
+}
+
+.current-setting-value
+{
+    display: inline-block;
+    margin-right: 13px;
 }

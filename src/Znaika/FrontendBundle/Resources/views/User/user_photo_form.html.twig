@@ -8,7 +8,7 @@
 {{ form_start(form, {'attr': {'id': 'editUserPhotoForm'}, 'action': url('edit_user_photo', {'userId': userId}), 'method': 'POST'}) }}
   {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
   <div class="upload-photo-button-container">
-    <a href="javascript:void(0);" class="edit-button" id="editUserPhotoButton">
+    <a href="javascript:void(0);" class="semi-active-button add-photo-button" id="editUserPhotoButton">
       <span class="edit-button-icon"></span>
       <span class="edit-button-label button-label">{% if user.hasPhoto %}Изменить фото{% else %}Добавить фото{% endif %}</span>
     </a>

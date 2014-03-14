@@ -35,7 +35,7 @@
     {{ form_errors(form.city) }}
     {{ form_widget(form.city, {'id': 'cityField', 'attr': {'class': 'form-control' }}) }}
   </div>
-  <div>
-    {{ form_widget(form.save, {'attr': {'class': 'semi-active-button'}, 'label': 'Сохранить'}) }}
+  <div class="save-user-profile-button-container">
+    {{ form_widget(form.save, {'attr': {'class': 'semi-active-button save-user-profile-button'}, 'label': 'Сохранить'}) }}
   </div>
 {{ form_end(form) }}
