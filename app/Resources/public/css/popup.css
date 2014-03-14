@@ -553,7 +553,7 @@ img.mfp-img
     cursor: pointer;
 }
 
-.icheckbox {background: transparent url('/images/checkbox/checkbox-login-form.png') no-repeat;}
+.icheckbox {background: transparent url('/images/controls/checkbox.png') no-repeat;}
 
 .icheckbox {
     background-position: 0 0;
@@ -567,6 +567,31 @@ img.mfp-img
 .icheckbox.checked.hover {
     background-position: 0px -60px;
 }
+/** ~checkbox styles **/
+
+/** radiobutton styles */
+.iradio {background: transparent url('/images/controls/radio.gif') no-repeat;}
+
+.iradio {
+    background-position: 0px -36px;
+}
+.iradio.hover {
+    background-position: 0px -54px;
+}
+.iradio.checked {
+    background-position: 0px -108px;
+}
+.iradio.checked.hover {
+    background-position: 0px -126px;
+}
+
+.iradio.disabled {
+    background-position: 0px 0px;
+}
+.iradio.checked.disabled {
+    background-position: 0px -72px;
+}
+/** ~radiobuttons styles **/
 
 /* Znaika Login Popup*/
 
@@ -617,7 +642,7 @@ img.mfp-img
 {
     color: #222;
     font-size: 20px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 
     margin: 0;
     display: inline-block;
@@ -630,7 +655,7 @@ img.mfp-img
 
     color: #036995;
     font-size: 14px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     text-decoration: underline;
 }
 
@@ -647,7 +672,7 @@ img.mfp-img
 
     font-weight: normal;
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .get-new-password-form label
@@ -714,7 +739,7 @@ img.mfp-img
     float: right;
     margin-top: -18px;
     font-size: 12px;
-    font-family: "OpenSans";
+    font-family: "OpenSans",serif;
 }
 
 .agreement-block
@@ -734,7 +759,7 @@ img.mfp-img
     width: auto;
 
     font-size: 11px;
-    font-family: "OpenSans";
+    font-family: "OpenSans",serif;
 }
 
 .agreement-block span a
@@ -748,7 +773,7 @@ img.mfp-img
     padding-left: 2px;
     width: auto;
     font-size: 12px;
-    font-family: "OpenSans";
+    font-family: "OpenSans",serif;
 }
 
 .login-popup-left-column
@@ -783,7 +808,7 @@ img.mfp-img
 
     color: #fff;
     font-size: 12px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .login-popup-content .social-login-buttons-container h5
@@ -793,7 +818,7 @@ img.mfp-img
 
     color: #313030;
     font-size: 16px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     text-align: center;
 }
 
@@ -891,14 +916,14 @@ img.mfp-img
 
     color: #222;
     font-size: 20px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .additional-form-container h5
 {
     margin: 15px 0;
 
-    font-family: "OpenSans";
+    font-family: "OpenSans",serif;
 }
 
 .additional-form-header-horizontal-bar
@@ -920,7 +945,7 @@ img.mfp-img
     width: 113px;
 
     text-align: right;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     font-weight: normal;
 }
 

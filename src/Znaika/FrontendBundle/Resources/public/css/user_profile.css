@@ -66,7 +66,7 @@
 
     color: #0373a8;
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .popup-content
@@ -84,7 +84,7 @@
     padding: 0 5px;
 
     color: #0373A8;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     font-size: 13px;
     cursor: pointer;
 }
@@ -99,8 +99,28 @@
     margin-top: 28px;
 }
 
+.user-profile-container h3,
+.user-profile-container label
+{
+    font-family: "OpenSans Semibold",sans-serif;
+    font-weight: normal;
+}
+
+.user-profile-container h3
+{
+    margin: 20px 0;
+    color: #000;
+    font-size: 16px;
+}
+
+.user-profile-container label
+{
+    color: #2a2a2a;
+    font-size: 12px;
+}
+
 .photo-column-container,
-.info-column-container,
+.user-profile-column-container,
 .settings-column-container
 {
     float: left;
@@ -108,25 +128,99 @@
 
 .photo-column-container
 {
-    width: 245px;
+    padding-left: 23px;
+    padding-right: 24px;
+    width: 247px;
 }
 
 .photo-container
 {
     width: 200px;
-    height: 200px;
+    height: 201px;
 
-    border: 1px solid grey;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.add-photo-button{}
-
-.info-column-container
+.user-profile-column-container
 {
-    width: 365px;
+    width: 378px;
+    padding-left: 24px;
+    padding-right: 16px;
+}
+
+.form-control,
+.date-form select
+{
+    border-color: #c8c8c8;
+}
+
+.edit-user-profile-form
+{
+    width: 100%;
+}
+
+.edit-user-profile-form input[type="text"]
+{
+    width: 230px;
+}
+
+.edit-user-profile-form label
+{
+    width: 108px;
+}
+
+
+.edit-user-profile-form .input-group input,
+.sex-field label
+{
+    font-family: "OpenSans",serif;
+}
+
+.sex-form label,
+.sex-field .iradio
+{
+    display: block;
+    float: left;
+}
+
+.sex-field
+{
+    padding-left: 0;
+    border: none;
+}
+
+.sex-field label
+{
+    bottom: 2px;
+    left: 2px;
+    position: relative;
+    width: 78px;
+}
+
+.grade-select
+{
+    width: 82px !important;
+    border-radius: 4px !important;
+}
+
+.date-form select
+{
+    padding: 4px 8px 6px;
+    height: 32px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+.date-select-block
+{
+    padding: 0;
+    width: 220px;
+    border: none;
 }
 
 .settings-column-container
 {
-    width: 387px;
+    padding-left: 16px;
+    width: 373px;
 }

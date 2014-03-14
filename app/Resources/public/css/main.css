@@ -8,7 +8,7 @@ html,
 body
 {
     height: 100%;
-    font-family: "OpenSans";
+    font-family: "OpenSans",serif;
     background: #FCFCFC;
 }
 
@@ -297,7 +297,7 @@ a:focus
 
 .subject-menu .selected > a
 {
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     color: #d35306;
 }
 
@@ -458,7 +458,7 @@ div.form-error-field .arrow
     height: 32px;
     padding: 4px 8px 6px;
 
-    font-family: "OpenSans";
+    font-family: "OpenSans",serif;
     font-size: 13px;
     border-color: #aaaaaa;
 
@@ -477,25 +477,25 @@ div.form-error-field .arrow
 .form-control:-moz-placeholder
 {
     color: #9b9898;
-    font-family: "OpenSans Italic";
+    font-family: "OpenSans Italic",cursive;
 }
 
 .form-control::-moz-placeholder
 {
     color: #9b9898;
-    font-family: "OpenSans Italic";
+    font-family: "OpenSans Italic",cursive;
 }
 
 .form-control:-ms-input-placeholder
 {
     color: #9b9898;
-    font-family: "OpenSans Italic";
+    font-family: "OpenSans Italic",cursive;
 }
 
 .form-control::-webkit-input-placeholder
 {
     color: #9b9898;
-    font-family: "OpenSans Italic";
+    font-family: "OpenSans Italic",cursive;
 }
 
 .form-control::-ms-clear
@@ -784,7 +784,7 @@ label
     display: block;
     color: #fff;
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     text-decoration: none;
 }
 

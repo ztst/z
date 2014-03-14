@@ -23,17 +23,6 @@
     float: left;
 }
 
-.filters-block-container
-{
-    margin-left: 661px;
-    width: 337px;
-}
-
-.filters-block-container .filters-block
-{
-    width: 336px;
-}
-
 .show-catalog-page-container h4,
 .show-catalog-page-container h5
 {
@@ -50,12 +39,12 @@
     margin-bottom: -15px;
 
     background: #fff;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .show-catalog-page-container h5
 {
-    font-family: "OpenSans";
+    font-family: "OpenSans",serif;
 }
 
 .chapter-video-preview-container
@@ -82,14 +71,20 @@
 {
     color: #666;
     font-size: 12px;
-    font-family: "OpenSans";
+    font-family: "OpenSans",serif;
 }
 
-/* filters block styles BEGIN */
-.filters-block
+.filters-block-container
+{
+    margin-left: 661px;
+    width: 337px;
+}
+
+.filters-block-container .filters-block
 {
     margin-top: -20px;
     padding: 10px 18px 0;
+    width: 336px;
 }
 
 .filters-block h5
@@ -97,61 +92,7 @@
     margin-top: 20px;
     font-size: 14px;
     color: #262626;
-    font-family: "OpenSans";
-}
-
-.filters-block .filter,
-.filters-block .filter .dropdown-toggle,
-.filters-block .filter .dropdown-menu
-{
-    width: 100%;
-}
-
-.filters-block .filter .dropdown-toggle,
-.filters-block .open.filter .dropdown-toggle
-{
-    margin-top: 10px;
-    padding: 0 10px !important;
-
-    border-radius: 2px;
-    border-color: #c8c8c8 !important;
-    background: linear-gradient(to bottom, #fdfdfd, #f2f2f2);
-    box-shadow: none;
-
-    color: #717070 !important;
-    font-size: 13px !important;
-    font-family: "OpenSans Semibold" !important;
-    text-align: left;
-}
-
-.filters-block .filter .dropdown-toggle .filter-label
-{
-    display: inline-block;
-    float: left;
-}
-
-.filters-block .filter .dropdown-toggle .caret
-{
-    float: right;
-    margin-top: 13px;
-    border-top-color: #606060;
-}
-
-.filters-block .filter .dropdown-menu
-{
-    margin: -1px 0 0;
-    border-radius: 0;
-    box-shadow: none;
-}
-
-.filters-block .filter .dropdown-menu > li > a
-{
-    font-size: 13px;
-}
-
-.filters-block .filter .dropdown-menu > li > a:hover
-{
-    text-decoration: underline;
+    font-family: "OpenSans",serif;
 }
 
 .advertisement
@@ -161,4 +102,3 @@
     height: 200px;
     border: 1px solid #ccc;
 }
-/* filters block styles END */

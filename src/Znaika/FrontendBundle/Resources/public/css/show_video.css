@@ -32,7 +32,7 @@
 {
     width: 85%;
     margin: 0 18px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     font-size: 22px;
 }
 
@@ -100,7 +100,7 @@
     color: #010101;
     background: #fff;
 
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     border-bottom: none;
 
     padding-top: 3px;
@@ -312,7 +312,7 @@
     height: 30px;
 
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .user-question-container
@@ -327,14 +327,14 @@
     margin-top: 5px;
     color: #333;
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .question-author-name
 {
     color: #333;
     font-size: 12px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .comment-body
@@ -348,14 +348,14 @@
     margin-top: 5px;
     color: #999;
     font-size: 11px;
-    font-family: "OpenSans";
+    font-family: "OpenSans",serif;
 }
 
 .label-your-comment
 {
     color: #333;
     font-size: 15px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     font-weight: normal;
 }
 /* comments styles END */
@@ -393,7 +393,7 @@
 {
     color: #036995;
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .chapter-name
@@ -401,7 +401,7 @@
     margin-bottom: 15px;
     color: #303030;
     font-size: 15px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .show-more-videos
@@ -504,7 +504,7 @@
     margin-left: 8px;
 
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .add-button-label
@@ -513,7 +513,7 @@
     margin-left: 8px;
 
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 /* moderator styles END */

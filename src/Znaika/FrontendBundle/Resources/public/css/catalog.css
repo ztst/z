@@ -98,7 +98,7 @@
 
     color: #555;
     font-size: 15px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .chapter-description-container.selected a

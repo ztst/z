@@ -53,7 +53,7 @@
     display: block;
 }
 
-.over-video-length
+.over-duration-length
 {
     display: block;
     position: absolute;
@@ -64,10 +64,10 @@
     font-family: "Arial";
     font-weight: bold;
     font-size: 10px;
-    background: url('/images/video/video-length-background.png') repeat-x;
+    background: url('/images/video/video-duration-background.png') repeat-x;
 }
 
-.chapter-selected-video .over-video-length
+.chapter-selected-video .over-duration-length
 {
     right: 2px;
     bottom: 2px;
@@ -84,7 +84,7 @@
     margin-bottom: 15px;
     color: #303030;
     font-size: 15px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .chapter-videos-block-container h5
@@ -100,7 +100,7 @@
     margin-bottom: 5px;
     color: #222;
     font-size: 12px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     cursor: pointer;
 }
 
@@ -221,7 +221,7 @@
 
     color: #fff;
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .video-down,

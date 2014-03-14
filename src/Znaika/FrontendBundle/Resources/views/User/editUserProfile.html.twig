@@ -31,16 +31,21 @@
     </div>
   {% endfor %}
 
-  <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-    {% include "ZnaikaFrontendBundle:User:user_photo_form.html.twig" with {'form': userPhotoForm} %}
-  </div>
-  <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-    {% if isSocialRegisterComplete %}
-      {% include "ZnaikaFrontendBundle:User:change_password_on_register_complete.html.twig" with {'form': changePasswordOnRegisterCompleteForm} %}
-    {% endif %}
+  <div class="user-profile-container">
+    <div class="photo-column-container">
+      {% include "ZnaikaFrontendBundle:User:user_photo_form.html.twig" with {'form': userPhotoForm} %}
+    </div>
 
-    {% include "ZnaikaFrontendBundle:User:user_profile_form.html.twig" with {'form': profileForm} %}
-    <div class="user-settings-container">
+    <div class="user-profile-column-container">
+      {% if isSocialRegisterComplete %}
+        {% include "ZnaikaFrontendBundle:User:change_password_on_register_complete.html.twig" with {'form': changePasswordOnRegisterCompleteForm} %}
+      {% endif %}
+
+      <h3>Личная информация</h3>
+      {% include "ZnaikaFrontendBundle:User:user_profile_form.html.twig" with {'form': profileForm} %}
+    </div>
+
+    <div class="settings-column-container">
       <h3>Настройки аккаунта</h3>
       <div class="change-email-controller">
         <span>Email</span>
