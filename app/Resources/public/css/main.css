@@ -8,7 +8,7 @@ html,
 body
 {
     height: 100%;
-    font-family: "OpenSans";
+    font-family: "OpenSans", "Open Sans", sans-serif;
     background: #FCFCFC;
 }
 
@@ -64,6 +64,7 @@ a:focus
 
 .wrap > .container
 {
+    width: 1000px !important;
     display: block;
     position: relative;
     min-height: 100%;
@@ -267,16 +268,30 @@ a:focus
 .subject-menu
 {
     height: 33px;
+    position: relative;
 }
 
 .subject-menu .subject-menu-more-link
 {
+    border-left: 1px solid #e2e2e2;
     float: right;
+    padding-right: 30px !important;
+    position: relative;
 }
 
-.subject-menu ul
+.subject-menu .more-button-carot
 {
-    width: 935px;
+    display: inline-block;
+    height: 5px;
+    width: 8px;
+    position: absolute;
+    right: 18px;
+    top: 15px;
+    background: url("/images/more-button-caret.png") no-repeat;
+}
+
+.subject-menu .subject-menu-list
+{
     height: 32px;
     float: left;
 
@@ -286,13 +301,24 @@ a:focus
     background: #f4f4f4;
 }
 
-.subject-menu li
+.subject-menu-list li
 {
     display: inline-block;
     width: auto;
-    margin-left: -4px;
+    float: left;
     border-left: 1px solid #e2e2e2;
     border-right: 1px solid #fcfcfc;
+}
+
+.subject-menu li.first
+{
+    border-left: none;
+    border-right: 1px solid #fcfcfc;
+}
+
+.subject-menu li.last
+{
+    border-right: none;
 }
 
 .subject-menu .selected > a
@@ -314,9 +340,33 @@ a:focus
     cursor: pointer;
 }
 
-.subject-menu a:hover
+.subject-menu a:hover,
+.subject-menu a.over
 {
     background: #ebebeb;
+}
+
+.subject-menu-more-container
+{
+    position: absolute;
+    display: inline-block;
+    background: #f4f4f4;
+    border: 1px solid #cfcfcf;
+}
+
+.subject-menu-more-container ul
+{
+    list-style: none;
+    margin: 0;
+}
+
+.subject-menu-more-container a:hover
+{
+    background: #ebebeb;
+    border-top: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
 }
 
 .main-menu
@@ -689,21 +739,18 @@ label
     }
 }
 
-@media (min-width: 1024px)
+.container,
+.class-menu,
+.subject-menu
 {
-    .container,
-    .class-menu,
-    .subject-menu
-    {
-        width: 1000px;
-    }
+    width: 1000px;
+}
 
-    .class-menu,
-    .subject-menu
-    {
-        margin-right: auto;
-        margin-left: auto;
-    }
+.class-menu,
+.subject-menu
+{
+    margin-right: auto;
+    margin-left: auto;
 }
 
 * + html .class-menu .nav-justified > li

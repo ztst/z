@@ -13,7 +13,15 @@
         <div class="video-duration">{{ video.duration|date("i:s") }}</div>
       </div>
       <div class="video-description">
-        <h5>{{ video.getName|raw }}</h5>
+        <a
+          href="{{ path('show_video', {
+          'subjectName': video.getSubject.getUrlName,
+          'class': video.getGrade,
+          'videoName': video.getUrlName
+          }) }}"
+          title="{{ video.getName|raw }}">
+          <h5>{{ video.getName|raw }}</h5>
+        </a>
         <div class="video-info-line">
           <span>{{ video.getSubject.getName }}</span>
           <span>{{ video.getGrade }} класс</span>

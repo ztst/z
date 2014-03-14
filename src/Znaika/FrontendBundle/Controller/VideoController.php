@@ -274,17 +274,20 @@
             $chapterRepository = $this->getChapterRepository();
             $chapters          = $chapterRepository->getChaptersForCatalog($class, $subject->getSubjectId());
 
-            $currentChapter = null;
+            $currentChapter   = null;
+            $currentChapterId = 0;
             if (!empty($chapters) && isset($chapters[0]))
             {
-                $currentChapter = $chapters[0];
+                $currentChapter   = $chapters[0];
+                $currentChapterId = $currentChapter->getChapterId();
             }
 
             return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
-                'class'           => $class,
-                'currentChapter'  => $currentChapter,
-                'chapters'        => $chapters,
-                'videoRepository' => $this->getVideoRepository()
+                'class'            => $class,
+                'currentChapter'   => $currentChapter,
+                'currentChapterId' => $currentChapterId,
+                'chapters'         => $chapters,
+                'videoRepository'  => $this->getVideoRepository()
             ));
         }
 

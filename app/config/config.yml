@@ -95,13 +95,13 @@ parameters:
 
     vk_client_id:     4189574
     vk_client_secret: VKKmEUUmZuLf9xb9EVTB
-    vk_redirect_uri:  http://znaika.local/app_dev.php/vk-auth
+    vk_redirect_uri:  http://znaika.local/vk-auth
 
     facebook_client_id:     738615669489662
     facebook_client_secret: b1a4797dc63a8bd6c92c6305f258a9ec
-    facebook_redirect_uri:  http://znaika.local/app_dev.php/facebook-auth
+    facebook_redirect_uri:  http://znaika.local/facebook-auth
 
     odnoklassniki_client_id:     223869184
     odnoklassniki_public_key:    CBAKPIFOABABABABA
     odnoklassniki_client_secret: E36998B37C434A20950F618E
-    odnoklassniki_redirect_uri:  http://znaika.local/app_dev.php/odnoklassniki-auth
+    odnoklassniki_redirect_uri:  http://znaika.local/odnoklassniki-auth

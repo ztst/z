@@ -40,6 +40,11 @@
             return $this->findOneByUrlName($name);
         }
 
+        public function getOneByContentDir($dir)
+        {
+            return $this->findOneByContentDir($dir);
+        }
+
         public function getVideoByChapter($chapter)
         {
             $queryBuilder = $this->getEntityManager()

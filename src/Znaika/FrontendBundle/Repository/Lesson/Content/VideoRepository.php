@@ -42,6 +42,17 @@
             return $result;
         }
 
+        public function getOneByContentDir($dir)
+        {
+            $result = $this->redisRepository->getOneByContentDir($dir);
+            if (empty($result))
+            {
+                $result = $this->dbRepository->getOneByContentDir($dir);
+            }
+
+            return $result;
+        }
+
         /**
          * @param null $classNumber
          * @param null $subjectName

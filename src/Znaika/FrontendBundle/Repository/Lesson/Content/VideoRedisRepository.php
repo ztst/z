@@ -86,4 +86,9 @@
         {
             return null;
         }
+
+        public function getOneByContentDir($dir)
+        {
+            return null;
+        }
     }

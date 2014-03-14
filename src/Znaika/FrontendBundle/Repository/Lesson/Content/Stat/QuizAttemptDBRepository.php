@@ -13,14 +13,17 @@
         }
 
         public function getUserQuizAttempt($userId, $quizId)
-        {            $queryBuilder = $this->getEntityManager()
-                                          ->createQueryBuilder();
+        {
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
             $queryBuilder->select('qa')
                          ->from('ZnaikaFrontendBundle:Lesson\Content\Stat\QuizAttempt', 'qa')
                          ->andWhere('qa.user = :user_id')
                          ->setParameter('user_id', $userId)
                          ->andWhere('qa.quiz = :quiz_id')
-                         ->setParameter('quiz_id', $quizId);
+                         ->setParameter('quiz_id', $quizId)
+                         ->orderBy("qa.createdTime", "DESC")
+                         ->setMaxResults(1);
 
             return $queryBuilder->getQuery()->getOneOrNullResult();
         }
