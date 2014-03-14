@@ -104,6 +104,7 @@
     padding: 0 6px;
     height: 27px;
 }
+
 .user-profile-container .form-group
 {
     margin-bottom: 14px;
@@ -190,9 +191,10 @@
 
 .edit-user-profile-form label
 {
+    display: block;
+    float: left;
     width: 107px;
 }
-
 
 .edit-user-profile-form .input-group input,
 .sex-field label,
@@ -201,14 +203,13 @@
     font-family: "OpenSans",serif;
 }
 
-.sex-form label,
 .sex-field .iradio
 {
     display: block;
     float: left;
 }
 
-.sex-form
+.form-group.sex-form
 {
     margin-bottom: 7px;
 }
@@ -244,6 +245,7 @@
 
 .form-control.date-select-block
 {
+    display: inline-block;
     padding: 0;
     width: 220px;
     border: none;
@@ -284,3 +286,39 @@
     display: inline-block;
     margin-right: 13px;
 }
+
+/* selectbox additional styles BEGIN */
+.selectbox .select
+{
+    padding: 0 7px;
+    height: 27px;
+    line-height: 25px;
+
+    color: #2a2a2a;
+    font-size: 12px;
+    font-family: "OpenSans","Open Sans",serif;
+
+    background: #ffffff;
+    background-image: linear-gradient(#ffffff, #fdfdfd)
+}
+
+.selectbox .trigger .arrow
+{
+    top: 11px;
+    right: 6px;
+    opacity: 1;
+}
+
+.grade-form .selectbox,
+.grade-form .selectbox .select,
+.selectbox .dropdown
+
+{
+    width: 82px !important;
+}
+
+.date-form .selectbox
+{
+    margin-right: 6px;
+}
+/* selectbox additional styles END */

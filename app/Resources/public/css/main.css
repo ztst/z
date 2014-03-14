@@ -633,8 +633,9 @@ input
 .login-button,
 .registration-button
 {
-    font-size: 13px;
     color: #036995 !important;
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .login-button,

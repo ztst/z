@@ -96,6 +96,7 @@
 
 .video-title
 {
+    display: inline-block;
     margin-top: -1px;
     margin-bottom: 5px;
     color: #222;

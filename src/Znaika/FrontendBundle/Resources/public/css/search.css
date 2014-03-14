@@ -35,8 +35,9 @@
     position: relative;
     z-index: 1;
 
-    padding-bottom: 18px;
+    margin-top: 25px;
     margin-bottom: -15px;
+    padding-bottom: 18px;
 
     background: #fff;
     font-family: "OpenSans Semibold",sans-serif;
