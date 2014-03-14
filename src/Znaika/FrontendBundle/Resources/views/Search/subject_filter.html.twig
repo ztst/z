@@ -1,12 +1,6 @@
-<div class="btn-group custom-select subject-select">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-    <span class="custom-select-label">{% if currentSubject %}{{ currentSubject.name }}{% else %}Предмет{% endif %}</span>
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><input type="hidden" value="" /><a href="javascript:void(0);">Любой</a></li>
-    {% for subject in subjects %}
-      <li><input type="hidden" value="{{ subject.urlName }}" /><a href="javascript:void(0);">{{ subject.name }}</a></li>
-    {% endfor %}
-  </ul>
-</div>
+<select id="subjectSelect" class="search-filter-select">
+  <option value="" />Предмет</option>
+  {% for subject in subjects %}
+    <option value="{{ subject.urlName }}" {% if currentSubject and currentSubject == subject  %}selected="selected"{% endif %}/>{{ subject.name }}</option>
+  {% endfor %}
+</select>

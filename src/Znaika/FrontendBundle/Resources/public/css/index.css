@@ -112,6 +112,11 @@
     margin-top: 8px;
 }
 
+.index-page-videos-list .list-item .video-description a:hover
+{
+    text-decoration: none;
+}
+
 .index-page-videos-list .list-item .video-info-line span
 {
     font-family: "OpenSans",serif;

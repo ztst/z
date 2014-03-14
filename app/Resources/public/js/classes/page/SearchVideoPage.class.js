@@ -41,15 +41,17 @@ var SearchVideoPage = Base.extend({
 
     _initFilterSelect: function()
     {
-        $('.dropdown-toggle').dropdown();
-
-        $(".grade-select .dropdown-menu li").click(function(){
-            $("#searchGradeInput").val($(this).find("input[type='hidden']").val());
+        var gradeSelect = $("#gradeSelect");
+        gradeSelect.selectbox();
+        gradeSelect.change(function(){
+            $("#searchGradeInput").val($(this).val());
             $("#searchForm").submit();
         });
 
-        $(".subject-select .dropdown-menu li").click(function(){
-            $("#searchSubjectInput").val($(this).find("input[type='hidden']").val());
+        var subjectSelect = $("#subjectSelect");
+        subjectSelect.selectbox();
+        subjectSelect.change(function(){
+            $("#searchSubjectInput").val($(this).val());
             $("#searchForm").submit();
         });
     },

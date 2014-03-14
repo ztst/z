@@ -12,10 +12,18 @@ var BaseForm = EventDispatcher.extend({
             onkeyup: false,
             errorClass: "form-error-field",
             errorElement: "div",
-            errorPlacement: function ($error, $element) {
+            errorPlacement: function($error, $element)
+            {
                 $element.closest("div").after($error);
                 var errorFields = $($element.parents().get(1)).find(".form-error-field");
                 errorFields.append('<div class="arrow"></div>');
+            },
+            invalidHandler: function()
+            {
+                setTimeout(function()
+                {
+                    $('input, select').trigger('refresh');
+                }, 1)
             }
         });
 
@@ -91,28 +99,27 @@ var BaseForm = EventDispatcher.extend({
         var email = $(element).val();
 
         var errorMessage = "Не верный емайл.";
-        if(email.indexOf("@") == -1)
+        if (email.indexOf("@") == -1)
         {
             errorMessage = "Адрес должен содержать символ \"@\". Адрес \"" + email + "\" не содержит символ \"@\"";
         }
-        else if(email.indexOf("@") == email.length - 1)
+        else if (email.indexOf("@") == email.length - 1)
         {
             errorMessage = "Введите часть адреса после \"@\". Адрес \"" + email + "\" неполный"
         }
-        else if(/^.+\@\.$/.test(email))
+        else if (/^.+\@\.$/.test(email))
         {
             errorMessage = "Недопустимое положение \".\"";
         }
-        else if(email.indexOf(".") == email.length - 1)
+        else if (email.indexOf(".") == email.length - 1)
         {
             errorMessage = "Введите часть адреса после \".\". Адрес \"" + email + "\" неполный";
         }
 
         return errorMessage;
     }
-},{
-    event:
-    {
+}, {
+    event: {
         SUBMITTED: "submitted"
     }
 });

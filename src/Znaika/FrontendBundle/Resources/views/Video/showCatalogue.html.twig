@@ -25,7 +25,7 @@
 {% block content %}
   <div class="show-catalog-page-container">
     <div id="chapterCatalogContainer" class="chapters-list-container">
-      {% include "ZnaikaFrontendBundle:Video:chapters_list.html.twig" with {'chapters': chapters, 'currentChapterId': currentChapter.chapterId} %}
+      {% include "ZnaikaFrontendBundle:Video:chapters_list.html.twig" with {'chapters': chapters, 'currentChapterId': currentChapterId} %}
     </div>
     <div id="videoCatalogContainer" class="videos-list-container">
       <div class="chapter-videos-block-container">

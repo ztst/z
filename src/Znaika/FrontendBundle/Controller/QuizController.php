@@ -26,8 +26,8 @@
                 return $this->createNotFoundException("Bad url for save quiz stat");
             }
 
-            $videoUrlName = $matches[1];
-            $video     = $this->getVideoRepository()->getOneByUrlName($videoUrlName);
+            $videoDirName = $matches[1];
+            $video     = $this->getVideoRepository()->getOneByContentDir($videoDirName);
             if (is_null($video) || !$video->getQuiz())
             {
                 return $this->createNotFoundException("Quiz not found");
@@ -100,13 +100,13 @@
          */
         private function prepareUserQuizAttempt(User $user, Quiz $quiz)
         {
-            $quizAttempt = $this->getUserQuizAttempt($user, $quiz);
+            $quizAttempt = new QuizAttempt();
             $quizAttempt->setQuiz($quiz);
             $quizAttempt->setUser($user);
             $quizAttempt->setCreatedTime(new \DateTime());
             $this->setQuizAttemptScore($quizAttempt);
 
-            return is_null($quizAttempt) ? new QuizAttempt() : $quizAttempt;
+            return $quizAttempt;
         }
 
         /**
@@ -119,20 +119,6 @@
             $totalPoint = $request->get("tp", 1);
             $score      = $userPoint * 100 / $totalPoint;
             $quizAttempt->setScore($score);
-        }
-
-        /**
-         * @param User $user
-         * @param Quiz $quiz
-         *
-         * @return QuizAttempt
-         */
-        private function getUserQuizAttempt(User $user, Quiz $quiz)
-        {
-            $quizAttemptRepository = $this->getQuizAttemptRepository();
-            $quizAttempt           = $quizAttemptRepository->getUserQuizAttempt($user->getUserId(), $quiz->getQuizId());
-
-            return $quizAttempt;
         }
 
         /**

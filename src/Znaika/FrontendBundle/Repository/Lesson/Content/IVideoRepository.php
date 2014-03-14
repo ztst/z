@@ -42,6 +42,13 @@
         public function getOneByUrlName($name);
 
         /**
+         * @param $dir
+         *
+         * @return Video
+         */
+        public function getOneByContentDir($dir);
+
+        /**
          * @param $limit
          *
          * @return Video[]

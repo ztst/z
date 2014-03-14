@@ -1,6 +1,6 @@
 .wrap > .container
 {
-    background: url('/images/gray-border.png') repeat-y 661px 0 #ffffff;
+    background: url("/images/gray-border.png") repeat-y 661px 0 #ffffff;
 }
 
 .search-video-result-container
@@ -44,7 +44,7 @@
 
 .show-catalog-page-container h5
 {
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", sans-serif;
 }
 
 .chapter-video-preview-container
@@ -71,7 +71,7 @@
 {
     color: #666;
     font-size: 12px;
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", sans-serif;
 }
 
 .filters-block-container
@@ -92,13 +92,37 @@
     margin-top: 20px;
     font-size: 14px;
     color: #262626;
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", sans-serif;
+}
+
+.filters-block .filter,
+.filters-block .search-filter-select
+{
+    width: 100%;
+}
+
+.filters-block .search-filter-select,
+.filters-block .selectbox .dropdown
+{
+    width: 300px;
+}
+
+.filters-block .selectbox
+{
+    margin-top: 10px;
+}
+
+.filters-block .search-filter-select
+{
+    margin-top: 10px;
 }
 
 .advertisement
 {
+    border: 1px solid #CCCCCC;
+    height: 200px;
     margin-top: 20px;
     width: 100%;
-    height: 200px;
-    border: 1px solid #ccc;
 }
+
+/* filters block styles END */

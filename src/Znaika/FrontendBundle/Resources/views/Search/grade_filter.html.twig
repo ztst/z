@@ -1,12 +1,6 @@
-<div class="btn-group custom-select grade-select">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-    <span class="custom-select-label">{% if currentGrade %}{{ currentGrade }} класс{% else %}Класс{% endif %}</span>
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><input type="hidden" value="" /><a href="javascript:void(0);">Любой</a></li>
-    {% for grade in grades %}
-      <li><input type="hidden" value="{{ grade }}" /><a href="javascript:void(0);">{{ grade }} класс</a></li>
-    {% endfor %}
-  </ul>
-</div>
+<select id="gradeSelect" class="search-filter-select">
+  <option value="" />Класс</option>
+  {% for grade in grades %}
+    <option value="{{ grade }}" {% if currentGrade and currentGrade == grade  %}selected="selected"{% endif %}/>{{ grade }} класс</option>
+  {% endfor %}
+</select>
