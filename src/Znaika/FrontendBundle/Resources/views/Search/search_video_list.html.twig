@@ -24,17 +24,18 @@
         </div>
       </div>
       <div class="video-text-block">
-        <p class="video-title">
-          <a href="{{ path('show_video', {
-          'subjectName': video.getSubject.getUrlName,
-          'class': video.getGrade,
-          'videoName': video.getUrlName
-          }) }}"
-             title="{{ video.getName|raw }}">
-            {{ video.getName|raw }}
-          </a>
+        <a href="{{ path('show_video', {
+        'subjectName': video.getSubject.getUrlName,
+        'class': video.getGrade,
+        'videoName': video.getUrlName
+        }) }}"
+           class="video-title"
+           title="{{ video.getName|raw }}">
+          {{ video.getName|raw }}
+        </a>
+        <p class="search-video-breadcrumbs">{{ video.grade }} класс > {{ video.subject.name }}>
+          {{ video.chapter.name }}
         </p>
-        <p class="search-video-breadcrumbs">{{ video.grade }} класс > {{ video.subject.name }} > {{ video.chapter.name }}</p>
       </div>
       <div class="clear"></div>
     </div>
