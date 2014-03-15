@@ -8,9 +8,8 @@
 {{ form_start(form, {'attr': {'id': 'editUserPhotoForm'}, 'action': url('edit_user_photo', {'userId': userId}), 'method': 'POST'}) }}
   {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
   <div class="upload-photo-button-container">
-    <a href="javascript:void(0);" class="semi-active-button add-photo-button" id="editUserPhotoButton">
-      <span class="edit-button-icon"></span>
-      <span class="edit-button-label button-label">{% if user.hasPhoto %}Изменить фото{% else %}Добавить фото{% endif %}</span>
+    <a href="javascript:void(0);" class="semi-active-button {% if user.hasPhoto %}edit-photo-button{% else %}add-photo-button{% endif %}" id="editUserPhotoButton">
+      <span class="semi-active-button-label button-label">{% if user.hasPhoto %}Изменить фото{% else %}Добавить фото{% endif %}</span>
     </a>
     <div class="form-group photo-button">
       {{ form_errors(form.photo) }}
@@ -19,9 +18,8 @@
   </div>
 
   <div class="delete-photo-button-container">
-    <a href="javascript:void(0);" class="edit-button {% if not user.hasPhoto %}hidden{% endif %}" id="deleteUserPhotoButton">
-      <span class="edit-button-icon"></span>
-      <span class="edit-button-label">Убрать фото</span>
+    <a href="javascript:void(0);" class="semi-active-button delete-photo-button {% if not user.hasPhoto %}hidden{% endif %}" id="deleteUserPhotoButton">
+      <span class="semi-active-button-label">Убрать фото</span>
     </a>
     <input type="hidden" id="userId" value="{{ user.userId }}"/>
     <input type="hidden" id="defaultPhotoUrl" value="{{ asset("images/404.jpg") }}" />

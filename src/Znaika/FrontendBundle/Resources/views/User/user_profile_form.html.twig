@@ -36,6 +36,8 @@
     {{ form_widget(form.city, {'id': 'cityField', 'attr': {'class': 'form-control' }}) }}
   </div>
   <div class="save-user-profile-button-container">
-    {{ form_widget(form.save, {'attr': {'class': 'semi-active-button save-user-profile-button'}, 'label': 'Сохранить'}) }}
+    <button type="submit" class="semi-active-button save-user-profile-button">
+      <span class="semi-active-button-label">Сохранить</span>
+    </button>
   </div>
 {{ form_end(form) }}

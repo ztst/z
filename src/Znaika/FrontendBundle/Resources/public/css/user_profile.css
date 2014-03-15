@@ -10,6 +10,7 @@
     position: absolute;
     overflow: hidden;
     width: 200px;
+    height: 30px;
 }
 
 .photo-button input
@@ -29,67 +30,16 @@
 
 .upload-photo-button-container
 {
-    margin-top: 14px;
+    margin: 14px 0;
 
-    text-align: center;
     overflow: hidden;
     width: 200px;
     height: 30px;
 }
 
-.edit-button,
-.edit-button span
-{
-    display: block;
-    float: left;
-}
-
-.edit-button
-{
-    padding: 0 5px;
-
-    border: 1px solid #4ea4cd !important;
-    border-radius: 3px !important;
-    background: #fdfdfd !important;
-    background: linear-gradient(#fdfdfd, #f0f0f0) !important;
-}
-
-.edit-button-icon
-{
-    margin: 7px 0 0;
-    width: 12px;
-    height: 14px;
-    background: url('/images/video/edit-button-icon.png') no-repeat;
-}
-
-.edit-button-label
-{
-    margin-top: 4px;
-    margin-left: 8px;
-
-    color: #0373a8;
-    font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
-}
-
 .popup-content
 {
     padding: 30px;
-}
-
-.upload-label
-{
-    display: inline-block;
-    background: linear-gradient(#FDFDFD, #F0F0F0) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
-    border: 1px solid #4EA4CD !important;
-    border-radius: 3px !important;
-    height: 30px;
-    padding: 0 5px;
-
-    color: #0373A8;
-    font-family: "OpenSans Semibold",sans-serif;
-    font-size: 13px;
-    cursor: pointer;
 }
 
 .change-password-popup
@@ -100,12 +50,6 @@
 .user-profile-container
 {
     margin-top: 9px;
-}
-
-.user-profile-container .semi-active-button
-{
-    font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .user-profile-container .form-control
@@ -121,7 +65,7 @@
 
 .user-profile-container h3,
 .user-profile-container label,
-.setting-label
+.user-profile-container .setting-label
 {
     font-family: "OpenSans Semibold",sans-serif;
     font-weight: normal;
@@ -167,10 +111,25 @@
     border-radius: 4px;
 }
 
-.add-photo-button
+.add-photo-button,
+.edit-photo-button
 {
     float: left;
-    background: #fff url('/images/user-profile/add-photo-button-icon.png') no-repeat 39px 7px;
+}
+
+.add-photo-button .semi-active-button-label
+{
+    background: #fff url('/images/user-profile/add-photo-button-icon.png') no-repeat 0 3px;
+}
+
+.edit-photo-button .semi-active-button-label
+{
+    background: #fff url('/images/user-profile/edit-photo-button-icon.png') no-repeat 0 3px;
+}
+
+.delete-photo-button .semi-active-button-label
+{
+    background: #fff url('/images/user-profile/delete-photo-button-icon.png') no-repeat 0 3px;
 }
 
 .user-profile-column-container
@@ -197,11 +156,15 @@
     width: 222px;
 }
 
-.edit-user-profile-form label
+.user-profile-container label
 {
     display: block;
     float: left;
     margin-top: 5px;
+}
+
+.edit-user-profile-form label
+{
     width: 107px;
 }
 
@@ -264,7 +227,7 @@
 .save-user-profile-button
 {
     font-family: "OpenSans Semibold",sans-serif;
-    background: url("/images/user-profile/save-user-profile-button-icon.png") no-repeat scroll 54px 10px #FFFFFF;
+    background: url("/images/user-profile/save-user-profile-button-icon.png") no-repeat scroll 54px 8px #FFFFFF;
 }
 
 .settings-column-container
@@ -296,18 +259,29 @@
 .change-form-container
 {
     position: relative;
-    bottom: 10px;
 
-    padding: 18px;
+    padding: 15px 18px;
     width: 100%;
-    background: #fffdf7;
+    background: rgba(255, 253, 247, 0.5);
     border: 1px solid #dfbca7;
+}
+
+.change-email-form-container
+{
+    position: relative;
+    bottom: 10px;
+}
+
+.change-password-form-container
+{
+    position: relative;
+    bottom: -11px;
 }
 
 .change-form-container h4
 {
     margin: 0;
-    padding-bottom: 15px;
+    height: 33px;
     font-size: 13px;
     font-family: "OpenSans Bold",sans-serif;
 }
@@ -351,12 +325,24 @@ a.non-active-button
     width: 169px;
 }
 
+.change-setting-button .semi-active-button-label
+{
+    padding-left: 16px;
+    background: url('/images/user-profile/change-setting-icon.png') no-repeat 0 3px;
+}
+
 .cancel-edit-account
 {
     float: right;
     padding-top: 5px;
     width: 119px;
-    text-align: center;
+}
+
+.cancel-edit-account .non-active-button-label
+{
+    padding-left: 16px;
+    color: #686868;
+    background: url('/images/user-profile/cancel-edit-icon.png') no-repeat 0 3px;
 }
 /* change forms styles END */
 
