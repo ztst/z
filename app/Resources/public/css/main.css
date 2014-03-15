@@ -831,9 +831,9 @@ label
 .footer-copyright-container span
 {
     display: block;
-    color: #fff;
+    color: #d1dfe6;
     font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans",sans-serif;
     text-decoration: none;
 }
 
