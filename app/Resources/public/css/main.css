@@ -837,10 +837,10 @@ label
 .footer-container a,
 .footer-copyright-container span
 {
-    color: #D1DFE6;
     display: block;
-    font-family: "OpenSans", sans-serif;
+    color: #d1dfe6;
     font-size: 13px;
+    font-family: "OpenSans",sans-serif;
     text-decoration: none;
 }
 
