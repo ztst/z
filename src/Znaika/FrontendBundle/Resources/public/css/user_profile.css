@@ -1,3 +1,8 @@
+.wrap > .container
+{
+    background: url('/images/user-profile/user-profile-background.png') repeat-y 0 25px;
+}
+
 .photo-button
 {
     filter: alpha(opacity=0);
@@ -161,8 +166,7 @@
 .add-photo-button
 {
     height: 31px;
-    background: url('/images/user-profile/add-photo-button-icon.png') no-repeat;
-    background-position: 39px 7px;
+    background: #fff url('/images/user-profile/add-photo-button-icon.png') no-repeat 39px 7px;
 }
 
 .user-profile-column-container
@@ -236,7 +240,7 @@
     border-radius: 4px !important;
 }
 
-.date-form select
+.date-form .form-control.select
 {
     padding: 4px 8px 6px;
     height: 32px;
