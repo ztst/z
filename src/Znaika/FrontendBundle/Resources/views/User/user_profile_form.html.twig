@@ -23,12 +23,12 @@
   <div class="form-group grade-form">
     {{ form_label(form.grade, 'Класс') }}
     {{ form_errors(form.grade) }}
-    {{ form_widget(form.grade, {'id': 'gradeField', 'attr': {'class': 'form-control grade-select' }}) }}
+    {{ form_widget(form.grade, {'id': 'gradeField', 'attr': {'class': 'grade-select' }}) }}
   </div>
   <div class="form-group date-form birthdate-container">
     {{ form_label(form.birthDate, 'Дата рождения') }}
     {{ form_errors(form.birthDate) }}
-    {{ form_widget(form.birthDate, {'id': 'birthDateField', 'attr': {'class': 'form-control date-select-block' }}) }}
+    {{ form_widget(form.birthDate, {'id': 'birthDateField', 'attr': {'class': 'date-select-block' }}) }}
   </div>
   <div class="form-group input-group">
     {{ form_label(form.city, 'Город') }}

@@ -12,6 +12,12 @@ body
     background: #FCFCFC;
 }
 
+h3
+{
+    font-size: 24px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
 a:focus
 {
     outline: none;
@@ -193,7 +199,7 @@ a:focus
     border-left: 1px solid #1181b3;
 
     height: 35px;
-    padding: 5px 5px 0 !important;
+    padding: 7px 5px 0 !important;
     cursor: pointer;
     display: block;
 
@@ -232,7 +238,7 @@ a:focus
 .class-menu .selected > span:hover
 {
     position: relative;
-    padding: 3px 5px 0 !important;;
+    padding: 5px 5px 0 !important;;
     height: 34px;
     color: #fefefe;
     background: #0074a6;
@@ -263,7 +269,7 @@ a:focus
 
 .class-menu .grade-number
 {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .subject-menu
@@ -831,10 +837,10 @@ label
 .footer-container a,
 .footer-copyright-container span
 {
+    color: #D1DFE6;
     display: block;
-    color: #fff;
+    font-family: "OpenSans", sans-serif;
     font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
     text-decoration: none;
 }
 

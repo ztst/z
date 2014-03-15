@@ -1,11 +1,15 @@
+.wrap > .container
+{
+    background: url('/images/user-profile/user-profile-background.png') repeat-y 0 30px;
+}
+
 .photo-button
 {
     filter: alpha(opacity=0);
     opacity: 0;
     position: absolute;
     overflow: hidden;
-    width: 208px;
-    height: 30px;
+    width: 200px;
 }
 
 .photo-button input
@@ -15,9 +19,9 @@
 
     margin-top: -50px;
     margin-left: -410px;
-    font-size: 40px;
+    font-size: 70px;
     height: 100px;
-    width: 550px;
+    width: 611px;
     position: relative;
 
     cursor: pointer;
@@ -42,7 +46,6 @@
 
 .edit-button
 {
-    height: 30px;
     padding: 0 5px;
 
     border: 1px solid #4ea4cd !important;
@@ -97,6 +100,12 @@
 .user-profile-container
 {
     margin-top: 9px;
+}
+
+.user-profile-container .semi-active-button
+{
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .user-profile-container .form-control
@@ -160,9 +169,8 @@
 
 .add-photo-button
 {
-    height: 31px;
-    background: url('/images/user-profile/add-photo-button-icon.png') no-repeat;
-    background-position: 39px 7px;
+    float: left;
+    background: #fff url('/images/user-profile/add-photo-button-icon.png') no-repeat 39px 7px;
 }
 
 .user-profile-column-container
@@ -193,6 +201,7 @@
 {
     display: block;
     float: left;
+    margin-top: 5px;
     width: 107px;
 }
 
@@ -208,11 +217,7 @@
 {
     display: block;
     float: left;
-}
-
-.form-group.sex-form
-{
-    margin-bottom: 7px;
+    margin-top: 7px;
 }
 
 .sex-field
@@ -223,9 +228,7 @@
 
 .sex-field label
 {
-    bottom: 2px;
-    left: 2px;
-    position: relative;
+    padding-left: 3px;
     width: 78px;
 }
 
@@ -236,7 +239,7 @@
     border-radius: 4px !important;
 }
 
-.date-form select
+.date-form .form-control.select
 {
     padding: 4px 8px 6px;
     height: 32px;
@@ -254,19 +257,20 @@
 
 .save-user-profile-button-container
 {
+    padding-top: 7px;
     padding-left: 108px;
 }
 
 .save-user-profile-button
 {
     font-family: "OpenSans Semibold",sans-serif;
-    background: url('/images/user-profile/save-user-profile-button-icon.png') no-repeat 54px 10px;
+    background: url("/images/user-profile/save-user-profile-button-icon.png") no-repeat scroll 54px 10px #FFFFFF;
 }
 
 .settings-column-container
 {
     padding-left: 19px;
-    padding-right: 2px;
+    padding-right: 20px;
     width: 378px;
 }
 
@@ -279,7 +283,7 @@
 .setting-label
 {
     display: inline-block;
-    width: 62px;
+    width: 58px;
 }
 
 .current-setting-value
@@ -287,6 +291,74 @@
     display: inline-block;
     margin-right: 13px;
 }
+
+/* change forms styles BEGIN */
+.change-form-container
+{
+    position: relative;
+    bottom: 10px;
+
+    padding: 18px;
+    width: 100%;
+    background: #fffdf7;
+    border: 1px solid #dfbca7;
+}
+
+.change-form-container h4
+{
+    margin: 0;
+    padding-bottom: 15px;
+    font-size: 13px;
+    font-family: "OpenSans Bold",sans-serif;
+}
+
+.change-form-container label
+{
+    float: left;
+    width: 111px;
+}
+
+.change-form-container input
+{
+    width: 190px;
+}
+
+.semi-active-button,
+.non-active-button
+{
+    height: 30px;
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
+a.semi-active-button,
+a.non-active-button
+{
+    padding-top: 4px;
+}
+
+.change-buttons-container
+{
+    display: inline-block;
+    padding-top: 6px;
+    width: 100%;
+}
+
+.change-setting-button
+{
+    float: left;
+    padding: 0 5px;
+    width: 169px;
+}
+
+.cancel-edit-account
+{
+    float: right;
+    padding-top: 5px;
+    width: 119px;
+    text-align: center;
+}
+/* change forms styles END */
 
 /* selectbox additional styles BEGIN */
 .selectbox .select
@@ -299,8 +371,7 @@
     font-size: 12px;
     font-family: "OpenSans","Open Sans",serif;
 
-    background: #ffffff;
-    background-image: linear-gradient(#ffffff, #fdfdfd)
+    background: #ffffff linear-gradient(#ffffff, #fdfdfd);
 }
 
 .selectbox .trigger .arrow

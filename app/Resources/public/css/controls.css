@@ -9,6 +9,7 @@
     border-radius: 3px;
     font-size: 15px;
     font-family: "OpenSans",serif;
+    cursor: pointer;
 }
 
 .active-button:hover,
@@ -54,7 +55,8 @@
     box-shadow: 0 3px 6px -6px #000;
 }
 
-.non-active-button
+.non-active-button,
+.non-active-button:hover
 {
     border: 1px solid #d6d6d6;
     color: #cbd6dc;

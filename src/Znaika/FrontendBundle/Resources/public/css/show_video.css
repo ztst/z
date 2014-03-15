@@ -180,6 +180,7 @@
     float: left;
     margin: 0;
     font-size: 13px;
+    font-family: "OpenSans",serif;
 }
 
 .video-social-buttons a.social_share_link.vk
@@ -213,6 +214,7 @@
 .video-views-amount
 {
     margin-bottom: 0;
+    font-family: "OpenSans",serif;
 }
 
 .video-author
