@@ -193,7 +193,7 @@ a:focus
     border-left: 1px solid #1181b3;
 
     height: 35px;
-    padding: 5px 5px 0 !important;
+    padding: 7px 5px 0 !important;
     cursor: pointer;
     display: block;
 
@@ -232,7 +232,7 @@ a:focus
 .class-menu .selected > span:hover
 {
     position: relative;
-    padding: 3px 5px 0 !important;;
+    padding: 5px 5px 0 !important;;
     height: 34px;
     color: #fefefe;
     background: #0074a6;
@@ -262,7 +262,7 @@ a:focus
 
 .class-menu .grade-number
 {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .subject-menu

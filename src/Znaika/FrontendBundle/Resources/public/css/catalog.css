@@ -45,6 +45,9 @@
     margin-top: -18px;
     margin-bottom: 0;
     padding-bottom: 15px;
+
+    font-size: 24px;
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .chapter-list-marker
