@@ -1,18 +1,23 @@
-{{ form_start(form, {'attr': {'id': 'changeEmailForm'}, 'action': path('change_email', {'userId': userId}), 'method': 'POST'}) }}
-  {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
-  <div class="form-group">
-    {{ form_label(form.oldPassword, 'Текущий пароль') }}
-    {{ form_errors(form.oldPassword) }}
-    {{ form_widget(form.oldPassword, {'id': 'oldPasswordNewEmailField', 'attr': {'class': 'form-control' }}) }}
-  </div>
-  <div class="form-group">
-    {{ form_label(form.newEmail, 'Новый емайл') }}
-    {{ form_errors(form.newEmail) }}
-    {{ form_widget(form.newEmail, {'id': 'newEmail', 'attr': {'class': 'form-control'}}) }}
-  </div>
-  <button class="btn btn-primary">Изменить</button>
-{{ form_end(form) }}
-
+<div class="change-form-container">
+  <h4>Сменить email</h4>
+  {{ form_start(form, {'attr': {'id': 'changeEmailForm'}, 'action': path('change_email', {'userId': userId}), 'method': 'POST'}) }}
+    {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
+    <div class="form-group">
+      {{ form_label(form.oldPassword, 'Текущий пароль') }}
+      {{ form_errors(form.oldPassword) }}
+      {{ form_widget(form.oldPassword, {'id': 'oldPasswordNewEmailField', 'attr': {'class': 'form-control' }}) }}
+    </div>
+    <div class="form-group">
+      {{ form_label(form.newEmail, 'Новый email') }}
+      {{ form_errors(form.newEmail) }}
+      {{ form_widget(form.newEmail, {'id': 'newEmail', 'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="change-buttons-container">
+      <button class="semi-active-button change-setting-button">Изменить email</button>
+      <a class="non-active-button cancel-edit-account">Отмена</a>
+    </div>
+  {{ form_end(form) }}
+</div>
 
 <div id="changeEmailSendSuccessPopup" class="popup mfp-hide">
   <div class="popup-content">

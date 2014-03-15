@@ -38,7 +38,7 @@
 
         public function getHtmlFilePath(Synopsis $synopsis)
         {
-            return $this->getFileDir($synopsis) . "/" . $synopsis->getHtmlFileName();
+            return $this->getFileDir($synopsis) . $synopsis->getHtmlFileName();
         }
 
         private function uploadHtmlZipFile(Synopsis $synopsis)

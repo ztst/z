@@ -16,8 +16,8 @@ var SearchPage = Base.extend({
 
         $('.dropdown-toggle').dropdown();
 
-        $(".filter .dropdown-menu li").click(function(){
-            $($(this).parents().get(1)).find(".dropdown-toggle .filter-label").html($(this).find("a").html());
+        $(".custom-select .dropdown-menu li").click(function(){
+            $($(this).parent().parent()).find(".dropdown-toggle .custom-select-label").html($(this).find("a").html());
         });
     }
 });

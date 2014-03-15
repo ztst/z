@@ -1,12 +1,14 @@
-<img width="200" id="userAvatar"
-     src="{% if user.hasPhoto %}{{ user.getPhotoUrl }}{% else %}{{ asset("images/404.jpg") }}{% endif %}"
-     title="Фотография"/>
+<div class="photo-container">
+  <img width="198" id="userAvatar"
+       src="{% if user.hasPhoto %}{{ user.getPhotoUrl }}{% else %}{{ asset("images/user-profile/default-userpic.png") }}{% endif %}"
+       title="Фотография"/>
+</div>
 
 <div id="uploadPhotoProgress" class="hidden">Загружается...</div>
 {{ form_start(form, {'attr': {'id': 'editUserPhotoForm'}, 'action': url('edit_user_photo', {'userId': userId}), 'method': 'POST'}) }}
   {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
   <div class="upload-photo-button-container">
-    <a href="javascript:void(0);" class="edit-button" id="editUserPhotoButton">
+    <a href="javascript:void(0);" class="semi-active-button add-photo-button" id="editUserPhotoButton">
       <span class="edit-button-icon"></span>
       <span class="edit-button-label button-label">{% if user.hasPhoto %}Изменить фото{% else %}Добавить фото{% endif %}</span>
     </a>

@@ -53,7 +53,7 @@
     display: block;
 }
 
-.over-video-length
+.over-duration-length
 {
     display: block;
     position: absolute;
@@ -64,10 +64,10 @@
     font-family: "Arial";
     font-weight: bold;
     font-size: 10px;
-    background: url('/images/video/video-length-background.png') repeat-x;
+    background: url('/images/video/video-duration-background.png') repeat-x;
 }
 
-.chapter-selected-video .over-video-length
+.chapter-selected-video .over-duration-length
 {
     right: 2px;
     bottom: 2px;
@@ -84,7 +84,7 @@
     margin-bottom: 15px;
     color: #303030;
     font-size: 15px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .chapter-videos-block-container h5
@@ -92,15 +92,17 @@
     margin-bottom: 15px;
     color: #262626;
     font-size: 15px;
+    font-family: "OpenSans", serif;
 }
 
 .video-title
 {
+    display: inline-block;
     margin-top: -1px;
     margin-bottom: 5px;
     color: #222;
     font-size: 12px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     cursor: pointer;
 }
 
@@ -182,7 +184,7 @@
     margin-bottom: 19px;
 }
 
-.add-video-button,
+.add-button,
 .video-down,
 .video-up,
 .video-down-icon,
@@ -191,51 +193,37 @@
     display: block;
 }
 
-.video-down,
-.video-up
+.add-button
 {
-    border: 1px solid #4ea4cd !important;
-    border-radius: 3px !important;
-    background: #fdfdfd !important;
-    background: linear-gradient(#fdfdfd, #f0f0f0) !important;
+    float: left;
+
+    width: 233px;
 }
 
-.add-video-button span
+.add-button span
 {
     display: block;
     float: left;
 }
 
-.add-video-button
-{
-    float: left;
-
-    width: 233px;
-
-    border: 1px solid #4ea4cd !important;
-    border-radius: 3px !important;
-    background: #32a1d5 !important;
-    background: linear-gradient(#32a1d5, #1e89bb) !important;
-}
-
-.add-video-button-icon
+.add-button-icon
 {
     margin-top: 7px;
     margin-left: 33px;
 
     width: 13px;
     height: 14px;
-    background: url('/images/video/add-video-button-icon.png') no-repeat;
+    background: url('/images/video/add-button-icon.png') no-repeat;
 }
 
-.add-video-button-label
+.add-button-label
 {
-    margin-top: 4px;
+    margin-top: 5px;
     margin-left: 8px;
 
     color: #fff;
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .video-down,

@@ -1,21 +1,24 @@
-{% if video.quiz %}
-  {% if is_moderator() %}
-    <a class="edit-button" href="{{ path("add_quiz_form", {"videoName": video.urlName}) }}">
-      <span class="edit-button-icon"></span>
-      <span class="edit-button-label">Редактировать тест</span>
-    </a>
-    <div class="clear"></div>
-  {% endif %}
-  <div class="quiz-container">
-    {{ show_quiz(video)|raw }}
-    {% if userQuizScore is not null %}
-      <p>Ваш последний результат: {{ userQuizScore }}%</p>
+{% if is_user() %}
+  {% if video.quiz %}
+    {% if is_moderator() %}
+      <a class="semi-active-button edit-button" href="{{ path("add_quiz_form", {"videoName": video.urlName}) }}">
+        <span class="edit-button-icon"></span>
+        <span class="edit-button-label">Редактировать тест</span>
+      </a>
+      <div class="clear"></div>
     {% endif %}
-  </div>
-{% elseif is_moderator() %}
-  <a href="{{ path("add_quiz_form", {"videoName": video.urlName}) }}" class="add-video-button">
-    <span class="add-video-button-icon"></span>
-    <span class="add-video-button-label">Добавить тест</span>
-  </a>
+    <div class="quiz-container">
+      {{ show_quiz(video)|raw }}
+      {% if userQuizScore is not null %}
+        <p>Ваш последний результат: {{ userQuizScore }}%</p>
+      {% endif %}
+    </div>
+  {% elseif is_moderator() %}
+    <a href="{{ path("add_quiz_form", {"videoName": video.urlName}) }}" class="active-button add-button">
+      <span class="add-button-icon"></span>
+      <span class="add-button-label">Добавить тест</span>
+    </a>
+  {% endif %}
+{% else %}
+  <p class="quiz-not-available">Только зарегистрированные и авторизованные пользователи могут решать тесты.</p>
 {% endif %}
-

@@ -55,8 +55,7 @@
             $templateContent = $this->twig->loadTemplate($templateFile);
             $body            = $templateContent->render(
                                                array(
-                                                   "recoveryKey" => $passwordRecovery->getRecoveryKey(),
-                                                   "email"       => $passwordRecovery->getUser()->getEmail()
+                                                   "recoveryKey" => $passwordRecovery->getRecoveryKey()
                                                ));
             $subject         = $this->getEmailSubject($templateContent);
 

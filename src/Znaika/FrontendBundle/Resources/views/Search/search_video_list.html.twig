@@ -13,7 +13,7 @@
              title="{{ video.getName|raw }}">
             <div class="over-elements-container">
               <div class="over-play-sign"></div>
-              <div class="over-video-length">{{ video.duration|date("i:s") }}</div>
+              <div class="over-duration-length">{{ video.duration|date("i:s") }}</div>
             </div>
             <img
               src="{{ small_video_thumbnail(video) }}"
@@ -29,9 +29,13 @@
         'class': video.getGrade,
         'videoName': video.getUrlName
         }) }}"
-           title="{{ video.getName|raw }}"
-           class="video-title">{{ video.getName|raw }}</a>
-        <p class="search-video-breadcrumbs">{{ video.grade }} класс > {{ video.subject.name }} > {{ video.chapter.name }}</p>
+           class="video-title"
+           title="{{ video.getName|raw }}">
+          {{ video.getName|raw }}
+        </a>
+        <p class="search-video-breadcrumbs">{{ video.grade }} класс > {{ video.subject.name }}>
+          {{ video.chapter.name }}
+        </p>
       </div>
       <div class="clear"></div>
     </div>

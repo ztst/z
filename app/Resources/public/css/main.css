@@ -12,6 +12,12 @@ body
     background: #FCFCFC;
 }
 
+h3
+{
+    font-size: 24px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
 a:focus
 {
     outline: none;
@@ -141,7 +147,7 @@ a:focus
 
 .navbar-header
 {
-    margin-top: 14px;
+    margin-top: 11px;
 }
 
 .navbar-toggle
@@ -193,7 +199,7 @@ a:focus
     border-left: 1px solid #1181b3;
 
     height: 35px;
-    padding: 5px 5px 0 !important;
+    padding: 7px 5px 0 !important;
     cursor: pointer;
     display: block;
 
@@ -232,7 +238,7 @@ a:focus
 .class-menu .selected > span:hover
 {
     position: relative;
-    padding: 3px 5px 0 !important;;
+    padding: 5px 5px 0 !important;;
     height: 34px;
     color: #fefefe;
     background: #0074a6;
@@ -244,7 +250,8 @@ a:focus
     display: block;
     position: absolute;
     bottom: -2px;
-    left: 45%;
+    left: 50%;
+    margin-left: -3px;
     width: 9px;
     height: 6px;
     background: url('/images/header/arrow.png') no-repeat;
@@ -262,7 +269,7 @@ a:focus
 
 .class-menu .grade-number
 {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .subject-menu
@@ -323,7 +330,7 @@ a:focus
 
 .subject-menu .selected > a
 {
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     color: #d35306;
 }
 
@@ -508,7 +515,7 @@ div.form-error-field .arrow
     height: 32px;
     padding: 4px 8px 6px;
 
-    font-family: "OpenSans";
+    font-family: "OpenSans",serif;
     font-size: 13px;
     border-color: #aaaaaa;
 
@@ -527,25 +534,25 @@ div.form-error-field .arrow
 .form-control:-moz-placeholder
 {
     color: #9b9898;
-    font-family: "OpenSans Italic";
+    font-family: "OpenSans Italic",cursive;
 }
 
 .form-control::-moz-placeholder
 {
     color: #9b9898;
-    font-family: "OpenSans Italic";
+    font-family: "OpenSans Italic",cursive;
 }
 
 .form-control:-ms-input-placeholder
 {
     color: #9b9898;
-    font-family: "OpenSans Italic";
+    font-family: "OpenSans Italic",cursive;
 }
 
 .form-control::-webkit-input-placeholder
 {
     color: #9b9898;
-    font-family: "OpenSans Italic";
+    font-family: "OpenSans Italic",cursive;
 }
 
 .form-control::-ms-clear
@@ -577,7 +584,7 @@ input
 .main-menu-right ul
 {
     float: right;
-    margin-top: 17px;
+    margin-top: 15px;
 }
 
 .main-menu-right .navbar-right
@@ -616,7 +623,7 @@ input
 
 .login-registration-buttons-container
 {
-    margin-top: 5px;
+    margin-top: 6px;
 }
 
 .login-button,
@@ -633,8 +640,9 @@ input
 .login-button,
 .registration-button
 {
-    font-size: 13px;
     color: #036995 !important;
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .login-button,
@@ -669,7 +677,7 @@ input
 
 .logout-button
 {
-    margin-top: 6px;
+    margin-top: 5px;
     padding-right: 0 !important;
     font-size: 13px;
     color: #555;
@@ -821,17 +829,18 @@ label
 .footer-container
 {
     position: relative;
+    padding-top: 18px;
     height: 54px;
     color: #c9c8c8;
 }
 
 .footer-container a,
-.footer-copyright
+.footer-copyright-container span
 {
     display: block;
-    color: #c9c8c8;
+    color: #d1dfe6;
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans",sans-serif;
     text-decoration: none;
 }
 
@@ -841,17 +850,19 @@ label
     height: 40px;
 }
 
-.footer-link,
-.footer-copyright
+.footer-social-buttons-block,
+.footer-links-block,
+.footer-copyright-container
 {
-    margin-top: 18px;
+    display: inline-block;
 }
 
 .footer-social-buttons-block
 {
     float: left;
-    width: 140px;
-    margin-top: 12px;
+    margin-left: 23px;
+    margin-right: 109px;
+    width: 104px;
 }
 
 .footer-social-buttons-text
@@ -863,8 +874,19 @@ label
 .footer-social-button
 {
     float: left;
-    margin-left: 6px;
-    margin-top: 0;
+    margin-right: 6px;
+}
+
+.footer-copyright-container
+{
+    float: right;
+    margin-right: 23px;
+}
+
+.footer-link
+{
+    float: left;
+    margin-right: 44px;
 }
 
 .footer-horizontal-bar
@@ -883,10 +905,20 @@ label
     {
         display: none;
     }
-    .footer-container a, .footer-copyright
+    .footer-container a, .footer-copyright-container span
     {
         font-size: 13px;
     }
 }
 
 /* Footer block END */
+
+.static-page-container
+{
+    padding: 0 18px 18px;
+}
+
+.static-page-container h3
+{
+    margin-top: 0px;
+}

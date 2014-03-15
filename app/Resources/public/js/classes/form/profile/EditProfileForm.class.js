@@ -14,6 +14,12 @@ var EditProfileForm = BaseForm.extend({
             checkboxClass: 'icheckbox',
             radioClass: 'iradio'
         });
+
+        var gradeField = $("#gradeField");
+        gradeField.selectbox();
+
+        $(".birthdate-container select").selectbox();
+        
     },
 
     isEdited: function()

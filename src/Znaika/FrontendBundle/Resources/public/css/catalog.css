@@ -1,6 +1,6 @@
 .wrap > .container
 {
-    background: url('/images/gray-border.png') repeat-y 661px 0 #ffffff;
+    background: url("/images/chapters-list/chapter-list-row-background.png") repeat-y scroll 0 -5px #fff;
 }
 
 .show-catalog-page-container
@@ -27,16 +27,26 @@
     height: 100%;
 }
 
+.chapters-list
+{
+    margin-right: 1px;
+    margin-top: -1px;
+}
+
 .chapters-list-container h3,
 .chapter-description-container
 {
-    padding: 0 18px;
+    margin-right: 1px;
+    padding: 18px;
+    background: #fff;
 }
 
 .chapters-list-container h3
 {
-    margin-top: 0;
-    margin-bottom: 18px;
+    margin-top: -18px;
+    margin-bottom: 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ffffff;
 }
 
 .chapter-list-marker
@@ -56,46 +66,48 @@
 
 .chapter-description-container
 {
-    display: inline-block;
+    display: block;
+    padding: 0 18px;
+    height: 39px;
     width: 100%;
+    background: none;
 }
 
 .chapter-description-container.selected
 {
-    position: relative;
-    margin-bottom: -5px;
-    z-index: 1;
+    margin-bottom: -1px;
+    height: 40px;
     border-top: 1px solid #c3d6e1;
     border-bottom: 1px solid #c3d6e1;
     background: #eef9fe;
 }
 
-.chapter-description-container,
-.chapter-description-container.selected
-{
-    margin-top: -1px;
-}
-
 .chapter-description-container a,
 .chapter-description-container.selected a
 {
-    padding: 8px 0;
+    padding: 7px 0 8px;
+    width: 550px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .chapter-description-container a
 {
     display: block;
-    color: #555;
-    border-top: 1px solid #d8e5ed;
-    border-bottom: 1px solid #d8e5ed;
+    padding: 8px 0;
 
+    color: #555;
     font-size: 15px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .chapter-description-container.selected a
 {
     float: left;
+    padding: 7px 0 8px;
+
     color: #004e78;
     border: none;
 }
@@ -115,19 +127,10 @@
     display: block;
 }
 
-.placeholder
-{
-    position: absolute;
-    margin: -1px 18px 0;
-    width: 100%;
-    min-height: 100%;
-    background: url('/images/chapters-list/chapter-list-row-background.png') repeat-y;
-}
-
 .chapters-list-vertical-line
 {
     position: absolute;
-    right: 70px;
+    right: 52px;
     width: 3px;
     height: 90%;
     z-index: 3;
@@ -140,7 +143,6 @@
 }
 
 /* moderator styles BEGIN */
-.moderator-buttons-block a,
 .moderator-buttons-block span
 {
     display: block;
@@ -148,10 +150,15 @@
 
 .moderator-buttons-block
 {
+    padding-top: 4px;
     padding-left: 5px;
+    padding-bottom: 15px;
     margin-top: -5px;
-    margin-bottom: 15px;
-    height: 26px;
+    margin-right: 1px;
+    height: 45px;
+    border-bottom: 1px solid #ffffff;
+
+    background: #fff;
 }
 
 .moderator-buttons-block a
@@ -170,30 +177,6 @@
     float: left;
 }
 
-.add-chapter-button,
-.edit-chapter-button,
-.save-changes-button,
-.chapter-down,
-.chapter-up
-{
-    border: 1px solid #78b9d8;
-    border-radius: 3px;
-    background: #fdfdfd;
-    background: linear-gradient(#fdfdfd, #f0f0f0);
-}
-
-.add-chapter-button.disabled,
-.edit-chapter-button.disabled,
-.save-changes-button.disabled,
-.chapter-down.disabled,
-.chapter-up.disabled
-{
-    border: 1px solid #c8ddf5;
-    border-radius: 3px;
-    background: #f8f8f8;
-    background: linear-gradient(#f8f8f8, #f2f2f2);
-}
-
 .add-chapter-button-label,
 .edit-chapter-button-label,
 .save-changes-button-label
@@ -201,17 +184,7 @@
     margin-top: 4px;
     margin-left: 5px;
 
-    color: #0373a8;
     font-size: 11px;
-    font-family: "OpenSans Semibold";
-}
-
-.disabled .add-chapter-button-label,
-.disabled .edit-chapter-button-label,
-.disabled .save-changes-button-label
-{
-    color: #cbd6dc;
-    font-family: "OpenSans";
 }
 
 .add-chapter-button
@@ -316,5 +289,12 @@
 .disabled .chapter-up-icon
 {
     background: url('/images/chapters-list/chapter-up-icon-disabled.png') no-repeat;
+}
+
+.disabled
+{
+    color: #cbd6dc !important;
+    border-color: #d6d6d6 !important;
+    box-shadow: none !important;
 }
 /* moderator styles END */

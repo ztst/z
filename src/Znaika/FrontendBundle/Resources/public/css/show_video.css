@@ -32,7 +32,7 @@
 {
     width: 85%;
     margin: 0 18px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     font-size: 22px;
 }
 
@@ -100,7 +100,7 @@
     color: #010101;
     background: #fff;
 
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     border-bottom: none;
 
     padding-top: 3px;
@@ -180,6 +180,7 @@
     float: left;
     margin: 0;
     font-size: 13px;
+    font-family: "OpenSans",serif;
 }
 
 .video-social-buttons a.social_share_link.vk
@@ -213,6 +214,7 @@
 .video-views-amount
 {
     margin-bottom: 0;
+    font-family: "OpenSans",serif;
 }
 
 .video-author
@@ -298,7 +300,7 @@
 .question-comment-button.selected
 {
     text-decoration: none;
-    background: url('/images/video/question-comment-button-over.png') no-repeat;
+    background: url('/images/video/question-comment-button-selected.png') no-repeat;
 }
 
 .comment-text-field
@@ -306,12 +308,13 @@
     border-radius: 0;
 }
 
-.btn.btn-primary.send-comment-button
+.send-comment-button
 {
-    border-radius: 2px;
-    font-size: 13px !important;
-    font-family: "OpenSans Semibold" !important;
-    background: linear-gradient(to top, #1e89bb, #32a1d5);
+    width: 115px;
+    height: 30px;
+
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .user-question-container
@@ -326,14 +329,14 @@
     margin-top: 5px;
     color: #333;
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .question-author-name
 {
     color: #333;
     font-size: 12px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .comment-body
@@ -347,26 +350,31 @@
     margin-top: 5px;
     color: #999;
     font-size: 11px;
-    font-family: "OpenSans";
+    font-family: "OpenSans",serif;
 }
 
 .label-your-comment
 {
     color: #333;
     font-size: 15px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
     font-weight: normal;
 }
 /* comments styles END */
 
 .synopsis-container
 {
-    margin: 22px 3px 0;
+    margin: 10px 18px 18px 18px;
 }
 
 .quiz-container
 {
-    margin: 22px 18px 0;
+    margin: 18px;
+}
+
+.quiz-container iframe
+{
+    border: none;
 }
 
 .chapter-selected-video .video-preview-image
@@ -387,7 +395,7 @@
 {
     color: #036995;
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .chapter-name
@@ -395,7 +403,7 @@
     margin-bottom: 15px;
     color: #303030;
     font-size: 15px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .show-more-videos
@@ -411,9 +419,9 @@
 
 /* moderator styles BEGIN */
 .edit-button,
-.add-video-button,
+.add-button,
 .edit-button span,
-.add-video-button span
+.add-button span
 {
     display: block;
     float: left;
@@ -425,31 +433,21 @@
     margin-left: 18px;
 
     height: 30px;
-
-    border: 1px solid #4ea4cd !important;
-    border-radius: 3px !important;
-    background: #fdfdfd !important;
-    background: linear-gradient(#fdfdfd, #f0f0f0) !important;
 }
 
-.synopsis-tab .add-video-button,
-.quiz-tab .add-video-button
+.synopsis-tab .add-button,
+.quiz-tab .add-button
 {
     margin-top: 18px;
     margin-left: 18px;
 }
 
-.add-video-button
+.add-button
 {
     float: left;
 
     width: 233px;
     height: 30px;
-
-    border: 1px solid #4ea4cd !important;
-    border-radius: 3px !important;
-    background: #32a1d5 !important;
-    background: linear-gradient(#32a1d5, #1e89bb) !important;
 }
 
 .edit-button-icon
@@ -459,14 +457,14 @@
     background: url('/images/video/edit-button-icon.png') no-repeat;
 }
 
-.add-video-button-icon
+.add-button-icon
 {
     margin-top: 7px;
     margin-left: 33px;
 
     width: 13px;
     height: 14px;
-    background: url('/images/video/add-video-button-icon.png') no-repeat;
+    background: url('/images/video/add-button-icon.png') no-repeat;
 }
 
 .video-tab .edit-button
@@ -507,19 +505,22 @@
     margin-top: 4px;
     margin-left: 8px;
 
-    color: #0373a8;
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
-.add-video-button-label
+.add-button-label
 {
     margin-top: 4px;
     margin-left: 8px;
 
-    color: #fff;
     font-size: 13px;
-    font-family: "OpenSans Semibold";
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 /* moderator styles END */
+
+.quiz-not-available
+{
+    padding: 18px;
+}

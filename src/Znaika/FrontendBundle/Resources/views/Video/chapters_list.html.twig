@@ -1,26 +1,25 @@
 <h3>Разделы</h3>
 {% if is_moderator() %}
   <div class="moderator-buttons-block">
-    <a class="add-chapter-button" href="javascript:void(0);">
+    <a class="semi-active-button add-chapter-button" href="javascript:void(0);">
       <span class="add-chapter-button-icon"></span>
       <span class="add-chapter-button-label">Добавить раздел</span>
     </a>
-    <a class="edit-chapter-button" href="javascript:void(0);">
+    <a class="semi-active-button edit-chapter-button" href="javascript:void(0);">
       <span class="edit-chapter-button-icon"></span>
       <span class="edit-chapter-button-label">Редактировать раздел</span>
     </a>
-    <a class="save-changes-button" href="javascript:void(0);">
+    <a class="semi-active-button save-changes-button disabled" href="javascript:void(0);">
       <span class="save-changes-button-icon"></span>
       <span class="save-changes-button-label">Сохранить изменения</span>
     </a>
-    <a class="chapter-down" href="javascript:void(0);">
+    <a class="semi-active-button chapter-down" href="javascript:void(0);">
       <span class="chapter-down-icon"></span>
     </a>
-    <a class="chapter-up" href="javascript:void(0);">
+    <a class="semi-active-button chapter-up disabled" href="javascript:void(0);">
       <span class="chapter-up-icon"></span>
     </a>
   </div>
-  <div class="clear"></div>
 {% endif %}
 {% if not chapters is empty %}
   <div class="chapters-list">

@@ -1,28 +1,46 @@
 <div id="completeSocialRegistrationPopup" class="popup mfp-hide">
   <div id="completeSocialRegistrationForm" class="complete-registration-popup-content">
-    <h1>Вход в Знайка.ру</h1>
-    <p>Вы впервые на Знайка.ру или у Вас уже есть аккаунт?</p>
-    <a id="createNewUser" href="javascript:void(0);" class="btn btn-primary">Я новый пользователь</a>
-    <a id="attachUser" href="javascript:void(0);" class="btn btn-primary">У меня уже есть аккаунт</a>
+    <div class="additional-form-container logination-check-container">
+      <div class="additional-form-header login-form-header">
+        <h3>Вход в Знайка.ру</h3>
+      </div>
+      <div class="additional-form-header-horizontal-bar"></div>
+      <h5>Вы впервые на Знайка.ру или у Вас уже есть аккаунт?</h5>
+      <div class="newuser-button-container">
+        <a id="createNewUser" href="javascript:void(0);" class="semi-active-button newuser-button">Я новый пользователь</a>
+      </div>
+      <div class="have-account-button-container">
+        <a id="attachUser" href="javascript:void(0);" class="active-button have-account-button">У меня уже есть аккаунт</a>
+      </div>
+      <div class="clear"></div>
+    </div>
   </div>
   <div id="attachUserForm" class="hidden complete-registration-popup-content">
-    <div class="form-header">
-      <h1>Связывание аккаунтов</h1>
-      <p>
+    <div class="additional-form-container account-linkage-form-container">
+      <div class="additional-form-header account-linkage-form-header">
+        <h3>Связывание аккаунтов</h3>
+      </div>
+      <div class="additional-form-header-horizontal-bar"></div>
+      <h5>
         Введите Вашу почту и пароль от Знайка.ру.<br/>
-        Чтобы зайти на Знайка.ру в следующий раз, будет достаточно просто нажать на кнопку быстрого входа.
-      </p>
-    </div>
+        Чтобы зайти на Знайка.ру в следующий раз, будет достаточно просто нажать на кнопку быстрого входа!
+      </h5>
     {% include "ZnaikaFrontendBundle:TwigExtension:assign_account_form.html.twig" %}
+    </div>
   </div>
   <div id="registrationFormContainer" class="hidden complete-registration-popup-content">
-    <div class="form-header">
-      <h1>Создание аккаунта</h1>
-      <p>
-        Укажите любую удобную Вам почту - мы вышлем Вам пароль.<br/>
-        Чтобы зайти на Знайка.ру в следующий раз, будет достаточно просто нажать на кнопку быстрого входа.
-      </p>
+    <div class="additional-form-container account-creation-form-container">
+      <div class="additional-form-header login-form-header">
+        <h3>Создание аккаунта</h3>
+      </div>
+      <div class="additional-form-header-horizontal-bar"></div>
+      <h5>
+        Укажите Вашу почту - мы вышлем Вам пароль.<br/>
+        Чтобы зайти на Знайка.ру в следующий раз, будет достаточно нажать на кнопку быстрого входа!
+      </h5>
+      <div class="additional-form">
+        {% include 'ZnaikaFrontendBundle:User:register_form.html.twig' with {'form': registerForm, 'autoGeneratePassword': true} %}
+      </div>
     </div>
-    {% include 'ZnaikaFrontendBundle:User:register_form.html.twig' with {'form': registerForm, 'autoGeneratePassword': true} %}
   </div>
 </div>
