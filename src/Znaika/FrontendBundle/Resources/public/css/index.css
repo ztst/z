@@ -39,10 +39,20 @@
     text-decoration: underline;
 }
 
+.index-content
+{
+    margin-top: 2px;
+}
+
+.index-top-videos-block
+{
+    margin-top: 25px;
+}
+
 .index-page-videos-list
 {
     padding-left: 3px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
 .index-page-videos-list .list-item

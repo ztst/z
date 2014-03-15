@@ -295,8 +295,11 @@
 /* change forms styles BEGIN */
 .change-form-container
 {
-    width: 100%;
+    position: relative;
+    bottom: 10px;
+
     padding: 18px;
+    width: 100%;
     background: #fffdf7;
     border: 1px solid #dfbca7;
 }
