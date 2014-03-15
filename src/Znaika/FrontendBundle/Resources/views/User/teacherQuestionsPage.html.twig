@@ -1,0 +1,58 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter='cssrewrite'
+    '@ZnaikaFrontendBundle/Resources/public/css/teacher_profile.css'
+  %}
+  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts
+    '../app/Resources/public/js/classes/page/profile/ViewTeacherQuestionsPage.class.js'
+  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+  <div class="profile-sidebar-menu-container col-xs-3">
+    {{ knp_menu_render('sidebar_profile_menu') }}
+  </div>
+  <div class="profile-form-container col-xs-9">
+    <div class="col-center">
+      <div class="tabs-container">
+        <ul class="nav nav-tabs select-content-tab show-questions-tab-menu">
+          <li class="video active">
+            <div class="active-top-border"></div>
+            <a href="#video_tab" data-toggle="tab">
+              <div class="video-tab-icon"></div>
+              <span>Уроки с вопросами</span>
+            </a>
+          </li>
+          {% if countQuestions %}
+            <li class="questions-tab hidden">
+              <div class="active-top-border"></div>
+              <a id="questionTab" href="#synopsis_tab" data-toggle="tab">
+                <div class="question-tab-icon"></div>
+                <span>Просмотр вопросов <span class="user-questions-count">(+{{ countQuestions }})</span></span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="tab-pane active video-tab" id="video_tab">
+      {% include "ZnaikaFrontendBundle:User:video_with_questions_list.html.twig" with {'videos': videos} %}
+    </div>
+    <div class="tab-pane synopsis-tab" id="synopsis_tab">
+      {% include "ZnaikaFrontendBundle:User:teacher_questions_tab.html.twig" with {'videos': videos} %}
+    </div>
+  </div>
+{% endblock %}

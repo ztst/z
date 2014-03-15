@@ -3,6 +3,7 @@
 
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\FrontendBundle\Entity\Profile\User;
 
     interface IVideoCommentRepository
     {
@@ -42,5 +43,19 @@
          *
          * @return VideoComment[]
          */
-        public function getVideoNotAnsweredQuestionComments($video);
+        public function getVideoNotAnsweredQuestionComments(Video $video);
+
+        /**
+         * @param $user
+         *
+         * @return VideoComment[]
+         */
+        public function getTeacherNotAnsweredQuestionComments(User $user);
+
+        /**
+         * @param $user
+         *
+         * @return int
+         */
+        public function countTeacherNotAnsweredQuestionComments(User $user);
     }

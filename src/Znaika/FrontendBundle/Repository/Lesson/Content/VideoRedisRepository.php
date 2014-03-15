@@ -3,15 +3,10 @@
 
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\FrontendBundle\Entity\Profile\User;
 
     class VideoRedisRepository implements IVideoRepository
     {
-        /**
-         * @param null $classNumber
-         * @param null $subjectName
-         *
-         * @return array|null
-         */
         public function getVideosForCatalog($classNumber = null, $subjectName = null)
         {
             return null;
@@ -27,41 +22,21 @@
             return null;
         }
 
-        /**
-         * @param $name
-         *
-         * @return Video|null
-         */
         public function getOneByUrlName($name)
         {
             return null;
         }
 
-        /**
-         * @param Video $video
-         *
-         * @return bool
-         */
         public function save(Video $video)
         {
             return true;
         }
 
-        /**
-         * @param $limit
-         *
-         * @return Video[]
-         */
         public function getNewestVideo($limit)
         {
             return null;
         }
 
-        /**
-         * @param $limit
-         *
-         * @return Video[]
-         */
         public function getPopularVideo($limit)
         {
             return null;
@@ -77,17 +52,17 @@
             return true;
         }
 
-        /**
-         * @param Chapter $chapter
-         *
-         * @return int
-         */
         public function getMaxChapterOrderPriority(Chapter $chapter)
         {
             return null;
         }
 
         public function getOneByContentDir($dir)
+        {
+            return null;
+        }
+
+        public function getSupervisorVideosWithQuestions(User $user)
         {
             return null;
         }

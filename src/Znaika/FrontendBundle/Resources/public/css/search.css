@@ -74,8 +74,9 @@
 
 .video-title
 {
-    margin-top: 3px !important;
+    display: inline-block;
     font-size: 14px;
+    margin: 2px 0 3px;
 }
 
 .search-video-breadcrumbs

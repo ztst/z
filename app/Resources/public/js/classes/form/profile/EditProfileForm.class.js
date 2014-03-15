@@ -47,6 +47,10 @@ var EditProfileForm = BaseForm.extend({
             maxlength: 40,
             messages: { maxlength: "Максимальная длина имени - 40 символов" }
         });
+        this._form.find("#middleNameField").rules('add', {
+            maxlength: 40,
+            messages: { maxlength: "Максимальная длина отчества - 40 символов" }
+        });
         this._form.find("#lastNameField").rules('add', {
             maxlength: 80,
             messages: { maxlength: "Максимальная длина фамилии - 80 символов" }

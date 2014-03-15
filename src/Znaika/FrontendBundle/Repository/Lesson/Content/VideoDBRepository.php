@@ -4,6 +4,9 @@
     use Doctrine\ORM\EntityRepository;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
+    use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
 
     class VideoDBRepository extends EntityRepository implements IVideoRepository
     {
@@ -182,7 +185,31 @@
                     $isMoved = true;
                 }
             }
+
             return $isMoved;
+        }
+
+        public function getSupervisorVideosWithQuestions(User $user)
+        {
+            $qb = $this->getEntityManager()
+                       ->createQueryBuilder();
+
+            $qb->select('v')
+               ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+               ->innerJoin('v.videoComments', 'vc')
+               ->andWhere("vc.isAnswered = :is_answered")
+               ->setParameter('is_answered', false)
+               ->andWhere("vc.commentType = :comment_type")
+               ->setParameter('comment_type', VideoCommentUtil::QUESTION)
+               ->addOrderBy('vc.createdTime', 'ASC');
+
+            if ($user->getRole() == UserRole::ROLE_TEACHER)
+            {
+                $qb->innerJoin('v.supervisors', 's', 'WITH', 's.userId = :user_id')
+                   ->setParameter('user_id', $user->getUserId());
+            }
+
+            return $qb->getQuery()->getResult();
         }
 
         /**

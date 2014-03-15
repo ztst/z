@@ -1,0 +1,11 @@
+{% if not videos is empty %}
+  <ul class="videos-with-questions-list">
+    {% for video in videos %}
+      <li class="">
+        <a href="javascript:void(0);" title="{{ video.name }}"  class="open-video-question-link" id="openVideoQuestionLink{{ video.videoId }}">
+          {{ video.name }} <span class="user-questions-count">{{ count_video_questions(video) }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

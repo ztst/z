@@ -32,6 +32,11 @@
         /**
          * @var string
          */
+        private $middleName;
+
+        /**
+         * @var string
+         */
         private $email;
 
         /**
@@ -201,6 +206,22 @@
         public function getLastName()
         {
             return $this->lastName;
+        }
+
+        /**
+         * @param string $middleName
+         */
+        public function setMiddleName($middleName)
+        {
+            $this->middleName = $middleName;
+        }
+
+        /**
+         * @return string
+         */
+        public function getMiddleName()
+        {
+            return $this->middleName;
         }
 
         /**

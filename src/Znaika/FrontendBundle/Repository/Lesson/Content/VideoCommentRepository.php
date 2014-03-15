@@ -3,6 +3,7 @@
 
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
+    use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Repository\BaseRepository;
 
     class VideoCommentRepository extends BaseRepository implements IVideoCommentRepository
@@ -26,11 +27,6 @@
             $this->setDBRepository($dbRepository);
         }
 
-        /**
-         * @param VideoComment $videoComment
-         *
-         * @return mixed
-         */
         public function save(VideoComment $videoComment)
         {
             $this->redisRepository->save($videoComment);
@@ -39,11 +35,6 @@
             return $success;
         }
 
-        /**
-         * @param $videoCommentId
-         *
-         * @return VideoComment
-         */
         public function getOneByVideoCommentId($videoCommentId)
         {
             $result = $this->redisRepository->getOneByVideoCommentId($videoCommentId);
@@ -55,12 +46,6 @@
             return $result;
         }
 
-        /**
-         * @param Video $video
-         * @param $limit
-         *
-         * @return VideoComment[]
-         */
         public function getLastVideoComments(Video $video, $limit)
         {
             $result = $this->redisRepository->getLastVideoComments($video, $limit);
@@ -72,13 +57,6 @@
             return $result;
         }
 
-        /**
-         * @param Video $video
-         * @param $offset
-         * @param $limit
-         *
-         * @return VideoComment[]
-         */
         public function getVideoComments($video, $offset, $limit)
         {
             $result = $this->redisRepository->getVideoComments($video, $offset, $limit);
@@ -90,17 +68,34 @@
             return $result;
         }
 
-        /**
-         * @param $video
-         *
-         * @return VideoComment[]
-         */
-        public function getVideoNotAnsweredQuestionComments($video)
+        public function getVideoNotAnsweredQuestionComments(Video $video)
         {
             $result = $this->redisRepository->getVideoNotAnsweredQuestionComments($video);
             if (is_null($result))
             {
                 $result = $this->dbRepository->getVideoNotAnsweredQuestionComments($video);
+            }
+
+            return $result;
+        }
+
+        public function getTeacherNotAnsweredQuestionComments(User $user)
+        {
+            $result = $this->redisRepository->getTeacherNotAnsweredQuestionComments($user);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getTeacherNotAnsweredQuestionComments($user);
+            }
+
+            return $result;
+        }
+
+        public function countTeacherNotAnsweredQuestionComments(User $user)
+        {
+            $result = $this->redisRepository->countTeacherNotAnsweredQuestionComments($user);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->countTeacherNotAnsweredQuestionComments($user);
             }
 
             return $result;

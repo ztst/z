@@ -1,0 +1,43 @@
+.wrap > .container
+{
+    background: url('/images/gray-border.png') repeat-y 220px 0 #ffffff;
+}
+
+.profile-sidebar-menu
+{
+    list-style: none;
+}
+
+.profile-sidebar-menu li
+{
+    display: inline-block;
+}
+
+.profile-sidebar-menu li a
+{
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+.profile-sidebar-menu li.current a
+{
+    color: #D35306;
+    font-family: "OpenSans Semibold", sans-serif;
+}
+
+.profile-sidebar-menu li a:hover
+{
+    background: #ebebeb;
+    border-radius: 3px;
+}
+
+.tab-pane
+{
+    display: none;
+}
+
+.tab-pane.active
+{
+    display: block;
+}

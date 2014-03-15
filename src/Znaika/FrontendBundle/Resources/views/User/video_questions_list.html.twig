@@ -1,0 +1,9 @@
+{% if not questions is empty %}
+  <ul id="videoQuestions{{ video.videoId }}" class="video-questions hidden">
+    {% for question in questions %}
+      <li class="">
+        {{ question.text }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

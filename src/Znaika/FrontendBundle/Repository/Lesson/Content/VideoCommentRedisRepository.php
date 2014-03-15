@@ -3,58 +3,41 @@
 
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
+    use Znaika\FrontendBundle\Entity\Profile\User;
 
     class VideoCommentRedisRepository implements IVideoCommentRepository
     {
-        /**
-         * @param VideoComment $videoComment
-         *
-         * @return mixed
-         */
         public function save(VideoComment $videoComment)
         {
             return true;
         }
 
-        /**
-         * @param $videoCommentId
-         *
-         * @return VideoComment
-         */
         public function getOneByVideoCommentId($videoCommentId)
         {
             return null;
         }
 
-        /**
-         * @param Video $video
-         * @param $limit
-         *
-         * @return VideoComment[]
-         */
         public function getLastVideoComments(Video $video, $limit)
         {
             return null;
         }
 
-        /**
-         * @param Video $video
-         * @param $offset
-         * @param $limit
-         *
-         * @return VideoComment[]
-         */
         public function getVideoComments($video, $offset, $limit)
         {
             return null;
         }
 
-        /**
-         * @param $video
-         *
-         * @return VideoComment[]
-         */
-        public function getVideoNotAnsweredQuestionComments($video)
+        public function getVideoNotAnsweredQuestionComments(Video $video)
+        {
+            return null;
+        }
+
+        public function getTeacherNotAnsweredQuestionComments(User $user)
+        {
+            return null;
+        }
+
+        public function countTeacherNotAnsweredQuestionComments(User $user)
         {
             return null;
         }

@@ -47,7 +47,29 @@
                 'comment_title'                 => new \Twig_Function_Method($this, 'renderCommentTitle'),
                 'has_question_for_current_user' => new \Twig_Function_Method($this, 'hasQuestionForCurrentUser'),
                 'video_questions_block'         => new \Twig_Function_Method($this, 'renderVideoQuestions'),
+                'count_video_questions'         => new \Twig_Function_Method($this, 'countVideoQuestions'),
+                'teacher_profile_questions'     => new \Twig_Function_Method($this, 'renderTeacherProfileQuestions'),
             );
+        }
+
+        public function countVideoQuestions(Video $video)
+        {
+            $count = count($this->videoCommentRepository->getVideoNotAnsweredQuestionComments($video));
+
+            return $count > 1 ? "(+$count)" : "";
+        }
+
+        public function renderTeacherProfileQuestions(Video $video)
+        {
+            $questions       = $this->videoCommentRepository->getVideoNotAnsweredQuestionComments($video);
+            $templateFile    = "ZnaikaFrontendBundle:User:video_questions_list.html.twig";
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $result          = $templateContent->render(array(
+                "questions" => $questions,
+                "video"     => $video
+            ));
+
+            return $result;
         }
 
         /**
