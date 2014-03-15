@@ -17,5 +17,7 @@ var RegistrationForm = BaseForm.extend({
         this._form.find("#registration_user_password").rules('add', {
             passwordSymbols: true
         });
+
+        this._initShowPasswordLink();
     }
 });

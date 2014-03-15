@@ -30,6 +30,7 @@
 .chapters-list
 {
     margin-right: 1px;
+    margin-top: -1px;
 }
 
 .chapters-list-container h3,
@@ -45,9 +46,7 @@
     margin-top: -18px;
     margin-bottom: 0;
     padding-bottom: 15px;
-
-    font-size: 24px;
-    font-family: "OpenSans Semibold",sans-serif;
+    border-bottom: 1px solid #ffffff;
 }
 
 .chapter-list-marker
@@ -156,7 +155,8 @@
     padding-bottom: 15px;
     margin-top: -5px;
     margin-right: 1px;
-    height: 44px;
+    height: 45px;
+    border-bottom: 1px solid #ffffff;
 
     background: #fff;
 }

@@ -52,7 +52,6 @@
 .index-page-videos-list
 {
     padding-left: 3px;
-    /*margin-bottom: 10px;*/
 }
 
 .index-page-videos-list .list-item
@@ -140,4 +139,25 @@
 {
     float: right;
     margin: 0;
+}
+
+.video-preview a .video-preview-over
+{
+    display: none;
+    left: 83px;
+    position: absolute;
+    top: 47px;
+    width: 72px;
+    height: 47px;
+    background: url('/images/index/video-preview-over.png') no-repeat;
+}
+
+.index-page-videos-list .list-item .video-preview a
+{
+    position: relative;
+}
+
+.video-preview a:hover .video-preview-over
+{
+    display: block;
 }

@@ -12,6 +12,12 @@ body
     background: #FCFCFC;
 }
 
+h3
+{
+    font-size: 24px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
 a:focus
 {
     outline: none;
@@ -141,7 +147,7 @@ a:focus
 
 .navbar-header
 {
-    margin-top: 14px;
+    margin-top: 11px;
 }
 
 .navbar-toggle
@@ -244,7 +250,8 @@ a:focus
     display: block;
     position: absolute;
     bottom: -2px;
-    left: 45%;
+    left: 50%;
+    margin-left: -3px;
     width: 9px;
     height: 6px;
     background: url('/images/header/arrow.png') no-repeat;
@@ -577,7 +584,7 @@ input
 .main-menu-right ul
 {
     float: right;
-    margin-top: 17px;
+    margin-top: 15px;
 }
 
 .main-menu-right .navbar-right
@@ -616,7 +623,7 @@ input
 
 .login-registration-buttons-container
 {
-    margin-top: 5px;
+    margin-top: 6px;
 }
 
 .login-button,
@@ -670,7 +677,7 @@ input
 
 .logout-button
 {
-    margin-top: 6px;
+    margin-top: 5px;
     padding-right: 0 !important;
     font-size: 13px;
     color: #555;
@@ -905,3 +912,13 @@ label
 }
 
 /* Footer block END */
+
+.static-page-container
+{
+    padding: 0 18px 18px;
+}
+
+.static-page-container h3
+{
+    margin-top: 0px;
+}

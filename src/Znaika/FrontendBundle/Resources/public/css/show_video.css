@@ -300,7 +300,7 @@
 .question-comment-button.selected
 {
     text-decoration: none;
-    background: url('/images/video/question-comment-button-over.png') no-repeat;
+    background: url('/images/video/question-comment-button-selected.png') no-repeat;
 }
 
 .comment-text-field
@@ -519,3 +519,8 @@
 }
 
 /* moderator styles END */
+
+.quiz-not-available
+{
+    padding: 18px;
+}

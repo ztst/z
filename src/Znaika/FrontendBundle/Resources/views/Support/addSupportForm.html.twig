@@ -1,29 +1,31 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
 {% block content %}
-  <h1>Помощь</h1>
+  <div class="static-page-container">
+    <h3>Помощь</h3>
 
-  <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
-    {{ form_start(form, {'method': 'POST'}) }}
-    {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
-    <div class="form-group">
-      {{ form_label(form.name, 'Имя') }}
-      {{ form_errors(form.name) }}
-      {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+    <div class="">
+      {{ form_start(form, {'method': 'POST'}) }}
+      {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+      <div class="form-group">
+        {{ form_label(form.name, 'Имя') }}
+        {{ form_errors(form.name) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(form.email, 'Email') }}
+        {{ form_errors(form.email) }}
+        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(form.text, 'Текст') }}
+        {{ form_errors(form.text) }}
+        {{ form_widget(form.text, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div>
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Отправить'}) }}
+      </div>
+      {{ form_end(form) }}
     </div>
-    <div class="form-group">
-      {{ form_label(form.email, 'Email') }}
-      {{ form_errors(form.email) }}
-      {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="form-group">
-      {{ form_label(form.text, 'Текст') }}
-      {{ form_errors(form.text) }}
-      {{ form_widget(form.text, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div>
-      {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Отправить'}) }}
-    </div>
-    {{ form_end(form) }}
   </div>
 {% endblock %}

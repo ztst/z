@@ -887,12 +887,12 @@ img.mfp-img
     right: 0;
     top: 0;
 
-    background: url('/images/popup/show-password-icon.png') no-repeat 0 9px;
+    background: url('/images/popup/show-password-icon-opened.png') no-repeat 0 11px;
 }
 
 .show-password-button-container .show-password-icon.opened
 {
-    background: url('/images/popup/show-password-icon-opened.png') no-repeat 0 10px;
+    background: url('/images/popup/show-password-icon.png') no-repeat 0 10px;
 }
 
 /* Additional forms styles BEGIN */

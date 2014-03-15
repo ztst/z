@@ -9,6 +9,7 @@
         }) }}"
            title="{{ video.getName|raw }}">
           <img src="{{ large_video_thumbnail(video) }}" alt="{{ video.getName|raw }}"/>
+          <span class="video-preview-over">&nbsp;</span>
         </a>
         <div class="video-duration">{{ video.duration|date("i:s") }}</div>
       </div>

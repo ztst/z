@@ -63,8 +63,6 @@ var MainMenu = EventDispatcher.extend({
     {
         this._registrationForm = new RegistrationForm("registrationForm");
         this._registrationForm.addListener(BaseForm.event.SUBMITTED, this, this._onRegistrationFormSubmitted);
-
-        this._initShowPasswordLink();
     },
 
     _initForgetPasswordForm: function()
@@ -191,39 +189,6 @@ var MainMenu = EventDispatcher.extend({
         this._showBadgesPopupLink.remove();
 
         $.post(this._userHasViewedBadgesUrl, null, handler(this, "_onSaveViewingBadgesComplete"), "json");
-    },
-
-    _initShowPasswordLink: function()
-    {
-        var showPasswordLink = $(".show-password-icon");
-        if (navigator.userAgent.search("MSIE") >= 0)
-        {
-            $(".show-password-icon").remove();
-            showPasswordLink.width(1);
-        }
-        else
-        {
-            showPasswordLink.click(handler(this, "_onShowPasswordLinkClick"));
-        }
-    },
-
-    _onShowPasswordLinkClick: function(event)
-    {
-        var link = $(event.target);
-        var container = link.parent();
-
-        var passwordInput = container.find(".password-input");
-        var currentType = passwordInput.attr("type");
-        if (currentType == "text")
-        {
-            passwordInput.attr("type", "password");
-            link.removeClass("opened");
-        }
-        else
-        {
-            passwordInput.attr("type", "text");
-            link.addClass("opened");
-        }
     },
 
     _onSaveViewingBadgesComplete: function(response)
