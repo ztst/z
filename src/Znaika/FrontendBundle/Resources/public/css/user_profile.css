@@ -203,7 +203,8 @@
     font-family: "OpenSans",serif;
 }
 
-.sex-field .iradio
+.sex-field .iradio,
+.sex-field input
 {
     display: block;
     float: left;

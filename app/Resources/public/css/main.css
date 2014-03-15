@@ -822,12 +822,13 @@ label
 .footer-container
 {
     position: relative;
+    padding-top: 18px;
     height: 54px;
     color: #c9c8c8;
 }
 
 .footer-container a,
-.footer-copyright
+.footer-copyright-container span
 {
     display: block;
     color: #fff;
@@ -842,17 +843,19 @@ label
     height: 40px;
 }
 
-.footer-link,
-.footer-copyright
+.footer-social-buttons-block,
+.footer-links-block,
+.footer-copyright-container
 {
-    margin-top: 18px;
+    display: inline-block;
 }
 
 .footer-social-buttons-block
 {
     float: left;
-    width: 140px;
-    margin-top: 17px;
+    margin-left: 23px;
+    margin-right: 109px;
+    width: 104px;
 }
 
 .footer-social-buttons-text
@@ -864,8 +867,19 @@ label
 .footer-social-button
 {
     float: left;
-    margin-left: 6px;
-    margin-top: 0;
+    margin-right: 6px;
+}
+
+.footer-copyright-container
+{
+    float: right;
+    margin-right: 23px;
+}
+
+.footer-link
+{
+    float: left;
+    margin-right: 44px;
 }
 
 .footer-horizontal-bar
@@ -884,7 +898,7 @@ label
     {
         display: none;
     }
-    .footer-container a, .footer-copyright
+    .footer-container a, .footer-copyright-container span
     {
         font-size: 13px;
     }
