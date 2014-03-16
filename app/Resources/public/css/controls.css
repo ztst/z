@@ -13,6 +13,13 @@
     cursor: pointer;
 }
 
+a.active-button,
+a.semi-active-button,
+a.non-active-button
+{
+    padding-top: 5px;
+}
+
 .active-button:hover,
 .active-button:focus,
 .semi-active-button:hover,
@@ -25,8 +32,6 @@
 
 .active-button
 {
-    color: #fff;
-
     border: none;
     background: #32a1d5;
     background: linear-gradient(#32a1d5, #1e89bb);
@@ -41,13 +46,20 @@
     background: linear-gradient(#31a7de, #0692c8);
 }
 
+.active-button-label
+{
+    padding: 0;
+    color: #fff;
+}
+
 .semi-active-button
 {
     border: 1px solid #d6d6d6;
     background: #fff;
 }
 
-.semi-active-button:hover
+.semi-active-button:hover,
+.non-active-button:hover
 {
     border-color: #a9a9a9;
     box-shadow: 0 3px 6px -6px #000;
@@ -55,12 +67,11 @@
 
 .semi-active-button-label
 {
-    padding-left: 16px;
+    padding-left: 19px;
     color: #0373a8;
 }
 
-.non-active-button,
-.non-active-button:hover
+.non-active-button
 {
     border: 1px solid #d6d6d6;
     color: #cbd6dc;

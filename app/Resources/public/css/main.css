@@ -703,8 +703,9 @@ input
 
 label
 {
-    font: bold 12px Verdana;
     color: #2a2a2a;
+    font-size: 12px;
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 @media (max-width: 991px)
@@ -844,6 +845,11 @@ label
     text-decoration: none;
 }
 
+.footer-container a:hover
+{
+    color: #fff;
+}
+
 .footer-logo
 {
     background: url('/images/footer/footer-logo.png') no-repeat;
@@ -877,6 +883,12 @@ label
     margin-right: 6px;
 }
 
+.footer-social-button a
+{
+    width: 20px;
+    height: 20px;
+}
+
 .footer-copyright-container
 {
     float: right;
@@ -887,6 +899,46 @@ label
 {
     float: left;
     margin-right: 44px;
+}
+
+.footer-vk
+{
+    background: url('/images/footer/footer-vk.png') no-repeat;
+}
+
+.footer-vk:hover
+{
+    background: url('/images/footer/footer-vk-over.png') no-repeat;
+}
+
+.footer-facebook
+{
+    background: url('/images/footer/footer-facebook.png') no-repeat;
+}
+
+.footer-facebook:hover
+{
+    background: url('/images/footer/footer-facebook-over.png') no-repeat;
+}
+
+.footer-twitter
+{
+    background: url('/images/footer/footer-twitter.png') no-repeat;
+}
+
+.footer-twitter:hover
+{
+    background: url('/images/footer/footer-twitter-over.png') no-repeat;
+}
+
+.footer-odnoklassniki
+{
+    background: url('/images/footer/footer-odnoklassniki.png') no-repeat;
+}
+
+.footer-odnoklassniki:hover
+{
+    background: url('/images/footer/footer-odnoklassniki-over.png') no-repeat;
 }
 
 .footer-horizontal-bar

@@ -1,6 +1,6 @@
 .wrap > .container
 {
-    background: url('/images/user-profile/user-profile-background.png') repeat-y 0 30px;
+    background: url('/images/user-profile/user-profile-background.png') repeat-y 0 27px;
 }
 
 .photo-button
@@ -9,8 +9,8 @@
     opacity: 0;
     position: absolute;
     overflow: hidden;
-    width: 200px;
-    height: 30px;
+    width: 148px;
+    height: 31px;
 }
 
 .photo-button input
@@ -34,7 +34,7 @@
 
     overflow: hidden;
     width: 200px;
-    height: 30px;
+    height: 31px;
 }
 
 .popup-content
@@ -49,7 +49,7 @@
 
 .user-profile-container
 {
-    margin-top: 9px;
+    margin-top: 6px;
 }
 
 .user-profile-container .form-control
@@ -73,8 +73,7 @@
 
 .user-profile-container h3
 {
-    margin-top: 1px;
-    margin-bottom: 0;
+    margin: 0;
     padding-bottom: 25px;
     color: #000;
     font-size: 16px;
@@ -104,15 +103,18 @@
 
 .photo-container
 {
-    width: 200px;
-    height: 201px;
+    position: relative;
+    bottom: 1px;
+    width: 202px;
+    height: 202px;
 
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
 .add-photo-button,
-.edit-photo-button
+.edit-photo-button,
+.delete-photo-button
 {
     float: left;
 }
@@ -122,14 +124,14 @@
     background: #fff url('/images/user-profile/add-photo-button-icon.png') no-repeat 0 3px;
 }
 
-.edit-photo-button .semi-active-button-label
+.edit-photo-button .non-active-button-label
 {
-    background: #fff url('/images/user-profile/edit-photo-button-icon.png') no-repeat 0 3px;
+    background: #fff url('/images/user-profile/edit-photo-button-icon.png') no-repeat 0 4px;
 }
 
-.delete-photo-button .semi-active-button-label
+.delete-photo-button .non-active-button-label
 {
-    background: #fff url('/images/user-profile/delete-photo-button-icon.png') no-repeat 0 3px;
+    background: #fff url('/images/user-profile/delete-photo-button-icon.png') no-repeat 0 4px;
 }
 
 .user-profile-column-container
@@ -150,9 +152,14 @@
     width: 100%;
 }
 
-.edit-user-profile-form input[type="text"],
+.edit-user-profile-form input[type="text"]
+{
+    width: 222px;
+}
+
 .save-user-profile-button
 {
+    float: right;
     width: 222px;
 }
 
@@ -224,10 +231,9 @@
     padding-left: 108px;
 }
 
-.save-user-profile-button
+.save-user-profile-button .semi-active-button-label
 {
-    font-family: "OpenSans Semibold",sans-serif;
-    background: url("/images/user-profile/save-user-profile-button-icon.png") no-repeat scroll 54px 8px #FFFFFF;
+    background: url("/images/user-profile/save-user-profile-button-icon.png") no-repeat scroll 0 3px #FFFFFF;
 }
 
 .settings-column-container
@@ -235,6 +241,12 @@
     padding-left: 19px;
     padding-right: 20px;
     width: 378px;
+}
+
+.settings-column-container .edit-account-setting-button
+{
+    position: relative;
+    top: 3px;
 }
 
 .change-email-controller
@@ -278,6 +290,16 @@
     bottom: -11px;
 }
 
+.change-password-form-container .show-password-icon
+{
+    background-position: 0 9px;
+}
+
+.change-password-form-container .show-password-icon.opened
+{
+    background-position: 0 8px;
+}
+
 .change-form-container h4
 {
     margin: 0;
@@ -298,50 +320,45 @@
 }
 
 .semi-active-button,
-.non-active-button
+.non-active-button,
+.semi-active-button a,
+.non-active-button a
 {
-    height: 30px;
+    padding-right: 14px;
+    padding-left: 14px;
+    width: auto;
+    height: 31px;
     font-size: 13px;
     font-family: "OpenSans Semibold",sans-serif;
 }
 
-a.semi-active-button,
-a.non-active-button
+.non-active-button-label
 {
-    padding-top: 4px;
+    padding-left: 19px;
+    color: #686868;
 }
 
 .change-buttons-container
 {
     display: inline-block;
-    padding-top: 6px;
+    padding-top: 7px;
     width: 100%;
 }
 
-.change-setting-button
+.change-setting-button,
+.cancel-edit-account
 {
+    margin-left: 12px;
     float: left;
-    padding: 0 5px;
-    width: 169px;
 }
 
 .change-setting-button .semi-active-button-label
 {
-    padding-left: 16px;
     background: url('/images/user-profile/change-setting-icon.png') no-repeat 0 3px;
-}
-
-.cancel-edit-account
-{
-    float: right;
-    padding-top: 5px;
-    width: 119px;
 }
 
 .cancel-edit-account .non-active-button-label
 {
-    padding-left: 16px;
-    color: #686868;
     background: url('/images/user-profile/cancel-edit-icon.png') no-repeat 0 3px;
 }
 /* change forms styles END */
