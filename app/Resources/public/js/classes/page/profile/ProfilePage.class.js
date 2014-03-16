@@ -65,6 +65,8 @@ var ProfilePage = Base.extend({
         $(".change-email-form-container").removeClass("hidden");
         $(".change-password-form-container").addClass("hidden");
         $(".change-password-controller").addClass("hidden");
+
+        this._showChangeEmailFormLink.addClass("activated");
     },
 
     _onShowChangePasswordFormLink: function()
@@ -72,6 +74,8 @@ var ProfilePage = Base.extend({
         $(".change-email-form-container").addClass("hidden");
         $(".change-password-form-container").removeClass("hidden");
         $(".change-password-controller").removeClass("hidden");
+
+        this._showChangePasswordFormLink.addClass("activated")
     },
 
     _closeAccountSettingsForms: function()
@@ -79,6 +83,8 @@ var ProfilePage = Base.extend({
         $(".change-email-form-container").addClass("hidden");
         $(".change-password-form-container").addClass("hidden");
         $(".change-password-controller").removeClass("hidden");
+
+        $(".edit-account-setting-button").removeClass("activated");
     },
 
     _onChangeEmailFormSubmitted: function()

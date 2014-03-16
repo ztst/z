@@ -50,8 +50,7 @@
                     "format"      => "dd MMMM yyyy",
                     "widget"      => "choice",
                     "years"       => range(date("Y"), date("Y") - self::MAX_YEARS_OLD)
-                ))
-                ->add("save", "submit");
+                ));
         }
 
         /**

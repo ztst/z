@@ -1015,6 +1015,11 @@ img.mfp-img
     text-align: center;
 }
 
+.newuser-button .semi-active-button-label
+{
+    padding-left: 0;
+}
+
 .get-new-password-form-container
 {
     width: 583px;

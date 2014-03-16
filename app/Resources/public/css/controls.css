@@ -9,7 +9,15 @@
     border-radius: 3px;
     font-size: 15px;
     font-family: "OpenSans",serif;
+    text-align: center;
     cursor: pointer;
+}
+
+a.active-button,
+a.semi-active-button,
+a.non-active-button
+{
+    padding-top: 5px;
 }
 
 .active-button:hover,
@@ -24,8 +32,6 @@
 
 .active-button
 {
-    color: #fff;
-
     border: none;
     background: #32a1d5;
     background: linear-gradient(#32a1d5, #1e89bb);
@@ -40,23 +46,32 @@
     background: linear-gradient(#31a7de, #0692c8);
 }
 
+.active-button-label
+{
+    padding: 0;
+    color: #fff;
+}
+
 .semi-active-button
 {
     border: 1px solid #d6d6d6;
-    color: #0373a8;
-
     background: #fff;
 }
 
-.semi-active-button:hover
+.semi-active-button:hover,
+.non-active-button:hover
 {
     border-color: #a9a9a9;
-    color: #0373a8;
     box-shadow: 0 3px 6px -6px #000;
 }
 
-.non-active-button,
-.non-active-button:hover
+.semi-active-button-label
+{
+    padding-left: 19px;
+    color: #0373a8;
+}
+
+.non-active-button
 {
     border: 1px solid #d6d6d6;
     color: #cbd6dc;
@@ -66,7 +81,7 @@
 
 .edit-account-setting-button,
 .edit-account-setting-button:hover,
-.edit-account-setting-button:hover
+.edit-account-setting-button:focus
 {
     display: inline-block;
     text-decoration: none;
@@ -77,6 +92,11 @@
 .edit-account-setting-button
 {
     background: url('/images/user-profile/edit-profile-setting-icon.png') no-repeat;
+}
+
+.edit-account-setting-button.activated
+{
+    background: url('/images/user-profile/edit-profile-setting-icon-activated.png') no-repeat;
 }
 
 .edit-account-setting-button:hover
