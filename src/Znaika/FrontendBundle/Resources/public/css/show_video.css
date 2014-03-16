@@ -418,21 +418,13 @@
 }
 
 /* moderator styles BEGIN */
-.edit-button,
-.add-button,
-.edit-button span,
-.add-button span
-{
-    display: block;
-    float: left;
-}
-
 .edit-button
 {
     margin-top: 19px;
     margin-left: 18px;
-
     height: 30px;
+
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .synopsis-tab .add-button,
@@ -445,31 +437,10 @@
 .add-button
 {
     float: left;
-
-    width: 233px;
+    width: auto;
     height: 30px;
-}
 
-.edit-button-icon
-{
-    width: 12px;
-    height: 14px;
-    background: url('/images/video/edit-button-icon.png') no-repeat;
-}
-
-.add-button-icon
-{
-    margin-top: 7px;
-    margin-left: 33px;
-
-    width: 13px;
-    height: 14px;
-    background: url('/images/video/add-button-icon.png') no-repeat;
-}
-
-.video-tab .edit-button
-{
-    width: 231px;
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .synopsis-tab .edit-button
@@ -480,12 +451,6 @@
 .quiz-tab .edit-button
 {
     width: 210px;
-}
-
-.video-tab .edit-button-icon
-{
-    margin-left: 15px;
-    margin-top: 8px;
 }
 
 .synopsis-tab .edit-button-icon
@@ -500,13 +465,23 @@
     margin-top: 8px;
 }
 
-.edit-button-label
+.video-view-container .semi-active-button
 {
-    margin-top: 4px;
-    margin-left: 8px;
-
+    display: inline-block;
+    padding: 4px 14px 0;
+    width: auto;
     font-size: 13px;
+}
+
+.add-button .active-button-label
+{
     font-family: "OpenSans Semibold",sans-serif;
+    background: url('/images/video/add-button-icon.png') no-repeat 0 3px;
+}
+
+.edit-button .semi-active-button-label
+{
+    background: url('/images/video/edit-button-icon.png') no-repeat 0 3px;
 }
 
 .add-button-label

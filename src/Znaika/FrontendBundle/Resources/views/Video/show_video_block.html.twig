@@ -1,8 +1,7 @@
 <div class="video-container">
   {% if is_moderator() %}
     <a class="semi-active-button edit-button" href="{{ path("edit_video_form", {"videoName": video.urlName}) }}">
-      <span class="edit-button-icon"></span>
-      <span class="edit-button-label">Редактировать видеоурок</span>
+      <span class="semi-active-button-label">Редактировать видеоурок</span>
     </a>
     <div class="clear"></div>
   {% endif %}

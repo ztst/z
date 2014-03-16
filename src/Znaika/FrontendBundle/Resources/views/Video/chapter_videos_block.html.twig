@@ -3,8 +3,7 @@
     <a class="active-button add-button"
        href="{{ path('add_video_form', {"chapterName": chapter.urlName, "class": chapter.grade, "subjectName": chapter.subject.urlName}) }}"
        title="">
-      <span class="add-button-icon"></span>
-      <span class="add-button-label">Добавить видеоурок</span>
+      <span class="active-button-label">Добавить видеоурок</span>
     </a>
     {% if currentVideo is defined and currentVideo == video %}
       <a class="semi-active-button video-down" href="javascript:void(0);">

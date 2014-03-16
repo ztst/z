@@ -195,42 +195,27 @@
 
 .add-button
 {
+    display: inline-block;
     float: left;
+    padding: 4px 14px 0;
+    width: auto;
+    height: 30px;
 
-    width: 233px;
-}
-
-.add-button span
-{
-    display: block;
-    float: left;
-}
-
-.add-button-icon
-{
-    margin-top: 7px;
-    margin-left: 33px;
-
-    width: 13px;
-    height: 14px;
-    background: url('/images/video/add-button-icon.png') no-repeat;
-}
-
-.add-button-label
-{
-    margin-top: 5px;
-    margin-left: 8px;
-
-    color: #fff;
     font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
 }
 
-.video-down,
-.video-up
+.add-button .active-button-label
+{
+    font-family: "OpenSans Semibold",sans-serif;
+    background: url('/images/video/add-button-icon.png') no-repeat 0 3px;
+}
+
+.semi-active-button.video-down,
+.semi-active-button.video-up
 {
     float: left;
     margin-left: 4px;
+    padding-top: 0;
 
     width: 30px;
 }
