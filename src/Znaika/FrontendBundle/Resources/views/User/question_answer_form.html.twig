@@ -1,0 +1,24 @@
+<div>
+  <a class="active-button show-answer-form-link" href="javascript:void(0);" title="">Ответить</a>
+  <div class="question-answer-form-container hidden">
+    {{ form_start(form, {
+        'attr': {'id': 'addCommentForm' ~ comment.videoCommentId},
+        'action': path('add_video_comment_form', {"videoName": comment.video.getUrlName}),
+        'method': 'POST'
+      })
+    }}
+      {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+      <div class="form-group add-video-comment-container">
+        <label class="label-your-comment" for="questionAnswer{{ comment.videoCommentId}}">Ваш ответ</label>
+        {{ form_errors(form.text) }}
+        {{ form_widget(form.text, {'id': 'questionAnswer' ~ comment.videoCommentId, 'attr': {'class': 'form-control comment-text-field'}}) }}
+        <input type="hidden" name="isAnswer" value="1" id="isQuestionInput{{ comment.videoCommentId }}" />
+        <input type="hidden" name="questionId" value="{{ comment.videoCommentId }}" id="questionIdInput{{ comment.videoCommentId }}" />
+        {{ form_widget(form._token, {'id': 'questionAnswerFormToken' ~ comment.videoCommentId}) }}
+      </div>
+      <div>
+        <button class="active-button send-comment-button" type="submit">Отправить</button>
+      </div>
+    {{ form_end(form) }}
+  </div>
+</div>

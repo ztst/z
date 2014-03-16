@@ -9,8 +9,13 @@
     opacity: 0;
     position: absolute;
     overflow: hidden;
+<<<<<<< HEAD
+    width: 200px;
+    height: 30px;
+=======
     width: 148px;
     height: 31px;
+>>>>>>> 015324b1816e893887cb549ddf8ea9e142a749d7
 }
 
 .photo-button input

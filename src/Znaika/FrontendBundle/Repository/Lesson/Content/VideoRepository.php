@@ -2,6 +2,7 @@
     namespace Znaika\FrontendBundle\Repository\Lesson\Content;
 
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
+    use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Repository\BaseRepository;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
 
@@ -167,6 +168,17 @@
             if (is_null($result))
             {
                 $result = $this->dbRepository->getMaxChapterOrderPriority($chapter);
+            }
+
+            return $result;
+        }
+
+        public function getSupervisorVideosWithQuestions(User $user)
+        {
+            $result = $this->redisRepository->getSupervisorVideosWithQuestions($user);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getSupervisorVideosWithQuestions($user);
             }
 
             return $result;

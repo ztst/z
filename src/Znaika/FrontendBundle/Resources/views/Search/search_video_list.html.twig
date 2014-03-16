@@ -6,9 +6,9 @@
       <div class="col-center">
         <div class="chapter-video-preview-container">
           <a href="{{ path('show_video', {
-          'subjectName': video.getSubject.getUrlName,
-          'class': video.getGrade,
-          'videoName': video.getUrlName
+            'subjectName': video.getSubject.getUrlName,
+            'class': video.getGrade,
+            'videoName': video.getUrlName
           }) }}"
              title="{{ video.getName|raw }}">
             <div class="over-elements-container">
@@ -33,8 +33,8 @@
            title="{{ video.getName|raw }}">
           {{ video.getName|raw }}
         </a>
-        <p class="search-video-breadcrumbs">{{ video.grade }} класс > {{ video.subject.name }}>
-          {{ video.chapter.name }}
+        <p class="search-video-breadcrumbs">
+          {{ video.grade }} класс > {{ video.subject.name }}> {{ video.chapter.name }}
         </p>
       </div>
       <div class="clear"></div>

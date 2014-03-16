@@ -7,6 +7,7 @@ Znaika\FrontendBundle\Entity\Profile\User:
         nickname:        { type: string, length: 255, nullable: true }
         firstName:       { column: first_name, type: string, length: 255, nullable: true }
         lastName:        { column: last_name, type: string, length: 255, nullable: true }
+        middleName:      { column: middle_name, type: string, length: 255, nullable: true }
         email:           { type: string, length: 255, unique: true, notnull: true }
         password:        { type: string, length: 255, notnull: true }
         createdTime:     { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }

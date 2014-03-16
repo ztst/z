@@ -7,6 +7,8 @@
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Znaika\FrontendBundle\Helper\Util\Lesson\SubjectUtil;
     use Znaika\FrontendBundle\Repository\Lesson\Category\ISubjectRepository;
+    use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
+    use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
     class MenuBuilder
     {
@@ -55,6 +57,27 @@
             return $menu;
         }
 
+        public function createSidebarProfileMenu(Request $request, UserRepository $userRepository, VideoCommentRepository $videoCommentRepository)
+        {
+            $userId = $request->get("userId");
+            $menu   = $this->factory->createItem("root");
+            $menu->setCurrentUri($request->getRequestUri());
+
+            $menu->setChildrenAttribute("class", "profile-sidebar-menu");
+
+            $countQuestions = $videoCommentRepository->countTeacherNotAnsweredQuestionComments($userRepository->getOneByUserId($userId));
+            $menu->addChild("Мой профиль",
+                array("route" => "edit_teacher_profile", "routeParameters" => array("userId" => $userId)));
+
+            $title = "Вопросы к урокам";
+            $title .= $countQuestions ? " <span class='user-questions-count'>(+$countQuestions)</span>" : "";
+            $menuItem = $menu->addChild($title,
+                array("route" => "teacher_questions", "routeParameters" => array("userId" => $userId)));
+            $menuItem->setExtra('safe_label', true);
+
+            return $menu;
+        }
+
         public function createSidebarSubjectMenu(Request $request, ISubjectRepository $repository)
         {
             $currentGrade          = $this->getCurrentClass($request);
@@ -66,7 +89,7 @@
             $gradesSubjects  = SubjectUtil::getGradesSubjects();
             $currentSubjects = $gradesSubjects[$currentGrade];
             $subjects        = $repository->getAll();
-            $subjects = $this->prepareSubjectsOrder($subjects, $currentSubjects);
+            $subjects        = $this->prepareSubjectsOrder($subjects, $currentSubjects);
             foreach ($subjects as $subject)
             {
                 /** @var Subject $subject */

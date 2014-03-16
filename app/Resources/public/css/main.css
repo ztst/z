@@ -21,6 +21,7 @@ h3
 a:focus
 {
     outline: none;
+    outline: 0;
 }
 
 .clear
@@ -36,6 +37,12 @@ a:focus
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus
+{
+    background: none;
 }
 
 .col-left
@@ -365,6 +372,11 @@ a:focus
 {
     list-style: none;
     margin: 0;
+}
+
+.subject-menu-more-container ul a
+{
+    text-align: left;
 }
 
 .subject-menu-more-container a:hover

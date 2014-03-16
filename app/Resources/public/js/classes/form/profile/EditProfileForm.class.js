@@ -7,7 +7,6 @@ var EditProfileForm = BaseForm.extend({
         this.base(id);
 
         this._initValidators();
-
         this._saveFieldsValues();
 
         $('input').iCheck({
@@ -19,7 +18,7 @@ var EditProfileForm = BaseForm.extend({
         gradeField.selectbox();
 
         $(".birthdate-container select").selectbox();
-        
+
     },
 
     isEdited: function()
@@ -72,6 +71,15 @@ var EditProfileForm = BaseForm.extend({
             maxlength: 150,
             messages: { maxlength: "Максимальная длина - 150 символов" }
         });
+
+        var middleNameField = this._form.find("#middleNameField");
+        if (middleNameField.length)
+        {
+            middleNameField.rules('add', {
+                maxlength: 40,
+                messages: { maxlength: "Максимальная длина отчества - 40 символов" }
+            });
+        }
     },
 
     _needToSubmit: function()

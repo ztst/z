@@ -3,14 +3,14 @@
 {% block stylesheets %}
   {{ parent() }}
 
-  {% stylesheets '@ZnaikaFrontendBundle/Resources/public/css/index.css' %}
+  {% stylesheets '@ZnaikaFrontendBundle/Resources/public/css/index.css' filter="?yui_css" %}
     <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
 
 {% block content %}
   <div class="index-content">
-    <img src="{{ asset('/images/index-top-picture.jpg') }}" alt="" />
+    <img width="998" height="300" src="{{ asset('/images/index-top-picture.jpg') }}" alt="Инфографика" />
     <div class="index-top-videos-block">
       <div class="index-page-videos-list-container">
         <div class="">

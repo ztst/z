@@ -3,7 +3,7 @@
 {% block stylesheets %}
   {{ parent() }}
 
-  {% stylesheets filter='cssrewrite'
+  {% stylesheets filter="?yui_css"
     '@ZnaikaFrontendBundle/Resources/public/css/user_profile.css'
   %}
     <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
@@ -13,12 +13,13 @@
 {% block javascripts %}
   {{ parent() }}
 
-  {% javascripts
+  {% javascripts filter='?yui_js'
     '../app/Resources/public/js/classes/form/profile/EditProfileForm.class.js'
     '../app/Resources/public/js/classes/form/profile/UserPhotoForm.class.js'
     '../app/Resources/public/js/classes/form/profile/ChangePasswordForm.class.js'
     '../app/Resources/public/js/classes/form/profile/ChangeEmailForm.class.js'
-    '../app/Resources/public/js/classes/page/UserProfilePage.class.js'
+    '../app/Resources/public/js/classes/page/profile/ProfilePage.class.js'
+    '../app/Resources/public/js/classes/page/profile/UserProfilePage.class.js'
   %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}

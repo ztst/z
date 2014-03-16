@@ -1,4 +1,4 @@
-var UserProfilePage = Base.extend({
+var ProfilePage = Base.extend({
 
     _editProfileForm: null,
     _userPhotoForm: null,
@@ -13,7 +13,7 @@ var UserProfilePage = Base.extend({
     {
         this.base();
 
-        this._editProfileForm = new EditProfileForm("editUserProfileForm");
+        this._editProfileForm = new EditProfileForm(this._getEditProfileFormId());
         this._userPhotoForm = new UserPhotoForm();
 
         this._changeEmailForm = new ChangeEmailForm("changeEmailForm");
@@ -24,7 +24,16 @@ var UserProfilePage = Base.extend({
 
         this._initPageCloseHandler();
         this._initAccountSettingsFormSwitching();
+        this._initChangePasswordOnSocialRegisterCompletePopup();
+    },
 
+    _getEditProfileFormId: function()
+    {
+        return "editUserProfileForm";
+    },
+
+    _initChangePasswordOnSocialRegisterCompletePopup: function()
+    {
         if ($("#changePasswordOnRegisterCompletePopup").length)
         {
             this._changePasswordOnRegisterCompleteForm = new ChangePasswordForm("changePasswordOnRegisterCompleteForm");
@@ -178,9 +187,4 @@ var UserProfilePage = Base.extend({
             window.onbeforeunload = null;
         });
     }
-});
-
-$(function()
-{
-    var userProfilePage = new UserProfilePage();
 });

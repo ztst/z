@@ -1,0 +1,29 @@
+<div id="videoQuestions{{ video.videoId }}" class="video-questions-container hidden">
+  <h4>{{ video.name }}</h4>
+  <p class="video-breadcrumbs">
+    {{ video.grade }} класс > {{ video.subject.name }}> {{ video.chapter.name }}
+  </p>
+
+  {% if not questions is empty %}
+    <ul class="video-questions">
+      {% for question in questions %}
+        <li class="" id="questionContainer{{ question.videoCommentId }}">
+          <a class="pull-left" href="#">
+            <img class="media-object"
+                 width="50"
+                 height="50"
+                 src="{% if question.user.hasPhoto %}{{ question.user.getPhotoUrl }}{% else %}{{ asset('images/404.jpg') }}{% endif %}"
+                 alt="Здесь будет аватар автора"/>
+          </a>
+          <div class="media-body">
+            <span class="comment-author">{{ question.user }}</span>
+            <span class="comment-body">{{ question.getText }}</span>
+            <h6 class="media-heading comment-date">{{ comment_date(question.getCreatedTime) }}</h6>
+          </div>
+          <div class="clear"></div>
+          {{ question_answer_form(question)|raw }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>

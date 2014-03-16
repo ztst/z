@@ -3,6 +3,7 @@
 
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\FrontendBundle\Entity\Profile\User;
 
     interface IVideoRepository
     {
@@ -90,4 +91,6 @@
          * @return int
          */
         public function getMaxChapterOrderPriority(Chapter $chapter);
+
+        public function getSupervisorVideosWithQuestions(User $user);
     }

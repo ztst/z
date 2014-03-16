@@ -1,0 +1,41 @@
+{{ form_start(form, {'attr': {'id': 'editTeacherProfileForm'}, 'action': path('edit_teacher_profile', {'userId': userId}), 'method': 'POST'}) }}
+  {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
+  <div class="form-group">
+    {{ form_label(form.firstName, 'Имя') }}
+    {{ form_errors(form.firstName) }}
+    {{ form_widget(form.firstName, {'id': 'firstNameField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(form.lastName, 'Фамилия') }}
+    {{ form_errors(form.lastName) }}
+    {{ form_widget(form.lastName, {'id': 'lastNameField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(form.middleName, 'Отчество') }}
+    {{ form_errors(form.middleName) }}
+    {{ form_widget(form.middleName, {'id': 'middleNameField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(form.nickname, 'Никнейм') }}
+    {{ form_errors(form.nickname) }}
+    {{ form_widget(form.nickname, {'id': 'nicknameField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(form.sex, 'Пол') }}
+    {{ form_errors(form.sex) }}
+    {{ form_widget(form.sex, {'id': 'sexField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(form.birthDate, 'Дата рождения') }}
+    {{ form_errors(form.birthDate) }}
+    {{ form_widget(form.birthDate, {'id': 'birthDateField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div class="form-group">
+    {{ form_label(form.city, 'Город') }}
+    {{ form_errors(form.city) }}
+    {{ form_widget(form.city, {'id': 'cityField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div>
+  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
+</div>
+{{ form_end(form) }}

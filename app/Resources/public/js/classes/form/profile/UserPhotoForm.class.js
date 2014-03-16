@@ -5,9 +5,16 @@ var UserPhotoForm = Base.extend({
     _deleteButton: null,
     _uploadButtonText: null,
 
+    _isUploading: null,
+
     constructor: function()
     {
-        $("#submit").change(function () {
+        this._isUploading = false;
+
+        var uploadFileButton = $("#submit");
+        uploadFileButton.click(handler(this, "_onUploadFileButtonClick"));
+        uploadFileButton.change(function()
+        {
             $("#editUserPhotoForm").submit();
         });
 
@@ -23,8 +30,25 @@ var UserPhotoForm = Base.extend({
         this._deleteButton.click(handler(this, "_onUserPhotoDeleteClick"))
     },
 
+    _onUploadFileButtonClick: function()
+    {
+        if (this._isUploading)
+        {
+            return false;
+        }
+        this._isUploading = true;
+
+        return true;
+    },
+
     _onUserPhotoDeleteClick: function()
     {
+        if (this._isUploading)
+        {
+            return;
+        }
+        this._isUploading = true;
+
         $("#uploadPhotoProgress").removeClass("hidden");
 
         var url = Routing.generate('delete_user_photo', {'userId': $("#userId").val()});
@@ -34,6 +58,8 @@ var UserPhotoForm = Base.extend({
 
     _onPhotoDeleted: function()
     {
+        this._isUploading = false;
+
         $("#uploadPhotoProgress").addClass("hidden");
         this._uploadButtonText.html("Добавить фото");
         this._updatePhotos($("#defaultPhotoUrl").val());
@@ -48,6 +74,8 @@ var UserPhotoForm = Base.extend({
 
     _onSuccess: function(response)
     {
+        this._isUploading = false;
+
         $("#uploadPhotoProgress").addClass("hidden");
         if (response.success)
         {

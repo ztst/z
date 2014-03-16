@@ -21,6 +21,7 @@
     use Znaika\FrontendBundle\Form\Type\RegistrationType;
     use Znaika\FrontendBundle\Form\User\ChangeUserEmailType;
     use Znaika\FrontendBundle\Form\User\PasswordRecoveryType;
+    use Znaika\FrontendBundle\Form\User\TeacherProfileType;
     use Znaika\FrontendBundle\Form\User\UserPhotoType;
     use Znaika\FrontendBundle\Form\User\UserProfileType;
     use Znaika\FrontendBundle\Helper\Encode\RegisterKeyEncoder;
@@ -31,9 +32,12 @@
     use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
     use Znaika\FrontendBundle\Helper\Util\FileSystem\UnixSystemUtils;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
+    use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
     use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
     use Znaika\FrontendBundle\Helper\Util\UserAgentInfoProvider;
     use Znaika\FrontendBundle\Helper\Vkontakte;
+    use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
+    use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
     use Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository;
     use Znaika\FrontendBundle\Repository\Profile\ChangeUserEmailRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRegistrationRepository;
@@ -296,12 +300,15 @@
 
         public function showUserProfileAction($userId)
         {
+            /** @var User $currentUser */
             $currentUser = $this->getUser();
             $ownProfile  = ($currentUser && $currentUser->getUserId() == $userId);
 
             if ($ownProfile)
             {
-                return new RedirectResponse($this->generateUrl('edit_user_profile', array('userId' => $userId)));
+                $urlPattern = $currentUser->getRole() == UserRole::ROLE_USER ? "edit_user_profile" : "edit_teacher_profile";
+
+                return new RedirectResponse($this->generateUrl($urlPattern, array('userId' => $userId)));
             }
 
             $userRepository = $this->getUserRepository();
@@ -321,9 +328,8 @@
         {
             $isSocialRegisterComplete = $this->getIsSocialRegisterComplete();
             $user                     = $this->canEditProfile();
-            $userRepository           = $this->getUserRepository();
 
-            $profileForm                          = $this->handleProfileForm($user, $userRepository);
+            $profileForm                          = $this->handleProfileForm($user);
             $userPhotoForm                        = $this->createForm(new UserPhotoType(), $user);
             $changeUserEmail                      = $this->createForm(new ChangeUserEmailType(), new ChangeUserEmail());
             $changePasswordOnRegisterCompleteForm = $this->createForm(new ChangePasswordType(), new ChangePassword());
@@ -338,6 +344,44 @@
                 'user'                                 => $user,
                 'userId'                               => $user->getUserId(),
                 'isSocialRegisterComplete'             => $isSocialRegisterComplete,
+            ));
+        }
+
+        public function editTeacherProfileAction()
+        {
+            $user = $this->canEditProfile();
+
+            $profileForm        = $this->handleTeacherProfileForm($user);
+            $userPhotoForm      = $this->createForm(new UserPhotoType(), $user);
+            $changeUserEmail    = $this->createForm(new ChangeUserEmailType(), new ChangeUserEmail());
+            $changePasswordForm = $this->createForm(new ChangePasswordType(), new ChangePassword());
+
+            return $this->render('ZnaikaFrontendBundle:User:editTeacherProfile.html.twig', array(
+                'profileForm'         => $profileForm->createView(),
+                'userPhotoForm'       => $userPhotoForm->createView(),
+                'changePasswordForm'  => $changePasswordForm->createView(),
+                'changeUserEmailFrom' => $changeUserEmail->createView(),
+                'user'                => $user,
+                'userId'              => $user->getUserId(),
+            ));
+        }
+
+        public function teacherQuestionsAction()
+        {
+            $user = $this->canEditProfile();
+
+
+            $videoCommentRepository = $this->getVideoCommentRepository();
+            $countQuestions         = $videoCommentRepository->countTeacherNotAnsweredQuestionComments($user);
+
+            $videoRepository = $this->getVideoRepository();
+            $videos          = $videoRepository->getSupervisorVideosWithQuestions($user);
+
+
+            return $this->render('ZnaikaFrontendBundle:User:teacherQuestionsPage.html.twig', array(
+                'user'           => $user,
+                'countQuestions' => $countQuestions,
+                'videos'         => $videos,
             ));
         }
 
@@ -831,11 +875,10 @@
 
         /**
          * @param $user
-         * @param $userRepository
          *
          * @return \Symfony\Component\Form\Form
          */
-        private function handleProfileForm(User $user, UserRepository $userRepository)
+        private function handleProfileForm(User $user)
         {
             $request = $this->getRequest();
             $form    = $this->createForm(new UserProfileType(), $user);
@@ -848,6 +891,30 @@
                     $listener = $this->getUserOperationListener();
                     $listener->onEditProfile($user);
 
+                    $userRepository = $this->getUserRepository();
+                    $userRepository->save($user);
+                }
+            }
+
+            return $form;
+        }
+
+        /**
+         * @param $user
+         *
+         * @return \Symfony\Component\Form\Form
+         */
+        private function handleTeacherProfileForm(User $user)
+        {
+            $request = $this->getRequest();
+            $form    = $this->createForm(new TeacherProfileType(), $user);
+
+            if ($request->request->has('teacher_profile_type'))
+            {
+                $form->handleRequest($request);
+                if ($form->isValid())
+                {
+                    $userRepository = $this->getUserRepository();
                     $userRepository->save($user);
                 }
             }
@@ -930,6 +997,23 @@
         {
             $request = $this->getRequest();
             $session = $request->getSession();
+
             return $session->get("isSocialRegisterComplete", false);
+        }
+
+        /**
+         * @return VideoCommentRepository
+         */
+        private function getVideoCommentRepository()
+        {
+            return $this->get('znaika_frontend.video_comment_repository');
+        }
+
+        /**
+         * @return VideoRepository
+         */
+        private function getVideoRepository()
+        {
+            return $this->get('znaika_frontend.video_repository');
         }
     }

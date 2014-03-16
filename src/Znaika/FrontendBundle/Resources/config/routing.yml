@@ -86,6 +86,14 @@ edit_user_profile:
     pattern: /edit-user-profile/{userId}
     defaults: { _controller: ZnaikaFrontendBundle:User:editUserProfile }
 
+edit_teacher_profile:
+    pattern: /edit-teacher-profile/{userId}
+    defaults: { _controller: ZnaikaFrontendBundle:User:editTeacherProfile }
+
+teacher_questions:
+    pattern: /teacher-questions/{userId}
+    defaults: { _controller: ZnaikaFrontendBundle:User:teacherQuestions }
+
 edit_user_photo:
     pattern: /edit-user-photo/{userId}
     defaults: { _controller: ZnaikaFrontendBundle:User:editUserPhoto }

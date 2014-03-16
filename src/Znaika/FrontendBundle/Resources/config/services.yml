@@ -178,6 +178,18 @@ services:
         tags:
             - { name: knp_menu.menu, alias: main }
 
+    znaika_frontend.menu.sidebar_profile_menu:
+        class: "%znaika_frontend.menu.class%"
+        factory_service: znaika_frontend.menu_builder
+        factory_method: createSidebarProfileMenu
+        arguments:
+            - @request
+            - @znaika_frontend.user_repository
+            - @znaika_frontend.video_comment_repository
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: sidebar_profile_menu }
+
     znaika_frontend.menu.sidebar_grade_menu:
         class: "%znaika_frontend.menu.class%"
         factory_service: znaika_frontend.menu_builder
