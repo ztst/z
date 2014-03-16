@@ -32,6 +32,7 @@
   {% endfor %}
 
   <div class="user-profile-container">
+    <div class="user-profile-top-horizontal-line"></div>
     <div class="photo-column-container">
       {% include "ZnaikaFrontendBundle:User:user_photo_form.html.twig" with {'form': userPhotoForm} %}
     </div>
@@ -64,5 +65,8 @@
         {% include "ZnaikaFrontendBundle:User:change_password_form.html.twig" with {'form': changePasswordForm} %}
       </div>
     </div>
+  </div>
+  <div class="bottom-horizontal-placeholder">
+    <div class="line"></div>
   </div>
 {% endblock %}
