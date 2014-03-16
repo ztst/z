@@ -24,12 +24,9 @@
           <h5>{{ video.getName|raw }}</h5>
         </a>
         <div class="video-info-line">
-          <span>{{ video.getSubject.getName }}</span>
-          <span>{{ video.getGrade }} класс</span>
+          <span>{{ video.getSubject.getName }}, {{ video.getGrade }} класс</span>
           {% set month = "month_" ~ video.getCreatedTime|date("M") %}
           {% set year = video.getCreatedTime|date('Y') %}
-          <span class="video-date">{{ '%s %s'|format(month|trans, year) }}</span>
-          <div class="clear"></div>
         </div>
       </div>
     </div>

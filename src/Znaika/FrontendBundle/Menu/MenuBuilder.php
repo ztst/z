@@ -70,9 +70,10 @@
                 array("route" => "edit_teacher_profile", "routeParameters" => array("userId" => $userId)));
 
             $title = "Вопросы к урокам";
-            $title .= $countQuestions ? " (+$countQuestions)" : "";
-            $menu->addChild($title,
+            $title .= $countQuestions ? " <span class='user-questions-count'>(+$countQuestions)</span>" : "";
+            $menuItem = $menu->addChild($title,
                 array("route" => "teacher_questions", "routeParameters" => array("userId" => $userId)));
+            $menuItem->setExtra('safe_label', true);
 
             return $menu;
         }

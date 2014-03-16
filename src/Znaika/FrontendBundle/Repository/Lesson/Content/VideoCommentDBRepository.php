@@ -65,7 +65,7 @@
                ->setParameter('is_answered', false)
                ->andWhere("vc.commentType = :comment_type")
                ->setParameter('comment_type', VideoCommentUtil::QUESTION)
-               ->addOrderBy('vc.createdTime', 'DESC');
+               ->addOrderBy('vc.createdTime', 'ASC');
 
             return $qb->getQuery()->getResult();
         }

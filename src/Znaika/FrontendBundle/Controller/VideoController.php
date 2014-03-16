@@ -159,27 +159,37 @@
             $videoComment = new VideoComment();
             $videoComment->setVideo($video);
             $videoComment->setUser($this->getUser());
-
             $form = $this->createForm(new VideoCommentType(), $videoComment);
 
             $form->handleRequest($request);
-            if ($form->isValid())
+            $success = $form->isValid();
+            if ($success)
             {
                 $videoCommentRepository = $this->getVideoCommentRepository();
-
                 $this->prepareVideoCommentType($videoComment, $videoCommentRepository);
-
                 $videoCommentRepository->save($videoComment);
 
                 $listener = $this->getUserOperationListener();
                 $listener->onAddVideoComment($this->getUser(), $video);
             }
+            if ($request->isXmlHttpRequest())
+            {
+                $response = JsonResponse::create(array(
+                    "success"    => $success,
+                    "questionId" => $request->get("questionId", 0),
+                    "videoId"    => $video->getVideoId()
+                ));
+            }
+            else
+            {
+                $response = new RedirectResponse($this->generateUrl('show_video', array(
+                    "class"       => $video->getGrade(),
+                    "subjectName" => $video->getSubject()->getUrlName(),
+                    "videoName"   => $video->getUrlName()
+                )));
+            }
 
-            return new RedirectResponse($this->generateUrl('show_video', array(
-                "class"       => $video->getGrade(),
-                "subjectName" => $video->getSubject()->getUrlName(),
-                "videoName"   => $video->getUrlName()
-            )));
+            return $response;
         }
 
         public function editVideoFormAction($videoName)

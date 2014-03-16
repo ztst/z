@@ -49,6 +49,7 @@
                 'video_questions_block'         => new \Twig_Function_Method($this, 'renderVideoQuestions'),
                 'count_video_questions'         => new \Twig_Function_Method($this, 'countVideoQuestions'),
                 'teacher_profile_questions'     => new \Twig_Function_Method($this, 'renderTeacherProfileQuestions'),
+                'question_answer_form'          => new \Twig_Function_Method($this, 'renderQuestionAnswerForm'),
             );
         }
 
@@ -59,6 +60,21 @@
             return $count > 1 ? "(+$count)" : "";
         }
 
+        public function renderQuestionAnswerForm(VideoComment $comment)
+        {
+            $videoComment        = new VideoComment();
+            $addVideoCommentForm = $this->formFactory->create(new VideoCommentType(), $videoComment);
+
+            $templateFile    = "ZnaikaFrontendBundle:User:question_answer_form.html.twig";
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $result          = $templateContent->render(array(
+                "form"    => $addVideoCommentForm->createView(),
+                "comment" => $comment,
+            ));
+
+            return $result;
+        }
+
         public function renderTeacherProfileQuestions(Video $video)
         {
             $questions       = $this->videoCommentRepository->getVideoNotAnsweredQuestionComments($video);
@@ -66,7 +82,7 @@
             $templateContent = $this->twig->loadTemplate($templateFile);
             $result          = $templateContent->render(array(
                 "questions" => $questions,
-                "video"     => $video
+                "video"     => $video,
             ));
 
             return $result;

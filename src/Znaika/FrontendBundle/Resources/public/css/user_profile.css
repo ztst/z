@@ -10,6 +10,7 @@
     position: absolute;
     overflow: hidden;
     width: 200px;
+    height: 30px;
 }
 
 .photo-button input

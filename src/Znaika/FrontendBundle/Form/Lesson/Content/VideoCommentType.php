@@ -14,9 +14,7 @@ class VideoCommentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('text', 'textarea')
-            ->add('save', 'submit');
+        $builder->add('text', 'textarea');
     }
 
     /**

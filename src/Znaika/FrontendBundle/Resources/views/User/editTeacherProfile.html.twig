@@ -3,7 +3,7 @@
 {% block stylesheets %}
   {{ parent() }}
 
-  {% stylesheets filter='cssrewrite'
+  {% stylesheets filter="?yui_css"
     '@ZnaikaFrontendBundle/Resources/public/css/user_profile.css'
     '@ZnaikaFrontendBundle/Resources/public/css/teacher_profile.css'
   %}
@@ -14,7 +14,7 @@
 {% block javascripts %}
   {{ parent() }}
 
-  {% javascripts
+  {% javascripts filter='?yui_js'
     '../app/Resources/public/js/classes/form/profile/EditProfileForm.class.js'
     '../app/Resources/public/js/classes/form/profile/UserPhotoForm.class.js'
     '../app/Resources/public/js/classes/form/profile/ChangePasswordForm.class.js'
@@ -32,10 +32,10 @@
       {{ flashMessage }}
     </div>
   {% endfor %}
-  <div class="profile-sidebar-menu-container col-xs-3">
-    {{ knp_menu_render('sidebar_profile_menu') }}
+  <div class="profile-sidebar-menu-container">
+    {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
   </div>
-  <div class="profile-form-container col-xs-9">
+  <div class="profile-form-container">
     <div class="col-xs-8">
       {% include "ZnaikaFrontendBundle:User:teacher_profile_form.html.twig" with {'form': profileForm} %}
       <div class="user-settings-container">
