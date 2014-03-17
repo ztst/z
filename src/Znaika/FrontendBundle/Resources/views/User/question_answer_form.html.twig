@@ -1,5 +1,7 @@
 <div>
-  <a class="active-button show-answer-form-link" href="javascript:void(0);" title="">Ответить</a>
+  <a class="semi-active-button show-answer-form-link" href="javascript:void(0);" title="">
+    <span class="semi-active-button-label">Ответить</span>
+  </a>
   <div class="question-answer-form-container hidden">
     {{ form_start(form, {
         'attr': {'id': 'addCommentForm' ~ comment.videoCommentId},
@@ -17,7 +19,9 @@
         {{ form_widget(form._token, {'id': 'questionAnswerFormToken' ~ comment.videoCommentId}) }}
       </div>
       <div>
-        <button class="active-button send-comment-button" type="submit">Отправить</button>
+        <button class="active-button send-comment-button" type="submit">
+          <span class="active-button-label">Отправить</span>
+        </button>
       </div>
     {{ form_end(form) }}
   </div>

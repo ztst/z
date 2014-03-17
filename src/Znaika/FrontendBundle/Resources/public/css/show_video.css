@@ -167,9 +167,16 @@
     font-size: 13px;
 }
 
+.add-video-comment-container
+{
+    position: relative;
+    width: 496px;
+}
+
 .add-video-comment-container textarea
 {
     padding-right: 25px;
+    border-radius: 0;
     resize: none;
 }
 
@@ -181,7 +188,6 @@
     background: url('/images/video/question-comment-button.png') no-repeat;
 
     position: absolute;
-    right: 4px;
     right: 4px;
     top: 30px;
     text-decoration: none;
@@ -199,16 +205,16 @@
     background: url('/images/video/question-comment-button-selected.png') no-repeat;
 }
 
-.comment-text-field
-{
-    border-radius: 0;
-}
-
 .send-comment-button
 {
-    width: 115px;
+    padding: 0 14px;
+    width: auto;
     height: 30px;
+}
 
+.send-comment-button .active-button-label
+{
+    padding-left: 0;
     font-size: 13px;
     font-family: "OpenSans Semibold",sans-serif;
 }

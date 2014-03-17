@@ -1,6 +1,15 @@
 <div class="photo-container">
   <img width="200" id="userAvatar"
-       src="{% if user.hasPhoto %}{{ user.getPhotoUrl }}{% else %}{{ asset("images/user-profile/default-userpic.png") }}{% endif %}"
+       src="
+       {% if user.hasPhoto %}
+         {{ user.getPhotoUrl }}
+       {% else %}
+         {% if user.role == 0 %}
+           {{ asset("images/user-profile/user-photo-placeholder.png") }}
+         {% else %}
+           {{ asset("images/teacher-page/teacher-photo-placeholder.png") }}
+         {% endif %}
+       {% endif %}"
        title="Фотография"/>
 </div>
 

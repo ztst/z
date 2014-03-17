@@ -553,6 +553,12 @@ img.mfp-img
     box-shadow: 0 0 8px #000000;
 }
 
+.popup .active-button-label,
+.popup .semi-active-button-label
+{
+    padding-left: 0;
+}
+
 .login-popup-content
 {
     width: 583px;
@@ -960,11 +966,6 @@ img.mfp-img
 {
     padding-top: 5px;
     text-align: center;
-}
-
-.newuser-button .semi-active-button-label
-{
-    padding-left: 0;
 }
 
 .get-new-password-form-container
