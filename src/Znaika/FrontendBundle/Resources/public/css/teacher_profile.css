@@ -58,13 +58,74 @@
 
 .profile-sidebar-menu-container
 {
-    width: 297px;
     float: left;
+    width: 297px;
 }
 
-.profile-form-container
+.teacher-profile-container
 {
-    margin-left: 297px;
+    float: left;
+    width: 701px;
+}
+
+.teacher-profile-container .user-profile-column-container,
+.teacher-profile-container .photo-column-container
+{
+    margin-top: 14px;
+}
+
+.teacher-profile-container .form-control
+{
+    padding: 0 6px;
+    height: 27px;
+}
+
+.teacher-profile-container label
+{
+    display: block;
+    float: left;
+    margin-top: 5px;
+}
+
+.teacher-profile-container h3,
+.teacher-profile-container label,
+.teacher-profile-container .setting-label
+{
+    font-family: "OpenSans Semibold",sans-serif;
+    font-weight: normal;
+}
+
+.semi-active-button,
+.non-active-button,
+.semi-active-button a,
+.non-active-button a
+{
+    display: inline-block;
+    padding-right: 14px;
+    padding-left: 14px;
+    width: auto;
+    height: 31px;
+
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
+.teacher-profile-container h3
+{
+    margin: 0;
+    padding-bottom: 20px;
+    color: #000;
+    font-size: 16px;
+}
+
+.teacher-profile-container .form-group
+{
+    margin-bottom: 14px;
+}
+
+.teacher-profile-container .settings-column-container
+{
+    margin-top: 45px;
 }
 
 .show-questions-tab-menu
@@ -166,6 +227,11 @@
     margin-top: 8px;
 }
 
+.video-questions .show-answer-form-link .semi-active-button-label
+{
+    background: url('/images/teacher-page/show-answer-form-link-icon.png') no-repeat;
+}
+
 .video-questions-container h4
 {
     font-size: 14px;
@@ -177,4 +243,43 @@
 .select-content-tab
 {
     margin-top: 16px;
+}
+
+.question-answer-form-container
+{
+    margin-top: 1px;
+    width: 496px;
+}
+
+.form-group.add-video-comment-container label
+{
+    float: none;
+    color: #333;
+    font-size: 15px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
+.form-group.add-video-comment-container textarea
+{
+    padding: 4px 9px;
+    height: auto;
+    border-radius: 0;
+    resize: none;
+
+    color: #2a2a2a;
+    font-size: 12px;
+}
+
+.question-answer-form-container .send-comment-button
+{
+    padding: 0 14px;
+    width: auto;
+    height: 30px;
+}
+
+.question-answer-form-container .send-comment-button .active-button-label
+{
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
+    background: url('/images/teacher-page/send-answer-button-icon.png') no-repeat 0 3px;
 }

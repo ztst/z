@@ -1,7 +1,7 @@
-<div class="col-sm-11 col-left col-center">
+<div class="add-video-comment-container">
   {{ form_start(form, {'attr': {'id': 'addCommentForm'}, 'action': path('add_video_comment_form', {"videoName": video.getUrlName}), 'method': 'POST'}) }}
     {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
-    <div class="form-group add-video-comment-container">
+    <div class="form-group">
       {{ form_label(form.text, 'Ваш комментарий', {'label_attr': {'class': 'label-your-comment'}}) }}
       {{ form_errors(form.text) }}
       {{ form_widget(form.text, {'attr': {'class': 'form-control comment-text-field'}}) }}
@@ -14,7 +14,9 @@
       {% endif %}
     </div>
     <div>
-      <button class="active-button send-comment-button" type="submit">Отправить</button>
+      <button class="active-button send-comment-button" type="submit">
+        <span class="active-button-label">Отправить</span>
+      </button>
     </div>
   {{ form_end(form) }}
 </div>

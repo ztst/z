@@ -540,59 +540,6 @@ img.mfp-img
     padding-top: 0;
 }
 
-/** checkbox styles */
-.icheckbox,
-.iradio{
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0;
-    padding: 0;
-    width: 15px;
-    height: 15px;
-    border: none;
-    cursor: pointer;
-}
-
-.icheckbox {background: transparent url('/images/controls/checkbox.png') no-repeat;}
-
-.icheckbox {
-    background-position: 0 0;
-}
-.icheckbox.hover {
-    background-position: 0px -20px;
-}
-.icheckbox.checked {
-    background-position: 0 -40px;
-}
-.icheckbox.checked.hover {
-    background-position: 0px -60px;
-}
-/** ~checkbox styles **/
-
-/** radiobutton styles */
-.iradio {background: transparent url('/images/controls/radio.gif') no-repeat;}
-
-.iradio {
-    background-position: 0px -36px;
-}
-.iradio.hover {
-    background-position: 0px -54px;
-}
-.iradio.checked {
-    background-position: 0px -108px;
-}
-.iradio.checked.hover {
-    background-position: 0px -126px;
-}
-
-.iradio.disabled {
-    background-position: 0px 0px;
-}
-.iradio.checked.disabled {
-    background-position: 0px -72px;
-}
-/** ~radiobuttons styles **/
-
 /* Znaika Login Popup*/
 
 .popup
@@ -604,6 +551,12 @@ img.mfp-img
     margin: 20px auto;
     border-radius: 4px;
     box-shadow: 0 0 8px #000000;
+}
+
+.popup .active-button-label,
+.popup .semi-active-button-label
+{
+    padding-left: 0;
 }
 
 .login-popup-content
@@ -1013,11 +966,6 @@ img.mfp-img
 {
     padding-top: 5px;
     text-align: center;
-}
-
-.newuser-button .semi-active-button-label
-{
-    padding-left: 0;
 }
 
 .get-new-password-form-container

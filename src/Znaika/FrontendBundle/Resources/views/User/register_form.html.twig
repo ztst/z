@@ -19,6 +19,8 @@
   </div>
   <input type="hidden" name="autogeneratepassword" value="{% if autoGeneratePassword is defined and autoGeneratePassword %}1{% endif %}" />
   <div class="registration-button-container">
-    {{ form_widget(form.save, {'attr': {'class': 'active-button'}, 'label': 'Зарегистрироваться'}) }}
+    <button type="submit" class="active-button">
+      <span class="active-button-label">Зарегистрироваться</span>
+    </button>
   </div>
 {{ form_end(form) }}

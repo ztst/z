@@ -48,7 +48,7 @@ a.non-active-button
 
 .active-button-label
 {
-    padding: 0;
+    padding-left: 19px;
     color: #fff;
 }
 
@@ -216,3 +216,49 @@ a.non-active-button
     background: none;
 }
 /* select styles END */
+
+/** checkbox styles */
+.icheckbox,
+.iradio{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    width: 15px;
+    height: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.icheckbox {background: transparent url('/images/controls/checkbox.png') no-repeat;}
+
+.icheckbox {
+    background-position: 0 0;
+}
+.icheckbox.hover {
+    background-position: 0 -20px;
+}
+.icheckbox.checked {
+    background-position: 0 -40px;
+}
+.icheckbox.checked.hover {
+    background-position: 0 -60px;
+}
+/** ~checkbox styles **/
+
+/** radiobutton styles */
+.iradio {background: transparent url('/images/controls/radio.png') no-repeat;}
+
+.iradio {
+    background-position: 0 0;
+}
+.iradio.hover {
+    background-position: 0 -19px;
+}
+.iradio.checked {
+    background-position: 0 -38px;
+}
+.iradio.checked.hover {
+    background-position: 0 -57px;
+}
+/** ~radiobuttons styles **/

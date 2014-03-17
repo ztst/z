@@ -164,7 +164,7 @@
 .moderator-buttons-block a
 {
     margin-left: 13px;
-    height: 26px;
+    height: 30px;
 }
 
 .moderator-buttons-block span,
@@ -177,80 +177,60 @@
     float: left;
 }
 
-.add-chapter-button-label,
-.edit-chapter-button-label,
-.save-changes-button-label
+.moderator-buttons-block .semi-active-button
 {
-    margin-top: 4px;
-    margin-left: 5px;
-
-    font-size: 11px;
+    padding: 4px 10px 0;
 }
 
-.add-chapter-button
+.moderator-buttons-block .semi-active-button-label
 {
-    width: 130px;
+    padding-left: 16px;
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
 }
 
-.edit-chapter-button
-{
-    width: 158px;
-}
-
+.add-chapter-button,
+.edit-chapter-button,
 .save-changes-button
 {
-    width: 161px;
+    width: auto;
 }
 
-.add-chapter-button-icon
+.add-chapter-button .semi-active-button-label
 {
-    margin-top: 7px;
-    margin-left: 9px;
-
-    width: 9px;
-    height: 10px;
-    background: url('/images/chapters-list/add-chapter-button-icon.png') no-repeat;
+    background: url('/images/chapters-list/add-chapter-button-icon.png') no-repeat 0 5px;
 }
 
-.edit-chapter-button-icon
+.edit-chapter-button .semi-active-button-label
 {
-    margin-top: 6px;
-    margin-left: 7px;
-
-    width: 12px;
-    height: 13px;
-    background: url('/images/video/edit-button-icon.png') no-repeat;
+    background: url('/images/video/edit-button-icon.png') no-repeat 0 5px;
 }
 
-.save-changes-button-icon
+.save-changes-button .semi-active-button-label
 {
-    margin-top: 7px;
-    margin-left: 9px;
-
-    width: 11px;
-    height: 11px;
-    background: url('/images/chapters-list/save-changes-button-icon.png') no-repeat;
+    background: url('/images/chapters-list/save-changes-button-icon.png') no-repeat 0 5px;
 }
 
-.disabled .add-chapter-button-icon
+.disabled.add-chapter-button .semi-active-button-label
 {
-    background: url('/images/chapters-list/add-chapter-button-icon-disabled.png') no-repeat;
+    background: url('/images/chapters-list/add-chapter-button-icon-disabled.png') no-repeat 0 5px;
 }
 
-.disabled .edit-chapter-button-icon
+.disabled.edit-chapter-button .semi-active-button-label
 {
-    background: url('/images/video/edit-button-icon-disabled.png') no-repeat;
+    background: url('/images/video/edit-button-icon-disabled.png') no-repeat 0 5px;
 }
 
-.disabled .save-changes-button-icon
+.disabled.save-changes-button .semi-active-button-label
 {
-    background: url('/images/chapters-list/save-changes-button-icon-disabled.png') no-repeat;
+    background: url('/images/chapters-list/save-changes-button-icon-disabled.png') no-repeat 0 5px;
 }
 
-.chapter-down,
-.chapter-up
+.semi-active-button.chapter-down,
+.semi-active-button.chapter-up
 {
-    width: 26px;
+    padding: 0;
+    width: 30px;
 }
 
 .chapter-up
@@ -265,36 +245,41 @@
     height: 13px;
 }
 
-.chapter-down-icon
+.semi-active-button .chapter-down-icon
 {
-    margin-top: 6px;
-    margin-left: 6px;
+    margin-top: 8px;
+    margin-left: 8px;
 
     background: url('/images/chapters-list/chapter-down-icon.png') no-repeat;
 }
 
-.chapter-up-icon
+.semi-active-button .chapter-up-icon
 {
-    margin-top: 5px;
-    margin-left: 6px;
+    margin-top: 7px;
+    margin-left: 8px;
 
     background: url('/images/chapters-list/chapter-up-icon.png') no-repeat;
 }
 
-.disabled .chapter-down-icon
+.disabled.semi-active-button:hover
+{
+    border-color: #d6d6d6;
+    box-shadow: none;
+}
+
+.disabled .semi-active-button-label
+{
+    color: #cbd6dc;
+    box-shadow: none;
+}
+
+.disabled.semi-active-button .chapter-down-icon
 {
     background: url('/images/chapters-list/chapter-down-icon-disabled.png') no-repeat;
 }
 
-.disabled .chapter-up-icon
+.disabled.semi-active-button .chapter-up-icon
 {
     background: url('/images/chapters-list/chapter-up-icon-disabled.png') no-repeat;
-}
-
-.disabled
-{
-    color: #cbd6dc !important;
-    border-color: #d6d6d6 !important;
-    box-shadow: none !important;
 }
 /* moderator styles END */
