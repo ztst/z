@@ -44,7 +44,7 @@
 .tabs-and-social-buttons-container
 {
     display: inline-block;
-    width: 100%;
+    width: 662px;
     border-bottom: 1px solid #ccc;
 }
 
@@ -176,6 +176,7 @@
 .add-video-comment-container textarea
 {
     padding-right: 25px;
+    height: 85px;
     border-radius: 0;
     resize: none;
 }
@@ -214,9 +215,9 @@
 
 .send-comment-button .active-button-label
 {
-    padding-left: 0;
     font-size: 13px;
     font-family: "OpenSans Semibold",sans-serif;
+    background: url("/images/teacher-page/send-answer-button-icon.png") no-repeat scroll 0 3px;
 }
 
 .user-question-container
@@ -400,4 +401,85 @@
 .quiz-not-available
 {
     padding: 18px;
+}
+
+.questions-buttons-block
+{
+    float: right;
+    width: 555px;
+    background: none;
+}
+
+.questions-buttons-block > h4
+{
+    margin-top: 32px;
+    margin-bottom: 19px;
+    font-size: 15px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
+.question-button.semi-active-button
+{
+    margin-right: 10px;
+    margin-bottom: 9px;
+    width: 231px;
+    height: 31px;
+}
+
+.question-button .semi-active-button-label
+{
+    display: block;
+    padding-left: 0;
+    font-family: "OpenSans Semibold",sans-serif;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.user-question-container > h4,
+.user-question-container .add-video-comment-container label
+{
+    font-size: 13px;
+    font-family: "OpenSans Bold",sans-serif;
+}
+
+.user-question-container > h4
+{
+    margin-top: 9px;
+    margin-bottom: 8px;
+}
+
+.question-button.semi-active-button.active
+{
+    background-color: #f3f3f3;
+    border-color: #868686;
+}
+
+.question-button.active .semi-active-button-label
+{
+    color: #686868;
+}
+
+.questions-buttons-block .comment-body
+{
+    display: block;
+    margin-top: 4px;
+}
+
+.user-question-container .add-video-comment-container .form-group
+{
+    margin-bottom: 9px;
+}
+
+.user-question-container .add-video-comment-container label
+{
+    margin-top: 17px;
+    margin-bottom: 7px;
+}
+
+.user-question-container.add-video-comment-container textarea
+{
+    padding: 4px 9px;
+    height: 85px;
 }
