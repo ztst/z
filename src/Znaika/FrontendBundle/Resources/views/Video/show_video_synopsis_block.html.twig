@@ -10,4 +10,6 @@
   <a id="addSynopsis" href="{{ path('add_synopsis_form', {'videoName': video.getUrlName}) }}" class="active-button add-button">
     <span class="active-button-label">Добавить конспект</span>
   </a>
+{% else %}
+  <p class="quiz-not-available">Конспект находится в разработке.</p>
 {% endif %}

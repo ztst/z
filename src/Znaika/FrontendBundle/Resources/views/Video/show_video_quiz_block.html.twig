@@ -16,6 +16,8 @@
     <a href="{{ path("add_quiz_form", {"videoName": video.urlName}) }}" class="active-button add-button">
       <span class="active-button-label">Добавить тест</span>
     </a>
+  {% else %}
+    <p class="quiz-not-available">Тест находится в разработке.</p>
   {% endif %}
 {% else %}
   <p class="quiz-not-available">Только зарегистрированные и авторизованные пользователи могут решать тесты.</p>

@@ -24,7 +24,7 @@
             {% if is_user() %}
               <li>
                 <div class="user-pic">
-                  <img id="userSmallAvatar" width="30" src="{% if app.user.hasPhoto %}{{ app.user.getPhotoUrl }}{% else %}{{ asset('images/header/404-30x30.png') }}{% endif %}" alt="" />
+                  <img id="userSmallAvatar" width="30" src="{% if app.user.hasPhoto %}{{ app.user.getPhotoUrl }}{% else %}{{ asset('images/user-profile/default-userpic.png') }}{% endif %}" alt="" />
                 </div>
               </li>
               <li>

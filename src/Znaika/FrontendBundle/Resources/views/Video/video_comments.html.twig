@@ -5,7 +5,7 @@
         <img class="media-object"
              width="60"
              height="60"
-             src="{% if comment.user.hasPhoto %}{{ comment.user.getPhotoUrl }}{% else %}{{ asset('images/404.jpg') }}{% endif %}"
+             src="{% if comment.user.hasPhoto %}{{ comment.user.getPhotoUrl }}{% else %}{{ asset('images/user-profile/default-userpic.png') }}{% endif %}"
              alt="Здесь будет аватар автора"/>
       </a>
       <div class="media-body">

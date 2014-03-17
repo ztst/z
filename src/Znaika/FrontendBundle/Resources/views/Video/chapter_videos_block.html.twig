@@ -65,7 +65,7 @@
               {% if not video.synopsis is empty %}
                 <a
                   {% if currentVideo is defined and currentVideo == video %}id="currentVideoSynopsisLink"{% endif %}
-                  href="{% if is_user() %}{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#synopsis_tab" }}{% else %}javascript:void(0);{% endif %}"
+                  href="{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#synopsis_tab" }}"
                   class="video-has-synopsis">
                 </a>
                 <div class="icons-delimiter"></div>
@@ -73,7 +73,7 @@
               {% if not video.quiz is empty %}
                 <a
                   {% if currentVideo is defined and currentVideo == video %}id="currentVideoQuizLink"{% endif %}
-                  href="{% if is_user() %}{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#quiz_tab" }}{% else %}javascript:void(0);{% endif %}"
+                  href="{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#quiz_tab" }}"
                   class="video-has-quiz">
                 </a>
               {% endif %}

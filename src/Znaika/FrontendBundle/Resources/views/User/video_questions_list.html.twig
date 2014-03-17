@@ -12,7 +12,7 @@
             <img class="media-object"
                  width="50"
                  height="50"
-                 src="{% if question.user.hasPhoto %}{{ question.user.getPhotoUrl }}{% else %}{{ asset('images/404.jpg') }}{% endif %}"
+                 src="{% if question.user.hasPhoto %}{{ question.user.getPhotoUrl }}{% else %}{{ asset('images/user-profile/default-userpic.png') }}{% endif %}"
                  alt="Здесь будет аватар автора"/>
           </a>
           <div class="media-body">
