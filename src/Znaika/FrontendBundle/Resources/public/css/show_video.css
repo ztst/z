@@ -225,14 +225,26 @@
     margin-top: 5px;
     color: #333;
     font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .question-author-name
 {
     color: #333;
     font-size: 12px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
+}
+
+.question-author-name img
+{
+    position: relative;
+    top: -4px;
+}
+
+.question-comment-author-name img
+{
+    position: relative;
+    top: -1px;
 }
 
 .comment-body

@@ -3,11 +3,11 @@
 
     class VideoUtil
     {
-        const VIMEO_COM = "//vimeo.com/";
+        const VIMEO_COM = "http//vimeo.com/";
 
         public static function getVimeoIdByUrl($url)
         {
-            $pattern = '/([^\d]+)(\d+)/i';
+            $pattern = '/([^\d]*)(\d+)/i';
             $replacement = '${2}';
             return preg_replace($pattern, $replacement, $url);
         }
