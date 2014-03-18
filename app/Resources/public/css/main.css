@@ -118,13 +118,13 @@ a:focus
 
 .class-horizontal-bar
 {
+    position: relative;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 36px;
 
     border-bottom: 1px solid #0074a5;
-    border-top: 1px solid #4fb4e9;
 
     background: #31a0d4;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#31a0d4), to(#208bbd));
@@ -133,6 +133,16 @@ a:focus
     background: -ms-linear-gradient(#31a0d4, #208bbd);
     background: -o-linear-gradient(#31a0d4, #208bbd);
     background: linear-gradient(#31a0d4, #208bbd);
+}
+
+.class-menu-top-line
+{
+    position: absolute;
+    top: 1px;
+    z-index: 1;
+    width: 100%;
+    height: 1px;
+    background: #4fb4e9;
 }
 
 .subjects-horizontal-bar
@@ -205,7 +215,7 @@ a:focus
     border-bottom: 1px solid #0074a5;
     border-left: 1px solid #1181b3;
 
-    height: 35px;
+    height: 36px;
     padding: 7px 5px 0 !important;
     cursor: pointer;
     display: block;
@@ -245,8 +255,9 @@ a:focus
 .class-menu .selected > span:hover
 {
     position: relative;
+    z-index: 2;
     padding: 5px 5px 0 !important;;
-    height: 34px;
+    height: 35px;
     color: #fefefe;
     background: #0074a6;
     border-top: 1px solid #0074a5;
