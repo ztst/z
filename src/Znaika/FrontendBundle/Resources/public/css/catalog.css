@@ -55,13 +55,13 @@
     margin-left: 6px;
     margin-right: 10px;
     width: 6px;
-    height: 20px;
+    height: 22px;
     background: url('/images/chapters-list/chapter-list-marker.png') no-repeat 0 16px;
 }
 
 .selected .chapter-list-marker
 {
-    background-position: 0 13px;
+    background-position: 0 15px;
 }
 
 .chapter-description-container
@@ -106,7 +106,6 @@
 .chapter-description-container.selected a
 {
     float: left;
-    padding: 7px 0 8px;
 
     color: #004e78;
     border: none;

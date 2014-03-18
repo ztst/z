@@ -101,9 +101,9 @@ parameters:
 
     facebook_client_id:     738615669489662
     facebook_client_secret: b1a4797dc63a8bd6c92c6305f258a9ec
-    facebook_redirect_uri:  http://znaika-dima.local/facebook-auth
+    facebook_redirect_uri:  http://znaika.local/facebook-auth
 
     odnoklassniki_client_id:     223869184
     odnoklassniki_public_key:    CBAKPIFOABABABABA
     odnoklassniki_client_secret: E36998B37C434A20950F618E
-    odnoklassniki_redirect_uri:  http://znaika-dima.local/odnoklassniki-auth
+    odnoklassniki_redirect_uri:  http://znaika.local/odnoklassniki-auth

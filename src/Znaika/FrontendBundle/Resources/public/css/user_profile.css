@@ -42,6 +42,30 @@
     padding: 30px;
 }
 
+.popup-content ol
+{
+    padding: 0 20px;
+}
+
+.additional-form-container.user-profile-popup h3
+{
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.upload-label.active-button
+{
+    padding-left: 14px;
+    padding-right: 14px;
+    width: auto;
+}
+
+.upload-label.active-button .active-button-label
+{
+    padding-left: 0;
+    font-size: 15px;
+}
+
 .change-password-popup
 {
     width: 400px;

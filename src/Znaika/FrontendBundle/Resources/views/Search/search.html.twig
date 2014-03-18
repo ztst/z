@@ -22,8 +22,8 @@
 {% endblock %}
 
 {% block content %}
-  <div class="show-catalog-page-container col-sm-12 col-center">
-    <div id="videoCatalogContainer" class="col-md-8 col-left chapter-catalog-container">
+  <div class="show-catalog-page-container col-center">
+    <div id="videoCatalogContainer" class="col-left chapter-catalog-container">
       {% if videos|length %}
         <h4>{{ 'founded_video_lessons'|transchoice(videos|length) }}</h4>
       {% else %}
@@ -31,7 +31,7 @@
       {% endif %}
       {% include "ZnaikaFrontendBundle:Search:search_video_list.html.twig" with {'videos': videos, 'currentChapterId': currentChapterId} %}
     </div>
-    <div class="col-md-4 col-center">
+    <div class="col-center">
       {% include "ZnaikaFrontendBundle:Search:filters_block.html.twig" %}
     </div>
   </div>
