@@ -91,7 +91,7 @@
       </div>
     </div>
   {% else %}
-    <img src="{{ asset('images/user-profile/default-userpic.png') }}" alt="Видео не найдено"/>
+    <img src="{{ asset('images/user-profile/user-photo-placeholder.png') }}" alt="Видео не найдено"/>
   {% endif %}
   <input id="videoName" type="hidden" value="{{ video.getUrlName }}"/>
 {% endblock %}

@@ -860,16 +860,20 @@ img.mfp-img
     text-align: center;
 }
 
-.additional-form-header h3
+.additional-form-container h3
 {
     display: inline-block;
     margin-bottom: 20px;
-    padding-left: 41px;
     height: 32px;
 
     color: #222;
     font-size: 20px;
     font-family: "OpenSans Semibold",sans-serif;
+}
+
+.additional-form-header h3
+{
+    padding-left: 41px;
 }
 
 .additional-form-container h5
