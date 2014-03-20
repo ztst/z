@@ -1,7 +1,7 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
 {% block content %}
-  <div class="col-sm-12">
+  <div>
     <h1>{{ video.getName|raw }}</h1>
     {{ form_start(form, {'method': 'POST'}) }}
       {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
