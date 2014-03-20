@@ -335,12 +335,6 @@ a:focus
     border-right: none;
 }
 
-.subject-menu .selected > a
-{
-    font-family: "OpenSans Semibold",sans-serif;
-    color: #d35306;
-}
-
 .subject-menu a
 {
     font-size: 13px;
@@ -352,6 +346,12 @@ a:focus
     display: block;
     text-align: center;
     cursor: pointer;
+}
+
+.subject-menu .selected > a
+{
+    font-family: "OpenSans Semibold",sans-serif;
+    color: #d35306;
 }
 
 .subject-menu a:hover,

@@ -34,4 +34,11 @@
          * @return Chapter
          */
         public function getOne($name, $grade, $subjectId);
+
+        /**
+         * @param Chapter $chapter
+         *
+         * @return bool
+         */
+        public function save(Chapter $chapter);
     }

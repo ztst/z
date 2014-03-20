@@ -55,13 +55,13 @@
     margin-left: 6px;
     margin-right: 10px;
     width: 6px;
-    height: 20px;
+    height: 24px;
     background: url('/images/chapters-list/chapter-list-marker.png') no-repeat 0 16px;
 }
 
 .selected .chapter-list-marker
 {
-    background-position: 0 13px;
+    background-position: 0 15px;
 }
 
 .chapter-description-container
@@ -100,7 +100,20 @@
 
     color: #555;
     font-size: 15px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
+}
+
+.chapter-description-container .chapter-title-input
+{
+    border: 1px solid #C6CFD3;
+    color: #555555;
+    display: inline-block;
+    font-family: "OpenSans Semibold", sans-serif;
+    font-size: 15px;
+    margin-left: -5px;
+    margin-top: 6px;
+    padding: 0 3px;
+    width: 552px;
 }
 
 .chapter-description-container.selected a
@@ -186,7 +199,7 @@
 {
     padding-left: 16px;
     font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .add-chapter-button,
@@ -282,4 +295,5 @@
 {
     background: url('/images/chapters-list/chapter-up-icon-disabled.png') no-repeat;
 }
+
 /* moderator styles END */
