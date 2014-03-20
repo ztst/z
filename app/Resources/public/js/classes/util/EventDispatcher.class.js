@@ -1,11 +1,11 @@
 var EventDispatcher = Base.extend({
     _listeners: null,
-    
+
     constructor: function()
     {
-        this._listeners = new Object(); 
+        this._listeners = new Object();
     },
-    
+
     /**
      * Adds listener to object's event.
      */
@@ -15,15 +15,15 @@ var EventDispatcher = Base.extend({
         {
             this._listeners = new Object();
         }
-        
+
         if (!this._listeners[eventName])
         {
             this._listeners[eventName] = new Array();
         }
-        
+
         this._listeners[eventName].push({listener: listener, method: method});
     },
-    
+
     /**
      * Removes listener from object's event.
      */
@@ -33,21 +33,21 @@ var EventDispatcher = Base.extend({
         {
             return;
         }
-        
+
         var countListeners = this._listeners[eventName].length;
         for (var i = 0; i < countListeners; ++i)
         {
             if (this._listeners[eventName][i].listener == listener)
             {
-                this._listeners[eventName].splice(i, 1);        
+                this._listeners[eventName].splice(i, 1);
                 break;
             }
         }
     },
-    
+
     /**
      * Checkes is object already has specified listener to event.
-     * 
+     *
      * @return boolean
      */
     hasListener: function(eventName, listener)
@@ -56,7 +56,7 @@ var EventDispatcher = Base.extend({
         {
             return false;
         }
-        
+
         var countListeners = this._listeners[eventName].length;
         for (var i = 0; i < countListeners; ++i)
         {
@@ -67,7 +67,7 @@ var EventDispatcher = Base.extend({
         }
         return false;
     },
-    
+
     /**
      * Dispatches event.
      */
@@ -77,11 +77,11 @@ var EventDispatcher = Base.extend({
         {
             return;
         }
-    
+
         var eventArguments = Array.prototype.slice.call(arguments);
         //remove eventName from arguments list
         eventArguments.splice(0, 1);
-        
+
         var countListeners = this._listeners[eventName].length;
         for (var i = 0; i < countListeners; ++i)
         {

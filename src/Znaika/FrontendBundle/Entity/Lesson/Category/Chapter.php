@@ -41,6 +41,11 @@
         private $videos;
 
         /**
+         * @var integer
+         */
+        private $orderPriority;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -210,5 +215,21 @@
         public function getVideos()
         {
             return $this->videos;
+        }
+
+        /**
+         * @param int $orderPriority
+         */
+        public function setOrderPriority($orderPriority)
+        {
+            $this->orderPriority = $orderPriority;
+        }
+
+        /**
+         * @return int
+         */
+        public function getOrderPriority()
+        {
+            return $this->orderPriority;
         }
     }

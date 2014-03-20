@@ -24,4 +24,9 @@
         {
             return null;
         }
+
+        public function save(Chapter $chapter)
+        {
+            return true;
+        }
     }

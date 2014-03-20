@@ -20,6 +20,11 @@ show_catalogue_by_subject:
     pattern: /catalog/{subjectName}
     defaults: { _controller: ZnaikaFrontendBundle:Video:showCatalogue, class: null }
 
+edit_chapters:
+    pattern: /edit-chapters/{class}-klass/{subjectName}
+    defaults: { _controller: ZnaikaFrontendBundle:Chapter:editChapters }
+    methods:  [POST]
+
 get_videos:
     pattern: /get-videos
     defaults: { _controller: ZnaikaFrontendBundle:Video:getVideos }

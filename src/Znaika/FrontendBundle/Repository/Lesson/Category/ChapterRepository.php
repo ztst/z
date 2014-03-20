@@ -68,4 +68,12 @@
 
             return $result;
         }
+
+        public function save(Chapter $chapter)
+        {
+            $this->redisRepository->save($chapter);
+            $success = $this->dbRepository->save($chapter);
+
+            return $success;
+        }
     }

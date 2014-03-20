@@ -25,7 +25,8 @@
                          ->andWhere('ch.grade = :grade')
                          ->setParameter('grade', $grade)
                          ->andWhere('ch.subject = :subject_id')
-                         ->setParameter('subject_id', $subjectId);
+                         ->setParameter('subject_id', $subjectId)
+                         ->addOrderBy('ch.orderPriority', 'ASC');
 
             $subjects = $queryBuilder->getQuery()->getResult();
 
@@ -46,5 +47,11 @@
                          ->setParameter('url_name', $name);
 
             return $queryBuilder->getQuery()->getOneOrNullResult();
+        }
+
+        public function save(Chapter $chapter)
+        {
+            $this->getEntityManager()->persist($chapter);
+            $this->getEntityManager()->flush();
         }
     }
