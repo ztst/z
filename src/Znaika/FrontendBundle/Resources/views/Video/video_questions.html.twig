@@ -1,17 +1,20 @@
-<div class="alert alert-info" id="teacherAnswerBlock">
+<div class="questions-buttons-block" id="teacherAnswerBlock">
   <h4>Необходимо ответить на вопросы</h4>
   <div class="questions-buttons">
     {% for question in questions %}
-      <a href="javascript:void(0);" class="btn btn-primary question-button" id="questionButton{{ question.videoCommentId }}">Ответить {{ question.user }}</a>
+      <a href="javascript:void(0);" class="semi-active-button question-button" id="questionButton{{ question.videoCommentId }}">
+        <span class="semi-active-button-label">Ответить {{ question.user }}</span>
+      </a>
     {% endfor %}
   </div>
   <div class="user-question-container">
     <h4>Вопрос</h4>
     {% for question in questions %}
         <div class="hidden question-block" id="questionContent{{ question.videoCommentId }}">
-          <span>{{ question.user }}</span>
-          <h6 class="media-heading"><em>{{ comment_date(question.getCreatedTime) }}</em></h6>
-          {{ question.getText }}
+          <span class="simple-comment-author-name">{{ question.user }}</span>
+          <span class="media-heading comment-date">{{ comment_date(question.getCreatedTime) }}</span>
+          <br />
+          <span class="comment-body">{{ question.getText }}</span>
         </div>
     {% endfor %}
     {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "videoName": video.getUrlName} %}

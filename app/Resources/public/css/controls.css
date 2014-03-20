@@ -15,7 +15,10 @@
 
 a.active-button,
 a.semi-active-button,
-a.non-active-button
+a.non-active-button,
+label.active-button,
+label.semi-active-button,
+label.non-active-button
 {
     padding-top: 5px;
 }
@@ -74,9 +77,13 @@ a.non-active-button
 .non-active-button
 {
     border: 1px solid #d6d6d6;
-    color: #cbd6dc;
-
     background: #fff;
+}
+
+.non-active-button-label
+{
+    padding-left: 19px;
+    color: #cbd6dc;
 }
 
 .edit-account-setting-button,

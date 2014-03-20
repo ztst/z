@@ -35,23 +35,27 @@
       <span class="non-active-button-label">Убрать фото</span>
     </a>
     <input type="hidden" id="userId" value="{{ user.userId }}"/>
-    <input type="hidden" id="defaultPhotoUrl" value="{{ asset("images/user-profile/default-userpic.png") }}" />
+    <input type="hidden" id="defaultPhotoUrl" value="{{ asset("images/user-profile/user-photo-placeholder.png") }}" />
   </div>
 {{ form_end(form) }}
 
 <div id="uploadErrorPopup" class="popup mfp-hide">
-  <div class="popup-content">
-    <h1>Ошибка добавления фотографии</h1>
-    <p>
+  <div class="popup-content additional-form-container user-profile-popup">
+    <div class="additional-form-header">
+      <h3>Ошибка добавления фотографии</h3>
+    </div>
+    <h5>
       К сожалению, произошла ошибка. Пожалуйста, проверьте, соответствует ли фотография следующим требованиям:
-    </p>
+    </h5>
     <ol>
       <li>Фотография должна иметь размер не меньше 300 точек и не больше 4000 точек по каждой из сторон.</li>
       <li>Размер одной стороны не должен более чем в 3 раза превышать размер другой стороны.</li>
       <li>Размер файла с фотографией не должен превышать 10 МБ.</li>
       <li>Фотография должна быть в формате JPG, PNG или GIF.</li>
     </ol>
-    <label class="upload-label" for="submit">Выбрать фото</label>
+    <label class="upload-label active-button" for="submit">
+      <span class="active-button-label">Выбрать фото</span>
+    </label>
     <div class="clear"></div>
   </div>
 </div>

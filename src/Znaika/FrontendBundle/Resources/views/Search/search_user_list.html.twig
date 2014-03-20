@@ -1,13 +1,13 @@
 {% if users %}
   {% for user in users %}
-    <div class="search-result-container col-lg-6 col-xs-12">
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+    <div class="search-result-container">
+      <div>
         <a href="{{ path('show_user_profile', { 'userId': user.getUserId }) }}"
            title="{{ user.getFirstName }} {{ user.getLastName }}">
           <img class="media-object" width="100" src="{{ asset('images/404.jpg') }}" alt="Здесь будет аватар"/>
         </a>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+      <div>
         <h5><strong>Имя: </strong>{{ user.getFirstName }}</h5>
         <h5><strong>Фамилия: </strong>{{ user.getLastName }}</h5>
         <a href="{{ path('show_user_profile', { 'userId': user.getUserId }) }}"
