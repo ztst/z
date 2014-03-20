@@ -154,6 +154,9 @@ a:focus
 
     background: #f4f4f4;
     box-shadow: 0 5px 10px -8px;
+    -webkit-box-shadow: 0 5px 10px -8px #000000;
+    -mox-box-shadow: 0 5px 10px -8px #000000;
+    -o-box-shadow: 0 5px 10px -8px #000000;
 }
 
 .navbar-brand
@@ -191,6 +194,8 @@ a:focus
 .class-menu,
 .subject-menu
 {
+    position: relative;
+    z-index: 2;
     padding: 0;
     width: 100%;
 }
@@ -205,38 +210,27 @@ a:focus
     margin: 0;
 }
 
-.class-menu li > span
+.nav.nav-justified > li
 {
-    position: relative;
+    display: table-cell;
+    width: 1%;
+}
 
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    border-bottom: 1px solid #0074a5;
-    border-left: 1px solid #1181b3;
-
+.class-menu .nav.nav-justified > li
+{
+    margin-left: -1px;
     height: 36px;
-    padding: 7px 5px 0 !important;
-    cursor: pointer;
-    display: block;
+    border-left: 1px solid #1181b3;
+    border-right: 1px solid #329dd1;
 
-    background: #31a0d4;
-    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#31a0d4), to(#208bbd));
-    background: -webkit-linear-gradient(#31a0d4, #208bbd);
-    background: -moz-linear-gradient(#31a0d4, #208bbd);
-    background: -ms-linear-gradient(#31a0d4, #208bbd);
-    background: -o-linear-gradient(#31a0d4, #208bbd);
-    background: linear-gradient(#31a0d4, #208bbd);
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-.class-menu li.first > span
+.class-menu .nav.nav-justified > li:hover
 {
-    border-left: none;
-}
-
-.class-menu li > span:hover
-{
-    height: 35px;
     background: #2199cd;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#2199cd), to(#1484b6));
     background: -webkit-linear-gradient(#2199cd, #1484b6);
@@ -246,21 +240,46 @@ a:focus
     background: linear-gradient(#2199cd, #1484b6);
 }
 
-.class-menu .selected
+.class-menu .nav.nav-justified > li.first
 {
-    border-top: 1px solid #0074A5
+    border-left: none;
 }
 
-.class-menu .selected > span,
-.class-menu .selected > span:hover
+.class-menu .nav.nav-justified > li.last
+{
+    border-right: none;
+}
+
+.class-menu .nav.nav-justified > li.selected
 {
     position: relative;
     z-index: 2;
-    padding: 5px 5px 0 !important;;
-    height: 35px;
-    color: #fefefe;
+    border-color: #0074a6;
     background: #0074a6;
-    border-top: 1px solid #0074a5;
+}
+
+.class-menu .nav.nav-justified > li.selected .class-menu-top-line
+{
+    display: none;
+}
+
+.class-menu li > span
+{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 35px;
+    line-height: 36px;
+
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.class-menu li.first > span
+{
+    border-left: none;
 }
 
 .class-menu .selected .arrow
@@ -304,7 +323,7 @@ a:focus
     position: relative;
 }
 
-.subject-menu .more-button-carot
+.subject-menu .more-button-caret
 {
     display: inline-block;
     height: 5px;
@@ -317,9 +336,7 @@ a:focus
 
 .subject-menu .subject-menu-list
 {
-    height: 32px;
     float: left;
-
     margin: 0;
     overflow: hidden;
 
@@ -330,9 +347,15 @@ a:focus
 {
     display: inline-block;
     width: auto;
+    height: 33px;
     float: left;
     border-left: 1px solid #e2e2e2;
     border-right: 1px solid #fcfcfc;
+}
+
+.subject-menu-list li:hover
+{
+    background: #ebebeb;
 }
 
 .subject-menu li.first
@@ -363,12 +386,6 @@ a:focus
     display: block;
     text-align: center;
     cursor: pointer;
-}
-
-.subject-menu a:hover,
-.subject-menu a.over
-{
-    background: #ebebeb;
 }
 
 .subject-menu-more-container
@@ -731,46 +748,6 @@ label
     font-family: "OpenSans Semibold",sans-serif;
 }
 
-@media (max-width: 991px)
-{
-    ul.nav.navbar-nav.main-menu
-    {
-        margin-top: 10px;
-    }
-}
-
-@media (max-width: 767px)
-{
-    .grade-word
-    {
-        display: none;
-    }
-
-    .grade-number
-    {
-        font-size: 14px;
-    }
-
-    .nav.nav-justified > li
-    {
-        display: table-cell;
-        width: 1%;
-    }
-
-    .nav.nav-justified > li > a
-    {
-        margin-bottom: 0;
-    }
-}
-
-@media (min-width: 992px) and (max-width: 1199px)
-{
-    .main-menu > li > a
-    {
-        margin-right: 6px;
-    }
-}
-
 .container,
 .class-menu,
 .subject-menu
@@ -989,19 +966,6 @@ label
     height: 1px;
     background: #5690b7;
 }
-
-@media (max-width: 767px)
-{
-    .footer-logo, .footer-social-buttons-block
-    {
-        display: none;
-    }
-    .footer-container a, .footer-copyright-container span
-    {
-        font-size: 13px;
-    }
-}
-
 /* Footer block END */
 
 .static-page-container
@@ -1011,5 +975,5 @@ label
 
 .static-page-container h3
 {
-    margin-top: 0px;
+    margin-top: 0;
 }
