@@ -15,7 +15,7 @@ body
 h3
 {
     font-size: 24px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 a:focus
@@ -386,7 +386,7 @@ a:focus
 
 .subject-menu .selected > a
 {
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
     color: #d35306;
 }
 
@@ -563,7 +563,7 @@ div.form-error-field .arrow
     height: 32px;
     padding: 4px 8px 6px;
 
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
     font-size: 13px;
     border-color: #aaaaaa;
 
@@ -690,7 +690,7 @@ input
 {
     color: #036995 !important;
     font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .login-button,
@@ -753,7 +753,7 @@ label
 {
     color: #2a2a2a;
     font-size: 12px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .container,

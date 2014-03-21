@@ -1,20 +1,20 @@
 .index-content h2
 {
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
     font-size: 16px;
     line-height: 16px;
 }
 
 .index-content h4
 {
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
     font-size: 13px;
     font-weight: bold;
 }
 
 .index-content h5
 {
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
     font-size: 13px;
     color: #222222;
 }
@@ -30,7 +30,7 @@
 {
     display: block;
     text-align: center;
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
     font-size: 14px;
 }
 
@@ -134,7 +134,7 @@
 
 .index-page-videos-list .list-item .video-info-line span
 {
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
     font-size: 11px;
     color: #666666;
     margin-right: 16px;

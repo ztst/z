@@ -205,7 +205,7 @@
 .sex-field label,
 .current-setting-value
 {
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
 }
 
 .sex-field .iradio,
@@ -415,7 +415,7 @@
 
     color: #2a2a2a;
     font-size: 12px;
-    font-family: "OpenSans","Open Sans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
 
     background: #ffffff linear-gradient(#ffffff, #fdfdfd);
 }

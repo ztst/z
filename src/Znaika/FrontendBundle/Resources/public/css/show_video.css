@@ -76,7 +76,7 @@
     float: left;
     margin: 0;
     font-size: 13px;
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
 }
 
 .video-social-buttons a.social_share_link.vk
@@ -110,7 +110,7 @@
 .video-views-amount
 {
     margin-bottom: 0;
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
 }
 
 .video-author
@@ -216,7 +216,7 @@
 .send-comment-button .active-button-label
 {
     font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
     background: url("/images/teacher-page/send-answer-button-icon.png") no-repeat scroll 0 3px;
 }
 
@@ -265,14 +265,14 @@
     margin-top: 5px;
     color: #999;
     font-size: 11px;
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
 }
 
 .label-your-comment
 {
     color: #333;
     font-size: 15px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
     font-weight: normal;
 }
 /* comments styles END */
@@ -310,7 +310,7 @@
 {
     color: #036995;
     font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .chapter-name
@@ -318,7 +318,7 @@
     margin-bottom: 15px;
     color: #303030;
     font-size: 15px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .show-more-videos
@@ -339,7 +339,7 @@
     margin-left: 18px;
     height: 30px;
 
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .synopsis-tab .add-button,
@@ -355,7 +355,7 @@
     width: auto;
     height: 30px;
 
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .synopsis-tab .edit-button
@@ -390,7 +390,7 @@
 
 .add-button .active-button-label
 {
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
     background: url('/images/video/add-button-icon.png') no-repeat 0 3px;
 }
 
@@ -405,7 +405,7 @@
     margin-left: 8px;
 
     font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 /* moderator styles END */
@@ -427,7 +427,7 @@
     margin-top: 32px;
     margin-bottom: 19px;
     font-size: 15px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .question-button.semi-active-button
@@ -442,7 +442,7 @@
 {
     display: block;
     padding-left: 0;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 
     overflow: hidden;
     text-overflow: ellipsis;
