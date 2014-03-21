@@ -32,6 +32,7 @@
       {{ flashMessage }}
     </div>
   {% endfor %}
+  <div class="teacher-profile-top-horizontal-line"></div>
   <div class="profile-sidebar-menu-container">
     {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
   </div>
@@ -62,5 +63,8 @@
     <div class="photo-column-container">
       {% include "ZnaikaFrontendBundle:User:user_photo_form.html.twig" with {'form': userPhotoForm} %}
     </div>
+  </div>
+  <div class="teacher-profile-bottom-horizontal-placeholder">
+    <div class="line"></div>
   </div>
 {% endblock %}
