@@ -294,6 +294,7 @@
 
             return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
                 'class'            => $class,
+                'subjectName'      => $subjectName,
                 'currentChapter'   => $currentChapter,
                 'currentChapterId' => $currentChapterId,
                 'chapters'         => $chapters,

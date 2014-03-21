@@ -198,7 +198,6 @@ a:focus
     z-index: 2;
     padding: 0;
     width: 100%;
-    overflow: hidden;
 }
 
 .class-menu
@@ -340,6 +339,7 @@ a:focus
     float: left;
     margin: 0;
     overflow: hidden;
+    height: 33px;
 
     background: #f4f4f4;
 }

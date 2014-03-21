@@ -43,5 +43,5 @@
   <div class="chapters-list-bottom-horizontal-placeholder">
     <div class="line"></div>
   </div>
-  <input type="hidden" id="editChaptersUrl" value="{{ url("edit_chapters", {"class": currentChapter.grade, "subjectName": currentChapter.subject.urlName }) }}">
+  <input type="hidden" id="editChaptersUrl" value="{{ url("edit_chapters", {"class": class, "subjectName": subjectName }) }}">
 {% endblock %}
