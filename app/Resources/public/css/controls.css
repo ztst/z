@@ -8,7 +8,7 @@
 
     border-radius: 3px;
     font-size: 15px;
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
     text-align: center;
     cursor: pointer;
 }
@@ -130,7 +130,7 @@ label.non-active-button
     box-shadow: none;
 
     color: #717070;
-    font: 13px/30px "OpenSans Semibold";
+    font: 13px/30px "OpenSans Semibold", sans-serif;
 }
 
 .selectbox .select:hover
