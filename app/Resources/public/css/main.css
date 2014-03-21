@@ -622,6 +622,12 @@ input
 .search-container
 {
     margin-right: 25px;
+    width: 299px;
+}
+
+.search-container .input-group
+{
+    width: 100%;
 }
 
 .main-menu-right
@@ -849,7 +855,7 @@ label
     display: block;
     color: #d1dfe6;
     font-size: 13px;
-    font-family: "OpenSans",sans-serif;
+    font-family: "OpenSans", "Open Sans", sans-serif;
     text-decoration: none;
 }
 
