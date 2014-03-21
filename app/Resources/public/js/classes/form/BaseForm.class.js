@@ -15,8 +15,10 @@ var BaseForm = EventDispatcher.extend({
             errorPlacement: function($error, $element)
             {
                 $element.closest("div").after($error);
-                var errorFields = $($element.parents().get(1)).find(".form-error-field");
-                errorFields.append('<div class="arrow"></div>');
+                var errorFields = $($element.parent().parent()).find(".form-error-field");
+                $element.bind('blur', function(){
+                    errorFields.append('<div class="arrow"></div>');
+                });
             },
             invalidHandler: function()
             {
