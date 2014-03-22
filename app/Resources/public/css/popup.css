@@ -545,6 +545,7 @@ img.mfp-img
 .popup
 {
     position: relative;
+    z-index: 100;
     background: #ffffff;
     width: auto;
     max-width: 583px;

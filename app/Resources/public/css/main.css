@@ -35,6 +35,7 @@ a:focus
     min-height: 100%;
     height: 100%;
     width: 100%;
+    min-width: 1000px;
     margin: 0;
     padding: 0;
 }
@@ -93,7 +94,20 @@ a:focus
 .header-container
 {
     position: relative;
-    z-index: 2;
+    z-index: 5;
+    min-width: 1000px;
+}
+
+.header-logo-container
+{
+    float: left;
+    margin-top: 11px;
+}
+
+.header-logo
+{
+    margin-left: -17px;
+    padding: 0;
 }
 
 .content-container

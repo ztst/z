@@ -29,7 +29,7 @@
                     }
                     var selectbox =
                         $('<span class="selectbox" style="display:inline-block;position:relative">'+
-                            '<div class="select" style="float:left;position:relative;z-index:10"><div class="text">' + optionText + '</div>'+
+                            '<div class="select" style="float:left;position:relative;z-index:4"><div class="text">' + optionText + '</div>'+
                             '<b class="trigger"><i class="arrow"></i></b>'+
                             '</div>'+
                             '<div class="dropdown" style="position:absolute;z-index:9999;overflow:auto;overflow-x:hidden;list-style:none">'+
