@@ -14,8 +14,6 @@ var SearchPage = Base.extend({
             link.closest(".chapter-description-container").addClass("selected");
         });
 
-        $('.dropdown-toggle').dropdown();
-
         $(".custom-select .dropdown-menu li").click(function(){
             $($(this).parent().parent()).find(".dropdown-toggle .custom-select-label").html($(this).find("a").html());
         });

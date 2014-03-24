@@ -490,6 +490,7 @@ button.search-button:active
 {
     display: block;
     position: absolute;
+    z-index: 3;
     top: 8px;
     left: 10px;
     width: 14px;

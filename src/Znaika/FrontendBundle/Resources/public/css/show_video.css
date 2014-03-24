@@ -300,7 +300,7 @@
 
 .label-all-chapters
 {
-    margin-bottom: 10px;
+    margin-bottom: 11px;
     padding-left: 15px;
     background: url('/images/video/all-chapters-icon.png') no-repeat;
     background-position: 0 5px;
@@ -310,14 +310,6 @@
 {
     color: #036995;
     font-size: 13px;
-    font-family: "OpenSans Semibold", sans-serif;
-}
-
-.chapter-name
-{
-    margin-bottom: 15px;
-    color: #303030;
-    font-size: 15px;
     font-family: "OpenSans Semibold", sans-serif;
 }
 
