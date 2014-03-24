@@ -1,4 +1,4 @@
-<h3>Разделы</h3>
+<h3>Разделы предмета &laquo;{{ subjectNameRussian }}&raquo;, {{ class }} класс</h3>
 {% if is_moderator() %}
   <div class="moderator-buttons-block">
     <a class="semi-active-button add-chapter-button" href="javascript:void(0);">
@@ -29,15 +29,17 @@
       <div class="chapter-selected-item-arrow"></div>
     </div>
     {% for chapter in chapters %}
-      <div id="chapter_container_{{ chapter.getChapterId }}" class="chapter-description-container{% if currentChapterId == chapter.getChapterId %} selected{% endif %}">
-        <div class="chapter-list-marker">&nbsp;</div>
-        <a href="javascript:void(0);" title="{{ chapter.getName|raw }}" class="chapter-title-link" id="show_chapter_{{ chapter.getChapterId }}">
-          {{ chapter.getName|raw }}
-        </a>
-        <input type="hidden" class="chapter-title-input" id="chapter_title_input_{{ chapter.getChapterId }}" value="{{ chapter.getName|raw }}" />
-        <input type="hidden" class="chapter-order-input" id="chapter_order_{{ chapter.getChapterId }}" value="{{ chapter.orderPriority }}"/>
-        <div class="chapter-selected-item-arrow"></div>
-      </div>
+      {% if ((not (chapter.videos.count == 0)) or is_moderator())%}
+        <div id="chapter_container_{{ chapter.getChapterId }}" class="chapter-description-container{% if currentChapterId == chapter.getChapterId %} selected{% endif %}">
+          <div class="chapter-list-marker">&nbsp;</div>
+          <a href="javascript:void(0);" title="{{ chapter.getName|raw }}" class="chapter-title-link" id="show_chapter_{{ chapter.getChapterId }}">
+            {{ chapter.getName|raw }}
+          </a>
+          <input type="hidden" class="chapter-title-input" id="chapter_title_input_{{ chapter.getChapterId }}" value="{{ chapter.getName|raw }}" />
+          <input type="hidden" class="chapter-order-input" id="chapter_order_{{ chapter.getChapterId }}" value="{{ chapter.orderPriority }}"/>
+          <div class="chapter-selected-item-arrow"></div>
+        </div>
+      {% endif %}
     {% endfor %}
     <div class="chapters-list-bottom-horizontal-placeholder">
       <div class="line"></div>

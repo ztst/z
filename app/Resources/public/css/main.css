@@ -237,9 +237,11 @@ a:focus
     border-left: 1px solid #1181b3;
     border-right: 1px solid #329dd1;
 
-    -moz-user-select: none;
-    -khtml-user-select: none;
+    -webkit-touch-callout: none;
     -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 
@@ -335,6 +337,8 @@ a:focus
     float: right;
     padding-right: 30px !important;
     position: relative;
+    width: 75px;
+    height: 33px;
 }
 
 .subject-menu .more-button-caret
@@ -361,7 +365,6 @@ a:focus
 .subject-menu-list li
 {
     display: inline-block;
-    width: auto;
     height: 33px;
     float: left;
     border-left: 1px solid #e2e2e2;
@@ -392,7 +395,7 @@ a:focus
     text-decoration: none;
     white-space: nowrap;
 
-    padding: 7px 18px !important;
+    padding: 7px 0;
     display: block;
     text-align: center;
     cursor: pointer;
@@ -424,8 +427,15 @@ a:focus
     margin: 0;
 }
 
+.subject-menu-more-container li
+{
+    width: 100%;
+}
+
 .subject-menu-more-container ul a
 {
+    padding: 7px 18px;
+    width: 100%;
     text-align: left;
 }
 
@@ -436,6 +446,96 @@ a:focus
     border-bottom: 1px solid #e2e2e2;
     padding-top: 6px !important;
     padding-bottom: 6px !important;
+}
+
+.english
+{
+    width: 147px;
+}
+
+.istoriya-rossii
+{
+    width: 139px;
+}
+
+.algebra
+{
+    width: 88px;
+}
+
+.physics
+{
+    width: 85px;
+}
+
+.biology
+{
+    width: 98px;
+}
+
+.geografy
+{
+    width: 105px;
+}
+
+.literatura
+{
+    width: 112px;
+}
+
+.obshestvoznanie
+{
+    width: 148px;
+}
+
+.istoria-mira
+{
+    width: 128px;
+}
+
+.geometry
+{
+    width: 106px;
+}
+
+.informatika
+{
+    width: 126px;
+}
+
+.chemistry
+{
+    width: 79px;
+}
+
+.obzh
+{
+    width: 67px;
+}
+
+.prirodovedenie
+{
+    width: 148px;
+}
+
+.matematika
+{
+    width: 114px;
+}
+
+.russian
+{
+    width: 122px;
+}
+
+.okruj-mir
+{
+    width: 154px;
+}
+
+.chtenie
+{
+    width: 83px;
 }
 
 .main-menu
@@ -643,6 +743,11 @@ input
 .search-container .input-group
 {
     width: 100%;
+}
+
+.search-container input
+{
+    background: #fff url('/images/search-placeholder.png') no-repeat 31px 9px;
 }
 
 .main-menu-right
@@ -855,6 +960,64 @@ label
     text-align: center;
 }
 
+/* static pages styles BEGIN */
+.add-video-comment-container textarea
+{
+    padding-right: 25px;
+    height: 85px;
+    border-radius: 0;
+    resize: none;
+}
+
+.static-page-container label
+{
+    display: table-cell;
+    padding-right: 7px;
+    width: 85px;
+
+    font-weight: normal;
+    font-size: 13px;
+    font-family: "OpenSans Semibold", sans-serif;
+}
+
+.static-page-container .input-group
+{
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.static-page-container .form-group label
+{
+    display: block;
+    float: left;
+}
+
+.static-page-container input,
+.static-page-container textarea
+{
+    width: 462px;
+}
+
+.static-page-container .active-button
+{
+    margin-left: 85px;
+    padding-left: 18px;
+    padding-right: 18px;
+    width: auto;
+}
+
+.static-page-container .active-button-label
+{
+    background: url("/images/teacher-page/send-answer-button-icon.png") no-repeat scroll 0 6px;
+}
+
+.static-page-container ol,
+.static-page-container ul
+{
+    padding: 0 18px;
+}
+/* static pages styles END */
+
 /* Footer block BEGIN */
 .footer-container
 {
@@ -896,7 +1059,7 @@ label
 {
     float: left;
     margin-left: 23px;
-    margin-right: 109px;
+    margin-right: 81px;
     width: 104px;
 }
 
@@ -980,13 +1143,3 @@ label
     background: #5690b7;
 }
 /* Footer block END */
-
-.static-page-container
-{
-    padding: 0 18px 18px;
-}
-
-.static-page-container h3
-{
-    margin-top: 0;
-}

@@ -13,7 +13,7 @@
              title="{{ video.getName|raw }}">
             <div class="over-elements-container">
               <div class="over-play-sign"></div>
-              <div class="over-duration-length">{{ video.duration|date("i:s") }}</div>
+              <div class="over-video-duration">{{ video.duration|date("i:s") }}</div>
             </div>
             <img
               src="{{ small_video_thumbnail(video) }}"

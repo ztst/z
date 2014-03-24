@@ -167,7 +167,9 @@ services:
 #menu
     znaika_frontend.menu_builder:
         class: Znaika\FrontendBundle\Menu\MenuBuilder
-        arguments: ["@knp_menu.factory"]
+        arguments:
+            - @knp_menu.factory
+            - @service_container
 
     znaika_frontend.menu.main:
         class: "%znaika_frontend.menu.class%"

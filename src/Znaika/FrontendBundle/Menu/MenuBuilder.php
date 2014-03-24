@@ -2,8 +2,12 @@
     namespace Znaika\FrontendBundle\Menu;
 
     use Knp\Menu\FactoryInterface;
+    use Symfony\Component\DependencyInjection\ContainerInterface;
     use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\Security\Core\SecurityContext;
+    use Symfony\Component\Security\Core\SecurityContextInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
+    use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Znaika\FrontendBundle\Helper\Util\Lesson\SubjectUtil;
     use Znaika\FrontendBundle\Repository\Lesson\Category\ISubjectRepository;
@@ -12,14 +16,22 @@
 
     class MenuBuilder
     {
+        const ANONYMOUS_USER_DEFAULT_CLASS = 5;
         private $factory;
 
         /**
          * @param FactoryInterface $factory
          */
-        public function __construct(FactoryInterface $factory)
+
+        /**
+         * @var ContainerInterface
+         */
+        private $container;
+
+        public function __construct(FactoryInterface $factory, ContainerInterface $container)
         {
-            $this->factory = $factory;
+            $this->factory   = $factory;
+            $this->container = $container;
         }
 
         public function createMainMenu()
@@ -44,7 +56,12 @@
             $classes = ClassNumberUtil::getAvailableClasses();
             foreach ($classes as $classNumber)
             {
-                $menuItem = $menu->addChild("<div class='class-menu-top-line'></div><span class='grade-number'>$classNumber</span><span class='grade-word'>&nbsp;класс</span><span class='arrow'></span>");
+                $menuItem = $menu->addChild(
+                                 "<div class='class-menu-top-line'></div>
+                                  <span class='grade-number'>$classNumber</span>
+                                  <span class='grade-word'>&nbsp;класс</span>
+                                  <span class='arrow'></span>"
+                );
                 $menuItem->setExtra('safe_label', true);
                 $menuItem->setAttribute("id", $classNumber);
 
@@ -109,6 +126,8 @@
                 {
                     $menuItem->setAttribute("class", "selected");
                 }
+
+                $menuItem->setAttribute("class", $menuItem->getAttribute("class") . " " . $subject->getUrlName());
             }
 
             return $menu;
@@ -152,9 +171,15 @@
 
         protected function getCurrentClass(Request $request)
         {
-            $currentClass = $request->get("class", null);
+            /** @var SecurityContextInterface $securityContext */
+            $securityContext = $this->container->get('security.context');
+            $user = $securityContext->getToken()->getUser();
 
-            return $currentClass ? $currentClass : 1; //TODO: add user class by default
+            $defaultUserClass = ($user instanceof User) ? $user->getGrade() : null;
+
+            $currentClass = $request->get("class", $defaultUserClass);
+
+            return $currentClass ? $currentClass : self::ANONYMOUS_USER_DEFAULT_CLASS;
         }
 
         protected function getCurrentSubjectUrlName(Request $request)

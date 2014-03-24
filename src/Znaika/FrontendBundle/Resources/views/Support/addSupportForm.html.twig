@@ -1,18 +1,21 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
 {% block content %}
-  <div class="static-page-container">
-    <h3>Помощь</h3>
-
+  <div class="static-page-container add-video-comment-container">
+    <h3>Напишите нам!</h3>
+    <h5>
+      Наша цель - создать самый удобный веб-сервис для изучения уроков школьной программы.
+      Нам очень важны ваши комментарии, пожелания и заметки об ошибках.
+    </h5>
     <div class="">
       {{ form_start(form, {'method': 'POST'}) }}
       {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
-      <div class="form-group">
+      <div class="input-group">
         {{ form_label(form.name, 'Имя') }}
         {{ form_errors(form.name) }}
         {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
       </div>
-      <div class="form-group">
+      <div class="input-group">
         {{ form_label(form.email, 'Email') }}
         {{ form_errors(form.email) }}
         {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
@@ -22,9 +25,14 @@
         {{ form_errors(form.text) }}
         {{ form_widget(form.text, {'attr': {'class': 'form-control'}}) }}
       </div>
-      <div>
-        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Отправить'}) }}
+      <div class="hidden">
+        {{ form_widget(form.save, {'attr': {'class': 'active-button'}, 'label': 'Отправить'}) }}
       </div>
+      <button type="submit" class="active-button">
+        <span class="active-button-label">
+          Отправить
+        </span>
+      </button>
       {{ form_end(form) }}
     </div>
   </div>

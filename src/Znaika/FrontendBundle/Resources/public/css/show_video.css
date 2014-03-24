@@ -173,14 +173,6 @@
     width: 496px;
 }
 
-.add-video-comment-container textarea
-{
-    padding-right: 25px;
-    height: 85px;
-    border-radius: 0;
-    resize: none;
-}
-
 .question-comment-button
 {
     display: inline-block;

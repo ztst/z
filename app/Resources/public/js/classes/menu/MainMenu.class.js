@@ -18,6 +18,24 @@ var MainMenu = EventDispatcher.extend({
 
         this._initBadgesPopup();
         this._initLoginPopup();
+
+        var searchFormInput = $("#searchForm").find(".input-group input");
+        searchFormInput.on("input", function(){
+            if ($(this).val().length == 0)
+            {
+                $(this).css("background", "");
+            }
+            else
+            {
+                $(this).css("background", "#fff");
+            }
+        });
+        searchFormInput.on("blur", function(){
+            if ($(this).val().length == 0)
+            {
+                $(this).css("background", "");
+            }
+        });
     },
 
     setUserHasViewedBadgesUrl: function(url)
