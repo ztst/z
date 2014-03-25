@@ -6,7 +6,7 @@
       <div class="footer-social-button">
         <a
           id="{{ vk_button_id(prefix) }}"
-          href="http://vk.com/share.php?url={{ url('znaika_frontend_homepage') }}&amp;title=&#34;Знайка.Ру&#34;&amp;noparse=true"
+          href="http://vk.com/share.php?url={{ url('znaika_frontend_homepage') }}&amp;title={{ "Знайка.Ру"|url_encode }}&amp;noparse=true"
           class="footer-vk"
           target="_blank"
           title="Поделиться в ВК">
@@ -15,7 +15,7 @@
       <div class="footer-social-button">
         <a
           id="{{ facebook_button_id(prefix) }}"
-          href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p%5Btitle%5D=&#34;Знайка.Ру&#34;&amp;p%5Burl%5D={{ url('znaika_frontend_homepage') }}"
+          href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p%5Btitle%5D={{ "Знайка.Ру"|url_encode }}&amp;p%5Burl%5D={{ url('znaika_frontend_homepage') }}"
           class="footer-facebook"
           target="_blank"
           title="Поделиться в facebook">
@@ -24,7 +24,7 @@
       <div class="footer-social-button">
         <a
           id="{{ twitter_button_id(prefix) }}"
-          href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Ffiddle.jshell.net%2F_display%2F&amp;text=&#34;Знайка.Ру&#34;&amp;url={{ url('znaika_frontend_homepage') }}"
+          href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Ffiddle.jshell.net%2F_display%2F&amp;text={{ "Знайка.Ру"|url_encode }}&amp;url={{ url('znaika_frontend_homepage') }}"
           class="footer-twitter"
           target="_blank"
           title="Поделиться в twitter">

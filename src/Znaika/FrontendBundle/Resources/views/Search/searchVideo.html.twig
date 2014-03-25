@@ -28,7 +28,14 @@
       {% if videos|length %}
         <h4>{{ 'founded_video_lessons'|transchoice(countVideos) }}</h4>
       {% else %}
-        <h5>По запросу "{{ searchString }}" ничего не найдено</h5>
+        <div class="nothing-found-message">
+          <h5>Ничего не найдено</h5>
+          {% if not searchString %}
+            <h5>Введите запрос в строку поиска</h5>
+          {% else %}
+            <h5>Ваш запрос не дал результатов</h5>
+          {% endif %}
+        </div>
       {% endif %}
       {% include "ZnaikaFrontendBundle:Search:search_video_list.html.twig" with {'videos': videos} %}
     </div>

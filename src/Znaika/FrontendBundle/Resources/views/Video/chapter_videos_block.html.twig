@@ -17,11 +17,9 @@
   </div>
 {% endif %}
 {% if currentVideo is defined and currentVideo.orderPriority > 2 and not is_moderator() %}
-  <div class="show-more-videos">
-    <a id="showMoreChapterVideos" href="javascript:void(0);">
-      Показать предыдущие ({{ currentVideo.orderPriority - 2 }})
-    </a>
-  </div>
+  <a id="showMoreChapterVideos" href="javascript:void(0);" class="show-more-videos">
+    Показать предыдущие ({{ currentVideo.orderPriority - 2 }})
+  </a>
 {% endif %}
 {% if not videos is empty %}
   <ul class="chapter-videos-list">
@@ -65,7 +63,7 @@
               {% if not video.synopsis is empty %}
                 <a
                   {% if currentVideo is defined and currentVideo == video %}id="currentVideoSynopsisLink"{% endif %}
-                  href="{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#synopsis_tab" }}"
+                  href="{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName, 'show': 'synopsis' })}}"
                   class="video-has-synopsis">
                 </a>
                 {% if not video.quiz is empty %}
@@ -75,7 +73,7 @@
               {% if not video.quiz is empty %}
                 <a
                   {% if currentVideo is defined and currentVideo == video %}id="currentVideoQuizLink"{% endif %}
-                  href="{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName }) ~ "#quiz_tab" }}"
+                  href="{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName, 'show': 'quiz' })}}"
                   class="video-has-quiz">
                 </a>
               {% endif %}

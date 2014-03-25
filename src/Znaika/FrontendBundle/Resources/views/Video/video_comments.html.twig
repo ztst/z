@@ -1,6 +1,6 @@
 <ul class="media-list">
   {% for comment in comments %}
-    <li class="media">
+    <li class="media comment-container{% if loop.first %} first{% elseif loop.last %} last{% endif %}">
       <a class="pull-left" href="#">
         <img class="media-object"
              width="60"

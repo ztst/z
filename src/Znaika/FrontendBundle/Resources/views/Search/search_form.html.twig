@@ -1,7 +1,7 @@
 <form id="searchForm" action="{{ path("search") }}" method="get">
   <div class="input-group">
     <span class="search-icon"></span>
-    <input type="text" class="form-control search-input" name="q" value="{{ searchString }}">
+    <input type="text" class="form-control search-input" placeholder="Поиск видеоуроков" name="q" value="{{ searchString }}">
     <input id="searchGradeInput" type="hidden" name="g" value="{{ grade }}">
     <input id="searchSubjectInput" type="hidden" name="s" value="{{ subject }}">
     <div class="input-group-btn search-button-container">

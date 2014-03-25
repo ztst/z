@@ -745,11 +745,6 @@ input
     width: 100%;
 }
 
-.search-container input
-{
-    background: #fff url('/images/search-placeholder.png') no-repeat 31px 9px;
-}
-
 .main-menu-right
 {
     float: right;

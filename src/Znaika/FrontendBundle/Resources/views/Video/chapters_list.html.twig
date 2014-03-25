@@ -18,25 +18,31 @@
     </a>
   </div>
 {% endif %}
-{% if not chapters is empty %}
-  <div class="chapters-list">
-    <div class="chapters-list-vertical-line"></div>
+<div class="chapters-list">
+  <div class="chapters-list-vertical-line"></div>
+  {% if not chapters is empty %}
     <div id="chaptersListRowPattern" class="chapter-description-container hidden">
       <div class="chapter-list-marker">&nbsp;</div>
       <a href="javascript:void(0);" title="" class="chapter-title-link" id="show_chapter_%chapterId%"></a>
-      <input type="hidden" class="chapter-title-input" id="chapter_title_input_%chapterId%" value="" />
+      <input type="hidden" class="chapter-title-input" id="chapter_title_input_%chapterId%" value=""/>
       <input type="hidden" class="chapter-order-input" id="chapter_order_%chapterId%" value=""/>
+
       <div class="chapter-selected-item-arrow"></div>
     </div>
     {% for chapter in chapters %}
-      {% if ((not (chapter.videos.count == 0)) or is_moderator())%}
-        <div id="chapter_container_{{ chapter.getChapterId }}" class="chapter-description-container{% if currentChapterId == chapter.getChapterId %} selected{% endif %}">
+      {% if ((not (chapter.videos.count == 0)) or is_moderator()) %}
+        <div id="chapter_container_{{ chapter.getChapterId }}"
+             class="chapter-description-container{% if currentChapterId == chapter.getChapterId %} selected{% endif %}">
           <div class="chapter-list-marker">&nbsp;</div>
-          <a href="javascript:void(0);" title="{{ chapter.getName|raw }}" class="chapter-title-link" id="show_chapter_{{ chapter.getChapterId }}">
+          <a href="javascript:void(0);" title="{{ chapter.getName|raw }}" class="chapter-title-link"
+             id="show_chapter_{{ chapter.getChapterId }}">
             {{ chapter.getName|raw }}
           </a>
-          <input type="hidden" class="chapter-title-input" id="chapter_title_input_{{ chapter.getChapterId }}" value="{{ chapter.getName|raw }}" />
-          <input type="hidden" class="chapter-order-input" id="chapter_order_{{ chapter.getChapterId }}" value="{{ chapter.orderPriority }}"/>
+          <input type="hidden" class="chapter-title-input" id="chapter_title_input_{{ chapter.getChapterId }}"
+                 value="{{ chapter.getName|raw }}"/>
+          <input type="hidden" class="chapter-order-input" id="chapter_order_{{ chapter.getChapterId }}"
+                 value="{{ chapter.orderPriority }}"/>
+
           <div class="chapter-selected-item-arrow"></div>
         </div>
       {% endif %}
@@ -44,5 +50,20 @@
     <div class="chapters-list-bottom-horizontal-placeholder">
       <div class="line"></div>
     </div>
-  </div>
-{% endif %}
+  {% else %}
+    <div class="chapter-description-container">
+      <div>
+        Видеоуроки предмета &laquo;{{ subjectNameRussian }}&raquo; находятся в разработке. В данный
+        момент на сайте доступны видеоуроки за {{ class }} класс по следующим предметам:
+      </div>
+    </div>
+    {% for subject in subjects %}
+      <div class="chapter-description-container">
+        <div class="chapter-list-marker">&nbsp;</div>
+        <a href="{{ subject.getUrlName }}" class="chapter-title-link">
+          {{ subject.getName }}
+        </a>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>

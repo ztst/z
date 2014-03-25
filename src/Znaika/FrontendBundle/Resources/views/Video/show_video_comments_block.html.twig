@@ -1,13 +1,11 @@
 <div class="comments-container">
   {% if not video.getVideoComments is empty %}
     {% if video.getVideoComments|length > constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE') %}
-      <div class="alert alert-info show-more-comments">
-        <a href="javascript:void(0);" id="showPrevCommentsLink">
-          {{ 'show_prev_comments'|transchoice(video.getVideoComments|length - constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE')) }}
-        </a>
-        <input type="hidden" id="showPrevCommentsUrl" value="{{ path('get_prev_comments', {'videoName': video.getUrlName}) }}"/>
-      </div>
-      <div id="prevCommentsContainer"></div>
+      <a href="javascript:void(0);" id="showPrevCommentsLink" class="alert alert-info show-more-comments">
+        {{ 'show_prev_comments'|transchoice(video.getVideoComments|length - constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE')) }}
+      </a>
+      <input type="hidden" id="showPrevCommentsUrl" value="{{ path('get_prev_comments', {'videoName': video.getUrlName}) }}"/>
+      <div id="prevCommentsContainer" class="prev-comments-container"></div>
     {% endif %}
     {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': comments} %}
   {% endif %}

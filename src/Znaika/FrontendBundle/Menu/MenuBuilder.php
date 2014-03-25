@@ -16,7 +16,7 @@
 
     class MenuBuilder
     {
-        const ANONYMOUS_USER_DEFAULT_CLASS = 5;
+        const DEFAULT_CLASS_FOR_ANONYMOUS_USER = 5;
         private $factory;
 
         /**
@@ -57,7 +57,7 @@
             foreach ($classes as $classNumber)
             {
                 $menuItem = $menu->addChild(
-                                 "<div class='class-menu-top-line'></div>
+                                 "<span class='class-menu-top-line'></span>
                                   <span class='grade-number'>$classNumber</span>
                                   <span class='grade-word'>&nbsp;класс</span>
                                   <span class='arrow'></span>"
@@ -179,7 +179,7 @@
 
             $currentClass = $request->get("class", $defaultUserClass);
 
-            return $currentClass ? $currentClass : self::ANONYMOUS_USER_DEFAULT_CLASS;
+            return $currentClass ? $currentClass : self::DEFAULT_CLASS_FOR_ANONYMOUS_USER;
         }
 
         protected function getCurrentSubjectUrlName(Request $request)

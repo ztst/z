@@ -69,6 +69,7 @@
     margin-left: 5px;
     width: 16px;
     height: 16px;
+    text-decoration: none;
 }
 
 .video-social-buttons h5
@@ -137,34 +138,61 @@
 .show-more-comments,
 .show-more-videos
 {
+    display: block;
     border: 1px solid #d6d6d6;
     border-radius: 3px;
+
+    color: #036995;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
 }
 
 .show-more-comments:hover,
 .show-more-videos:hover
 {
+    text-decoration: none;
     border-color: #c4c4c4;
     box-shadow: 0 3px 6px -6px #000;
 }
 
-.show-more-comments a,
-.show-more-videos a
-{
-    display: block;
-    color: #036995;
-    text-align: center;
-    text-decoration: none;
-}
-
 .show-more-comments
 {
+    margin-bottom: 0;
     background: #f6f6f6;
 }
 
-.show-more-comments a
+.comments-container .media-list
 {
-    font-size: 13px;
+    margin: 0;
+}
+
+.comments-container .media.comment-container.first
+{
+    border-top: none;
+}
+
+.comments-container .media.comment-container
+{
+    margin: 0;
+    padding: 18px 0;
+    border-top: 1px solid #e9e9e9;
+}
+
+.prev-comments-container .media.comment-container
+{
+    border-top: none;
+    border-bottom: 1px solid #e9e9e9;;
+}
+
+.prev-comments-container .media.comment-container.first
+{
+    padding-top: 0;
+}
+
+.comments-container .media.comment-container img
+{
+    overflow: hidden;
 }
 
 .add-video-comment-container
@@ -221,7 +249,7 @@
 .answer-comment-author-name,
 .question-comment-author-name
 {
-    margin-top: 5px;
+    margin: 3px 0 0;
     color: #333;
     font-size: 13px;
     font-family: "OpenSans Semibold", sans-serif;
@@ -254,7 +282,7 @@
 
 .comment-date
 {
-    margin-top: 5px;
+    margin: 10px 0 0;
     color: #999;
     font-size: 11px;
     font-family: "OpenSans", "Open Sans", serif;
@@ -294,8 +322,7 @@
 {
     margin-bottom: 11px;
     padding-left: 15px;
-    background: url('/images/video/all-chapters-icon.png') no-repeat;
-    background-position: 0 5px;
+    background: url('/images/video/all-chapters-icon.png') no-repeat 0 5px;
 }
 
 .label-all-chapters a
