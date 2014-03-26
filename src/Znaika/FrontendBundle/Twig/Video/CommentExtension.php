@@ -54,7 +54,37 @@
                 'teacher_profile_questions'         => new \Twig_Function_Method($this, 'renderTeacherProfileQuestions'),
                 'moderator_profile_comments'        => new \Twig_Function_Method($this, 'renderModeratorProfileComments'),
                 'question_answer_form'              => new \Twig_Function_Method($this, 'renderQuestionAnswerForm'),
+                'count_video_comments'              => new \Twig_Function_Method($this, 'countVideoComments'),
+                'comment_answer_block'              => new \Twig_Function_Method($this, 'renderCommentAnswer'),
             );
+        }
+
+        public function renderCommentAnswer(VideoComment $comment)
+        {
+            if ($comment->getCommentType() != VideoCommentUtil::QUESTION)
+            {
+                return "";
+            }
+            $answers = $comment->getAnswers();
+            if (empty($answers))
+            {
+                return "";
+            }
+
+            $answer = $answers->first();
+
+            $templateFile    = "ZnaikaFrontendBundle:Video:comment_answer.html.twig";
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $result          = $templateContent->render(array(
+                "comment" => $answer
+            ));
+
+            return $result;
+        }
+
+        public function countVideoComments(Video $video)
+        {
+            return $this->videoCommentRepository->countVideoComments($video);
         }
 
         public function countVideoQuestions(Video $video)
@@ -121,6 +151,7 @@
             {
                 $result = "Комментарий удален. Причина: нарушение положений Пользовательского соглашения";
             }
+
             return $result;
         }
 

@@ -32,6 +32,11 @@
             return null;
         }
 
+        public function countVideoComments(Video $video)
+        {
+            return null;
+        }
+
         public function getVideoNotAnsweredQuestionComments(Video $video)
         {
             return null;

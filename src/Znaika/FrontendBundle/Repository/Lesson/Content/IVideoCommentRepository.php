@@ -37,6 +37,8 @@
         public function getLastVideoComments(Video $video, $limit);
 
         /**
+         * Return comments, not answers
+         *
          * @param Video $video
          * @param $offset
          * @param $limit
@@ -44,6 +46,13 @@
          * @return VideoComment[]
          */
         public function getVideoComments($video, $offset, $limit);
+
+        /**
+         * @param Video $video
+         *
+         * @return int
+         */
+        public function countVideoComments(Video $video);
 
         /**
          * @param $video

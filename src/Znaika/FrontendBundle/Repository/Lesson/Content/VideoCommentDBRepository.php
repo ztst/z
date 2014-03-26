@@ -41,6 +41,8 @@
                ->from('ZnaikaFrontendBundle:Lesson\Content\VideoComment', 'vc')
                ->andWhere("vc.video = :video_id")
                ->setParameter('video_id', $video->getVideoId())
+               ->andWhere("vc.commentType != :comment_type")
+               ->setParameter('comment_type', VideoCommentUtil::ANSWER)
                ->addOrderBy('vc.createdTime', 'DESC')
                ->setMaxResults($limit);
 
@@ -52,14 +54,22 @@
             $qb = $this->getEntityManager()->createQueryBuilder();
 
             $qb->select('vc')
-               ->from('ZnaikaFrontendBundle:Lesson\Content\VideoComment', 'vc')
-               ->andWhere("vc.video = :video_id")
-               ->setParameter('video_id', $video->getVideoId())
-               ->addOrderBy('vc.createdTime', 'DESC')
                ->setFirstResult($offset)
                ->setMaxResults($limit);
 
+            $this->prepareGetCommentsQueryBuilder($video, $qb);
+
             return $qb->getQuery()->getResult();
+        }
+
+        public function countVideoComments(Video $video)
+        {
+            $qb = $this->getEntityManager()->createQueryBuilder();
+
+            $qb->select('count(vc)');
+            $this->prepareGetCommentsQueryBuilder($video, $qb);
+
+            return $qb->getQuery()->getSingleScalarResult();
         }
 
         public function getVideoNotAnsweredQuestionComments(Video $video)
@@ -157,5 +167,19 @@
             }
 
             return $qb;
+        }
+
+        /**
+         * @param $video
+         * @param $qb
+         */
+        private function prepareGetCommentsQueryBuilder($video, $qb)
+        {
+            $qb->from('ZnaikaFrontendBundle:Lesson\Content\VideoComment', 'vc')
+               ->andWhere("vc.video = :video_id")
+               ->setParameter('video_id', $video->getVideoId())
+               ->andWhere("vc.commentType != :comment_type")
+               ->setParameter('comment_type', VideoCommentUtil::ANSWER)
+               ->addOrderBy('vc.createdTime', 'DESC');
         }
     }

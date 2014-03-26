@@ -65,7 +65,7 @@
     </div>
     <div class="clear"></div>
     <div class="tab-pane active video-tab" id="video_tab">
-      {% include "ZnaikaFrontendBundle:Video:show_video_block.html.twig" with {'video': video} %}
+      {% include "ZnaikaFrontendBundle:Video:show_video_block.html.twig" with {'video': video, 'comments': comments} %}
     </div>
     <div class="tab-pane synopsis-tab" id="synopsis_tab">
       {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}

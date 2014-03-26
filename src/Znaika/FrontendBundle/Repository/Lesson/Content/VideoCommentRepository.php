@@ -84,6 +84,17 @@
             return $result;
         }
 
+        public function countVideoComments(Video $video)
+        {
+            $result = $this->redisRepository->countVideoComments($video);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->countVideoComments($video);
+            }
+
+            return $result;
+        }
+
         public function getVideoNotAnsweredQuestionComments(Video $video)
         {
             $result = $this->redisRepository->getVideoNotAnsweredQuestionComments($video);

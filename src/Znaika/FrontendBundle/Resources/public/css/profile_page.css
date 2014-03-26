@@ -57,6 +57,7 @@
 
 .profile-sidebar-menu-container
 {
+    position: relative;
     float: left;
     width: 297px;
 }

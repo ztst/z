@@ -86,7 +86,7 @@
 
             $templateFile    = $this->getUserBanTemplate($user);
             $templateContent = $this->twig->loadTemplate($templateFile);
-            $body            = $templateContent->render(array());
+            $body            = $templateContent->render(array("user" => $user));
             $subject         = $this->getEmailSubject($templateContent);
 
             $this->mailHelper->sendEmail(null, $user->getEmail(), $body, $subject);
