@@ -3,10 +3,14 @@
   <div class="footer-container">
     <div class="footer-social-buttons-block">
       {% set prefix = "footer_social_link_" %}
+      {% set url = url('znaika_frontend_homepage') %}
+      {% set title = "Знайка.Ру" %}
+      {% set desc = "Интересные видеоуроки" %}
+      {% set img = asset("images/logo.png") %}
       <div class="footer-social-button">
         <a
           id="{{ vk_button_id(prefix) }}"
-          href="http://vk.com/share.php?url={{ url('znaika_frontend_homepage') }}&amp;title={{ "Знайка.Ру"|url_encode }}&amp;noparse=true"
+          href="http://vk.com/share.php?url={{ url }}&amp;title={{ title|url_encode }}&amp;description={{ desc|url_encode }}&amp;image={{ img }}&amp;noparse=true"
           class="footer-vk"
           target="_blank"
           title="Поделиться в ВК">
@@ -15,7 +19,7 @@
       <div class="footer-social-button">
         <a
           id="{{ facebook_button_id(prefix) }}"
-          href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p%5Btitle%5D={{ "Знайка.Ру"|url_encode }}&amp;p%5Burl%5D={{ url('znaika_frontend_homepage') }}"
+          href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p%5Btitle%5D={{ title|url_encode }}&amp;p%5Bsummary%5D={{ desc|url_encode }}&amp;p%5Burl%5D={{ url }}&amp;p%5Bimages%5D%5B0%5D={{ img }}"
           class="footer-facebook"
           target="_blank"
           title="Поделиться в facebook">
@@ -24,7 +28,7 @@
       <div class="footer-social-button">
         <a
           id="{{ twitter_button_id(prefix) }}"
-          href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Ffiddle.jshell.net%2F_display%2F&amp;text={{ "Знайка.Ру"|url_encode }}&amp;url={{ url('znaika_frontend_homepage') }}"
+          href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Ffiddle.jshell.net%2F_display%2F&amp;text={{ title|url_encode }}&amp;url={{ url }}"
           class="footer-twitter"
           target="_blank"
           title="Поделиться в twitter">
@@ -33,7 +37,7 @@
       <div class="footer-social-button">
         <a
           id="{{ odnoklassniki_button_id(prefix) }}"
-          href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st._surl={{ url('znaika_frontend_homepage') }}"
+          href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st.s=1&amp;st.comments={{ desc|url_encode }}&amp;st._surl={{ url }}"
           class="footer-odnoklassniki"
           target="_blank"
           title="Поделиться в одноклассниках">

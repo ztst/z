@@ -15,8 +15,12 @@ var LoginForm = BaseForm.extend({
             messages: { email: handler(that, "_getInvalidEmailMessage") }
         });
         this._form.find("#password").rules('add', {
+            minlength: BaseForm.MIN_PASSWORD_LENGTH,
             password: true,
-            messages: { password: handler(that, "_getInvalidPasswordMessage") }
+            messages: {
+                minlength: "Пароль должен содержать более " + (BaseForm.MIN_PASSWORD_LENGTH - 1) + " символов",
+                password: handler(that, "_getInvalidPasswordMessage")
+            }
         });
 
         $('input').iCheck({

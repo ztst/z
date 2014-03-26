@@ -2,8 +2,7 @@ $(function()
 {
     jQuery.validator.addMethod("password", function(value, element)
     {
-        var MIN_PASSWORD_LENGTH = 8;
-        var reg = new RegExp("^[a-zA-Z0-9\!\'\"\№\;\%\:\?/*\(\)\-\=\_\+\\\/\<\>\,\.\?\~]{" + MIN_PASSWORD_LENGTH + ",}$");
+        var reg = new RegExp("^[a-zA-Z0-9\!\'\"\№\;\%\:\?/*\(\)\-\=\_\+\\\/\<\>\,\.\?\~]{1,}$");
 
         return this.optional(element) || reg.test(value);
     });
