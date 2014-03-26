@@ -1,5 +1,5 @@
 <div id="videoQuestions{{ video.videoId }}" class="video-questions-container hidden">
-  <h4>{{ video.name }}</h4>
+  <h4>{{ video.name }} <span class="user-questions-count">{{ count_video_questions(video) }}</span></h4>
   <p class="video-breadcrumbs">
     {{ video.grade }} класс > {{ video.subject.name }} > {{ video.chapter.name }}
   </p>
@@ -8,16 +8,18 @@
     <ul class="video-questions">
       {% for question in questions %}
         <li class="" id="questionContainer{{ question.videoCommentId }}">
-          <a class="pull-left" href="#">
+          <a class="pull-left" href="{{ path("not_verified_pupils", {"userId": question.user.userId}) }}">
             <img class="media-object"
                  width="50"
                  height="50"
-                 src="{% if question.user.hasPhoto %}{{ question.user.getPhotoUrl }}{% else %}{{ asset('images/user-profile/user-photo-placeholder.png') }}{% endif %}"
+                 src="{{ user_photo_url(question.user) }}"
                  alt="Здесь будет аватар автора"/>
           </a>
           <div class="media-body">
-            <span class="comment-author">{{ question.user }}</span>
-            <span class="comment-body">{{ question.getText }}</span>
+            <a class="" href="{{ path("not_verified_pupils", {"userId": question.user.userId}) }}">
+              <span class="comment-author">{{ question.user }}</span>
+            </a>
+            <span class="comment-body">{{ comment_text(question) }}</span>
             <h6 class="media-heading comment-date">{{ comment_date(question.getCreatedTime) }}</h6>
           </div>
           <div class="clear"></div>

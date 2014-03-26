@@ -37,15 +37,15 @@ show_video:
         class:  \d+
 
 add_video_form:
-    pattern: /video/{class}-klass/{subjectName}/{chapterName}/add-video-form
+    pattern: /moderator/video/{class}-klass/{subjectName}/{chapterName}/add-video-form
     defaults: { _controller: ZnaikaFrontendBundle:Video:addVideoForm }
 
 edit_video_form:
-    pattern: /video/{videoName}/edit-video-form
+    pattern: /moderator/video/{videoName}/edit-video-form
     defaults: { _controller: ZnaikaFrontendBundle:Video:editVideoForm }
 
 add_quiz_form:
-    pattern: /video/{videoName}/quiz-form
+    pattern: /moderator/video/{videoName}/quiz-form
     defaults: { _controller: ZnaikaFrontendBundle:Quiz:addQuizForm }
 
 save_quiz_stat_form:
@@ -61,14 +61,14 @@ get_prev_comments:
     defaults: { _controller: ZnaikaFrontendBundle:Video:getPrevComments }
 
 move_video:
-    pattern: /move-video-ajax
+    pattern: /moderator/move-video-ajax
     defaults: { _controller: ZnaikaFrontendBundle:Video:moveVideoAjax }
     methods:  [POST]
     options:
         expose: true
 
 add_synopsis_form:
-    pattern: /video/{videoName}/add-synopsis-form
+    pattern: /moderator/video/{videoName}/add-synopsis-form
     defaults: { _controller: ZnaikaFrontendBundle:Video:addSynopsisForm }
 
 register:
@@ -92,12 +92,62 @@ edit_user_profile:
     defaults: { _controller: ZnaikaFrontendBundle:User:editUserProfile }
 
 edit_teacher_profile:
-    pattern: /edit-teacher-profile/{userId}
+    pattern: /teacher/edit-profile/{userId}
     defaults: { _controller: ZnaikaFrontendBundle:User:editTeacherProfile }
 
 teacher_questions:
-    pattern: /teacher-questions/{userId}
+    pattern: /teacher/questions/{userId}
     defaults: { _controller: ZnaikaFrontendBundle:User:teacherQuestions }
+
+not_verified_comments:
+    pattern: /moderator/not_verified_comments/{userId}
+    defaults: { _controller: ZnaikaFrontendBundle:User:notVerifiedComments }
+
+approve_comments:
+    pattern: /moderator/approve-comments
+    defaults: { _controller: ZnaikaFrontendBundle:User:approveComments }
+    methods:  [POST]
+    options:
+        expose: true
+
+delete_comments:
+    pattern: /moderator/delete-comments
+    defaults: { _controller: ZnaikaFrontendBundle:User:deleteComments }
+    methods:  [POST]
+    options:
+        expose: true
+
+not_verified_pupils:
+    pattern: /moderator/not_verified_pupils/{userId}
+    defaults: { _controller: ZnaikaFrontendBundle:User:notVerifiedPupils, userId: null }
+
+approve_users:
+    pattern: /moderator/approve-users
+    defaults: { _controller: ZnaikaFrontendBundle:User:approveUsers }
+    methods:  [POST]
+    options:
+        expose: true
+
+delete_users:
+    pattern: /moderator/delete-users
+    defaults: { _controller: ZnaikaFrontendBundle:User:deleteUsers }
+    methods:  [POST]
+    options:
+        expose: true
+
+get_user_profile_ajax:
+    pattern: /moderator/get-user-profile/{userId}
+    defaults: { _controller: ZnaikaFrontendBundle:User:getUserProfileAjax }
+    methods:  [POST]
+    options:
+        expose: true
+
+get_video_not_verified_comments_ajax:
+    pattern: /moderator/get-not-verified-comments/{videoId}
+    defaults: { _controller: ZnaikaFrontendBundle:Video:getNotVerifiedCommentsAjax }
+    methods:  [POST]
+    options:
+        expose: true
 
 edit_user_photo:
     pattern: /edit-user-photo/{userId}

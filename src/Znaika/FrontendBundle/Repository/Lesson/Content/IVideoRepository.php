@@ -43,6 +43,13 @@
         public function getOneByUrlName($name);
 
         /**
+         * @param $videoId
+         *
+         * @return Video
+         */
+        public function getOneByVideoId($videoId);
+
+        /**
          * @param $dir
          *
          * @return Video
@@ -92,5 +99,15 @@
          */
         public function getMaxChapterOrderPriority(Chapter $chapter);
 
+        /**
+         * @param User $user
+         *
+         * @return Video[]
+         */
         public function getSupervisorVideosWithQuestions(User $user);
+
+        /**
+         * @return Video[]
+         */
+        public function getVideosWithNotVerifiedComments();
     }

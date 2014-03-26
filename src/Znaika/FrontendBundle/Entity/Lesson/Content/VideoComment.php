@@ -50,6 +50,11 @@
          * @var bool
          */
         private $isAnswered = false;
+
+        /**
+         * @var int
+         */
+        private $status = 0;
         /**
          * Constructor
          */
@@ -227,5 +232,21 @@
         public function getIsAnswered()
         {
             return $this->isAnswered;
+        }
+
+        /**
+         * @param int $status
+         */
+        public function setStatus($status)
+        {
+            $this->status = $status;
+        }
+
+        /**
+         * @return int
+         */
+        public function getStatus()
+        {
+            return $this->status;
         }
     }

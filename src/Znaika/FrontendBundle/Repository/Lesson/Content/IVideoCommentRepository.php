@@ -22,6 +22,13 @@
         public function getOneByVideoCommentId($videoCommentId);
 
         /**
+         * @param $videoCommentIds
+         *
+         * @return VideoComment[]
+         */
+        public function getByVideoCommentIds($videoCommentIds);
+
+        /**
          * @param Video $video
          * @param $limit
          *
@@ -58,4 +65,21 @@
          * @return int
          */
         public function countTeacherNotAnsweredQuestionComments(User $user);
+
+        /**
+         * @return VideoComment[]
+         */
+        public function getModeratorNotVerifiedComments();
+
+        /**
+         * @return int
+         */
+        public function countModeratorNotVerifiedComments();
+
+        /**
+         * @param Video $video
+         *
+         * @return VideoComment[]
+         */
+        public function getVideoNotVerifiedComments(Video $video);
     }

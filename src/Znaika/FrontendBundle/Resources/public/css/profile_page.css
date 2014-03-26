@@ -1,0 +1,190 @@
+.wrap > .container
+{
+    background: url('/images/teacher-page/sidebar-menu-row-background.png') repeat-y 0 -11px #ffffff;
+}
+
+.profile-sidebar-menu
+{
+    list-style: none;
+    margin-right: 1px;
+    margin-top: 4px;
+}
+
+.profile-sidebar-menu li
+{
+    display: inline-block;
+    height: 42px;
+    margin-bottom: -1px;
+    width: 100%;
+    padding-top: 1px;
+}
+
+.profile-sidebar-menu li a
+{
+    display: inline-block;
+    padding: 8px 36px;
+    text-decoration: none;
+    font-family: "OpenSans Semibold", sans-serif;
+    font-size: 15px;
+    color: #333333;
+
+    background: url('/images/chapters-list/chapter-list-marker.png') no-repeat 20px 15px;
+}
+
+.profile-sidebar-menu li.current a
+{
+    color: #004e78;
+}
+
+.profile-sidebar-menu li.current
+{
+    border-bottom: 1px solid #C3D6E1;
+    border-top: 1px solid #C3D6E1;
+    padding-top: 0;
+    background: url('/images/teacher-page/profile-sidebar-menu-arrow.png') no-repeat 251px 0 #EEF9FE;
+}
+.tab-pane
+{
+    display: none;
+
+    padding: 6px 26px;
+}
+
+.tab-pane.active
+{
+    display: block;
+}
+
+.profile-sidebar-menu-container
+{
+    float: left;
+    width: 297px;
+}
+
+.teacher-profile-container
+{
+    float: left;
+    width: 701px;
+}
+
+.videos-with-comments-list,
+.videos-with-questions-list
+{
+    list-style: none;
+}
+
+.videos-with-comments-list li,
+.videos-with-questions-list li
+{
+    padding: 16px 0 18px;
+    border-top: 1px solid #efefef;
+}
+
+.videos-with-comments-list li.first,
+.videos-with-questions-list li.first
+{
+    border-top: none;
+}
+
+.video-with-questions-list-item .user-questions-count,
+.video-questions-container .user-questions-count
+{
+    float: right;
+}
+
+.video-breadcrumbs
+{
+    font-family: "OpenSans", "Open Sans", sans-serif;
+    font-size: 12px;
+    color: #666666;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.video-comments,
+.video-questions
+{
+    list-style: none;
+    margin-top: 18px;
+}
+
+.video-comments li,
+.video-questions li
+{
+    border-top: 1px solid #efefef;
+    padding: 23px 0 26px;
+}
+
+.video-comments .media-body,
+.video-questions .media-body
+{
+    margin-left: 61px;
+}
+
+.video-comments .comment-author,
+.video-questions .comment-author
+{
+    font-family: "OpenSans Semibold", sans-serif;
+    font-size: 13px;
+    color: #333333;
+    display: block;
+}
+
+.video-comments .comment-body,
+.video-questions .comment-body
+{
+    font-family: "OpenSans", "Open Sans", sans-serif;
+    font-size: 12px;
+    color: #555555
+}
+
+.video-comments .comment-date,
+.video-questions .comment-date
+{
+    font-family: "OpenSans", "Open Sans", sans-serif;
+    font-size: 11px;
+    color: #999999;
+    margin-top: 8px;
+}
+
+.video-comments-container h4,
+.video-questions-container h4
+{
+    font-size: 14px;
+    font-family: "OpenSans Semibold", sans-serif;
+    color: #222222;
+    margin: 18px 0 8px;
+}
+
+.select-content-tab
+{
+    margin-top: 16px;
+}
+
+.user-profile-tab-menu
+{
+    padding: 0 26px;
+}
+
+.videos-with-comments-list .open-video-comment-link,
+.videos-with-questions-list .open-video-question-link
+{
+    font-size: 14px;
+    font-family: "OpenSans Semibold", sans-serif;
+    color: #222222;
+}
+
+.semi-active-button,
+.non-active-button,
+.semi-active-button a,
+.non-active-button a
+{
+    display: inline-block;
+    padding-right: 14px;
+    padding-left: 14px;
+    width: auto;
+    height: 31px;
+
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
+}

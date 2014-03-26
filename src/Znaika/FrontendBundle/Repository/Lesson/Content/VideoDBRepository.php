@@ -5,6 +5,7 @@
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentStatus;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
 
@@ -41,6 +42,11 @@
         public function getOneByUrlName($name)
         {
             return $this->findOneByUrlName($name);
+        }
+
+        public function getOneByVideoId($videoId)
+        {
+            return $this->findOneByVideoId($videoId);
         }
 
         public function getOneByContentDir($dir)
@@ -208,6 +214,21 @@
                 $qb->innerJoin('v.supervisors', 's', 'WITH', 's.userId = :user_id')
                    ->setParameter('user_id', $user->getUserId());
             }
+
+            return $qb->getQuery()->getResult();
+        }
+
+        public function getVideosWithNotVerifiedComments()
+        {
+            $qb = $this->getEntityManager()
+                       ->createQueryBuilder();
+
+            $qb->select('v')
+               ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+               ->innerJoin('v.videoComments', 'vc')
+               ->andWhere("vc.status = :not_verified")
+               ->setParameter('not_verified', VideoCommentStatus::NOT_VERIFIED)
+               ->addOrderBy('vc.createdTime', 'ASC');
 
             return $qb->getQuery()->getResult();
         }

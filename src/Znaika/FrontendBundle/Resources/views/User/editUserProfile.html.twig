@@ -28,7 +28,7 @@
 {% block content %}
   {% for flashMessage in app.session.flashbag.get('notice') %}
     <div class="alert alert-info">
-      {{ flashMessage }}
+      {{ flashMessage|raw }}
     </div>
   {% endfor %}
 

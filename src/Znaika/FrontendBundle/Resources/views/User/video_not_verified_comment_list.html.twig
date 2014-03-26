@@ -1,0 +1,48 @@
+<div id="videoComments{{ video.videoId }}" class="video-comments-container hidden">
+  <h4>{{ video.name }} <span class="not-verified-comments-count">{{ count_video_not_verified_comments(video) }}</span></h4>
+  <p class="video-breadcrumbs">
+    {{ video.grade }} класс > {{ video.subject.name }} > {{ video.chapter.name }}
+  </p>
+
+  {% if not comments is empty %}
+    <ul class="video-comments">
+      {% set count = 1 %}
+      {% for comment in comments %}
+        <li class="{% if count > 10 %}hidden{% endif %}" id="commentContainer{{ comment.videoCommentId }}">
+          <a class="pull-left" href="{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}">
+            <img class="media-object"
+                 width="50"
+                 height="50"
+                 src="{{ user_photo_url(comment.user) }}"
+                 alt="Здесь будет аватар автора"/>
+          </a>
+          <div class="media-body">
+            <a class="" href="{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}">
+              <span class="comment-author">{{ comment.user }}</span>
+            </a>
+            <span class="comment-body">{{ comment_text(comment) }}</span>
+            <h6 class="media-heading comment-date">{{ comment_date(comment.getCreatedTime) }}</h6>
+          </div>
+          <a title="" href="javascript:void(0);" class="semi-active-button approve-comment-link">
+            <span class="semi-active-button-label">Одобрить</span>
+          </a>
+          <a title="" href="javascript:void(0);" class="semi-active-button delete-comment-link">
+            <span class="semi-active-button-label">Удалить</span>
+          </a>
+          <div class="clear"></div>
+        </li>
+        {% set count = count + 1 %}
+      {% endfor %}
+    </ul>
+    <div class="approve-all-comments-block">
+      {% if count > 10 %}
+        <a title="" href="javascript:void(0);" class="semi-active-button show-more-comment-link">
+          <span class="semi-active-button-label">Показать еще</span>
+        </a>
+      {% endif %}
+      <a title="" href="javascript:void(0);" class="semi-active-button approve-all-comment-link">
+        <span class="semi-active-button-label">Одобрить все комментарии</span>
+      </a>
+    </div>
+  {% endif %}
+</div>

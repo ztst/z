@@ -9,7 +9,7 @@
     use Znaika\FrontendBundle\Form\Communication\SupportType;
     use Znaika\FrontendBundle\Helper\Support\SupportStatus;
 
-    class SupportController extends Controller
+    class SupportController extends ZnaikaController
     {
         public function addSupportFormAction(Request $request)
         {

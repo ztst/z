@@ -1,0 +1,33 @@
+<div>
+  <div>
+    <img src="{{ user_photo_url(user) }}" alt="Аватар" />
+  </div>
+  <div>
+    <span>Имя</span>
+    <span>{% if user.firstName %}{{ user.firstName }}{% else %}-{% endif %}</span>
+  </div>
+  <div>
+    <span>Фамилия</span>
+    <span>{% if user.lastName %}{{ user.lastName }}{% else %}-{% endif %}</span>
+  </div>
+  <div>
+    <span>Никнейм</span>
+    <span>{% if user.nickname %}{{ user.nickname }}{% else %}-{% endif %}</span>
+  </div>
+  <div>
+    <span>Пол</span>
+    <span>{{ user_sex(user) }}</span>
+  </div>
+  <div>
+    <span>Класс</span>
+    <span>{% if user.grade %}{{ user.grade }}{% else %}-{% endif %}</span>
+  </div>
+  <div>
+    <span>Дата рождения</span>
+    <span>{{ user.birthDate|date("j M Y") }}</span>
+  </div>
+  <div>
+    <span>Город</span>
+    <span>{% if user.city %}{{ user.city }}{% else %}-{% endif %}</span>
+  </div>
+</div>

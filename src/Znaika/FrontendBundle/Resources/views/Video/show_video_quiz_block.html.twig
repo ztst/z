@@ -1,4 +1,4 @@
-{% if is_user() %}
+{% if user_can_pass_test() %}
   {% if video.quiz %}
     {% if is_moderator() %}
       <a class="semi-active-button edit-button" href="{{ path("add_quiz_form", {"videoName": video.urlName}) }}">
@@ -19,6 +19,8 @@
   {% else %}
     <p class="quiz-not-available">Тест находится в разработке.</p>
   {% endif %}
+{% elseif is_banned_user() %}
+  <p class="quiz-not-available">Ваш аккаунт забанен. Вы не можете проходить тесты.</p>
 {% else %}
   <p class="quiz-not-available">Только зарегистрированные и авторизованные пользователи могут решать тесты.</p>
 {% endif %}

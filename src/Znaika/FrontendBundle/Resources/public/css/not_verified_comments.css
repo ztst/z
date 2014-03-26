@@ -1,0 +1,15 @@
+.video-comments-container .video-comments
+{
+    list-style: none;
+}
+
+.approve-all-comments-block
+{
+    border-top: 1px solid #EFEFEF;
+    padding-top: 20px;
+}
+
+.video-comments
+{
+    margin-bottom: 0;
+}

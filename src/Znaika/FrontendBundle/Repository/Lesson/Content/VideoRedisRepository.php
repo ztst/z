@@ -66,4 +66,17 @@
         {
             return null;
         }
+
+        /**
+         * @return Video[]
+         */
+        public function getVideosWithNotVerifiedComments()
+        {
+            return null;
+        }
+
+        public function getOneByVideoId($videoId)
+        {
+            return null;
+        }
     }

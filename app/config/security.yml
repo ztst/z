@@ -45,4 +45,7 @@ security:
 
     access_control:
         - { path: ^/login, roles: ROLE_USER }
+        - { path: ^/teacher, roles: ROLE_TEACHER }
+        - { path: ^/moderator, roles: ROLE_MODERATOR }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

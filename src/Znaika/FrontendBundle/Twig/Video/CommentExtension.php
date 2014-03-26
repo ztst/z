@@ -7,6 +7,7 @@
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoCommentType;
+    use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentStatus;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
@@ -44,12 +45,15 @@
         public function getFunctions()
         {
             return array(
-                'comment_title'                 => new \Twig_Function_Method($this, 'renderCommentTitle'),
-                'has_question_for_current_user' => new \Twig_Function_Method($this, 'hasQuestionForCurrentUser'),
-                'video_questions_block'         => new \Twig_Function_Method($this, 'renderVideoQuestions'),
-                'count_video_questions'         => new \Twig_Function_Method($this, 'countVideoQuestions'),
-                'teacher_profile_questions'     => new \Twig_Function_Method($this, 'renderTeacherProfileQuestions'),
-                'question_answer_form'          => new \Twig_Function_Method($this, 'renderQuestionAnswerForm'),
+                'comment_title'                     => new \Twig_Function_Method($this, 'renderCommentTitle'),
+                'comment_text'                      => new \Twig_Function_Method($this, 'renderCommentText'),
+                'has_question_for_current_user'     => new \Twig_Function_Method($this, 'hasQuestionForCurrentUser'),
+                'video_questions_block'             => new \Twig_Function_Method($this, 'renderVideoQuestions'),
+                'count_video_questions'             => new \Twig_Function_Method($this, 'countVideoQuestions'),
+                'count_video_not_verified_comments' => new \Twig_Function_Method($this, 'countVideoNotVerifiedComments'),
+                'teacher_profile_questions'         => new \Twig_Function_Method($this, 'renderTeacherProfileQuestions'),
+                'moderator_profile_comments'        => new \Twig_Function_Method($this, 'renderModeratorProfileComments'),
+                'question_answer_form'              => new \Twig_Function_Method($this, 'renderQuestionAnswerForm'),
             );
         }
 
@@ -57,7 +61,15 @@
         {
             $count = count($this->videoCommentRepository->getVideoNotAnsweredQuestionComments($video));
 
-            return $count > 1 ? "(+$count)" : "";
+            return $count > 0 ? "+$count" : "";
+        }
+
+
+        public function countVideoNotVerifiedComments(Video $video)
+        {
+            $count = count($this->videoCommentRepository->getVideoNotVerifiedComments($video));
+
+            return $count > 0 ? "+$count" : "";
         }
 
         public function renderQuestionAnswerForm(VideoComment $comment)
@@ -88,6 +100,30 @@
             return $result;
         }
 
+
+        public function renderModeratorProfileComments(Video $video)
+        {
+            $comments        = $this->videoCommentRepository->getVideoNotVerifiedComments($video);
+            $templateFile    = "ZnaikaFrontendBundle:User:video_not_verified_comment_list.html.twig";
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $result          = $templateContent->render(array(
+                "comments" => $comments,
+                "video"    => $video,
+            ));
+
+            return $result;
+        }
+
+        public function renderCommentText(VideoComment $comment)
+        {
+            $result = $comment->getText();
+            if ($comment->getStatus() == VideoCommentStatus::DELETED)
+            {
+                $result = "Комментарий удален. Причина: нарушение положений Пользовательского соглашения";
+            }
+            return $result;
+        }
+
         /**
          * @param \Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment $comment
          *
@@ -95,27 +131,22 @@
          */
         public function renderCommentTitle(VideoComment $comment)
         {
-            $result = "";
-            $type   = $comment->getCommentType();
+            $type = $comment->getCommentType();
             switch ($type)
             {
                 case VideoCommentUtil::ANSWER:
-                    $templateFile    = "ZnaikaFrontendBundle:Video:answer_comment_title.html.twig";
-                    $templateContent = $this->twig->loadTemplate($templateFile);
-                    $result          = $templateContent->render(array("comment" => $comment));
+                    $templateFile = "ZnaikaFrontendBundle:Video:answer_comment_title.html.twig";
                     break;
                 case VideoCommentUtil::QUESTION:
-                    $templateFile    = "ZnaikaFrontendBundle:Video:question_comment_title.html.twig";
-                    $templateContent = $this->twig->loadTemplate($templateFile);
-                    $result          = $templateContent->render(array("comment" => $comment));
+                    $templateFile = "ZnaikaFrontendBundle:Video:question_comment_title.html.twig";
                     break;
                 case VideoCommentUtil::SIMPLE_COMMENT:
                 default:
-                    $templateFile    = "ZnaikaFrontendBundle:Video:simple_comment_title.html.twig";
-                    $templateContent = $this->twig->loadTemplate($templateFile);
-                    $result          = $templateContent->render(array("comment" => $comment));
+                    $templateFile = "ZnaikaFrontendBundle:Video:simple_comment_title.html.twig";
                     break;
             }
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $result          = $templateContent->render(array("comment" => $comment));
 
             return $result;
         }

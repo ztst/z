@@ -1,0 +1,37 @@
+.not-verified-users
+{
+    list-style: none;
+}
+
+.not-verified-users li
+{
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0;
+    border-top: 1px solid #EFEFEF;
+}
+
+.not-verified-users li .user-name
+{
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.approve-all-pupils-block
+{
+    border-top: 1px solid #EFEFEF;
+    padding-top: 20px;
+}
+
+.show-user-profile-link
+{
+    float: left;
+    margin-right: 20px;
+    text-decoration: none !important;
+}
+
+.show-user-profile-link img,
+.show-user-profile-link span
+{
+    display: inline-block;
+}

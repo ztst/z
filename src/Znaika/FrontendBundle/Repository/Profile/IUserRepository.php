@@ -20,6 +20,13 @@
         public function getOneByUserId($userId);
 
         /**
+         * @param $userIds
+         *
+         * @return User[]
+         */
+        public function getByUserIds($userIds);
+
+        /**
          * @param $vkId
          *
          * @return User
@@ -60,4 +67,18 @@
          * @return User[]
          */
         public function getUsersTopByPoints($limit);
+
+        /**
+         * @param $userRoles
+         *
+         * @return User[]
+         */
+        public function getNotVerifiedUsers($userRoles = array());
+
+        /**
+         * @param $userRoles
+         *
+         * @return int
+         */
+        public function countNotVerifiedUsers($userRoles = array());
     }

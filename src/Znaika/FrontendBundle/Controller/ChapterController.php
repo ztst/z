@@ -9,7 +9,7 @@
     use Znaika\FrontendBundle\Helper\Util\TransliterateUtil;
     use Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository;
 
-    class ChapterController extends Controller
+    class ChapterController extends ZnaikaController
     {
         public function editChaptersAction(Request $request)
         {

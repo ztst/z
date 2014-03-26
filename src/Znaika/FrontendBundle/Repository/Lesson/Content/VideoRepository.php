@@ -149,6 +149,17 @@
             return $success;
         }
 
+        public function getOneByVideoId($videoId)
+        {
+            $result = $this->redisRepository->getOneByVideoId($videoId);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getOneByVideoId($videoId);
+            }
+
+            return $result;
+        }
+
         public function moveVideo(Video $video, $direction)
         {
             $this->redisRepository->moveVideo($video, $direction);
@@ -179,6 +190,17 @@
             if (is_null($result))
             {
                 $result = $this->dbRepository->getSupervisorVideosWithQuestions($user);
+            }
+
+            return $result;
+        }
+
+        public function getVideosWithNotVerifiedComments()
+        {
+            $result = $this->redisRepository->getVideosWithNotVerifiedComments();
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getVideosWithNotVerifiedComments();
             }
 
             return $result;

@@ -25,4 +25,11 @@
 
             return $availableTypes;
         }
+
+        public static function getTextBySex($sex)
+        {
+            $availableTypes = self::getAvailableTypesTexts();
+
+            return isset($availableTypes[$sex]) ? $availableTypes[$sex] : "-";
+        }
     }

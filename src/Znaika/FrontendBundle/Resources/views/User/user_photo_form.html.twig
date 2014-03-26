@@ -1,15 +1,6 @@
 <div class="photo-container">
   <img width="200" id="userAvatar"
-       src="
-       {% if user.hasPhoto %}
-         {{ user.getPhotoUrl }}
-       {% else %}
-         {% if user.role == 0 %}
-           {{ asset("images/user-profile/user-photo-placeholder.png") }}
-         {% else %}
-           {{ asset("images/teacher-page/teacher-photo-placeholder.png") }}
-         {% endif %}
-       {% endif %}"
+       src="{{ user_photo_url(user) }}"
        title="Фотография"/>
 </div>
 
@@ -35,7 +26,7 @@
       <span class="non-active-button-label">Убрать фото</span>
     </a>
     <input type="hidden" id="userId" value="{{ user.userId }}"/>
-    <input type="hidden" id="defaultPhotoUrl" value="{{ asset("images/user-profile/user-photo-placeholder.png") }}" />
+    <input type="hidden" id="defaultPhotoUrl" value="{{ user_photo_url(user) }}" />
   </div>
 {{ form_end(form) }}
 

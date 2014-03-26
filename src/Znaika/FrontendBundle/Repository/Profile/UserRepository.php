@@ -149,4 +149,42 @@
 
             return $result;
         }
+
+        public function getNotVerifiedUsers($userRoles = array())
+        {
+            $result = $this->redisRepository->getNotVerifiedUsers($userRoles);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getNotVerifiedUsers($userRoles);
+            }
+
+            return $result;
+        }
+
+        public function countNotVerifiedUsers($userRoles = array())
+        {
+            $result = $this->redisRepository->countNotVerifiedUsers($userRoles);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->countNotVerifiedUsers($userRoles);
+            }
+
+            return $result;
+        }
+
+        /**
+         * @param $userIds
+         *
+         * @return User[]
+         */
+        public function getByUserIds($userIds)
+        {
+            $result = $this->redisRepository->getByUserIds($userIds);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getByUserIds($userIds);
+            }
+
+            return $result;
+        }
     }

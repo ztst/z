@@ -26,6 +26,16 @@
         }
 
         /**
+         * @param $userIds
+         *
+         * @return User[]
+         */
+        public function getByUserIds($userIds)
+        {
+            return null;
+        }
+
+        /**
          * @param $vkId
          *
          * @return User
@@ -81,6 +91,16 @@
          * @return User[]
          */
         public function getUsersTopByPoints($limit)
+        {
+            return null;
+        }
+
+        public function getNotVerifiedUsers($userRoles = array())
+        {
+            return null;
+        }
+
+        public function countNotVerifiedUsers($userRoles = array())
         {
             return null;
         }

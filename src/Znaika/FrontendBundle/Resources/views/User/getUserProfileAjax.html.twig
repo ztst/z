@@ -1,0 +1,12 @@
+<div id="userProfileContent{{ user.userId }}">
+  {% include "ZnaikaFrontendBundle:User:show_user_profile_block.html.twig" with {'user': user} %}
+
+  <a class="semi-active-button approve-user-profile-link" id="approveUser{{ user.userId }}" href="javascript:void(0);" title="">
+    <span class="semi-active-button-label">Одобрить</span>
+  </a>
+  <a class="semi-active-button delete-user-profile-link" id="deleteUser{{ user.userId }}" href="javascript:void(0);" title="">
+    <span class="semi-active-button-label">Забанить</span>
+  </a>
+  {{ ban_reason_select()|raw }}
+  <input type="hidden" id="userProfileId" value="{{ user.userId }}">
+</div>

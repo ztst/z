@@ -164,10 +164,16 @@ services:
             class:        Znaika\FrontendBundle\Repository\Communication\Support\SupportRepository
             arguments:    ["@doctrine.orm.entity_manager"]
 
+    znaika_frontend.ban_info_repository:
+            class:        Znaika\FrontendBundle\Repository\Profile\Ban\InfoRepository
+            arguments:    ["@doctrine.orm.entity_manager"]
+
 #menu
     znaika_frontend.menu_builder:
         class: Znaika\FrontendBundle\Menu\MenuBuilder
-        arguments: ["@knp_menu.factory"]
+        arguments:
+            - @knp_menu.factory
+            - @security.context
 
     znaika_frontend.menu.main:
         class: "%znaika_frontend.menu.class%"
@@ -310,3 +316,35 @@ services:
             - @znaika_frontend.subject_repository
         tags:
             - { name: twig.extension }
+
+    znaika_frontend.user_photo_extension:
+        class: Znaika\FrontendBundle\Twig\Profile\UserPhotoExtension
+        arguments:
+            - @twig
+            - @service_container
+        tags:
+            - { name: twig.extension }
+
+    znaika_frontend.profile_extension:
+        class: Znaika\FrontendBundle\Twig\Profile\ProfileExtension
+        arguments:
+            - @twig
+            - @service_container
+        tags:
+            - { name: twig.extension }
+
+    znaika_frontend.user_ban_extension:
+        class: Znaika\FrontendBundle\Twig\Profile\UserBanExtension
+        arguments:
+            - @twig
+            - @service_container
+        tags:
+            - { name: twig.extension }
+
+#event listeners
+    znaika_frontend.before_controller_listener:
+        class: Znaika\FrontendBundle\EventListener\BeforeControllerListener
+        arguments:
+            - @service_container
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
