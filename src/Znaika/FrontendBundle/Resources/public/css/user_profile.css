@@ -152,7 +152,8 @@
 
 .edit-photo-button .non-active-button-label
 {
-    background: #fff url('/images/user-profile/edit-photo-button-icon.png') no-repeat 0 4px;
+    padding-left: 22px;
+    background: #fff url("/images/user-profile/edit-profile-setting-icon.png") no-repeat 0 1px;
 }
 
 .delete-photo-button .non-active-button-label

@@ -338,12 +338,7 @@
                 $isValidUrl = $subject->getUrlName() == $subjectName && $video->getGrade() == $class;
             }
 
-            $contentToShow = $this->getRequest()->get("show", 0);
-            if (($contentToShow != "synopsis") && ($contentToShow != "quiz"))
-            {
-                $contentToShow = "video";
-            }
-
+            $contentToShow       = $this->getRequest()->get("show", "video");
             $addVideoCommentForm = $this->getAddVideoCommentForm();
             $viewVideoOperation  = $this->saveViewVideoOperation($video);
             $chapterVideos       = $repository->getVideoByChapter($video->getChapter()->getChapterId());
@@ -359,7 +354,7 @@
                 'viewVideoOperation'  => $viewVideoOperation,
                 'chapterVideos'       => $chapterVideos,
                 'userQuizScore'       => $userQuizScore,
-                'contentToShow'         => $contentToShow
+                'contentToShow'       => $contentToShow
             ));
         }
 

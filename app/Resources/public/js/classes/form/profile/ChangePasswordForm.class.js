@@ -7,8 +7,8 @@ var ChangePasswordForm = BaseForm.extend({
         this._form.find("input").each(function () {
             $(this).rules('add', {
                 required: true,
-                passwordSymbols: true,
-                messages: { required: "Это поле обязательно для заполнения" }
+                password: true,
+                messages: { password: handler(that, "_getInvalidPasswordMessage") }
             });
         });
         this._initShowPasswordLink();

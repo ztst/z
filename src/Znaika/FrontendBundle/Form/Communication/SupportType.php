@@ -17,8 +17,7 @@
             $builder
                 ->add('name', 'text')
                 ->add('email', 'text')
-                ->add('text', 'textarea')
-                ->add('save', 'submit');
+                ->add('text', 'textarea');
         }
 
         /**

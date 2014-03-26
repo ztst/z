@@ -956,35 +956,63 @@ label
 }
 
 /* static pages styles BEGIN */
-.add-video-comment-container textarea
+.additional-form-container.static-page-container
 {
+    padding: 18px;
+}
+
+.static-page-container .additional-form
+{
+    width: 100%;
+}
+
+.additional-form-container textarea
+{
+    display: table-cell;
     padding-right: 25px;
     height: 85px;
     border-radius: 0;
     resize: none;
 }
 
-.static-page-container label
+.static-page-container
+{
+    padding: 0 18px 18px;
+    width: 583px;
+}
+
+.additional-form-container.static-page-container h3
+{
+    margin: 0;
+}
+
+.additional-form-container.static-page-container h5
+{
+    text-align: left;
+}
+
+.additional-form-container.static-page-container label
 {
     display: table-cell;
+    vertical-align: top;
+    padding-top: 5px;
     padding-right: 7px;
-    width: 85px;
+    width: 113px;
 
     font-weight: normal;
     font-size: 13px;
     font-family: "OpenSans Semibold", sans-serif;
 }
 
+.additional-form-container.static-page-container .additional-form-button-container
+{
+    padding-left: 113px;
+}
+
 .static-page-container .input-group
 {
     margin-bottom: 16px;
     width: 100%;
-}
-
-.static-page-container .form-group label
-{
-    display: block;
-    float: left;
 }
 
 .static-page-container input,
@@ -995,7 +1023,6 @@ label
 
 .static-page-container .active-button
 {
-    margin-left: 85px;
     padding-left: 18px;
     padding-right: 18px;
     width: auto;
@@ -1010,6 +1037,43 @@ label
 .static-page-container ul
 {
     padding: 0 18px;
+}
+
+.additional-form.support-form label
+{
+    width: 55px;
+}
+
+.additional-form.support-form .additional-form-button-container
+{
+    padding-left: 55px;
+}
+
+.static-page-container.add-video-page-container label
+{
+    width: 170px;
+    line-height: 32px;
+}
+
+.static-page-container.add-video-page-container .buttons-container
+{
+    padding-left: 170px;
+}
+
+.static-page-container.add-video-page-container .active-button,
+.static-page-container.add-video-page-container .semi-active-button
+{
+    float: left;
+    margin-right: 10px;
+    margin-left: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+    width: auto;
+}
+
+.static-page-container.add-video-page-container .semi-active-button-label
+{
+    padding-left: 0;
 }
 /* static pages styles END */
 

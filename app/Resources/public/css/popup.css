@@ -973,17 +973,6 @@ img.mfp-img
     text-align: center;
 }
 
-.static-page-container
-{
-    padding: 0 18px 18px;
-    width: 583px;
-}
-
-.static-page-container h3
-{
-    margin-top: 0;
-}
-
 .account-linkage-form-container .forget-password-link
 {
     display: block;

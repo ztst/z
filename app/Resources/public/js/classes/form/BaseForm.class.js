@@ -1,6 +1,7 @@
 var BaseForm = EventDispatcher.extend({
 
     _form: null,
+    MIN_PASSWORD_LENGTH: 8,
 
     constructor: function(id)
     {
@@ -119,10 +120,26 @@ var BaseForm = EventDispatcher.extend({
         }
 
         return errorMessage;
+    },
+    _getInvalidPasswordMessage: function(parameters, element)
+    {
+        var password = $(element).val();
+
+        var errorMessage = "Не верный пароль.";
+        if (password.length < this.MIN_PASSWORD_LENGTH)
+        {
+            errorMessage = "Пароль должен содержать более " + (this.MIN_PASSWORD_LENGTH - 1) + " символов";
+        }
+        else if (/[^a-zA-Z0-9\!\'\"\№\;\%\:\?/*\(\)\-\=\_\+\\\/\<\>\,\.\?\~]/.test(password))
+        {
+            errorMessage = "Пароль должен содержать только английские буквы, цифры и знаки";
+        }
+
+        return errorMessage;
     }
-}, {
+},
+{
     event: {
         SUBMITTED: "submitted"
     }
 });
-

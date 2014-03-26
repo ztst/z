@@ -15,7 +15,8 @@ var LoginForm = BaseForm.extend({
             messages: { email: handler(that, "_getInvalidEmailMessage") }
         });
         this._form.find("#password").rules('add', {
-            passwordSymbols: true
+            password: true,
+            messages: { password: handler(that, "_getInvalidPasswordMessage") }
         });
 
         $('input').iCheck({

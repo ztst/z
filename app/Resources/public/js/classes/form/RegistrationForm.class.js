@@ -15,7 +15,8 @@ var RegistrationForm = BaseForm.extend({
             messages: { email: handler(that, "_getInvalidEmailMessage") }
         });
         this._form.find("#registration_user_password").rules('add', {
-            passwordSymbols: true
+            password: true,
+            messages: { password: handler(that, "_getInvalidPasswordMessage") }
         });
 
         this._initShowPasswordLink();
