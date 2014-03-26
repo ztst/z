@@ -62,20 +62,21 @@ var ProfilePage = Base.extend({
 
     _onShowChangeEmailFormLink: function()
     {
-        $(".change-email-form-container").removeClass("hidden");
+        $(".change-email-form-container").toggleClass("hidden");
         $(".change-password-form-container").addClass("hidden");
-        $(".change-password-controller").addClass("hidden");
+        $(".change-password-controller").toggleClass("hidden");
 
-        this._showChangeEmailFormLink.addClass("activated");
+        this._showChangeEmailFormLink.toggleClass("activated");
+        this._showChangePasswordFormLink.removeClass("activated");
     },
 
     _onShowChangePasswordFormLink: function()
     {
         $(".change-email-form-container").addClass("hidden");
-        $(".change-password-form-container").removeClass("hidden");
+        $(".change-password-form-container").toggleClass("hidden");
         $(".change-password-controller").removeClass("hidden");
 
-        this._showChangePasswordFormLink.addClass("activated")
+        this._showChangePasswordFormLink.toggleClass("activated")
     },
 
     _closeAccountSettingsForms: function()

@@ -8,7 +8,7 @@
 
     border-radius: 3px;
     font-size: 15px;
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
     text-align: center;
     cursor: pointer;
 }
@@ -130,7 +130,7 @@ label.non-active-button
     box-shadow: none;
 
     color: #717070;
-    font: 13px/30px "OpenSans Semibold";
+    font: 13px/27px "OpenSans Semibold", sans-serif;
 }
 
 .selectbox .select:hover
@@ -167,7 +167,7 @@ label.non-active-button
 .selectbox .trigger .arrow
 {
     position: absolute;
-    top: 14px;
+    top: 12px;
     right: 12px;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;

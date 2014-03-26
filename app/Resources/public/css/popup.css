@@ -545,6 +545,7 @@ img.mfp-img
 .popup
 {
     position: relative;
+    z-index: 100;
     background: #ffffff;
     width: auto;
     max-width: 583px;
@@ -595,7 +596,7 @@ img.mfp-img
 {
     color: #222;
     font-size: 20px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 
     margin: 0;
     display: inline-block;
@@ -608,7 +609,7 @@ img.mfp-img
 
     color: #036995;
     font-size: 14px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
     text-decoration: underline;
 }
 
@@ -625,7 +626,7 @@ img.mfp-img
 
     font-weight: normal;
     font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .get-new-password-form label
@@ -692,7 +693,7 @@ img.mfp-img
     float: right;
     margin-top: -18px;
     font-size: 12px;
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
 }
 
 .agreement-block
@@ -712,7 +713,7 @@ img.mfp-img
     width: auto;
 
     font-size: 11px;
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
 }
 
 .agreement-block span a
@@ -726,7 +727,7 @@ img.mfp-img
     padding-left: 2px;
     width: auto;
     font-size: 12px;
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
 }
 
 .login-popup-left-column
@@ -761,7 +762,7 @@ img.mfp-img
 
     color: #fff;
     font-size: 12px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .login-popup-content .social-login-buttons-container h5
@@ -771,7 +772,7 @@ img.mfp-img
 
     color: #313030;
     font-size: 16px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
     text-align: center;
 }
 
@@ -868,7 +869,7 @@ img.mfp-img
 
     color: #222;
     font-size: 20px;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .additional-form-header h3
@@ -880,7 +881,7 @@ img.mfp-img
 {
     margin: 15px 0;
 
-    font-family: "OpenSans",serif;
+    font-family: "OpenSans", "Open Sans", serif;
 }
 
 .additional-form-header-horizontal-bar
@@ -902,7 +903,7 @@ img.mfp-img
     width: 113px;
 
     text-align: right;
-    font-family: "OpenSans Semibold",sans-serif;
+    font-family: "OpenSans Semibold", sans-serif;
     font-weight: normal;
 }
 

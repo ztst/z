@@ -1,6 +1,6 @@
 .wrap > .container
 {
-    background: url("/images/chapters-list/chapter-list-row-background.png") repeat-y scroll 0 -5px #fff;
+    background: url("/images/chapters-list/chapter-list-row-background.png") repeat-y scroll 0 -3px #fff;
 }
 
 .show-catalog-page-container
@@ -31,6 +31,7 @@
 {
     margin-right: 1px;
     margin-top: -1px;
+    padding-bottom: 54px;
 }
 
 .chapters-list-container h3,
@@ -45,8 +46,9 @@
 {
     margin-top: -18px;
     margin-bottom: 0;
-    padding-bottom: 15px;
+    padding-bottom: 19px;
     border-bottom: 1px solid #ffffff;
+    font-size: 22px;
 }
 
 .chapter-list-marker
@@ -152,6 +154,28 @@
 .chapter-videos-block-container
 {
     padding: 20px 18px 40px !important;
+}
+
+.chapters-list-bottom-horizontal-placeholder
+{
+    position: absolute;
+    bottom: 54px;
+    width: 660px;
+    height: 53px;
+    background-color: #fff;
+}
+
+.chapters-list-bottom-horizontal-placeholder > .line
+{
+    width: 100%;
+    height: 25px;
+    background: url('/images/chapters-list/chapters-list-horizontal-placeholder-line.png') repeat-y;
+}
+
+.chapters-list .chapters-list-bottom-horizontal-placeholder
+{
+    bottom: 0;
+    background: none;
 }
 
 /* moderator styles BEGIN */

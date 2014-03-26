@@ -18,13 +18,12 @@
 .nav-tabs.select-content-tab > li > a
 {
     display: block;
-    padding: 5px 20px 5px;
+    padding: 4px 0 0;
     height: 30px;
-    color: #212020;
-    font-size: 13px;
     border-radius: 3px 3px 0 0;
     border: 1px solid #ccc;
     cursor: pointer;
+    text-align: center;
     background: linear-gradient(to bottom, #fefefe, #f3f3f3);
 }
 
@@ -51,20 +50,21 @@
 
 .nav-tabs.select-content-tab > li.active > a
 {
-    color: #010101;
     background: #fff;
-
-    font-family: "OpenSans Semibold",sans-serif;
     border-bottom: none;
 }
 
-.tab-icon
+.tab-label
 {
-    float: left;
-    position: relative;
-    z-index: 1;
-    width: 12px;
-    height: 12px;
+    padding-left: 14px;
+    color: #212020;
+    font-size: 13px;
+}
+
+.acrive .tab-label
+{
+    color: #010101;
+    font-family: "OpenSans Semibold", sans-serif;
 }
 
 .tab-pane
@@ -77,52 +77,62 @@
     display: block;
 }
 
-.select-content-tab .video-tab-icon
-{
-    top: 4px;
-    left: -4px;
-
-    background: url('/images/video/video-tab-icon.png') no-repeat;
-}
-
-.select-content-tab .synopsis-tab-icon
-{
-    top: 6px;
-    left: -4px;
-
-    background: url('/images/video/synopsis-tab-icon.png') no-repeat;
-}
-
-.select-content-tab .quiz-tab-icon
-{
-    top: 3px;
-    left: -4px;
-
-    background: url('/images/video/quiz-tab-icon.png') no-repeat;
-}
-
-.select-content-tab .questions-tab-icon
-{
-    top: 3px;
-    left: -4px;
-    width: 14px;
-    height: 13px;
-
-    background: url('/images/teacher-page/questions-tab-icon.png') no-repeat;
-}
-
-.select-content-tab .video-with-questions-tab-icon
-{
-    top: 3px;
-    left: -4px;
-    height: 13px;
-
-    background: url('/images/teacher-page/video-with-questions-tab-icon.png') no-repeat;
-}
-
 .tabs-container
 {
     display: inline-block;
     width: 100%;
     border-bottom: 1px solid #ccc;
+}
+
+.select-content-tab .video
+{
+    width: 128px;
+}
+
+.select-content-tab .synopsis
+{
+    width: 109px;
+}
+
+.select-content-tab .quiz
+{
+    width: 108px;
+}
+
+.select-content-tab .video-with-questions
+{
+    width: 189px;
+}
+
+.select-content-tab .questions-tab
+{
+    width: 213px;
+}
+
+.select-content-tab .video .tab-label
+{
+    background: url('/images/video/video-tab-icon.png') no-repeat 0 4px;
+}
+
+.select-content-tab .synopsis .tab-label
+{
+    background: url('/images/video/synopsis-tab-icon.png') no-repeat 0 6px;
+}
+
+.select-content-tab .quiz .tab-label
+{
+    padding-left: 18px;
+    background: url('/images/video/quiz-tab-icon.png') no-repeat 0 3px;
+}
+
+.select-content-tab .video-with-questions .tab-label
+{
+    padding-left: 18px;
+    background: url('/images/teacher-page/video-with-questions-tab-icon.png') no-repeat 0 4px;
+}
+
+.select-content-tab .questions-tab .tab-label
+{
+    padding-left: 18px;
+    background: url('/images/teacher-page/questions-tab-icon.png') no-repeat 0 3px;
 }

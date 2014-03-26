@@ -23,26 +23,25 @@
 {% endblock %}
 
 {% block content %}
+  <div class="teacher-profile-top-horizontal-line"></div>
   <div class="profile-sidebar-menu-container">
     {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
   </div>
   <div class="teacher-profile-container">
-    <div class="">
+    <div>
       <div class="tabs-container">
         <ul class="nav nav-tabs select-content-tab user-profile-tab-menu">
-          <li class="video active">
+          <li class="video-with-questions active">
             <div class="active-top-border"></div>
             <a id="videoTab" href="#video_tab" data-toggle="tab">
-              <div class="video-with-questions-tab-icon tab-icon"></div>
-              <span>Уроки с вопросами</span>
+              <span class="tab-label">Уроки с вопросами</span>
             </a>
           </li>
           {% if countQuestions %}
             <li class="questions-tab hidden">
               <div class="active-top-border"></div>
               <a id="questionTab" href="#synopsis_tab" data-toggle="tab">
-                <div class="questions-tab-icon tab-icon"></div>
-                <span>Просмотр вопросов</span>
+                <span class="tab-label">Просмотр вопросов</span>
               </a>
             </li>
           {% endif %}
@@ -55,5 +54,8 @@
     <div class="tab-pane synopsis-tab" id="synopsis_tab">
       {% include "ZnaikaFrontendBundle:User:teacher_questions_tab.html.twig" with {'videos': videos} %}
     </div>
+  </div>
+  <div class="teacher-profile-bottom-horizontal-placeholder">
+    <div class="line"></div>
   </div>
 {% endblock %}
