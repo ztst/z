@@ -30,14 +30,25 @@ var EditProfileForm = BaseForm.extend({
                 return true;
             }
         }
+
         return false;
+    },
+
+    _onFormSubmitted: function()
+    {
+        if (!this.isEdited())
+        {
+            return false;
+        }
+
+        return this.base();
     },
 
     _saveFieldsValues: function()
     {
         var that = this;
         that._fields = [];
-        this._form.find("input").each(function()
+        this._form.find("input, select").each(function()
         {
             that._fields.push({
                 field: $(this),

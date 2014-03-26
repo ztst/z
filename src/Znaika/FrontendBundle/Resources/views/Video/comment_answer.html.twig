@@ -1,0 +1,16 @@
+<a class="pull-left"
+   href="{% if is_moderator() %}{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}{% else %}javascript:void(0);{% endif %}">
+  <img class="media-object"
+       width="60"
+       height="60"
+       src="{{ user_photo_url(comment.user) }}"
+       alt="{{ comment.user }}"/>
+</a>
+<div class="media-body">
+  <a class=""
+     href="{% if is_moderator() %}{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}{% else %}javascript:void(0);{% endif %}">
+    {{ comment_title(comment)|raw }}
+  </a>
+  <span class="comment-body">{{ comment_text(comment) }}</span>
+  <h6 class="media-heading comment-date">{{ comment_date(comment.getCreatedTime) }}</h6>
+</div>

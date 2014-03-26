@@ -1,7 +1,6 @@
 <?
     namespace Znaika\FrontendBundle\Controller;
 
-    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -33,10 +32,27 @@
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
-    class VideoController extends Controller
+    class VideoController extends ZnaikaController
     {
         const COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE = 3;
         const VIDEO_CONTENT_DIR_NAME_LENGTH     = 27;
+
+        public function getNotVerifiedCommentsAjaxAction($videoId)
+        {
+            $video = $this->getVideoRepository()->getOneByVideoId($videoId);
+
+            $html = $this->renderView("ZnaikaFrontendBundle:Video:getNotVerifiedCommentsAjax.html.twig", array(
+                'video' => $video
+            ));
+
+            $result = array(
+                'html'    => $html,
+                'success' => true,
+                'videoId' => $video->getVideoId(),
+            );
+
+            return new JsonResponse($result);
+        }
 
         public function postVideoToSocialNetworkAction(Request $request)
         {
@@ -327,15 +343,14 @@
             $repository = $this->getVideoRepository();
             $video      = $repository->getOneByUrlName($videoName);
 
-            $isValidUrl = false;
             if (!$video)
             {
                 throw $this->createNotFoundException("Video not found");
             }
-            else
+            $subject = $video->getSubject();
+            if ($subject->getUrlName() != $subjectName || $video->getGrade() != $class)
             {
-                $subject    = $video->getSubject();
-                $isValidUrl = $subject->getUrlName() == $subjectName && $video->getGrade() == $class;
+                throw $this->createNotFoundException("Bad vicatadeo url");
             }
 
             $contentToShow       = $this->getRequest()->get("show", "video");
@@ -349,7 +364,6 @@
                 'class'               => $class,
                 'video'               => $video,
                 'comments'            => $comments,
-                'isValidUrl'          => $isValidUrl,
                 'addVideoCommentForm' => $addVideoCommentForm->createView(),
                 'viewVideoOperation'  => $viewVideoOperation,
                 'chapterVideos'       => $chapterVideos,

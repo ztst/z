@@ -1,0 +1,17 @@
+Znaika\FrontendBundle\Entity\Profile\Ban\Info:
+    type: entity
+    table: ban_info
+    repositoryClass: Znaika\FrontendBundle\Repository\Profile\Ban\InfoDBRepository
+    fields:
+        infoId:          { column: info_id, type: integer, id: true, generator: { strategy: AUTO } }
+        reason:          { type: smallint, notnull: true }
+        createdTime:     { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
+    manyToOne:
+        user:
+            targetEntity: Znaika\FrontendBundle\Entity\Profile\User
+            inversedBy: banInfos
+            joinColumn:
+                name: user_id
+                referencedColumnName: user_id
+                onDelete: "SET NULL"
+    lifecycleCallbacks: {  }

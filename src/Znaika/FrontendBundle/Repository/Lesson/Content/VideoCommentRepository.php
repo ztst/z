@@ -46,6 +46,22 @@
             return $result;
         }
 
+        /**
+         * @param $videoCommentIds
+         *
+         * @return VideoComment[]
+         */
+        public function getByVideoCommentIds($videoCommentIds)
+        {
+            $result = $this->redisRepository->getByVideoCommentIds($videoCommentIds);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getByVideoCommentIds($videoCommentIds);
+            }
+
+            return $result;
+        }
+
         public function getLastVideoComments(Video $video, $limit)
         {
             $result = $this->redisRepository->getLastVideoComments($video, $limit);
@@ -63,6 +79,17 @@
             if (is_null($result))
             {
                 $result = $this->dbRepository->getVideoComments($video, $offset, $limit);
+            }
+
+            return $result;
+        }
+
+        public function countVideoComments(Video $video)
+        {
+            $result = $this->redisRepository->countVideoComments($video);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->countVideoComments($video);
             }
 
             return $result;
@@ -96,6 +123,49 @@
             if (is_null($result))
             {
                 $result = $this->dbRepository->countTeacherNotAnsweredQuestionComments($user);
+            }
+
+            return $result;
+        }
+
+        /**
+         * @internal param $user
+         *
+         * @return VideoComment[]
+         */
+        public function getModeratorNotVerifiedComments()
+        {
+            $result = $this->redisRepository->getModeratorNotVerifiedComments();
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getModeratorNotVerifiedComments();
+            }
+
+            return $result;
+        }
+
+        /**
+         * @internal param $user
+         *
+         * @return int
+         */
+        public function countModeratorNotVerifiedComments()
+        {
+            $result = $this->redisRepository->countModeratorNotVerifiedComments();
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->countModeratorNotVerifiedComments();
+            }
+
+            return $result;
+        }
+
+        public function getVideoNotVerifiedComments(Video $video)
+        {
+            $result = $this->redisRepository->getVideoNotVerifiedComments($video);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getVideoNotVerifiedComments($video);
             }
 
             return $result;

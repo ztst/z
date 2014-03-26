@@ -15,7 +15,7 @@
     use Znaika\FrontendBundle\Repository\Communication\MessageRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
-    class MessageController extends Controller
+    class MessageController extends ZnaikaController
     {
         public function deleteMessageAction(Request $request)
         {

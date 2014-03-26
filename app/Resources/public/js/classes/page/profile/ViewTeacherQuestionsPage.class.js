@@ -23,10 +23,18 @@ var ViewTeacherQuestionsPage = Base.extend({
         if(response.success)
         {
             $("#questionContainer" + response.questionId).remove();
+            var openQuestionLink = $("#openVideoQuestionLink" + response.videoId);
 
-            this._decrementCountQuestions($(".questions-tab .user-questions-count"));
             this._decrementCountQuestions($(".profile-sidebar-menu .user-questions-count"));
-            this._decrementCountQuestions($("#openVideoQuestionLink" + response.videoId + " .user-questions-count"));
+            this._decrementCountQuestions(openQuestionLink.next());
+            var hasQuestions = this._decrementCountQuestions($("#videoQuestions" + response.videoId + " .user-questions-count"));
+
+            if (!hasQuestions)
+            {
+                openQuestionLink.closest("li").remove();
+                $(".questions-tab").addClass("hidden");
+                $("#videoTab").click();
+            }
         }
     },
 
@@ -35,8 +43,10 @@ var ViewTeacherQuestionsPage = Base.extend({
         var text = elem.text();
         var count = text.replace("(+", "").replace(")", "");
         --count;
-        text = (count > 0) ? "(+" + count + ")" : "";
+        text = (count > 0) ? "+" + count: "";
         elem.text(text);
+
+        return count > 0;
     },
 
     _initOpenQuestionsLinks: function()

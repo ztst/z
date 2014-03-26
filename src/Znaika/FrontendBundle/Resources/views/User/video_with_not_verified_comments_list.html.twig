@@ -1,0 +1,20 @@
+{% if not videos is empty %}
+  <ul class="videos-with-comments-list">
+    {% set isFirst = true %}
+    {% for video in videos %}
+      <li class="{% if isFirst %}first{% endif %}">
+        <div class="video-with-comments-list-item">
+          <a href="javascript:void(0);" title="{{ video.name }}" class="open-video-comment-link" id="openVideoCommentLink{{ video.videoId }}">
+            {{ video.name }}
+          </a>
+          <span class="not-verified-comments-count">{{ count_video_not_verified_comments(video) }}</span>
+          <div class="clear"></div>
+          <p class="video-breadcrumbs">
+            {{ video.grade }} класс > {{ video.subject.name }} > {{ video.chapter.name }}
+          </p>
+        </div>
+      </li>
+      {% set isFirst = false %}
+    {% endfor %}
+  </ul>
+{% endif %}

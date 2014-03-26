@@ -5,7 +5,7 @@
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\Request;
 
-    class DefaultController extends Controller
+    class DefaultController extends ZnaikaController
     {
         public function indexAction()
         {

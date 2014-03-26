@@ -7,34 +7,5 @@
     </div>
   {% endfor %}
 
-  <div>
-    <div>
-      <span>Имя</span>
-      <span>{{ user.firstName }}</span>
-    </div>
-    <div>
-      <span>Фамилия</span>
-      <span>{{ user.lastName }}</span>
-    </div>
-    <div>
-      <span>Никнейм</span>
-      <span>{{ user.nickname }}</span>
-    </div>
-    <div>
-      <span>Пол</span>
-      <span>{{ user.sex }}</span>
-    </div>
-    <div>
-      <span>Класс</span>
-      <span>{{ user.grade }}</span>
-    </div>
-    <div>
-      <span>Дата рождения</span>
-      <span>{{ user.birthDate|date("j M Y") }}</span>
-    </div>
-    <div>
-      <span>Город</span>
-      <span>{{ user.city }}</span>
-    </div>
-  </div>
+  {% include "ZnaikaFrontendBundle:User:show_user_profile_block.html.twig" with {'user': user} %}
 {% endblock %}

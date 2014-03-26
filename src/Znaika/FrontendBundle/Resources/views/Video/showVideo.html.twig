@@ -6,11 +6,10 @@
   {{ parent() }}
 
   {% stylesheets filter="?yui_css"
-    '@ZnaikaFrontendBundle/Resources/public/css/show_video.css'
-    '@ZnaikaFrontendBundle/Resources/public/css/tab_menu.css'
-    '@ZnaikaFrontendBundle/Resources/public/css/videos_list.css'
-  %}
-    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  '@ZnaikaFrontendBundle/Resources/public/css/show_video.css'
+  '@ZnaikaFrontendBundle/Resources/public/css/tab_menu.css'
+  '@ZnaikaFrontendBundle/Resources/public/css/videos_list.css' %}
+  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
 
@@ -19,76 +18,72 @@
   {{ parent() }}
 
   {% javascripts filter='?yui_js'
-    '../app/Resources/public/js/classes/ShareLinks.class.js'
-    '../app/Resources/public/js/classes/form/AddCommentForm.class.js'
-    '../app/Resources/public/js/classes/page/ShowVideoPage.class.js'
-    '../app/Resources/public/js/classes/page/VideosList.class.js'
-  %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
+  '../app/Resources/public/js/classes/ShareLinks.class.js'
+  '../app/Resources/public/js/classes/form/AddCommentForm.class.js'
+  '../app/Resources/public/js/classes/page/ShowVideoPage.class.js'
+  '../app/Resources/public/js/classes/page/VideosList.class.js' %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
 {% endblock %}
 
 {% block content %}
-  {% if isValidUrl %}
-      <div class="video-view-container">
-        <div class="clear"></div>
-        <h1>{{ video.getName|raw }}</h1>
-
-        <div>
-          <div class="tabs-and-social-buttons-container">
-            <ul class="nav nav-tabs select-content-tab view-video-tab-menu">
-              <li class="video{% if contentToShow == "video" %} active{% endif %}">
-                <div class="active-top-border"></div>
-                <a href="#video_tab" data-toggle="tab">
-                  <span class="tab-label">Видеоурок</span>
-                </a>
-              </li>
-              <li class="synopsis{% if contentToShow == "synopsis" %} active{% endif %}">
-                <div class="active-top-border"></div>
-                <a id="synopsisTab" href="#synopsis_tab" data-toggle="tab">
-                  <span class="tab-label">Конспект</span>
-                </a>
-              </li>
-              <li class="quiz{% if contentToShow == "quiz" %} active{% endif %}">
-                <div class="active-top-border"></div>
-                <a id="quizTab" href="#quiz_tab" data-toggle="tab">
-                  <span class="tab-label">Тест</span>
-                </a>
-              </li>
-            </ul>
-            <div class="video-buttons-container">
-              {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
-                'url': app.request.uri,
-                'title': video.name,
-                'img': large_video_thumbnail(video),
-                'desc': video.name
-              } %}
-            </div>
-          </div>
+  <div class="video-view-container">
+    <div class="clear"></div>
+    <h1>{{ video.getName|raw }}</h1>
+    <div>
+      <div class="tabs-and-social-buttons-container">
+        <ul class="nav nav-tabs select-content-tab view-video-tab-menu">
+          <li class="video{% if contentToShow == "video" %} active{% endif %}">
+            <div class="active-top-border"></div>
+            <a href="#video_tab" data-toggle="tab">
+              <span class="tab-label">Видеоурок</span>
+            </a>
+          </li>
+          <li class="synopsis{% if contentToShow == "synopsis" %} active{% endif %}">
+            <div class="active-top-border"></div>
+            <a id="synopsisTab" href="#synopsis_tab" data-toggle="tab">
+              <span class="tab-label">Конспект</span>
+            </a>
+          </li>
+          <li class="quiz{% if contentToShow == "quiz" %} active{% endif %}">
+            <div class="active-top-border"></div>
+            <a id="quizTab" href="#quiz_tab" data-toggle="tab">
+              <span class="tab-label">Тест</span>
+            </a>
+          </li>
+        </ul>
+        <div class="video-buttons-container">
+          {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
+          'url': app.request.uri,
+          'title': video.name,
+          'img': app.request.getSchemeAndHttpHost() ~ large_video_thumbnail(video),
+          'desc': video.name
+          } %}
         </div>
-        <div class="clear"></div>
-        <div class="tab-pane video-tab{% if contentToShow == "video" %} active{% endif %}" id="video_tab">
-          {% include "ZnaikaFrontendBundle:Video:show_video_block.html.twig" with {'video': video} %}
-        </div>
-        <div class="tab-pane synopsis-tab{% if contentToShow == "synopsis" %} active{% endif %}" id="synopsis_tab">
-          {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
-        </div>
-        <div class="tab-pane quiz-tab{% if contentToShow == "quiz" %} active{% endif %}" id="quiz_tab">
-          {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video, 'userQuizScore': userQuizScore} %}
-        </div>
-      </div>
-    <div class="videos-list-container">
-      <div class="chapter-videos-block-container">
-        <div class="label-all-chapters">
-          <a href="{{ path('show_catalogue', {"class": class, "subjectName": video.getSubject.getUrlName, "ch": video.chapter.chapterId}) }}">Все разделы</a>
-        </div>
-        <div class="chapter-name">{{ video.chapter.name }}</div>
-        <h5>Уроки этого раздела</h5>
-        {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapterVideos, 'currentVideo': video, "chapter": video.chapter} %}
       </div>
     </div>
-  {% else %}
-    <img src="{{ asset('images/user-profile/user-photo-placeholder.png') }}" alt="Видео не найдено"/>
-  {% endif %}
+    <div class="clear"></div>
+        <div class="tab-pane video-tab{% if contentToShow == "video" %} active{% endif %}" id="video_tab">
+      {% include "ZnaikaFrontendBundle:Video:show_video_block.html.twig" with {'video': video, 'comments': comments} %}
+    </div>
+        <div class="tab-pane synopsis-tab{% if contentToShow == "synopsis" %} active{% endif %}" id="synopsis_tab">
+      {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}
+    </div>
+        <div class="tab-pane quiz-tab{% if contentToShow == "quiz" %} active{% endif %}" id="quiz_tab">
+      {% include "ZnaikaFrontendBundle:Video:show_video_quiz_block.html.twig" with {'video': video, 'userQuizScore': userQuizScore} %}
+    </div>
+  </div>
+  <div class="videos-list-container">
+    <div class="chapter-videos-block-container">
+      <div class="label-all-chapters">
+        <a href="{{ path('show_catalogue', {"class": class, "subjectName": video.getSubject.getUrlName}) }}">
+          Все разделы
+        </a>
+      </div>
+      <div class="chapter-name">{{ video.chapter.name }}</div>
+      <h5>Уроки этого раздела</h5>
+      {% include "ZnaikaFrontendBundle:Video:chapter_videos_block.html.twig" with {'videos': chapterVideos, 'currentVideo': video, "chapter": video.chapter} %}
+    </div>
+  </div>
   <input id="videoName" type="hidden" value="{{ video.getUrlName }}"/>
 {% endblock %}

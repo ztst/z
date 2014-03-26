@@ -17,12 +17,22 @@
             return null;
         }
 
+        public function getByVideoCommentIds($videoCommentIds)
+        {
+            return null;
+        }
+
         public function getLastVideoComments(Video $video, $limit)
         {
             return null;
         }
 
         public function getVideoComments($video, $offset, $limit)
+        {
+            return null;
+        }
+
+        public function countVideoComments(Video $video)
         {
             return null;
         }
@@ -38,6 +48,31 @@
         }
 
         public function countTeacherNotAnsweredQuestionComments(User $user)
+        {
+            return null;
+        }
+
+        /**
+         * @internal param $user
+         *
+         * @return VideoComment[]
+         */
+        public function getModeratorNotVerifiedComments()
+        {
+            return null;
+        }
+
+        /**
+         * @internal param $user
+         *
+         * @return int
+         */
+        public function countModeratorNotVerifiedComments()
+        {
+            return null;
+        }
+
+        public function getVideoNotVerifiedComments(Video $video)
         {
             return null;
         }

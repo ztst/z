@@ -11,7 +11,7 @@ Znaika\FrontendBundle\Entity\Profile\User:
         email:           { type: string, length: 255, unique: true, notnull: true }
         password:        { type: string, length: 255, notnull: true }
         createdTime:     { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
-        status:          { type: integer, notnull: true }
+        status:          { type: smallint, notnull: true }
         sex:             { type: smallint, notnull: true }
         points:          { type: integer, notnull: true }
         birthDate:       { column: birth_date, type: date, nullable: true }
@@ -23,8 +23,11 @@ Znaika\FrontendBundle\Entity\Profile\User:
         vkId:            { column: vk_id, type: bigint, nullable: true }
         facebookId:      { column: facebook_id, type: bigint, nullable: true }
         odnoklassnikiId: { column: odnoklassniki_id, type: bigint, nullable: true }
+        banReason:       { column: ban_reason, type: smallint, notnull: true }
+        updatedTime:     { column: updated_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     oneToMany:
         videoComments:      { targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment, mappedBy: user }
+        banInfos:           { targetEntity: Znaika\FrontendBundle\Entity\Profile\Ban\Info, mappedBy: user }
         userRegistrations:  { targetEntity: Znaika\FrontendBundle\Entity\Profile\UserRegistration, mappedBy: user }
         passwordRecoveries: { targetEntity: Znaika\FrontendBundle\Entity\Profile\PasswordRecovery, mappedBy: user }
         changeUserEmails:   { targetEntity: Znaika\FrontendBundle\Entity\Profile\ChangeUserEmail, mappedBy: user }

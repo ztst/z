@@ -2,7 +2,6 @@
 
     namespace Znaika\FrontendBundle\Controller;
 
-    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\Form\Form;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -15,6 +14,7 @@
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Entity\Profile\PasswordRecovery;
     use Znaika\FrontendBundle\Entity\Profile\UserRegistration;
+    use Znaika\FrontendBundle\Entity\Profile\Ban\Info;
     use Znaika\FrontendBundle\Form\Model\ChangePassword;
     use Znaika\FrontendBundle\Form\Model\Registration;
     use Znaika\FrontendBundle\Form\Type\ChangePasswordType;
@@ -31,6 +31,8 @@
     use Znaika\FrontendBundle\Helper\Uploader\UserPhotoUploader;
     use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
     use Znaika\FrontendBundle\Helper\Util\FileSystem\UnixSystemUtils;
+    use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentStatus;
+    use Znaika\FrontendBundle\Helper\Util\Profile\UserBan;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
     use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
@@ -39,13 +41,14 @@
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
     use Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository;
+    use Znaika\FrontendBundle\Repository\Profile\Ban\InfoRepository;
     use Znaika\FrontendBundle\Repository\Profile\ChangeUserEmailRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRegistrationRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
     use Znaika\FrontendBundle\Repository\Profile\PasswordRecoveryRepository;
     use Znaika\FrontendBundle\Form\User\GenerateNewPasswordType;
 
-    class UserController extends Controller
+    class UserController extends ZnaikaController
     {
         public function odnoklassnikiLoginAction(Request $request)
         {
@@ -259,7 +262,7 @@
                 return $this->render('ZnaikaFrontendBundle:User:expiredRegistrationKey.html.twig');
             }
 
-            $user->setStatus(UserStatus::ACTIVE);
+            $user->setStatus(UserStatus::NOT_VERIFIED);
 
             $userRegistrationRepository->delete($userRegistration);
 
@@ -300,17 +303,16 @@
 
         public function showUserProfileAction($userId)
         {
-            /** @var User $currentUser */
-            $currentUser = $this->getUser();
-            $ownProfile  = ($currentUser && $currentUser->getUserId() == $userId);
-
-            if ($ownProfile)
+            $canEdit = $this->canEditProfile();
+            if ($canEdit)
             {
-                $urlPattern = $currentUser->getRole() == UserRole::ROLE_USER ? "edit_user_profile" : "edit_teacher_profile";
+                $currentUser = $this->getUser();
+                $urlPattern  = $currentUser->getRole() == UserRole::ROLE_USER ? "edit_user_profile" : "edit_teacher_profile";
 
                 return new RedirectResponse($this->generateUrl($urlPattern, array('userId' => $userId)));
             }
 
+            $this->addBanReasonMessage();
             $userRepository = $this->getUserRepository();
             $user           = $userRepository->getOneByUserId($userId);
 
@@ -326,14 +328,20 @@
 
         public function editUserProfileAction()
         {
+            if (!$this->canEditProfile())
+            {
+                throw $this->createNotFoundException("Can't manage user");
+            }
             $isSocialRegisterComplete = $this->getIsSocialRegisterComplete();
-            $user                     = $this->canEditProfile();
+            $user                     = $this->getUser();
 
             $profileForm                          = $this->handleProfileForm($user);
             $userPhotoForm                        = $this->createForm(new UserPhotoType(), $user);
             $changeUserEmail                      = $this->createForm(new ChangeUserEmailType(), new ChangeUserEmail());
             $changePasswordOnRegisterCompleteForm = $this->createForm(new ChangePasswordType(), new ChangePassword());
             $changePasswordForm                   = $this->createForm(new ChangePasswordType(), new ChangePassword());
+
+            $this->addBanReasonMessage();
 
             return $this->render('ZnaikaFrontendBundle:User:editUserProfile.html.twig', array(
                 'profileForm'                          => $profileForm->createView(),
@@ -349,7 +357,11 @@
 
         public function editTeacherProfileAction()
         {
-            $user = $this->canEditProfile();
+            if (!$this->canEditProfile())
+            {
+                throw $this->createNotFoundException("Can't manage user");
+            }
+            $user = $this->getUser();
 
             $profileForm        = $this->handleTeacherProfileForm($user);
             $userPhotoForm      = $this->createForm(new UserPhotoType(), $user);
@@ -368,15 +380,17 @@
 
         public function teacherQuestionsAction()
         {
-            $user = $this->canEditProfile();
-
+            if (!$this->canEditProfile())
+            {
+                throw $this->createNotFoundException("Can't manage user");
+            }
+            $user = $this->getUser();
 
             $videoCommentRepository = $this->getVideoCommentRepository();
             $countQuestions         = $videoCommentRepository->countTeacherNotAnsweredQuestionComments($user);
 
             $videoRepository = $this->getVideoRepository();
             $videos          = $videoRepository->getSupervisorVideosWithQuestions($user);
-
 
             return $this->render('ZnaikaFrontendBundle:User:teacherQuestionsPage.html.twig', array(
                 'user'           => $user,
@@ -385,11 +399,89 @@
             ));
         }
 
+        public function notVerifiedCommentsAction()
+        {
+            $user = $this->getUser();
+
+            $videoCommentRepository = $this->getVideoCommentRepository();
+            $countComments          = $videoCommentRepository->countModeratorNotVerifiedComments();
+
+            $videoRepository = $this->getVideoRepository();
+            $videos          = $videoRepository->getVideosWithNotVerifiedComments();
+
+            return $this->render('ZnaikaFrontendBundle:User:notVerifiedCommentsPage.html.twig', array(
+                'user'          => $user,
+                'videos'        => $videos,
+                'countComments' => $countComments,
+            ));
+        }
+
+        public function notVerifiedPupilsAction()
+        {
+            $user = $this->getUser();
+
+            $userRepository = $this->getUserRepository();
+            $pupilRoles     = array(UserRole::ROLE_USER);
+            $countPupils    = $userRepository->countNotVerifiedUsers($pupilRoles);
+            $users          = $userRepository->getNotVerifiedUsers($pupilRoles);
+
+
+            $editedUserId = $this->getRequest()->get("userId");
+            $editedUser   = $editedUserId ? $userRepository->getOneByUserId($editedUserId) : null;
+
+            return $this->render('ZnaikaFrontendBundle:User:notVerifiedPupilsPage.html.twig', array(
+                'countPupils' => $countPupils,
+                'users'       => $users,
+                'user'        => $user,
+                'editedUser'  => $editedUser,
+            ));
+        }
+
+        public function approveCommentsAction()
+        {
+            return $this->updateCommentsStatus(VideoCommentStatus::APPROVED);
+        }
+
+        public function deleteCommentsAction()
+        {
+            return $this->updateCommentsStatus(VideoCommentStatus::DELETED);
+        }
+
+        public function approveUsersAction()
+        {
+            return $this->updateUsersStatus(UserStatus::ACTIVE);
+        }
+
+        public function deleteUsersAction()
+        {
+            return $this->updateUsersStatus(UserStatus::BANNED);
+        }
+
+        public function getUserProfileAjaxAction($userId)
+        {
+            $user = $this->getUserRepository()->getOneByUserId($userId);
+
+            $html = $this->renderView("ZnaikaFrontendBundle:User:getUserProfileAjax.html.twig", array(
+                'user' => $user
+            ));
+
+            $result = array(
+                'html'    => $html,
+                'success' => true
+            );
+
+            return new JsonResponse($result);
+        }
+
         public function changeEmailAction(Request $request)
         {
-            $currentUser = $this->canEditProfile();
+            if (!$this->canEditProfile())
+            {
+                throw $this->createNotFoundException("Can't manage user");
+            }
+            $user = $this->getUser();
 
-            $changeEmail = $this->createChangeUserEmail($currentUser);
+            $changeEmail = $this->createChangeUserEmail($user);
             $form        = $this->createForm(new ChangeUserEmailType(), $changeEmail);
 
             $form->handleRequest($request);
@@ -399,7 +491,7 @@
             if ($form->isSubmitted() && $form->isValid())
             {
                 $userWithEmail = $this->getUserRepository()->getOneByEmail($changeEmail->getNewEmail());
-                if ($userWithEmail && $userWithEmail->getStatus() == UserStatus::ACTIVE)
+                if ($userWithEmail && $userWithEmail->isEnabled())
                 {
                     $emailBusy = true;
                 }
@@ -457,7 +549,11 @@
 
         public function changePasswordAction(Request $request)
         {
-            $currentUser = $this->canEditProfile();
+            if (!$this->canEditProfile())
+            {
+                throw $this->createNotFoundException("Can't manage user");
+            }
+            $currentUser = $this->getUser();
 
             $changePasswordModel = new ChangePassword();
             $form                = $this->createForm(new ChangePasswordType(), $changePasswordModel);
@@ -483,7 +579,11 @@
 
         public function editUserPhotoAction(Request $request)
         {
-            $user           = $this->canEditProfile();
+            if (!$this->canEditProfile())
+            {
+                throw $this->createNotFoundException("Can't manage user");
+            }
+            $user           = $this->getUser();
             $userRepository = $this->getUserRepository();
 
             $userPhotoForm = $this->createForm(new UserPhotoType(), $user);
@@ -891,6 +991,7 @@
                     $listener = $this->getUserOperationListener();
                     $listener->onEditProfile($user);
 
+                    $user->setStatus(UserStatus::NOT_VERIFIED);
                     $userRepository = $this->getUserRepository();
                     $userRepository->save($user);
                 }
@@ -947,22 +1048,57 @@
         }
 
         /**
-         * @return User
-         * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+         * @return boolean
          */
         private function canEditProfile()
         {
             $request     = $this->getRequest();
             $userId      = $request->get('userId');
             $currentUser = $this->getUser();
-            $canEdit     = ($currentUser && $currentUser->getUserId() == $userId);
 
-            if (!$canEdit)
+            $canEdit = false;
+            if ($currentUser instanceof User)
             {
-                throw $this->createNotFoundException("Can't manage user");
+                $ownProfile = $currentUser->getUserId() == $userId;
+                $status     = $currentUser->getStatus();
+                $canEdit    = $ownProfile && !UserBan::isPermanentlyBanned($currentUser);
             }
 
-            return $currentUser;
+            return $canEdit;
+        }
+
+        private function addBanReasonMessage()
+        {
+            $user = $this->getUser();
+
+            if ($user instanceof User && UserBan::isBanned($user))
+            {
+                $templateName = null;
+                $reason       = $user->getBanReason();
+                switch ($reason)
+                {
+                    case UserBan::PERMANENTLY:
+                        $templateName = "permanently_ban_message";
+                        break;
+                    case UserBan::PROFILE:
+                        $templateName = "ban_profile_message";
+                        break;
+                    case UserBan::COMMENT:
+                        $templateName = "ban_comment_message";
+                        break;
+                }
+
+                if ($templateName)
+                {
+                    $templateName = "ZnaikaFrontendBundle:User:Ban\\{$templateName}.html.twig";
+                    $message = $this->renderView($templateName, array(
+                        'user' => $user
+                    ));
+
+                    $this->get('session')->getFlashBag()
+                         ->add('notice', $this->get('translator')->trans($message));
+                }
+            }
         }
 
         /**
@@ -1015,5 +1151,108 @@
         private function getVideoRepository()
         {
             return $this->get('znaika_frontend.video_repository');
+        }
+
+        /**
+         * @param $status
+         *
+         * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+         * @return Response|static
+         */
+        private function updateCommentsStatus($status)
+        {
+            $request                = $this->getRequest();
+            $videoCommentRepository = $this->getVideoCommentRepository();
+            $comments               = $videoCommentRepository->getByVideoCommentIds($request->get("ids"));
+
+            $videoId = 0;
+            $success = false;
+            $ids     = array();
+
+            foreach ($comments as $comment)
+            {
+                if ($comment->getStatus() != $status)
+                {
+                    $comment->setStatus($status);
+                    $videoCommentRepository->save($comment);
+                    $videoId = $videoId == 0 ? $comment->getVideo()->getVideoId() : $videoId;
+                    array_push($ids, $comment->getVideoCommentId());
+                    $success = true;
+                }
+            }
+
+            return JsonResponse::create(array(
+                "success" => $success,
+                "videoId" => $videoId,
+                "ids"     => $ids
+            ));
+        }
+
+        /**
+         * @param $status
+         *
+         * @return Response|static
+         */
+        private function updateUsersStatus($status)
+        {
+            $request        = $this->getRequest();
+            $reason         = $request->get("reason", UserBan::PROFILE);
+            $userRepository = $this->getUserRepository();
+            $users          = $userRepository->getByUserIds($request->get("ids"));
+
+            $success = false;
+            $ids     = array();
+
+            foreach ($users as $user)
+            {
+                if ($user->getStatus() != $status)
+                {
+                    $this->setUserStatus($user, $status, $reason);
+                    $user->setUpdatedTime(new \DateTime());
+                    $userRepository->save($user);
+                    array_push($ids, $user->getUserId());
+                    $success = true;
+                }
+            }
+
+            return JsonResponse::create(array(
+                "success" => $success,
+                "ids"     => $ids
+            ));
+        }
+
+        /**
+         * @param \Znaika\FrontendBundle\Entity\Profile\User $user
+         * @param $status
+         * @param $reason
+         */
+        private function setUserStatus(User $user, $status, $reason)
+        {
+            $user->setStatus($status);
+            if ($status == UserStatus::BANNED)
+            {
+                if ($user->getBanReason() != UserBan::NO_REASON)
+                {
+                    $reason = UserBan::PERMANENTLY;
+                }
+
+                $user->setBanReason($reason);
+                $this->saveBanInfo($user, $reason);
+
+                $userMailer = $this->getUserMailer();
+                $userMailer->sendUserBanMessage($user);
+            }
+        }
+
+        private function saveBanInfo(User $user, $reason)
+        {
+            $banInfo = new Info();
+            $banInfo->setCreatedTime(new \DateTime());
+            $banInfo->setUser($user);
+            $banInfo->setReason($reason);
+
+            /** @var InfoRepository $repository */
+            $repository = $this->get("znaika_frontend.ban_info_repository");
+            $repository->save($banInfo);
         }
     }

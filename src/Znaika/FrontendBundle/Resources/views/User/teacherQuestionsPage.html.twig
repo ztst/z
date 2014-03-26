@@ -5,6 +5,7 @@
 
   {% stylesheets filter="?yui_css"
     '@ZnaikaFrontendBundle/Resources/public/css/tab_menu.css'
+    '@ZnaikaFrontendBundle/Resources/public/css/profile_page.css'
     '@ZnaikaFrontendBundle/Resources/public/css/teacher_profile.css'
   %}
   <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
@@ -29,10 +30,10 @@
   <div class="teacher-profile-container">
     <div>
       <div class="tabs-container">
-        <ul class="nav nav-tabs select-content-tab show-questions-tab-menu">
+        <ul class="nav nav-tabs select-content-tab user-profile-tab-menu">
           <li class="video-with-questions active">
             <div class="active-top-border"></div>
-            <a href="#video_tab" data-toggle="tab">
+            <a id="videoTab" href="#video_tab" data-toggle="tab">
               <span class="tab-label">Уроки с вопросами</span>
             </a>
           </li>
@@ -40,7 +41,7 @@
             <li class="questions-tab hidden">
               <div class="active-top-border"></div>
               <a id="questionTab" href="#synopsis_tab" data-toggle="tab">
-                <span class="tab-label">Просмотр вопросов <span class="user-questions-count">(+{{ countQuestions }})</span></span>
+                <span class="tab-label">Просмотр вопросов</span>
               </a>
             </li>
           {% endif %}

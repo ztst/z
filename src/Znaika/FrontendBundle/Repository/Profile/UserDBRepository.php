@@ -2,6 +2,7 @@
     namespace Znaika\FrontendBundle\Repository\Profile;
 
     use Doctrine\ORM\EntityRepository;
+    use Doctrine\ORM\QueryBuilder;
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
 
@@ -29,21 +30,35 @@
         }
 
         /**
+         * @param $userIds
+         *
+         * @return User[]
+         */
+        public function getByUserIds($userIds)
+        {
+            $qb = $this->getEntityManager()->createQueryBuilder();
+
+            $qb->select('u')
+               ->from('ZnaikaFrontendBundle:Profile\User', 'u')
+               ->where($qb->expr()->in('u.userId', $userIds));
+
+            return $qb->getQuery()->getResult();
+        }
+
+        /**
          * @param $vkId
          *
          * @return User
          */
         public function getOneByVkId($vkId)
         {
-            $qb = $this->getEntityManager()
-                       ->createQueryBuilder();
+            $qb = $this->getEntityManager()->createQueryBuilder();
 
             $qb->select('u')
                ->from('ZnaikaFrontendBundle:Profile\User', 'u')
                ->andWhere("u.vkId = :vk_id")
                ->setParameter('vk_id', $vkId)
-               ->andWhere('u.status = :status')
-               ->setParameter('status', UserStatus::ACTIVE)
+               ->andWhere($qb->expr()->in('u.status', UserStatus::getActiveStatuses()))
                ->setMaxResults(1);
 
             return $qb->getQuery()->getOneOrNullResult();
@@ -56,15 +71,13 @@
          */
         public function getOneByFacebookId($facebookId)
         {
-            $qb = $this->getEntityManager()
-                       ->createQueryBuilder();
+            $qb = $this->getEntityManager()->createQueryBuilder();
 
             $qb->select('u')
                ->from('ZnaikaFrontendBundle:Profile\User', 'u')
                ->andWhere("u.facebookId = :facebook_id")
                ->setParameter('facebook_id', $facebookId)
-               ->andWhere('u.status = :status')
-               ->setParameter('status', UserStatus::ACTIVE)
+               ->andWhere($qb->expr()->in('u.status', UserStatus::getActiveStatuses()))
                ->setMaxResults(1);
 
             return $qb->getQuery()->getOneOrNullResult();
@@ -72,15 +85,13 @@
 
         public function getOneByOdnoklassnikiId($odnoklassnikiId)
         {
-            $qb = $this->getEntityManager()
-                       ->createQueryBuilder();
+            $qb = $this->getEntityManager()->createQueryBuilder();
 
             $qb->select('u')
                ->from('ZnaikaFrontendBundle:Profile\User', 'u')
                ->andWhere("u.odnoklassnikiId = :odnoklassniki_id")
                ->setParameter('odnoklassniki_id', $odnoklassnikiId)
-               ->andWhere('u.status = :status')
-               ->setParameter('status', UserStatus::ACTIVE)
+               ->andWhere($qb->expr()->in('u.status', UserStatus::getActiveStatuses()))
                ->setMaxResults(1);
 
             return $qb->getQuery()->getOneOrNullResult();
@@ -95,8 +106,7 @@
         {
             $searchString = "%{$searchString}%";
 
-            $qb = $this->getEntityManager()
-                       ->createQueryBuilder();
+            $qb = $this->getEntityManager()->createQueryBuilder();
             $qb->select('u')
                ->from('ZnaikaFrontendBundle:Profile\User', 'u')
                ->where($qb->expr()->andX(
@@ -137,8 +147,7 @@
          */
         public function getUsersTopByPoints($limit)
         {
-            $qb = $this->getEntityManager()
-                       ->createQueryBuilder();
+            $qb = $this->getEntityManager()->createQueryBuilder();
 
             $qb->select('u')
                ->from('ZnaikaFrontendBundle:Profile\User', 'u')
@@ -146,5 +155,40 @@
                ->setMaxResults($limit);
 
             return $qb->getQuery()->getResult();
+        }
+
+        public function getNotVerifiedUsers($userRoles = array())
+        {
+            $qb = $this->getEntityManager()->createQueryBuilder();
+            $qb->select('u');
+            $this->prepareNotVerifiedUsersQueryBuilder($userRoles, $qb);
+
+            return $qb->getQuery()->getResult();
+        }
+
+        public function countNotVerifiedUsers($userRoles = array())
+        {
+            $qb = $this->getEntityManager()->createQueryBuilder();
+            $qb->select('count(u)');
+            $this->prepareNotVerifiedUsersQueryBuilder($userRoles, $qb);
+
+            return $qb->getQuery()->getSingleScalarResult();
+        }
+
+        /**
+         * @param $userRoles
+         * @param $qb
+         */
+        private function prepareNotVerifiedUsersQueryBuilder($userRoles, QueryBuilder $qb)
+        {
+            $qb->from('ZnaikaFrontendBundle:Profile\User', 'u')
+               ->andWhere("u.status = :status")
+               ->setParameter('status', UserStatus::NOT_VERIFIED)
+               ->orderBy('u.createdTime', 'ASC');
+
+            if (!empty($userRoles))
+            {
+                $qb->andWhere($qb->expr()->in('u.role', $userRoles));
+            }
         }
     }

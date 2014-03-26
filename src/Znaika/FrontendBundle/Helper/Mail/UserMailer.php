@@ -2,7 +2,9 @@
     namespace Znaika\FrontendBundle\Helper\Mail;
 
     use Znaika\FrontendBundle\Entity\Profile\ChangeUserEmail;
+    use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Entity\Profile\UserRegistration;
+    use Znaika\FrontendBundle\Helper\Util\Profile\UserBan;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
     use Znaika\FrontendBundle\Entity\Profile\PasswordRecovery;
 
@@ -75,6 +77,21 @@
             $this->mailHelper->sendEmail(null, $changeUserEmail->getNewEmail(), $body, $subject);
         }
 
+        public function sendUserBanMessage(User $user)
+        {
+            if (!UserBan::isBanned($user))
+            {
+                throw new \InvalidArgumentException("User not banned");
+            }
+
+            $templateFile    = $this->getUserBanTemplate($user);
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $body            = $templateContent->render(array("user" => $user));
+            $subject         = $this->getEmailSubject($templateContent);
+
+            $this->mailHelper->sendEmail(null, $user->getEmail(), $body, $subject);
+        }
+
         /**
          * @param $templateContent
          *
@@ -86,5 +103,31 @@
             $subject = trim($subject);
 
             return $subject;
+        }
+
+        /**
+         * @param \Znaika\FrontendBundle\Entity\Profile\User $user
+         *
+         * @return string
+         */
+        private function getUserBanTemplate(User $user)
+        {
+            $reason = $user->getBanReason();
+            $templateFile = "";
+            switch ($reason)
+            {
+                case UserBan::PERMANENTLY:
+                    $templateFile = "userPermanentlyBanned";
+                    break;
+                case UserBan::PROFILE:
+                    $templateFile = "userProfileBanned";
+                    break;
+                case UserBan::COMMENT:
+                    $templateFile = "userCommentBanned";
+                    break;
+            }
+            $templateFile = "ZnaikaFrontendBundle:Email:Ban\\{$templateFile}.html.twig";
+
+            return $templateFile;
         }
     }

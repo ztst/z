@@ -14,7 +14,7 @@
           <span class="simple-comment-author-name">{{ question.user }}</span>
           <span class="media-heading comment-date">{{ comment_date(question.getCreatedTime) }}</span>
           <br />
-          <span class="comment-body">{{ question.getText }}</span>
+          <span class="comment-body">{{ comment_text(question) }}</span>
         </div>
     {% endfor %}
     {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "videoName": video.getUrlName} %}

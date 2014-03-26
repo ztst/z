@@ -10,7 +10,7 @@
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
-    class SearchController extends Controller
+    class SearchController extends ZnaikaController
     {
         const RESULT_ON_SPECIAL_PAGE = 15;
 

@@ -1,8 +1,9 @@
 <div class="comments-container">
-  {% if not video.getVideoComments is empty %}
-    {% if video.getVideoComments|length > constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE') %}
-      <a href="javascript:void(0);" id="showPrevCommentsLink" class="alert alert-info show-more-comments">
-        {{ 'show_prev_comments'|transchoice(video.getVideoComments|length - constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE')) }}
+  {% set countComments = count_video_comments(video) %}
+  {% if countComments %}
+    {% if countComments > constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE') %}
+      <a class="alert alert-info show-more-comments" href="javascript:void(0);" id="showPrevCommentsLink">
+        {{ 'show_prev_comments'|transchoice(countComments - constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE')) }}
       </a>
       <input type="hidden" id="showPrevCommentsUrl" value="{{ path('get_prev_comments', {'videoName': video.getUrlName}) }}"/>
       <div id="prevCommentsContainer" class="prev-comments-container"></div>
@@ -11,8 +12,10 @@
   {% endif %}
   {% if has_question_for_current_user(video) %}
     {{ video_questions_block(video)|raw }}
-  {% elseif is_user() %}
+  {% elseif user_can_write_comment() %}
     {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "video": video} %}
+  {% elseif is_banned_user() %}
+    <span>{% include "ZnaikaFrontendBundle:User:Ban\\ban_comment_message.html.twig" with {'user': app.user} %}</span>
   {% else %}
     <span>Только зарегистрированные и авторизованные пользователи могут оставлять комментарии</span>
   {% endif %}

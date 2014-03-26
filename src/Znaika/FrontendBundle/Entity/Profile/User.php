@@ -7,6 +7,8 @@
     use Symfony\Component\Security\Core\User\AdvancedUserInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
+    use Znaika\FrontendBundle\Entity\Profile\Ban\Info;
+    use Znaika\FrontendBundle\Helper\Util\Profile\UserBan;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
     use FOS\MessageBundle\Model\ParticipantInterface;
@@ -92,7 +94,7 @@
         /**
          * @var integer
          */
-        private $role = 0;
+        private $role = UserRole::ROLE_USER;
 
         /**
          * @var integer
@@ -140,6 +142,21 @@
         private $hasPhoto = false;
 
         /**
+         * @var integer
+         */
+        private $banReason = UserBan::NO_REASON;
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $banInfos;
+
+        /**
+         * @var \DateTime
+         */
+        private $updatedTime;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -148,6 +165,7 @@
             $this->userRegistrations = new ArrayCollection();
             $this->changeUserEmails  = new ArrayCollection();
             $this->supervisedVideos  = new ArrayCollection();
+            $this->banInfos          = new ArrayCollection();
         }
 
         /**
@@ -433,7 +451,7 @@
          */
         public function isEnabled()
         {
-            return $this->status == UserStatus::ACTIVE;
+            return UserStatus::isActive($this->status) || UserStatus::isBanned($this->status);
         }
 
         /**
@@ -757,6 +775,34 @@
         }
 
         /**
+         * @param Ban\Info $info
+         *
+         * @return $this
+         */
+        public function addBanInfo(Info $info)
+        {
+            $this->banInfos[] = $info;
+
+            return $this;
+        }
+
+        /**
+         * @param Info $info
+         */
+        public function removeBanInfo(Info $info)
+        {
+            $this->banInfos->removeElement($info);
+        }
+
+        /**
+         * @return \Doctrine\Common\Collections\ArrayCollection|\Doctrine\Common\Collections\Collection
+         */
+        public function getBanInfos()
+        {
+            return $this->banInfos;
+        }
+
+        /**
          * @param int $grade
          */
         public function setGrade($grade)
@@ -859,5 +905,37 @@
             }
 
             return $changeUserEmail;
+        }
+
+        /**
+         * @param \DateTime $updatedTime
+         */
+        public function setUpdatedTime($updatedTime)
+        {
+            $this->updatedTime = $updatedTime;
+        }
+
+        /**
+         * @return \DateTime
+         */
+        public function getUpdatedTime()
+        {
+            return $this->updatedTime;
+        }
+
+        /**
+         * @param int $banReason
+         */
+        public function setBanReason($banReason)
+        {
+            $this->banReason = $banReason;
+        }
+
+        /**
+         * @return int
+         */
+        public function getBanReason()
+        {
+            return $this->banReason;
         }
     }

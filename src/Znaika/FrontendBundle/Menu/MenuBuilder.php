@@ -1,15 +1,16 @@
 <?php
     namespace Znaika\FrontendBundle\Menu;
 
+    use Knp\Menu\ItemInterface;
     use Knp\Menu\FactoryInterface;
     use Symfony\Component\DependencyInjection\ContainerInterface;
     use Symfony\Component\HttpFoundation\Request;
-    use Symfony\Component\Security\Core\SecurityContext;
     use Symfony\Component\Security\Core\SecurityContextInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Znaika\FrontendBundle\Helper\Util\Lesson\SubjectUtil;
+    use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
     use Znaika\FrontendBundle\Repository\Lesson\Category\ISubjectRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
@@ -20,18 +21,28 @@
         private $factory;
 
         /**
-         * @param FactoryInterface $factory
+         * @var SecurityContextInterface
          */
+        private $securityContext;
 
         /**
-         * @var ContainerInterface
+         * @var User
          */
-        private $container;
+        private $currentUser;
 
-        public function __construct(FactoryInterface $factory, ContainerInterface $container)
+        private $currentRoute;
+
+        /**
+         * @param FactoryInterface $factory
+         * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
+         */
+        public function __construct(FactoryInterface $factory, SecurityContextInterface $securityContext)
         {
-            $this->factory   = $factory;
-            $this->container = $container;
+            $this->factory         = $factory;
+            $this->securityContext = $securityContext;
+
+            $currentUser       = $this->securityContext->getToken()->getUser();
+            $this->currentUser = $currentUser instanceof User ? $currentUser : null;
         }
 
         public function createMainMenu()
@@ -76,21 +87,27 @@
 
         public function createSidebarProfileMenu(Request $request, UserRepository $userRepository, VideoCommentRepository $videoCommentRepository)
         {
-            $userId = $request->get("userId");
-            $menu   = $this->factory->createItem("root");
+            $menu = $this->factory->createItem("root");
             $menu->setCurrentUri($request->getRequestUri());
 
             $menu->setChildrenAttribute("class", "profile-sidebar-menu");
+            $this->currentRoute = $request->get('_route');
 
-            $countQuestions = $videoCommentRepository->countTeacherNotAnsweredQuestionComments($userRepository->getOneByUserId($userId));
+            $countQuestions = $videoCommentRepository->countTeacherNotAnsweredQuestionComments($this->currentUser);
+            $userId         = $this->currentUser->getUserId();
             $menu->addChild("Мой профиль",
                 array("route" => "edit_teacher_profile", "routeParameters" => array("userId" => $userId)));
 
             $title = "Вопросы к урокам";
-            $title .= $countQuestions ? " <span class='user-questions-count'>(+$countQuestions)</span>" : "";
+            $title .= $countQuestions ? " <span class='user-questions-count'>+$countQuestions</span>" : "";
             $menuItem = $menu->addChild($title,
                 array("route" => "teacher_questions", "routeParameters" => array("userId" => $userId)));
             $menuItem->setExtra('safe_label', true);
+
+            if ($this->securityContext->isGranted(UserRole::getSecurityTextByRole(UserRole::ROLE_MODERATOR)))
+            {
+                $menu = $this->addModeratorItems($menu, $videoCommentRepository, $userRepository);
+            }
 
             return $menu;
         }
@@ -171,12 +188,7 @@
 
         protected function getCurrentClass(Request $request)
         {
-            /** @var SecurityContextInterface $securityContext */
-            $securityContext = $this->container->get('security.context');
-            $user = $securityContext->getToken()->getUser();
-
-            $defaultUserClass = ($user instanceof User) ? $user->getGrade() : null;
-
+            $defaultUserClass = ($this->currentUser instanceof User) ? $this->currentUser->getGrade() : null;
             $currentClass = $request->get("class", $defaultUserClass);
 
             return $currentClass ? $currentClass : self::DEFAULT_CLASS_FOR_ANONYMOUS_USER;
@@ -185,5 +197,42 @@
         protected function getCurrentSubjectUrlName(Request $request)
         {
             return $request->get("subjectName", "");
+        }
+
+        private function addModeratorItems(ItemInterface $menu, VideoCommentRepository $videoCommentRepository, UserRepository $userRepository)
+        {
+            $this->addCommentMenuItem($menu, $videoCommentRepository);
+            $this->addPupilMenuItem($menu, $userRepository);
+
+            return $menu;
+        }
+
+        private function addCommentMenuItem(ItemInterface $menu, VideoCommentRepository $videoCommentRepository)
+        {
+            $countComments = $videoCommentRepository->countModeratorNotVerifiedComments();
+
+            $title = "Комментарии";
+            $title .= $countComments ? " <span class='not-verified-comments-count'>+$countComments</span>" : "";
+            $menuItem = $menu->addChild($title,
+                array("route" => "not_verified_comments", "routeParameters" => array("userId" => $this->currentUser->getUserId())));
+            $menuItem->setExtra('safe_label', true);
+
+            return $menu;
+        }
+
+        private function addPupilMenuItem(ItemInterface $menu, UserRepository $userRepository)
+        {
+            $countPupils = $userRepository->countNotVerifiedUsers(array(UserRole::ROLE_USER));
+
+            $title = "Ученики";
+            $title .= $countPupils ? " <span class='not-verified-pupils-count'>+$countPupils</span>" : "";
+            $menuItem = $menu->addChild($title, array("route" => "not_verified_pupils"));
+            if ($this->currentRoute == "not_verified_pupils")
+            {
+                $menuItem->setCurrent(true);
+            }
+            $menuItem->setExtra('safe_label', true);
+
+            return $menu;
         }
     }
