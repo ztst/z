@@ -1,1 +1,4 @@
-<h5 class="media-heading answer-comment-author-name">{{ comment.getUser.lastName }} {{ comment.getUser.firstName }} {{ comment.getUser.middleName }}, учитель</h5>
+<h5 class="media-heading answer-comment-author-name">
+  <img src="{{ asset('/images/video/answer-comment.png') }}" alt="Вопрос" />
+  {{ comment.getUser.lastName }} {{ comment.getUser.firstName }} {{ comment.getUser.middleName }}, учитель
+</h5>

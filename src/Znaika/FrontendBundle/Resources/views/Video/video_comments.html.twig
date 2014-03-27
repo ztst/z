@@ -16,7 +16,7 @@
         </a>
         <span class="comment-body">{{ comment_text(comment) }}</span>
         <h6 class="media-heading comment-date">{{ comment_date(comment.getCreatedTime) }}</h6>
-        <div class="comment-answer">{{ comment_answer_block(comment)|raw }}</div>
+        <div class="media comment-answer">{{ comment_answer_block(comment)|raw }}</div>
       </div>
     </li>
   {% endfor %}

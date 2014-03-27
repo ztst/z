@@ -78,6 +78,10 @@ var EditProfileForm = BaseForm.extend({
                 minlength: "Никнейм должен быть минимум 3 символа"
             }
         });
+        this._form.find("#regionField").rules('add', {
+            maxlength: 150,
+            messages: { maxlength: "Максимальная длина - 150 символов" }
+        });
         this._form.find("#cityField").rules('add', {
             maxlength: 150,
             messages: { maxlength: "Максимальная длина - 150 символов" }

@@ -40,6 +40,9 @@
                     "empty_value" => "",
                     "required"    => false,
                 ))
+                ->add("region", "text", array(
+                    "required" => false,
+                ))
                 ->add("city", "text", array(
                     "required" => false,
                 ))

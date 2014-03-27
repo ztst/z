@@ -1041,12 +1041,26 @@ label
 
 .additional-form.support-form label
 {
-    width: 55px;
+    width: 127px;
+    text-align: left;
 }
 
 .additional-form.support-form .additional-form-button-container
 {
-    padding-left: 55px;
+    float: right;
+}
+
+.additional-form.support-form .active-button
+{
+    height: 26px;
+    font-size: 11px;
+}
+
+.additional-form.support-form .active-button-label
+{
+    padding-left: 14px;
+    line-height: 26px;
+    background-position: 0 4px;
 }
 
 .static-page-container.add-video-page-container label

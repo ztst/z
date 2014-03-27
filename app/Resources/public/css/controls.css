@@ -52,6 +52,7 @@ label.non-active-button
 .active-button-label
 {
     padding-left: 19px;
+    line-height: 30px;
     color: #fff;
 }
 
