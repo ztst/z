@@ -139,11 +139,11 @@
 .video-preview a .video-preview-over
 {
     display: none;
-    left: 83px;
+    left: 106px;
     position: absolute;
-    top: 47px;
-    width: 72px;
-    height: 47px;
+    top: 44px;
+    width: 35px;
+    height: 41px;
     background: url('/images/index/video-preview-over.png') no-repeat;
 }
 

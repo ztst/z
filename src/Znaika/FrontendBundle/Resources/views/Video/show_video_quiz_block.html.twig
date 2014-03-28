@@ -17,7 +17,10 @@
       <span class="active-button-label">Добавить тест</span>
     </a>
   {% else %}
-    <p class="quiz-not-available">Тест находится в разработке.</p>
+    <div class="quiz-under-construction">
+      <h3>Тест находится в разработке</h3>
+      <h4>Попробуйте зайти позже</h4>
+    </div>
   {% endif %}
 {% elseif is_banned_user() %}
   <p class="quiz-not-available">Ваш аккаунт забанен. Вы не можете проходить тесты.</p>

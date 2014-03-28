@@ -31,6 +31,7 @@
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
+    use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
 
     class VideoController extends ZnaikaController
     {
@@ -310,16 +311,31 @@
             }
             $currentChapter = $chapterRepository->getOneById($currentChapterId);
 
-            return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
-                'class'              => $class,
-                'subjectName'        => $subjectName,
-                'subjectNameRussian' => $subject->getName(),
-                'currentChapter'     => $currentChapter,
-                'currentChapterId'   => $currentChapterId,
-                'chapters'           => $chapters,
-                'videoRepository'    => $this->getVideoRepository(),
-                'subjects'           => $subjectsRepository->getByGrade($class)
-            ));
+            $videoRepository = $this->getVideoRepository();
+            if (count($videoRepository->getVideoByChapter($currentChapter)) > 0)
+            {
+                $result = $this->render('ZnaikaFrontendBundle:Video:showFilledCatalogue.html.twig', array(
+                    'class'              => $class,
+                    'subjectName'        => $subjectName,
+                    'subjectNameRussian' => $subject->getName(),
+                    'currentChapter'     => $currentChapter,
+                    'currentChapterId'   => $currentChapterId,
+                    'chapters'           => $chapters,
+                    'videoRepository'    => $videoRepository,
+                    'subjects'           => $subjectsRepository->getByGrade($class)
+                ));
+            }
+            else
+            {
+                $result = $this->render('ZnaikaFrontendBundle:Video:showEmptyCatalogue.html.twig', array(
+                    'class'              => $class,
+                    'subjectNameRussian' => $subject->getName(),
+                    'subjects'           => $subjectsRepository->getAll(),
+                    'subjectsRepository' => $subjectsRepository,
+                    'classes'            => ClassNumberUtil::getAvailableClasses()
+                ));
+            }
+            return $result;
         }
 
         public function moveVideoAjaxAction(Request $request)

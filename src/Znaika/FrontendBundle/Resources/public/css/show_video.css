@@ -435,6 +435,31 @@
     padding: 18px;
 }
 
+.quiz-under-construction
+{
+    margin: 68px auto;
+    padding-top: 148px;
+    background: url('/images/under-construction-image.png') no-repeat center top;
+}
+
+.quiz-under-construction h3,
+.quiz-under-construction h4
+{
+    text-align: center;
+}
+
+.quiz-under-construction h3
+{
+    color: #89a6bb;
+    font-size: 20px;
+}
+
+.quiz-under-construction h4
+{
+    color: #696969;
+    font-size: 13px;
+}
+
 .questions-buttons-block
 {
     float: right;
