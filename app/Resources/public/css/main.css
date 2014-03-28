@@ -1202,3 +1202,62 @@ label
     background: #5690b7;
 }
 /* Footer block END */
+
+/* 404 styles BEGIN */
+.page-not-found-container
+{
+    margin-left: 112px;
+    margin-top: 52px;
+    padding-left: 335px;
+    width: 760px;
+    height: 241px;
+    background: url('/images/404.png') no-repeat;
+}
+
+.page-not-found-container h1,
+.page-not-found-container h2
+{
+    margin-bottom: 0;
+    line-height: 1;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
+.page-not-found-container h3,
+.page-not-found-container h4
+{
+    margin-bottom: 0;
+    font-family: "OpenSans","Open Sans",serif;
+}
+
+.page-not-found-container h1
+{
+    color: #bad3e5;
+    font-size: 100px;
+    text-shadow: 1px 0 0 #8EADC9, 0 1px 0 #8EADC9, -1px 0 0 #8EADC9, 0 -1px 0 #8EADC9;
+}
+
+.page-not-found-container h2
+{
+    margin-top: 3px;
+    color: #a1bacc;
+    font-size: 30px;
+}
+
+.page-not-found-container h3
+{
+    margin-top: 17px;
+    line-height: 22px;
+    font-size: 16px;
+}
+
+.page-not-found-container h4
+{
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.page-not-found-container a
+{
+    color: #036995;
+}
+/* 404 styles END */
