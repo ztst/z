@@ -38,7 +38,9 @@
             {% set classesCounter = 1 %}
             {% for class in classes %}
                 {% if subject in subjectsRepository.getByGrade(class) %}
-                  <span class="subjects-list-item">{{ classesCounter }}) <a>{{ subject.getName }}, {{ class }} класс</a></span><br />
+                  <span class="subjects-list-item">{{ classesCounter }})
+                    <a title="" href="{{ url("show_catalogue", {"class": class, "subjectName": subject.getUrlName}) }}">{{ subject.getName }}, {{ class }} класс</a>
+                  </span><br />
                   {% set classesCounter = classesCounter + 1 %}
                 {% endif %}
             {% endfor %}
