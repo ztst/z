@@ -1,21 +1,23 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>An Error Occurred: {{ status_text }}</title>
-  </head>
-  <body>
-  <h1>Oops! An Error Occurred</h1>
-  {% if status_code == 404 %}
-    <img src="{{ asset('images/404.jpg') }}" alt="404"/>
-  {% else %}
-    <h2>The server returned a "{{ status_code }} {{ status_text }}".</h2>
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
-    <div>
-      Something is broken. Please e-mail us at [email] and let us know
-      what you were doing when this error occurred. We will fix it as soon
-      as possible. Sorry for any inconvenience caused.
-    </div>
-  {% endif %}
-  </body>
-</html>
+{% block stylesheets %}
+  {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+{% endblock %}
+
+{% block content %}
+  <div class="page-not-found-container">
+    <h1>404</h1>
+    <h2>Страница не найдена</h2>
+    <h3>
+      Страница, которую Вы ищете, не существует или она
+      была перемещена.
+    </h3>
+    <h4>
+      Перейти на <a href="{{ path('znaika_frontend_homepage') }}" title="Главная">Главную страницу сайта</a>
+    </h4>
+  </div>
+{% endblock %}
