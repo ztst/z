@@ -43,6 +43,9 @@
                     "widget"      => "choice",
                     "years"       => range(date("Y"), date("Y") - self::MAX_YEARS_OLD)
                 ))
+                ->add("region", "text", array(
+                    "required" => false,
+                ))
                 ->add("city", "text", array(
                     "required" => false,
                 ))

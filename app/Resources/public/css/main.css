@@ -909,26 +909,18 @@ label
     width: 100% !important;
 }
 
-.go-up, .go-down
+.go-up,
+.go-down
 {
     z-index: 9999;
-    background: #4F4F4F;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    background-position: 10px 10px;
     cursor: pointer;
 
-    color: #fff;
-    font: normal normal 42px/42px sans-serif;
-    text-shadow: 0 1px 2px #000;
-    text-align: center;
-
-    opacity: 0.1;
-    padding: 3px 0;
-    margin-bottom: 5px;
+    padding-top: 14px;
+    padding-left: 39px;
 
     display: none;
-    width: 4%;
-    min-width: 25px;
+    width: 100px;
     height: 100%;
 
     position: fixed;
@@ -936,11 +928,46 @@ label
     top: 0;
 }
 
+@media (max-width: 767px)
+{
+    .go-up,
+    .go-down
+    {
+        height: 43px;
+    }
+}
+
 .go-down:hover,
 .go-up:hover
 {
-    opacity: 0.4;
-    box-shadow: 0 5px 0.5em -1px #666;
+    color: #004e78;
+    font-size: 11px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
+.go-up
+{
+    background: url('/images/go-up-icon.png') no-repeat 10px 10px;
+}
+
+.go-up:hover
+{
+    background: #e8f1f5 url('/images/go-up-icon-over.png') no-repeat 10px 10px;
+}
+
+.go-up-label
+{
+    display: none;
+}
+
+.go-down
+{
+    background: url('/images/go-down-icon.png') no-repeat 10px 10px;
+}
+
+.go-down:hover
+{
+    background: #e8f1f5 url('/images/go-down-icon-over.png') no-repeat 10px 10px;
 }
 
 .add-video-link
@@ -955,13 +982,14 @@ label
     text-align: center;
 }
 
-/* static pages styles BEGIN */
-.additional-form-container.static-page-container
+/* static forms styles BEGIN */
+.additional-form-container.static-form-container
 {
-    padding: 18px;
+    padding-top: 18px;
+    padding-left: 35px;
 }
 
-.static-page-container .additional-form
+.static-form-container .additional-form
 {
     width: 100%;
 }
@@ -975,23 +1003,23 @@ label
     resize: none;
 }
 
-.static-page-container
+.static-form-container
 {
     padding: 0 18px 18px;
-    width: 583px;
+    width: 640px;
 }
 
-.additional-form-container.static-page-container h3
+.additional-form-container.static-form-container h3
 {
     margin: 0;
 }
 
-.additional-form-container.static-page-container h5
+.additional-form-container.static-form-container h5
 {
     text-align: left;
 }
 
-.additional-form-container.static-page-container label
+.additional-form-container.static-form-container label
 {
     display: table-cell;
     vertical-align: top;
@@ -1004,37 +1032,37 @@ label
     font-family: "OpenSans Semibold", sans-serif;
 }
 
-.additional-form-container.static-page-container .additional-form-button-container
+.additional-form-container.static-form-container .additional-form-button-container
 {
     padding-left: 113px;
 }
 
-.static-page-container .input-group
+.static-form-container .input-group
 {
     margin-bottom: 16px;
     width: 100%;
 }
 
-.static-page-container input,
-.static-page-container textarea
+.static-form-container input,
+.static-form-container textarea
 {
     width: 462px;
 }
 
-.static-page-container .active-button
+.static-form-container .active-button
 {
     padding-left: 18px;
     padding-right: 18px;
     width: auto;
 }
 
-.static-page-container .active-button-label
+.static-form-container .active-button-label
 {
     background: url("/images/teacher-page/send-answer-button-icon.png") no-repeat scroll 0 6px;
 }
 
-.static-page-container ol,
-.static-page-container ul
+.static-form-container ol,
+.static-form-container ul
 {
     padding: 0 18px;
 }
@@ -1063,19 +1091,19 @@ label
     background-position: 0 4px;
 }
 
-.static-page-container.add-video-page-container label
+.static-form-container.add-video-page-container label
 {
     width: 170px;
     line-height: 32px;
 }
 
-.static-page-container.add-video-page-container .buttons-container
+.static-form-container.add-video-page-container .buttons-container
 {
     padding-left: 170px;
 }
 
-.static-page-container.add-video-page-container .active-button,
-.static-page-container.add-video-page-container .semi-active-button
+.static-form-container.add-video-page-container .active-button,
+.static-form-container.add-video-page-container .semi-active-button
 {
     float: left;
     margin-right: 10px;
@@ -1085,9 +1113,92 @@ label
     width: auto;
 }
 
-.static-page-container.add-video-page-container .semi-active-button-label
+.static-form-container.add-video-page-container .semi-active-button-label
 {
     padding-left: 0;
+}
+/* static forms styles END */
+
+/* static pages styles BEGIN */
+.static-page-container
+{
+    padding: 18px 32px;
+}
+
+.static-page-container h3
+{
+    margin-top: 0;
+    font-size: 22px;
+}
+
+.static-page-container h4
+{
+    font-size: 16px;
+    font-family: "OpenSans Bold",sans-serif;
+}
+
+.static-page-container p
+{
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.static-page-container strong
+{
+    font-family: "OpenSans Bold", sans-serif;
+    font-weight: normal;
+}
+
+.static-page-container .column
+{
+    float: left;
+    margin-top: 20px;
+    margin-right: 105px;
+    padding-top: 80px;
+    width: 240px;
+}
+
+.static-page-container .column h4
+{
+    text-align: center;
+}
+
+.static-page-container .column.right
+{
+    float: right;
+    margin-right: 0;
+}
+
+.static-page-container .column.to-pupil
+{
+    background: url("/images/about/to-pupil-column.png") no-repeat center top;
+}
+
+.static-page-container .column.to-parent
+{
+    background: url("/images/about/to-parent-column.png") no-repeat center top;
+}
+
+.static-page-container .column.to-teacher
+{
+    background: url("/images/about/to-teacher-column.png") no-repeat center top;
+}
+
+.static-page-container .license-chapter-name
+{
+    margin-top: 20px;
+}
+
+.static-page-container .license-item
+{
+    margin-left: 5px;
+    font-family: "OpenSans Bold",sans-serif;
+}
+
+.static-page-container .license-paragraph
+{
+    margin-bottom: 0;
+    line-height: 20px;
 }
 /* static pages styles END */
 
