@@ -1,6 +1,6 @@
-<div class="comments-container">
-  {% set countComments = count_video_comments(video) %}
-  {% if countComments %}
+{% set countComments = count_video_comments(video) %}
+{% if countComments %}
+  <div class="comments-container">
     {% if countComments > constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE') %}
       <div class="show-more-link show-more-comments">
         <a href="javascript:void(0);" id="showPrevCommentsLink">
@@ -11,8 +11,6 @@
       <div id="prevCommentsContainer" class="prev-comments-container"></div>
     {% endif %}
     {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': comments} %}
-  {% endif %}
-  {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': comments} %}
   </div>
 {% endif %}
 {% if has_question_for_current_user(video) %}

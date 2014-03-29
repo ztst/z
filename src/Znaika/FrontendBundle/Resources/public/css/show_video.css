@@ -241,16 +241,6 @@
 .send-comment-button
 {
     float: right;
-    padding: 0 14px;
-    width: auto;
-    height: 30px;
-}
-
-.send-comment-button .active-button-label
-{
-    font-size: 13px;
-    font-family: "OpenSans Semibold", sans-serif;
-    background: url("/images/teacher-page/send-answer-button-icon.png") no-repeat scroll 0 5px;
 }
 
 .user-question-container
