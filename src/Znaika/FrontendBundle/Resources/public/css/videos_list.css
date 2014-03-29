@@ -40,8 +40,10 @@
 .chapter-video-preview-container a .over-play-sign
 {
     display: none;
-    margin-left: 44px;
-    margin-top: 22px;
+    left: 50%;
+    top: 50%;
+    margin-left: -10px;
+    margin-top: -14px;
     position: absolute;
     width: 25px;
     height: 29px;
@@ -175,6 +177,13 @@
 .chapter-list-moderator-buttons-block
 {
     margin-bottom: 19px;
+    display: inline-block;
+}
+
+.chapter-list-moderator-buttons-block .add-button
+{
+    float: left;
+    width: 233px;
 }
 
 .video-down,
@@ -183,6 +192,15 @@
 .video-up-icon
 {
     display: inline-block;
+}
+
+.video-down,
+.video-up
+{
+    float: left;
+    margin-left: 4px;
+    width: 30px;
+    padding: 6px 0;
 }
 
 .video-down-icon,

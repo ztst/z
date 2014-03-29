@@ -3,12 +3,12 @@
 .non-active-button
 {
     display: inline-block;
-    height: 26px;
+    height: 30px;
     width: auto;
 
     border-radius: 3px;
-    font-size: 11px;
-    line-height: 14px;
+    font-size: 13px;
+    line-height: 18px;
     font-family: "OpenSans Semibold", "Open Sans", serif;
     text-align: center;
     cursor: pointer;
@@ -28,9 +28,7 @@
 
 .active-button
 {
-    line-height: 15px;
     color: #ffffff;
-    text-shadow: 1px 1px 1px #000000;
     border: none;
     background: #32a1d5;
     background: linear-gradient(#32a1d5, #1e89bb);
@@ -49,7 +47,7 @@
 .semi-active-button-label,
 .non-active-button-label
 {
-    padding-left: 13px;
+    padding-left: 16px;
 }
 
 .active-button-label
@@ -118,7 +116,7 @@
 
 .add-button .active-button-label
 {
-    background: url('/images/video/add-button-icon.png') no-repeat 0 2px;
+    background: url('/images/video/add-button-icon.png') no-repeat 0 3px;
 }
 
 .edit-button .semi-active-button-label

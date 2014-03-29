@@ -14,6 +14,7 @@
       </a>
       <input type="hidden" value="{{ currentVideo.urlName }}" id="currentVideoName"/>
     {% endif %}
+    <div class="clear"></div>
   </div>
 {% endif %}
 {% if currentVideo is defined and currentVideo.orderPriority > 2 and not is_moderator() %}
@@ -36,8 +37,8 @@
             'videoName': video.getUrlName
             }) }}"
                title="{{ video.getName|raw }}">
-              <div class="">
                 <div class="over-play-sign"></div>
+              <div class="">
                 <div class="over-video-duration">{{ video.duration|date("i:s") }}</div>
               </div>
               <img
