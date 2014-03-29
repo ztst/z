@@ -21,8 +21,8 @@
 
 .profile-sidebar-menu li a
 {
-    display: inline-block;
-    padding: 8px 36px;
+    display: block;
+    padding: 8px 53px 8px 36px;
     text-decoration: none;
     font-family: "OpenSans Semibold", sans-serif;
     font-size: 15px;
@@ -77,18 +77,38 @@
 .videos-with-comments-list li,
 .videos-with-questions-list li
 {
-    padding: 16px 0 18px;
+    padding: 20px 0 18px;
     border-top: 1px solid #efefef;
 }
 
 .videos-with-comments-list li.first,
-.videos-with-questions-list li.first
+.videos-with-questions-list li.first,
+.video-comments li.first,
+.video-questions li.first
 {
     border-top: none;
 }
 
-.video-with-questions-list-item .user-questions-count,
-.video-questions-container .user-questions-count
+.video-with-questions-list-item,
+.video-with-comments-list-item,
+.right-count-column
+{
+    display: table-cell;
+}
+
+.video-with-questions-list-item,
+.video-with-comments-list-item
+{
+    width: 600px;
+}
+
+.right-count-column
+{
+    vertical-align: middle;
+    width: 48px;
+}
+
+.right-count-column .list-count-container
 {
     float: right;
 }
@@ -106,14 +126,13 @@
 .video-questions
 {
     list-style: none;
-    margin-top: 18px;
 }
 
 .video-comments li,
 .video-questions li
 {
     border-top: 1px solid #efefef;
-    padding: 23px 0 26px;
+    padding: 23px 0 17px;
 }
 
 .video-comments .media-body,
@@ -129,6 +148,12 @@
     font-size: 13px;
     color: #333333;
     display: block;
+}
+
+.video-questions .media-body a,
+.video-comments .media-body a
+{
+    text-decoration: none;
 }
 
 .video-comments .comment-body,
@@ -148,15 +173,6 @@
     margin-top: 8px;
 }
 
-.video-comments-container h4,
-.video-questions-container h4
-{
-    font-size: 14px;
-    font-family: "OpenSans Semibold", sans-serif;
-    color: #222222;
-    margin: 18px 0 8px;
-}
-
 .select-content-tab
 {
     margin-top: 16px;
@@ -167,25 +183,184 @@
     padding: 0 26px;
 }
 
-.videos-with-comments-list .open-video-comment-link,
-.videos-with-questions-list .open-video-question-link
+.videos-with-comments-list .open-video-comment-link a,
+.videos-with-questions-list .open-video-question-link a
 {
     font-size: 14px;
     font-family: "OpenSans Semibold", sans-serif;
     color: #222222;
 }
 
-.semi-active-button,
-.non-active-button,
-.semi-active-button a,
-.non-active-button a
+.videos-with-comments-list .open-video-comment-link,
+.videos-with-questions-list .open-video-question-link
+{
+    cursor: pointer;
+}
+
+.photo-container
+{
+    position: relative;
+    bottom: 1px;
+    width: 202px;
+    height: 202px;
+
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.photo-column-container,
+.user-profile-column-container,
+.settings-column-container
+{
+    float: left;
+}
+
+.user-profile-column-container
+{
+    width: 370px;
+    padding-left: 26px;
+    padding-right: 15px;
+}
+
+.profile-container
+{
+    padding: 8px 0;
+}
+
+.profile-container .user-profile-column-container
+{
+    padding: 0 15px 0 0;
+}
+
+.profile-info-row
+{
+    height: 40px;
+}
+
+.profile-info-row span
+{
+    color: #2a2a2a;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.profile-label
+{
+    font-family: "OpenSans Semibold", sans-serif;
+    display: inline-block;
+    width: 110px;
+}
+
+
+.user-profile-column-container h3
+{
+    margin: 0;
+    padding-bottom: 26px;
+    color: #000;
+    font-size: 16px;
+    font-family: "OpenSans Semibold", sans-serif;
+    font-weight: normal;
+}
+
+.ban-with-reason-dropdown-container
 {
     display: inline-block;
-    padding-right: 14px;
-    padding-left: 14px;
-    width: auto;
-    height: 31px;
+    position: relative;
+}
 
-    font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
+.ban-reasons-list
+{
+    list-style: none;
+    position: absolute;
+    border: 1px solid #cccccc;
+    border-top: none;
+    width: 100%;
+}
+
+.ban-reasons-list a
+{
+    display: inline-block;
+    height: 30px;
+    width: 100%;
+    padding: 6px 10px;
+
+    color: #333333;
+    font-size: 11px;
+    line-height: 16px;
+}
+
+.ban-reasons-list li a:hover
+{
+    background: #f4f4f4;
+}
+
+.moderator-profile-buttons-container
+{
+    border-top: 1px solid #cccccc;
+    padding: 15px 26px;
+    margin: 0 -26px;
+}
+
+.moderator-profile-buttons
+{
+    float: right;
+}
+
+.list-count-container
+{
+    font-family: "OpenSans Semibold", sans-serif;
+    font-size: 16px;
+    color: #036995;
+
+    float: right;
+}
+
+.tab-header
+{
+    margin: 0 -26px;
+    padding: 8px 26px 8px;
+
+    border-bottom: 1px solid #cccccc;
+}
+
+.tab-header .list-count-container
+{
+    color: #E8710D;
+}
+
+.tab-header h4
+{
+    font-size: 16px;
+    font-family: "OpenSans Semibold", sans-serif;
+    color: #222222;
+}
+
+.tab-header .video-breadcrumbs
+{
+    margin: 8px 0 8px;
+}
+
+.tab-footer-block
+{
+    border-top: 1px solid #cccccc;
+    padding: 20px 26px 0;
+    margin: 0 -26px;
+}
+
+.left-column
+{
+    width: 420px;
+}
+
+.right-column
+{
+    margin-left: 420px;
+    width: 200px;
+    margin-top: 12px;
+}
+
+.approve-comment-link
+{
+    margin-right: 3px;
 }

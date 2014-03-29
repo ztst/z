@@ -42,21 +42,10 @@
     margin-top: 45px;
 }
 
-.user-questions-count
-{
-    color: #004e78;
-}
-
 .profile-sidebar-menu-container .user-questions-count
 {
     font-size: 15px;
     font-family: "OpenSans Semibold", sans-serif;
-}
-
-.video-questions-container .user-questions-count
-{
-    font-size: 13px;
-    font-family: "OpenSans", "Open Sans", sans-serif;
 }
 
 .question-answer-form-container
@@ -84,20 +73,6 @@
     font-size: 12px;
 }
 
-.question-answer-form-container .send-comment-button
-{
-    padding: 0 14px;
-    width: auto;
-    height: 30px;
-}
-
-.question-answer-form-container .send-comment-button .active-button-label
-{
-    font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
-    background: url('/images/teacher-page/send-answer-button-icon.png') no-repeat 0 3px;
-}
-
 .teacher-profile-bottom-horizontal-placeholder
 {
     position: absolute;
@@ -121,4 +96,15 @@
     width: 296px;
     height: 22px;
     background: #fff;
+}
+
+.answer-form-block
+{
+    padding-left: 62px;
+}
+
+.show-answer-form-link
+{
+    float: right;
+    margin-top: -33px;
 }

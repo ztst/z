@@ -1064,16 +1064,9 @@ label
     width: 462px;
 }
 
-.static-form-container .active-button
-{
-    padding-left: 18px;
-    padding-right: 18px;
-    width: auto;
-}
-
 .static-form-container .active-button-label
 {
-    background: url("/images/teacher-page/send-answer-button-icon.png") no-repeat scroll 0 6px;
+    background: url("/images/teacher-page/send-answer-button-icon.png") no-repeat scroll 0 4px;
 }
 
 .static-form-container ol,

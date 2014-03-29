@@ -456,7 +456,7 @@
          */
         public function isEnabled()
         {
-            return UserStatus::isActive($this->status) || UserStatus::isBanned($this->status);
+            return UserStatus::isActive($this->status);
         }
 
         /**
@@ -606,7 +606,9 @@
             $firstName = $this->getFirstName();
             if (trim($firstName) != "")
             {
-                $name = $this->getFirstName() . " " . $this->getLastName();
+                $name = $this->getFirstName();
+                $name = $this->role == UserRole::ROLE_USER ? $name . " " . $this->getMiddleName() : $name;
+                $name .=  " " . $this->getLastName();
                 $name = trim($name);
             }
             else

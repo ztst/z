@@ -2,25 +2,18 @@
 .semi-active-button,
 .non-active-button
 {
-    display: block;
-    width: 100%;
-    height: 35px;
+    display: inline-block;
+    height: 26px;
+    width: auto;
 
     border-radius: 3px;
-    font-size: 15px;
-    font-family: "OpenSans", "Open Sans", serif;
+    font-size: 11px;
+    line-height: 14px;
+    font-family: "OpenSans Semibold", "Open Sans", serif;
     text-align: center;
     cursor: pointer;
-}
 
-a.active-button,
-a.semi-active-button,
-a.non-active-button,
-label.active-button,
-label.semi-active-button,
-label.non-active-button
-{
-    padding-top: 5px;
+    padding: 5px 11px;
 }
 
 .active-button:hover,
@@ -35,6 +28,9 @@ label.non-active-button
 
 .active-button
 {
+    line-height: 15px;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #000000;
     border: none;
     background: #32a1d5;
     background: linear-gradient(#32a1d5, #1e89bb);
@@ -49,17 +45,22 @@ label.non-active-button
     background: linear-gradient(#31a7de, #0692c8);
 }
 
+.active-button-label,
+.semi-active-button-label,
+.non-active-button-label
+{
+    padding-left: 13px;
+}
+
 .active-button-label
 {
-    padding-left: 19px;
-    line-height: 30px;
     color: #fff;
 }
 
 .semi-active-button
 {
-    border: 1px solid #d6d6d6;
-    background: #fff;
+    border: 1px solid #bbbbbb;
+    background: linear-gradient(#ffffff, #fafafa);
 }
 
 .semi-active-button:hover,
@@ -71,7 +72,6 @@ label.non-active-button
 
 .semi-active-button-label
 {
-    padding-left: 19px;
     color: #0373a8;
 }
 
@@ -83,7 +83,6 @@ label.non-active-button
 
 .non-active-button-label
 {
-    padding-left: 19px;
     color: #cbd6dc;
 }
 
@@ -110,6 +109,49 @@ label.non-active-button
 .edit-account-setting-button:hover
 {
     background: url('/images/user-profile/edit-profile-setting-icon-over.png') no-repeat;
+}
+
+.send-comment-button .active-button-label
+{
+    background: url('/images/controls/send-answer-button-icon.png') no-repeat 0 3px;
+}
+
+.add-button .active-button-label
+{
+    background: url('/images/video/add-button-icon.png') no-repeat 0 2px;
+}
+
+.edit-button .semi-active-button-label
+{
+    background: url('/images/video/edit-button-icon.png') no-repeat 0 3px;
+}
+
+.approve-all-link .active-button-label
+{
+    background: url('/images/controls/approve-all-icon.png') no-repeat 0 4px;
+}
+
+.show-answer-form-link .semi-active-button-label
+{
+    background: url('/images/controls/answer-button-icon.png') no-repeat 0 3px;
+}
+
+.approve-comment-link .semi-active-button-label,
+.approve-user-profile-link .semi-active-button-label,
+.approve-user-link .semi-active-button-label
+{
+    background: url('/images/controls/approve-button-icon.png') no-repeat 0 4px;
+}
+
+.ban-with-reason-dropdown-link .semi-active-button-label,
+.delete-user-link .semi-active-button-label
+{
+    background: url('/images/controls/ban-user-button-icon.png') no-repeat 0 3px;
+}
+
+.delete-comment-link .semi-active-button-label
+{
+    background: url('/images/controls/delete-button-icon.png') no-repeat 0 3px;
 }
 
 /* select style BEGIN */
@@ -270,3 +312,29 @@ label.non-active-button
     background-position: 0 -57px;
 }
 /** ~radiobuttons styles **/
+
+
+.show-more-link
+ {
+    border: 1px solid #d6d6d6;
+    border-radius: 3px;
+    background: #f6f6f6;
+
+    margin-bottom: 20px;
+}
+
+.show-more-link:hover
+{
+    border-color: #c4c4c4;
+    box-shadow: 0 3px 6px -6px #000;
+}
+
+.show-more-link a
+{
+    display: block;
+    color: #036995;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 15px;
+}

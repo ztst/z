@@ -5,6 +5,7 @@
 
 .approve-all-comments-block
 {
+    float: right;
     border-top: 1px solid #EFEFEF;
     padding-top: 20px;
 }
@@ -12,4 +13,21 @@
 .video-comments
 {
     margin-bottom: 0;
+}
+
+.approve-comment-buttons-container
+{
+    margin-top: -33px;
+    float: right;
+}
+
+.comment-content
+{
+    margin-top: -9px;
+    width: 440px;
+}
+
+.comment-content .pull-left
+{
+    margin-top: 6px;
 }

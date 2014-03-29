@@ -1,0 +1,16 @@
+<div class="ban-with-reason-dropdown-container">
+  <a class="semi-active-button ban-with-reason-dropdown-link" id="deleteUser{{ user.userId }}" href="javascript:void(0);" title="">
+    <span class="semi-active-button-label">Забанить за нарушение</span>
+  </a>
+  <div class="ban-reasons-list-container hidden">
+    <ul class="ban-reasons-list">
+      {% for key in reasons|keys %}
+        <li class="ban-with-reason-button" id="reason{{ key }}">
+          <a href="javascript:void(0);" title="">
+            {{ reasons[key] }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

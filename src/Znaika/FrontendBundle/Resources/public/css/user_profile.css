@@ -11,6 +11,7 @@
     overflow: hidden;
     width: 148px;
     height: 31px;
+    margin-top: -27px;
 }
 
 .photo-button input
@@ -33,7 +34,9 @@
     margin: 14px 0;
 
     overflow: hidden;
-    width: 200px;
+    position: relative;
+    display: inline-block;
+    width: 144px;
     height: 31px;
 }
 
@@ -111,60 +114,35 @@
     font-size: 12px;
 }
 
-.photo-column-container,
-.user-profile-column-container,
-.settings-column-container
-{
-    float: left;
-}
-
 .photo-column-container
 {
     padding-left: 23px;
     padding-right: 24px;
     width: 247px;
-}
 
-.photo-container
-{
-    position: relative;
-    bottom: 1px;
-    width: 202px;
-    height: 202px;
-
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    text-align: center;
 }
 
 .add-photo-button,
 .edit-photo-button,
 .delete-photo-button
 {
-    float: left;
+    width: 141px;
 }
 
 .add-photo-button .semi-active-button-label
 {
-    background: #fff url('/images/user-profile/add-photo-button-icon.png') no-repeat 0 3px;
+    background: #fff url('/images/user-profile/add-photo-button-icon.png') no-repeat 0 2px;
 }
 
 .edit-photo-button .non-active-button-label
 {
-    padding-left: 22px;
-    background: #fff url("/images/user-profile/edit-profile-setting-icon.png") no-repeat 0 1px;
+    background: #fff url('/images/user-profile/edit-photo-button-icon.png') no-repeat 0 3px;
 }
 
 .delete-photo-button .non-active-button-label
 {
-    background: #fff url('/images/user-profile/delete-photo-button-icon.png') no-repeat 0 4px;
-}
-
-.user-profile-column-container
-{
-    width: 370px;
-    padding-left: 26px;
-    padding-right: 15px;
+    background: #fff url('/images/user-profile/delete-photo-button-icon.png') no-repeat 0 3px;
 }
 
 .form-control,
@@ -186,7 +164,6 @@
 .save-user-profile-button
 {
     float: right;
-    width: 222px;
 }
 
 .user-profile-container label
@@ -259,7 +236,7 @@
 
 .save-user-profile-button .semi-active-button-label
 {
-    background: url("/images/user-profile/save-user-profile-button-icon.png") no-repeat scroll 0 3px #FFFFFF;
+    background: url("/images/user-profile/save-user-profile-button-icon.png") no-repeat scroll 0 2px #FFFFFF;
 }
 
 .settings-column-container
@@ -359,20 +336,6 @@
 .change-form-container input
 {
     width: 190px;
-}
-
-.semi-active-button,
-.non-active-button,
-.semi-active-button a,
-.non-active-button a
-{
-    padding-right: 14px;
-    padding-left: 14px;
-    width: auto;
-    height: 31px;
-
-    font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .non-active-button-label

@@ -1,33 +1,44 @@
-<div>
-  <div>
-    <img src="{{ user_photo_big_url(user) }}" alt="Аватар" />
+<div class="user-profile-column-container">
+  <h3>Личная информация</h3>
+  <div class="profile-info-row">
+    <span class="profile-label">Email</span>
+    <span>{% if user.email %}{{ user.email }}{% else %}-{% endif %}</span>
   </div>
-  <div>
-    <span>Имя</span>
-    <span>{% if user.firstName %}{{ user.firstName }}{% else %}-{% endif %}</span>
-  </div>
-  <div>
-    <span>Фамилия</span>
+  <div class="profile-info-row">
+    <span class="profile-label">Фамилия</span>
     <span>{% if user.lastName %}{{ user.lastName }}{% else %}-{% endif %}</span>
   </div>
-  <div>
-    <span>Никнейм</span>
+  <div class="profile-info-row">
+    <span class="profile-label">Имя</span>
+    <span>{% if user.firstName %}{{ user.firstName }}{% else %}-{% endif %}</span>
+  </div>
+  <div class="profile-info-row">
+    <span class="profile-label">Никнейм</span>
     <span>{% if user.nickname %}{{ user.nickname }}{% else %}-{% endif %}</span>
   </div>
-  <div>
-    <span>Пол</span>
+  <div class="profile-info-row">
+    <span class="profile-label">Пол</span>
     <span>{{ user_sex(user) }}</span>
   </div>
-  <div>
-    <span>Класс</span>
+  <div class="profile-info-row">
+    <span class="profile-label">Класс</span>
     <span>{% if user.grade %}{{ user.grade }}{% else %}-{% endif %}</span>
   </div>
-  <div>
-    <span>Дата рождения</span>
-    <span>{{ user.birthDate|date("j M Y") }}</span>
+  <div class="profile-info-row">
+    <span class="profile-label">Дата рождения</span>
+    {% set month = "month_" ~ user.birthDate|date("M") %}
+    {% set year = user.birthDate|date('Y') %}
+    {% set day = user.birthDate|date('j') %}
+    <span>{{ '%s %s %s'|format(day, month|trans, year) }}</span>
   </div>
-  <div>
-    <span>Город</span>
+  <div class="profile-info-row">
+    <span class="profile-label">Город</span>
     <span>{% if user.city %}{{ user.city }}{% else %}-{% endif %}</span>
   </div>
 </div>
+<div class="photo-column-container">
+  <div class="photo-container">
+    <img src="{{ user_photo_url(user) }}" alt="Аватар" />
+  </div>
+</div>
+<div class="clear"></div>

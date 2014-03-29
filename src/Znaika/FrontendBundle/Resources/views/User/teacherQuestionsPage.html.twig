@@ -40,7 +40,7 @@
           {% if countQuestions %}
             <li class="questions-tab hidden">
               <div class="active-top-border"></div>
-              <a id="questionTab" href="#synopsis_tab" data-toggle="tab">
+              <a id="questionTab" href="#question_tab" data-toggle="tab">
                 <span class="tab-label">Просмотр вопросов</span>
               </a>
             </li>
@@ -49,9 +49,12 @@
       </div>
     </div>
     <div class="tab-pane active video-tab" id="video_tab">
+      <div class="tab-header">
+        <h4>Видеоуроки с новыми вопросами<span class="list-count-container">+{{ videos|length }}</span></h4>
+      </div>
       {% include "ZnaikaFrontendBundle:User:video_with_questions_list.html.twig" with {'videos': videos} %}
     </div>
-    <div class="tab-pane synopsis-tab" id="synopsis_tab">
+    <div class="tab-pane questions-tab-content" id="question_tab">
       {% include "ZnaikaFrontendBundle:User:teacher_questions_tab.html.twig" with {'videos': videos} %}
     </div>
   </div>

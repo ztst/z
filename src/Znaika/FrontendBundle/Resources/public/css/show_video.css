@@ -150,12 +150,9 @@
 /* video info styles END */
 
 /* comments styles BEGIN */
-.show-more-comments,
 .show-more-videos
 {
-    display: block;
-    border: 1px solid #d6d6d6;
-    border-radius: 3px;
+    background: none;
 
     color: #036995;
     font-size: 13px;
@@ -163,19 +160,9 @@
     text-decoration: none;
 }
 
-.show-more-comments:hover,
-.show-more-videos:hover
+.show-more-videos a
 {
-    text-decoration: none;
-    border-color: #c4c4c4;
-    box-shadow: 0 3px 6px -6px #000;
-}
-
-.show-more-comments
-{
-    padding: 15px;
-    margin-bottom: 0;
-    background: #f6f6f6;
+    font-size: 12px;
 }
 
 .comments-container .media-list
@@ -382,81 +369,6 @@
 }
 
 /* moderator styles BEGIN */
-.edit-button
-{
-    margin-top: 19px;
-    margin-left: 18px;
-    height: 30px;
-
-    font-family: "OpenSans Semibold", sans-serif;
-}
-
-.synopsis-tab .add-button,
-.quiz-tab .add-button
-{
-    margin-top: 18px;
-    margin-left: 18px;
-}
-
-.add-button
-{
-    float: left;
-    width: auto;
-    height: 30px;
-
-    font-family: "OpenSans Semibold", sans-serif;
-}
-
-.synopsis-tab .edit-button
-{
-    width: 221px;
-}
-
-.quiz-tab .edit-button
-{
-    width: 210px;
-}
-
-.synopsis-tab .edit-button-icon
-{
-    margin-left: 17px;
-    margin-top: 7px;
-}
-
-.quiz-tab .edit-button-icon
-{
-    margin-left: 27px;
-    margin-top: 8px;
-}
-
-.video-view-container .semi-active-button
-{
-    display: inline-block;
-    padding: 4px 14px 0;
-    width: auto;
-    font-size: 13px;
-}
-
-.add-button .active-button-label
-{
-    font-family: "OpenSans Semibold", sans-serif;
-    background: url('/images/video/add-button-icon.png') no-repeat 0 3px;
-}
-
-.edit-button .semi-active-button-label
-{
-    background: url('/images/video/edit-button-icon.png') no-repeat 0 3px;
-}
-
-.add-button-label
-{
-    margin-top: 4px;
-    margin-left: 8px;
-
-    font-size: 13px;
-    font-family: "OpenSans Semibold", sans-serif;
-}
-
 /* moderator styles END */
 
 .quiz-not-available

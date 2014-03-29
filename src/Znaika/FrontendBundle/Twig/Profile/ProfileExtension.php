@@ -7,6 +7,7 @@
     use Znaika\FrontendBundle\Helper\Util\Profile\UserBan;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
     use Znaika\FrontendBundle\Helper\Util\Profile\UserSex;
+    use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
     class ProfileExtension extends \Twig_Extension
     {
@@ -30,18 +31,27 @@
         public function getFunctions()
         {
             return array(
-                'ban_reason_select' => new \Twig_Function_Method($this, 'renderBanReasonSelect'),
-                'user_sex'          => new \Twig_Function_Method($this, 'renderUserSex'),
+                'ban_reason_button'        => new \Twig_Function_Method($this, 'renderBanReasonButton'),
+                'user_sex'                 => new \Twig_Function_Method($this, 'renderUserSex'),
+                'count_not_verified_pupils' => new \Twig_Function_Method($this, 'countNotVerifiedPupils'),
             );
         }
 
-        public function renderBanReasonSelect()
+        public function countNotVerifiedPupils()
+        {
+            /** @var UserRepository $userRepository */
+            $userRepository = $this->container->get("znaika_frontend.user_repository");
+
+            return $userRepository->countNotVerifiedUsers(array(UserRole::ROLE_USER));
+        }
+
+        public function renderBanReasonButton(User $user)
         {
             $reasons = UserBan::getAvailableTypesTexts();
 
-            $templateFile    = "ZnaikaFrontendBundle:User:user_ban_reason_select.html.twig";
+            $templateFile    = "ZnaikaFrontendBundle:User:user_ban_reason_button.html.twig";
             $templateContent = $this->twig->loadTemplate($templateFile);
-            $result          = $templateContent->render(array("reasons" => $reasons));
+            $result          = $templateContent->render(array("reasons" => $reasons, "user" => $user));
 
             return $result;
         }

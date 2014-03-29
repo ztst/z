@@ -18,7 +18,7 @@
 .nav-tabs.select-content-tab > li > a
 {
     display: block;
-    padding: 4px 0 0;
+    padding: 5px 20px 0;
     height: 30px;
     border-radius: 3px 3px 0 0;
     border: 1px solid #ccc;
@@ -56,7 +56,7 @@
 
 .tab-label
 {
-    padding-left: 14px;
+    padding-left: 18px;
     color: #212020;
     font-size: 13px;
 }
@@ -84,55 +84,44 @@
     border-bottom: 1px solid #ccc;
 }
 
-.select-content-tab .video
-{
-    width: 128px;
-}
-
-.select-content-tab .synopsis
-{
-    width: 109px;
-}
-
-.select-content-tab .quiz
-{
-    width: 108px;
-}
-
-.select-content-tab .video-with-questions
-{
-    width: 189px;
-}
-
-.select-content-tab .questions-tab
-{
-    width: 213px;
-}
-
 .select-content-tab .video .tab-label
 {
-    background: url('/images/video/video-tab-icon.png') no-repeat 0 4px;
+    padding-left: 14px;
+    background: url('/images/tab-icons/video-tab-icon.png') no-repeat 0 4px;
 }
 
 .select-content-tab .synopsis .tab-label
 {
-    background: url('/images/video/synopsis-tab-icon.png') no-repeat 0 6px;
+    padding-left: 14px;
+    background: url('/images/tab-icons/synopsis-tab-icon.png') no-repeat 0 6px;
 }
 
 .select-content-tab .quiz .tab-label
 {
-    padding-left: 18px;
-    background: url('/images/video/quiz-tab-icon.png') no-repeat 0 3px;
+    background: url('/images/tab-icons/quiz-tab-icon.png') no-repeat 0 3px;
 }
 
 .select-content-tab .video-with-questions .tab-label
 {
-    padding-left: 18px;
-    background: url('/images/teacher-page/video-with-questions-tab-icon.png') no-repeat 0 4px;
+    background: url('/images/tab-icons/video-with-questions-tab-icon.png') no-repeat 1px 3px;
 }
 
 .select-content-tab .questions-tab .tab-label
 {
-    padding-left: 18px;
-    background: url('/images/teacher-page/questions-tab-icon.png') no-repeat 0 3px;
+    background: url('/images/tab-icons/questions-tab-icon.png') no-repeat 0 3px;
+}
+
+.select-content-tab .profiles-tab .tab-label
+{
+    background: url('/images/tab-icons/verify-users-tab-icon.png') no-repeat 0 3px;
+}
+
+.select-content-tab .pupil-tab .tab-label
+{
+    background: url('/images/tab-icons/verify-user-profile-tab-icon.png') no-repeat 0 3px;
+}
+
+.select-content-tab .comments-tab .tab-label
+{
+    background: url('/images/tab-icons/comment-tab-icon.png') no-repeat 0 4px;
 }

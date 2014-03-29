@@ -12,7 +12,8 @@
         {
             return array(
                 self::NOT_VERIFIED,
-                self::ACTIVE
+                self::ACTIVE,
+                self::BANNED,
             );
         }
 

@@ -95,7 +95,6 @@
             return $count > 0 ? "+$count" : "";
         }
 
-
         public function countVideoNotVerifiedComments(Video $video)
         {
             $count = count($this->videoCommentRepository->getVideoNotVerifiedComments($video));
