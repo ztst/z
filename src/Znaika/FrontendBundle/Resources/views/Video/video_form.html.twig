@@ -25,7 +25,9 @@
     <button type="submit" class="active-button">
       <span class="active-button-label">Cохранить</span>
     </button>
-    <a class="semi-active-button cancel-button" href="{{ app.request.headers.get('referer') }}">
+    <a
+      class="semi-active-button cancel-button"
+      href="{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName, 'show': 'synopsis' })}}">
       <span class="semi-active-button-label">Отмена</span>
     </a>
   </div>
