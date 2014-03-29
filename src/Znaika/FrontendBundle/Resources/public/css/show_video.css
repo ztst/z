@@ -69,6 +69,7 @@
     margin-left: 5px;
     width: 16px;
     height: 16px;
+    text-decoration: none;
 }
 
 .video-social-buttons h5
@@ -137,11 +138,49 @@
 .show-more-videos
 {
     background: none;
+
+    color: #036995;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
 }
 
 .show-more-videos a
 {
     font-size: 12px;
+}
+
+.comments-container .media-list
+{
+    margin: 0;
+}
+
+.comments-container .media.comment-container.first
+{
+    border-top: none;
+}
+
+.comments-container .media.comment-container
+{
+    margin: 0;
+    padding: 18px 0;
+    border-top: 1px solid #e9e9e9;
+}
+
+.prev-comments-container .media.comment-container
+{
+    border-top: none;
+    border-bottom: 1px solid #e9e9e9;;
+}
+
+.prev-comments-container .media.comment-container.first
+{
+    padding-top: 0;
+}
+
+.comments-container .media.comment-container img
+{
+    overflow: hidden;
 }
 
 .add-video-comment-container
@@ -183,6 +222,20 @@
     background: url('/images/video/question-comment-button-selected.png') no-repeat;
 }
 
+.send-comment-button
+{
+    padding: 0 14px;
+    width: auto;
+    height: 30px;
+}
+
+.send-comment-button .active-button-label
+{
+    font-size: 13px;
+    font-family: "OpenSans Semibold", sans-serif;
+    background: url("/images/teacher-page/send-answer-button-icon.png") no-repeat scroll 0 5px;
+}
+
 .user-question-container
 {
     display: none;
@@ -192,7 +245,7 @@
 .answer-comment-author-name,
 .question-comment-author-name
 {
-    margin-top: 5px;
+    margin: 3px 0 0;
     color: #333;
     font-size: 13px;
     font-family: "OpenSans Semibold", sans-serif;
@@ -225,7 +278,7 @@
 
 .comment-date
 {
-    margin-top: 5px;
+    margin: 10px 0 0;
     color: #999;
     font-size: 11px;
     font-family: "OpenSans", "Open Sans", serif;
@@ -265,8 +318,7 @@
 {
     margin-bottom: 11px;
     padding-left: 15px;
-    background: url('/images/video/all-chapters-icon.png') no-repeat;
-    background-position: 0 5px;
+    background: url('/images/video/all-chapters-icon.png') no-repeat 0 5px;
 }
 
 .label-all-chapters a
@@ -293,6 +345,31 @@
 .quiz-not-available
 {
     padding: 18px;
+}
+
+.quiz-under-construction
+{
+    margin: 68px auto;
+    padding-top: 148px;
+    background: url('/images/under-construction-image.png') no-repeat center top;
+}
+
+.quiz-under-construction h3,
+.quiz-under-construction h4
+{
+    text-align: center;
+}
+
+.quiz-under-construction h3
+{
+    color: #89a6bb;
+    font-size: 20px;
+}
+
+.quiz-under-construction h4
+{
+    color: #696969;
+    font-size: 13px;
 }
 
 .questions-buttons-block

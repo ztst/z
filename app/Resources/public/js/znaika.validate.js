@@ -1,9 +1,11 @@
 $(function()
 {
-    jQuery.validator.addMethod("passwordSymbols", function(value, element)
+    jQuery.validator.addMethod("password", function(value, element)
     {
-        return this.optional(element) || /^[a-zA-Z0-9\!\'\"\№\;\%\:\?/*\(\)\-\=\_\+\\\/\<\>\,\.\?\~]{1,}$/.test(value);
-    }, "Пароль должен содержать только английские буквы, цифры и знаки");
+        var reg = new RegExp("^[a-zA-Z0-9\!\'\"\№\;\%\:\?/*\(\)\-\=\_\+\\\/\<\>\,\.\?\~]{1,}$");
+
+        return this.optional(element) || reg.test(value);
+    });
     jQuery.validator.addMethod("nicknameSymbols", function(value, element)
     {
         return this.optional(element) || /^[a-zA-Z0-9\!\'\"\№\;\%\:\?/*\(\)\-\=\_\+\\\/\<\>\,\.\?\~]{1,}$/.test(value);

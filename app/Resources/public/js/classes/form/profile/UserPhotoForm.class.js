@@ -3,6 +3,7 @@ var UserPhotoForm = Base.extend({
     _fields: null,
 
     _deleteButton: null,
+    _uploadButton: null,
     _uploadButtonText: null,
 
     _isUploading: null,
@@ -18,7 +19,8 @@ var UserPhotoForm = Base.extend({
             $("#editUserPhotoForm").submit();
         });
 
-        this._uploadButtonText = $("#editUserPhotoButton .button-label");
+        this._uploadButton = $("#editUserPhotoButton");
+        this._uploadButtonText = this._uploadButton.find(".button-label");
 
         $("#editUserPhotoForm").ajaxForm({
             beforeSubmit: handler(this, "_onBeforeSubmit"),
@@ -62,6 +64,8 @@ var UserPhotoForm = Base.extend({
 
         $("#uploadPhotoProgress").addClass("hidden");
         this._uploadButtonText.html("Добавить фото");
+        this._uploadButtonText.attr("class", "semi-active-button-label");
+        this._uploadButton.attr("class", "semi-active-button add-photo-button");
         this._updatePhotos($("#defaultPhotoUrl").val());
         this._deleteButton.addClass("hidden");
     },
@@ -80,6 +84,8 @@ var UserPhotoForm = Base.extend({
         if (response.success)
         {
             this._uploadButtonText.html("Изменить фото");
+            this._uploadButtonText.attr("class", "non-active-button-label");
+            this._uploadButton.attr("class", "non-active-button edit-photo-button");
             this._updatePhotos(response.photoUrl);
             this._deleteButton.removeClass("hidden");
         }

@@ -17,7 +17,8 @@ var ChangeEmailForm = BaseForm.extend({
             messages: { email: handler(that, "_getInvalidEmailMessage") }
         });
         this._form.find("#oldPasswordNewEmailField").rules('add', {
-            passwordSymbols: true
+            password: true,
+            messages: { password: handler(that, "_getPasswordEmailMessage") }
         });
     }
 });

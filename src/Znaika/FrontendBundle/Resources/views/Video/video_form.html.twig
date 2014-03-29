@@ -1,28 +1,33 @@
-<div>
+<div class="static-form-container add-video-page-container">
   {{ form_start(form, {'action': url, 'method': 'POST'}) }}
   {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
   <div class="form-group">
-    {{ form_label(form.name, 'Название') }}
+    {{ form_label(form.name, 'Название видеоурока') }}
     {{ form_errors(form.name) }}
     {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
   </div>
   <div class="form-group">
-    {{ form_label(form.url, 'Ссылка') }}
+    {{ form_label(form.url, 'Ссылка на видео') }}
     {{ form_errors(form.url) }}
     {{ form_widget(form.url, {'attr': {'class': 'form-control'}}) }}
   </div>
   <div class="form-group">
-    {{ form_label(form.author, 'Автор') }}
+    {{ form_label(form.author, 'Автор видеоурока') }}
     {{ form_errors(form.author) }}
     {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
   </div>
   <div class="form-group">
-    {{ form_label(form.supervisors, 'Кураторы') }}
+    {{ form_label(form.supervisors, 'Кураторы видеоурока') }}
     {{ form_errors(form.supervisors) }}
     {{ form_widget(form.supervisors, {'attr': {'class': 'form-control'}}) }}
   </div>
-  <div>
-    <button type="submit" class="btn btn-primary">Cохранить</button>
+  <div class="buttons-container">
+    <button type="submit" class="active-button">
+      <span class="active-button-label">Cохранить</span>
+    </button>
+    <a class="semi-active-button cancel-button" href="{{ app.request.headers.get('referer') }}">
+      <span class="semi-active-button-label">Отмена</span>
+    </a>
   </div>
   {{ form_end(form) }}
 </div>

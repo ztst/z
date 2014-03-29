@@ -48,7 +48,7 @@ var EditProfileForm = BaseForm.extend({
     {
         var that = this;
         that._fields = [];
-        this._form.find("input").each(function()
+        this._form.find("input, select").each(function()
         {
             that._fields.push({
                 field: $(this),
@@ -77,6 +77,10 @@ var EditProfileForm = BaseForm.extend({
                 maxlength: "Максимальная длина никнейма - 50 символов",
                 minlength: "Никнейм должен быть минимум 3 символа"
             }
+        });
+        this._form.find("#regionField").rules('add', {
+            maxlength: 150,
+            messages: { maxlength: "Максимальная длина - 150 символов" }
         });
         this._form.find("#cityField").rules('add', {
             maxlength: 150,

@@ -8,7 +8,7 @@
         </a>
         <input type="hidden" id="showPrevCommentsUrl" value="{{ path('get_prev_comments', {'videoName': video.getUrlName}) }}"/>
       </div>
-      <div id="prevCommentsContainer"></div>
+      <div id="prevCommentsContainer" class="prev-comments-container"></div>
     {% endif %}
     {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': comments} %}
   {% endif %}

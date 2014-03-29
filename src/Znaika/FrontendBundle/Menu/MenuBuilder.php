@@ -1,8 +1,9 @@
 <?php
     namespace Znaika\FrontendBundle\Menu;
 
-    use Knp\Menu\FactoryInterface;
     use Knp\Menu\ItemInterface;
+    use Knp\Menu\FactoryInterface;
+    use Symfony\Component\DependencyInjection\ContainerInterface;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\Security\Core\SecurityContextInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
@@ -16,6 +17,7 @@
 
     class MenuBuilder
     {
+        const DEFAULT_CLASS_FOR_ANONYMOUS_USER = 5;
         private $factory;
 
         /**
@@ -65,7 +67,12 @@
             $classes = ClassNumberUtil::getAvailableClasses();
             foreach ($classes as $classNumber)
             {
-                $menuItem = $menu->addChild("<div class='class-menu-top-line'></div><span class='grade-number'>$classNumber</span><span class='grade-word'>&nbsp;класс</span><span class='arrow'></span>");
+                $menuItem = $menu->addChild(
+                                 "<span class='class-menu-top-line'></span>
+                                  <span class='grade-number'>$classNumber</span>
+                                  <span class='grade-word'>&nbsp;класс</span>
+                                  <span class='arrow'></span>"
+                );
                 $menuItem->setExtra('safe_label', true);
                 $menuItem->setAttribute("id", $classNumber);
 
@@ -136,6 +143,8 @@
                 {
                     $menuItem->setAttribute("class", "selected");
                 }
+
+                $menuItem->setAttribute("class", $menuItem->getAttribute("class") . " " . $subject->getUrlName());
             }
 
             return $menu;
@@ -179,9 +188,10 @@
 
         protected function getCurrentClass(Request $request)
         {
-            $currentClass = $request->get("class", null);
+            $defaultUserClass = ($this->currentUser instanceof User) ? $this->currentUser->getGrade() : null;
+            $currentClass = $request->get("class", $defaultUserClass);
 
-            return $currentClass ? $currentClass : 1; //TODO: add user class by default
+            return $currentClass ? $currentClass : self::DEFAULT_CLASS_FOR_ANONYMOUS_USER;
         }
 
         protected function getCurrentSubjectUrlName(Request $request)

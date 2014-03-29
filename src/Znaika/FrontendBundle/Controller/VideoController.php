@@ -31,6 +31,7 @@
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
+    use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
 
     class VideoController extends ZnaikaController
     {
@@ -296,26 +297,45 @@
 
         public function showCatalogueAction($class, $subjectName)
         {
-            $subject           = $this->getSubjectByName($subjectName);
-            $chapterRepository = $this->getChapterRepository();
-            $chapters          = $chapterRepository->getChaptersForCatalog($class, $subject->getSubjectId());
+            $subjectsRepository = $this->getSubjectRepository();
+            $subject            = $this->getSubjectByName($subjectName);
+            $chapterRepository  = $this->getChapterRepository();
+            $chapters           = $chapterRepository->getChaptersForCatalog($class, $subject->getSubjectId());
 
             $currentChapter   = null;
-            $currentChapterId = 0;
+            $currentChapterId = $this->getRequest()->get("ch", 0);
+
             if (!empty($chapters) && isset($chapters[0]))
             {
-                $currentChapter   = $chapters[0];
-                $currentChapterId = $currentChapter->getChapterId();
+                $currentChapterId = $currentChapterId ? : $chapters[0]->getChapterId();
             }
+            $currentChapter = $chapterRepository->getOneById($currentChapterId);
 
-            return $this->render('ZnaikaFrontendBundle:Video:showCatalogue.html.twig', array(
-                'class'            => $class,
-                'subjectName'      => $subjectName,
-                'currentChapter'   => $currentChapter,
-                'currentChapterId' => $currentChapterId,
-                'chapters'         => $chapters,
-                'videoRepository'  => $this->getVideoRepository()
-            ));
+            $videoRepository = $this->getVideoRepository();
+            if (count($videoRepository->getVideoByChapter($currentChapter)) > 0)
+            {
+                $result = $this->render('ZnaikaFrontendBundle:Video:showFilledCatalogue.html.twig', array(
+                    'class'              => $class,
+                    'subjectName'        => $subjectName,
+                    'subjectNameRussian' => $subject->getName(),
+                    'currentChapter'     => $currentChapter,
+                    'currentChapterId'   => $currentChapterId,
+                    'chapters'           => $chapters,
+                    'videoRepository'    => $videoRepository,
+                    'subjects'           => $subjectsRepository->getByGrade($class)
+                ));
+            }
+            else
+            {
+                $result = $this->render('ZnaikaFrontendBundle:Video:showEmptyCatalogue.html.twig', array(
+                    'class'              => $class,
+                    'subjectNameRussian' => $subject->getName(),
+                    'subjects'           => $subjectsRepository->getAll(),
+                    'subjectsRepository' => $subjectsRepository,
+                    'classes'            => ClassNumberUtil::getAvailableClasses()
+                ));
+            }
+            return $result;
         }
 
         public function moveVideoAjaxAction(Request $request)
@@ -349,6 +369,7 @@
                 throw $this->createNotFoundException("Bad vicatadeo url");
             }
 
+            $contentToShow       = $this->getRequest()->get("show", "video");
             $addVideoCommentForm = $this->getAddVideoCommentForm();
             $viewVideoOperation  = $this->saveViewVideoOperation($video);
             $chapterVideos       = $repository->getVideoByChapter($video->getChapter()->getChapterId());
@@ -363,6 +384,7 @@
                 'viewVideoOperation'  => $viewVideoOperation,
                 'chapterVideos'       => $chapterVideos,
                 'userQuizScore'       => $userQuizScore,
+                'contentToShow'       => $contentToShow
             ));
         }
 
@@ -406,7 +428,7 @@
             $subject = null;
             if ($subjectName)
             {
-                $repository = $this->get('znaika_frontend.subject_repository');
+                $repository = $this->getSubjectRepository();
                 $subject    = $repository->getOneByUrlName($subjectName);
             }
 
@@ -427,6 +449,14 @@
         private function getVideoInfoUpdater()
         {
             return $this->get("znaika_frontend.video_info_updater");
+        }
+
+        /**
+         * @return SubjectRepository
+         */
+        private function getSubjectRepository()
+        {
+            return $this->get("znaika_frontend.subject_repository");
         }
 
         /**

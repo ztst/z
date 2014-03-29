@@ -7,6 +7,15 @@
     <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts filter='?yui_js'
+  '../app/Resources/public/js/classes/page/VideosList.class.js'
+  %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
 
 {% block content %}
   <div class="index-content">

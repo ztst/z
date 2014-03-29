@@ -83,11 +83,6 @@
     font-size: 13px;
     line-height: 15px;
     width: 100%;
-    max-height: 30px;
-
-    white-space: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .index-page-videos-list .list-item a:hover h5
@@ -107,7 +102,7 @@
     right: 0;
     bottom: 0;
     color: #fff;
-    font: bold 12px/16px"Arial";
+    font: normal 12px/16px"OpenSans Semibold";
     background: url('/images/video/video-duration-background.png') repeat;
     padding: 1px 5px 1px 6px;
 }
@@ -144,11 +139,11 @@
 .video-preview a .video-preview-over
 {
     display: none;
-    left: 83px;
+    left: 106px;
     position: absolute;
-    top: 47px;
-    width: 72px;
-    height: 47px;
+    top: 44px;
+    width: 35px;
+    height: 41px;
     background: url('/images/index/video-preview-over.png') no-repeat;
 }
 

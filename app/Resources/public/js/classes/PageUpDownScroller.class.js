@@ -20,6 +20,12 @@ var PageUpDownScroller = Base.extend({
 
         this._upButton.click(handler(this, "_onUpButtonClick"));
         this._downButton.click(handler(this, "_onDownButtonClick"));
+        this._upButton.mouseenter(function(){
+            $(this).find(".go-up-label").show();
+        });
+        this._upButton.mouseleave(function(){
+            $(this).find(".go-up-label").hide();
+        });
     },
 
     _onWindowScroll: function()

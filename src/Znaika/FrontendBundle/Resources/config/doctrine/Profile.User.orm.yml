@@ -17,7 +17,7 @@ Znaika\FrontendBundle\Entity\Profile\User:
         birthDate:       { column: birth_date, type: date, nullable: true }
         role:            { type: smallint, notnull: true }
         grade:           { type: smallint, nullable: true }
-        city:            { type: string, length: 150, nullable: true }
+        region:          { type: string, length: 150, nullable: true }
         city:            { type: string, length: 150, nullable: true }
         hasPhoto:        { column: has_photo, type: boolean }
         vkId:            { column: vk_id, type: bigint, nullable: true }

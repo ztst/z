@@ -71,6 +71,7 @@
                 return "";
             }
 
+            /** @var VideoComment $answer */
             $answer = $answers->first();
 
             $templateFile    = "ZnaikaFrontendBundle:Video:comment_answer.html.twig";

@@ -1,0 +1,53 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter="?yui_css"
+  '@ZnaikaFrontendBundle/Resources/public/css/catalog.css'
+  '@ZnaikaFrontendBundle/Resources/public/css/empty_catalog.css'
+  '@ZnaikaFrontendBundle/Resources/public/css/videos_list.css'
+  %}
+  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts filter='?yui_js'
+  '../app/Resources/public/js/classes/list/ChapterListItem.class.js'
+  '../app/Resources/public/js/classes/list/ChapterList.class.js'
+  '../app/Resources/public/js/classes/page/VideoCatalogPage.class.js'
+  '../app/Resources/public/js/classes/page/VideosList.class.js'
+  %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+  <div class="empty-catalog-page-container">
+    <h3 class="empty-catalog-header">Видеоуроки предмета &laquo;{{ subjectNameRussian }}&raquo;, {{ class }} класс находятся в разработке</h3>
+    <h4>В данный момент на сайте доступны видеоуроки следующих предметов:</h4>
+    {% set subjectsCounter = 1 %}
+    {% for subject in subjects %}
+      {% if not subject.getVideos.isEmpty %}
+        <div class="subject-container{% if subjectsCounter is divisibleby(3) %} right{% endif %}">
+          <div class="subject-title">{{ subject.getName }}</div>
+          <div class="subjects-list">
+            {% set classesCounter = 1 %}
+            {% for class in classes %}
+                {% if subject in subjectsRepository.getByGrade(class) %}
+                  <span class="subjects-list-item">{{ classesCounter }})
+                    <a title="" href="{{ url("show_catalogue", {"class": class, "subjectName": subject.getUrlName}) }}">{{ subject.getName }}, {{ class }} класс</a>
+                  </span><br />
+                  {% set classesCounter = classesCounter + 1 %}
+                {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        {% set subjectsCounter = subjectsCounter + 1 %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endblock %}

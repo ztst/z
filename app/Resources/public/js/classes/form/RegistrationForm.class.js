@@ -15,7 +15,12 @@ var RegistrationForm = BaseForm.extend({
             messages: { email: handler(that, "_getInvalidEmailMessage") }
         });
         this._form.find("#registration_user_password").rules('add', {
-            passwordSymbols: true
+            minlength: BaseForm.MIN_PASSWORD_LENGTH,
+            password: true,
+            messages: {
+                minlength: "Пароль должен содержать более " + (BaseForm.MIN_PASSWORD_LENGTH - 1) + " символов",
+                password: handler(that, "_getInvalidPasswordMessage")
+            }
         });
 
         this._initShowPasswordLink();

@@ -1,6 +1,6 @@
 <ul class="media-list">
   {% for comment in comments %}
-    <li class="media">
+    <li class="media comment-container{% if loop.first %} first{% elseif loop.last %} last{% endif %}">
       <a class="pull-left"
          href="{% if is_moderator() %}{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}{% else %}javascript:void(0);{% endif %}">
         <img class="media-object"
@@ -16,7 +16,7 @@
         </a>
         <span class="comment-body">{{ comment_text(comment) }}</span>
         <h6 class="media-heading comment-date">{{ comment_date(comment.getCreatedTime) }}</h6>
-        <div class="comment-answer">{{ comment_answer_block(comment)|raw }}</div>
+        <div class="media comment-answer">{{ comment_answer_block(comment)|raw }}</div>
       </div>
     </li>
   {% endfor %}
