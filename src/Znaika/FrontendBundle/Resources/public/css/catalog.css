@@ -200,7 +200,6 @@
 .moderator-buttons-block a
 {
     margin-left: 13px;
-    height: 30px;
 }
 
 .moderator-buttons-block span,
@@ -213,18 +212,6 @@
     float: left;
 }
 
-.moderator-buttons-block .semi-active-button
-{
-    padding: 4px 10px 0;
-}
-
-.moderator-buttons-block .semi-active-button-label
-{
-    padding-left: 16px;
-    font-size: 13px;
-    font-family: "OpenSans Semibold", sans-serif;
-}
-
 .add-chapter-button,
 .edit-chapter-button,
 .save-changes-button
@@ -234,32 +221,32 @@
 
 .add-chapter-button .semi-active-button-label
 {
-    background: url('/images/chapters-list/add-chapter-button-icon.png') no-repeat 0 5px;
+    background: url('/images/chapters-list/add-chapter-button-icon.png') no-repeat 0 3px;
 }
 
 .edit-chapter-button .semi-active-button-label
 {
-    background: url('/images/video/edit-button-icon.png') no-repeat 0 5px;
+    background: url('/images/video/edit-button-icon.png') no-repeat 0 1px;
 }
 
 .save-changes-button .semi-active-button-label
 {
-    background: url('/images/chapters-list/save-changes-button-icon.png') no-repeat 0 5px;
+    background: url('/images/chapters-list/save-changes-button-icon.png') no-repeat 0 2px;
 }
 
 .disabled.add-chapter-button .semi-active-button-label
 {
-    background: url('/images/chapters-list/add-chapter-button-icon-disabled.png') no-repeat 0 5px;
+    background: url('/images/chapters-list/add-chapter-button-icon-disabled.png') no-repeat 0 3px;
 }
 
 .disabled.edit-chapter-button .semi-active-button-label
 {
-    background: url('/images/video/edit-button-icon-disabled.png') no-repeat 0 5px;
+    background: url('/images/video/edit-button-icon-disabled.png') no-repeat 0 1px;
 }
 
 .disabled.save-changes-button .semi-active-button-label
 {
-    background: url('/images/chapters-list/save-changes-button-icon-disabled.png') no-repeat 0 5px;
+    background: url('/images/chapters-list/save-changes-button-icon-disabled.png') no-repeat 0 2px;
 }
 
 .semi-active-button.chapter-down,
@@ -283,7 +270,7 @@
 
 .semi-active-button .chapter-down-icon
 {
-    margin-top: 8px;
+    margin-top: 6px;
     margin-left: 8px;
 
     background: url('/images/chapters-list/chapter-down-icon.png') no-repeat;
@@ -291,7 +278,7 @@
 
 .semi-active-button .chapter-up-icon
 {
-    margin-top: 7px;
+    margin-top: 5px;
     margin-left: 8px;
 
     background: url('/images/chapters-list/chapter-up-icon.png') no-repeat;

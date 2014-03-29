@@ -17,7 +17,7 @@
   </div>
 {% endif %}
 {% if currentVideo is defined and currentVideo.orderPriority > 2 and not is_moderator() %}
-  <div class="show-more-videos">
+  <div class="show-more-link show-more-videos">
     <a id="showMoreChapterVideos" href="javascript:void(0);">
       Показать предыдущие ({{ currentVideo.orderPriority - 2 }})
     </a>

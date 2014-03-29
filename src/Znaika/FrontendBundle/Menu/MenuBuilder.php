@@ -92,7 +92,7 @@
                 array("route" => "edit_teacher_profile", "routeParameters" => array("userId" => $userId)));
 
             $title = "Вопросы к урокам";
-            $title .= $countQuestions ? " <span class='user-questions-count'>+$countQuestions</span>" : "";
+            $title .= $countQuestions ? " <span class='list-count-container user-questions-count'>+$countQuestions</span>" : "";
             $menuItem = $menu->addChild($title,
                 array("route" => "teacher_questions", "routeParameters" => array("userId" => $userId)));
             $menuItem->setExtra('safe_label', true);
@@ -202,7 +202,7 @@
             $countComments = $videoCommentRepository->countModeratorNotVerifiedComments();
 
             $title = "Комментарии";
-            $title .= $countComments ? " <span class='not-verified-comments-count'>+$countComments</span>" : "";
+            $title .= $countComments ? " <span class='list-count-container not-verified-comments-count'>+$countComments</span>" : "";
             $menuItem = $menu->addChild($title,
                 array("route" => "not_verified_comments", "routeParameters" => array("userId" => $this->currentUser->getUserId())));
             $menuItem->setExtra('safe_label', true);
@@ -215,7 +215,7 @@
             $countPupils = $userRepository->countNotVerifiedUsers(array(UserRole::ROLE_USER));
 
             $title = "Ученики";
-            $title .= $countPupils ? " <span class='not-verified-pupils-count'>+$countPupils</span>" : "";
+            $title .= $countPupils ? " <span class='list-count-container not-verified-pupils-count'>+$countPupils</span>" : "";
             $menuItem = $menu->addChild($title, array("route" => "not_verified_pupils"));
             if ($this->currentRoute == "not_verified_pupils")
             {

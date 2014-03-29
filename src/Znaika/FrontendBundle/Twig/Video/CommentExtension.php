@@ -66,7 +66,7 @@
                 return "";
             }
             $answers = $comment->getAnswers();
-            if (empty($answers))
+            if ($answers->isEmpty())
             {
                 return "";
             }
@@ -93,7 +93,6 @@
 
             return $count > 0 ? "+$count" : "";
         }
-
 
         public function countVideoNotVerifiedComments(Video $video)
         {

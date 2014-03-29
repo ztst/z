@@ -37,7 +37,7 @@ var NotVerifiedPupilsPage = Base.extend({
     {
         if ($(".not-verified-users li:visible").is(":last-child"))
         {
-            $(".show-more-user-link:visible").remove();
+            $(".show-more-link:visible").remove();
         }
     },
 
@@ -95,6 +95,7 @@ var NotVerifiedPupilsPage = Base.extend({
                     $(".pupil-tab").addClass("hidden");
                 }
 
+                this._decrementCountQuestions($(".tab-header .list-count-container"));
                 var hasQuestions = this._decrementCountUsers($(".not-verified-pupils-count"));
 
                 if (!hasQuestions)
@@ -162,7 +163,8 @@ var NotVerifiedPupilsPage = Base.extend({
     {
         var id = $("#userProfileId").val();
         var approveLink = $("#approveUser" + id);
-        var deleteLink = $("#deleteUser" + id);
+        var deleteLink = $(".ban-with-reason-button");
+        var showDeleteDropdownLink = $(".ban-with-reason-dropdown-link");
 
         var that = this;
 
@@ -171,7 +173,12 @@ var NotVerifiedPupilsPage = Base.extend({
         });
 
         deleteLink.click(function(){
-            that._onDeleteLinkClick(id, $("#userBanReason").val());
+            var reason = $(this).attr("id").replace("reason", "");
+            that._onDeleteLinkClick(id, reason);
+        });
+
+        showDeleteDropdownLink.click(function(){
+            $(this).next(".ban-reasons-list-container ").toggleClass("hidden");
         });
     }
 },{

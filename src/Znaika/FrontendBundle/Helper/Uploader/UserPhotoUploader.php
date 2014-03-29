@@ -2,6 +2,7 @@
     namespace Znaika\FrontendBundle\Helper\Uploader;
 
     use Symfony\Component\DependencyInjection\ContainerInterface;
+    use Symfony\Component\HttpFoundation\File\UploadedFile;
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Helper\Util\FileSystem\UnixSystemUtils;
 
@@ -31,22 +32,7 @@
             $fileDir = $this->getFileDir($user);
             UnixSystemUtils::createDirectory($fileDir, 0755, true);
 
-            $image = new \Imagick($photo->getRealPath());
-            $width  = $image->getimagewidth();
-            $height = $image->getimageheight();
-            if ($width > $height)
-            {
-                $newHeight = self::PHOTO_SIZE;
-                $newWidth  = self::PHOTO_SIZE * $width / $height;
-            }
-            else
-            {
-                $newWidth  = self::PHOTO_SIZE;
-                $newHeight = self::PHOTO_SIZE * $height / $width;
-            }
-            $image->scaleimage($newWidth, $newHeight);
-            $image->cropimage(self::PHOTO_SIZE, self::PHOTO_SIZE, ($newWidth - self::PHOTO_SIZE) / 2, ($newHeight - self::PHOTO_SIZE) / 2);
-            UnixSystemUtils::setFileContents($this->getFilePath($user), $image);
+            $this->saveUserPhoto($user, $photo);
 
             $user->setHasPhoto(true);
         }
@@ -62,5 +48,30 @@
             $fileDir = $root . self::UPLOAD_PATH . "/" . $user->getUserId() . "/";
 
             return $fileDir;
+        }
+
+        /**
+         * @param User $user
+         * @param $photo
+         */
+        private function saveUserPhoto(User $user, UploadedFile $photo)
+        {
+            $image  = new \Imagick($photo->getRealPath());
+            $width  = $image->getimagewidth();
+            $height = $image->getimageheight();
+            if ($width > $height)
+            {
+                $newHeight = self::PHOTO_SIZE;
+                $newWidth  = self::PHOTO_SIZE * $width / $height;
+            }
+            else
+            {
+                $newWidth  = self::PHOTO_SIZE;
+                $newHeight = self::PHOTO_SIZE * $height / $width;
+            }
+            $image->scaleimage($newWidth, $newHeight);
+            $image->cropimage(self::PHOTO_SIZE, self::PHOTO_SIZE, ($newWidth - self::PHOTO_SIZE) / 2,
+                ($newHeight - self::PHOTO_SIZE) / 2);
+            UnixSystemUtils::setFileContents($this->getFilePath($user), $image);
         }
     }

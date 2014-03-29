@@ -2,7 +2,7 @@
   {% set countComments = count_video_comments(video) %}
   {% if countComments %}
     {% if countComments > constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE') %}
-      <div class="alert alert-info show-more-comments">
+      <div class="show-more-link show-more-comments">
         <a href="javascript:void(0);" id="showPrevCommentsLink">
           {{ 'show_prev_comments'|transchoice(countComments - constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE')) }}
         </a>

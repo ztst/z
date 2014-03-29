@@ -480,35 +480,9 @@
                 throw $this->createNotFoundException("Can't manage user");
             }
             $user = $this->getUser();
-
             $changeEmail = $this->createChangeUserEmail($user);
-            $form        = $this->createForm(new ChangeUserEmailType(), $changeEmail);
 
-            $form->handleRequest($request);
-
-            $success   = false;
-            $emailBusy = false;
-            if ($form->isSubmitted() && $form->isValid())
-            {
-                $userWithEmail = $this->getUserRepository()->getOneByEmail($changeEmail->getNewEmail());
-                if ($userWithEmail && $userWithEmail->isEnabled())
-                {
-                    $emailBusy = true;
-                }
-                else
-                {
-                    $changeEmailRepository = $this->getChangeUserEmailRepository();
-
-                    $changeEmailRepository->save($changeEmail);
-                    $this->getUserMailer()->sendChangeEmailConfirm($changeEmail);
-                    $success = true;
-                }
-            }
-
-            return JsonResponse::create(array(
-                "success"   => $success,
-                "emailBusy" => $emailBusy
-            ));
+            return $this->handleChangeEmailForm($request, $changeEmail);
         }
 
         public function completeChangeEmailAction($key)
@@ -525,12 +499,7 @@
             $currentTime = new \DateTime("now");
             if ($currentTime > $expiredTime)
             {
-                $changeEmail           = $this->createChangeUserEmail($user);
-                $changeEmailRepository = $this->getChangeUserEmailRepository();
-                $changeEmailRepository->save($changeEmail);
-                $this->getUserMailer()->sendChangeEmailConfirm($changeEmail);
-
-                return $this->render('ZnaikaFrontendBundle:User:expiredUserChangeEmailKey.html.twig');
+                return $this->recreateChangeUserEmail($user);
             }
 
             $user->setEmail($changeEmail->getNewEmail());
@@ -541,8 +510,7 @@
             $userAuthenticator = $this->getUserAuthenticator();
             $userAuthenticator->authenticate($user);
 
-            $this->get('session')->getFlashBag()
-                 ->add('notice', $this->get('translator')->trans('congratulations_change_email_success'));
+            $this->addCongratulationFlashBoxMessage();
 
             return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
         }
@@ -705,6 +673,11 @@
             return $userRegistration;
         }
 
+        /**
+         * @param User $user
+         *
+         * @return ChangeUserEmail
+         */
         private function createChangeUserEmail(User $user)
         {
             $changeUserEmail = $user->getLastChangeUserEmail();
@@ -983,7 +956,7 @@
             $request = $this->getRequest();
             $form    = $this->createForm(new UserProfileType(), $user);
 
-            if ($request->request->has('znaika_frontendbundle_user_userprofile'))
+            if ($request->request->has('user_profile_type'))
             {
                 $form->handleRequest($request);
                 if ($form->isValid())
@@ -1060,7 +1033,6 @@
             if ($currentUser instanceof User)
             {
                 $ownProfile = $currentUser->getUserId() == $userId;
-                $status     = $currentUser->getStatus();
                 $canEdit    = $ownProfile && !UserBan::isPermanentlyBanned($currentUser);
             }
 
@@ -1091,7 +1063,7 @@
                 if ($templateName)
                 {
                     $templateName = "ZnaikaFrontendBundle:User:Ban\\{$templateName}.html.twig";
-                    $message = $this->renderView($templateName, array(
+                    $message      = $this->renderView($templateName, array(
                         'user' => $user
                     ));
 
@@ -1157,7 +1129,7 @@
          * @param $status
          *
          * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-         * @return Response|static
+         * @return JsonResponse
          */
         private function updateCommentsStatus($status)
         {
@@ -1191,7 +1163,7 @@
         /**
          * @param $status
          *
-         * @return Response|static
+         * @return JsonResponse
          */
         private function updateUsersStatus($status)
         {
@@ -1244,6 +1216,10 @@
             }
         }
 
+        /**
+         * @param User $user
+         * @param $reason
+         */
         private function saveBanInfo(User $user, $reason)
         {
             $banInfo = new Info();
@@ -1254,5 +1230,62 @@
             /** @var InfoRepository $repository */
             $repository = $this->get("znaika_frontend.ban_info_repository");
             $repository->save($banInfo);
+        }
+
+        private function addCongratulationFlashBoxMessage()
+        {
+            $this->get('session')->getFlashBag()
+                 ->add('notice', $this->get('translator')->trans('congratulations_change_email_success'));
+        }
+
+        /**
+         * @param $user
+         *
+         * @return Response
+         */
+        private function recreateChangeUserEmail($user)
+        {
+            $changeEmail           = $this->createChangeUserEmail($user);
+            $changeEmailRepository = $this->getChangeUserEmailRepository();
+            $changeEmailRepository->save($changeEmail);
+            $this->getUserMailer()->sendChangeEmailConfirm($changeEmail);
+
+            return $this->render('ZnaikaFrontendBundle:User:expiredUserChangeEmailKey.html.twig');
+        }
+
+        /**
+         * @param Request $request
+         * @param ChangeUserEmail $changeEmail
+         *
+         * @return Response|static
+         */
+        private function handleChangeEmailForm(Request $request, ChangeUserEmail $changeEmail)
+        {
+            $form        = $this->createForm(new ChangeUserEmailType(), $changeEmail);
+            $form->handleRequest($request);
+
+            $success   = false;
+            $emailBusy = false;
+            if ($form->isSubmitted() && $form->isValid())
+            {
+                $userWithEmail = $this->getUserRepository()->getOneByEmail($changeEmail->getNewEmail());
+                if ($userWithEmail && $userWithEmail->isEnabled())
+                {
+                    $emailBusy = true;
+                }
+                else
+                {
+                    $changeEmailRepository = $this->getChangeUserEmailRepository();
+
+                    $changeEmailRepository->save($changeEmail);
+                    $this->getUserMailer()->sendChangeEmailConfirm($changeEmail);
+                    $success = true;
+                }
+            }
+
+            return JsonResponse::create(array(
+                "success"   => $success,
+                "emailBusy" => $emailBusy
+            ));
         }
     }

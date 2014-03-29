@@ -1,32 +1,41 @@
 <ul class="not-verified-users">
   {% set count = 1 %}
+  {% set maxShow = 10 %}
   {% for user in users %}
-    <li class="{% if count > 10 %}hidden{% endif %}" id="userContainer{{ user.UserId }}">
-      <a id="openUserProfile{{ user.userId }}" class="show-user-profile-link" href="javascript:void(0);">
-        <img class="media-object"
-             width="50"
-             height="50"
-             src="{{ user_photo_url(user) }}"
-             alt="Здесь будет аватар"/>
-        <span class="user-name">{{ user }}</span>
-      </a>
-      <a title="" href="javascript:void(0);" class="semi-active-button approve-user-link">
-        <span class="semi-active-button-label">Одобрить</span>
-      </a>
-      <a title="" href="javascript:void(0);" class="semi-active-button delete-user-link">
-        <span class="semi-active-button-label">Забанить</span>
-      </a>
+    <li class="{% if count > maxShow %}hidden{% endif %}{% if count == 1 %} first{% endif %}" id="userContainer{{ user.UserId }}">
+      <div class="left-column">
+        <a id="openUserProfile{{ user.userId }}" class="show-user-profile-link" href="javascript:void(0);">
+          <img class="media-object"
+               width="50"
+               height="50"
+               src="{{ user_photo_url(user) }}"
+               alt="Здесь будет аватар"/>
+          <span class="user-name">{{ user }}</span>
+        </a>
+      </div>
+      <div class="right-column">
+        <div class="approve-buttons-container">
+          <a title="" href="javascript:void(0);" class="semi-active-button approve-user-link">
+            <span class="semi-active-button-label">Одобрить</span>
+          </a>
+          <a title="" href="javascript:void(0);" class="semi-active-button delete-user-link">
+            <span class="semi-active-button-label">Забанить</span>
+          </a>
+        </div>
+      </div>
     </li>
     {% set count = count + 1 %}
   {% endfor %}
 </ul>
-<div class="approve-all-pupils-block">
-  {% if count > 10 %}
-    <a title="" href="javascript:void(0);" class="semi-active-button show-more-user-link">
-      <span class="semi-active-button-label">Показать еще</span>
+{% if count > maxShow %}
+  <div class="show-more-link ">
+    <a title="" href="javascript:void(0);" class="show-more-user-link">
+      Показать еще
     </a>
-  {% endif %}
-  <a title="" href="javascript:void(0);" class="semi-active-button approve-all-user-link">
-    <span class="semi-active-button-label">Одобрить все профили</span>
+  </div>
+{% endif %}
+<div class="tab-footer-block approve-all-pupils-block">
+  <a title="" href="javascript:void(0);" class="active-button approve-all-user-link approve-all-link">
+    <span class="active-button-label">Одобрить все профили</span>
   </a>
 </div>

@@ -1,13 +1,16 @@
 <div id="videoQuestions{{ video.videoId }}" class="video-questions-container hidden">
-  <h4>{{ video.name }} <span class="user-questions-count">{{ count_video_questions(video) }}</span></h4>
-  <p class="video-breadcrumbs">
-    {{ video.grade }} класс > {{ video.subject.name }} > {{ video.chapter.name }}
-  </p>
+  <div class="tab-header">
+    <h4>{{ video.name }} <span class="list-count-container user-questions-count">{{ count_video_questions(video) }}</span></h4>
+    <p class="video-breadcrumbs">
+      {{ video.grade }} класс > {{ video.subject.name }} > {{ video.chapter.name }}
+    </p>
+  </div>
 
   {% if not questions is empty %}
     <ul class="video-questions">
+      {% set isFirst = true %}
       {% for question in questions %}
-        <li class="" id="questionContainer{{ question.videoCommentId }}">
+        <li class="{% if isFirst %}first{% endif %}" id="questionContainer{{ question.videoCommentId }}">
           <a class="pull-left" href="{{ path("not_verified_pupils", {"userId": question.user.userId}) }}">
             <img class="media-object"
                  width="50"
@@ -25,6 +28,7 @@
           <div class="clear"></div>
           {{ question_answer_form(question)|raw }}
         </li>
+        {% set isFirst = false %}
       {% endfor %}
     </ul>
   {% endif %}

@@ -173,72 +173,25 @@
 }
 
 /* moderator styles BEGIN */
-.chapter-list-moderator-buttons-block,
-.chapter-list-moderator-buttons-block a
-{
-    height: 30px;
-}
-
 .chapter-list-moderator-buttons-block
 {
     margin-bottom: 19px;
 }
 
-.add-button,
 .video-down,
 .video-up,
 .video-down-icon,
 .video-up-icon
 {
-    display: block;
-}
-
-.add-button
-{
     display: inline-block;
-    float: left;
-    padding: 4px 14px 0;
-    width: auto;
-    height: 30px;
-
-    font-size: 13px;
-}
-
-.add-button .active-button-label
-{
-    font-family: "OpenSans Semibold",sans-serif;
-    background: url('/images/video/add-button-icon.png') no-repeat 0 3px;
-}
-
-.semi-active-button.video-down,
-.semi-active-button.video-up
-{
-    float: left;
-    margin-left: 4px;
-    padding-top: 0;
-
-    width: 30px;
 }
 
 .video-down-icon,
 .video-up-icon
 {
-    margin-left: 7px;
-
     width: 14px;
     height: 15px;
 }
-
-.video-down-icon
-{
-    margin-top: 7px;
-}
-
-.video-up-icon
-{
-    margin-top: 6px;
-}
-
 .video-down-icon
 {
     background: url('/images/video/video-down-icon.png') no-repeat;

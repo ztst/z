@@ -68,6 +68,6 @@
          */
         public function getName()
         {
-            return "znaika_frontendbundle_user_userprofile";
+            return "user_profile_type";
         }
     }

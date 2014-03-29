@@ -26,11 +26,12 @@ var ViewTeacherQuestionsPage = Base.extend({
             var openQuestionLink = $("#openVideoQuestionLink" + response.videoId);
 
             this._decrementCountQuestions($(".profile-sidebar-menu .user-questions-count"));
-            this._decrementCountQuestions(openQuestionLink.next());
-            var hasQuestions = this._decrementCountQuestions($("#videoQuestions" + response.videoId + " .user-questions-count"));
+            this._decrementCountQuestions(openQuestionLink.find(".user-questions-count"));
+            var hasQuestions = this._decrementCountQuestions($("#videoQuestions" + response.videoId + " .list-count-container"));
 
             if (!hasQuestions)
             {
+                this._decrementCountQuestions($(".video-tab .tab-header .list-count-container"));
                 openQuestionLink.closest("li").remove();
                 $(".questions-tab").addClass("hidden");
                 $("#videoTab").click();
@@ -41,7 +42,7 @@ var ViewTeacherQuestionsPage = Base.extend({
     _decrementCountQuestions: function(elem)
     {
         var text = elem.text();
-        var count = text.replace("(+", "").replace(")", "");
+        var count = text.replace("+", "");
         --count;
         text = (count > 0) ? "+" + count: "";
         elem.text(text);
