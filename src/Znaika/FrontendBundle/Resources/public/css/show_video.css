@@ -100,9 +100,24 @@
     background: url('/images/video/odnoklassniki.png') no-repeat;
 }
 
-.video-social-buttons a.social_share_link.mailru
+.video-social-buttons a.social_share_link.vk:hover
 {
-    background: url('/images/video/mailru.png') no-repeat;
+    background: url('/images/video/vk-over.png') no-repeat;
+}
+
+.video-social-buttons a.social_share_link.facebook:hover
+{
+    background: url('/images/video/facebook-over.png') no-repeat;
+}
+
+.video-social-buttons a.social_share_link.twitter:hover
+{
+    background: url('/images/video/twitter-over.png') no-repeat;
+}
+
+.video-social-buttons a.social_share_link.odnoklassniki:hover
+{
+    background: url('/images/video/odnoklassniki-over.png') no-repeat;
 }
 /* video social buttons styles END */
 
