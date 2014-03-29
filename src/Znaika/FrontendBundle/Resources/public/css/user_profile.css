@@ -55,8 +55,7 @@
 
 .upload-label.active-button
 {
-    padding-left: 14px;
-    padding-right: 14px;
+    padding: 2px 14px 0;
     width: auto;
 }
 

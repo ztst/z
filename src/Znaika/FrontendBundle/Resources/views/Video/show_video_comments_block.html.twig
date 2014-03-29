@@ -1,22 +1,24 @@
-<div class="comments-container">
-  {% set countComments = count_video_comments(video) %}
-  {% if countComments %}
-    {% if countComments > constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE') %}
-      <a class="show-more-comments" href="javascript:void(0);" id="showPrevCommentsLink">
-        {{ 'show_prev_comments'|transchoice(countComments - constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE')) }}
-      </a>
-      <input type="hidden" id="showPrevCommentsUrl" value="{{ path('get_prev_comments', {'videoName': video.getUrlName}) }}"/>
-      <div id="prevCommentsContainer" class="prev-comments-container"></div>
-    {% endif %}
-    {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': comments} %}
+{% set countComments = count_video_comments(video) %}
+{% if countComments %}
+  <div class="comments-container">
+  {% if countComments > constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE') %}
+    <a class="show-more-comments" href="javascript:void(0);" id="showPrevCommentsLink">
+      {{ 'show_prev_comments'|transchoice(countComments - constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE')) }}
+    </a>
+    <input type="hidden" id="showPrevCommentsUrl" value="{{ path('get_prev_comments', {'videoName': video.getUrlName}) }}"/>
+    <div id="prevCommentsContainer" class="prev-comments-container"></div>
   {% endif %}
-  {% if has_question_for_current_user(video) %}
-    {{ video_questions_block(video)|raw }}
-  {% elseif user_can_write_comment() %}
-    {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "video": video} %}
-  {% elseif is_banned_user() %}
-    <span>{% include "ZnaikaFrontendBundle:User:Ban\\ban_comment_message.html.twig" with {'user': app.user} %}</span>
-  {% else %}
-    <span>Только зарегистрированные и авторизованные пользователи могут оставлять комментарии</span>
-  {% endif %}
-</div>
+  {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': comments} %}
+  </div>
+{% endif %}
+{% if has_question_for_current_user(video) %}
+  {{ video_questions_block(video)|raw }}
+{% elseif user_can_write_comment() %}
+  {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "video": video} %}
+{% elseif is_banned_user() %}
+  <span>{% include "ZnaikaFrontendBundle:User:Ban\\ban_comment_message.html.twig" with {'user': app.user} %}</span>
+{% else %}
+  <div class="cant-leave-comment">
+    Оставлять комментарии  и  задавать вопросы учителю могут только зарегистрированные и авторизованные пользователи
+  </div>
+{% endif %}

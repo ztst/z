@@ -1,6 +1,6 @@
 <div class="photo-container">
   <img width="200" id="userAvatar"
-       src="{{ user_photo_url(user) }}"
+       src="{{ user_photo_big_url(user) }}"
        title="Фотография"/>
 </div>
 
@@ -26,7 +26,7 @@
       <span class="non-active-button-label">Убрать фото</span>
     </a>
     <input type="hidden" id="userId" value="{{ user.userId }}"/>
-    <input type="hidden" id="defaultPhotoUrl" value="{{ user_photo_url(user) }}" />
+    <input type="hidden" id="defaultPhotoUrl" value="{{ user_photo_big_url(user) }}" />
   </div>
 {{ form_end(form) }}
 

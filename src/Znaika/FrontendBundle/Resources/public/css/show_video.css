@@ -199,6 +199,7 @@
 .add-video-comment-container
 {
     position: relative;
+    margin-left: 88px;
     width: 496px;
 }
 
@@ -237,6 +238,7 @@
 
 .send-comment-button
 {
+    float: right;
     padding: 0 14px;
     width: auto;
     height: 30px;
@@ -303,6 +305,18 @@
     font-size: 15px;
     font-family: "OpenSans Semibold", sans-serif;
     font-weight: normal;
+}
+
+.cant-leave-comment
+{
+    margin: 20px 18px 0;
+    padding: 10px 0;
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 13px;
+    font-family: "OpenSans", "Open Sans", serif;
+    text-align: center;
 }
 /* comments styles END */
 
@@ -463,7 +477,7 @@
 .questions-buttons-block
 {
     float: right;
-    width: 555px;
+    width: 573px;
     background: none;
 }
 

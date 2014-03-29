@@ -20,6 +20,7 @@
     '../app/Resources/public/js/classes/list/ChapterList.class.js'
     '../app/Resources/public/js/classes/page/VideoCatalogPage.class.js'
     '../app/Resources/public/js/classes/page/VideosList.class.js'
+    '../app/Resources/public/js/classes/PageUpDownScroller.class.js'
   %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
@@ -45,4 +46,5 @@
     <div class="line"></div>
   </div>
   <input type="hidden" id="editChaptersUrl" value="{{ url("edit_chapters", {"class": class, "subjectName": subjectName }) }}">
+  {% include "ZnaikaFrontendBundle:Default:up_down_scroll_block.html.twig" %}
 {% endblock %}

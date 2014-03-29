@@ -28,11 +28,12 @@
         public function getFunctions()
         {
             return array(
-                'user_photo_url' => new \Twig_Function_Method($this, 'getUserPhotoUrl'),
+                'user_photo_big_url' => new \Twig_Function_Method($this, 'getUserPhotoBigUrl'),
+                'user_photo_small_url' => new \Twig_Function_Method($this, 'getUserPhotoSmallUrl')
             );
         }
 
-        public function getUserPhotoUrl(User $user)
+        public function getUserPhotoBigUrl(User $user)
         {
             $url = "";
             if ($user->getHasPhoto())
@@ -41,11 +42,30 @@
             }
             elseif ($user->getRole() == UserRole::ROLE_USER)
             {
-                $url = $this->container->get('templating.helper.assets')->getUrl("images/user-profile/user-photo-placeholder.png");
+                $url = $this->container->get('templating.helper.assets')->getUrl("images/user-profile/user-photo-big-placeholder.png");
             }
             else
             {
-                $url = $this->container->get('templating.helper.assets')->getUrl("images/teacher-page/teacher-photo-placeholder.png");
+                $url = $this->container->get('templating.helper.assets')->getUrl("images/teacher-page/teacher-photo-big-placeholder.png");
+            }
+
+            return $url;
+        }
+
+        public function getUserPhotoSmallUrl(User $user)
+        {
+            $url = "";
+            if ($user->getHasPhoto())
+            {
+                $url = $user->getPhotoUrl();
+            }
+            elseif ($user->getRole() == UserRole::ROLE_USER)
+            {
+                $url = $this->container->get('templating.helper.assets')->getUrl("images/user-profile/user-photo-small-placeholder.png");
+            }
+            else
+            {
+                $url = $this->container->get('templating.helper.assets')->getUrl("images/teacher-page/teacher-photo-small-placeholder.png");
             }
 
             return $url;

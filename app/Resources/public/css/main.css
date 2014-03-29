@@ -787,7 +787,7 @@ input
     width: 32px;
     height: 32px;
     border: 1px solid #b5bdc1;
-    border-radius: 3px;
+    background: #fff;
 }
 
 .login-registration-buttons-container
@@ -923,36 +923,18 @@ label
     width: 100px;
     height: 100%;
 
+    color: #004e78;
+    font-size: 11px;
+    font-family: "OpenSans Semibold",sans-serif;
+
     position: fixed;
     left: 0;
     top: 0;
 }
 
-@media (max-width: 767px)
-{
-    .go-up,
-    .go-down
-    {
-        height: 43px;
-    }
-}
-
-.go-down:hover,
-.go-up:hover
-{
-    color: #004e78;
-    font-size: 11px;
-    font-family: "OpenSans Semibold",sans-serif;
-}
-
 .go-up
 {
     background: url('/images/go-up-icon.png') no-repeat 10px 10px;
-}
-
-.go-up:hover
-{
-    background: #e8f1f5 url('/images/go-up-icon-over.png') no-repeat 10px 10px;
 }
 
 .go-up-label
@@ -965,9 +947,42 @@ label
     background: url('/images/go-down-icon.png') no-repeat 10px 10px;
 }
 
-.go-down:hover
+@media (max-width: 767px)
 {
-    background: #e8f1f5 url('/images/go-down-icon-over.png') no-repeat 10px 10px;
+    .go-up,
+    .go-down
+    {
+        height: 43px;
+        width: 43px;
+    }
+
+    .go-up:hover
+    {
+        background: url('/images/go-up-icon-over.png') no-repeat 10px 10px;
+    }
+
+    .go-down:hover
+    {
+        background: url('/images/go-down-icon-over.png') no-repeat 10px 10px;
+    }
+}
+
+@media (min-width: 768px)
+{
+    .go-up:hover .go-up-label
+    {
+        display: block;
+    }
+
+    .go-up:hover
+    {
+        background: #e8f1f5 url('/images/go-up-icon-over.png') no-repeat 10px 10px;
+    }
+
+    .go-down:hover
+    {
+        background: #e8f1f5 url('/images/go-down-icon-over.png') no-repeat 10px 10px;
+    }
 }
 
 .add-video-link
