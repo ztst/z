@@ -27,7 +27,7 @@ month_Dec: дек
 founded_video_lessons: Найден %count% видеоурок|Найдено %count% видеоурока|Найдено %count% видеоуроков
 in_chapters: в %count% разделе|в %count% разделах|в %count% разделах
 count_views: %count% просмотр|%count% просмотра|%count% просмотров
-show_prev_comments:  Показать еще %count% коментарий|Показать еще %count% коментария|Показать еще %count% коментариев
+show_prev_comments:  Показать еще %count% комментарий|Показать еще %count% комментария|Показать еще %count% комментариев
 
 congratulations_registration_success: Поздравляем Вас с успешным завершением регистрации! Теперь Вы можете в любое время войти на сайт Знайка.ру, введя свой логин и пароль.
 congratulations_change_email_success: Поздравляем Вас с успешным изменением почтового адреса.

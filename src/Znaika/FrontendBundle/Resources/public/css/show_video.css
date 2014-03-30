@@ -3,20 +3,6 @@
     background: url('/images/gray-border.png') repeat-y 662px 0 #ffffff;
 }
 
-.video-player-container,
-.nav-tabs.select-content-tab,
-.video-buttons-container,
-.video-info,
-.comments-container
-{
-    padding: 0 18px;
-}
-
-.video-player-container
-{
-    padding-top: 18px;
-}
-
 .video-viewed
 {
     margin-bottom: 10px;
@@ -31,7 +17,7 @@
 .video-view-container h1
 {
     width: 85%;
-    margin: 0 18px;
+    margin: 0;
     font-family: "OpenSans Semibold",sans-serif;
     font-size: 22px;
 }
@@ -53,6 +39,7 @@
 {
     float: right;
     height: 29px;
+    padding: 0 18px;
 }
 
 .video-social-buttons
@@ -158,11 +145,6 @@
     font-size: 13px;
     text-align: center;
     text-decoration: none;
-}
-
-.show-more-videos a
-{
-    font-size: 12px;
 }
 
 .comments-container .media-list
@@ -314,12 +296,12 @@
 
 .synopsis-container
 {
-    margin: 10px 18px 18px 18px;
+    margin: 0 0 18px;
 }
 
 .quiz-container
 {
-    margin: 18px;
+    margin: 0 0 18px;
 }
 
 .quiz-container iframe
@@ -356,15 +338,11 @@
 .show-more-videos a
 {
     font-size: 12px;
+    padding: 5px 15px;
 }
 
 /* moderator styles BEGIN */
 /* moderator styles END */
-
-.quiz-not-available
-{
-    padding: 18px;
-}
 
 .quiz-under-construction
 {
@@ -470,4 +448,20 @@
 {
     padding: 4px 9px;
     height: 85px;
+}
+
+.tab-pane
+{
+    padding: 18px;
+}
+
+.view-video-tab-menu
+{
+    padding: 0 18px;
+}
+
+.video-view-container .add-button,
+.video-view-container .edit-button
+{
+    margin-bottom: 18px;
 }
