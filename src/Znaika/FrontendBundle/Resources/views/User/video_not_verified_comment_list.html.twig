@@ -9,8 +9,9 @@
   {% if not comments is empty %}
     <ul class="video-comments">
       {% set count = 1 %}
+      {% set maxShow = 10 %}
       {% for comment in comments %}
-        <li class="{% if count > 10 %}hidden{% endif %}{% if count == 1 %}first{% endif %}" id="commentContainer{{ comment.videoCommentId }}">
+        <li class="{% if count > maxShow %}hidden{% endif %}{% if count == 1 %}first{% endif %}" id="commentContainer{{ comment.videoCommentId }}">
           <div class="comment-content">
             <a class="pull-left" href="{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}">
               <img class="media-object"
@@ -40,7 +41,7 @@
         {% set count = count + 1 %}
       {% endfor %}
     </ul>
-    {% if count > 10 %}
+    {% if count > maxShow + 1 %}
       <div class="show-more-link show-more-comment-link">
         <a title="" href="javascript:void(0);" class="">
           Показать еще

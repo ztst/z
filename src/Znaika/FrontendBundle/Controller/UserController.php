@@ -139,6 +139,11 @@
         {
             $session = $request->getSession();
 
+            if (!$request->isXmlHttpRequest())
+            {
+                return new RedirectResponse($this->generateUrl('znaika_frontend_homepage'));
+            }
+
             // get the login error if there is one
             if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR))
             {
@@ -150,15 +155,14 @@
                 $session->remove(SecurityContext::AUTHENTICATION_ERROR);
             }
 
+            $referrer             = $request->headers->get('referer');
             $userRepository       = $this->getUserRepository();
             $registerForm         = $this->createForm(new RegistrationType($userRepository), new Registration());
             $passwordRecoveryForm = $this->createForm(new PasswordRecoveryType($userRepository),
                 new PasswordRecovery());
 
-            $referrer      = $request->headers->get('referer');
-            $loginTemplate = ($request->isXmlHttpRequest()) ? 'ZnaikaFrontendBundle:User:loginAjax.html.twig' : 'ZnaikaFrontendBundle:User:login.html.twig';
 
-            return $this->render($loginTemplate,
+            return $this->render('ZnaikaFrontendBundle:User:loginAjax.html.twig',
                 array(
                     // last username entered by the user
                     'last_username'        => $session->get(SecurityContext::LAST_USERNAME),
@@ -282,6 +286,11 @@
 
         public function registerAction(Request $request)
         {
+            if (!$request->isXmlHttpRequest())
+            {
+                return new RedirectResponse($this->generateUrl('znaika_frontend_homepage'));
+            }
+
             $registration         = new Registration();
             $userRepository       = $this->getUserRepository();
             $autoGeneratePassword = $request->get("autoGeneratePassword", false);
@@ -479,7 +488,7 @@
             {
                 throw $this->createNotFoundException("Can't manage user");
             }
-            $user = $this->getUser();
+            $user        = $this->getUser();
             $changeEmail = $this->createChangeUserEmail($user);
 
             return $this->handleChangeEmailForm($request, $changeEmail);
@@ -1261,7 +1270,7 @@
          */
         private function handleChangeEmailForm(Request $request, ChangeUserEmail $changeEmail)
         {
-            $form        = $this->createForm(new ChangeUserEmailType(), $changeEmail);
+            $form = $this->createForm(new ChangeUserEmailType(), $changeEmail);
             $form->handleRequest($request);
 
             $success   = false;

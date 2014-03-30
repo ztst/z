@@ -41,32 +41,32 @@
 
 .add-chapter-button .semi-active-button-label
 {
-    background: url('/images/chapters-list/add-chapter-button-icon.png') no-repeat 0 3px;
+    background: url('/images/chapters-list/add-chapter-button-icon.png') no-repeat 0 4px;
 }
 
 .edit-chapter-button .semi-active-button-label
 {
-    background: url('/images/video/edit-button-icon.png') no-repeat 0 1px;
+    background: url('/images/video/edit-button-icon.png') no-repeat 0 4px;
 }
 
 .save-changes-button .semi-active-button-label
 {
-    background: url('/images/chapters-list/save-changes-button-icon.png') no-repeat 0 2px;
+    background: url('/images/chapters-list/save-changes-button-icon.png') no-repeat 0 4px;
 }
 
 .disabled.add-chapter-button .semi-active-button-label
 {
-    background: url('/images/chapters-list/add-chapter-button-icon-disabled.png') no-repeat 0 3px;
+    background: url('/images/chapters-list/add-chapter-button-icon-disabled.png') no-repeat 0 4px;
 }
 
 .disabled.edit-chapter-button .semi-active-button-label
 {
-    background: url('/images/video/edit-button-icon-disabled.png') no-repeat 0 1px;
+    background: url('/images/video/edit-button-icon-disabled.png') no-repeat 0 4px;
 }
 
 .disabled.save-changes-button .semi-active-button-label
 {
-    background: url('/images/chapters-list/save-changes-button-icon-disabled.png') no-repeat 0 2px;
+    background: url('/images/chapters-list/save-changes-button-icon-disabled.png') no-repeat 0 4px;
 }
 
 .semi-active-button.chapter-down,
@@ -90,7 +90,7 @@
 
 .semi-active-button .chapter-down-icon
 {
-    margin-top: 6px;
+    margin-top: 8px;
     margin-left: 8px;
 
     background: url('/images/chapters-list/chapter-down-icon.png') no-repeat;
@@ -98,7 +98,7 @@
 
 .semi-active-button .chapter-up-icon
 {
-    margin-top: 5px;
+    margin-top: 7px;
     margin-left: 8px;
 
     background: url('/images/chapters-list/chapter-up-icon.png') no-repeat;

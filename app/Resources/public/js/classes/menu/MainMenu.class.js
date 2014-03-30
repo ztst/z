@@ -27,9 +27,15 @@ var MainMenu = EventDispatcher.extend({
 
     _initLoginPopup: function()
     {
-        this._loginPopupLink = $(".login-button");
+        this._loginPopupLink = $(".login-button, .registration-button");
         this._loginPopupLink.magnificPopup({
             type: "ajax",
+            ajax: {
+                settings: {
+                    url: Routing.generate('try_login'),
+                    type : 'POST'
+                }
+            },
             callbacks: { ajaxContentAdded: handler(this, "_onLoginFormLoaded") }
         });
     },
