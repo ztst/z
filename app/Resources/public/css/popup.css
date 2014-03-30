@@ -639,6 +639,11 @@ img.mfp-img
     width: 103px;
 }
 
+.login-button-container .active-button
+{
+    width: 100%;
+}
+
 .login-button-container,
 .registration-button-container,
 .forget-password-button-container

@@ -74,6 +74,8 @@ add_synopsis_form:
 register:
     pattern: /register
     defaults: { _controller: ZnaikaFrontendBundle:User:register }
+    options:
+        expose: true
 
 password_recovery:
     pattern: /forget-password
@@ -212,6 +214,8 @@ try_login:
         _controller: FrameworkBundle:Redirect:redirect
         route: login
         permanent: true
+    options:
+        expose: true
 
 logout:
     path: /logout
