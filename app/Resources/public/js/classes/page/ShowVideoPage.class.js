@@ -191,7 +191,7 @@ var ShowVideoPage = Base.extend({
         if (response.success)
         {
             $("#prevCommentsContainer").html(response.html);
-            this._showPrevCommentsLink.closest(".alert").remove();
+            this._showPrevCommentsLink.closest(".show-more-link").remove();
         }
     }
 });
