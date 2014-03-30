@@ -76,9 +76,14 @@ a:focus
     background: linear-gradient(#25658a, #0b567a);
 }
 
-.wrap > .container
+.wrap > .container,
+.header-container .container
 {
     width: 1000px !important;
+}
+
+.wrap > .container
+{
     display: block;
     position: relative;
     min-height: 100%;
