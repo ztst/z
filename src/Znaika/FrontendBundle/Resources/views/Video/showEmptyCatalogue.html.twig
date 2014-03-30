@@ -27,7 +27,13 @@
 
 {% block content %}
   <div class="empty-catalog-page-container">
-    <h3 class="empty-catalog-header">Видеоуроки предмета &laquo;{{ subjectNameRussian }}&raquo;, {{ class }} класс находятся в разработке</h3>
+    <h3 class="empty-catalog-header">
+      Видеоуроки предмета
+        <span class="empty-catalog-header-subject">
+          &laquo;{{ subjectNameRussian }}&raquo;, {{ class }} класс
+        </span>
+      находятся в разработке
+    </h3>
     <h4>В данный момент на сайте доступны видеоуроки следующих предметов:</h4>
     {% set subjectsCounter = 1 %}
     {% for subject in subjects %}

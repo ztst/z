@@ -68,6 +68,15 @@ var UserPhotoForm = Base.extend({
         this._uploadButton.attr("class", "semi-active-button add-photo-button");
         this._updatePhotos($("#defaultPhotoUrl").val());
         this._deleteButton.addClass("hidden");
+        var avatar = $("#userAvatar");
+        if (avatar.parents().hasClass("learner-photo-form"))
+        {
+            avatar.attr("src", "/images/user-profile/user-photo-big-placeholder.png")
+        }
+        else if (avatar.parents().hasClass("teacher-photo-form"))
+        {
+            avatar.attr("src", "/images/teacher-page/teacher-photo-big-placeholder.png")
+        }
     },
 
     _onBeforeSubmit: function()

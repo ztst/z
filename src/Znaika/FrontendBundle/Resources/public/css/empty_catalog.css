@@ -1,19 +1,35 @@
 /* empty catalog page BEGIN */
 .empty-catalog-page-container
 {
-    margin-top: 47px;
-    margin-left: 90px;
+    margin-top: 31px;
+    margin-left: 95px;
     width: 804px;
 }
 
 .empty-catalog-header
 {
-    padding-top: 33px;
+    margin-left: -5px;
+    padding-top: 30px;
     padding-left: 168px;
     background: url('/images/under-construction-image.png') no-repeat;
     height: 129px;
+    line-height: 28px;
 
     color: #89a6bb;
+    font-size: 20px;
+}
+
+.empty-catalog-header-subject
+{
+    font-family: "OpenSans Bold", sans-serif;
+}
+
+.empty-catalog-page-container h4
+{
+    margin: 53px 0 39px;
+
+    color: #4b4b4b;
+    font-size: 16px;
 }
 
 .subject-container
@@ -33,7 +49,7 @@
 
 .subject-title
 {
-    padding-bottom: 2px;
+    padding-bottom: 1px;
     color: #535353;
     font-size: 15px;
     font-family: "OpenSans Semibold",sans-serif;
@@ -42,14 +58,13 @@
 .subjects-list
 {
     display: inline-block;
-    padding-top: 10px;
+    padding-top: 8px;
     width: auto;
     border-top: 1px solid #dedede;
 }
 
 .subjects-list-item
 {
-    line-height: 23px;
     color: #4b4b4b;
     font-size: 13px;
     font-family: "OpenSans","Open Sans",serif;

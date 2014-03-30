@@ -17,7 +17,7 @@
 .video-view-container h1
 {
     width: 85%;
-    margin: 0;
+    margin: 0 18px;
     font-family: "OpenSans Semibold",sans-serif;
     font-size: 22px;
 }
@@ -283,7 +283,7 @@
 
 .cant-leave-comment
 {
-    margin: 20px 18px 0;
+    margin: 20px 0;
     padding: 10px 0;
     background: #f9f9f9;
     border: 1px solid #ccc;
