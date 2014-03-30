@@ -28,6 +28,11 @@
     line-height: 15px;
 }
 
+.send-comment-button .active-button-label
+{
+    background: url('/images/controls/send-answer-button-icon.png') no-repeat 0 3px;
+}
+
 .teacher-profile-container .user-profile-column-container,
 .teacher-profile-container .photo-column-container
 {
