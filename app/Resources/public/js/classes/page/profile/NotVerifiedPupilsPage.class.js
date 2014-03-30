@@ -95,8 +95,9 @@ var NotVerifiedPupilsPage = Base.extend({
                     $(".pupil-tab").addClass("hidden");
                 }
 
-                this._decrementCountQuestions($(".tab-header .list-count-container"));
+                this._decrementCountUsers($(".tab-header .list-count-container"));
                 var hasQuestions = this._decrementCountUsers($(".not-verified-pupils-count"));
+
 
                 if (!hasQuestions)
                 {
