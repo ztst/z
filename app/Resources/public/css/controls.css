@@ -30,7 +30,13 @@
 {
     color: #ffffff;
     border: none;
+
     background: #32a1d5;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#32a1d5), to(#1e89bb));
+    background: -webkit-linear-gradient(#32a1d5, #1e89bb);
+    background: -moz-linear-gradient(#32a1d5, #1e89bb);
+    background: -ms-linear-gradient(#32a1d5, #1e89bb);
+    background: -o-linear-gradient(#32a1d5, #1e89bb);
     background: linear-gradient(#32a1d5, #1e89bb);
 }
 
@@ -39,7 +45,13 @@
     color: #fff;
 
     border: none;
+
     background: #31a7de;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#31a7de), to(#0692c8));
+    background: -webkit-linear-gradient(#31a7de, #0692c8);
+    background: -moz-linear-gradient(#31a7de, #0692c8);
+    background: -ms-linear-gradient(#31a7de, #0692c8);
+    background: -o-linear-gradient(#31a7de, #0692c8);
     background: linear-gradient(#31a7de, #0692c8);
 }
 
@@ -58,6 +70,13 @@
 .semi-active-button
 {
     border: 1px solid #bbbbbb;
+
+    background: #fff;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(#fafafa));
+    background: -webkit-linear-gradient(#ffffff, #fafafa);
+    background: -moz-linear-gradient(#ffffff, #fafafa);
+    background: -ms-linear-gradient(#ffffff, #fafafa);
+    background: -o-linear-gradient(#ffffff, #fafafa);
     background: linear-gradient(#ffffff, #fafafa);
 }
 
@@ -167,11 +186,18 @@
 
     border-radius: 2px;
     border: 1px solid #c8c8c8;
-    background: linear-gradient(to bottom, #fdfdfd, #f2f2f2);
     box-shadow: none;
 
     color: #717070;
     font: 13px/27px "OpenSans Semibold", sans-serif;
+
+    background: #fdfdfd;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#fdfdfd), to(#f2f2f2));
+    background: -webkit-linear-gradient(#fdfdfd, #f2f2f2);
+    background: -moz-linear-gradient(#fdfdfd, #f2f2f2);
+    background: -ms-linear-gradient(#fdfdfd, #f2f2f2);
+    background: -o-linear-gradient(#fdfdfd, #f2f2f2);
+    background: linear-gradient(#fdfdfd, #f2f2f2);
 }
 
 .selectbox .select:hover

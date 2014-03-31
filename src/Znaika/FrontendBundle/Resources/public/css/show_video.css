@@ -372,7 +372,7 @@
 .questions-buttons-block
 {
     float: right;
-    width: 573px;
+    width: 555px;
     background: none;
 }
 
@@ -401,6 +401,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.user-question-container .add-video-comment-container
+{
+    margin-left: 0;
 }
 
 .user-question-container > h4,

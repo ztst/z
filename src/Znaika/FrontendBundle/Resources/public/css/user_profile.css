@@ -58,14 +58,13 @@
 
 .upload-label.active-button
 {
-    padding: 2px 14px 0;
     width: auto;
 }
 
 .upload-label.active-button .active-button-label
 {
     padding-left: 0;
-    font-size: 15px;
+    font-weight: normal;
 }
 
 .change-password-popup
