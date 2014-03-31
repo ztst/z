@@ -24,6 +24,7 @@
 {% endblock %}
 
 {% block content %}
+  <div class="teacher-profile-top-horizontal-line"></div>
   <div class="profile-sidebar-menu-container">
     {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
   </div>
@@ -57,5 +58,8 @@
     <div class="tab-pane comments-tab" id="comments_tab">
       {% include "ZnaikaFrontendBundle:User:moderator_comments_tab.html.twig" with {'videos': videos} %}
     </div>
+  </div>
+  <div class="teacher-profile-bottom-horizontal-placeholder">
+    <div class="line"></div>
   </div>
 {% endblock %}
