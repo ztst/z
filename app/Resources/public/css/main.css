@@ -1022,7 +1022,6 @@ label
 .additional-form-container textarea
 {
     display: table-cell;
-    padding-right: 25px;
     height: 85px;
     border-radius: 0;
     resize: none;
@@ -1096,17 +1095,10 @@ label
     float: right;
 }
 
-.additional-form.support-form .active-button
-{
-    height: 26px;
-    font-size: 11px;
-}
-
 .additional-form.support-form .active-button-label
 {
     padding-left: 14px;
-    line-height: 26px;
-    background-position: 0 4px;
+    background-position: 0 5px;
 }
 
 .static-form-container.add-video-page-container label
