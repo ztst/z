@@ -97,6 +97,7 @@ var ChapterListItem = EventDispatcher.extend({
     showVideoList: function()
     {
         $("#chapter_videos_" + this._id).removeClass("hidden");
+        new VideosList();
     },
 
     hideVideoList: function()

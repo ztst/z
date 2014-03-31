@@ -8,6 +8,10 @@
 
     class UserPhotoExtension extends \Twig_Extension
     {
+        const USER_BIG_PHOTO_URL      = "images/user-profile/user-photo-big-placeholder.png";
+        const TEACHER_BIG_PHOTO_URL   = "images/teacher-page/teacher-photo-big-placeholder.png";
+        const USER_SMALL_PHOTO_URL    = "images/user-profile/user-photo-small-placeholder.png";
+        const TEACHER_SMALL_PHOTO_URL = "images/teacher-page/teacher-photo-small-placeholder.png";
         /**
          * @var \Twig_Environment
          */
@@ -28,25 +32,22 @@
         public function getFunctions()
         {
             return array(
-                'user_photo_big_url' => new \Twig_Function_Method($this, 'getUserPhotoBigUrl'),
-                'user_photo_small_url' => new \Twig_Function_Method($this, 'getUserPhotoSmallUrl')
+                'user_photo_big_url'      => new \Twig_Function_Method($this, 'getUserPhotoBigUrl'),
+                'default_photo_big_url'   => new \Twig_Function_Method($this, 'getDefaultPhotoBigUrl'),
+                'default_photo_small_url' => new \Twig_Function_Method($this, 'getDefaultPhotoSmallUrl'),
+                'user_photo_small_url'    => new \Twig_Function_Method($this, 'getUserPhotoSmallUrl')
             );
         }
 
         public function getUserPhotoBigUrl(User $user)
         {
-            $url = "";
             if ($user->getHasPhoto())
             {
                 $url = $user->getPhotoUrl();
             }
-            elseif ($user->getRole() == UserRole::ROLE_USER)
-            {
-                $url = $this->container->get('templating.helper.assets')->getUrl("images/user-profile/user-photo-big-placeholder.png");
-            }
             else
             {
-                $url = $this->container->get('templating.helper.assets')->getUrl("images/teacher-page/teacher-photo-big-placeholder.png");
+                $url = $this->getDefaultPhotoBigUrl($user);
             }
 
             return $url;
@@ -54,18 +55,41 @@
 
         public function getUserPhotoSmallUrl(User $user)
         {
-            $url = "";
             if ($user->getHasPhoto())
             {
                 $url = $user->getPhotoUrl();
             }
-            elseif ($user->getRole() == UserRole::ROLE_USER)
+            else
             {
-                $url = $this->container->get('templating.helper.assets')->getUrl("images/user-profile/user-photo-small-placeholder.png");
+                $url = $this->getDefaultPhotoSmallUrl($user);
+            }
+
+            return $url;
+        }
+
+        public function getDefaultPhotoBigUrl(User $user)
+        {
+            if ($user->getRole() == UserRole::ROLE_USER)
+            {
+                $url = $this->container->get('templating.helper.assets')->getUrl(self::USER_BIG_PHOTO_URL);
             }
             else
             {
-                $url = $this->container->get('templating.helper.assets')->getUrl("images/teacher-page/teacher-photo-small-placeholder.png");
+                $url = $this->container->get('templating.helper.assets')->getUrl(self::TEACHER_BIG_PHOTO_URL);
+            }
+
+            return $url;
+        }
+
+        public function getDefaultPhotoSmallUrl(User $user)
+        {
+            if ($user->getRole() == UserRole::ROLE_USER)
+            {
+                $url = $this->container->get('templating.helper.assets')->getUrl(self::USER_SMALL_PHOTO_URL);
+            }
+            else
+            {
+                $url = $this->container->get('templating.helper.assets')->getUrl(self::TEACHER_SMALL_PHOTO_URL);
             }
 
             return $url;

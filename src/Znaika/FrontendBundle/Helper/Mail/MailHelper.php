@@ -3,7 +3,7 @@
 
     class MailHelper
     {
-        const NO_REPLY_EMAIL = 'no-replay@znaika.ru';
+        const NO_REPLY_EMAIL = 'no-reply@znaika.ru';
         const HTML_TYPE = 'text/html';
         protected $mailer;
 
