@@ -820,9 +820,9 @@ img.mfp-img
     background: url('/images/popup/odnoklassniki-login-button-over.png') no-repeat;
 }
 
-.input-group .password-input
+.form-group .password-input
 {
-    padding-right: 30px;
+    padding-right: 30px !important;
 }
 
 .registration-success-message

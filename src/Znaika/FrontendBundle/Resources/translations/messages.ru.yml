@@ -32,3 +32,5 @@ show_prev_comments:  Показать еще %count% комментарий|По
 congratulations_registration_success: Поздравляем Вас с успешным завершением регистрации! Теперь Вы можете в любое время войти на сайт Знайка.ру, введя свой логин и пароль.
 congratulations_change_email_success: Поздравляем Вас с успешным изменением почтового адреса.
 congratulations_password_changed_success: Поздравляем Вас с успешным изменением пароля.
+
+not_selected_grade: Не выбран

@@ -62,6 +62,7 @@ var ProfilePage = Base.extend({
 
     _onShowChangeEmailFormLink: function()
     {
+        this._changeEmailForm.clear();
         $(".change-email-form-container").toggleClass("hidden");
         $(".change-password-form-container").addClass("hidden");
         $(".change-password-controller").toggleClass("hidden");
@@ -72,6 +73,7 @@ var ProfilePage = Base.extend({
 
     _onShowChangePasswordFormLink: function()
     {
+        this._changePasswordForm.clear();
         $(".change-email-form-container").addClass("hidden");
         $(".change-password-form-container").toggleClass("hidden");
         $(".change-password-controller").removeClass("hidden");
