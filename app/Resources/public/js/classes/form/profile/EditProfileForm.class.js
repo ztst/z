@@ -25,7 +25,12 @@ var EditProfileForm = BaseForm.extend({
     {
         for (var i in this._fields)
         {
-            if (this._fields[i].field.val() != this._fields[i].value)
+            var field = this._fields[i];
+            if (field.field.val() != field.value)
+            {
+                return true;
+            }
+            if (field.field.prop("checked") != field.checked)
             {
                 return true;
             }
@@ -52,7 +57,8 @@ var EditProfileForm = BaseForm.extend({
         {
             that._fields.push({
                 field: $(this),
-                value: $(this).val()
+                value: $(this).val(),
+                checked: $(this).prop("checked")
             });
         });
     },
@@ -95,6 +101,24 @@ var EditProfileForm = BaseForm.extend({
                 messages: { maxlength: "Максимальная длина отчества - 40 символов" }
             });
         }
+
+        this._initBirthdayValidation();
+    },
+
+    _initBirthdayValidation: function()
+    {
+        this._form.find("#birthDateField select").each(function(){
+            $(this).rules('add', {
+                required: function(element){
+                    var required = false;
+                    $("#birthDateField select").each(function(){
+                        required = required ? required : $(this).val() != "";
+                    });
+                    return required;
+                },
+                messages: { required: "Надо заполнить все поля даты рождения" }
+            });
+        });
     },
 
     _needToSubmit: function()

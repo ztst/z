@@ -37,7 +37,7 @@
                 ->add("grade", "choice", array(
                     "choices"     => $grades,
                     "empty_data"  => null,
-                    "empty_value" => "",
+                    "empty_value" => "not_selected_grade",
                     "required"    => false,
                 ))
                 ->add("region", "text", array(

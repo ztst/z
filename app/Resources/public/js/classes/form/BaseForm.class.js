@@ -14,11 +14,8 @@ var BaseForm = EventDispatcher.extend({
             errorElement: "div",
             errorPlacement: function($error, $element)
             {
-                $element.closest("div").after($error);
-                var errorFields = $($element.parent().parent()).find(".form-error-field");
-                $element.bind('blur', function(){
-                    errorFields.append('<div class="arrow"></div>');
-                });
+                var formGroup = $element.closest(".form-group");
+                formGroup.after($error);
             },
             invalidHandler: function()
             {
@@ -45,6 +42,12 @@ var BaseForm = EventDispatcher.extend({
     getAction: function()
     {
         return this._form.attr("action");
+    },
+
+    clear: function()
+    {
+        this._form.find("input").val("");
+        this._form.find("div.form-error-field").remove();
     },
 
     _onFormSubmitted: function()
