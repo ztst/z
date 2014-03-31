@@ -373,6 +373,11 @@
 
 .selectbox .select .text
 {
-    padding-left: 3px;
-    padding-right: 17px;
+    padding-left: 0;
+    padding-right: 14px;
+}
+
+.alert
+{
+    margin-bottom: 10px;
 }
