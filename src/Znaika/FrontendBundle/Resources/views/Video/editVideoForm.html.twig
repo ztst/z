@@ -4,7 +4,8 @@
   {% include "ZnaikaFrontendBundle:Video:video_form.html.twig" with
     {
       'form': form,
-      'url':  path('edit_video_form', {"videoName": videoName})
+      'url':  path('edit_video_form', {"videoName": videoName}),
+      'video': video
     }
   %}
 {% endblock %}

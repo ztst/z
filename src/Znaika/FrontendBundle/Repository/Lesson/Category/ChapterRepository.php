@@ -47,6 +47,12 @@
             return $result;
         }
 
+        /**
+         * @param int $grade
+         * @param int $subjectId
+         *
+         * @return \Znaika\FrontendBundle\Entity\Lesson\Category\Chapter[]
+         */
         public function getChaptersForCatalog($grade, $subjectId)
         {
             $result = $this->redisRepository->getChaptersForCatalog($grade, $subjectId);

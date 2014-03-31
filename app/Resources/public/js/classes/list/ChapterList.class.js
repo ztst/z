@@ -29,6 +29,7 @@ var ChapterList = Base.extend({
 
         this._downButton = $(".chapter-down");
         this._downButton.click(handler(this, "_onDownButtonClick"));
+        this._updateUpDownButtons();
 
         this._saveButton = $(".save-changes-button");
         this._saveButton.click(handler(this, "_onSaveButtonClick"));
@@ -93,7 +94,7 @@ var ChapterList = Base.extend({
 
     _updateUpDownButtons: function()
     {
-        if (this._currentItem.getPrevContainer().length == 0)
+        if (!this._currentItem || this._currentItem.getPrevContainer().length == 0)
         {
             this._upButton.addClass("disabled");
         }
@@ -101,7 +102,7 @@ var ChapterList = Base.extend({
         {
             this._upButton.removeClass("disabled");
         }
-        if (this._currentItem.getNextContainer().length == 0)
+        if (!this._currentItem || this._currentItem.getNextContainer().length == 0)
         {
             this._downButton.addClass("disabled");
         }
@@ -113,6 +114,10 @@ var ChapterList = Base.extend({
 
     _onUpButtonClick: function()
     {
+        if (!this._currentItem)
+        {
+            return false;
+        }
         var currentContainer = this._currentItem.getContainer();
         var prevContainer = this._currentItem.getPrevContainer();
         if (prevContainer.length > 0)
@@ -128,6 +133,10 @@ var ChapterList = Base.extend({
 
     _onDownButtonClick: function()
     {
+        if (!this._currentItem)
+        {
+            return false;
+        }
         var currentContainer = this._currentItem.getContainer();
         var nextContainer = this._currentItem.getNextContainer();
         if (nextContainer.length > 0)

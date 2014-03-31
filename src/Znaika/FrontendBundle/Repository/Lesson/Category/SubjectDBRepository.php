@@ -53,4 +53,20 @@
 
             return $subjects;
         }
+
+        public function getNotEmptySubjects()
+        {
+            $queryBuilder = $this->getEntityManager()
+                                 ->createQueryBuilder();
+            $queryBuilder->select('s.subjectId, s.name, s.urlName, v.grade')
+                         ->from('ZnaikaFrontendBundle:Lesson\Category\Subject', 's')
+                         ->innerJoin('s.videos', 'v')
+                         ->addGroupBy('v.grade')
+                         ->addGroupBy('v.subject')
+                         ->addOrderBy('s.name, v.grade', 'ASC');
+
+            $subjects = $queryBuilder->getQuery()->getArrayResult();
+
+            return $subjects;
+        }
     }

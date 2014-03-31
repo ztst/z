@@ -37,14 +37,13 @@
     display: inline-block;
     vertical-align: top;
     margin-bottom: 43px;
-    width: 300px;
+    width: 210px;
+    margin-right: 80px;
 }
 
 .subject-container.right
 {
-    float: right;
-    min-width: 180px;
-    width: auto;
+    margin-right: 0;
 }
 
 .subject-title

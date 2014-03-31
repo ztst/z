@@ -177,6 +177,7 @@ var ChapterListItem = EventDispatcher.extend({
 
         var order = $(".chapters-list .chapter-description-container").not(".hidden")
             .last().find(".chapter-order-input").val();
+        order = order ? order : 1;
 
         var newElement = elementPattern.clone();
         var newId = "new_" + ChapterListItem.newItemsCount++;

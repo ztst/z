@@ -67,4 +67,14 @@
             }
             return $result;
         }
+
+        public function getNotEmptySubjects()
+        {
+            $result = $this->redisRepository->getNotEmptySubjects();
+            if ( empty($result) )
+            {
+                $result = $this->dbRepository->getNotEmptySubjects();
+            }
+            return $result;
+        }
     }

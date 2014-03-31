@@ -5,7 +5,7 @@
 
 .approve-all-comments-block
 {
-    float: right;
+    text-align: right;
     border-top: 1px solid #EFEFEF;
     padding-top: 20px;
 }

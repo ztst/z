@@ -54,10 +54,14 @@
         </ul>
         <div class="video-buttons-container">
           {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
-          'url': app.request.uri,
-          'title': video.name,
-          'img': app.request.getSchemeAndHttpHost() ~ large_video_thumbnail(video),
-          'desc': video.name
+            'url': path('show_video', {
+              'subjectName': video.getSubject.getUrlName,
+              'class': video.getGrade,
+              'videoName': video.getUrlName
+              }),
+            'title': video.name,
+            'img': app.request.getSchemeAndHttpHost() ~ large_video_thumbnail(video),
+            'desc': video.name
           } %}
         </div>
       </div>

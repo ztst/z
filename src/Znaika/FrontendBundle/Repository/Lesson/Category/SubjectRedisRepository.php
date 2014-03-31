@@ -32,4 +32,9 @@
         {
             return null;
         }
+
+        public function getNotEmptySubjects()
+        {
+            return null;
+        }
     }

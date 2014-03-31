@@ -4,6 +4,7 @@
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+    use Symfony\Component\Security\Core\SecurityContext;
     use Symfony\Component\Security\Core\Util\SecureRandom;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz;
@@ -24,8 +25,10 @@
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
+    use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
     use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
     use Znaika\FrontendBundle\Repository\Lesson\Category\ChapterRepository;
+    use Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\IVideoAttachmentRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\Stat\QuizAttemptRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
@@ -233,7 +236,8 @@
 
             return $this->render('ZnaikaFrontendBundle:Video:editVideoForm.html.twig', array(
                 "form"      => $form->createView(),
-                "videoName" => $videoName
+                "videoName" => $videoName,
+                "video"     => $video
             ));
         }
 
@@ -309,10 +313,13 @@
             {
                 $currentChapterId = $currentChapterId ? : $chapters[0]->getChapterId();
             }
-            $currentChapter = $chapterRepository->getOneById($currentChapterId);
-
+            $currentChapter  = $chapterRepository->getOneById($currentChapterId);
             $videoRepository = $this->getVideoRepository();
-            if (count($videoRepository->getVideoByChapter($currentChapter)) > 0)
+            $securityContext = $this->getSecurityContext();
+
+            $needShowEmptyCatalog = count($videoRepository->getVideoByChapter($currentChapterId)) == 0
+                && !$securityContext->isGranted(UserRole::getSecurityTextByRole(UserRole::ROLE_MODERATOR));
+            if (!$needShowEmptyCatalog)
             {
                 $result = $this->render('ZnaikaFrontendBundle:Video:showFilledCatalogue.html.twig', array(
                     'class'              => $class,
@@ -327,14 +334,19 @@
             }
             else
             {
+                $subjectsWithGrades = $subjectsRepository->getNotEmptySubjects();
+                $subjects           = $this->getSubjectsWithVideos($subjectsWithGrades);
+                $subjectGrades      = $this->getSubjectGrades($subjectsWithGrades);
+
                 $result = $this->render('ZnaikaFrontendBundle:Video:showEmptyCatalogue.html.twig', array(
                     'class'              => $class,
                     'subjectNameRussian' => $subject->getName(),
-                    'subjects'           => $subjectsRepository->getAll(),
-                    'subjectsRepository' => $subjectsRepository,
+                    'subjects'           => $subjects,
+                    'subjectGrades'     => $subjectGrades,
                     'classes'            => ClassNumberUtil::getAvailableClasses()
                 ));
             }
+
             return $result;
         }
 
@@ -595,10 +607,62 @@
         /**
          * @param $video
          */
-        private function setVideoContentDir($video)
+        private function setVideoContentDir(Video $video)
         {
             $generator = new SecureRandom();
             $dirName   = bin2hex($generator->nextBytes(self::VIDEO_CONTENT_DIR_NAME_LENGTH));
             $video->setContentDir($dirName);
+        }
+
+        /**
+         * @return SecurityContext
+         */
+        private function getSecurityContext()
+        {
+            /** @var SecurityContext $securityContext */
+            $securityContext = $this->get("security.context");
+
+            return $securityContext;
+        }
+
+        /**
+         * @param $subjectsWithGrades
+         *
+         * @return array
+         */
+        private function getSubjectGrades($subjectsWithGrades)
+        {
+            $subjectGrades = array();
+            foreach ($subjectsWithGrades as $subjectWithGrade)
+            {
+                $subjectId = $subjectWithGrade['subjectId'];
+                if (!isset($subjectGrades[$subjectId]))
+                {
+                    $subjectGrades[$subjectId] = array();
+                }
+                array_push($subjectGrades[$subjectId], $subjectWithGrade['grade']);
+            }
+
+            return $subjectGrades;
+        }
+
+        /**
+         * @param $subjectsWithGrades
+         *
+         * @return array
+         */
+        private function getSubjectsWithVideos($subjectsWithGrades)
+        {
+            $subjects = array();
+            foreach ($subjectsWithGrades as $subjectWithGrade)
+            {
+                $subjectId = $subjectWithGrade['subjectId'];
+                if (!isset($subjects[$subjectId]))
+                {
+                    $subjects[$subjectId] = $subjectWithGrade;
+                }
+            }
+
+            return $subjects;
         }
     }

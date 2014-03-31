@@ -24,4 +24,9 @@
          * @return array|null
          */
         public function getByGrade($grade);
+
+        /**
+         * @return array
+         */
+        public function getNotEmptySubjects();
     }
