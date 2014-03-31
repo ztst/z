@@ -19,3 +19,4 @@
 /web/js
 /web/images/*.db
 /web/images/*.db
+/app/config/config_dev.yml
