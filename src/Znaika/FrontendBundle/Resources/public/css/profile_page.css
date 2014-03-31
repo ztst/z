@@ -364,3 +364,14 @@
 {
     margin-right: 3px;
 }
+
+.selectbox .select
+{
+    width: auto !important;
+}
+
+.selectbox .select .text
+{
+    padding-left: 3px;
+    padding-right: 17px;
+}
