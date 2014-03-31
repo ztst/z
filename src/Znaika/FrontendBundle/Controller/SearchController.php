@@ -2,7 +2,6 @@
 
     namespace Znaika\FrontendBundle\Controller;
 
-    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\Request;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
@@ -16,7 +15,7 @@
 
         public function searchVideoAction(Request $request)
         {
-            $searchString = $request->get("q", "");
+            $searchString = trim($request->get("q", ""));
             $subject      = $request->get("s", "");
             $grade        = $request->get("g", "");
             $videos       = null;
@@ -40,7 +39,7 @@
 
         public function searchVideoAjaxAction(Request $request)
         {
-            $searchString = $request->get("q", "");
+            $searchString = trim($request->get("q", ""));
             $subject      = $request->get("s", "");
             $grade        = $request->get("g", "");
             $page         = intval($request->get("page"));
@@ -62,7 +61,7 @@
 
         public function searchAction(Request $request)
         {
-            $searchString = $request->get("search_string");
+            $searchString = trim($request->get("search_string"));
 
             $videos   = null;
             $chapters = array();
