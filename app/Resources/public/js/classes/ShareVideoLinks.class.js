@@ -1,4 +1,4 @@
-var ShareLinks = Base.extend({
+var ShareVideoLinks = Base.extend({
 
     _statUrl: null,
 
@@ -47,7 +47,7 @@ var ShareLinks = Base.extend({
 
 $(function()
 {
-    var links = new ShareLinks();
+    var links = new ShareVideoLinks();
 
     var videoName = $("#videoName").val();
     links.setStatUrl(Routing.generate('post_video_to_social_network', {'videoName': videoName}));
