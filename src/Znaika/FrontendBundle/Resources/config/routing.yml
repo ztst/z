@@ -202,20 +202,13 @@ delete_message:
         expose: true
 
 login:
-    path: /user-login
+    path: /login
     defaults: { _controller: ZnaikaFrontendBundle:User:login }
+    options:
+        expose: true
 
 login_check:
     path: /login-check
-
-try_login:
-    path: /login
-    defaults:
-        _controller: FrameworkBundle:Redirect:redirect
-        route: login
-        permanent: true
-    options:
-        expose: true
 
 logout:
     path: /logout
@@ -294,3 +287,7 @@ agreement:
 support:
     pattern: /support
     defaults: { _controller: ZnaikaFrontendBundle:Support:addSupportForm }
+
+support_create_success:
+    pattern: /support-created
+    defaults: { _controller: ZnaikaFrontendBundle:Support:supportCreateSuccess }

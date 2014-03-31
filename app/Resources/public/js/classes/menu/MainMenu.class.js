@@ -27,17 +27,32 @@ var MainMenu = EventDispatcher.extend({
 
     _initLoginPopup: function()
     {
-        this._loginPopupLink = $(".login-button, .registration-button");
+        this._loginPopupLink = $(".login-button");
         this._loginPopupLink.magnificPopup({
             type: "ajax",
             ajax: {
                 settings: {
-                    url: Routing.generate('try_login'),
+                    url: Routing.generate('login'),
                     type : 'POST'
                 }
             },
             callbacks: { ajaxContentAdded: handler(this, "_onLoginFormLoaded") }
         });
+
+        this._registerPopupLink = $(".registration-button");
+        this._registerPopupLink.magnificPopup({
+            type: "ajax",
+            ajax: {
+                settings: {
+                    url: Routing.generate('login'),
+                    data: {showRegisterForm: true},
+                    type : 'POST'
+                }
+            },
+            callbacks: { ajaxContentAdded: handler(this, "_onLoginFormLoaded") }
+        });
+
+        //showRegisterForm
     },
 
     _onLoginFormLoaded: function()

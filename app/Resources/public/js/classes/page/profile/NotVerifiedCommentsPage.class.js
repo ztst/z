@@ -89,7 +89,7 @@ var NotVerifiedCommentsPage = Base.extend({
                 var openVideoCommentLink = $("#openVideoCommentLink" + videoId);
                 this._decrementCountComments($("#videoComments" + videoId + " .not-verified-comments-count"));
                 this._decrementCountComments($(".profile-sidebar-menu .not-verified-comments-count"));
-                var hasQuestions = this._decrementCountComments(openVideoCommentLink.next(".not-verified-comments-count"));
+                var hasQuestions = this._decrementCountComments(openVideoCommentLink.find(".not-verified-comments-count"));
 
                 if (!hasQuestions)
                 {

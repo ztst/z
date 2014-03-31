@@ -27,7 +27,8 @@
       <span class="non-active-button-label">Убрать фото</span>
     </a>
     <input type="hidden" id="userId" value="{{ user.userId }}"/>
-    <input type="hidden" id="defaultPhotoUrl" value="{{ user_photo_big_url(user) }}" />
+    <input type="hidden" id="defaultPhotoUrl" value="{{ default_photo_big_url(user) }}" />
+    <input type="hidden" id="defaultSmallPhotoUrl" value="{{ default_photo_small_url(user) }}" />
   </div>
 {{ form_end(form) }}
 

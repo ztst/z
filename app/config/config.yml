@@ -107,3 +107,5 @@ parameters:
     odnoklassniki_public_key:    CBAKPIFOABABABABA
     odnoklassniki_client_secret: E36998B37C434A20950F618E
     odnoklassniki_redirect_uri:  http://znaika.local/odnoklassniki-auth
+
+    support_emails: ilya.shikhaleev@cpslabs.net

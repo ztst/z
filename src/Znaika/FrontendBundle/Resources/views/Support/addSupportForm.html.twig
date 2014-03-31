@@ -1,5 +1,15 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts filter='?yui_js'
+    '../app/Resources/public/js/classes/form/AddSupportForm.class.js'
+  %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
 {% block content %}
   <div class="static-form-container additional-form-container">
     <h3>Напишите нам!</h3>
@@ -8,28 +18,28 @@
       Нам очень важны ваши комментарии, пожелания и заметки об ошибках.
     </h5>
     <div class="additional-form support-form">
-      {{ form_start(form, {'method': 'POST'}) }}
-      {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
-      <div class="input-group">
-        {{ form_label(form.name, 'Ваше имя') }}
-        {{ form_errors(form.name) }}
-        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="input-group">
-        {{ form_label(form.email, 'Email') }}
-        {{ form_errors(form.email) }}
-        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="input-group">
-        {{ form_label(form.text, 'Текст сообщения') }}
-        {{ form_errors(form.text) }}
-        {{ form_widget(form.text, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="additional-form-button-container">
-        <button type="submit" class="active-button">
-          <span class="active-button-label">Отправить</span>
-        </button>
-      </div>
+      {{ form_start(form, {'attr': {'id': 'addSupportForm'}, 'method': 'POST'}) }}
+        {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+        <div class="input-group">
+          {{ form_label(form.name, 'Ваше имя') }}
+          {{ form_errors(form.name) }}
+          {{ form_widget(form.name, {'attr': {'class': 'form-control'}, 'id': 'supportUserName'}) }}
+        </div>
+        <div class="input-group">
+          {{ form_label(form.email, 'Email') }}
+          {{ form_errors(form.email) }}
+          {{ form_widget(form.email, {'attr': {'class': 'form-control'}, 'id': 'supportUserEmail'}) }}
+        </div>
+        <div class="input-group">
+          {{ form_label(form.text, 'Текст сообщения') }}
+          {{ form_errors(form.text) }}
+          {{ form_widget(form.text, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="additional-form-button-container">
+          <button type="submit" class="active-button">
+            <span class="active-button-label">Отправить</span>
+          </button>
+        </div>
       {{ form_end(form) }}
     </div>
   </div>

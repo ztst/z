@@ -169,7 +169,8 @@
                     'error'                => $error,
                     'referrer'             => $referrer,
                     'registerForm'         => $registerForm->createView(),
-                    'passwordRecoveryForm' => $passwordRecoveryForm->createView()
+                    'passwordRecoveryForm' => $passwordRecoveryForm->createView(),
+                    'showRegisterForm'     => $request->get("showRegisterForm", false),
                 )
             );
         }

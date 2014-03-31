@@ -6,14 +6,21 @@
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Znaika\FrontendBundle\Entity\Communication\Support;
+    use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Form\Communication\SupportType;
+    use Znaika\FrontendBundle\Helper\Mail\UserMailer;
     use Znaika\FrontendBundle\Helper\Support\SupportStatus;
 
     class SupportController extends ZnaikaController
     {
+        public function supportCreateSuccessAction()
+        {
+            return $this->render('ZnaikaFrontendBundle:Support:supportCreateSuccess.html.twig');
+        }
+
         public function addSupportFormAction(Request $request)
         {
-            $support = new Support();
+            $support = $this->prepareSupportEntity();
             $form    = $this->createForm(new SupportType(), $support);
 
             $form->handleRequest($request);
@@ -25,11 +32,40 @@
                 $supportRepository = $this->get('znaika_frontend.support_repository');
                 $supportRepository->save($support);
 
-                return new RedirectResponse($this->generateUrl('support'));
+                $this->sendEmailToSuppor($support);
+
+                return new RedirectResponse($this->generateUrl('support_create_success'));
             }
 
             return $this->render('ZnaikaFrontendBundle:Support:addSupportForm.html.twig', array(
                 'form' => $form->createView()
             ));
+        }
+
+        /**
+         * @return Support
+         */
+        private function prepareSupportEntity()
+        {
+            $support = new Support();
+            $user = $this->getUser();
+            if ($user instanceof User)
+            {
+                $support->setEmail($user->getEmail());
+                $support->setName((string)$user);
+            }
+
+            return $support;
+        }
+
+        /**
+         * @param $support
+         */
+        private function sendEmailToSuppor($support)
+        {
+            $supportEmails = $this->container->getParameter('support_emails');
+            /** @var UserMailer $userMailer */
+            $userMailer = $this->get("znaika_frontend.user_mailer");
+            $userMailer->sendSupportEmail($support, $supportEmails);
         }
     }

@@ -6,15 +6,17 @@ var UserPhotoForm = Base.extend({
     _uploadButton: null,
     _uploadButtonText: null,
 
+    _uploadFileButton: null,
+
     _isUploading: null,
 
     constructor: function()
     {
         this._isUploading = false;
 
-        var uploadFileButton = $("#submit");
-        uploadFileButton.click(handler(this, "_onUploadFileButtonClick"));
-        uploadFileButton.change(function()
+        this._uploadFileButton = $("#submit");
+        this._uploadFileButton.click(handler(this, "_onUploadFileButtonClick"));
+        this._uploadFileButton.change(function()
         {
             $("#editUserPhotoForm").submit();
         });
@@ -34,13 +36,7 @@ var UserPhotoForm = Base.extend({
 
     _onUploadFileButtonClick: function()
     {
-        if (this._isUploading)
-        {
-            return false;
-        }
-        this._isUploading = true;
-
-        return true;
+        return !this._isUploading;
     },
 
     _onUserPhotoDeleteClick: function()
@@ -61,12 +57,14 @@ var UserPhotoForm = Base.extend({
     _onPhotoDeleted: function()
     {
         this._isUploading = false;
+        this._uploadFileButton.val("");
 
         $("#uploadPhotoProgress").addClass("hidden");
         this._uploadButtonText.html("Добавить фото");
         this._uploadButtonText.attr("class", "semi-active-button-label");
         this._uploadButton.attr("class", "semi-active-button add-photo-button");
-        this._updatePhotos($("#defaultPhotoUrl").val());
+        this._updateBigPhoto($("#defaultPhotoUrl").val());
+        this._updateSmallPhoto($("#defaultSmallPhotoUrl").val());
         this._deleteButton.addClass("hidden");
     },
 
@@ -74,6 +72,7 @@ var UserPhotoForm = Base.extend({
     {
         $.magnificPopup.close();
         $("#uploadPhotoProgress").removeClass("hidden");
+        this._isUploading = true;
     },
 
     _onSuccess: function(response)
@@ -86,7 +85,8 @@ var UserPhotoForm = Base.extend({
             this._uploadButtonText.html("Изменить фото");
             this._uploadButtonText.attr("class", "non-active-button-label");
             this._uploadButton.attr("class", "non-active-button edit-photo-button");
-            this._updatePhotos(response.photoUrl);
+            this._updateBigPhoto(response.photoUrl);
+            this._updateSmallPhoto(response.photoUrl);
             this._deleteButton.removeClass("hidden");
         }
         else
@@ -100,9 +100,13 @@ var UserPhotoForm = Base.extend({
         }
     },
 
-    _updatePhotos: function(url)
+    _updateBigPhoto: function(url)
     {
         $("#userAvatar").attr("src", url);
+    },
+
+    _updateSmallPhoto: function(url)
+    {
         $("#userSmallAvatar").attr("src", url);
     }
 });
