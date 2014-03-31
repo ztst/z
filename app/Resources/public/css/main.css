@@ -66,6 +66,7 @@ a:focus
 {
     position: relative;
     height: 54px;
+    min-width: 1000px;
 
     background: #25658a;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#25658a), to(#0b567a));
