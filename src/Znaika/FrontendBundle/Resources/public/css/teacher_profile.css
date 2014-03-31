@@ -74,8 +74,14 @@
 
 .teacher-profile-container .settings-column-container
 {
-    padding-left: 0;
+    padding: 0;
     margin-top: 45px;
+    width: 100%;
+}
+
+.teacher-profile-container .settings-column-container input
+{
+    width: 180px;
 }
 
 .profile-sidebar-menu-container .user-questions-count
