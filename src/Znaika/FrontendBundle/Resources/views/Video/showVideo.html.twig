@@ -57,7 +57,7 @@
         </ul>
         <div class="video-buttons-container">
           {% include "ZnaikaFrontendBundle:Video:video_social_links.html.twig" with {
-            'url': path('show_video', {
+            'url': url('show_video', {
               'subjectName': video.getSubject.getUrlName,
               'class': video.getGrade,
               'videoName': video.getUrlName

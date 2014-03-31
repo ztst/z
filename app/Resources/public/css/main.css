@@ -134,6 +134,7 @@ a:focus
     background: #eef9fe;
     margin-bottom: 0;
     height: 63px;
+    min-width: 1000px;
 }
 
 .class-horizontal-bar
@@ -159,6 +160,7 @@ a:focus
 {
     position: absolute;
     top: 1px;
+    left: 0;
     z-index: 1;
     width: 100%;
     height: 1px;
@@ -228,6 +230,7 @@ a:focus
 .class-menu ul
 {
     margin: 0;
+    width: 1000px;
 }
 
 .nav.nav-justified > li
@@ -752,7 +755,7 @@ input
 
 .search-container
 {
-    margin-right: 25px;
+    margin-right: 22px;
     width: 299px;
 }
 
@@ -764,17 +767,23 @@ input
 .main-menu-right
 {
     float: right;
+    width: 500px;
 }
 
 .main-menu-right ul
 {
     float: right;
     margin-top: 15px;
+    width: 473px;
+
+    list-style: none;
+    margin-right: 0 !important;
 }
 
-.main-menu-right .navbar-right
+.main-menu-right ul li
 {
-    margin-right: 0 !important;
+    display: inline-block;
+    height: 30px;
 }
 
 .search-button-container
