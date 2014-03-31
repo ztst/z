@@ -465,3 +465,13 @@
 {
     margin-bottom: 18px;
 }
+
+.media-body a
+{
+    text-decoration: none !important;
+}
+
+.answer-comment-author-name img
+{
+    margin-top: -9px;
+}

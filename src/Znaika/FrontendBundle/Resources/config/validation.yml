@@ -63,3 +63,10 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis:
                 maxSize: 100M
                 mimeTypes: [application/zip, application/x-zip, application/octet-stream, application/x-zip-compressed]
                 mimeTypesMessage: "invalid_zip_synopsis_file_format"
+
+Znaika\FrontendBundle\Entity\Communication\Support:
+    properties:
+        email:
+            - NotBlank: { message: "not_blank" }
+            - Email:
+                  checkMX: true

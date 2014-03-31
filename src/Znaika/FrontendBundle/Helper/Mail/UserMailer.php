@@ -1,6 +1,7 @@
 <?
     namespace Znaika\FrontendBundle\Helper\Mail;
 
+    use Znaika\FrontendBundle\Entity\Communication\Support;
     use Znaika\FrontendBundle\Entity\Profile\ChangeUserEmail;
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Entity\Profile\UserRegistration;
@@ -90,6 +91,19 @@
             $subject         = $this->getEmailSubject($templateContent);
 
             $this->mailHelper->sendEmail(null, $user->getEmail(), $body, $subject);
+        }
+
+        public function sendSupportEmail(Support $support, $supportEmails)
+        {
+            $templateFile    = "ZnaikaFrontendBundle:Email:support.html.twig";
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $body            = $templateContent->render(
+                                               array(
+                                                   "text" => $support->getText(),
+                                               ));
+            $subject         = $this->getEmailSubject($templateContent);
+
+            $this->mailHelper->sendEmail($support->getEmail(), $supportEmails, $body, $subject);
         }
 
         /**

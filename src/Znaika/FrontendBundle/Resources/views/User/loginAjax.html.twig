@@ -1,5 +1,5 @@
 <div class="popup login-popup-content">
-  <div id="loginFormContainer">
+  <div id="loginFormContainer" class="{% if showRegisterForm %}hidden{% endif %}">
     <div class="form-container">
       <div class="login-popup-left-column">
         <div class="login-popup-header">
@@ -15,7 +15,7 @@
     </div>
     <div class="clear"></div>
   </div>
-  <div id="registrationFormContainer" class="hidden">
+  <div id="registrationFormContainer" class="{% if not showRegisterForm %}hidden{% endif %}">
     <div class="form-container">
       <div class="login-popup-left-column">
         <div class="login-popup-header">

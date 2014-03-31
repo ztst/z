@@ -37,3 +37,5 @@ parameters:
     vk_redirect_uri:             http://znaika.local/app_dev.php/vk-auth
     facebook_redirect_uri:       http://znaika.local/app_dev.php/facebook-auth
     odnoklassniki_redirect_uri:  http://znaika.local/app_dev.php/odnoklassniki-auth
+
+    support_emails: ilya.shikhaleev@cpslabs.net, qwe123qweqwe123@gmail.com

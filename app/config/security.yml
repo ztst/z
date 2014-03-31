@@ -44,7 +44,7 @@ security:
                 realm: "Необходима логинация"
 
     access_control:
-        - { path: ^/login, roles: ROLE_USER }
+        - { path: ^/user, roles: ROLE_USER }
         - { path: ^/teacher, roles: ROLE_TEACHER }
         - { path: ^/moderator, roles: ROLE_MODERATOR }
         - { path: ^/admin, roles: ROLE_ADMIN }
