@@ -640,7 +640,7 @@ img.mfp-img
     width: 103px;
 }
 
-.login-button-container .active-button
+.login-popup-content .active-button
 {
     width: 100%;
 }
@@ -704,7 +704,7 @@ img.mfp-img
 
 .agreement-block
 {
-    margin-top: -9px;
+    margin-top: -7px;
     margin-bottom: 11px;
     padding-left: 85px;
 
@@ -871,7 +871,7 @@ img.mfp-img
 {
     display: inline-block;
     margin-bottom: 20px;
-    height: 32px;
+    height: 34px;
 
     color: #222;
     font-size: 20px;
@@ -907,6 +907,8 @@ img.mfp-img
     display: table-cell;
     padding-right: 7px;
     width: 113px;
+    height: 32px;
+    vertical-align: middle;
 
     text-align: right;
     font-family: "OpenSans Semibold", sans-serif;
