@@ -21,5 +21,11 @@ var ChangePasswordForm = BaseForm.extend({
             messages: { minlength: "Пароль должен содержать более " + (BaseForm.MIN_PASSWORD_LENGTH - 1) + " символов" }
         });
         this._initShowPasswordLink();
+    },
+
+    clear: function()
+    {
+        this._form.find("#newPassword, #oldPasswordField").val("");
+        this._form.find("div.form-error-field").remove();
     }
 });

@@ -8,6 +8,7 @@ var BaseForm = EventDispatcher.extend({
 
         this._form = $("#" + id);
 
+        var that = this;
         this._form.validate({
             onkeyup: false,
             errorClass: "form-error-field",
@@ -16,6 +17,17 @@ var BaseForm = EventDispatcher.extend({
             {
                 var formGroup = $element.closest(".form-group");
                 formGroup.after($error);
+            },
+            showErrors: function(errorMap, errorList) {
+                if (errorList.length)
+                {
+                    var firstError = errorList.shift();
+                    var newErrorList = [];
+                    newErrorList.push(firstError);
+                    this.errorList = newErrorList;
+                }
+                that._form.find("div.form-error-field").remove();
+                this.defaultShowErrors();
             },
             invalidHandler: function()
             {
@@ -42,12 +54,6 @@ var BaseForm = EventDispatcher.extend({
     getAction: function()
     {
         return this._form.attr("action");
-    },
-
-    clear: function()
-    {
-        this._form.find("input").val("");
-        this._form.find("div.form-error-field").remove();
     },
 
     _onFormSubmitted: function()

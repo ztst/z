@@ -20,5 +20,11 @@ var ChangeEmailForm = BaseForm.extend({
             password: true,
             messages: { password: handler(that, "_getInvalidPasswordMessage") }
         });
+    },
+
+    clear: function()
+    {
+        this._form.find("#newEmail, #oldPasswordNewEmailField").val("");
+        this._form.find("div.form-error-field").remove();
     }
 });
