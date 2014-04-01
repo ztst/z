@@ -96,6 +96,12 @@
 {
     border: 1px solid #d6d6d6;
     background: #fff;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(#fafafa));
+    background: -webkit-linear-gradient(#ffffff, #fafafa);
+    background: -moz-linear-gradient(#ffffff, #fafafa);
+    background: -ms-linear-gradient(#ffffff, #fafafa);
+    background: -o-linear-gradient(#ffffff, #fafafa);
+    background: linear-gradient(#ffffff, #fafafa);
 }
 
 .non-active-button-label

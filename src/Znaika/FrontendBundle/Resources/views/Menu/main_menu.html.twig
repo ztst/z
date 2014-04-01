@@ -6,30 +6,29 @@
       </div>
       <div class="col-right">
         <div class="main-menu-right col-center">
-          <ul class="">
-            <li class="search-container">
+            <div class="search-container menu-item-container">
               {{ search_form()|raw }}
               <div class="clear"></div>
-            </li>
+            </div>
 
             {{ complete_social_registration_popup()|raw }}
             {% if is_user() %}
-              <li>
+              <div class="menu-item-container">
                 <div class="user-pic">
                   <img id="userSmallAvatar" width="30" src="{{ user_photo_small_url(app.user) }}" alt="" />
                 </div>
-              </li>
-              <li>
+              </div>
+              <div class="menu-item-container user-profile-link-container">
                 <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link">{{ app.user }}</a>
-              </li>
-              <li>
+              </div>
+              <div class="menu-item-container">
                 <a href="{{ path('logout') }}" title="Выход" class="logout-button">
                   <div class="logout-button-icon"></div>
                   <span>Выход</span>
                 </a>
-              </li>
+              </div>
             {% else %}
-              <li>
+              <div class="menu-item-container">
                 <div class="login-registration-buttons-container">
                   <a href="javascript:void(0);" class="login-button">
                     <div class="login-button-icon"></div>
@@ -40,7 +39,7 @@
                     <span>Регистрация</span>
                   </a>
                 </div>
-              </li>
+              </div>
             {% endif %}
           </ul>
         </div>
