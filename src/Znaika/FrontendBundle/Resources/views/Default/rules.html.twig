@@ -1,5 +1,15 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts filter='?yui_js'
+    '../app/Resources/public/js/classes/PageUpDownScroller.class.js'
+  %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
 {% block content %}
   <div class="static-page-container">
   <h3>Соглашение об использовании Знайка.Ру</h3>
@@ -228,4 +238,5 @@
     </div>
   </div>
   </div>
+  {% include "ZnaikaFrontendBundle:Default:up_down_scroll_block.html.twig" %}
 {% endblock %}

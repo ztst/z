@@ -65,6 +65,7 @@ a:focus
 .footer
 {
     position: relative;
+    z-index: 6;
     height: 54px;
     min-width: 1000px;
 
@@ -175,10 +176,10 @@ a:focus
     height: 33px;
 
     background: #f4f4f4;
-    box-shadow: 0 5px 10px -8px;
-    -webkit-box-shadow: 0 5px 10px -8px #000000;
-    -mox-box-shadow: 0 5px 10px -8px #000000;
-    -o-box-shadow: 0 5px 10px -8px #000000;
+    box-shadow: 0 0 7px 0 #999;
+    -webkit-box-shadow: 0 0 7px 0 #999;
+    -mox-box-shadow: 0 0 7px 0 #999;
+    -o-box-shadow: 0 0 7px 0 #999;
 }
 
 .navbar-brand
@@ -571,8 +572,7 @@ a:focus
     padding-left: 16px !important;
     margin-right: 12px;
 
-    background: url("/images/main_menu_item_icon.png") no-repeat;
-    background-position: 0 4px;
+    background: url("/images/main_menu_item_icon.png") no-repeat 0 4px;
 }
 
 .main-menu .last a
@@ -584,8 +584,7 @@ a:focus
     padding-right: 0;
     margin-right: 0;
 
-    background: url("/images/main_menu_item_icon.png") no-repeat;
-    background-position: 0 4px;
+    background: url("/images/main_menu_item_icon.png") no-repeat 0 4px;
 }
 
 button.search-button,
@@ -676,10 +675,7 @@ div.form-error-field
 
     border: 1px solid #f79076;
     border-radius: 3px;
-    background-color: #fff9f1;
-    background-image: url('/images/popup/error-sign.png');
-    background-repeat: no-repeat;
-    background-position: 9px 8px;
+    background: #fff9f1 url('/images/popup/error-sign.png') no-repeat 9px 8px;
 }
 
 div.form-error-field .arrow
@@ -936,7 +932,7 @@ label
 .go-up,
 .go-down
 {
-    z-index: 9999;
+    z-index: 5;
     background-position: 10px 10px;
     cursor: pointer;
 
@@ -1000,12 +996,12 @@ label
 
     .go-up:hover
     {
-        background: #e8f1f5 url('/images/go-up-icon-over.png') no-repeat 10px 10px;
+        background: rgba(232, 241, 245, 0.4) url('/images/go-up-icon-over.png') no-repeat 10px 10px;
     }
 
     .go-down:hover
     {
-        background: #e8f1f5 url('/images/go-down-icon-over.png') no-repeat 10px 10px;
+        background: rgba(232, 241, 245, 0.4) url('/images/go-down-icon-over.png') no-repeat 10px 10px;
     }
 }
 
@@ -1024,7 +1020,7 @@ label
 /* static forms styles BEGIN */
 .additional-form-container.static-form-container
 {
-    padding-top: 18px;
+    padding-top: 11px;
     padding-left: 35px;
 }
 
@@ -1050,18 +1046,22 @@ label
 .additional-form-container.static-form-container h3
 {
     margin: 0;
+    font-size: 22px;
 }
 
 .additional-form-container.static-form-container h5
 {
+    margin: 3px 0 27px;
+    line-height: 20px;
     text-align: left;
+    font-size: 13px;
 }
 
 .additional-form-container.static-form-container label
 {
     display: table-cell;
     vertical-align: top;
-    padding-top: 5px;
+    padding-top: 7px;
     padding-right: 7px;
     width: 113px;
 
@@ -1100,7 +1100,7 @@ label
 
 .additional-form.support-form label
 {
-    width: 127px;
+    width: 129px;
     text-align: left;
 }
 
@@ -1146,7 +1146,7 @@ label
 /* static pages styles BEGIN */
 .static-page-container
 {
-    padding: 18px 32px;
+    padding: 18px 32px 50px;
 }
 
 .static-page-container h3
@@ -1248,12 +1248,6 @@ label
 .footer-container a:hover
 {
     color: #fff;
-}
-
-.footer-logo
-{
-    background: url('/images/footer/footer-logo.png') no-repeat;
-    height: 40px;
 }
 
 .footer-social-buttons-block,

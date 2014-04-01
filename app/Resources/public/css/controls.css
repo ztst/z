@@ -134,6 +134,11 @@
     background: url('/images/user-profile/edit-profile-setting-icon-over.png') no-repeat;
 }
 
+.send-comment-button
+{
+    float: right;
+}
+
 .send-comment-button .active-button-label
 {
     background: url('/images/controls/send-answer-button-icon.png') no-repeat 0 5px;

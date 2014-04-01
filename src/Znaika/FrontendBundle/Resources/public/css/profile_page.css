@@ -73,8 +73,15 @@
 .videos-with-comments-list li,
 .videos-with-questions-list li
 {
-    padding: 20px 0 18px;
+    margin: 0 -26px;
+    padding: 20px 26px 18px;
     border-top: 1px solid #efefef;
+}
+
+.videos-with-comments-list li:hover,
+.videos-with-questions-list li:hover
+{
+    background: #EEF9FE;
 }
 
 .videos-with-comments-list li.first,
