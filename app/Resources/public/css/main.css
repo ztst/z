@@ -782,16 +782,16 @@ input
     width: auto;
 }
 
-.user-profile-link-container
-{
-    vertical-align: middle;
-}
-
 .user-profile-link
 {
-    margin-right: 21px;
+    padding-right: 21px;
+    height: 30px;
     font-size: 13px;
-    line-height: 30px;
+    line-height: 14px;
+    max-width: 391px;
+
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .user-profile-link:hover
