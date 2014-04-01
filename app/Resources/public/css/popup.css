@@ -619,6 +619,7 @@ img.mfp-img
 {
     display: table-cell;
     text-align: right;
+    vertical-align: middle;
 
     padding-right: 7px;
 

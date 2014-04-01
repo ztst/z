@@ -6,9 +6,10 @@
   {{ parent() }}
 
   {% stylesheets filter="?yui_css"
-  '@ZnaikaFrontendBundle/Resources/public/css/show_video.css'
-  '@ZnaikaFrontendBundle/Resources/public/css/tab_menu.css'
-  '@ZnaikaFrontendBundle/Resources/public/css/videos_list.css' %}
+    '@ZnaikaFrontendBundle/Resources/public/css/show_video.css'
+    '@ZnaikaFrontendBundle/Resources/public/css/tab_menu.css'
+    '@ZnaikaFrontendBundle/Resources/public/css/videos_list.css'
+  %}
   <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
@@ -18,10 +19,12 @@
   {{ parent() }}
 
   {% javascripts filter='?yui_js'
-  '../app/Resources/public/js/classes/ShareVideoLinks.class.js'
-  '../app/Resources/public/js/classes/form/AddCommentForm.class.js'
-  '../app/Resources/public/js/classes/page/ShowVideoPage.class.js'
-  '../app/Resources/public/js/classes/page/VideosList.class.js' %}
+    '../app/Resources/public/js/classes/ShareVideoLinks.class.js'
+    '../app/Resources/public/js/classes/form/AddCommentForm.class.js'
+    '../app/Resources/public/js/classes/page/ShowVideoPage.class.js'
+    '../app/Resources/public/js/classes/page/VideosList.class.js'
+    '../app/Resources/public/js/classes/PageUpDownScroller.class.js'
+  %}
   <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
 {% endblock %}
@@ -90,4 +93,5 @@
     </div>
   </div>
   <input id="videoName" type="hidden" value="{{ video.getUrlName }}"/>
+  {% include "ZnaikaFrontendBundle:Default:up_down_scroll_block.html.twig" %}
 {% endblock %}
