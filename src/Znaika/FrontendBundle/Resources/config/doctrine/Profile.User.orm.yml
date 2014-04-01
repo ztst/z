@@ -19,12 +19,12 @@ Znaika\FrontendBundle\Entity\Profile\User:
         grade:           { type: smallint, nullable: true }
         region:          { type: string, length: 150, nullable: true }
         city:            { type: string, length: 150, nullable: true }
-        hasPhoto:        { column: has_photo, type: boolean }
         vkId:            { column: vk_id, type: bigint, nullable: true }
         facebookId:      { column: facebook_id, type: bigint, nullable: true }
         odnoklassnikiId: { column: odnoklassniki_id, type: bigint, nullable: true }
         banReason:       { column: ban_reason, type: smallint, notnull: true }
         updatedTime:     { column: updated_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
+        photoFileName:   { column: photo_file_name, type: string, length: 150, nullable: true }
     oneToMany:
         videoComments:      { targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment, mappedBy: user }
         banInfos:           { targetEntity: Znaika\FrontendBundle\Entity\Profile\Ban\Info, mappedBy: user }
