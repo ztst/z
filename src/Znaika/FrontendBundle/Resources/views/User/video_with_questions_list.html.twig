@@ -4,7 +4,13 @@
     {% for video in videos %}
       <li class="{% if isFirst %}first{% endif %} open-video-question-link" id="openVideoQuestionLink{{ video.videoId }}">
         <div class="video-with-questions-list-item">
-          <a href="javascript:void(0);" title="{{ video.name }}" class="">
+          <a
+            href="{{ path('show_video', {
+            'subjectName': video.getSubject.getUrlName,
+            'class': video.getGrade,
+            'videoName': video.getUrlName
+            }) }}"
+            class="">
             {{ video.name }}
           </a>
           <div class="clear"></div>
