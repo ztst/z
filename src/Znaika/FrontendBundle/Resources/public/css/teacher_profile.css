@@ -1,3 +1,8 @@
+.wrap > .container
+{
+    background: url('/images/teacher-page/sidebar-menu-row-background.png') repeat-y 0 -11px #ffffff;
+}
+
 .active-button,
 .semi-active-button,
 .non-active-button
