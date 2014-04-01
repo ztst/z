@@ -142,11 +142,6 @@
         private $photo;
 
         /**
-         * @var bool
-         */
-        private $hasPhoto = false;
-
-        /**
          * @var integer
          */
         private $banReason = UserBan::NO_REASON;
@@ -160,6 +155,11 @@
          * @var \DateTime
          */
         private $updatedTime;
+
+        /**
+         * @var string
+         */
+        private $photoFileName = null;
 
         /**
          * Constructor
@@ -608,7 +608,7 @@
             {
                 $name = $this->getFirstName();
                 $name = $this->role != UserRole::ROLE_USER ? $name . " " . $this->getMiddleName() : $name;
-                $name .=  " " . $this->getLastName();
+                $name .= " " . $this->getLastName();
                 $name = trim($name);
             }
             else
@@ -877,25 +877,20 @@
             return $this->photo;
         }
 
-        /**
-         * @param boolean $hasPhoto
-         */
-        public function setHasPhoto($hasPhoto)
+        public function getBigPhotoUrl()
         {
-            $this->hasPhoto = $hasPhoto;
+            $userId        = $this->getUserId();
+            $photoFileName = $this->getPhotoFileName();
+
+            return "/user-photo/{$userId}/{$photoFileName}_big";
         }
 
-        /**
-         * @return boolean
-         */
-        public function getHasPhoto()
+        public function getSmallPhotoUrl()
         {
-            return $this->hasPhoto;
-        }
+            $userId        = $this->getUserId();
+            $photoFileName = $this->getPhotoFileName();
 
-        public function getPhotoUrl()
-        {
-            return "/user-photo/" . $this->getUserId() . "/photo";
+            return "/user-photo/{$userId}/{$photoFileName}_small";
         }
 
         public function addChangeUserEmail(ChangeUserEmail $changeUserEmail)
@@ -960,5 +955,21 @@
         public function getBanReason()
         {
             return $this->banReason;
+        }
+
+        /**
+         * @param string $photoFileName
+         */
+        public function setPhotoFileName($photoFileName)
+        {
+            $this->photoFileName = $photoFileName;
+        }
+
+        /**
+         * @return string
+         */
+        public function getPhotoFileName()
+        {
+            return $this->photoFileName;
         }
     }

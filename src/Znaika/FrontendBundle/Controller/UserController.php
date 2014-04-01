@@ -561,6 +561,7 @@
             {
                 throw $this->createNotFoundException("Can't manage user");
             }
+            /** @var User $user */
             $user           = $this->getUser();
             $userRepository = $this->getUserRepository();
 
@@ -575,9 +576,10 @@
                 $success = true;
             }
 
-            $data       = array(
-                "photoUrl" => $user->getPhotoUrl() . "?" . time(),
-                "success"  => $success
+            $data = array(
+                "bigPhotoUrl"   => $user->getBigPhotoUrl(),
+                "smallPhotoUrl" => $user->getSmallPhotoUrl(),
+                "success"       => $success
             );
             $uaProvider = new UserAgentInfoProvider();
             $uaProvider->parse($request->headers->get('User-Agent'));
@@ -598,12 +600,11 @@
 
             $userRepository = $this->getUserRepository();
             $user           = $currentUser;
-            $user->setHasPhoto(false);
+            $user->setPhotoFileName(null);
             $userRepository->save($user);
 
             $userPhotoUploader = $this->getUserPhotoUploader();
-            $filePath          = $userPhotoUploader->getFilePath($user);
-            UnixSystemUtils::remove($filePath);
+            $userPhotoUploader->deletePhoto($user);
 
             return JsonResponse::create(array("success" => true));
         }

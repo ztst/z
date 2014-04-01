@@ -3,13 +3,16 @@
 
     use Symfony\Component\DependencyInjection\ContainerInterface;
     use Symfony\Component\HttpFoundation\File\UploadedFile;
+    use Symfony\Component\Security\Core\Util\SecureRandom;
     use Znaika\FrontendBundle\Entity\Profile\User;
     use Znaika\FrontendBundle\Helper\Util\FileSystem\UnixSystemUtils;
 
     class UserPhotoUploader
     {
-        const UPLOAD_PATH = "/user_photo";
-        const PHOTO_SIZE  = 200;
+        const RANDOM_FILE_NAME_LENGTH = 27;
+        const UPLOAD_PATH             = "/user_photo";
+        const PHOTO_SIZE              = 200;
+        const SMALL_PHOTO_SIZE        = 38;
 
         /**
          * @var ContainerInterface
@@ -28,18 +31,31 @@
             {
                 return;
             }
+            $user->setPhotoFileName($this->generateFileName());
 
             $fileDir = $this->getFileDir($user);
             UnixSystemUtils::createDirectory($fileDir, 0755, true);
 
             $this->saveUserPhoto($user, $photo);
 
-            $user->setHasPhoto(true);
         }
 
-        public function getFilePath(User $user)
+        public function deletePhoto(User $user)
         {
-            return $this->getFileDir($user) . "photo";
+            $filePath = $this->getBigPhotoFilePath($user);
+            UnixSystemUtils::remove($filePath);
+            $filePath = $this->getSmallPhotoFilePath($user);
+            UnixSystemUtils::remove($filePath);
+        }
+
+        public function getSmallPhotoFilePath(User $user)
+        {
+            return $this->getFileDir($user) . $user->getPhotoFileName() . "_small";
+        }
+
+        public function getBigPhotoFilePath(User $user)
+        {
+            return $this->getFileDir($user) . $user->getPhotoFileName() . "_big";
         }
 
         private function getFileDir(User $user)
@@ -72,6 +88,15 @@
             $image->scaleimage($newWidth, $newHeight);
             $image->cropimage(self::PHOTO_SIZE, self::PHOTO_SIZE, ($newWidth - self::PHOTO_SIZE) / 2,
                 ($newHeight - self::PHOTO_SIZE) / 2);
-            UnixSystemUtils::setFileContents($this->getFilePath($user), $image);
+            UnixSystemUtils::setFileContents($this->getBigPhotoFilePath($user), $image);
+            $image->scaleimage(self::SMALL_PHOTO_SIZE, self::SMALL_PHOTO_SIZE);
+            UnixSystemUtils::setFileContents($this->getSmallPhotoFilePath($user), $image);
+        }
+
+        private function generateFileName()
+        {
+            $generator = new SecureRandom();
+
+            return bin2hex($generator->nextBytes(self::RANDOM_FILE_NAME_LENGTH));
         }
     }

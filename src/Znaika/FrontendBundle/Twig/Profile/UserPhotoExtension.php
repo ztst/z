@@ -41,9 +41,9 @@
 
         public function getUserPhotoBigUrl(User $user)
         {
-            if ($user->getHasPhoto())
+            if ($user->getPhotoFileName())
             {
-                $url = $user->getPhotoUrl();
+                $url = $user->getBigPhotoUrl();
             }
             else
             {
@@ -55,9 +55,9 @@
 
         public function getUserPhotoSmallUrl(User $user)
         {
-            if ($user->getHasPhoto())
+            if ($user->getPhotoFileName())
             {
-                $url = $user->getPhotoUrl();
+                $url = $user->getSmallPhotoUrl();
             }
             else
             {

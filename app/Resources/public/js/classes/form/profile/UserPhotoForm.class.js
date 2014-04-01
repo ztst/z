@@ -85,8 +85,8 @@ var UserPhotoForm = Base.extend({
             this._uploadButtonText.html("Изменить фото");
             this._uploadButtonText.attr("class", "non-active-button-label");
             this._uploadButton.attr("class", "non-active-button edit-photo-button");
-            this._updateBigPhoto(response.photoUrl);
-            this._updateSmallPhoto(response.photoUrl);
+            this._updateBigPhoto(response.bigPhotoUrl);
+            this._updateSmallPhoto(response.smallPhotoUrl);
             this._deleteButton.removeClass("hidden");
         }
         else
