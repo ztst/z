@@ -607,7 +607,7 @@
             if (trim($firstName) != "")
             {
                 $name = $this->getFirstName();
-                $name = $this->role == UserRole::ROLE_USER ? $name . " " . $this->getMiddleName() : $name;
+                $name = $this->role != UserRole::ROLE_USER ? $name . " " . $this->getMiddleName() : $name;
                 $name .=  " " . $this->getLastName();
                 $name = trim($name);
             }

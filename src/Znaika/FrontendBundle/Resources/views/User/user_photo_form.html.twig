@@ -14,12 +14,11 @@
       {% else %}
         <span class="semi-active-button-label button-label">Добавить фото</span>
       {% endif %}
+      <div class="form-group photo-button">
+        {{ form_errors(form.photo) }}
+        {{ form_widget(form.photo, {'id': 'submit'}) }}
+      </div>
     </a>
-    <div class="clear"></div>
-    <div class="form-group photo-button">
-      {{ form_errors(form.photo) }}
-      {{ form_widget(form.photo, {'id': 'submit'}) }}
-    </div>
   </div>
 
   <div class="delete-photo-button-container">

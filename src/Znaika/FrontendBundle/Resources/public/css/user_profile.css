@@ -11,7 +11,8 @@
     overflow: hidden;
     width: 148px;
     height: 31px;
-    margin-top: -31px;
+    top: 0;
+    left: 0;
 }
 
 .photo-button input
@@ -126,7 +127,7 @@
 .edit-photo-button,
 .delete-photo-button
 {
-    width: 147px;
+    width: 147px !important;
 }
 
 .add-photo-button .semi-active-button-label

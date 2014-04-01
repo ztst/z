@@ -66,39 +66,42 @@ var EditProfileForm = BaseForm.extend({
     _initValidators: function()
     {
         this._form.find("#firstNameField").rules('add', {
-            maxlength: 40,
-            messages: { maxlength: "Максимальная длина имени - 40 символов" }
+            maxlength: EditProfileForm.MAX_FIELD_LENGTH,
+            nameSymbols: true,
+            messages: { maxlength: "Максимальная длина имени - " + EditProfileForm.MAX_FIELD_LENGTH + " символов" }
         });
         this._form.find("#lastNameField").rules('add', {
-            maxlength: 80,
-            messages: { maxlength: "Максимальная длина фамилии - 80 символов" }
+            maxlength: EditProfileForm.MAX_FIELD_LENGTH,
+            nameSymbols: true,
+            messages: { maxlength: "Максимальная длина фамилии - " + EditProfileForm.MAX_FIELD_LENGTH + " символов" }
         });
         this._form.find("#nicknameField").rules('add', {
-            maxlength: 50,
+            maxlength: EditProfileForm.MAX_FIELD_LENGTH,
             minlength: 3,
             required: true,
             nicknameSymbols: true,
             messages: {
                 required: "Это поле обязательно для заполнения",
-                maxlength: "Максимальная длина никнейма - 50 символов",
+                maxlength: "Максимальная длина никнейма - " + EditProfileForm.MAX_FIELD_LENGTH + " символов",
                 minlength: "Никнейм должен быть минимум 3 символа"
             }
         });
         this._form.find("#regionField").rules('add', {
-            maxlength: 150,
-            messages: { maxlength: "Максимальная длина - 150 символов" }
+            maxlength: EditProfileForm.MAX_FIELD_LENGTH,
+            messages: { maxlength: "Максимальная длина - " + EditProfileForm.MAX_FIELD_LENGTH + " символов" }
         });
         this._form.find("#cityField").rules('add', {
-            maxlength: 150,
-            messages: { maxlength: "Максимальная длина - 150 символов" }
+            maxlength: EditProfileForm.MAX_FIELD_LENGTH,
+            messages: { maxlength: "Максимальная длина - " + EditProfileForm.MAX_FIELD_LENGTH + " символов" }
         });
 
         var middleNameField = this._form.find("#middleNameField");
         if (middleNameField.length)
         {
             middleNameField.rules('add', {
-                maxlength: 40,
-                messages: { maxlength: "Максимальная длина отчества - 40 символов" }
+                maxlength: EditProfileForm.MAX_FIELD_LENGTH,
+                nameSymbols: true,
+                messages: { maxlength: "Максимальная длина отчества - " + EditProfileForm.MAX_FIELD_LENGTH + " символов" }
             });
         }
 
@@ -125,4 +128,6 @@ var EditProfileForm = BaseForm.extend({
     {
         return true;
     }
+},{
+    MAX_FIELD_LENGTH: 32
 });

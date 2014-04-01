@@ -64,8 +64,12 @@
             <div>
               {% if not video.synopsis is empty %}
                 <a
-                  {% if currentVideo is defined and currentVideo == video %}id="currentVideoSynopsisLink"{% endif %}
-                  href="{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName, 'show': 'synopsis' })}}"
+                  {% if currentVideo is defined and currentVideo == video %}
+                    id="currentVideoSynopsisLink"
+                    href="#synopsis_tab"
+                  {% else %}
+                    href="{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName, 'show': 'synopsis' })}}"
+                  {% endif %}
                   class="video-has-synopsis">
                 </a>
                 {% if not video.quiz is empty %}
@@ -74,8 +78,12 @@
               {% endif %}
               {% if not video.quiz is empty %}
                 <a
-                  {% if currentVideo is defined and currentVideo == video %}id="currentVideoQuizLink"{% endif %}
-                  href="{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName, 'show': 'quiz' })}}"
+                  {% if currentVideo is defined and currentVideo == video %}
+                    id="currentVideoQuizLink"
+                    href="#quiz_tab"
+                  {% else %}
+                    href="{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName, 'show': 'quiz' })}}"
+                  {% endif %}
                   class="video-has-quiz">
                 </a>
               {% endif %}

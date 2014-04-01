@@ -19,7 +19,7 @@
                 </div>
               </div>
               <div class="menu-item-container user-profile-link-container">
-                <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link">{{ app.user }}</a>
+                <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link"><span>{{ app.user }}</span></a>
               </div>
               <div class="menu-item-container">
                 <a href="{{ path('logout') }}" title="Выход" class="logout-button">

@@ -29,18 +29,21 @@ var ShowVideoPage = Base.extend({
         this._initVideoOrderButtons();
 
         $("#showMoreChapterVideos").click(handler(this, "_showMoreChapterVideos"));
-        $("#currentVideoSynopsisLink").click(handler(this, "_onCurrentVideoSynopsisLinkClick"));
-        $("#currentVideoQuizLink").click(handler(this, "_onCurrentVideoQuizLinkClick"));
+
+        $("#currentVideoSynopsisLink").click(handler(this, "_onChapterVideoSynopsisTabLinkClick"));
+        $("#currentVideoQuizLink").click(handler(this, "_onChapterVideoQuizTabLinkClick"));
     },
 
-    _onCurrentVideoSynopsisLinkClick: function()
+    _onChapterVideoSynopsisTabLinkClick: function()
     {
-        $("#synopsisTab").click();
+        $('.nav-tabs a[href="' +  $("#currentVideoSynopsisLink").attr("href") + '"]').tab('show');
+        return false;
     },
 
-    _onCurrentVideoQuizLinkClick: function()
+    _onChapterVideoQuizTabLinkClick: function()
     {
-        $("#quizTab").click();
+        $('.nav-tabs a[href="' +  $("#currentVideoQuizLink").attr("href") + '"]').tab('show');
+        return false;
     },
 
     _showMoreChapterVideos: function()
