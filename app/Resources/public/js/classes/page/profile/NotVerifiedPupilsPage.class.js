@@ -53,7 +53,7 @@ var NotVerifiedPupilsPage = Base.extend({
         var data = {ids: ids};
         var url = Routing.generate("approve_users");
 
-        $.post(url, data, handler(this, "_onUserStatusChanged"), "json");
+        $.post(url, data, handler(this, "_onUsersStatusesChanged"), "json");
     },
 
     _onDeleteLinkClick: function(id, reason)
@@ -66,7 +66,7 @@ var NotVerifiedPupilsPage = Base.extend({
         }
         var url = Routing.generate("delete_users");
 
-        $.post(url, data, handler(this, "_onUserStatusChanged"), "json");
+        $.post(url, data, handler(this, "_onUsersStatusesChanged"), "json");
     },
 
     _onApproveLinkClick: function(id)
@@ -75,41 +75,46 @@ var NotVerifiedPupilsPage = Base.extend({
         var data = {ids: ids};
         var url = Routing.generate("approve_users");
 
-        $.post(url, data, handler(this, "_onUserStatusChanged"), "json");
+        $.post(url, data, handler(this, "_onUsersStatusesChanged"), "json");
     },
 
-    _onUserStatusChanged: function(response)
+    _onUsersStatusesChanged: function(response)
     {
         if (response.success)
         {
             for (var i in response.ids)
             {
                 var userId = response.ids[i];
-                $("#userContainer" + userId).remove();
-
-                $("#videoTab").click();
-                var userProfileContent = $("#userProfileContent" + userId);
-                if (userProfileContent.length)
-                {
-                    userProfileContent.remove();
-                    $(".pupil-tab").addClass("hidden");
-                }
-
-                this._decrementCountUsers($(".tab-header .list-count-container"));
-                var hasQuestions = this._decrementCountUsers($(".not-verified-pupils-count"));
-
-
-                if (!hasQuestions)
-                {
-                    $("#openUserProfile" + userId).closest("li").remove();
-                    $("#userTab").click();
-                }
-                else
-                {
-                    $(".not-verified-users li:hidden:first").removeClass("hidden");
-                    this._updateShowMoreButton();
-                }
+                this._onUserStatusChanged(userId);
             }
+        }
+    },
+
+    _onUserStatusChanged: function(userId)
+    {
+        $("#userContainer" + userId).remove();
+
+        $("#videoTab").click();
+        var userProfileContent = $("#userProfileContent" + userId);
+        if (userProfileContent.length)
+        {
+            userProfileContent.remove();
+            $(".pupil-tab").addClass("hidden");
+        }
+
+        this._decrementCountUsers($(".tab-header .list-count-container"));
+        var hasUsers = this._decrementCountUsers($(".not-verified-pupils-count"));
+
+        if (!hasUsers)
+        {
+            $(".not-empty-pupils-container").addClass("hidden");
+            $(".empty-pupils-message-container").removeClass("hidden");
+            $("#userTab").click();
+        }
+        else
+        {
+            $(".not-verified-users li:hidden:first").removeClass("hidden");
+            this._updateShowMoreButton();
         }
     },
 

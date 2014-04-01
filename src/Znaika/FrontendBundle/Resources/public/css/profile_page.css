@@ -137,6 +137,11 @@
     margin-left: 61px;
 }
 
+.video-questions .media-body
+{
+    width: 466px;
+}
+
 .video-comments .comment-author,
 .video-questions .comment-author
 {

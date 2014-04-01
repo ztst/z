@@ -132,17 +132,17 @@
 
 .add-photo-button .semi-active-button-label
 {
-    background: #fff url('/images/user-profile/add-photo-button-icon.png') no-repeat 0 2px;
+    background: #fff url('/images/user-profile/add-photo-button-icon.png') no-repeat 0 3px;
 }
 
 .edit-photo-button .non-active-button-label
 {
-    background: #fff url('/images/user-profile/edit-photo-button-icon.png') no-repeat 0 3px;
+    background: #fff url('/images/user-profile/edit-photo-button-icon.png') no-repeat 0 4px;
 }
 
 .delete-photo-button .non-active-button-label
 {
-    background: #fff url('/images/user-profile/delete-photo-button-icon.png') no-repeat 0 3px;
+    background: #fff url('/images/user-profile/delete-photo-button-icon.png') no-repeat 0 4px;
 }
 
 .form-control,
@@ -236,7 +236,7 @@
 
 .save-user-profile-button .semi-active-button-label
 {
-    background: url("/images/user-profile/save-user-profile-button-icon.png") no-repeat scroll 0 2px #FFFFFF;
+    background: url("/images/user-profile/save-user-profile-button-icon.png") no-repeat scroll 0 3px #FFFFFF;
 }
 
 .settings-column-container

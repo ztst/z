@@ -8,6 +8,7 @@ var ViewTeacherQuestionsPage = Base.extend({
             var link = $(this);
             link.closest("li").find(".question-answer-form-container").removeClass("hidden");
             link.addClass("hidden");
+            $(".comment-text-field").val("");
         });
 
         $(".question-answer-form-container form").ajaxForm({
@@ -22,19 +23,27 @@ var ViewTeacherQuestionsPage = Base.extend({
     {
         if(response.success)
         {
-            $("#questionContainer" + response.questionId).remove();
-            var openQuestionLink = $("#openVideoQuestionLink" + response.videoId);
+            var questionId = response.questionId;
+            var videoId = response.videoId;
+            $("#questionContainer" + questionId).remove();
+            var openQuestionLink = $("#openVideoQuestionLink" + videoId);
 
             this._decrementCountQuestions($(".profile-sidebar-menu .user-questions-count"));
             this._decrementCountQuestions(openQuestionLink.find(".user-questions-count"));
-            var hasQuestions = this._decrementCountQuestions($("#videoQuestions" + response.videoId + " .list-count-container"));
+            var hasQuestions = this._decrementCountQuestions($("#videoQuestions" + videoId + " .list-count-container"));
 
             if (!hasQuestions)
             {
-                this._decrementCountQuestions($(".video-tab .tab-header .list-count-container"));
+                var hasVideoWithQuestions = this._decrementCountQuestions($(".video-tab .tab-header .list-count-container"));
+                if (!hasVideoWithQuestions)
+                {
+                    $(".not-empty-questions-container").addClass("hidden");
+                    $(".empty-questions-message-container").removeClass("hidden");
+                }
                 openQuestionLink.closest("li").remove();
                 $(".questions-tab").addClass("hidden");
                 $("#videoTab").click();
+                $(".videos-with-questions-list li").first().addClass("first");
             }
         }
     },

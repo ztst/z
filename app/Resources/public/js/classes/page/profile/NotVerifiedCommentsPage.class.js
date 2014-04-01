@@ -55,7 +55,7 @@ var NotVerifiedCommentsPage = Base.extend({
         var data = {ids: ids};
         var url = Routing.generate("approve_comments");
 
-        $.post(url, data, handler(this, "_onCommentStatusChanged"), "json");
+        $.post(url, data, handler(this, "_onCommentsStatusesChanged"), "json");
     },
 
     _onDeleteLinkClick: function(id)
@@ -64,7 +64,7 @@ var NotVerifiedCommentsPage = Base.extend({
         var data = {ids: ids};
         var url = Routing.generate("delete_comments");
 
-        $.post(url, data, handler(this, "_onCommentStatusChanged"), "json");
+        $.post(url, data, handler(this, "_onCommentsStatusesChanged"), "json");
     },
 
     _onApproveLinkClick: function(id)
@@ -73,10 +73,10 @@ var NotVerifiedCommentsPage = Base.extend({
         var data = {ids: ids};
         var url = Routing.generate("approve_comments");
 
-        $.post(url, data, handler(this, "_onCommentStatusChanged"), "json");
+        $.post(url, data, handler(this, "_onCommentsStatusesChanged"), "json");
     },
 
-    _onCommentStatusChanged: function(response)
+    _onCommentsStatusesChanged: function(response)
     {
         if (response.success)
         {
@@ -85,24 +85,36 @@ var NotVerifiedCommentsPage = Base.extend({
             for (var i in response.ids)
             {
                 var commentId = response.ids[i];
-                $("#commentContainer" + commentId).remove();
-                var openVideoCommentLink = $("#openVideoCommentLink" + videoId);
-                this._decrementCountComments($("#videoComments" + videoId + " .not-verified-comments-count"));
-                this._decrementCountComments($(".profile-sidebar-menu .not-verified-comments-count"));
-                var hasQuestions = this._decrementCountComments(openVideoCommentLink.find(".not-verified-comments-count"));
-
-                if (!hasQuestions)
-                {
-                    openVideoCommentLink.closest("li").remove();
-                    $(".comments-tab").addClass("hidden");
-                    $("#videoTab").click();
-                }
-                else
-                {
-                    $("#videoComments" + videoId + " .video-comments li:hidden:first").removeClass("hidden");
-                    this._updateShowMoreButton();
-                }
+                this._onCommentStatusChanged(videoId, commentId);
             }
+        }
+    },
+
+    _onCommentStatusChanged: function(videoId, commentId)
+    {
+        $("#commentContainer" + commentId).remove();
+        var openVideoCommentLink = $("#openVideoCommentLink" + videoId);
+        this._decrementCountComments($("#videoComments" + videoId + " .not-verified-comments-count"));
+        this._decrementCountComments($(".profile-sidebar-menu .not-verified-comments-count"));
+        var hasComments = this._decrementCountComments(openVideoCommentLink.find(".not-verified-comments-count"));
+
+        if (!hasComments)
+        {
+            var hasVideoWithNotVerifiedComments = this._decrementCountComments($(".not-empty-comments-container .tab-header .list-count-container"));
+            if (!hasVideoWithNotVerifiedComments)
+            {
+                $(".not-empty-comments-container").addClass("hidden");
+                $(".empty-comments-message-container").removeClass("hidden");
+            }
+            openVideoCommentLink.remove();
+            $(".comments-tab").addClass("hidden");
+            $("#videoTab").click();
+            $(".videos-with-comments-list li").first().addClass("first");
+        }
+        else
+        {
+            $("#videoComments" + videoId + " .video-comments li:hidden:first").removeClass("hidden");
+            this._updateShowMoreButton();
         }
     },
 
@@ -122,7 +134,8 @@ var NotVerifiedCommentsPage = Base.extend({
         var that = this;
         $(".open-video-comment-link").click(function()
         {
-            $(".profile-preloader").removeClass("hidden");
+            var preloader = $(".profile-preloader");
+            preloader.removeClass("hidden");
             var link = $(this);
             var videoId = link.attr("id").replace("openVideoCommentLink", "");
             var countCommentText = link.find(".not-verified-comments-count").html();
@@ -135,7 +148,7 @@ var NotVerifiedCommentsPage = Base.extend({
             var commentsContainer = $("#videoComments" + videoId);
             if (commentsContainer.length)
             {
-                $(".profile-preloader").addClass("hidden");
+                preloader.addClass("hidden");
                 commentsContainer.removeClass("hidden");
             }
             else

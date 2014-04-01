@@ -7,6 +7,7 @@
     '@ZnaikaFrontendBundle/Resources/public/css/tab_menu.css'
     '@ZnaikaFrontendBundle/Resources/public/css/profile_page.css'
     '@ZnaikaFrontendBundle/Resources/public/css/teacher_profile.css'
+    '@ZnaikaFrontendBundle/Resources/public/css/moderator_profile.css'
     '@ZnaikaFrontendBundle/Resources/public/css/not_verified_users.css'
   %}
     <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
@@ -48,10 +49,17 @@
       </div>
     </div>
     <div class="tab-pane {% if not editedUser %}active{% endif %}" id="user_list_tab">
-      <div class="tab-header">
-        <h4>Непроверенные профили<span class="list-count-container">+{{ count_not_verified_pupils() }}</span></h4>
+      <div class="empty-pupils-message-container {% if users|length  %}hidden{% endif %}">
+        <div class="tab-header">
+          <h4>Все профили проверены</h4>
+        </div>
       </div>
-      {% include "ZnaikaFrontendBundle:User:not_verified_pupils_list.html.twig" with {'users': users} %}
+      <div class="not-empty-pupils-container {% if not users|length  %}hidden{% endif %}">
+        <div class="tab-header">
+          <h4>Непроверенные профили<span class="list-count-container">+{{ users|length }}</span></h4>
+        </div>
+        {% include "ZnaikaFrontendBundle:User:not_verified_pupils_list.html.twig" with {'users': users} %}
+      </div>
     </div>
     <div class="tab-pane {% if editedUser %}active{% endif %}" id="pupil_tab">
       {% include "ZnaikaFrontendBundle:User:not_verified_pupil_profile.html.twig" with {'user': editedUser} %}

@@ -49,10 +49,17 @@
       </div>
     </div>
     <div class="tab-pane active video-tab" id="video_tab">
-      <div class="tab-header">
-        <h4>Видеоуроки с новыми вопросами<span class="list-count-container">+{{ videos|length }}</span></h4>
+      <div class="empty-questions-message-container {% if videos|length  %}hidden{% endif %}">
+        <div class="tab-header">
+          <h4>Вопросы к урокам отсутствуют</h4>
+        </div>
       </div>
-      {% include "ZnaikaFrontendBundle:User:video_with_questions_list.html.twig" with {'videos': videos} %}
+      <div class="not-empty-questions-container {% if not videos|length  %}hidden{% endif %}">
+        <div class="tab-header">
+          <h4>Видеоуроки с новыми вопросами<span class="list-count-container">+{{ videos|length }}</span></h4>
+        </div>
+        {% include "ZnaikaFrontendBundle:User:video_with_questions_list.html.twig" with {'videos': videos} %}
+      </div>
     </div>
     <div class="tab-pane questions-tab-content" id="question_tab">
       {% include "ZnaikaFrontendBundle:User:teacher_questions_tab.html.twig" with {'videos': videos} %}

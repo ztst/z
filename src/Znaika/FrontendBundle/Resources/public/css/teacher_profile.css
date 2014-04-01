@@ -3,41 +3,6 @@
     background: url('/images/teacher-page/sidebar-menu-row-background.png') repeat-y 0 -11px #ffffff;
 }
 
-.active-button,
-.semi-active-button,
-.non-active-button
-{
-    display: inline-block;
-    height: 26px;
-    width: auto;
-
-    border-radius: 3px;
-    font-size: 11px;
-    line-height: 14px;
-    font-family: "OpenSans Semibold", "Open Sans", serif;
-    text-align: center;
-    cursor: pointer;
-
-    padding: 5px 11px;
-}
-
-.active-button-label,
-.semi-active-button-label,
-.non-active-button-label
-{
-    padding-left: 13px;
-}
-
-.active-button
-{
-    line-height: 15px;
-}
-
-.send-comment-button .active-button-label
-{
-    background: url('/images/controls/send-answer-button-icon.png') no-repeat 0 3px;
-}
-
 .teacher-profile-container .user-profile-column-container,
 .teacher-profile-container .photo-column-container
 {
@@ -64,6 +29,7 @@
     font-family: "OpenSans Semibold",sans-serif;
     font-weight: normal;
 }
+
 .teacher-profile-container h3
 {
     margin: 0;
