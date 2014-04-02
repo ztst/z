@@ -684,6 +684,7 @@ img.mfp-img
 .remember-me-block label
 {
     padding-top: 2px;
+    line-height: 18px;
 }
 
 .remember-me-block .icheckbox
