@@ -12,12 +12,11 @@
             {{ search_form()|raw }}
             <div class="clear"></div>
           </div>
-
           {{ complete_social_registration_popup()|raw }}
           {% if is_user() %}
             <div class="menu-item-container">
               <div class="user-pic">
-                <img id="userSmallAvatar" width="30" src="{{ user_photo_small_url(app.user) }}" alt=""/>
+                <img id="userSmallAvatar" width="31" height="31" src="{{ user_photo_small_url(app.user) }}" alt=""/>
               </div>
             </div>
             <div class="menu-item-container user-profile-link-container">
