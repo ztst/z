@@ -174,8 +174,8 @@
 .add-video-comment-container
 {
     position: relative;
-    margin-left: 70px;
-    width: 496px;
+    margin-left: 60px;
+    width: 506px;
 }
 
 .add-video-comment-container textarea
@@ -476,4 +476,10 @@
 .answer-comment-author-name img
 {
     margin-top: -9px;
+}
+
+.comments-preloader
+{
+    padding: 10px;
+    text-align: center;
 }

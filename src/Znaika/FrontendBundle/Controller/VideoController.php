@@ -342,7 +342,7 @@
                     'class'              => $class,
                     'subjectNameRussian' => $subject->getName(),
                     'subjects'           => $subjects,
-                    'subjectGrades'     => $subjectGrades,
+                    'subjectGrades'      => $subjectGrades,
                     'classes'            => ClassNumberUtil::getAvailableClasses()
                 ));
             }
@@ -385,13 +385,11 @@
             $addVideoCommentForm = $this->getAddVideoCommentForm();
             $viewVideoOperation  = $this->saveViewVideoOperation($video);
             $chapterVideos       = $repository->getVideoByChapter($video->getChapter()->getChapterId());
-            $comments            = $this->getLastVideoComments($video);
             $userQuizScore       = $this->getCurrentUserQuizScore($video);
 
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
                 'class'               => $class,
                 'video'               => $video,
-                'comments'            => $comments,
                 'addVideoCommentForm' => $addVideoCommentForm->createView(),
                 'viewVideoOperation'  => $viewVideoOperation,
                 'chapterVideos'       => $chapterVideos,
@@ -409,6 +407,24 @@
             $comments      = $this->getVideoCommentRepository()
                                   ->getVideoComments($video, self::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE, $commentsCount);
             $comments      = array_reverse($comments);
+
+            $html = $this->renderView('ZnaikaFrontendBundle:Video:video_comments.html.twig', array(
+                'comments' => $comments
+            ));
+
+            $array = array(
+                'html'    => $html,
+                'success' => true
+            );
+
+            return new JsonResponse($array);
+        }
+
+        public function getVideoLastCommentsAction(Request $request)
+        {
+            $repository = $this->getVideoRepository();
+            $video      = $repository->getOneByUrlName($request->get('videoName'));
+            $comments   = $this->getLastVideoComments($video);
 
             $html = $this->renderView('ZnaikaFrontendBundle:Video:video_comments.html.twig', array(
                 'comments' => $comments

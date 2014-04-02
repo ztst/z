@@ -71,7 +71,7 @@
     </div>
     <div class="clear"></div>
         <div class="tab-pane video-tab{% if contentToShow == "video" %} active{% endif %}" id="video_tab">
-      {% include "ZnaikaFrontendBundle:Video:show_video_block.html.twig" with {'video': video, 'comments': comments} %}
+      {% include "ZnaikaFrontendBundle:Video:show_video_block.html.twig" with {'video': video} %}
     </div>
         <div class="tab-pane synopsis-tab{% if contentToShow == "synopsis" %} active{% endif %}" id="synopsis_tab">
       {% include "ZnaikaFrontendBundle:Video:show_video_synopsis_block.html.twig" with {'video': video} %}

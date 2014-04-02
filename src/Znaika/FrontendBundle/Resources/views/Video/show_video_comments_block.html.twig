@@ -1,6 +1,9 @@
 {% set countComments = count_video_comments(video) %}
 {% if countComments %}
-  <div class="comments-container">
+  <div class="comments-preloader">
+    <img src="{{ asset("images/preloader.gif") }}" alt="загрузка" />
+  </div>
+  <div class="comments-container hidden">
     {% if countComments > constant('Znaika\\FrontendBundle\\Controller\\VideoController::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE') %}
       <div class="show-more-link show-more-comments">
         <a href="javascript:void(0);" id="showPrevCommentsLink">
@@ -10,7 +13,8 @@
       </div>
       <div id="prevCommentsContainer" class="prev-comments-container"></div>
     {% endif %}
-    {% include "ZnaikaFrontendBundle:Video:video_comments.html.twig" with {'comments': comments} %}
+    <div id="lastCommentsContainer" class="last-comments-container"></div>
+    <input type="hidden" id="getVideoLastCommentsUrl" value="{{ path('get_video_last_comments', {'videoName': video.getUrlName}) }}"/>
   </div>
 {% endif %}
 {% if has_question_for_current_user(video) %}

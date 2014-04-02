@@ -59,6 +59,12 @@ add_video_comment_form:
 get_prev_comments:
     pattern: /{videoName}/prev-comments
     defaults: { _controller: ZnaikaFrontendBundle:Video:getPrevComments }
+    methods:  [POST]
+
+get_video_last_comments:
+    pattern: /{videoName}/get-last-comments
+    defaults: { _controller: ZnaikaFrontendBundle:Video:getVideoLastComments }
+    methods:  [POST]
 
 move_video:
     pattern: /moderator/move-video-ajax

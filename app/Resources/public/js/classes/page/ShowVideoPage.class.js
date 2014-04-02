@@ -32,6 +32,25 @@ var ShowVideoPage = Base.extend({
 
         $("#currentVideoSynopsisLink").click(handler(this, "_onChapterVideoSynopsisTabLinkClick"));
         $("#currentVideoQuizLink").click(handler(this, "_onChapterVideoQuizTabLinkClick"));
+
+        this._loadComments();
+    },
+
+    _loadComments: function()
+    {
+        $.post($("#getVideoLastCommentsUrl").val(), null, handler(this, "_onLastCommentsLoaded"), "json");
+
+        return false;
+    },
+
+    _onLastCommentsLoaded: function(response)
+    {
+        if (response.success)
+        {
+            $("#lastCommentsContainer").html(response.html);
+            $(".comments-container").removeClass("hidden");
+            $(".comments-preloader").addClass("hidden");
+        }
     },
 
     _onChapterVideoSynopsisTabLinkClick: function()
@@ -185,6 +204,8 @@ var ShowVideoPage = Base.extend({
     _onShowPrevCommentsLinkClick: function()
     {
         $.post($("#showPrevCommentsUrl").val(), null, handler(this, "_onPrevCommentsLoaded"), "json");
+        $(".comments-preloader").removeClass("hidden");
+        this._showPrevCommentsLink.closest(".show-more-link").addClass("hidden");
 
         return false;
     },
@@ -195,6 +216,7 @@ var ShowVideoPage = Base.extend({
         {
             $("#prevCommentsContainer").html(response.html);
             this._showPrevCommentsLink.closest(".show-more-link").remove();
+            $(".comments-preloader").addClass("hidden");
         }
     }
 });

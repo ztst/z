@@ -20,6 +20,6 @@
       {% set year = video.getCreatedTime|date('Y') %}
       <div class="video-date">{{ '%s %s'|format(month|trans, year) }}</div>
     </div>
-    {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video, 'comments': comments} %}
+    {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video} %}
   </div>
 </div>
