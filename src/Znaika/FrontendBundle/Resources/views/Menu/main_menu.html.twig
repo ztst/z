@@ -2,46 +2,50 @@
   <div class="navbar navbar-container" role="navigation">
     <div class="container col-right">
       <div class="header-logo-container">
-        <a class="header-logo" href="{{ path("znaika_frontend_homepage") }}"><img src="{{ asset("images/logo.png") }}" alt='Знайка' /></a>
+        <a class="header-logo" href="{{ path("znaika_frontend_homepage") }}">
+          <img src="{{ asset("images/logo.png") }}" alt='Знайка'/>
+        </a>
       </div>
       <div class="col-right">
         <div class="main-menu-right col-center">
-            <div class="search-container menu-item-container">
-              {{ search_form()|raw }}
-              <div class="clear"></div>
-            </div>
+          <div class="search-container menu-item-container">
+            {{ search_form()|raw }}
+            <div class="clear"></div>
+          </div>
 
-            {{ complete_social_registration_popup()|raw }}
-            {% if is_user() %}
-              <div class="menu-item-container">
-                <div class="user-pic">
-                  <img id="userSmallAvatar" width="30" src="{{ user_photo_small_url(app.user) }}" alt="" />
-                </div>
+          {{ complete_social_registration_popup()|raw }}
+          {% if is_user() %}
+            <div class="menu-item-container">
+              <div class="user-pic">
+                <img id="userSmallAvatar" width="30" src="{{ user_photo_small_url(app.user) }}" alt=""/>
               </div>
-              <div class="menu-item-container user-profile-link-container">
-                <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link"><span>{{ app.user }}</span></a>
-              </div>
-              <div class="menu-item-container">
-                <a href="{{ path('logout') }}" title="Выход" class="logout-button">
-                  <div class="logout-button-icon"></div>
-                  <span>Выход</span>
+            </div>
+            <div class="menu-item-container user-profile-link-container">
+              <a href="{{ path("show_user_profile", {"userId": app.user.userId}) }}" class="user-profile-link">
+                <span>{{ app.user }}</span>
+              </a>
+            </div>
+            <div class="menu-item-container">
+              <a href="{{ path('logout') }}" title="Выход" class="logout-button">
+                <div class="logout-button-icon"></div>
+                <span>Выход</span>
+              </a>
+            </div>
+          {% else %}
+            <div class="menu-item-container">
+              <div class="login-registration-buttons-container">
+                <a href="javascript:void(0);" class="login-button">
+                  <div class="login-button-icon"></div>
+                  <span>Вход</span>
+                </a>
+
+                <div class="login-registration-buttons-delimiter"></div>
+                <a href="javascript:void(0);" class="registration-button">
+                  <span>Регистрация</span>
                 </a>
               </div>
-            {% else %}
-              <div class="menu-item-container">
-                <div class="login-registration-buttons-container">
-                  <a href="javascript:void(0);" class="login-button">
-                    <div class="login-button-icon"></div>
-                    <span>Вход</span>
-                  </a>
-                  <div class="login-registration-buttons-delimiter"></div>
-                  <a href="javascript:void(0);" class="registration-button">
-                    <span>Регистрация</span>
-                  </a>
-                </div>
-              </div>
-            {% endif %}
-          </ul>
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>

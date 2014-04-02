@@ -3,9 +3,13 @@
     namespace Znaika\FrontendBundle\Twig;
 
     use Symfony\Component\DependencyInjection\ContainerInterface;
+    use Symfony\Component\Form\FormFactory;
+    use Znaika\FrontendBundle\Entity\Profile\PasswordRecovery;
     use Znaika\FrontendBundle\Form\Model\Registration;
     use Znaika\FrontendBundle\Form\Type\RegistrationType;
+    use Znaika\FrontendBundle\Form\User\PasswordRecoveryType;
     use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
+    use Znaika\FrontendBundle\Repository\Profile\UserRepository;
 
     class SocialNetworksExtension extends \Twig_Extension
     {
@@ -39,24 +43,30 @@
 
         public function renderCompleteSocialRegistrationPopup()
         {
-            $session = $this->container->get('session');
+            $session            = $this->container->get('session');
             $showRegisterSocial = $session->get('showRegisterSocial', false);
 
             $result = "";
             if ($showRegisterSocial)
             {
                 $showRegisterSocial = $session->remove('showRegisterSocial');
+                /** @var FormFactory $formFactory */
+                $formFactory = $this->container->get('form.factory');
 
-                $userRepository = $this->container->get('znaika_frontend.user_repository');
-                $registerForm   = $this->container->get('form.factory')->create(new RegistrationType($userRepository, true), new Registration());
-
+                /** @var UserRepository $userRepository */
+                $userRepository       = $this->container->get('znaika_frontend.user_repository');
+                $registerForm         = $formFactory->create(new RegistrationType($userRepository, true),
+                    new Registration());
+                $passwordRecoveryForm = $formFactory->create(new PasswordRecoveryType($userRepository),
+                    new PasswordRecovery());
 
                 $templateFile    = "ZnaikaFrontendBundle:TwigExtension:complete_social_registration.html.twig";
                 $templateContent = $this->twig->loadTemplate($templateFile);
 
                 $result = $templateContent->render(array(
-                    "showRegisterSocial" => $showRegisterSocial,
-                    "registerForm" => $registerForm->createView()
+                    "showRegisterSocial"   => $showRegisterSocial,
+                    "registerForm"         => $registerForm->createView(),
+                    'passwordRecoveryForm' => $passwordRecoveryForm->createView(),
                 ));
             }
 

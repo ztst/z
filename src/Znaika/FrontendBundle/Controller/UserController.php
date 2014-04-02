@@ -182,6 +182,11 @@
          */
         public function passwordRecoveryAction(Request $request)
         {
+            if (!$request->isXmlHttpRequest())
+            {
+                return new RedirectResponse($this->generateUrl('znaika_frontend_homepage'));
+            }
+
             $passwordRecovery = new PasswordRecovery();
             $userRepository   = $this->getUserRepository();
 
@@ -576,7 +581,7 @@
                 $success = true;
             }
 
-            $data = array(
+            $data       = array(
                 "bigPhotoUrl"   => $user->getBigPhotoUrl(),
                 "smallPhotoUrl" => $user->getSmallPhotoUrl(),
                 "success"       => $success
@@ -870,27 +875,17 @@
          */
         private function getPasswordRecoverySuccessResponse(PasswordRecovery $passwordRecovery, Form $form)
         {
-            $request = $this->getRequest();
-            $user    = $passwordRecovery->getUser();
+            $user = $passwordRecovery->getUser();
             $this->recoverUserPassword($user);
 
-            if ($request->isXmlHttpRequest())
-            {
-                $html     = $this->renderView('ZnaikaFrontendBundle:User:forget_password_success_block.html.twig',
-                    array(
-                        'form' => $form->createView()
-                    ));
-                $array    = array('success' => true, 'html' => $html);
-                $response = new JsonResponse($array);
+            $html     = $this->renderView('ZnaikaFrontendBundle:User:forget_password_success_block.html.twig',
+                array(
+                    'form' => $form->createView()
+                ));
+            $array    = array('success' => true, 'html' => $html);
+            $response = new JsonResponse($array);
 
-                return $response;
-            }
-            else
-            {
-                $response = $this->render('ZnaikaFrontendBundle:User:forgetPasswordSuccess.html.twig');
-
-                return $response;
-            }
+            return $response;
         }
 
         /**
@@ -901,27 +896,14 @@
          */
         private function getPasswordRecoveryFailedResponse(Form $form)
         {
-            $request = $this->getRequest();
-            if ($request->isXmlHttpRequest())
-            {
-                $html     = $this->renderView('ZnaikaFrontendBundle:User:forget_password_form.html.twig',
-                    array(
-                        'form' => $form->createView()
-                    ));
-                $array    = array('success' => false, 'html' => $html);
-                $response = new JsonResponse($array);
+            $html     = $this->renderView('ZnaikaFrontendBundle:User:forget_password_form.html.twig',
+                array(
+                    'form' => $form->createView()
+                ));
+            $array    = array('success' => false, 'html' => $html);
+            $response = new JsonResponse($array);
 
-                return $response;
-            }
-            else
-            {
-                $response = $this->render('ZnaikaFrontendBundle:User:forget_password.html.twig',
-                    array(
-                        'form' => $form->createView()
-                    ));
-
-                return $response;
-            }
+            return $response;
         }
 
         /**
@@ -1114,10 +1096,12 @@
 
         private function getIsSocialRegisterComplete()
         {
-            $request = $this->getRequest();
-            $session = $request->getSession();
+            $request                  = $this->getRequest();
+            $session                  = $request->getSession();
+            $isSocialRegisterComplete = $session->get("isSocialRegisterComplete", false);
+            $session->set("isSocialRegisterComplete", false);
 
-            return $session->get("isSocialRegisterComplete", false);
+            return $isSocialRegisterComplete;
         }
 
         /**

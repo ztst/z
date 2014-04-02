@@ -12,7 +12,7 @@
         const RANDOM_FILE_NAME_LENGTH = 27;
         const UPLOAD_PATH             = "/user_photo";
         const PHOTO_SIZE              = 200;
-        const SMALL_PHOTO_SIZE        = 38;
+        const SMALL_PHOTO_SIZE        = 50;
 
         /**
          * @var ContainerInterface

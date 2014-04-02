@@ -75,9 +75,6 @@ var MainMenu = EventDispatcher.extend({
     {
         this._loginForm = new LoginForm("loginForm");
         this._loginForm.addListener(BaseForm.event.SUBMITTED, this, this._onLoginFormSubmitted);
-        $("#switchForgetPasswordLink").click(function(){
-            return false;
-        });
     },
 
     _initRegistrationForm: function()
@@ -163,7 +160,7 @@ var MainMenu = EventDispatcher.extend({
         else
         {
             this._registrationForm.hide();
-            $("#registrationFormContainer .login-popup-header").after(response.html);
+            $("#registrationFormContainer").find(".login-popup-header").after(response.html);
 
             this._initRegistrationForm();
         }

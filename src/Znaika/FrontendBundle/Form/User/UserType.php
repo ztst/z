@@ -3,6 +3,7 @@
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
+    use Symfony\Component\Form\FormEvent;
     use Symfony\Component\Form\FormEvents;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
     use Znaika\FrontendBundle\Entity\Profile\User;
@@ -39,10 +40,10 @@
                     'required' => !$this->autoGeneratePassword
                 ));
 
-            $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPostBind'));
+            $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
         }
 
-        public function onPostBind($event)
+        public function onPreSubmit(FormEvent $event)
         {
             $user = $event->getData();
             $form = $event->getForm();
@@ -52,7 +53,6 @@
                 $user['password'] = substr(md5(rand()), 0, 8);
                 $event->setData($user);
             }
-
             $email = isset($user['email']) ? $user['email'] : "";
             $existingUser = $this->userRepository->getOneByEmail($email);
 

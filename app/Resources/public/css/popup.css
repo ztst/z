@@ -996,4 +996,9 @@ img.mfp-img
 {
     padding: 0 25px;
 }
+
+.forget-password-form-social-registration .additional-form-container
+{
+    padding-top: 16px;
+}
 /* Additional forms styles END */

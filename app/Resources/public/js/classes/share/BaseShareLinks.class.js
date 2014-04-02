@@ -1,11 +1,13 @@
-var ShareVideoLinks = Base.extend({
+var BaseShareLinks = Base.extend({
 
     _statUrl: null,
+    _id: null,
 
-    constructor: function()
+    constructor: function(id)
     {
         this.base();
 
+        this._id = id;
         this._initLinks();
     },
 
@@ -16,7 +18,7 @@ var ShareVideoLinks = Base.extend({
 
     _initLinks: function()
     {
-        $(".social_share_link").click(handler(this, "_onShareButtonClick"));
+        $("a[id^=" + this._id + "]").click(handler(this, "_onShareButtonClick"));
     },
 
     _onShareButtonClick: function(event)
@@ -25,7 +27,7 @@ var ShareVideoLinks = Base.extend({
         var url = link.attr('href');
         var isOpened = window.open(url, '', 'toolbar=0,status=0,width=626,height=436');
 
-        var network = link.attr("id").replace("video_social_link_", "");
+        var network = link.attr("id").replace(this._id, "");
         this._sendStatistics(network);
 
         return !isOpened;
@@ -33,6 +35,11 @@ var ShareVideoLinks = Base.extend({
 
     _sendStatistics: function(network)
     {
+        if (!this._statUrl)
+        {
+            return;
+        }
+
         var data = {
             "network" : network
         };
@@ -43,12 +50,4 @@ var ShareVideoLinks = Base.extend({
     _onStatisticsSaved: function(response)
     {
     }
-});
-
-$(function()
-{
-    var links = new ShareVideoLinks();
-
-    var videoName = $("#videoName").val();
-    links.setStatUrl(Routing.generate('post_video_to_social_network', {'videoName': videoName}));
 });

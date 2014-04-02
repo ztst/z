@@ -12,14 +12,58 @@ var CompleteSocialRegistrationPopup = Base.extend({
         this._createNewUserButton = $("#createNewUser");
         this._attachUserButton = $("#attachUser");
 
-        this._createNewUserButton.click(handler(this, "_onCreateNewUserButtonClick"))
-        this._attachUserButton.click(handler(this, "_onAttachUserButtonClick"))
+        this._createNewUserButton.click(handler(this, "_onCreateNewUserButtonClick"));
+        this._attachUserButton.click(handler(this, "_onAttachUserButtonClick"));
+
+        var switchForgetPasswordLink = $("#showForgetPasswordForm");
+        switchForgetPasswordLink.click(handler(this, "_showForgetPasswordForm"));
 
         var loginForm = $("#loginForm");
         loginForm.submit(handler(this, "_onLoginFormSubmitted"));
 
         this._initRegistrationForm();
+        this._initForgetPasswordForm();
     },
+
+    _showForgetPasswordForm: function()
+    {
+        $("#attachUserForm").addClass("hidden");
+        $("#createNewUserFormContainer").addClass("hidden");
+
+        $("#forgetPasswordCompleteSocialFormContainer").removeClass("hidden");
+    },
+
+    _initForgetPasswordForm: function()
+    {
+        this._forgetPasswordForm = new ForgetPasswordForm("forgetPasswordSocialRegistrationForm");
+        this._forgetPasswordForm.addListener(BaseForm.event.SUBMITTED, this, this._onForgetPasswordFormSubmitted);
+    },
+
+    _onForgetPasswordFormSubmitted: function()
+    {
+        var url = this._forgetPasswordForm.getAction();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: this._forgetPasswordForm.serialize(),
+            success: handler(this, "_onSendPasswordSuccess")
+        });
+
+        return false;
+    },
+
+    _onSendPasswordSuccess: function(response)
+    {
+        if (response.success)
+        {
+            $("#forgetPasswordCompleteSocialFormContainer").html(response.html);
+        }
+        else
+        {
+            alert('Неверный e-mail');
+        }
+    },
+
 
     _initRegistrationForm: function()
     {
@@ -45,12 +89,11 @@ var CompleteSocialRegistrationPopup = Base.extend({
     {
         if (response.success)
         {
-            $("#registrationFormContainer").html(response.html);
+            $("#createNewUserFormContainer").html(response.html);
         }
         else
         {
-            $(".registration-form").remove();
-            $("#registrationFormContainer .form-header").after(response.html);
+            $("#registrationForm").after(response.html).remove();
 
             this._initRegistrationForm();
         }
@@ -59,7 +102,7 @@ var CompleteSocialRegistrationPopup = Base.extend({
     _onCreateNewUserButtonClick: function()
     {
         $(".complete-registration-popup-content").addClass("hidden");
-        $("#registrationFormContainer").removeClass("hidden");
+        $("#createNewUserFormContainer").removeClass("hidden");
     },
 
     _onAttachUserButtonClick: function()
