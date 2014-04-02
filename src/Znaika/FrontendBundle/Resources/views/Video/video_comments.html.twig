@@ -4,8 +4,8 @@
       <a class="pull-left"
          href="{% if is_moderator() %}{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}{% else %}javascript:void(0);{% endif %}">
         <img class="media-object"
-             width="60"
-             height="60"
+             width="50"
+             height="50"
              src="{{ user_photo_small_url(comment.user) }}"
              alt="{{ comment.user }}"/>
       </a>

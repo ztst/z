@@ -10,21 +10,21 @@
   <div class="media user-question-container">
     <h4>Вопрос</h4>
     {% for question in questions %}
-        <a class="pull-left"
-           href="{% if is_moderator() %}{{ path("not_verified_pupils", {"userId": question.user.userId}) }}{% else %}javascript:void(0);{% endif %}">
-          <img class="media-object"
-               width="60"
-               height="60"
-               src="{{ user_photo_small_url(question.user) }}"
-               alt="{{ question.user }}"/>
-        </a>
-        <div class="hidden question-block" id="questionContent{{ question.videoCommentId }}">
-          <span class="simple-comment-author-name">{{ question.user }}</span>
-          <span class="media-heading comment-date">{{ comment_date(question.getCreatedTime) }}</span>
-          <br />
-          <span class="comment-body">{{ comment_text(question) }}</span>
-        </div>
-        <div class="clear"></div>
+      <a class="pull-left"
+         href="{% if is_moderator() %}{{ path("not_verified_pupils", {"userId": question.user.userId}) }}{% else %}javascript:void(0);{% endif %}">
+        <img class="media-object"
+             width="50"
+             height="50"
+             src="{{ user_photo_small_url(question.user) }}"
+             alt="{{ question.user }}"/>
+      </a>
+      <div class="hidden question-block" id="questionContent{{ question.videoCommentId }}">
+        <span class="simple-comment-author-name">{{ question.user }}</span>
+        <span class="media-heading comment-date">{{ comment_date(question.getCreatedTime) }}</span>
+        <br />
+        <span class="comment-body">{{ comment_text(question) }}</span>
+      </div>
+      <div class="clear"></div>
     {% endfor %}
     {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "videoName": video.getUrlName} %}
   </div>

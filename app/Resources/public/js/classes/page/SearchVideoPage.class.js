@@ -32,6 +32,7 @@ var SearchVideoPage = Base.extend({
         this._initFilterSelect();
 
         $('.filters-block').followTo(150);
+        this._textToEllipsis();
     },
 
     setSearchVideoAjaxUrl: function(url)
@@ -106,6 +107,20 @@ var SearchVideoPage = Base.extend({
 
             this._showMoreLink.removeClass("hidden");
         }
+        this._textToEllipsis();
+    },
+
+    _textToEllipsis: function()
+    {
+        this.base();
+
+        $(".video-title").ellipsis({
+            row: 2
+        });
+
+        $(".video-author-in-list").ellipsis({
+            onlyFullWords: true
+        })
     }
 
 });
