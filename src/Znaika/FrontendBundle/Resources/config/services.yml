@@ -272,6 +272,7 @@ services:
     znaika_frontend.date_extension:
         class: Znaika\FrontendBundle\Twig\DateExtension
         arguments:
+            - @service_container
             - @translator
         tags:
             - { name: twig.extension }
