@@ -1,6 +1,18 @@
 <div id="videoComments{{ video.videoId }}" class="video-comments-container hidden">
   <div class="tab-header">
-    <h4>{{ video.name }} <span class="list-count-container not-verified-comments-count">+{{ comments|length }}</span></h4>
+    <h4>
+      <a href="{{ path('show_video', {
+      'subjectName': video.getSubject.getUrlName,
+      'class': video.getGrade,
+      'videoName': video.getUrlName
+      }) }}"
+         title=""
+        >
+        {{ video.name }}
+      </a>
+      <span class="list-count-container not-verified-comments-count">+{{ comments|length }}</span>
+    </h4>
+
     <p class="video-breadcrumbs">
       {{ video.grade }} класс > {{ video.subject.name }} > {{ video.chapter.name }}
     </p>
@@ -11,7 +23,8 @@
       {% set count = 1 %}
       {% set maxShow = 10 %}
       {% for comment in comments %}
-        <li class="{% if count > maxShow %}hidden{% endif %}{% if count == 1 %}first{% endif %}" id="commentContainer{{ comment.videoCommentId }}">
+        <li class="{% if count > maxShow %}hidden{% endif %}{% if count == 1 %}first{% endif %}"
+            id="commentContainer{{ comment.videoCommentId }}">
           <div class="comment-content">
             <a class="pull-left" href="{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}">
               <img class="media-object"
@@ -20,6 +33,7 @@
                    src="{{ user_photo_small_url(comment.user) }}"
                    alt="Здесь будет аватар автора"/>
             </a>
+
             <div class="media-body">
               <a class="" href="{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}">
                 <span class="comment-author">{{ comment.user }}</span>

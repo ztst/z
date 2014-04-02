@@ -1,6 +1,17 @@
 <div id="videoQuestions{{ video.videoId }}" class="video-questions-container hidden">
   <div class="tab-header">
-    <h4>{{ video.name }} <span class="list-count-container user-questions-count">{{ count_video_questions(video) }}</span></h4>
+    <h4>
+      <a href="{{ path('show_video', {
+      'subjectName': video.getSubject.getUrlName,
+      'class': video.getGrade,
+      'videoName': video.getUrlName
+      }) }}"
+         title=""
+        >
+        {{ video.name }}
+      </a>
+      <span class="list-count-container user-questions-count">{{ count_video_questions(video) }}</span>
+    </h4>
     <p class="video-breadcrumbs">
       {{ video.grade }} класс > {{ video.subject.name }} > {{ video.chapter.name }}
     </p>
