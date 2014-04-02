@@ -618,16 +618,16 @@ img.mfp-img
 .forget-password-form label
 {
     display: table-cell;
-    text-align: right;
     vertical-align: middle;
 
     padding-right: 7px;
-
     width: 85px;
+    line-height: 18px;
 
     font-weight: normal;
     font-size: 13px;
     font-family: "OpenSans Semibold", sans-serif;
+    text-align: right;
 }
 
 .get-new-password-form label
@@ -681,11 +681,6 @@ img.mfp-img
     margin-right: 6px;
 }
 
-.remember-me-block label
-{
-    padding-top: 2px;
-    line-height: 18px;
-}
 
 .remember-me-block .icheckbox
 {
@@ -731,7 +726,9 @@ img.mfp-img
 
 .remember-me-block label
 {
+    padding-top: 2px;
     padding-left: 2px;
+
     width: auto;
     font-size: 12px;
     font-family: "OpenSans", "Open Sans", serif;
@@ -871,6 +868,7 @@ img.mfp-img
 .additional-form-container h3
 {
     display: inline-block;
+    margin-top: 0;
     margin-bottom: 20px;
     height: 34px;
 
@@ -997,9 +995,8 @@ img.mfp-img
 {
     padding: 0 25px;
 }
-
-.forget-password-form-social-registration .additional-form-container
+.additional-form-header.social-registration-complete-header
 {
-    padding-top: 16px;
+    padding-left: 0;
 }
 /* Additional forms styles END */
