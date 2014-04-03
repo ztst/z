@@ -1,9 +1,9 @@
 {% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
 
 {% block content %}
-  <div>
-    <h1>{{ video.getName|raw }}</h1>
-    {{ form_start(form, {'method': 'POST'}) }}
+  <div class="static-form-container add-video-page-container">
+    <h3>{{ video.getName|raw }}</h3>
+    {{ form_start(form, {'method': 'POST', 'attr': {'class': 'additional-form'}}) }}
       {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
       <div class="form-group">
         {{ form_label(form.msWordFile, 'Исходный файл word') }}
@@ -15,8 +15,17 @@
         {{ form_errors(form.htmlFile) }}
         {{ form_widget(form.htmlFile) }}
       </div>
-      <div>
-        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}, 'label': 'Сохранить'}) }}
+      <div class="buttons-container">
+        <button type="submit" class="active-button">
+          <span class="active-button-label">Сохранить</span>
+        </button>
+        {% if video is defined %}
+          <a
+            class="semi-active-button cancel-button"
+            href="{{ path('show_video', { 'subjectName': video.getSubject.getUrlName, 'class': video.getGrade, 'videoName': video.getUrlName })}}">
+            <span class="semi-active-button-label">Отмена</span>
+          </a>
+        {% endif %}
       </div>
     {{ form_end(form) }}
   </div>

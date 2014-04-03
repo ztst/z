@@ -1,5 +1,5 @@
 <div class="static-form-container add-video-page-container">
-  {{ form_start(form, {'action': url, 'method': 'POST'}) }}
+  {{ form_start(form, {'action': url, 'method': 'POST', 'attr': {'class': 'additional-form'}}) }}
   {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
   <div class="form-group">
     {{ form_label(form.name, 'Название видеоурока') }}
