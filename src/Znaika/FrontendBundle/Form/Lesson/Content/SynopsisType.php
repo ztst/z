@@ -16,8 +16,7 @@ class SynopsisType extends AbstractType
     {
         $builder
             ->add('msWordFile', 'file')
-            ->add('htmlFile', 'file')
-            ->add('save', 'submit');
+            ->add('htmlFile', 'file');
     }
 
     /**

@@ -1118,11 +1118,7 @@ label
 {
     width: 170px;
     line-height: 32px;
-}
-
-.static-form-container.add-video-page-container .buttons-container
-{
-    padding-left: 170px;
+    text-align: left;
 }
 
 .static-form-container.add-video-page-container .active-button,
