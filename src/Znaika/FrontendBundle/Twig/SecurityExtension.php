@@ -41,7 +41,7 @@
 
         private function isGranted($role)
         {
-            if (null === $this->context)
+            if (null === $this->context || !$this->context->getToken())
             {
                 return false;
             }

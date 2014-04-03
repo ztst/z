@@ -33,7 +33,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['ZnaikaFrontendBundle']
+    bundles:        ['ZnaikaFrontendBundle', 'TwigBundle']
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -68,7 +68,56 @@ swiftmailer:
     host:      %mailer_host%
     username:  %mailer_user%
     password:  %mailer_password%
-    spool:     { type: memory }
+
+monolog:
+    handlers:
+        main:
+            level:    error
+            type:     stream
+            path:     "%kernel.logs_dir%/%kernel.environment%_remaining.log"
+            channels: ["!doctrine", "!request", "!security"]
+        request:
+            type:    fingers_crossed
+            handler: requests
+            excluded_404s:
+                - ^/phpmyadmin
+        requests:
+            type:    group
+            members: [request_critical, request_error]
+        request_critical:
+            level:    critical
+            type:     stream
+            path:     "%kernel.logs_dir%/%kernel.environment%_request_critical.log"
+            channels: [request]
+        request_error:
+            level:    error
+            type:     stream
+            path:     "%kernel.logs_dir%/%kernel.environment%_request.log"
+            channels: [request]
+        doctrine:
+            level:    error
+            type:     stream
+            path:     "%kernel.logs_dir%/%kernel.environment%_doctrine.log"
+            channels: [doctrine]
+        security:
+            level:    error
+            type:     stream
+            path:     "%kernel.logs_dir%/%kernel.environment%_security.log"
+            channels: [security]
+        mail:
+            type:         fingers_crossed
+            action_level: critical
+            handler:      buffered
+        buffered:
+            type:    buffer
+            handler: swift
+        swift:
+            type:       swift_mailer
+            from_email: error@znaika.ru
+            to_email:   %error_report_emails%
+            subject:    %error_report_subject%
+            level:      debug
+            formatter:  email_formatter
 
 knp_menu:
     twig:  # use "twig: false" to disable the Twig extension and the TwigRenderer
@@ -108,4 +157,7 @@ parameters:
     odnoklassniki_client_secret: E36998B37C434A20950F618E
     odnoklassniki_redirect_uri:  http://znaika.local/odnoklassniki-auth
 
-    support_emails: ilya.shikhaleev@cpslabs.net
+    support_emails: ["ilya.shikhaleev@cpslabs.net", "qwe123qweqwe123@gmail.com"]
+
+    error_report_emails: ["ilya.shikhaleev@cpslabs.net", "qwe123qweqwe123@gmail.com"]
+    error_report_subject: Znaika.ru %kernel.environment% Error

@@ -3,3 +3,4 @@ web/uploads/*
 dumps/*
 dumps
 .*
+app/config/config_prod.yml

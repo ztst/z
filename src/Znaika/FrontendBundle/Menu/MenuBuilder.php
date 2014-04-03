@@ -41,7 +41,8 @@
             $this->factory         = $factory;
             $this->securityContext = $securityContext;
 
-            $currentUser       = $this->securityContext->getToken()->getUser();
+            $token = $this->securityContext->getToken();
+            $currentUser       = $token ? $token->getUser() : null;
             $this->currentUser = $currentUser instanceof User ? $currentUser : null;
         }
 

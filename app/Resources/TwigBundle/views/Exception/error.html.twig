@@ -1,7 +1,13 @@
-{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block stylesheets %}
   {{ parent() }}
+
+  {% stylesheets
+    '../app/Resources/public/css/error_page.css'
+  %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
 {% endblock %}
 
 {% block javascripts %}

@@ -7,6 +7,7 @@
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
     use Symfony\Component\Security\Core\Encoder\EncoderFactory;
     use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
     use Symfony\Component\Security\Core\SecurityContext;
@@ -345,7 +346,7 @@
         {
             if (!$this->canEditProfile())
             {
-                throw $this->createNotFoundException("Can't manage user");
+                throw new AccessDeniedHttpException("Can't manage user");
             }
             $isSocialRegisterComplete = $this->getIsSocialRegisterComplete();
             $user                     = $this->getUser();
@@ -374,7 +375,7 @@
         {
             if (!$this->canEditProfile())
             {
-                throw $this->createNotFoundException("Can't manage user");
+                throw new AccessDeniedHttpException("Can't manage user");
             }
             $user = $this->getUser();
 
@@ -397,7 +398,7 @@
         {
             if (!$this->canEditProfile())
             {
-                throw $this->createNotFoundException("Can't manage user");
+                throw new AccessDeniedHttpException("Can't manage user");
             }
             $user = $this->getUser();
 
@@ -492,7 +493,7 @@
         {
             if (!$this->canEditProfile())
             {
-                throw $this->createNotFoundException("Can't manage user");
+                throw new AccessDeniedHttpException("Can't manage user");
             }
             $user        = $this->getUser();
             $changeEmail = $this->createChangeUserEmail($user);
@@ -534,7 +535,7 @@
         {
             if (!$this->canEditProfile())
             {
-                throw $this->createNotFoundException("Can't manage user");
+                throw new AccessDeniedHttpException("Can't manage user");
             }
             $currentUser = $this->getUser();
 
@@ -564,7 +565,7 @@
         {
             if (!$this->canEditProfile())
             {
-                throw $this->createNotFoundException("Can't manage user");
+                throw new AccessDeniedHttpException("Can't manage user");
             }
             /** @var User $user */
             $user           = $this->getUser();
@@ -600,7 +601,7 @@
 
             if (!$canEdit)
             {
-                throw $this->createNotFoundException("Can't manage user");
+                throw new AccessDeniedHttpException("Can't manage user");
             }
 
             $userRepository = $this->getUserRepository();

@@ -349,3 +349,27 @@ services:
             - @service_container
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+#monolog
+    email_formatter:
+        class: Monolog\Formatter\LineFormatter
+
+    web_processor:
+        class: Monolog\Processor\WebProcessor
+        tags:
+            - { name: monolog.processor, handler: swift_mailer }
+
+    introspection_processor:
+        class: Monolog\Processor\IntrospectionProcessor
+        tags:
+            - { name: monolog.processor }
+
+    uid_processor:
+        class: Monolog\Processor\UidProcessor
+        tags:
+            - { name: monolog.processor }
+
+    mpu_processor:
+        class: Monolog\Processor\MemoryPeakUsageProcessor
+        tags:
+            - { name: monolog.processor, handler: swift_mailer }
