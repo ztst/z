@@ -357,7 +357,7 @@ services:
     web_processor:
         class: Monolog\Processor\WebProcessor
         tags:
-            - { name: monolog.processor, handler: swift_mailer }
+            - { name: monolog.processor, handler: mail }
 
     introspection_processor:
         class: Monolog\Processor\IntrospectionProcessor
@@ -372,4 +372,4 @@ services:
     mpu_processor:
         class: Monolog\Processor\MemoryPeakUsageProcessor
         tags:
-            - { name: monolog.processor, handler: swift_mailer }
+            - { name: monolog.processor, handler: mail }
