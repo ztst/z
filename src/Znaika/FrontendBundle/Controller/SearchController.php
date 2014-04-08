@@ -5,6 +5,8 @@
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\Request;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\FrontendBundle\Helper\Search\VideoSearch;
+    use Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\SynopsisRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
     use Znaika\FrontendBundle\Repository\Profile\UserRepository;
@@ -16,7 +18,7 @@
         public function searchVideoAction(Request $request)
         {
             $searchString = trim($request->get("q", ""));
-            $subject      = $request->get("s", "");
+            $subject      = $this->getSubjectIdFromRequest($request);
             $grade        = $request->get("g", "");
             $videos       = null;
             $countVideos  = 0;
@@ -40,7 +42,7 @@
         public function searchVideoAjaxAction(Request $request)
         {
             $searchString = trim($request->get("q", ""));
-            $subject      = $request->get("s", "");
+            $subject      = $this->getSubjectIdFromRequest($request);
             $grade        = $request->get("g", "");
             $page         = intval($request->get("page"));
             $videos       = $this->searchVideos($searchString, $subject, $grade, self::RESULT_ON_SPECIAL_PAGE, $page);
@@ -107,10 +109,18 @@
          */
         private function searchVideos($searchString, $subject, $grade, $limit = null, $page = null)
         {
-            $repository = $this->getVideoRepository();
-            $videos     = $repository->getVideosBySearchString($searchString, $subject, $grade, $limit, $page);
+            $videoSearch = $this->getVideoSearch();
+            $videos      = $videoSearch->getVideosBySearchString($searchString, $subject, $grade, $limit, $page);
 
             return $videos;
+        }
+
+        /**
+         * @return VideoSearch
+         */
+        private function getVideoSearch()
+        {
+            return $this->get("znaika_frontend.video_search");
         }
 
         /**
@@ -141,10 +151,9 @@
 
         private function countFoundedVideos($searchString, $subject, $grade)
         {
-            $repository  = $this->getVideoRepository();
-            $countVideos = $repository->countVideosBySearchString($searchString, $subject, $grade);
+            $videoSearch = $this->getVideoSearch();
 
-            return $countVideos;
+            return $videoSearch->countVideosBySearchString($searchString, $subject, $grade);
         }
 
         /**
@@ -169,5 +178,28 @@
         private function getSynopsisRepository()
         {
             return $this->get("znaika_frontend.synopsis_repository");
+        }
+
+        /**
+         * @return SubjectRepository
+         */
+        private function getSubjectRepository()
+        {
+            return $this->get("znaika_frontend.subject_repository");
+        }
+
+        /**
+         * @param Request $request
+         *
+         * @return mixed
+         */
+        private function getSubjectIdFromRequest(Request $request)
+        {
+            $subjectName = $request->get("s", "");
+            $repository = $this->getSubjectRepository();
+
+            $subject = $repository->getOneByUrlName($subjectName);
+
+            return $subject ? $subject->getSubjectId() : 0;
         }
     }

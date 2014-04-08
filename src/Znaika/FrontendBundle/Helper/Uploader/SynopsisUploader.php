@@ -56,7 +56,7 @@
                 $zip->extractTo("$fileDir/");
                 $zip->close();
 
-                $this->prepareSynopsisFileName($synopsis);
+                $this->processUnzippedFiles($synopsis);
             }
         }
 
@@ -73,7 +73,7 @@
             $file->move($fileDir, $fileName);
         }
 
-        private function prepareSynopsisFileName(Synopsis $synopsis)
+        private function processUnzippedFiles(Synopsis $synopsis)
         {
             $fileDir   = $this->getFileDir($synopsis);
             $htmlFiles = UnixSystemUtils::getDirectoryFiles($fileDir, "/[^\.]+\.(htm|html)/");
@@ -90,6 +90,7 @@
             $path = $this->getHtmlFilePath($synopsis);
 
             $content = UnixSystemUtils::getFileContents($path);
+            $synopsis->setText(strip_tags($content));
             $content = $this->prepareStyles($content);
             $content = $this->removeExcessTags($content);
             $content = $this->prepareImagesUrls($synopsis, $content);

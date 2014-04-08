@@ -36,6 +36,11 @@
         private $htmlFileName;
 
         /**
+         * @var string
+         */
+        private $text;
+
+        /**
          * @param \Symfony\Component\HttpFoundation\File\UploadedFile $htmlFile
          */
         public function setHtmlFile($htmlFile)
@@ -104,11 +109,11 @@
         /**
          * Set video
          *
-         * @param \Znaika\FrontendBundle\Entity\Lesson\Content\Video $video
+         * @param Video $video
          *
          * @return Synopsis
          */
-        public function setVideo(\Znaika\FrontendBundle\Entity\Lesson\Content\Video $video = null)
+        public function setVideo(Video $video = null)
         {
             $this->video = $video;
 
@@ -118,7 +123,7 @@
         /**
          * Get video
          *
-         * @return \Znaika\FrontendBundle\Entity\Lesson\Content\Video
+         * @return Video
          */
         public function getVideo()
         {
@@ -139,5 +144,21 @@
         public function getHtmlFileName()
         {
             return $this->htmlFileName;
+        }
+
+        /**
+         * @param string $text
+         */
+        public function setText($text)
+        {
+            $this->text = $text;
+        }
+
+        /**
+         * @return string
+         */
+        public function getText()
+        {
+            return $this->text;
         }
     }

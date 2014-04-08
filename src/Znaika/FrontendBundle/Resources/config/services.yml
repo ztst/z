@@ -373,3 +373,9 @@ services:
         class: Monolog\Processor\MemoryPeakUsageProcessor
         tags:
             - { name: monolog.processor, handler: mail }
+
+#search
+    znaika_frontend.video_search:
+        class: Znaika\FrontendBundle\Helper\Search\VideoSearch
+        arguments:
+            - @znaika_frontend.video_repository

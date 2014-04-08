@@ -12,12 +12,7 @@
             return null;
         }
 
-        public function getVideosBySearchString($searchString, $subjectName, $grade, $limit = null, $page = null)
-        {
-            return null;
-        }
-
-        public function countVideosBySearchString($searchString, $subjectName, $grade)
+        public function getByVideoIds($videoIds)
         {
             return null;
         }
