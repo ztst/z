@@ -4,3 +4,4 @@ dumps/*
 dumps
 .*
 app/config/config_prod.yml
+app/config/parameters.yml
