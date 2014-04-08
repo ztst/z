@@ -1,0 +1,11 @@
+*.log
+/web/uploads/*
+/dumps/*
+/dumps
+.*
+/app/config/config_prod.yml
+/app/config/config_dev.yml
+/app/config/rsync_exclude.txt
+/app/config/parameters.yml
+/app/cache
+/app/cache/*
