@@ -1,93 +1,39 @@
 parameters:
-    znaika_frontend.menu.class: Knp\Menu\MenuItem
+    znaika.menu.class: Knp\Menu\MenuItem
 
 services:
-    znaika_frontend.new_thread_form.type:
+    znaika.new_thread_form.type:
         class:     Znaika\FrontendBundle\Form\Communication\NewThreadMessageFormType
 
-    znaika_frontend.mail_helper:
-        class:     Znaika\FrontendBundle\Helper\Mail\MailHelper
-        arguments: ['@mailer']
-
-    znaika_frontend.user_mailer:
-        class:     Znaika\FrontendBundle\Helper\Mail\UserMailer
-        arguments:
-            - @znaika_frontend.mail_helper
-            - @twig
-
-    znaika_frontend.register_key_encoder:
-        class:     Znaika\FrontendBundle\Helper\Encode\RegisterKeyEncoder
-
-    znaika_frontend.user_authenticator:
-        class:     Znaika\FrontendBundle\Helper\Security\UserAuthenticator
-        arguments: ['@service_container']
-
-    znaika_frontend.vkontakte:
-        class:     Znaika\FrontendBundle\Helper\Vkontakte
-        arguments: ['@service_container']
-
-    znaika_frontend.odnoklassniki:
-        class:     Znaika\FrontendBundle\Helper\Odnoklassniki
-        arguments:
-            config:
-                client_id:       %odnoklassniki_client_id%
-                application_key: %odnoklassniki_public_key%
-                client_secret:   %odnoklassniki_client_secret%
-
-    znaika_frontend.facebook:
-        class:     Facebook
-        arguments:
-            config:
-                appId: %facebook_client_id%
-                secret: %facebook_client_secret%
-
-    znaika_frontend.messages_provider:
+    znaika.messages_provider:
         class:     Znaika\FrontendBundle\Provider\MessagesProvider
         arguments:
-            - @znaika_frontend.thread_repository
-            - @znaika_frontend.message_repository
+            - @znaika.thread_repository
+            - @znaika.message_repository
             - @fos_message.thread_reader
             - @fos_message.authorizer
             - @fos_message.participant_provider
 
-    znaika_frontend.user_operation_listener:
-        class:     Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener
-        arguments:
-            - @znaika_frontend.user_operation_repository
-            - @znaika_frontend.user_badge_repository
-
-    znaika_frontend.video_attachment_uploader:
+    znaika.video_attachment_uploader:
         class:     Znaika\FrontendBundle\Helper\Uploader\VideoAttachmentUploader
         arguments: ['@service_container']
 
-    znaika_frontend.quiz_uploader:
+    znaika.quiz_uploader:
         class:     Znaika\FrontendBundle\Helper\Uploader\QuizUploader
         arguments: ['@service_container']
 
-    znaika_frontend.synopsis_uploader:
+    znaika.synopsis_uploader:
         class:     Znaika\FrontendBundle\Helper\Uploader\SynopsisUploader
         arguments: ['@service_container']
 
-    znaika_frontend.user_photo_uploader:
-        class:     Znaika\FrontendBundle\Helper\Uploader\UserPhotoUploader
-        arguments: ['@service_container']
-
-    znaika_frontend.security.authentication_handler:
-        class: Znaika\FrontendBundle\Helper\Security\AuthenticationHandler
-        public: false
-        arguments:
-            - @router
-            - @session
-            - @znaika_frontend.user_repository
-
-    znaika_frontend.video_info_updater:
+    znaika.video_info_updater:
         class:     Znaika\FrontendBundle\Helper\Content\VideoInfoUpdater
         arguments:
-            - @znaika_frontend.video_repository
-            - @znaika_frontend.php_vimeo
+            - @znaika.video_repository
+            - @znaika.php_vimeo
             - @service_container
 
-    znaika_frontend.php_vimeo:
+    znaika.php_vimeo:
         class:     Znaika\FrontendBundle\Helper\Vimeo
         arguments:
             - %vimeo_client_id%
@@ -96,180 +42,136 @@ services:
             - %vimeo_access_token_secret%
 
 #repository
-    znaika_frontend.video_repository:
+    znaika.video_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika_frontend.video_comment_repository:
+    znaika.video_comment_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika_frontend.synopsis_repository:
+    znaika.synopsis_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\SynopsisRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika_frontend.subject_repository:
+    znaika.subject_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika_frontend.chapter_repository:
+    znaika.chapter_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Category\ChapterRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika_frontend.user_repository:
-        class:        Znaika\FrontendBundle\Repository\Profile\UserRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
-    znaika_frontend.user_registration_repository:
-        class:        Znaika\FrontendBundle\Repository\Profile\UserRegistrationRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
-    znaika_frontend.password_recovery_repository:
-        class:        Znaika\FrontendBundle\Repository\Profile\PasswordRecoveryRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
-    znaika_frontend.change_user_email_repository:
-        class:        Znaika\FrontendBundle\Repository\Profile\ChangeUserEmailRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
-    znaika_frontend.message_repository:
+    znaika.message_repository:
         class:        Znaika\FrontendBundle\Repository\Communication\MessageRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika_frontend.thread_repository:
+    znaika.thread_repository:
         class:        Znaika\FrontendBundle\Repository\Communication\ThreadRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika_frontend.user_operation_repository:
-        class:        Znaika\FrontendBundle\Repository\Profile\Action\UserOperationRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
-    znaika_frontend.user_badge_repository:
-        class:        Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
-    znaika_frontend.video_attachment_repository:
+    znaika.video_attachment_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\VideoAttachmentRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika_frontend.quiz_repository:
+    znaika.quiz_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\QuizRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika_frontend.quiz_attempt_repository:
+    znaika.quiz_attempt_repository:
         class:        Znaika\FrontendBundle\Repository\Lesson\Content\Stat\QuizAttemptRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika_frontend.support_repository:
+    znaika.support_repository:
             class:        Znaika\FrontendBundle\Repository\Communication\Support\SupportRepository
             arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika_frontend.ban_info_repository:
-            class:        Znaika\FrontendBundle\Repository\Profile\Ban\InfoRepository
-            arguments:    ["@doctrine.orm.entity_manager"]
-
 #menu
-    znaika_frontend.menu_builder:
+    znaika.menu_builder:
         class: Znaika\FrontendBundle\Menu\MenuBuilder
         arguments:
             - @knp_menu.factory
             - @security.context
 
-    znaika_frontend.menu.main:
-        class: "%znaika_frontend.menu.class%"
-        factory_service: znaika_frontend.menu_builder
+    znaika.menu.main:
+        class: "%znaika.menu.class%"
+        factory_service: znaika.menu_builder
         factory_method: createMainMenu
         arguments: ["@request"]
         scope: request
         tags:
             - { name: knp_menu.menu, alias: main }
 
-    znaika_frontend.menu.sidebar_profile_menu:
-        class: "%znaika_frontend.menu.class%"
-        factory_service: znaika_frontend.menu_builder
+    znaika.menu.sidebar_profile_menu:
+        class: "%znaika.menu.class%"
+        factory_service: znaika.menu_builder
         factory_method: createSidebarProfileMenu
         arguments:
             - @request
-            - @znaika_frontend.user_repository
-            - @znaika_frontend.video_comment_repository
+            - @znaika.user_repository
+            - @znaika.video_comment_repository
         scope: request
         tags:
             - { name: knp_menu.menu, alias: sidebar_profile_menu }
 
-    znaika_frontend.menu.sidebar_grade_menu:
-        class: "%znaika_frontend.menu.class%"
-        factory_service: znaika_frontend.menu_builder
+    znaika.menu.sidebar_grade_menu:
+        class: "%znaika.menu.class%"
+        factory_service: znaika.menu_builder
         factory_method: createSidebarGradeMenu
         arguments: ["@request"]
         scope: request
         tags:
             - { name: knp_menu.menu, alias: sidebar_grade_menu }
 
-    znaika_frontend.menu.sidebar_subject_menu:
-        class: "%znaika_frontend.menu.class%"
-        factory_service: znaika_frontend.menu_builder
+    znaika.menu.sidebar_subject_menu:
+        class: "%znaika.menu.class%"
+        factory_service: znaika.menu_builder
         factory_method: createSidebarSubjectMenu
-        arguments: ["@request", "@znaika_frontend.subject_repository"]
+        arguments: ["@request", "@znaika.subject_repository"]
         scope: request
         tags:
             - { name: knp_menu.menu, alias: sidebar_subject_menu }
 
 #form
-    znaika_frontend.recipient_type:
+    znaika.recipient_type:
         class:        Znaika\FrontendBundle\Form\Communication\RecipientType
-        arguments:    ["@znaika_frontend.user_to_id_transformer"]
+        arguments:    ["@znaika.user_to_id_transformer"]
         tags:
             - { name: form.type, alias: recipient_input }
 
-    znaika_frontend.user_to_id_transformer:
-        class:     Znaika\FrontendBundle\Form\DataTransformer\UserToIdTransformer
-        arguments: ['@znaika_frontend.user_repository']
-
-    znaika_frontend.email_to_user_transformer:
-        class:     Znaika\FrontendBundle\Form\DataTransformer\EmailToUserTransformer
-        arguments: ['@znaika_frontend.user_repository']
-
 #twig
-    znaika_frontend.badge_extension:
-        class: Znaika\FrontendBundle\Twig\BadgeExtension
-        arguments:
-            - @twig
-            - @znaika_frontend.user_badge_repository
-        tags:
-            - { name: twig.extension }
-
-    znaika_frontend.video_comment_extension:
+    znaika.video_comment_extension:
         class: Znaika\FrontendBundle\Twig\Video\CommentExtension
         arguments:
             - @twig
             - @security.context
-            - @znaika_frontend.video_comment_repository
+            - @znaika.video_comment_repository
             - @form.factory
         tags:
             - { name: twig.extension }
 
-    znaika_frontend.quiz_extension:
+    znaika.quiz_extension:
         class: Znaika\FrontendBundle\Twig\Video\QuizExtension
         arguments:
             - @twig
-            - @znaika_frontend.quiz_uploader
+            - @znaika.quiz_uploader
         tags:
             - { name: twig.extension }
 
-    znaika_frontend.thumbnail_extension:
+    znaika.thumbnail_extension:
         class: Znaika\FrontendBundle\Twig\Video\ThumbnailExtension
         tags:
             - { name: twig.extension }
 
-    znaika_frontend.synopsis_extension:
+    znaika.synopsis_extension:
         class: Znaika\FrontendBundle\Twig\Video\SynopsisExtension
         arguments:
             - @twig
-            - @znaika_frontend.synopsis_uploader
+            - @znaika.synopsis_uploader
         tags:
             - { name: twig.extension }
 
-    znaika_frontend.date_extension:
+    znaika.date_extension:
         class: Znaika\FrontendBundle\Twig\DateExtension
         arguments:
             - @service_container
@@ -277,33 +179,18 @@ services:
         tags:
             - { name: twig.extension }
 
-    znaika_frontend.index_page_extension:
+    znaika.index_page_extension:
         class: Znaika\FrontendBundle\Twig\IndexPageExtension
         arguments:
             - @twig
-            - @znaika_frontend.video_repository
-            - @znaika_frontend.user_operation_repository
-            - @znaika_frontend.user_repository
-            - @znaika_frontend.user_badge_repository
+            - @znaika.video_repository
+            - @znaika.user_operation_repository
+            - @znaika.user_repository
+            - @znaika.user_badge_repository
         tags:
             - { name: twig.extension }
 
-    znaika_frontend.security_extension:
-        class: Znaika\FrontendBundle\Twig\SecurityExtension
-        arguments:
-            - @security.context
-        tags:
-            - { name: twig.extension }
-
-    znaika_frontend.social_networks_extension:
-        class: Znaika\FrontendBundle\Twig\SocialNetworksExtension
-        arguments:
-            - @twig
-            - @service_container
-        tags:
-            - { name: twig.extension }
-
-    znaika_frontend.search_extension:
+    znaika.search_extension:
         class: Znaika\FrontendBundle\Twig\SearchExtension
         arguments:
             - @twig
@@ -311,39 +198,15 @@ services:
         tags:
             - { name: twig.extension }
 
-    znaika_frontend.menu_helper_extension:
+    znaika.menu_helper_extension:
         class: Znaika\FrontendBundle\Twig\MenuHelperExtension
         arguments:
-            - @znaika_frontend.subject_repository
-        tags:
-            - { name: twig.extension }
-
-    znaika_frontend.user_photo_extension:
-        class: Znaika\FrontendBundle\Twig\Profile\UserPhotoExtension
-        arguments:
-            - @twig
-            - @service_container
-        tags:
-            - { name: twig.extension }
-
-    znaika_frontend.profile_extension:
-        class: Znaika\FrontendBundle\Twig\Profile\ProfileExtension
-        arguments:
-            - @twig
-            - @service_container
-        tags:
-            - { name: twig.extension }
-
-    znaika_frontend.user_ban_extension:
-        class: Znaika\FrontendBundle\Twig\Profile\UserBanExtension
-        arguments:
-            - @twig
-            - @service_container
+            - @znaika.subject_repository
         tags:
             - { name: twig.extension }
 
 #event listeners
-    znaika_frontend.before_controller_listener:
+    znaika.before_controller_listener:
         class: Znaika\FrontendBundle\EventListener\BeforeControllerListener
         arguments:
             - @service_container
@@ -375,7 +238,7 @@ services:
             - { name: monolog.processor, handler: mail }
 
 #search
-    znaika_frontend.video_search:
+    znaika.video_search:
         class: Znaika\FrontendBundle\Helper\Search\VideoSearch
         arguments:
-            - @znaika_frontend.video_repository
+            - @znaika.video_repository

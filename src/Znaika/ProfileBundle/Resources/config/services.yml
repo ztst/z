@@ -1,0 +1,140 @@
+services:
+    znaika..mail_helper:
+        class:     Znaika\ProfileBundle\Helper\Mail\MailHelper
+        arguments: ['@mailer']
+
+    znaika..user_mailer:
+        class:     Znaika\ProfileBundle\Helper\Mail\UserMailer
+        arguments:
+            - @znaika..mail_helper
+            - @twig
+
+    znaika.register_key_encoder:
+        class:     Znaika\ProfileBundle\Helper\Encode\RegisterKeyEncoder
+
+    znaika.user_authenticator:
+        class:     Znaika\ProfileBundle\Helper\Security\UserAuthenticator
+        arguments: ['@service_container']
+
+    znaika.vkontakte:
+        class:     Znaika\ProfileBundle\Helper\Vkontakte
+        arguments: ['@service_container']
+
+    znaika.odnoklassniki:
+        class:     Znaika\ProfileBundle\Helper\Odnoklassniki
+        arguments:
+            config:
+                client_id:       %odnoklassniki_client_id%
+                application_key: %odnoklassniki_public_key%
+                client_secret:   %odnoklassniki_client_secret%
+
+    znaika.facebook:
+        class:     Facebook
+        arguments:
+            config:
+                appId: %facebook_client_id%
+                secret: %facebook_client_secret%
+
+    znaika.user_operation_listener:
+        class:     Znaika\ProfileBundle\Helper\UserOperation\UserOperationListener
+        arguments:
+            - @znaika.user_operation_repository
+            - @znaika.user_badge_repository
+
+    znaika.user_photo_uploader:
+        class:     Znaika\ProfileBundle\Helper\Uploader\UserPhotoUploader
+        arguments: ['@service_container']
+
+    znaika.security.authentication_handler:
+        class: Znaika\ProfileBundle\Helper\Security\AuthenticationHandler
+        public: false
+        arguments:
+            - @router
+            - @session
+            - @znaika.user_repository
+
+#repository
+    znaika.user_repository:
+        class:        Znaika\ProfileBundle\Repository\UserRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika.user_registration_repository:
+        class:        Znaika\ProfileBundle\Repository\UserRegistrationRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika.password_recovery_repository:
+        class:        Znaika\ProfileBundle\Repository\PasswordRecoveryRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika.change_user_email_repository:
+        class:        Znaika\ProfileBundle\Repository\ChangeUserEmailRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika.user_operation_repository:
+        class:        Znaika\ProfileBundle\Repository\Action\UserOperationRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika.user_badge_repository:
+        class:        Znaika\ProfileBundle\Repository\Badge\UserBadgeRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika.ban_info_repository:
+            class:        Znaika\ProfileBundle\Repository\Ban\InfoRepository
+            arguments:    ["@doctrine.orm.entity_manager"]
+
+#twig
+    znaika.badge_extension:
+        class: Znaika\ProfileBundle\Twig\BadgeExtension
+        arguments:
+            - @twig
+            - @znaika.user_badge_repository
+        tags:
+            - { name: twig.extension }
+
+    znaika.security_extension:
+        class: Znaika\ProfileBundle\Twig\SecurityExtension
+        arguments:
+            - @security.context
+        tags:
+            - { name: twig.extension }
+
+    znaika.social_networks_extension:
+        class: Znaika\ProfileBundle\Twig\SocialNetworksExtension
+        arguments:
+            - @twig
+            - @service_container
+        tags:
+            - { name: twig.extension }
+
+    znaika.user_photo_extension:
+        class: Znaika\ProfileBundle\Twig\UserPhotoExtension
+        arguments:
+            - @twig
+            - @service_container
+        tags:
+            - { name: twig.extension }
+
+    znaika.profile_extension:
+        class: Znaika\ProfileBundle\Twig\ProfileExtension
+        arguments:
+            - @twig
+            - @service_container
+        tags:
+            - { name: twig.extension }
+
+    znaika.user_ban_extension:
+        class: Znaika\ProfileBundle\Twig\UserBanExtension
+        arguments:
+            - @twig
+            - @service_container
+        tags:
+            - { name: twig.extension }
+
+#form
+    znaika.user_to_id_transformer:
+        class:     Znaika\ProfileBundle\Form\DataTransformer\UserToIdTransformer
+        arguments: ['@znaika.user_repository']
+
+    znaika.email_to_user_transformer:
+        class:     Znaika\ProfileBundle\Form\DataTransformer\EmailToUserTransformer
+        arguments: ['@znaika.user_repository']

@@ -9,7 +9,7 @@
     use Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\SynopsisRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
-    use Znaika\FrontendBundle\Repository\Profile\UserRepository;
+    use Znaika\ProfileBundle\Repository\UserRepository;
 
     class SearchController extends ZnaikaController
     {
@@ -120,7 +120,7 @@
          */
         private function getVideoSearch()
         {
-            return $this->get("znaika_frontend.video_search");
+            return $this->get("znaika.video_search");
         }
 
         /**
@@ -161,7 +161,7 @@
          */
         private function getVideoRepository()
         {
-            return $this->get("znaika_frontend.video_repository");
+            return $this->get("znaika.video_repository");
         }
 
         /**
@@ -169,7 +169,7 @@
          */
         private function getUserRepository()
         {
-            return $this->get("znaika_frontend.user_repository");
+            return $this->get("znaika.user_repository");
         }
 
         /**
@@ -177,7 +177,7 @@
          */
         private function getSynopsisRepository()
         {
-            return $this->get("znaika_frontend.synopsis_repository");
+            return $this->get("znaika.synopsis_repository");
         }
 
         /**
@@ -185,7 +185,7 @@
          */
         private function getSubjectRepository()
         {
-            return $this->get("znaika_frontend.subject_repository");
+            return $this->get("znaika.subject_repository");
         }
 
         /**

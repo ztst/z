@@ -1,0 +1,23 @@
+Znaika\ProfileBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [email]
+            message: 'not_unique_user_email'
+    properties:
+        email:
+            - NotBlank: { message: "not_blank" }
+            - Email:
+                  checkMX: true
+        password:
+            - NotBlank: { message: "not_blank" }
+        photo:
+            - File:
+                maxSize:          10M
+                mimeTypes:        [image/gif, image/jpeg, image/png]
+                mimeTypesMessage: "invalid_user_photo_format"
+            - Znaika\ProfileBundle\Validator\Constraints\UserPhoto: ~
+
+Znaika\ProfileBundle\Entity\PasswordRecovery:
+    properties:
+        user:
+            - NotNull: { message: "not_null" }

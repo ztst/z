@@ -18,7 +18,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment:
                 referencedColumnName: video_id
                 onDelete: CASCADE
         user:
-            targetEntity: Znaika\FrontendBundle\Entity\Profile\User
+            targetEntity: Znaika\ProfileBundle\Entity\User
             inversedBy: videoComments
             joinColumn:
                 name: user_id

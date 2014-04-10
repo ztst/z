@@ -1,6 +1,8 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @ZnaikaProfileBundle/Resources/config/services.yml }
+    - { resource: @ZnaikaFrontendBundle/Resources/config/services.yml }
 
 framework:
     #esi:             ~
@@ -33,7 +35,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['ZnaikaFrontendBundle', 'TwigBundle']
+    bundles:        ['ZnaikaFrontendBundle', 'TwigBundle', 'ZnaikaProfileBundle']
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -132,12 +134,12 @@ fos_message:
     db_driver:        orm
     thread_class:     Znaika\FrontendBundle\Entity\Communication\Thread
     message_class:    Znaika\FrontendBundle\Entity\Communication\Message
-    message_manager:  znaika_frontend.message_repository
-    thread_manager:   znaika_frontend.thread_repository
-    user_transformer: znaika_frontend.user_to_id_transformer
-    provider:         znaika_frontend.messages_provider
+    message_manager:  znaika.message_repository
+    thread_manager:   znaika.thread_repository
+    user_transformer: znaika.user_to_id_transformer
+    provider:         znaika.messages_provider
     new_thread_form:
-        type:         znaika_frontend.new_thread_form.type
+        type:         znaika.new_thread_form.type
 
 parameters:
     vimeo_client_id:           f17911c69b8310bf7639f9580feb4f0ffa4ec696

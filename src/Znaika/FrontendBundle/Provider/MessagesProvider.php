@@ -3,7 +3,7 @@
 
     use FOS\MessageBundle\Model\ThreadInterface;
     use FOS\MessageBundle\Provider\Provider;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Repository\Communication\IThreadRepository;
 
     class MessagesProvider extends Provider

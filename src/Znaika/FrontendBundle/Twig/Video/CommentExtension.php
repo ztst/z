@@ -5,11 +5,11 @@
     use Symfony\Component\Security\Core\SecurityContextInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoCommentType;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentStatus;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
-    use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
+    use Znaika\ProfileBundle\Helper\Util\UserRole;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
 
     class CommentExtension extends \Twig_Extension
@@ -107,7 +107,7 @@
             $videoComment        = new VideoComment();
             $addVideoCommentForm = $this->formFactory->create(new VideoCommentType(), $videoComment);
 
-            $templateFile    = "ZnaikaFrontendBundle:User:question_answer_form.html.twig";
+            $templateFile    = "ZnaikaProfileBundle:Default:question_answer_form.html.twig";
             $templateContent = $this->twig->loadTemplate($templateFile);
             $result          = $templateContent->render(array(
                 "form"    => $addVideoCommentForm->createView(),
@@ -120,7 +120,7 @@
         public function renderTeacherProfileQuestions(Video $video)
         {
             $questions       = $this->videoCommentRepository->getVideoNotAnsweredQuestionComments($video);
-            $templateFile    = "ZnaikaFrontendBundle:User:video_questions_list.html.twig";
+            $templateFile    = "ZnaikaProfileBundle:Default:video_questions_list.html.twig";
             $templateContent = $this->twig->loadTemplate($templateFile);
             $result          = $templateContent->render(array(
                 "questions" => $questions,
@@ -134,7 +134,7 @@
         public function renderModeratorProfileComments(Video $video)
         {
             $comments        = $this->videoCommentRepository->getVideoNotVerifiedComments($video);
-            $templateFile    = "ZnaikaFrontendBundle:User:video_not_verified_comment_list.html.twig";
+            $templateFile    = "ZnaikaProfileBundle:Default:video_not_verified_comment_list.html.twig";
             $templateContent = $this->twig->loadTemplate($templateFile);
             $result          = $templateContent->render(array(
                 "comments" => $comments,

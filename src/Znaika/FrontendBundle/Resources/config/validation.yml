@@ -16,25 +16,6 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
         author:
             - NotBlank: { message: "not_blank" }
 
-Znaika\FrontendBundle\Entity\Profile\User:
-    constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-            fields: [email]
-            message: 'not_unique_user_email'
-    properties:
-        email:
-            - NotBlank: { message: "not_blank" }
-            - Email:
-                  checkMX: true
-        password:
-            - NotBlank: { message: "not_blank" }
-        photo:
-            - File:
-                maxSize:          10M
-                mimeTypes:        [image/gif, image/jpeg, image/png]
-                mimeTypesMessage: "invalid_user_photo_format"
-            - Znaika\FrontendBundle\Validator\Constraints\UserPhoto: ~
-
 Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment:
     properties:
         file:
@@ -50,11 +31,6 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz:
                 maxSize:          100M
                 mimeTypes:        [application/zip, application/x-zip, application/octet-stream, application/x-zip-compressed]
                 mimeTypesMessage: "invalid_quiz_file_format"
-
-Znaika\FrontendBundle\Entity\Profile\PasswordRecovery:
-    properties:
-        user:
-            - NotNull: { message: "not_null" }
 
 Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis:
     properties:

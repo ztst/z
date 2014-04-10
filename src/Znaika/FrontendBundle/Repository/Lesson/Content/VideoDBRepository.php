@@ -4,11 +4,11 @@
     use Doctrine\ORM\EntityRepository;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Helper\SphinxClient;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentStatus;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
-    use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
+    use Znaika\ProfileBundle\Helper\Util\UserRole;
 
     class VideoDBRepository extends EntityRepository implements IVideoRepository
     {

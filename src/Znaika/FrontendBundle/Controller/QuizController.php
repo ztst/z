@@ -8,7 +8,7 @@
     use Symfony\Component\HttpFoundation\Request;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Stat\QuizAttempt;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Form\Lesson\Content\Attachment\QuizType;
     use Znaika\FrontendBundle\Helper\Uploader\QuizUploader;
     use Znaika\FrontendBundle\Repository\Lesson\Content\Attachment\QuizRepository;
@@ -66,7 +66,7 @@
                 $video->setQuiz($quiz);
 
                 /** @var QuizUploader $uploader */
-                $uploader = $this->get('znaika_frontend.quiz_uploader');
+                $uploader = $this->get('znaika.quiz_uploader');
                 $uploader->upload($quiz);
 
                 $this->getQuizRepository()->save($quiz);
@@ -89,7 +89,7 @@
          */
         private function getQuizRepository()
         {
-            return $this->get("znaika_frontend.quiz_repository");
+            return $this->get("znaika.quiz_repository");
         }
 
         /**
@@ -126,7 +126,7 @@
          */
         private function getQuizAttemptRepository()
         {
-            return $this->get("znaika_frontend.quiz_attempt_repository");
+            return $this->get("znaika.quiz_attempt_repository");
         }
 
         /**
@@ -134,6 +134,6 @@
          */
         private function getVideoRepository()
         {
-            return $this->get("znaika_frontend.video_repository");
+            return $this->get("znaika.video_repository");
         }
     }

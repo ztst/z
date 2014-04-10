@@ -5,7 +5,7 @@
     use FOS\MessageBundle\Model\ReadableInterface;
     use FOS\MessageBundle\Model\ThreadInterface;
     use FOS\MessageBundle\ModelManager\Builder;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Repository\BaseRepository;
 
     class ThreadRepository extends BaseRepository implements IThreadRepository

@@ -9,7 +9,7 @@
     use Doctrine\ORM\Query\Builder;
     use Znaika\FrontendBundle\Entity\Communication\Thread;
     use Znaika\FrontendBundle\Entity\Communication\ThreadMetadata;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
 
     class ThreadDBRepository extends EntityRepository implements IThreadRepository
     {

@@ -4,7 +4,7 @@
     use FOS\MessageBundle\Model\MessageInterface;
     use FOS\MessageBundle\Model\ParticipantInterface;
     use FOS\MessageBundle\Model\ReadableInterface;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
 
     class MessageRedisRepository implements IMessageRepository
     {

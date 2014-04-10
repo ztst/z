@@ -12,7 +12,7 @@ Znaika\FrontendBundle\Entity\Communication\ThreadMetadata:
                 referencedColumnName: thread_id
                 onDelete: CASCADE
         participant:
-            targetEntity: Znaika\FrontendBundle\Entity\Profile\User
+            targetEntity: Znaika\ProfileBundle\Entity\User
             joinColumn:
                 name: participant_id
                 referencedColumnName: user_id

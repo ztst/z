@@ -1,0 +1,44 @@
+<div class="popup login-popup-content">
+  <div id="loginFormContainer" class="{% if showRegisterForm %}hidden{% endif %}">
+    <div class="form-container">
+      <div class="login-popup-left-column">
+        <div class="login-popup-header">
+          <h3>Вход</h3>
+          <a href="javascript:void(0);" class="right-link" title="" id="switchRegistrationLink">Регистрация</a>
+          <div class="clear"></div>
+        </div>
+        {% include "ZnaikaProfileBundle:Default:login_form.html.twig" with {'last_username': last_username, 'error': error, 'referrer': referrer} %}
+      </div>
+    </div>
+    <div class="social-login-buttons-container">
+      {% include 'ZnaikaProfileBundle:Default:login_popup_social_buttons.html.twig' %}
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div id="registrationFormContainer" class="{% if not showRegisterForm %}hidden{% endif %}">
+    <div class="form-container">
+      <div class="login-popup-left-column">
+        <div class="login-popup-header">
+          <h3>Регистрация</h3>
+          <a href="javascript:void(0);" class="right-link" title="" id="switchLoginLink">Вход</a>
+          <div class="clear"></div>
+        </div>
+        {% include 'ZnaikaProfileBundle:Default:register_form.html.twig' with {'form': registerForm} %}
+      </div>
+    </div>
+    <div class="social-login-buttons-container">
+      {% include 'ZnaikaProfileBundle:Default:login_popup_social_buttons.html.twig' %}
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div id="forgetPasswordFormContainer" class="hidden">
+    <div class="additional-form-container">
+      <div class="additional-form-header recover-password-request-header">
+        <h3>Восстановление пароля</h3>
+      </div>
+      <div class="additional-form-header-horizontal-bar"></div>
+      <h5>Укажите Вашу почту - мы вышлем Вам письмо со ссылкой для создания нового пароля</h5>
+      {% include "ZnaikaProfileBundle:Default:forget_password_form.html.twig" with {'form': passwordRecoveryForm} %}
+    </div>
+  </div>
+</div>

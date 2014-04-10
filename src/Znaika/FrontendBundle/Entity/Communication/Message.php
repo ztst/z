@@ -23,7 +23,7 @@
         protected $thread;
 
         /**
-         * @var \Znaika\FrontendBundle\Entity\Profile\User
+         * @var \Znaika\ProfileBundle\Entity\User
          */
         protected $sender;
 

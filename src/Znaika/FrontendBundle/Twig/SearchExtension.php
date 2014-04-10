@@ -80,7 +80,7 @@
 
             $subject      = $request->get("s", "");
             /** @var SubjectRepository $subjectRepository */
-            $subjectRepository = $this->container->get("znaika_frontend.subject_repository");
+            $subjectRepository = $this->container->get("znaika.subject_repository");
             $currentSubject = $subjectRepository->getOneByUrlName($subject);
 
             $templateFile    = "ZnaikaFrontendBundle:Search:subject_filter.html.twig";

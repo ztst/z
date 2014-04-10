@@ -55,7 +55,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             cascade:      [persist]
     manyToMany:
         supervisors:
-            targetEntity: Znaika\FrontendBundle\Entity\Profile\User
+            targetEntity: Znaika\ProfileBundle\Entity\User
             inversedBy: supervisedVideos
             joinTable:
                 name: video_supervisor

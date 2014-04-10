@@ -1,0 +1,132 @@
+register:
+    pattern: /register
+    defaults: { _controller: ZnaikaProfileBundle:Auth:register }
+    options:
+        expose: true
+
+password_recovery:
+    pattern: /forget-password
+    defaults: { _controller: ZnaikaProfileBundle:Auth:passwordRecovery }
+
+generate_password:
+    pattern: /generate-new-password/{recoveryKey}
+    defaults: { _controller: ZnaikaProfileBundle:Auth:generateNewPassword }
+
+register_confirm:
+    pattern: /register-confirm/{registerKey}
+    defaults: { _controller: ZnaikaProfileBundle:Auth:registerConfirm }
+
+login:
+    path: /login
+    defaults: { _controller: ZnaikaProfileBundle:Auth:login }
+    options:
+        expose: true
+
+login_check:
+    path: /login-check
+
+logout:
+    path: /logout
+
+vk_login:
+    path: /vk-auth
+    defaults: { _controller: ZnaikaProfileBundle:Auth:vkLogin }
+
+facebook_login:
+    path: /facebook-auth
+    defaults: { _controller: ZnaikaProfileBundle:Auth:facebookLogin }
+
+odnoklassniki_login:
+    path: /odnoklassniki-auth
+    defaults: { _controller: ZnaikaProfileBundle:Auth:odnoklassnikiLogin }
+
+show_user_profile:
+    pattern: /user/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:showUserProfile }
+
+edit_user_profile:
+    pattern: /edit-user-profile/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:editUserProfile }
+
+edit_teacher_profile:
+    pattern: /teacher/edit-profile/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:editTeacherProfile }
+
+teacher_questions:
+    pattern: /teacher/questions/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:teacherQuestions }
+
+not_verified_comments:
+    pattern: /moderator/not_verified_comments/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:notVerifiedComments }
+
+approve_comments:
+    pattern: /moderator/approve-comments
+    defaults: { _controller: ZnaikaProfileBundle:Default:approveComments }
+    methods:  [POST]
+    options:
+        expose: true
+
+delete_comments:
+    pattern: /moderator/delete-comments
+    defaults: { _controller: ZnaikaProfileBundle:Default:deleteComments }
+    methods:  [POST]
+    options:
+        expose: true
+
+not_verified_pupils:
+    pattern: /moderator/not_verified_pupils/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:notVerifiedPupils, userId: null }
+
+approve_users:
+    pattern: /moderator/approve-users
+    defaults: { _controller: ZnaikaProfileBundle:Default:approveUsers }
+    methods:  [POST]
+    options:
+        expose: true
+
+delete_users:
+    pattern: /moderator/delete-users
+    defaults: { _controller: ZnaikaProfileBundle:Default:deleteUsers }
+    methods:  [POST]
+    options:
+        expose: true
+
+get_user_profile_ajax:
+    pattern: /moderator/get-user-profile/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:getUserProfileAjax }
+    methods:  [POST]
+    options:
+        expose: true
+
+user_has_viewed_badges:
+    pattern: /user-has-viewed-badges
+    defaults: { _controller: ZnaikaProfileBundle:Default:hasViewedBadges }
+    methods:  [POST]
+    options:
+        expose: true
+
+edit_user_photo:
+    pattern: /edit-user-photo/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:editUserPhoto }
+
+delete_user_photo:
+    pattern: /delete-user-photo/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:deleteUserPhoto }
+    methods:  [POST]
+    options:
+        expose: true
+
+change_password:
+    pattern: /change-password/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:changePassword }
+    methods:  [POST]
+
+change_email:
+    pattern: /change-email/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:changeEmail }
+    methods:  [POST]
+
+complete_change_email:
+    pattern: /complete-change-email/{key}
+    defaults: { _controller: ZnaikaProfileBundle:Default:completeChangeEmail }

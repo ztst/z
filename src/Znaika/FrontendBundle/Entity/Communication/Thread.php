@@ -5,7 +5,7 @@
 
     use Doctrine\ORM\Mapping as ORM;
     use FOS\MessageBundle\Entity\Thread as BaseThread;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
 
     class Thread extends BaseThread
     {
@@ -25,7 +25,7 @@
         protected $metadata;
 
         /**
-         * @var \Znaika\FrontendBundle\Entity\Profile\User
+         * @var \Znaika\ProfileBundle\Entity\User
          */
         protected $createdBy;
 

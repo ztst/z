@@ -1,0 +1,12 @@
+Znaika\ProfileBundle\Entity\Action\PostVideoToSocialNetworkOperation:
+    type: entity
+    fields:
+        socialNetwork: { column: social_network, type: smallint, nullable: true }
+    manyToOne:
+        video:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
+            inversedBy: postVideoToSocialNetworkOperations
+            joinColumn:
+                name: video_id
+                referencedColumnName: video_id
+                onDelete: "SET NULL"

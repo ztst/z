@@ -32,7 +32,7 @@
         private $video;
 
         /**
-         * @var \Znaika\FrontendBundle\Entity\Profile\User
+         * @var \Znaika\ProfileBundle\Entity\User
          */
         private $user;
 
@@ -148,11 +148,11 @@
         /**
          * Set user
          *
-         * @param \Znaika\FrontendBundle\Entity\Profile\User $user
+         * @param \Znaika\ProfileBundle\Entity\User $user
          *
          * @return VideoComment
          */
-        public function setUser(\Znaika\FrontendBundle\Entity\Profile\User $user = null)
+        public function setUser(\Znaika\ProfileBundle\Entity\User $user = null)
         {
             $this->user = $user;
 
@@ -162,7 +162,7 @@
         /**
          * Get user
          *
-         * @return \Znaika\FrontendBundle\Entity\Profile\User
+         * @return \Znaika\ProfileBundle\Entity\User
          */
         public function getUser()
         {

@@ -22,7 +22,7 @@
 {% elseif user_can_write_comment() %}
   {% include "ZnaikaFrontendBundle:Video:add_video_comment_form.html.twig" with {'form': addVideoCommentForm, "video": video} %}
 {% elseif is_banned_user() %}
-  <span>{% include "ZnaikaFrontendBundle:User:Ban\\ban_comment_message.html.twig" with {'user': app.user} %}</span>
+  <span>{% include "ZnaikaProfileBundle:Default:Ban\\ban_comment_message.html.twig" with {'user': app.user} %}</span>
 {% else %}
   <div class="cant-leave-comment">
     Оставлять комментарии  и  задавать вопросы учителю могут только зарегистрированные и авторизованные пользователи

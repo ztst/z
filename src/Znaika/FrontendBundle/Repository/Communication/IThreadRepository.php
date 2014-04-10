@@ -3,7 +3,7 @@
 
     use FOS\MessageBundle\Model\ThreadInterface;
     use FOS\MessageBundle\ModelManager\ThreadManagerInterface;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
 
     interface IThreadRepository extends ThreadManagerInterface
     {

@@ -3,9 +3,9 @@
     namespace Znaika\FrontendBundle\Twig;
 
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
-    use Znaika\FrontendBundle\Repository\Profile\Action\UserOperationRepository;
-    use Znaika\FrontendBundle\Repository\Profile\Badge\UserBadgeRepository;
-    use Znaika\FrontendBundle\Repository\Profile\UserRepository;
+    use Znaika\ProfileBundle\Repository\Action\UserOperationRepository;
+    use Znaika\ProfileBundle\Repository\Badge\UserBadgeRepository;
+    use Znaika\ProfileBundle\Repository\UserRepository;
 
     class IndexPageExtension extends \Twig_Extension
     {

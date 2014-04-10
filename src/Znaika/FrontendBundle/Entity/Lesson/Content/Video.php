@@ -7,7 +7,7 @@
     use Doctrine\ORM\Mapping as ORM;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
 
     class Video
     {

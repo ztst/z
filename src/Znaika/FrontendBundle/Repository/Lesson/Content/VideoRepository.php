@@ -2,7 +2,7 @@
     namespace Znaika\FrontendBundle\Repository\Lesson\Content;
 
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Repository\BaseRepository;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
 

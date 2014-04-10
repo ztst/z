@@ -1,0 +1,35 @@
+Znaika\ProfileBundle\Entity\Action\BaseUserOperation:
+    type: entity
+    table: user_operation
+    repositoryClass: Znaika\ProfileBundle\Repository\Action\UserOperationDBRepository
+    fields:
+        userOperationId: { column: user_operation_id, type: integer, id: true, generator: { strategy: AUTO } }
+        createdTime: { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
+    manyToOne:
+        user:
+            targetEntity: Znaika\ProfileBundle\Entity\User
+            inversedBy: userOperations
+            joinColumn:
+                name: user_id
+                referencedColumnName: user_id
+                onDelete: "SET NULL"
+
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        fieldName: operationType
+        name: operation_type
+        type: smallint
+    discriminatorMap:
+        0: Znaika\ProfileBundle\Entity\Action\BaseUserOperation
+        2: Znaika\ProfileBundle\Entity\Action\ViewVideoOperation
+        3: Znaika\ProfileBundle\Entity\Action\PostVideoToSocialNetworkOperation
+        4: Znaika\ProfileBundle\Entity\Action\AddPhoneNumberInProfileOperation
+        5: Znaika\ProfileBundle\Entity\Action\AddBirthdayInProfileOperation
+        7: Znaika\ProfileBundle\Entity\Action\JoinSocialNetworkCommunityOperation
+        8: Znaika\ProfileBundle\Entity\Action\RegistrationReferralOperation
+        9: Znaika\ProfileBundle\Entity\Action\RegistrationOperation
+        11: Znaika\ProfileBundle\Entity\Action\AddVideoCommentOperation
+        12: Znaika\ProfileBundle\Entity\Action\RateVideoOperation
+        13: Znaika\ProfileBundle\Entity\Action\AddSexInProfileOperation
+
+    lifecycleCallbacks: {  }

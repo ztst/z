@@ -13,7 +13,7 @@
     use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Form\Lesson\Content\Attachment\VideoAttachmentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\SynopsisType;
     use Znaika\FrontendBundle\Form\Lesson\Content\VideoCommentType;
@@ -21,11 +21,11 @@
     use Znaika\FrontendBundle\Helper\Content\VideoInfoUpdater;
     use Znaika\FrontendBundle\Helper\Uploader\SynopsisUploader;
     use Znaika\FrontendBundle\Helper\Uploader\VideoAttachmentUploader;
-    use Znaika\FrontendBundle\Helper\UserOperation\UserOperationListener;
+    use Znaika\ProfileBundle\Helper\UserOperation\UserOperationListener;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
-    use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
+    use Znaika\ProfileBundle\Helper\Util\UserRole;
     use Znaika\FrontendBundle\Helper\Util\SocialNetworkUtil;
     use Znaika\FrontendBundle\Repository\Lesson\Category\ChapterRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository;
@@ -33,7 +33,7 @@
     use Znaika\FrontendBundle\Repository\Lesson\Content\Stat\QuizAttemptRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
-    use Znaika\FrontendBundle\Repository\Profile\UserRepository;
+    use Znaika\ProfileBundle\Repository\UserRepository;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
 
     class VideoController extends ZnaikaController
@@ -80,7 +80,7 @@
             $attachment = $repository->getOneByVideoAttachmentId($attachmentId);
 
             /** @var VideoAttachmentUploader $uploader */
-            $uploader = $this->get('znaika_frontend.video_attachment_uploader');
+            $uploader = $this->get('znaika.video_attachment_uploader');
             $file     = $uploader->getAbsoluteFilePath($attachment);
 
             $response = new BinaryFileResponse($file);
@@ -96,7 +96,7 @@
          */
         private function getVideoAttachmentRepository()
         {
-            return $this->get('znaika_frontend.video_attachment_repository');
+            return $this->get('znaika.video_attachment_repository');
         }
 
         public function addVideoAttachmentFormAction(Request $request)
@@ -114,7 +114,7 @@
                 $video->addVideoAttachment($videoAttachment);
 
                 /** @var VideoAttachmentUploader $uploader */
-                $uploader = $this->get('znaika_frontend.video_attachment_uploader');
+                $uploader = $this->get('znaika.video_attachment_uploader');
                 $uploader->upload($videoAttachment);
 
                 $repository->save($video);
@@ -147,10 +147,10 @@
                 $video->setSynopsis($synopsis);
 
                 /** @var SynopsisUploader $uploader */
-                $uploader = $this->get('znaika_frontend.synopsis_uploader');
+                $uploader = $this->get('znaika.synopsis_uploader');
                 $uploader->upload($synopsis);
 
-                $synopsisRepository = $this->get('znaika_frontend.synopsis_repository');
+                $synopsisRepository = $this->get('znaika.synopsis_repository');
                 $synopsisRepository->save($synopsis);
 
                 return new RedirectResponse($this->generateUrl('show_video', array(
@@ -443,7 +443,7 @@
          */
         protected function getUserOperationListener()
         {
-            return $this->get('znaika_frontend.user_operation_listener');
+            return $this->get('znaika.user_operation_listener');
         }
 
         /**
@@ -468,7 +468,7 @@
          */
         private function getVideoRepository()
         {
-            return $this->get("znaika_frontend.video_repository");
+            return $this->get("znaika.video_repository");
         }
 
         /**
@@ -476,7 +476,7 @@
          */
         private function getVideoInfoUpdater()
         {
-            return $this->get("znaika_frontend.video_info_updater");
+            return $this->get("znaika.video_info_updater");
         }
 
         /**
@@ -484,7 +484,7 @@
          */
         private function getSubjectRepository()
         {
-            return $this->get("znaika_frontend.subject_repository");
+            return $this->get("znaika.subject_repository");
         }
 
         /**
@@ -492,7 +492,7 @@
          */
         private function getChapterRepository()
         {
-            return $this->get("znaika_frontend.chapter_repository");
+            return $this->get("znaika.chapter_repository");
         }
 
         /**
@@ -500,7 +500,7 @@
          */
         private function getVideoCommentRepository()
         {
-            return $this->get('znaika_frontend.video_comment_repository');
+            return $this->get('znaika.video_comment_repository');
         }
 
         /**
@@ -508,7 +508,7 @@
          */
         private function getUserRepository()
         {
-            return $this->get('znaika_frontend.user_repository');
+            return $this->get('znaika.user_repository');
         }
 
         /**
@@ -554,7 +554,7 @@
         /**
          * @param $video
          *
-         * @return null|\Znaika\FrontendBundle\Entity\Profile\Action\ViewVideoOperation
+         * @return null|\Znaika\ProfileBundle\Entity\Action\ViewVideoOperation
          */
         private function saveViewVideoOperation($video)
         {
@@ -581,7 +581,7 @@
          */
         private function getQuizAttemptRepository()
         {
-            return $this->get("znaika_frontend.quiz_attempt_repository");
+            return $this->get("znaika.quiz_attempt_repository");
         }
 
         /**

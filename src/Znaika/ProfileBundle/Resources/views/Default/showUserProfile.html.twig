@@ -1,0 +1,23 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter="?yui_css"
+    '@ZnaikaProfileBundle/Resources/public/css/profile_page.css'
+  %}
+  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+  <div class="show-user-profile-container">
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+      <div class="alert alert-info">
+        {{ flashMessage }}
+      </div>
+    {% endfor %}
+
+    {% include "ZnaikaProfileBundle:Default:show_user_profile_block.html.twig" with {'user': user} %}
+  </div>
+{% endblock %}
