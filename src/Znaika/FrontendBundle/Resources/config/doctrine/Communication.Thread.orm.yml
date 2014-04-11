@@ -7,7 +7,7 @@ Znaika\FrontendBundle\Entity\Communication\Thread:
     manyToOne:
         createdBy:
             column: created_by
-            targetEntity: Znaika\FrontendBundle\Entity\Profile\User
+            targetEntity: Znaika\ProfileBundle\Entity\User
             joinColumn:
                 name: created_by
                 referencedColumnName: user_id

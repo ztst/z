@@ -12,7 +12,7 @@
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoUtil;
     use Znaika\FrontendBundle\Helper\Util\TransliterateUtil;
-    use Znaika\FrontendBundle\Repository\Profile\UserRepository;
+    use Znaika\ProfileBundle\Repository\UserRepository;
 
     class VideoType extends AbstractType
     {

@@ -5,7 +5,7 @@
     use FOS\MessageBundle\Model\ParticipantInterface;
     use FOS\MessageBundle\Model\ReadableInterface;
     use FOS\MessageBundle\Model\ThreadInterface;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Repository\BaseRepository;
 
     class MessageRepository extends BaseRepository implements IMessageRepository

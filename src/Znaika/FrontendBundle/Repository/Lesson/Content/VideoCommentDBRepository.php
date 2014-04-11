@@ -4,10 +4,10 @@
     use Doctrine\ORM\EntityRepository;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentStatus;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
-    use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
+    use Znaika\ProfileBundle\Helper\Util\UserRole;
 
     class VideoCommentDBRepository extends EntityRepository implements IVideoCommentRepository
     {

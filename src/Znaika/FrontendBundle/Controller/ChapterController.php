@@ -63,7 +63,7 @@
          */
         private function getChapterRepository()
         {
-            return $this->get("znaika_frontend.chapter_repository");
+            return $this->get("znaika.chapter_repository");
         }
 
         /**
@@ -71,6 +71,6 @@
          */
         private function getSubjectRepository()
         {
-            return $this->get("znaika_frontend.subject_repository");
+            return $this->get("znaika.subject_repository");
         }
     }

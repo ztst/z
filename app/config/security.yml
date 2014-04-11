@@ -1,6 +1,6 @@
 security:
     encoders:
-        Znaika\FrontendBundle\Entity\Profile\User:
+        Znaika\ProfileBundle\Entity\User:
             algorithm: sha1
             iterations: 9
             encode_as_base64: true
@@ -12,7 +12,7 @@ security:
 
     providers:
         main:
-            entity: { class: Znaika\FrontendBundle\Entity\Profile\User, property: email }
+            entity: { class: Znaika\ProfileBundle\Entity\User, property: email }
 
     firewalls:
         dev:
@@ -33,8 +33,8 @@ security:
             form_login:
                 login_path:      login
                 check_path:      login_check
-                success_handler: znaika_frontend.security.authentication_handler
-                failure_handler: znaika_frontend.security.authentication_handler
+                success_handler: znaika.security.authentication_handler
+                failure_handler: znaika.security.authentication_handler
             logout:
                 path:   /logout
                 target: /

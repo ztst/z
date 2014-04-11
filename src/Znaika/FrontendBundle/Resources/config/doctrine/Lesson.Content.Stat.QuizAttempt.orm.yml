@@ -14,7 +14,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Stat\QuizAttempt:
                 referencedColumnName: quiz_id
                 onDelete: CASCADE
         user:
-            targetEntity: Znaika\FrontendBundle\Entity\Profile\User
+            targetEntity: Znaika\ProfileBundle\Entity\User
             joinColumn:
                 name: user_id
                 referencedColumnName: user_id

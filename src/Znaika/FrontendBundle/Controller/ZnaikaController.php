@@ -6,9 +6,9 @@
     use Symfony\Component\Security\Core\SecurityContextInterface;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\RedirectResponse;
-    use Znaika\FrontendBundle\Helper\Util\Profile\UserBan;
-    use Znaika\FrontendBundle\Helper\Util\Profile\UserStatus;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Helper\Util\UserBan;
+    use Znaika\ProfileBundle\Helper\Util\UserStatus;
+    use Znaika\ProfileBundle\Entity\User;
 
     /**
      * @author Matt Drollette <matt@drollette.com>
@@ -64,7 +64,7 @@
             {
                 $this->user->setStatus(UserStatus::ACTIVE);
 
-                $this->context->get("znaika_frontend.user_repository")->save($this->user);
+                $this->context->get("znaika.user_repository")->save($this->user);
             }
         }
     }

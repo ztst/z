@@ -4,10 +4,11 @@
     use Doctrine\ORM\EntityRepository;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
+    use Znaika\FrontendBundle\Helper\SphinxClient;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentStatus;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
-    use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
+    use Znaika\ProfileBundle\Helper\Util\UserRole;
 
     class VideoDBRepository extends EntityRepository implements IVideoRepository
     {
@@ -67,31 +68,21 @@
             return $queryBuilder->getQuery()->getResult();
         }
 
-        public function getVideosBySearchString($searchString, $subjectName, $grade, $limit = null, $page = null)
+        public function getByVideoIds($videoIds)
         {
-            $queryBuilder = $this->prepareSearchQuery($searchString, $subjectName, $grade);
-            $queryBuilder->select('v');
-
-            if (!is_null($limit))
+            if (empty($videoIds))
             {
-                $queryBuilder->setMaxResults($limit);
-                if (!is_null($page))
-                {
-                    $queryBuilder->setFirstResult($limit * $page);
-                }
+                return array();
             }
 
-            $videos = $queryBuilder->getQuery()->getResult();
+            $queryBuilder = $this->getEntityManager()->createQueryBuilder();
 
-            return $videos;
-        }
+            $queryBuilder->select("v, FIELD(v.videoId, " . implode(", ", $videoIds) . ") as HIDDEN field")
+               ->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
+               ->where($queryBuilder->expr()->in('v.videoId', $videoIds))
+               ->orderBy("field");
 
-        public function countVideosBySearchString($searchString, $subjectName, $grade)
-        {
-            $queryBuilder = $this->prepareSearchQuery($searchString, $subjectName, $grade);
-            $queryBuilder->select('count(v)');
-
-            return intval($queryBuilder->getQuery()->getSingleScalarResult());
+            return $queryBuilder->getQuery()->getResult();
         }
 
         /**
@@ -269,29 +260,6 @@
                          ->setParameter('order_priority', $video->getOrderPriority() - 1);
 
             return $queryBuilder->getQuery()->getOneOrNullResult();
-        }
-
-        /**
-         * @param $searchString
-         * @param $subjectName
-         * @param $grade
-         *
-         * @return \Doctrine\ORM\QueryBuilder
-         */
-        private function prepareSearchQuery($searchString, $subjectName, $grade)
-        {
-            $searchString = "%{$searchString}%";
-
-            $queryBuilder = $this->getEntityManager()
-                                 ->createQueryBuilder();
-            $queryBuilder->from('ZnaikaFrontendBundle:Lesson\Content\Video', 'v')
-                         ->where($queryBuilder->expr()->like('v.name', $queryBuilder->expr()->literal($searchString)))
-                         ->addOrderBy('v.grade, v.chapter', 'ASC');
-
-            $this->prepareSubjectNameFilter($subjectName, $queryBuilder);
-            $this->prepareClassNumberFilter($grade, $queryBuilder);
-
-            return $queryBuilder;
         }
 
         /**

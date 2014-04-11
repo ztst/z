@@ -7,7 +7,7 @@
     use FOS\MessageBundle\Model\ReadableInterface;
     use Znaika\FrontendBundle\Entity\Communication\Message;
     use Znaika\FrontendBundle\Entity\Communication\MessageMetadata;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
 
     class MessageDBRepository extends EntityRepository implements IMessageRepository
     {

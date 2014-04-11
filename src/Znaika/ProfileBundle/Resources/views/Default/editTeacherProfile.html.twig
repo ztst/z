@@ -1,0 +1,76 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter="?yui_css"
+    '@ZnaikaProfileBundle/Resources/public/css/user_profile.css'
+    '@ZnaikaProfileBundle/Resources/public/css/teacher_profile.css'
+    '@ZnaikaProfileBundle/Resources/public/css/profile_page.css'
+  %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts filter='?yui_js'
+    '../app/Resources/public/js/classes/form/profile/EditProfileForm.class.js'
+    '../app/Resources/public/js/classes/form/profile/UserPhotoForm.class.js'
+    '../app/Resources/public/js/classes/form/profile/ChangePasswordForm.class.js'
+    '../app/Resources/public/js/classes/form/profile/ChangeEmailForm.class.js'
+    '../app/Resources/public/js/classes/page/profile/ProfilePage.class.js'
+    '../app/Resources/public/js/classes/page/profile/TeacherProfilePage.class.js'
+  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+  <div class="teacher-profile-top-horizontal-line"></div>
+  {% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="alert alert-info">
+      {{ flashMessage }}
+    </div>
+  {% endfor %}
+  <div class="profile-sidebar-menu-container">
+    {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
+  </div>
+  <div class="teacher-profile-container">
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+      <div class="alert alert-info">
+        {{ flashMessage }}
+      </div>
+    {% endfor %}
+    <div class="user-profile-column-container">
+      <h3>Личная информация</h3>
+      {% include "ZnaikaProfileBundle:Default:teacher_profile_form.html.twig" with {'form': profileForm} %}
+      <div class="settings-column-container">
+        <h3>Настройки аккаунта</h3>
+        <div class="change-email-controller">
+          <span class="setting-label">Email</span>
+          <span class="current-setting-value">{{ user.email }}</span>
+          <a href="javascript:void(0);" class="edit-account-setting-button" id="editUserEmailLink" title="Изменить email">&nbsp;</a>
+        </div>
+        <div class="change-email-form-container hidden">
+          {% include "ZnaikaProfileBundle:Default:change_email_form.html.twig" with {'form': changeUserEmailFrom} %}
+        </div>
+        <div class="change-password-controller">
+          <span class="setting-label">Пароль</span>
+          <span class="current-setting-value">********</span>
+          <a href="javascript:void(0);" class="edit-account-setting-button" id="editUserPasswordLink" title="Изменить пароль">&nbsp;</a>
+        </div>
+        <div class="change-password-form-container hidden">
+          {% include "ZnaikaProfileBundle:Default:change_password_form.html.twig" with {'form': changePasswordForm} %}
+        </div>
+      </div>
+    </div>
+    <div class="photo-column-container teacher-photo-form">
+      {% include "ZnaikaProfileBundle:Default:user_photo_form.html.twig" with {'form': userPhotoForm} %}
+    </div>
+  </div>
+  <div class="teacher-profile-bottom-horizontal-placeholder">
+    <div class="line"></div>
+  </div>
+{% endblock %}

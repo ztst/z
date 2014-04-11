@@ -1,7 +1,7 @@
 <?
     namespace Znaika\FrontendBundle\Helper\Util;
 
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
 
     class SocialNetworkUtil
     {

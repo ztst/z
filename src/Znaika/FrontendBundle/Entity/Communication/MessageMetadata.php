@@ -23,7 +23,7 @@
         protected $message;
 
         /**
-         * @var \Znaika\FrontendBundle\Entity\Profile\User
+         * @var \Znaika\ProfileBundle\Entity\User
          */
         protected $participant;
 

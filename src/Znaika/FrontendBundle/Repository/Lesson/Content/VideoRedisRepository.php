@@ -3,7 +3,7 @@
 
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
 
     class VideoRedisRepository implements IVideoRepository
     {
@@ -12,12 +12,7 @@
             return null;
         }
 
-        public function getVideosBySearchString($searchString, $subjectName, $grade, $limit = null, $page = null)
-        {
-            return null;
-        }
-
-        public function countVideosBySearchString($searchString, $subjectName, $grade)
+        public function getByVideoIds($videoIds)
         {
             return null;
         }

@@ -3,7 +3,7 @@
 
     use Znaika\FrontendBundle\Entity\Lesson\Category\Chapter;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
 
     interface IVideoRepository
     {
@@ -15,25 +15,7 @@
          */
         public function getVideosForCatalog($classNumber = null, $subjectName = null);
 
-        /**
-         * @param string $searchString
-         * @param $subjectName
-         * @param $grade
-         * @param $limit
-         * @param $page
-         *
-         * @return Video[]
-         */
-        public function getVideosBySearchString($searchString, $subjectName, $grade, $limit = null, $page = null);
-
-        /**
-         * @param string $searchString
-         * @param $subjectName
-         * @param $grade
-         *
-         * @return int
-         */
-        public function countVideosBySearchString($searchString, $subjectName, $grade);
+        public function getByVideoIds($videoIds);
 
         /**
          * @param $name

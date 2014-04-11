@@ -1,0 +1,9 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block content %}
+  <div>
+    {% include "ZnaikaProfileBundle:Default:login_form.html.twig" with {'last_username': last_username, 'error': error, 'referrer': referrer} %}
+    <br />
+    <a href="{{ path("register") }}">Регистрация</a>
+  </div>
+{% endblock %}

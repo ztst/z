@@ -1,0 +1,38 @@
+Znaika\ProfileBundle\Entity\User:
+    type: entity
+    table: user
+    repositoryClass: Znaika\ProfileBundle\Repository\UserDBRepository
+    fields:
+        userId:          { column: user_id, type: integer, id: true, generator: { strategy: AUTO } }
+        nickname:        { type: string, length: 255, nullable: true }
+        firstName:       { column: first_name, type: string, length: 255, nullable: true }
+        lastName:        { column: last_name, type: string, length: 255, nullable: true }
+        middleName:      { column: middle_name, type: string, length: 255, nullable: true }
+        email:           { type: string, length: 255, unique: true, notnull: true }
+        password:        { type: string, length: 255, notnull: true }
+        createdTime:     { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
+        status:          { type: smallint, notnull: true }
+        sex:             { type: smallint, notnull: true }
+        points:          { type: integer, notnull: true }
+        birthDate:       { column: birth_date, type: date, nullable: true }
+        role:            { type: smallint, notnull: true }
+        grade:           { type: smallint, nullable: true }
+        region:          { type: string, length: 150, nullable: true }
+        city:            { type: string, length: 150, nullable: true }
+        vkId:            { column: vk_id, type: bigint, nullable: true }
+        facebookId:      { column: facebook_id, type: bigint, nullable: true }
+        odnoklassnikiId: { column: odnoklassniki_id, type: bigint, nullable: true }
+        banReason:       { column: ban_reason, type: smallint, notnull: true }
+        updatedTime:     { column: updated_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
+        photoFileName:   { column: photo_file_name, type: string, length: 150, nullable: true }
+    oneToMany:
+        videoComments:      { targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment, mappedBy: user }
+        banInfos:           { targetEntity: Znaika\ProfileBundle\Entity\Ban\Info, mappedBy: user }
+        userRegistrations:  { targetEntity: Znaika\ProfileBundle\Entity\UserRegistration, mappedBy: user }
+        passwordRecoveries: { targetEntity: Znaika\ProfileBundle\Entity\PasswordRecovery, mappedBy: user }
+        changeUserEmails:   { targetEntity: Znaika\ProfileBundle\Entity\ChangeUserEmail, mappedBy: user }
+    manyToMany:
+        supervisedVideos:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
+            mappedBy: supervisors
+    lifecycleCallbacks: {  }

@@ -3,7 +3,7 @@
 
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
 
     class VideoCommentRedisRepository implements IVideoCommentRepository
     {

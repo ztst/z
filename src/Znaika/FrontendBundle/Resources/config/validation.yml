@@ -6,62 +6,43 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
     properties:
         name:
             - NotBlank: { message: "not_blank" }
+            - Length:
+                min: 3
+                max: 255
+                minMessage: "min_video_name"
+                maxMessage: "max_video_name"
         url:
             - NotBlank: { message: "not_blank" }
         author:
             - NotBlank: { message: "not_blank" }
 
-Znaika\FrontendBundle\Entity\Profile\User:
-    constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-            fields: [email]
-            message: 'not_unique_user_email'
-    properties:
-        email:
-            - NotBlank: { message: "not_blank" }
-            - Email:
-                  checkMX: true
-        password:
-            - NotBlank: { message: "not_blank" }
-        photo:
-            - File:
-                maxSize: 10M
-                mimeTypes: [image/gif, image/jpeg, image/png]
-                mimeTypesMessage: "invalid_user_photo_format"
-            - Znaika\FrontendBundle\Validator\Constraints\UserPhoto: ~
-
 Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment:
     properties:
         file:
             - File:
-                maxSize: 100M
-                mimeTypes: [application/pdf, application/x-pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword]
+                maxSize:          100M
+                mimeTypes:        [application/pdf, application/x-pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword]
                 mimeTypesMessage: "invalid_attachment_file_format"
 
 Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz:
     properties:
         file:
             - File:
-                maxSize: 100M
-                mimeTypes: [application/zip, application/x-zip, application/octet-stream, application/x-zip-compressed]
+                maxSize:          100M
+                mimeTypes:        [application/zip, application/x-zip, application/octet-stream, application/x-zip-compressed]
                 mimeTypesMessage: "invalid_quiz_file_format"
-
-Znaika\FrontendBundle\Entity\Profile\PasswordRecovery:
-    properties:
-        user:
-            - NotNull: { message: "not_null" }
 
 Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis:
     properties:
         msWordFile:
             - File:
-                maxSize: 100M
-                mimeTypes: [application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword]
+                maxSize:          100M
+                mimeTypes:        [application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword]
                 mimeTypesMessage: "invalid_ms_synopsis_file_format"
         htmlFile:
             - File:
-                maxSize: 100M
-                mimeTypes: [application/zip, application/x-zip, application/octet-stream, application/x-zip-compressed]
+                maxSize:          100M
+                mimeTypes:        [application/zip, application/x-zip, application/octet-stream, application/x-zip-compressed]
                 mimeTypesMessage: "invalid_zip_synopsis_file_format"
 
 Znaika\FrontendBundle\Entity\Communication\Support:

@@ -3,7 +3,7 @@
 
     use Doctrine\ORM\Mapping as ORM;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
 
     class QuizAttempt
     {
@@ -96,7 +96,7 @@
         }
 
         /**
-         * @param \Znaika\FrontendBundle\Entity\Profile\User $user
+         * @param \Znaika\ProfileBundle\Entity\User $user
          */
         public function setUser($user)
         {
@@ -104,7 +104,7 @@
         }
 
         /**
-         * @return \Znaika\FrontendBundle\Entity\Profile\User
+         * @return \Znaika\ProfileBundle\Entity\User
          */
         public function getUser()
         {

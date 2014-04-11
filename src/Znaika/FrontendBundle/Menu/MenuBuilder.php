@@ -7,13 +7,13 @@
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\Security\Core\SecurityContextInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Znaika\FrontendBundle\Helper\Util\Lesson\SubjectUtil;
-    use Znaika\FrontendBundle\Helper\Util\Profile\UserRole;
+    use Znaika\ProfileBundle\Helper\Util\UserRole;
     use Znaika\FrontendBundle\Repository\Lesson\Category\ISubjectRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
-    use Znaika\FrontendBundle\Repository\Profile\UserRepository;
+    use Znaika\ProfileBundle\Repository\UserRepository;
 
     class MenuBuilder
     {

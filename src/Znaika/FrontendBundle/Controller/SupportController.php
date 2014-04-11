@@ -2,13 +2,12 @@
 
     namespace Znaika\FrontendBundle\Controller;
 
-    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Znaika\FrontendBundle\Entity\Communication\Support;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Form\Communication\SupportType;
-    use Znaika\FrontendBundle\Helper\Mail\UserMailer;
+    use Znaika\ProfileBundle\Helper\Mail\UserMailer;
     use Znaika\FrontendBundle\Helper\Support\SupportStatus;
 
     class SupportController extends ZnaikaController
@@ -29,7 +28,7 @@
             {
                 $support->setStatus(SupportStatus::OPEN);
 
-                $supportRepository = $this->get('znaika_frontend.support_repository');
+                $supportRepository = $this->get('znaika.support_repository');
                 $supportRepository->save($support);
 
                 $this->sendEmailToSuppor($support);
@@ -65,7 +64,7 @@
         {
             $supportEmails = $this->container->getParameter('support_emails');
             /** @var UserMailer $userMailer */
-            $userMailer = $this->get("znaika_frontend.user_mailer");
+            $userMailer = $this->get("znaika..user_mailer");
             $userMailer->sendSupportEmail($support, $supportEmails);
         }
     }

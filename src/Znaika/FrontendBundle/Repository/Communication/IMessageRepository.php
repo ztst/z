@@ -3,7 +3,7 @@
 
 
     use FOS\MessageBundle\ModelManager\MessageManagerInterface;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
 
     interface IMessageRepository extends MessageManagerInterface
     {

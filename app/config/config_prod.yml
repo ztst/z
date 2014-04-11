@@ -46,4 +46,3 @@ parameters:
 
     support_emails: ["ilya.shikhaleev@cpslabs.net"]
     error_report_emails: ["ilya.shikhaleev@cpslabs.net"]
-    error_report_subject: Znaika.ru Live Error

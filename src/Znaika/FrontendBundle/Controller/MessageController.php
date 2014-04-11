@@ -4,16 +4,14 @@
 
     use FOS\MessageBundle\FormFactory\NewThreadMessageFormFactory;
     use FOS\MessageBundle\FormModel\NewThreadMessage;
-    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\Request;
-    use Symfony\Component\Security\Core\SecurityContext;
     use Znaika\FrontendBundle\Entity\Communication\Thread;
-    use Znaika\FrontendBundle\Entity\Profile\User;
+    use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Provider\MessagesProvider;
     use Znaika\FrontendBundle\Repository\Communication\MessageRepository;
-    use Znaika\FrontendBundle\Repository\Profile\UserRepository;
+    use Znaika\ProfileBundle\Repository\UserRepository;
 
     class MessageController extends ZnaikaController
     {
@@ -22,7 +20,7 @@
             $messageId = $request->get("messageId");
 
             /** @var MessageRepository $messageRepository */
-            $messageRepository = $this->get('znaika_frontend.message_repository');
+            $messageRepository = $this->get('znaika.message_repository');
 
             $success = $messageRepository->markIsDeletedByParticipant($this->getUser(), $messageId);
 
@@ -88,7 +86,7 @@
 
         public function sendMessageAction(Request $request)
         {
-            $userRepository = $this->get('znaika_frontend.user_repository');
+            $userRepository = $this->get('znaika.user_repository');
             $participant    = $userRepository->getOneByUserId($request->get('to'));
 
             $provider = $this->getProvider();

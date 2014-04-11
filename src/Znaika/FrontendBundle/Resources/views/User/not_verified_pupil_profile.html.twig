@@ -1,8 +1,0 @@
-<div class="profiles-container">
-  <div class="profile-preloader {% if user %}hidden{% endif %}">Профиль загружается...</div>
-  <div class="profile-container">
-    {% if user %}
-      {% include "ZnaikaFrontendBundle:User:getUserProfileAjax.html.twig" with {"user": user} %}
-    {% endif %}
-  </div>
-</div>
