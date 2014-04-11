@@ -640,7 +640,7 @@
          */
         private function getUserMailer()
         {
-            $userMailer = $this->get('znaika..user_mailer');
+            $userMailer = $this->get('znaika.user_mailer');
 
             return $userMailer;
         }

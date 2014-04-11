@@ -1,5 +1,5 @@
-znaika_user:
-    resource: "@ZnaikaProfileBundle/Resources/config/routing.yml"
+znaika_likes:
+    resource: "@ZnaikaLikesBundle/Resources/config/routing.yml"
     prefix:   /
 
 fos_js_routing:

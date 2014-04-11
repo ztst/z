@@ -2,6 +2,7 @@
     namespace Znaika\FrontendBundle\Entity\Lesson\Content;
 
     use Doctrine\ORM\Mapping as ORM;
+    use Znaika\LikesBundle\Entity\VideoCommentLike;
 
     class VideoComment
     {
@@ -55,12 +56,24 @@
          * @var int
          */
         private $status = 0;
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $likes;
+
+        /**
+         * @var int
+         */
+        private $likesCount = 0;
+
         /**
          * Constructor
          */
         public function __construct()
         {
             $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->likes   = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
@@ -248,5 +261,38 @@
         public function getStatus()
         {
             return $this->status;
+        }
+
+        public function addLike(VideoCommentLike $videoCommentLike)
+        {
+            $this->likes[] = $videoCommentLike;
+
+            return $this;
+        }
+
+        public function removeLike(VideoCommentLike $videoCommentLike)
+        {
+            $this->likes->removeElement($videoCommentLike);
+        }
+
+        public function getLikes()
+        {
+            return $this->likes;
+        }
+
+        /**
+         * @param int $likesCount
+         */
+        public function setLikesCount($likesCount)
+        {
+            $this->likesCount = $likesCount;
+        }
+
+        /**
+         * @return int
+         */
+        public function getLikesCount()
+        {
+            return $this->likesCount;
         }
     }

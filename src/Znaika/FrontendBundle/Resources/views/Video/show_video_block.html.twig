@@ -18,7 +18,20 @@
       <div class="clear"></div>
       {% set month = video.getCreatedTime|date('F') %}
       {% set year = video.getCreatedTime|date('Y') %}
-      <div class="video-date">{{ '%s %s'|format(month|trans, year) }}</div>
+      <div class="video-date-and-likes">
+        <span class="video-date">{{ '%s %s'|format(month|trans, year) }}</span>
+        <span class="video-likes">
+          <span class="likes-count">
+            {{ video.likesCount }}
+          </span>
+          <a class="video-like-button {% if is_user() %}can-like{% endif %}"
+             id="videoLikeButton{{ video.videoId }}"
+             title=""
+             href="javascript:void(0);">
+            Мне нравится
+          </a>
+        </span>
+      </div>
     </div>
     {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video} %}
   </div>

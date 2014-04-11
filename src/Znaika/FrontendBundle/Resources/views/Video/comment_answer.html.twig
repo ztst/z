@@ -12,5 +12,18 @@
     {{ comment_title(comment)|raw }}
   </a>
   <span class="comment-body">{{ comment_text(comment) }}</span>
-  <h6 class="media-heading comment-date">{{ comment_date(comment.getCreatedTime) }}</h6>
+  <h6 class="media-heading comment-date-and-like">
+    <span class="comment-date">{{ comment_date(comment.getCreatedTime) }}</span>
+    <span class="video-comment-likes">
+      <span class="likes-count">
+       {{ comment.likesCount }}
+      </span>
+      <a class="comment-like-button {% if is_user() %}can-like{% endif %}"
+         id="commentLikeButton{{ comment.videoCommentId }}"
+         title=""
+         href="javascript:void(0);">
+        Мне нравится
+      </a>
+    </span>
+  </h6>
 </div>
