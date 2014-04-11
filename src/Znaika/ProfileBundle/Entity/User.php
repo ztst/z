@@ -7,6 +7,8 @@
     use Symfony\Component\Security\Core\User\AdvancedUserInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
+    use Znaika\LikesBundle\Entity\VideoCommentLike;
+    use Znaika\LikesBundle\Entity\VideoLike;
     use Znaika\ProfileBundle\Entity\Ban\Info;
     use Znaika\ProfileBundle\Helper\Util\UserBan;
     use Znaika\ProfileBundle\Helper\Util\UserRole;
@@ -162,6 +164,16 @@
         private $photoFileName = null;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $videoCommentLikes;
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $videoLikes;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -171,6 +183,8 @@
             $this->changeUserEmails  = new ArrayCollection();
             $this->supervisedVideos  = new ArrayCollection();
             $this->banInfos          = new ArrayCollection();
+            $this->videoCommentLikes = new ArrayCollection();
+            $this->videoLikes        = new ArrayCollection();
         }
 
         /**
@@ -753,11 +767,6 @@
                 ) = unserialize($serialized);
         }
 
-        /**
-         * @param Video $supervisedVideo
-         *
-         * @return $this
-         */
         public function addSupervisedVideo(Video $supervisedVideo)
         {
             $this->supervisedVideos[] = $supervisedVideo;
@@ -765,27 +774,16 @@
             return $this;
         }
 
-        /**
-         * @param Video $supervisedVideo
-         */
         public function removeSupervisedVideo(Video $supervisedVideo)
         {
             $this->supervisedVideos->removeElement($supervisedVideo);
         }
 
-        /**
-         * @return \Doctrine\Common\Collections\ArrayCollection|\Doctrine\Common\Collections\Collection
-         */
         public function getSupervisedVideos()
         {
             return $this->supervisedVideos;
         }
 
-        /**
-         * @param Ban\Info $info
-         *
-         * @return $this
-         */
         public function addBanInfo(Info $info)
         {
             $this->banInfos[] = $info;
@@ -793,65 +791,41 @@
             return $this;
         }
 
-        /**
-         * @param Info $info
-         */
         public function removeBanInfo(Info $info)
         {
             $this->banInfos->removeElement($info);
         }
 
-        /**
-         * @return \Doctrine\Common\Collections\ArrayCollection|\Doctrine\Common\Collections\Collection
-         */
         public function getBanInfos()
         {
             return $this->banInfos;
         }
 
-        /**
-         * @param int $grade
-         */
         public function setGrade($grade)
         {
             $this->grade = $grade;
         }
 
-        /**
-         * @return int
-         */
         public function getGrade()
         {
             return $this->grade;
         }
 
-        /**
-         * @param string $region
-         */
         public function setRegion($region)
         {
             $this->region = $region;
         }
 
-        /**
-         * @return string
-         */
         public function getRegion()
         {
             return $this->region;
         }
 
-        /**
-         * @param string $city
-         */
         public function setCity($city)
         {
             $this->city = $city;
         }
 
-        /**
-         * @return string
-         */
         public function getCity()
         {
             return $this->city;
@@ -925,51 +899,67 @@
             return $changeUserEmail;
         }
 
-        /**
-         * @param \DateTime $updatedTime
-         */
         public function setUpdatedTime($updatedTime)
         {
             $this->updatedTime = $updatedTime;
         }
 
-        /**
-         * @return \DateTime
-         */
         public function getUpdatedTime()
         {
             return $this->updatedTime;
         }
 
-        /**
-         * @param int $banReason
-         */
         public function setBanReason($banReason)
         {
             $this->banReason = $banReason;
         }
 
-        /**
-         * @return int
-         */
         public function getBanReason()
         {
             return $this->banReason;
         }
 
-        /**
-         * @param string $photoFileName
-         */
         public function setPhotoFileName($photoFileName)
         {
             $this->photoFileName = $photoFileName;
         }
 
-        /**
-         * @return string
-         */
         public function getPhotoFileName()
         {
             return $this->photoFileName;
+        }
+
+        public function addVideoLike(VideoLike $videoLike)
+        {
+            $this->videoLikes[] = $videoLike;
+
+            return $this;
+        }
+
+        public function removeVideoLike(VideoLike $videoLike)
+        {
+            $this->videoLikes->removeElement($videoLike);
+        }
+
+        public function getVideoLikes()
+        {
+            return $this->videoLikes;
+        }
+
+        public function addVideoCommentLike(VideoCommentLike $videoCommentLike)
+        {
+            $this->videoCommentLikes[] = $videoCommentLike;
+
+            return $this;
+        }
+
+        public function removeVideoCommentLike(VideoCommentLike $videoCommentLike)
+        {
+            $this->videoCommentLikes->removeElement($videoCommentLike);
+        }
+
+        public function getVideoCommentLikes()
+        {
+            return $this->videoCommentLikes;
         }
     }

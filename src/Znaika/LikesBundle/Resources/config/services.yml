@@ -1,0 +1,9 @@
+services:
+#repository
+    znaika.video_comment_like_repository:
+        class:        Znaika\LikesBundle\Repository\VideoCommentLikeRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika.video_like_repository:
+        class:        Znaika\LikesBundle\Repository\VideoLikeRepository
+        arguments:    ["@doctrine.orm.entity_manager"]

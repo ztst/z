@@ -10,6 +10,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
         url:           { column: url, type: string, length: 255, notnull: true }
         contentDir:    { column: content_dir, type: string, length: 128, notnull: true }
         views:         { type: integer, notnull: true }
+        likesCount:    { column: likes_count, type: integer, notnull: true }
         author:        { type: string, length: 255, notnull: true }
         orderPriority: { column: order_priority, type: integer, notnull: true }
         duration:      { type: integer, notnull: true }
@@ -51,6 +52,10 @@ Znaika\FrontendBundle\Entity\Lesson\Content\Video:
             cascade:      [persist]
         videoAttachments:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment
+            mappedBy:     video
+            cascade:      [persist]
+        likes:
+            targetEntity: Znaika\LikesBundle\Entity\VideoLike
             mappedBy:     video
             cascade:      [persist]
     manyToMany:

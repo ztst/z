@@ -1,0 +1,23 @@
+Znaika\LikesBundle\Entity\VideoLike:
+    type: entity
+    table: video_like
+    repositoryClass: Znaika\LikesBundle\Repository\VideoLikeDBRepository
+    fields:
+        videoLikeId: { column: video_like_id, type: integer, id: true, generator: { strategy: AUTO } }
+        createdTime: { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
+    manyToOne:
+        video:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
+            inversedBy: likes
+            joinColumn:
+                name: video_id
+                referencedColumnName: video_id
+                onDelete: CASCADE
+        user:
+            targetEntity: Znaika\ProfileBundle\Entity\User
+            inversedBy: videoCommentLikes
+            joinColumn:
+                name: user_id
+                referencedColumnName: user_id
+                onDelete: CASCADE
+    lifecycleCallbacks: {  }
