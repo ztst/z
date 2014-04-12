@@ -8,6 +8,7 @@ Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment:
         commentType:    { column: comment_type, type: smallint, notnull: true }
         isAnswered:     { column: is_answered, type: boolean }
         status:         { type: smallint }
+        likesCount:     { column: likes_count, type: integer, notnull: true }
         createdTime:    { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     manyToOne:
         video:

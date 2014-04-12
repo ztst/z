@@ -123,12 +123,18 @@
     color: #333;
 }
 
-.video-date
+.video-date-and-likes
 {
     margin-top: 3px;
     margin-bottom: 15px;
     color: #666;
     font-size: 12px;
+}
+
+.video-likes
+{
+    float: right;
+    clear: both;
 }
 
 .video-views-amount
@@ -251,7 +257,7 @@
     font-size: 12px;
 }
 
-.comment-date
+.comment-date-and-like
 {
     margin: 10px 0 0;
     color: #999;

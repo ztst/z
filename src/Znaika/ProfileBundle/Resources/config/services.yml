@@ -3,7 +3,7 @@ services:
         class:     Znaika\ProfileBundle\Helper\Mail\MailHelper
         arguments: ['@mailer']
 
-    znaika..user_mailer:
+    znaika.user_mailer:
         class:     Znaika\ProfileBundle\Helper\Mail\UserMailer
         arguments:
             - @znaika..mail_helper

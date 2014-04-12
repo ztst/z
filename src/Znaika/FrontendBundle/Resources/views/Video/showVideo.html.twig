@@ -19,6 +19,10 @@
   {{ parent() }}
 
   {% javascripts filter='?yui_js'
+    '@ZnaikaLikesBundle/Resources/public/js/classes/popup/UnregisteredUserLikePopup.class.js'
+    '@ZnaikaLikesBundle/Resources/public/js/classes/button/BaseLikeButton.class.js'
+    '@ZnaikaLikesBundle/Resources/public/js/classes/button/VideoCommentLikeButton.class.js'
+    '@ZnaikaLikesBundle/Resources/public/js/classes/button/VideoLikeButton.class.js'
     '../app/Resources/public/js/classes/share/ShareVideoLinks.class.js'
     '../app/Resources/public/js/classes/form/AddCommentForm.class.js'
     '../app/Resources/public/js/classes/page/ShowVideoPage.class.js'
@@ -94,4 +98,5 @@
   </div>
   <input id="videoName" type="hidden" value="{{ video.getUrlName }}"/>
   {% include "ZnaikaFrontendBundle:Default:up_down_scroll_block.html.twig" %}
+  {% include "ZnaikaLikesBundle:Default:unregistered_user_like_popup.html.twig" %}
 {% endblock %}
