@@ -64,7 +64,7 @@
         {
             $supportEmails = $this->container->getParameter('support_emails');
             /** @var UserMailer $userMailer */
-            $userMailer = $this->get("znaika..user_mailer");
+            $userMailer = $this->get("znaika.user_mailer");
             $userMailer->sendSupportEmail($support, $supportEmails);
         }
     }

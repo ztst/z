@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new FOS\MessageBundle\FOSMessageBundle(),
+            new Znaika\LikesBundle\ZnaikaLikesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

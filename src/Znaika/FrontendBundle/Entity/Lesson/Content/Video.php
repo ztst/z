@@ -7,6 +7,7 @@
     use Doctrine\ORM\Mapping as ORM;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\Quiz;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Attachment\VideoAttachment;
+    use Znaika\LikesBundle\Entity\VideoLike;
     use Znaika\ProfileBundle\Entity\User;
 
     class Video
@@ -102,6 +103,16 @@
         private $contentDir;
 
         /**
+         * @var int
+         */
+        private $likesCount = 0;
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $likes;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -109,6 +120,7 @@
             $this->videoComments    = new \Doctrine\Common\Collections\ArrayCollection();
             $this->videoAttachments = new \Doctrine\Common\Collections\ArrayCollection();
             $this->supervisors      = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->likes            = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
@@ -504,5 +516,41 @@
         public function getContentDir()
         {
             return $this->contentDir;
+        }
+
+        /**
+         * @param int $likesCount
+         */
+        public function setLikesCount($likesCount)
+        {
+            $this->likesCount = $likesCount;
+        }
+
+        /**
+         * @return int
+         */
+        public function getLikesCount()
+        {
+            return $this->likesCount;
+        }
+
+        public function addLike(VideoLike $videoLike)
+        {
+            $this->likes[] = $videoLike;
+
+            return $this;
+        }
+
+        public function removeLike(VideoLike $videoLike)
+        {
+            $this->likes->removeElement($videoLike);
+        }
+
+        /**
+         * @return \Doctrine\Common\Collections\Collection
+         */
+        public function getLikes()
+        {
+            return $this->likes;
         }
     }

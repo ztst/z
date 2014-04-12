@@ -1,0 +1,13 @@
+like_video:
+    pattern:  /user/like-video
+    defaults: { _controller: ZnaikaLikesBundle:Default:addVideoLike }
+    methods:  [POST]
+    options:
+        expose: true
+
+like_video_comment:
+    pattern:  /user/like-video-comment
+    defaults: { _controller: ZnaikaLikesBundle:Default:addVideoCommentLike }
+    methods:  [POST]
+    options:
+        expose: true

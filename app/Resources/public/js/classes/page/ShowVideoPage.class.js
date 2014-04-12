@@ -34,11 +34,29 @@ var ShowVideoPage = Base.extend({
         $("#currentVideoQuizLink").click(handler(this, "_onChapterVideoQuizTabLinkClick"));
 
         this._loadComments();
+        this._initVideoLikeButtons();
+    },
+
+    _initVideoLikeButtons: function()
+    {
+        $(".video-like-button").each(function(){
+            var id = $(this).attr("id");
+            new VideoLikeButton(id);
+        });
+    },
+
+    _initCommentLikeButtons: function()
+    {
+        $(".comment-like-button").each(function(){
+            var id = $(this).attr("id");
+            new VideoCommentLikeButton(id);
+        });
     },
 
     _loadComments: function()
     {
         $.post($("#getVideoLastCommentsUrl").val(), null, handler(this, "_onLastCommentsLoaded"), "json");
+        this._initCommentLikeButtons();
 
         return false;
     },
@@ -50,6 +68,8 @@ var ShowVideoPage = Base.extend({
             $("#lastCommentsContainer").html(response.html);
             $(".comments-container").removeClass("hidden");
             $(".comments-preloader").addClass("hidden");
+
+            this._initCommentLikeButtons();
         }
     },
 
@@ -217,6 +237,7 @@ var ShowVideoPage = Base.extend({
             $("#prevCommentsContainer").html(response.html);
             this._showPrevCommentsLink.closest(".show-more-link").remove();
             $(".comments-preloader").addClass("hidden");
+            this._initCommentLikeButtons();
         }
     }
 });
