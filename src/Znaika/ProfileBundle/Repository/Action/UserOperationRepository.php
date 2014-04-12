@@ -90,6 +90,17 @@
             return $result;
         }
 
+        public function getLastAddRegionInProfileOperation(User $user)
+        {
+            $result = $this->redisRepository->getLastAddRegionInProfileOperation($user);
+            if (empty($result))
+            {
+                $result = $this->dbRepository->getLastAddRegionInProfileOperation($user);
+            }
+
+            return $result;
+        }
+
         public function getLastRegistrationReferralOperation(User $user)
         {
             $result = $this->redisRepository->getLastRegistrationReferralOperation($user);

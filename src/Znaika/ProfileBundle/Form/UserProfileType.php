@@ -9,7 +9,8 @@
 
     class UserProfileType extends AbstractType
     {
-        const MAX_YEARS_OLD = 64;
+        const MIN_YEARS_OLD = 14;
+        const MAX_YEARS_OLD = 113;
 
         /**
          * @param FormBuilderInterface $builder
@@ -40,9 +41,6 @@
                     "empty_value" => "not_selected_grade",
                     "required"    => false,
                 ))
-                ->add("region", "text", array(
-                    "required" => false,
-                ))
                 ->add("city", "text", array(
                     "required" => false,
                 ))
@@ -52,7 +50,7 @@
                     "required"    => false,
                     "format"      => "dd MMMM yyyy",
                     "widget"      => "choice",
-                    "years"       => range(date("Y"), date("Y") - self::MAX_YEARS_OLD)
+                    "years"       => range(date("Y") - self::MIN_YEARS_OLD, date("Y") - self::MAX_YEARS_OLD)
                 ));
         }
 

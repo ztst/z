@@ -37,6 +37,11 @@
             return null;
         }
 
+        public function getLastAddRegionInProfileOperation(User $user)
+        {
+            return null;
+        }
+
         public function getLastRegistrationReferralOperation(User $user)
         {
             return null;

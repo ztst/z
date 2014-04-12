@@ -1,0 +1,12 @@
+Znaika\ProfileBundle\Entity\Region:
+    type: entity
+    table: region
+    repositoryClass: Znaika\ProfileBundle\Repository\RegionDBRepository
+    fields:
+        regionId: { column: region_id, type: integer, id: true, generator: { strategy: AUTO } }
+        regionName: { column: region_name, type: string, length: 255, notnull: true, unique: true }
+    oneToMany:
+        users:
+            targetEntity: Znaika\ProfileBundle\Entity\User
+            mappedBy: region
+    lifecycleCallbacks: {  }

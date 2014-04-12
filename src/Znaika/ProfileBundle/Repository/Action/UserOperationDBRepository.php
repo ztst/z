@@ -34,6 +34,11 @@
             return $this->getLastOperationByUser($user, 'ZnaikaProfileBundle:Action\AddSexInProfileOperation');
         }
 
+        public function getLastAddRegionInProfileOperation(User $user)
+        {
+            return $this->getLastOperationByUser($user, 'ZnaikaProfileBundle:Action\AddRegionInProfileOperation');
+        }
+
         public function getLastRegistrationReferralOperation(User $user)
         {
             return $this->getLastOperationByUser($user, 'ZnaikaProfileBundle:Action\RegistrationReferralOperation');

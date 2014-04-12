@@ -13,4 +13,5 @@
         const ADD_VIDEO_COMMENT_OPERATION             = 11;
         const RATE_VIDEO_OPERATION                    = 12;
         const ADD_SEX_IN_PROFILE_OPERATION            = 13;
+        const ADD_REGION_IN_PROFILE_OPERATION         = 14;
     }

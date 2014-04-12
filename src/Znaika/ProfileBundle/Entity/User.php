@@ -129,7 +129,7 @@
         private $grade;
 
         /**
-         * @var string
+         * @var Region
          */
         private $region;
 
@@ -811,21 +811,33 @@
             return $this->grade;
         }
 
-        public function setRegion($region)
+        /**
+         * @param Region $region
+         */
+        public function setRegion(Region $region)
         {
             $this->region = $region;
         }
 
+        /**
+         * @return Region
+         */
         public function getRegion()
         {
             return $this->region;
         }
 
+        /**
+         * @param string $city
+         */
         public function setCity($city)
         {
             $this->city = $city;
         }
 
+        /**
+         * @return string
+         */
         public function getCity()
         {
             return $this->city;

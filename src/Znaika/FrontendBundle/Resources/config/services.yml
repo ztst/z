@@ -83,8 +83,12 @@ services:
         arguments:    ["@doctrine.orm.entity_manager"]
 
     znaika.support_repository:
-            class:        Znaika\FrontendBundle\Repository\Communication\Support\SupportRepository
-            arguments:    ["@doctrine.orm.entity_manager"]
+        class:        Znaika\FrontendBundle\Repository\Communication\Support\SupportRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika.region_repository:
+        class:        Znaika\ProfileBundle\Repository\RegionRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
 
 #menu
     znaika.menu_builder:

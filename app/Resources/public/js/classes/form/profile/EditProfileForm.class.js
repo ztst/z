@@ -18,6 +18,7 @@ var EditProfileForm = BaseForm.extend({
         gradeField.selectbox();
 
         $(".birthdate-container select").selectbox();
+        $("#regionField").selectbox();
 
     },
 
@@ -119,7 +120,7 @@ var EditProfileForm = BaseForm.extend({
                     });
                     return required;
                 },
-                messages: { required: "Надо заполнить все поля даты рождения" }
+                messages: { required: "Необходимо заполнить все поля даты рождения" }
             });
         });
     },

@@ -138,6 +138,7 @@
                 'user'                                 => $user,
                 'userId'                               => $user->getUserId(),
                 'isSocialRegisterComplete'             => $isSocialRegisterComplete,
+                'regions'                              => $this->getRegionRepository()->getAll(),
             ));
         }
 
@@ -506,7 +507,7 @@
          */
         private function handleProfileForm(User $user, Request $request)
         {
-            $form    = $this->createForm(new UserProfileType(), $user);
+            $form = $this->createForm(new UserProfileType(), $user);
 
             if ($request->request->has('user_profile_type'))
             {
@@ -833,5 +834,13 @@
                 "success"   => $success,
                 "emailBusy" => $emailBusy
             ));
+        }
+
+        /**
+         * @return RegionRepository
+         */
+        private function getRegionRepository()
+        {
+            return $this->get("znaika.region_repository");
         }
     }
