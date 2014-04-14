@@ -7,7 +7,7 @@
     use Symfony\Component\Form\FormEvents;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
-    use Znaika\FrontendBundle\Form\DataTransformer\EmailsToUsersTransformer;
+    use Znaika\ProfileBundle\Form\DataTransformer\EmailsToUsersTransformer;
     use Znaika\FrontendBundle\Form\DataTransformer\VideoUrlTransformer;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoUtil;
