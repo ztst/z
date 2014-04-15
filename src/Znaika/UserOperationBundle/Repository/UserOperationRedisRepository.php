@@ -2,6 +2,9 @@
     namespace Znaika\UserOperationBundle\Repository;
 
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\UserOperationBundle\Entity\AddCityInProfileOperation;
+    use Znaika\UserOperationBundle\Entity\AddLastNameInProfileOperation;
+    use Znaika\UserOperationBundle\Entity\AddPhotoInProfileOperation;
     use Znaika\UserOperationBundle\Entity\BaseUserOperation;
     use Znaika\ProfileBundle\Entity\User;
 
@@ -22,7 +25,22 @@
             return null;
         }
 
-        public function getLastAddPhoneNumberInProfileOperation(User $user)
+        public function getLastAddFirstNameInProfileOperation(User $user)
+        {
+            return null;
+        }
+
+        public function getLastAddPhotoInProfileOperation(User $user)
+        {
+            return null;
+        }
+
+        public function getLastAddLastNameInProfileOperation(User $user)
+        {
+            return null;
+        }
+
+        public function getLastAddCityInProfileOperation(User $user)
         {
             return null;
         }
@@ -33,11 +51,6 @@
         }
 
         public function getLastAddSexInProfileOperation(User $user)
-        {
-            return null;
-        }
-
-        public function getLastRegistrationReferralOperation(User $user)
         {
             return null;
         }

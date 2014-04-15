@@ -77,9 +77,11 @@
         {
             $fileDir   = $this->getFileDir($synopsis);
             $htmlFiles = UnixSystemUtils::getDirectoryFiles($fileDir, "/[^\.]+\.(htm|html)/");
+
             if (count($htmlFiles) == 1)
             {
-                $synopsis->setHtmlFileName($htmlFiles[0]);
+                $fileName = $htmlFiles[0];
+                $synopsis->setHtmlFileName($fileName);
 
                 $this->processHtmlFile($synopsis);
             }

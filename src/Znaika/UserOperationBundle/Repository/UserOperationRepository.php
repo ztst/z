@@ -2,6 +2,8 @@
     namespace Znaika\UserOperationBundle\Repository;
 
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\UserOperationBundle\Entity\AddLastNameInProfileOperation;
+    use Znaika\UserOperationBundle\Entity\AddPhotoInProfileOperation;
     use Znaika\UserOperationBundle\Entity\BaseUserOperation;
     use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Repository\BaseRepository;
@@ -57,12 +59,45 @@
             return $result;
         }
 
-        public function getLastAddPhoneNumberInProfileOperation(User $user)
+        public function getLastAddFirstNameInProfileOperation(User $user)
         {
-            $result = $this->redisRepository->getLastAddPhoneNumberInProfileOperation($user);
+            $result = $this->redisRepository->getLastAddFirstNameInProfileOperation($user);
             if (empty($result))
             {
-                $result = $this->dbRepository->getLastAddPhoneNumberInProfileOperation($user);
+                $result = $this->dbRepository->getLastAddFirstNameInProfileOperation($user);
+            }
+
+            return $result;
+        }
+
+        public function getLastAddPhotoInProfileOperation(User $user)
+        {
+            $result = $this->redisRepository->getLastAddPhotoInProfileOperation($user);
+            if (empty($result))
+            {
+                $result = $this->dbRepository->getLastAddPhotoInProfileOperation($user);
+            }
+
+            return $result;
+        }
+
+        public function getLastAddLastNameInProfileOperation(User $user)
+        {
+            $result = $this->redisRepository->getLastAddLastNameInProfileOperation($user);
+            if (empty($result))
+            {
+                $result = $this->dbRepository->getLastAddLastNameInProfileOperation($user);
+            }
+
+            return $result;
+        }
+
+        public function getLastAddCityInProfileOperation(User $user)
+        {
+            $result = $this->redisRepository->getLastAddCityInProfileOperation($user);
+            if (empty($result))
+            {
+                $result = $this->dbRepository->getLastAddCityInProfileOperation($user);
             }
 
             return $result;
@@ -85,17 +120,6 @@
             if (empty($result))
             {
                 $result = $this->dbRepository->getLastAddSexInProfileOperation($user);
-            }
-
-            return $result;
-        }
-
-        public function getLastRegistrationReferralOperation(User $user)
-        {
-            $result = $this->redisRepository->getLastRegistrationReferralOperation($user);
-            if (empty($result))
-            {
-                $result = $this->dbRepository->getLastRegistrationReferralOperation($user);
             }
 
             return $result;
@@ -188,22 +212,6 @@
             if (is_null($result))
             {
                 $result = $this->dbRepository->countRateVideoOperations($user);
-            }
-
-            return $result;
-        }
-
-        /**
-         * @param User $user
-         *
-         * @return integer
-         */
-        public function countReferralRegistrationOperations(User $user)
-        {
-            $result = $this->redisRepository->countReferralRegistrationOperations($user);
-            if (is_null($result))
-            {
-                $result = $this->dbRepository->countReferralRegistrationOperations($user);
             }
 
             return $result;

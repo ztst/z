@@ -23,13 +23,15 @@ Znaika\UserOperationBundle\Entity\BaseUserOperation:
         0: Znaika\UserOperationBundle\Entity\BaseUserOperation
         2: Znaika\UserOperationBundle\Entity\ViewVideoOperation
         3: Znaika\UserOperationBundle\Entity\PostVideoToSocialNetworkOperation
-        4: Znaika\UserOperationBundle\Entity\AddPhoneNumberInProfileOperation
+        4: Znaika\UserOperationBundle\Entity\AddFirstNameInProfileOperation
         5: Znaika\UserOperationBundle\Entity\AddBirthdayInProfileOperation
         7: Znaika\UserOperationBundle\Entity\JoinSocialNetworkCommunityOperation
-        8: Znaika\UserOperationBundle\Entity\RegistrationReferralOperation
         9: Znaika\UserOperationBundle\Entity\RegistrationOperation
         11: Znaika\UserOperationBundle\Entity\AddVideoCommentOperation
         12: Znaika\UserOperationBundle\Entity\RateVideoOperation
         13: Znaika\UserOperationBundle\Entity\AddSexInProfileOperation
+        14: Znaika\UserOperationBundle\Entity\AddLastNameInProfileOperation
+        15: Znaika\UserOperationBundle\Entity\AddCityInProfileOperation
+        16: Znaika\UserOperationBundle\Entity\AddPhotoInProfileOperation
 
     lifecycleCallbacks: {  }

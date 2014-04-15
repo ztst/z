@@ -3,7 +3,10 @@
 
     class UnixSystemUtils
     {
-
+        public static function renameFile($srcFilePath ,$destFilePath)
+        {
+            return rename($srcFilePath, $destFilePath);
+        }
         /**
          * Creates directory.
          *

@@ -47,17 +47,6 @@
 
         /**
          * @param User $user
-         */
-        public function onRegistrationReferral(User $user)
-        {
-            $handler = new RegistrationReferralHandler($this->userOperationRepository);
-            $handler->setUser($user);
-
-            $handler->handle();
-        }
-
-        /**
-         * @param User $user
          * @param Video $video
          *
          * @return \Znaika\UserOperationBundle\Entity\RateVideoOperation

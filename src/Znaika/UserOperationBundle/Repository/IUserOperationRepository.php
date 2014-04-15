@@ -3,7 +3,10 @@
 
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\UserOperationBundle\Entity\AddBirthdayInProfileOperation;
-    use Znaika\UserOperationBundle\Entity\AddPhoneNumberInProfileOperation;
+    use Znaika\UserOperationBundle\Entity\AddCityInProfileOperation;
+    use Znaika\UserOperationBundle\Entity\AddFirstNameInProfileOperation;
+    use Znaika\UserOperationBundle\Entity\AddLastNameInProfileOperation;
+    use Znaika\UserOperationBundle\Entity\AddPhotoInProfileOperation;
     use Znaika\UserOperationBundle\Entity\AddSexInProfileOperation;
     use Znaika\UserOperationBundle\Entity\AddVideoCommentOperation;
     use Znaika\UserOperationBundle\Entity\BaseUserOperation;
@@ -11,7 +14,6 @@
     use Znaika\UserOperationBundle\Entity\PostVideoToSocialNetworkOperation;
     use Znaika\UserOperationBundle\Entity\RateVideoOperation;
     use Znaika\UserOperationBundle\Entity\RegistrationOperation;
-    use Znaika\UserOperationBundle\Entity\RegistrationReferralOperation;
     use Znaika\UserOperationBundle\Entity\ViewVideoOperation;
     use Znaika\ProfileBundle\Entity\User;
 
@@ -27,9 +29,30 @@
         /**
          * @param User $user
          *
-         * @return AddPhoneNumberInProfileOperation
+         * @return AddFirstNameInProfileOperation
          */
-        public function getLastAddPhoneNumberInProfileOperation(User $user);
+        public function getLastAddFirstNameInProfileOperation(User $user);
+
+        /**
+         * @param User $user
+         *
+         * @return AddLastNameInProfileOperation
+         */
+        public function getLastAddLastNameInProfileOperation(User $user);
+
+        /**
+         * @param User $user
+         *
+         * @return AddCityInProfileOperation
+         */
+        public function getLastAddCityInProfileOperation(User $user);
+
+        /**
+         * @param User $user
+         *
+         * @return AddPhotoInProfileOperation
+         */
+        public function getLastAddPhotoInProfileOperation(User $user);
 
         /**
          * @param User $user
@@ -44,13 +67,6 @@
          * @return AddSexInProfileOperation
          */
         public function getLastAddSexInProfileOperation(User $user);
-
-        /**
-         * @param User $user
-         *
-         * @return RegistrationReferralOperation
-         */
-        public function getLastRegistrationReferralOperation(User $user);
 
         /**
          * @param User $user
@@ -120,13 +136,6 @@
          * @return integer
          */
         public function countRateVideoOperations(User $user);
-
-        /**
-         * @param User $user
-         *
-         * @return integer
-         */
-        public function countReferralRegistrationOperations(User $user);
 
         /**
          * @param User $user

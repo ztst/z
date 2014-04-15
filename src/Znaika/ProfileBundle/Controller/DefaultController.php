@@ -329,6 +329,9 @@
             $success = false;
             if ($userPhotoForm->isValid())
             {
+                $listener = $this->getUserOperationListener();
+                $listener->onEditProfile($user);
+
                 $userPhotoUploader = $this->getUserPhotoUploader();
                 $userPhotoUploader->upload($user);
                 $userRepository->save($user);
@@ -515,6 +518,9 @@
                 $form->handleRequest($request);
                 if ($form->isValid())
                 {
+                    $listener = $this->getUserOperationListener();
+                    $listener->onEditProfile($user);
+
                     $userRepository = $this->getUserRepository();
                     $userRepository->save($user);
                 }

@@ -3,6 +3,7 @@
 
     use Doctrine\ORM\EntityRepository;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\UserOperationBundle\Entity\AddPhotoInProfileOperation;
     use Znaika\UserOperationBundle\Entity\BaseUserOperation;
     use Znaika\ProfileBundle\Entity\User;
 
@@ -19,9 +20,24 @@
             return $this->getLastOperationByUserAndVideo($user, $video, 'ZnaikaUserOperationBundle:ViewVideoOperation');
         }
 
-        public function getLastAddPhoneNumberInProfileOperation(User $user)
+        public function getLastAddFirstNameInProfileOperation(User $user)
         {
-            return $this->getLastOperationByUser($user, 'ZnaikaUserOperationBundle:AddPhoneNumberInProfileOperation');
+            return $this->getLastOperationByUser($user, 'ZnaikaUserOperationBundle:AddFirstNameInProfileOperation');
+        }
+
+        public function getLastAddPhotoInProfileOperation(User $user)
+        {
+            return $this->getLastOperationByUser($user, 'ZnaikaUserOperationBundle:AddPhotoInProfileOperation');
+        }
+
+        public function getLastAddLastNameInProfileOperation(User $user)
+        {
+            return $this->getLastOperationByUser($user, 'ZnaikaUserOperationBundle:AddLastNameInProfileOperation');
+        }
+
+        public function getLastAddCityInProfileOperation(User $user)
+        {
+            return $this->getLastOperationByUser($user, 'ZnaikaUserOperationBundle:AddCityInProfileOperation');
         }
 
         public function getLastAddBirthdayInProfileOperation(User $user)
@@ -32,11 +48,6 @@
         public function getLastAddSexInProfileOperation(User $user)
         {
             return $this->getLastOperationByUser($user, 'ZnaikaUserOperationBundle:AddSexInProfileOperation');
-        }
-
-        public function getLastRegistrationReferralOperation(User $user)
-        {
-            return $this->getLastOperationByUser($user, 'ZnaikaUserOperationBundle:RegistrationReferralOperation');
         }
 
         public function getLastRegistrationOperation(User $user)
@@ -131,16 +142,6 @@
         public function countRateVideoOperations(User $user)
         {
             return $this->countUserOperations($user, 'ZnaikaUserOperationBundle:RateVideoOperation');
-        }
-
-        /**
-         * @param User $user
-         *
-         * @return integer
-         */
-        public function countReferralRegistrationOperations(User $user)
-        {
-            return $this->countUserOperations($user, 'ZnaikaUserOperationBundle:ReferralRegistrationOperation');
         }
 
         /**
