@@ -99,13 +99,6 @@ get_user_profile_ajax:
     options:
         expose: true
 
-user_has_viewed_badges:
-    pattern: /user-has-viewed-badges
-    defaults: { _controller: ZnaikaProfileBundle:Default:hasViewedBadges }
-    methods:  [POST]
-    options:
-        expose: true
-
 edit_user_photo:
     pattern: /edit-user-photo/{userId}
     defaults: { _controller: ZnaikaProfileBundle:Default:editUserPhoto }

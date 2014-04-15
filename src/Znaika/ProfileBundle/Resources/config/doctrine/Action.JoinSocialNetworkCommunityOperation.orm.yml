@@ -1,4 +1,0 @@
-Znaika\ProfileBundle\Entity\Action\JoinSocialNetworkCommunityOperation:
-    type: entity
-    fields:
-        socialNetwork: { column: social_network, type: smallint, nullable: true }

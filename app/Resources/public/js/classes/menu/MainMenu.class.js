@@ -3,11 +3,6 @@ var MainMenu = EventDispatcher.extend({
     _loginPopupLink: null,
     _loginPopup: null,
 
-    _showBadgesPopupLink: null,
-    _badgesPopup: null,
-
-    _userHasViewedBadgesUrl: null,
-
     _registrationForm: null,
     _loginForm: null,
     _forgetPasswordForm: null,
@@ -16,13 +11,7 @@ var MainMenu = EventDispatcher.extend({
     {
         this.base();
 
-        this._initBadgesPopup();
         this._initLoginPopup();
-    },
-
-    setUserHasViewedBadgesUrl: function(url)
-    {
-        this._userHasViewedBadgesUrl = url;
     },
 
     _initLoginPopup: function()
@@ -190,33 +179,10 @@ var MainMenu = EventDispatcher.extend({
         {
             alert('Неверный e-mail');
         }
-    },
-
-    _initBadgesPopup: function()
-    {
-        this._showBadgesPopupLink = $(".new-user-badge-link");
-        this._showBadgesPopupLink.magnificPopup({
-            type: "inline",
-            midClick: true,
-            callbacks: { open: handler(this, "_onShowUserBadgesLinkClick")}
-        });
-    },
-
-    _onShowUserBadgesLinkClick: function()
-    {
-        this._showBadgesPopupLink.remove();
-
-        $.post(this._userHasViewedBadgesUrl, null, handler(this, "_onSaveViewingBadgesComplete"), "json");
-    },
-
-    _onSaveViewingBadgesComplete: function(response)
-    {
     }
 });
 
 $(function()
 {
-    var mainMenu = new MainMenu();
-
-    mainMenu.setUserHasViewedBadgesUrl(Routing.generate("user_has_viewed_badges"))
+    new MainMenu();
 });

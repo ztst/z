@@ -190,7 +190,6 @@ services:
             - @znaika.video_repository
             - @znaika.user_operation_repository
             - @znaika.user_repository
-            - @znaika.user_badge_repository
         tags:
             - { name: twig.extension }
 

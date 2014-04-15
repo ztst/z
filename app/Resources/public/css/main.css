@@ -887,15 +887,6 @@ input
     background: url('/images/header/logout-button-icon.png') no-repeat;
 }
 
-.new-user-badge-link
-{
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-
-    background: url('/images/header/new_badge_icon.jpg');
-}
-
 label
 {
     color: #2a2a2a;

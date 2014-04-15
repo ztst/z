@@ -35,12 +35,6 @@ services:
                 appId: %facebook_client_id%
                 secret: %facebook_client_secret%
 
-    znaika.user_operation_listener:
-        class:     Znaika\ProfileBundle\Helper\UserOperation\UserOperationListener
-        arguments:
-            - @znaika.user_operation_repository
-            - @znaika.user_badge_repository
-
     znaika.user_photo_uploader:
         class:     Znaika\ProfileBundle\Helper\Uploader\UserPhotoUploader
         arguments: ['@service_container']
@@ -70,27 +64,11 @@ services:
         class:        Znaika\ProfileBundle\Repository\ChangeUserEmailRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika.user_operation_repository:
-        class:        Znaika\ProfileBundle\Repository\Action\UserOperationRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
-    znaika.user_badge_repository:
-        class:        Znaika\ProfileBundle\Repository\Badge\UserBadgeRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
     znaika.ban_info_repository:
             class:        Znaika\ProfileBundle\Repository\Ban\InfoRepository
             arguments:    ["@doctrine.orm.entity_manager"]
 
 #twig
-    znaika.badge_extension:
-        class: Znaika\ProfileBundle\Twig\BadgeExtension
-        arguments:
-            - @twig
-            - @znaika.user_badge_repository
-        tags:
-            - { name: twig.extension }
-
     znaika.security_extension:
         class: Znaika\ProfileBundle\Twig\SecurityExtension
         arguments:
