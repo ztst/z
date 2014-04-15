@@ -26,7 +26,7 @@
     use Znaika\ProfileBundle\Helper\Mail\UserMailer;
     use Znaika\ProfileBundle\Helper\Security\UserAuthenticator;
     use Znaika\ProfileBundle\Helper\Uploader\UserPhotoUploader;
-    use Znaika\ProfileBundle\Helper\UserOperation\UserOperationListener;
+    use Znaika\UserOperationBundle\Helper\UserOperationListener;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentStatus;
     use Znaika\ProfileBundle\Helper\Util\UserBan;
     use Znaika\ProfileBundle\Helper\Util\UserStatus;
@@ -34,29 +34,12 @@
     use Znaika\FrontendBundle\Helper\Util\UserAgentInfoProvider;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoCommentRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
-    use Znaika\ProfileBundle\Repository\Badge\UserBadgeRepository;
     use Znaika\ProfileBundle\Repository\Ban\InfoRepository;
     use Znaika\ProfileBundle\Repository\ChangeUserEmailRepository;
     use Znaika\ProfileBundle\Repository\UserRepository;
 
     class DefaultController extends ZnaikaController
     {
-        public function hasViewedBadgesAction()
-        {
-            $user            = $this->getUser();
-            $badgeRepository = $this->getUserBadgeRepository();
-            $badges          = $badgeRepository->getUserNotViewedBadges($user);
-            foreach ($badges as $badge)
-            {
-                $badge->setIsViewed(true);
-                $badgeRepository->save($badge);
-            }
-
-            $success = true;
-
-            return new JsonResponse(array('success' => $success));
-        }
-
         /**
          * @param Request $request
          *
@@ -391,14 +374,6 @@
         private function getUserOperationListener()
         {
             return $this->get('znaika.user_operation_listener');
-        }
-
-        /**
-         * @return UserBadgeRepository
-         */
-        private function getUserBadgeRepository()
-        {
-            return $this->get('znaika.user_badge_repository');
         }
 
         /**

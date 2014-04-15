@@ -1,0 +1,10 @@
+Znaika\UserOperationBundle\Entity\RateVideoOperation:
+    type: entity
+    manyToOne:
+        video:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video
+            inversedBy: viewVideoOperations
+            joinColumn:
+                name: video_id
+                referencedColumnName: video_id
+                onDelete: "SET NULL"

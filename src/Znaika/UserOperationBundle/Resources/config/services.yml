@@ -1,0 +1,10 @@
+services:
+    znaika.user_operation_listener:
+        class:     Znaika\UserOperationBundle\Helper\UserOperationListener
+        arguments:
+            - @znaika.user_operation_repository
+
+#repository
+    znaika.user_operation_repository:
+        class:        Znaika\UserOperationBundle\Repository\UserOperationRepository
+        arguments:    ["@doctrine.orm.entity_manager"]

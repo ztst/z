@@ -21,7 +21,7 @@
     use Znaika\FrontendBundle\Helper\Content\VideoInfoUpdater;
     use Znaika\FrontendBundle\Helper\Uploader\SynopsisUploader;
     use Znaika\FrontendBundle\Helper\Uploader\VideoAttachmentUploader;
-    use Znaika\ProfileBundle\Helper\UserOperation\UserOperationListener;
+    use Znaika\UserOperationBundle\Helper\UserOperationListener;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentUtil;
@@ -554,7 +554,7 @@
         /**
          * @param $video
          *
-         * @return null|\Znaika\ProfileBundle\Entity\Action\ViewVideoOperation
+         * @return null|\Znaika\UserOperationBundle\Entity\ViewVideoOperation
          */
         private function saveViewVideoOperation($video)
         {

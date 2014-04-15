@@ -3,8 +3,7 @@
     namespace Znaika\FrontendBundle\Twig;
 
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
-    use Znaika\ProfileBundle\Repository\Action\UserOperationRepository;
-    use Znaika\ProfileBundle\Repository\Badge\UserBadgeRepository;
+    use Znaika\UserOperationBundle\Repository\UserOperationRepository;
     use Znaika\ProfileBundle\Repository\UserRepository;
 
     class IndexPageExtension extends \Twig_Extension
@@ -28,24 +27,18 @@
         private $userRepository;
 
         /**
-         * @var UserBadgeRepository
-         */
-        private $userBadgeRepository;
-
-        /**
          * @var \Twig_Environment
          */
         private $twig;
 
         public function __construct(\Twig_Environment $twig, VideoRepository $videoRepository,
-                                    UserOperationRepository $userOperationRepository, UserRepository $userRepository,
-                                    UserBadgeRepository $userBadgeRepository)
+                                    UserOperationRepository $userOperationRepository,
+                                    UserRepository $userRepository)
         {
             $this->twig                    = $twig;
             $this->videoRepository         = $videoRepository;
             $this->userOperationRepository = $userOperationRepository;
             $this->userRepository          = $userRepository;
-            $this->userBadgeRepository     = $userBadgeRepository;
         }
 
         public function getFunctions()
