@@ -257,6 +257,8 @@ a:focus
 
 .class-menu .nav.nav-justified > li:hover
 {
+    border-bottom: 1px solid #0074A5;
+    
     background: #2199cd;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#2199cd), to(#1484b6));
     background: -webkit-linear-gradient(#2199cd, #1484b6);
@@ -282,6 +284,11 @@ a:focus
     z-index: 2;
     border-color: #0074a6;
     background: #0074a6;
+}
+
+.class-menu .nav.nav-justified > li.selected + li
+{
+    border-left: 1px solid #329dd1;
 }
 
 .class-menu .nav.nav-justified > li.selected .class-menu-top-line
