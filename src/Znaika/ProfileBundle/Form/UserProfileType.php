@@ -6,11 +6,25 @@
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Znaika\ProfileBundle\Helper\Util\UserSex;
+    use Znaika\ProfileBundle\Repository\RegionRepository;
 
     class UserProfileType extends AbstractType
     {
         const MIN_YEARS_OLD = 14;
         const MAX_YEARS_OLD = 113;
+
+        /**
+         * @var RegionRepository
+         */
+        private $regionRepository;
+
+        /**
+         * @param RegionRepository $regionRepository
+         */
+        public function __construct(RegionRepository $regionRepository)
+        {
+            $this->regionRepository = $regionRepository;
+        }
 
         /**
          * @param FormBuilderInterface $builder
@@ -20,6 +34,7 @@
         {
             $sexTypes = UserSex::getAvailableTypesTexts();
             $grades   = ClassNumberUtil::getAvailableClassesForSelect();
+            $regions  = $this->regionRepository->getAll();
 
             $builder
                 ->add("firstName", "text", array(
@@ -38,8 +53,14 @@
                 ->add("grade", "choice", array(
                     "choices"     => $grades,
                     "empty_data"  => null,
-                    "empty_value" => "not_selected_grade",
+                    "empty_value" => "not_selected",
                     "required"    => false,
+                ))
+                ->add("region", "entity", array(
+                    "class"       => "Znaika\\ProfileBundle\\Entity\\Region",
+                    "property"    => "regionName",
+                    "empty_data"  => null,
+                    "empty_value" => "not_selected",
                 ))
                 ->add("city", "text", array(
                     "required" => false,

@@ -14,7 +14,6 @@
             $addBirthdayOperation    = $this->saveAddBirthdayInProfileOperation($user);
             $addPhoneNumberOperation = $this->saveAddPhoneNumberInProfileOperation($user);
             $addSexOperation         = $this->saveAddSexInProfileOperation($user);
-            $addRegionOperation      = $this->saveAddRegionInProfileOperation($user);
 
             $isFilledOutProfile = !is_null($addBirthdayOperation) &&
                 !is_null($addPhoneNumberOperation) && !is_null($addSexOperation) &&
@@ -76,28 +75,5 @@
 
                 $this->userBadgeRepository->save($badge);
             }
-        }
-
-        /**
-         * @param User $user
-         *
-         * @return null|\Znaika\ProfileBundle\Entity\Action\AddRegionInProfileOperation
-         */
-        private function saveAddRegionInProfileOperation(User $user)
-        {
-            if (!$user->getSex())
-            {
-                return null;
-            }
-
-            $operation = $this->userOperationRepository->getLastAddRegionInProfileOperation($user);
-            if (!$operation)
-            {
-                $operation = new AddSexInProfileOperation();
-                $operation->setUser($user);
-                $this->userOperationRepository->save($operation);
-            }
-
-            return $operation;
         }
     }

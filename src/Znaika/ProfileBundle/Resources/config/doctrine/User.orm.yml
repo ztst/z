@@ -17,7 +17,6 @@ Znaika\ProfileBundle\Entity\User:
         birthDate:       { column: birth_date, type: date, nullable: true }
         role:            { type: smallint, notnull: true }
         grade:           { type: smallint, nullable: true }
-        region:          { type: string, length: 150, nullable: true }
         city:            { type: string, length: 150, nullable: true }
         vkId:            { column: vk_id, type: bigint, nullable: true }
         facebookId:      { column: facebook_id, type: bigint, nullable: true }
@@ -33,6 +32,14 @@ Znaika\ProfileBundle\Entity\User:
         changeUserEmails:   { targetEntity: Znaika\ProfileBundle\Entity\ChangeUserEmail, mappedBy: user }
         videoCommentLikes:  { targetEntity: Znaika\LikesBundle\Entity\VideoCommentLike, mappedBy: user }
         videoLikes:         { targetEntity: Znaika\LikesBundle\Entity\VideoLike, mappedBy: user }
+    manyToOne:
+        region:
+            targetEntity: Znaika\ProfileBundle\Entity\Region
+            inversedBy: users
+            joinColumn:
+                name: region_id
+                referencedColumnName: region_id
+                onDelete: "SET NULL"
     manyToMany:
         supervisedVideos:
             targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\Video

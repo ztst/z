@@ -40,4 +40,20 @@
 
             return $qb->getQuery()->getResult();
         }
+
+        /**
+         * @param string $name
+         *
+         * @return Region
+         */
+        public function getOneByName($name)
+        {
+            $qb = $this->getEntityManager()->createQueryBuilder();
+            $qb->select('r')
+                ->from('ZnaikaProfileBundle:Region', 'r')
+                ->andWhere('r.regionName = :name')
+                ->setParameter('name', $name);
+
+            return $qb->getQuery()->getSingleResult();
+        }
     }

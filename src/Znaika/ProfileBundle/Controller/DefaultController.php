@@ -507,8 +507,8 @@
          */
         private function handleProfileForm(User $user, Request $request)
         {
-            $form = $this->createForm(new UserProfileType(), $user);
-
+            $regionRepository = $this->getRegionRepository();
+            $form = $this->createForm(new UserProfileType($regionRepository), $user);
             if ($request->request->has('user_profile_type'))
             {
                 $form->handleRequest($request);

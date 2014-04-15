@@ -48,13 +48,6 @@
         /**
          * @param User $user
          *
-         * @return AddRegionInProfileOperation
-         */
-        public function getLastAddRegionInProfileOperation(User $user);
-
-        /**
-         * @param User $user
-         *
          * @return RegistrationReferralOperation
          */
         public function getLastRegistrationReferralOperation(User $user);
