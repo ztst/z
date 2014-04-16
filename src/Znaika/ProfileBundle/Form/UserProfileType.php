@@ -61,6 +61,7 @@
                     "property"    => "regionName",
                     "empty_data"  => null,
                     "empty_value" => "not_selected",
+                    "required"    => false,
                 ))
                 ->add("city", "text", array(
                     "required" => false,

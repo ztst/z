@@ -43,8 +43,12 @@
                     "widget"      => "choice",
                     "years"       => range(date("Y"), date("Y") - self::MAX_YEARS_OLD)
                 ))
-                ->add("region", "text", array(
-                    "required" => false,
+                ->add("region", "entity", array(
+                    "class"       => "Znaika\\ProfileBundle\\Entity\\Region",
+                    "property"    => "regionName",
+                    "empty_data"  => null,
+                    "empty_value" => "not_selected",
+                    "required"    => false,
                 ))
                 ->add("city", "text", array(
                     "required" => false,
