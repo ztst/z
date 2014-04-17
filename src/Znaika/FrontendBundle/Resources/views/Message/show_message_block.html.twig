@@ -1,0 +1,9 @@
+<div class="messenger_thread_message {% if not message.isRead %}not-read-message{% endif %} {% if message.sender != app.user %}not-self-message{% endif %}">
+  <div class="messenger_thread_message_info">
+    {{ message.sender|e }}, {{ message.createdAt|date }}
+  </div>
+  <div class="messenger_thread_message_body" id="message_{{ message.id }}">
+    {{ message.body }}
+  </div>
+</div>
+<hr/>

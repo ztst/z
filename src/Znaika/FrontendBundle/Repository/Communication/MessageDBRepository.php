@@ -7,6 +7,7 @@
     use FOS\MessageBundle\Model\ReadableInterface;
     use Znaika\FrontendBundle\Entity\Communication\Message;
     use Znaika\FrontendBundle\Entity\Communication\MessageMetadata;
+    use Znaika\FrontendBundle\Entity\Communication\Thread;
     use Znaika\ProfileBundle\Entity\User;
 
     class MessageDBRepository extends EntityRepository implements IMessageRepository
@@ -24,7 +25,7 @@
             $builder = $this->createQueryBuilder('m');
 
             return (int)$builder
-                ->select($builder->expr()->count('mm.message_metadata_id'))
+                ->select($builder->expr()->count('mm.messageMetadataId'))
 
                 ->innerJoin('m.metadata', 'mm')
                 ->innerJoin('mm.participant', 'p')
@@ -40,6 +41,91 @@
 
                 ->getQuery()
                 ->getSingleScalarResult();
+        }
+
+        public function countUnreadThreadMessageByParticipant(User $participant, Thread $thread)
+        {
+            $builder = $this->createQueryBuilder('m');
+
+            return (int)$builder
+                ->select($builder->expr()->count('mm.messageMetadataId'))
+                ->innerJoin('m.metadata', 'mm')
+
+                ->where('mm.participant = :participant_id')
+                ->setParameter('participant_id', $participant->getId())
+
+                ->andWhere('m.sender != :sender')
+                ->setParameter('sender', $participant->getId())
+
+                ->andWhere('m.thread = :thread_id')
+                ->setParameter('thread_id', $thread->getId())
+
+                ->andWhere('mm.isRead = :isRead')
+                ->setParameter('isRead', false, \PDO::PARAM_BOOL)
+
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+
+        /**
+         * @param User $participant
+         *
+         * @return int
+         */
+        public function countUnreadThreadsByParticipant(User $participant)
+        {
+            $builder = $this->createQueryBuilder('m');
+
+            return (int)$builder
+                ->select($builder->expr()->count('DISTINCT m.thread'))
+
+                ->innerJoin('m.metadata', 'mm')
+
+                ->where('mm.participant = :participant_id')
+                ->setParameter('participant_id', $participant->getId())
+
+                ->andWhere('m.sender != :sender')
+                ->setParameter('sender', $participant->getId())
+
+                ->andWhere('mm.isRead = :isRead')
+                ->setParameter('isRead', false, \PDO::PARAM_BOOL)
+
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+
+        public function getThreadMessages(Thread $thread, $offset, $limit)
+        {
+            $builder = $this->createQueryBuilder('m');
+
+            return $builder
+                ->select('m')
+                ->andWhere('m.thread = :thread_id')
+                ->setParameter('thread_id', $thread->getId())
+                ->setFirstResult($offset)
+                ->setMaxResults($limit)
+                ->addOrderBy('m.createdAt', 'DESC')
+                ->getQuery()
+                ->getResult();
+        }
+
+        /**
+         * @param Thread $thread
+         *
+         * @return Message
+         */
+        public function getLastThreadMessage(Thread $thread)
+        {
+            $builder = $this->createQueryBuilder('m');
+
+            return $builder
+                ->select('m')
+                ->andWhere('m.thread = :thread_id')
+                ->setParameter('thread_id', $thread->getId())
+                ->setMaxResults(1)
+                ->addOrderBy('m.createdAt', 'DESC')
+                ->getQuery()
+                ->getOneOrNullResult();
         }
 
         /**

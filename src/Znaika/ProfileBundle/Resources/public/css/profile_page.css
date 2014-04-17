@@ -64,28 +64,25 @@
     padding-bottom: 30px;
 }
 
-.videos-with-comments-list,
-.videos-with-questions-list
+.user-profile-page-list
 {
     list-style: none;
 }
 
-.videos-with-comments-list li,
-.videos-with-questions-list li
+.user-profile-page-list li
 {
     margin: 0 -26px;
     padding: 20px 26px 18px;
     border-top: 1px solid #efefef;
 }
 
-.videos-with-comments-list li:hover,
-.videos-with-questions-list li:hover
+.user-profile-page-list li:hover
 {
     background: #EEF9FE;
+    cursor: pointer
 }
 
-.videos-with-comments-list li.first,
-.videos-with-questions-list li.first,
+.user-profile-page-list li.first,
 .video-comments li.first,
 .video-questions li.first
 {
@@ -191,16 +188,16 @@
     padding: 0 26px;
 }
 
-.videos-with-comments-list .open-video-comment-link a,
-.videos-with-questions-list .open-video-question-link a
+.user-profile-page-list .open-video-comment-link a,
+.user-profile-page-list .open-video-question-link a
 {
     font-size: 14px;
     font-family: "OpenSans Semibold", sans-serif;
     color: #222222;
 }
 
-.videos-with-comments-list .open-video-comment-link,
-.videos-with-questions-list .open-video-question-link
+.user-profile-page-list .open-video-comment-link,
+.user-profile-page-list .open-video-question-link
 {
     cursor: pointer;
 }

@@ -2,6 +2,12 @@ parameters:
     znaika.menu.class: Knp\Menu\MenuItem
 
 services:
+    message_send_listener:
+        class: Znaika\FrontendBundle\EventListener\MessageSendSubscriber
+        arguments: [@fos_message.message_manager]
+        tags:
+            - { name: kernel.event_subscriber }
+
     znaika.new_thread_form.type:
         class:     Znaika\FrontendBundle\Form\Communication\NewThreadMessageFormType
 
@@ -114,6 +120,7 @@ services:
             - @request
             - @znaika.user_repository
             - @znaika.video_comment_repository
+            - @znaika.message_repository
         scope: request
         tags:
             - { name: knp_menu.menu, alias: sidebar_profile_menu }
@@ -205,6 +212,13 @@ services:
         class: Znaika\FrontendBundle\Twig\MenuHelperExtension
         arguments:
             - @znaika.subject_repository
+        tags:
+            - { name: twig.extension }
+
+    znaika.message_extension:
+        class: Znaika\FrontendBundle\Twig\MessageExtension
+        arguments:
+            - @znaika.message_repository
         tags:
             - { name: twig.extension }
 

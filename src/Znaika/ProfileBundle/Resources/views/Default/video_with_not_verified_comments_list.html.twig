@@ -1,5 +1,5 @@
 {% if not videos is empty %}
-  <ul class="videos-with-comments-list">
+  <ul class="user-profile-page-list">
     {% set isFirst = true %}
     {% for video in videos %}
       <li class="{% if isFirst %}first{% endif %} open-video-comment-link" id="openVideoCommentLink{{ video.videoId }}">

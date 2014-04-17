@@ -61,4 +61,17 @@
             $messages = $this->getNotDeletedMessages($user);
             return $messages->last();
         }
+
+        public function isRead()
+        {
+            $participants = $this->getParticipants();
+            foreach ($participants as $participant)
+            {
+                if (!$this->isReadByParticipant($participant))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }

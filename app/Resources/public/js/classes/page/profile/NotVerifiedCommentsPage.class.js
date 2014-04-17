@@ -109,7 +109,7 @@ var NotVerifiedCommentsPage = Base.extend({
             openVideoCommentLink.remove();
             $(".comments-tab").addClass("hidden");
             $("#videoTab").click();
-            $(".videos-with-comments-list li").first().addClass("first");
+            $(".user-profile-page-list li").first().addClass("first");
         }
         else
         {

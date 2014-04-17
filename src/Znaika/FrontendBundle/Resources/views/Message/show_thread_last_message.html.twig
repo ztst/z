@@ -1,0 +1,18 @@
+{% set lastMessage = last_thread_message(thread) %}
+{% set otherParticipant = thread.getOtherParticipant(app.user) %}
+{% if lastMessage %}
+  <li id="openThreadLink{{ otherParticipant.userId }}"
+      class="{% if isFirst is defined and isFirst %}first{% endif %} open-thread-link {% if not lastMessage.isRead %}unread-thread{% endif %}">
+    <a href="{{ url('show_user_profile', {'userId': otherParticipant.userId}) }}">
+      {{ otherParticipant }}
+    </a>
+    <br />
+    {{ lastMessage.createdAt|date }}
+    <br />
+    {{ lastMessage.sender|e }}
+    <br />
+    {{ lastMessage.body|e }}
+    <br />
+    {{ count_unread_messages(app.user, thread) }}
+  </li>
+{% endif %}

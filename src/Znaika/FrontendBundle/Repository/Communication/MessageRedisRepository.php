@@ -4,6 +4,8 @@
     use FOS\MessageBundle\Model\MessageInterface;
     use FOS\MessageBundle\Model\ParticipantInterface;
     use FOS\MessageBundle\Model\ReadableInterface;
+    use Znaika\FrontendBundle\Entity\Communication\Message;
+    use Znaika\FrontendBundle\Entity\Communication\Thread;
     use Znaika\ProfileBundle\Entity\User;
 
     class MessageRedisRepository implements IMessageRepository
@@ -83,5 +85,30 @@
         public function markIsDeletedByParticipant(User $participant, $messageId)
         {
             return true;
+        }
+
+        public function countUnreadThreadMessageByParticipant(User $participant, Thread $thread)
+        {
+            return null;
+        }
+
+        /**
+         * @param User $participant
+         *
+         * @return int
+         */
+        public function countUnreadThreadsByParticipant(User $participant)
+        {
+            return null;
+        }
+
+        public function getThreadMessages(Thread $thread, $offset, $limit)
+        {
+            return null;
+        }
+
+        public function getLastThreadMessage(Thread $thread)
+        {
+            return null;
         }
     }

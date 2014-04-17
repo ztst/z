@@ -18,6 +18,10 @@
       </div>
     {% endfor %}
 
+    {% if app.user %}
+      <a href="{{ path('show_threads', {'sel': user.userId}) }}" title="" class="btn btn-primary">Написать</a>
+    {% endif %}
+
     {% include "ZnaikaProfileBundle:Default:show_user_profile_block.html.twig" with {'user': user} %}
   </div>
 {% endblock %}

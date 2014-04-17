@@ -1,0 +1,27 @@
+<h4>
+  Диалог с <a href="{{ path('show_user_profile', {'userId': participant.userId}) }}" title="">{{ participant }}</a>
+</h4>
+
+{% if messagesCount > constant('Znaika\\FrontendBundle\\Controller\\MessageController::MESSAGES_LIMIT_ON_PAGE') %}
+  <div class="show-more-link show-more-messages">
+    <a href="javascript:void(0);" id="showPrevMessagesLink">
+      {{ 'show_prev_messages'|transchoice(messagesCount - constant('Znaika\\FrontendBundle\\Controller\\MessageController::MESSAGES_LIMIT_ON_PAGE')) }}
+    </a>
+    <input type="hidden" id="showPrevMessagesUrl" value="{{ path('show_thread_prev_messages', {'threadId': thread.id}) }}"/>
+  </div>
+  <div id="prevMessagesContainer" class="prev-messages-container"></div>
+{% endif %}
+
+{% for message in messages %}
+  {% include "ZnaikaFrontendBundle:Message:show_message_block.html.twig" with {'message': message} %}
+{% endfor %}
+{{ form_start(form, {'attr': {'id': 'sendMessageForm'}, 'action': url('send_message_ajax', {'participantId': participant.userId}), 'method': 'POST'}) }}
+  {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
+  <div class="form-group">
+    {{ form_errors(form.body) }}
+    {{ form_widget(form.body, {'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+  </div>
+{{ form_end(form) }}

@@ -41,4 +41,17 @@
         {
             return parent::getMetadataForParticipant($participant);
         }
+
+        public function isRead()
+        {
+            foreach($this->getAllMetadata() as $meta)
+            {
+                /** @var MessageMetadata $meta */
+                if(!$meta->getIsRead())
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }

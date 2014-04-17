@@ -84,23 +84,28 @@ get_video_not_verified_comments_ajax:
     options:
         expose: true
 
+#messages
 show_threads:
-    pattern: /messages
+    pattern: /user/messages
     defaults: { _controller: ZnaikaFrontendBundle:Message:showThreads }
 
-send_message:
-    pattern: /send-message
-    defaults: { _controller: ZnaikaFrontendBundle:Message:sendMessage }
+show_thread_prev_messages:
+    pattern: /user/prev-messages/{threadId}
+    defaults: { _controller: ZnaikaFrontendBundle:Message:showThreadPrevMessages }
     methods:  [POST]
 
-show_thread:
-    pattern: /dialog/{threadId}
-    defaults: { _controller: ZnaikaFrontendBundle:Message:showThread }
-
-new_message:
-    pattern: /new-message
-    defaults: { _controller: ZnaikaFrontendBundle:Message:newMessage }
+send_message_ajax:
+    pattern: /user/send-message-ajax/{participantId}
+    defaults: { _controller: ZnaikaFrontendBundle:Message:sendMessageAjax }
     methods:  [POST]
+    options:
+        expose: true
+
+get_thread_ajax:
+    pattern: /user/dialog/{userId}
+    defaults: { _controller: ZnaikaFrontendBundle:Message:getThreadAjax }
+    options:
+        expose: true
 
 delete_message:
     pattern: /delete-message
@@ -108,8 +113,6 @@ delete_message:
     methods:  [POST]
     options:
         expose: true
-
-
 
 search:
     pattern: /search

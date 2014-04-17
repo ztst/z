@@ -43,9 +43,11 @@ odnoklassniki_login:
 show_user_profile:
     pattern: /user/{userId}
     defaults: { _controller: ZnaikaProfileBundle:Default:showUserProfile }
+    requirements:
+        userId:  \d+
 
 edit_user_profile:
-    pattern: /edit-user-profile/{userId}
+    pattern: /user/edit-profile/{userId}
     defaults: { _controller: ZnaikaProfileBundle:Default:editUserProfile }
 
 edit_teacher_profile:

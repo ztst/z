@@ -1,0 +1,7 @@
+<ul class="user-profile-page-list">
+  {% set isFirst = true %}
+  {% for thread in threads %}
+    {% include "ZnaikaFrontendBundle:Message:show_thread_last_message.html.twig" with {'thread': thread, 'isFirst': isFirst} %}
+    {% set isFirst = false %}
+  {% endfor %}
+</ul>

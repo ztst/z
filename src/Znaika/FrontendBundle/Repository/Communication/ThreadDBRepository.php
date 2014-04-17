@@ -57,7 +57,7 @@
         /**
          * @param ParticipantInterface $participant
          *
-         * @return Builde
+         * @return Builder
          */
         public function getParticipantInboxThreadsQueryBuilder(ParticipantInterface $participant)
         {
@@ -288,8 +288,8 @@
                             ->andWhere('tm.isDeleted = :isDeleted')
                             ->setParameter('isDeleted', false, \PDO::PARAM_BOOL)
 
-                // sort by date of last message written by this participant
-                            ->orderBy('tm.lastParticipantMessageDate', 'DESC');
+                // sort by date of last message
+                            ->orderBy('tm.lastMessageDate', 'DESC');
 
             return $builder->getQuery()->execute();
         }
@@ -394,19 +394,15 @@
         /**
          * Update the dates of last message written by other participants
          */
-        protected function doDatesOfLastMessageWrittenByOtherParticipant(ThreadInterface $thread)
+        protected function doDatesOfLastMessageWrittenByOtherParticipant(Thread $thread)
         {
             foreach ($thread->getAllMetadata() as $meta)
             {
-                $participantId = $meta->getParticipant()->getId();
                 $timestamp     = 0;
 
                 foreach ($thread->getMessages() as $message)
                 {
-                    if ($participantId != $message->getSender()->getId())
-                    {
-                        $timestamp = max($timestamp, $message->getTimestamp());
-                    }
+                    $timestamp = max($timestamp, $message->getTimestamp());
                 }
                 if ($timestamp)
                 {

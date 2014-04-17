@@ -21,8 +21,16 @@
         public function getThreadWithUser($participant)
         {
             $authenticatedParticipant = $this->getAuthenticatedParticipant();
+            $thread = $this->threadManager->findThreadByUsers($authenticatedParticipant, $participant);
 
-            return $this->threadManager->findThreadByUsers($authenticatedParticipant, $participant);
+            if ($thread)
+            {
+                //TODO: make 1 query solution
+                $thread->getMessages();
+                $this->threadReader->markAsRead($thread);
+            }
+
+            return $thread;
         }
 
         /**
