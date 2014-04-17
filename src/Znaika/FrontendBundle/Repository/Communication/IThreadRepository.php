@@ -9,9 +9,11 @@
     {
         /**
          * @param User $participant
+         * @param $filter
+         *
          * @return ThreadInterface[]
          */
-        public function findParticipantAllThreads(User $participant);
+        public function findParticipantAllThreads(User $participant, $filter);
 
         /**
          * @param User $firstUser

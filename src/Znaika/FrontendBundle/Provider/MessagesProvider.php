@@ -34,12 +34,14 @@
         }
 
         /**
+         * @param $filter
+         *
          * @return ThreadInterface[]
          */
-        public function getParticipantAllThreads()
+        public function getParticipantAllThreads($filter)
         {
             $authenticatedParticipant = $this->getAuthenticatedParticipant();
 
-            return $this->threadManager->findParticipantAllThreads($authenticatedParticipant);
+            return $this->threadManager->findParticipantAllThreads($authenticatedParticipant, $filter);
         }
     }

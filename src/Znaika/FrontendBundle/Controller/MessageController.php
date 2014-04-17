@@ -7,6 +7,7 @@
     use Symfony\Component\HttpFoundation\Request;
     use Znaika\FrontendBundle\Entity\Communication\Message;
     use Znaika\FrontendBundle\Entity\Communication\Thread;
+    use Znaika\FrontendBundle\Helper\Util\MessageFilterUtil;
     use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Provider\MessagesProvider;
     use Znaika\FrontendBundle\Repository\Communication\MessageRepository;
@@ -28,13 +29,18 @@
 
         public function showThreadsAction(Request $request)
         {
+            $filter = $request->get("f", MessageFilterUtil::ALL);
+            $filters = MessageFilterUtil::getAvailableValuesForSelect();
+
             $provider  = $this->getProvider();
-            $threads   = $provider->getParticipantAllThreads();
+            $threads   = $provider->getParticipantAllThreads($filter);
             $recipient = $request->get("sel", false);
 
             return $this->render('ZnaikaFrontendBundle:Message:showThreads.html.twig', array(
-                'threads'     => $threads,
-                'recipientId' => $recipient,
+                'threads'       => $threads,
+                'recipientId'   => $recipient,
+                'filters'       => $filters,
+                'currentFilter' => $filter,
             ));
         }
 

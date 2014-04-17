@@ -9,6 +9,7 @@
     use Doctrine\ORM\Query\Builder;
     use Znaika\FrontendBundle\Entity\Communication\Thread;
     use Znaika\FrontendBundle\Entity\Communication\ThreadMetadata;
+    use Znaika\FrontendBundle\Helper\Util\MessageFilterUtil;
     use Znaika\ProfileBundle\Entity\User;
 
     class ThreadDBRepository extends EntityRepository implements IThreadRepository
@@ -265,16 +266,13 @@
             $this->getEntityManager()->flush();
         }
 
-        /**
-         * @param User $participant
-         *
-         * @return array of ThreadInterface
-         */
-        public function findParticipantAllThreads(User $participant)
+        public function findParticipantAllThreads(User $participant, $filter)
         {
             $builder = $this->createQueryBuilder('t')
                             ->innerJoin('t.metadata', 'tm')
+                            ->innerJoin('t.metadata', 'tm2')
                             ->innerJoin('tm.participant', 'p')
+                            ->innerJoin('tm2.participant', 'p2')
 
                 // the participant is in the thread participants
                             ->andWhere('p.userId = :user_id')
@@ -290,6 +288,13 @@
 
                 // sort by date of last message
                             ->orderBy('tm.lastMessageDate', 'DESC');
+
+            if ($filter != MessageFilterUtil::ALL)
+            {
+                $role = MessageFilterUtil::getRoleByFilter($filter);
+                $builder->andWhere('p2.role = :role_filter')
+                  ->setParameter('role_filter', $role);
+            }
 
             return $builder->getQuery()->execute();
         }

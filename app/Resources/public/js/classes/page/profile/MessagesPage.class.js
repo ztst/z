@@ -12,6 +12,17 @@ var MessagesPage = Base.extend({
         this._initOpenThreadLinks();
 
         this._loadCurrentThread();
+
+        this._initFilterSelect();
+    },
+
+    _initFilterSelect: function()
+    {
+        var gradeSelect = $("#messagesFilter");
+        gradeSelect.selectbox();
+        gradeSelect.change(function(){
+            window.location.href = gradeSelect.val();
+        });
     },
 
     _loadCurrentThread: function()

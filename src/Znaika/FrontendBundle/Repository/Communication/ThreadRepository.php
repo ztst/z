@@ -23,7 +23,7 @@
         public function __construct($doctrine)
         {
             $redisRepository = new ThreadRedisRepository();
-            $dbRepository = $doctrine->getRepository('ZnaikaFrontendBundle:Communication\Thread');
+            $dbRepository    = $doctrine->getRepository('ZnaikaFrontendBundle:Communication\Thread');
 
             $this->setRedisRepository($redisRepository);
             $this->setDBRepository($dbRepository);
@@ -57,10 +57,11 @@
         public function findThreadById($id)
         {
             $result = $this->redisRepository->findThreadById($id);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->findThreadById($id);
             }
+
             return $result;
         }
 
@@ -82,10 +83,11 @@
         public function findParticipantInboxThreads(ParticipantInterface $participant)
         {
             $result = $this->redisRepository->findParticipantInboxThreads($participant);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->findParticipantInboxThreads($participant);
             }
+
             return $result;
         }
 
@@ -107,10 +109,11 @@
         public function findParticipantSentThreads(ParticipantInterface $participant)
         {
             $result = $this->redisRepository->findParticipantSentThreads($participant);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->findParticipantSentThreads($participant);
             }
+
             return $result;
         }
 
@@ -132,10 +135,11 @@
         public function findParticipantDeletedThreads(ParticipantInterface $participant)
         {
             $result = $this->redisRepository->findParticipantDeletedThreads($participant);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->findParticipantDeletedThreads($participant);
             }
+
             return $result;
         }
 
@@ -159,10 +163,11 @@
         public function findParticipantThreadsBySearch(ParticipantInterface $participant, $search)
         {
             $result = $this->redisRepository->getParticipantThreadsBySearchQueryBuilder($participant, $search);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->getParticipantThreadsBySearchQueryBuilder($participant, $search);
             }
+
             return $result;
         }
 
@@ -174,10 +179,11 @@
         public function findThreadsCreatedBy(ParticipantInterface $participant)
         {
             $result = $this->redisRepository->findThreadsCreatedBy($participant);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->findThreadsCreatedBy($participant);
             }
+
             return $result;
         }
 
@@ -187,10 +193,11 @@
         public function createThread()
         {
             $result = $this->redisRepository->createThread();
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->createThread();
             }
+
             return $result;
         }
 
@@ -214,17 +221,16 @@
         }
 
         /**
-         * @param User $participant
-         *
-         * @return ThreadInterface[]
+         * @inheritdoc
          */
-        public function findParticipantAllThreads(User $participant)
+        public function findParticipantAllThreads(User $participant, $filter)
         {
-            $result = $this->redisRepository->findParticipantAllThreads($participant);
-            if ( empty($result) )
+            $result = $this->redisRepository->findParticipantAllThreads($participant, $filter);
+            if (is_null($result))
             {
-                $result = $this->dbRepository->findParticipantAllThreads($participant);
+                $result = $this->dbRepository->findParticipantAllThreads($participant, $filter);
             }
+
             return $result;
         }
 
@@ -237,10 +243,11 @@
         public function findThreadByUsers(User $firstUser, User $secondUser)
         {
             $result = $this->redisRepository->findThreadByUsers($firstUser, $secondUser);
-            if ( empty($result) )
+            if (is_null($result))
             {
                 $result = $this->dbRepository->findThreadByUsers($firstUser, $secondUser);
             }
+
             return $result;
         }
 
