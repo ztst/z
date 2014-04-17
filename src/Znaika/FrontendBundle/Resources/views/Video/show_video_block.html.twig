@@ -12,15 +12,17 @@
   <div class="clear"></div>
   <div>
     <div class="video-info">
-      <h5 class="video-author">{{ video.getAuthor }}</h5>
-      <h5 class="video-views-amount">{{ 'count_views'|transchoice(video.getViews) }}</h5>
-
-      <div class="clear"></div>
       {% set month = video.getCreatedTime|date('F') %}
       {% set year = video.getCreatedTime|date('Y') %}
-      <div class="video-date-and-likes">
-        <span class="video-date">{{ '%s %s'|format(month|trans, year) }}</span>
-        <span class="video-likes">
+      <div class="video-info-left-block">
+        <div class="video-author">{{ video.getAuthor }}</div>
+        <div class="video-date">{{ '%s %s'|format(month|trans, year) }}</div>
+      </div>
+
+      <div class="video-info-right-block">
+        <div class="video-views-amount">{{ 'count_views'|transchoice(video.getViews) }}</div>
+        <div class="views-and-likes-delimiter"></div>
+        <div class="video-likes">
           <span class="likes-count">
             {{ video.likesCount }}
           </span>
@@ -30,8 +32,9 @@
              href="javascript:void(0);">
             Мне нравится
           </a>
-        </span>
+        </div>
       </div>
+      <div class="clear"></div>
     </div>
     {% include "ZnaikaFrontendBundle:Video:show_video_comments_block.html.twig" with {'video': video} %}
   </div>
