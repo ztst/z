@@ -9,6 +9,7 @@
     use Doctrine\ORM\Query\Builder;
     use Znaika\FrontendBundle\Entity\Communication\Thread;
     use Znaika\FrontendBundle\Entity\Communication\ThreadMetadata;
+    use Znaika\FrontendBundle\Helper\Util\MessageFilterUtil;
     use Znaika\ProfileBundle\Entity\User;
 
     class ThreadDBRepository extends EntityRepository implements IThreadRepository
@@ -57,7 +58,7 @@
         /**
          * @param ParticipantInterface $participant
          *
-         * @return Builde
+         * @return Builder
          */
         public function getParticipantInboxThreadsQueryBuilder(ParticipantInterface $participant)
         {
@@ -265,16 +266,13 @@
             $this->getEntityManager()->flush();
         }
 
-        /**
-         * @param User $participant
-         *
-         * @return array of ThreadInterface
-         */
-        public function findParticipantAllThreads(User $participant)
+        public function findParticipantAllThreads(User $participant, $filter)
         {
             $builder = $this->createQueryBuilder('t')
                             ->innerJoin('t.metadata', 'tm')
+                            ->innerJoin('t.metadata', 'tm2')
                             ->innerJoin('tm.participant', 'p')
+                            ->innerJoin('tm2.participant', 'p2')
 
                 // the participant is in the thread participants
                             ->andWhere('p.userId = :user_id')
@@ -288,8 +286,15 @@
                             ->andWhere('tm.isDeleted = :isDeleted')
                             ->setParameter('isDeleted', false, \PDO::PARAM_BOOL)
 
-                // sort by date of last message written by this participant
-                            ->orderBy('tm.lastParticipantMessageDate', 'DESC');
+                // sort by date of last message
+                            ->orderBy('tm.lastMessageDate', 'DESC');
+
+            if ($filter != MessageFilterUtil::ALL)
+            {
+                $role = MessageFilterUtil::getRoleByFilter($filter);
+                $builder->andWhere('p2.role = :role_filter')
+                  ->setParameter('role_filter', $role);
+            }
 
             return $builder->getQuery()->execute();
         }
@@ -394,19 +399,15 @@
         /**
          * Update the dates of last message written by other participants
          */
-        protected function doDatesOfLastMessageWrittenByOtherParticipant(ThreadInterface $thread)
+        protected function doDatesOfLastMessageWrittenByOtherParticipant(Thread $thread)
         {
             foreach ($thread->getAllMetadata() as $meta)
             {
-                $participantId = $meta->getParticipant()->getId();
                 $timestamp     = 0;
 
                 foreach ($thread->getMessages() as $message)
                 {
-                    if ($participantId != $message->getSender()->getId())
-                    {
-                        $timestamp = max($timestamp, $message->getTimestamp());
-                    }
+                    $timestamp = max($timestamp, $message->getTimestamp());
                 }
                 if ($timestamp)
                 {

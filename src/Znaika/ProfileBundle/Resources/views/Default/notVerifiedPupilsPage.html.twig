@@ -1,12 +1,9 @@
-{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+{% extends 'ZnaikaProfileBundle::Default/user_page_layout.html.twig' %}
 
 {% block stylesheets %}
   {{ parent() }}
 
   {% stylesheets filter="?yui_css"
-    '../app/Resources/public/css/tab_menu.css'
-    '@ZnaikaProfileBundle/Resources/public/css/profile_page.css'
-    '@ZnaikaProfileBundle/Resources/public/css/teacher_profile.css'
     '@ZnaikaProfileBundle/Resources/public/css/moderator_profile.css'
     '@ZnaikaProfileBundle/Resources/public/css/not_verified_users.css'
   %}
@@ -24,48 +21,39 @@
   {% endjavascripts %}
 {% endblock %}
 
-{% block content %}
-  <div class="teacher-profile-top-horizontal-line"></div>
-  <div class="profile-sidebar-menu-container">
-    {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
-  </div>
-  <div class="teacher-profile-container">
-    <div class="">
-      <div class="tabs-container">
-        <ul class="nav nav-tabs select-content-tab user-profile-tab-menu">
-          <li class="profiles-tab {% if not editedUser %}active{% endif %}">
-            <div class="active-top-border"></div>
-            <a id="videoTab" href="#user_list_tab" data-toggle="tab">
-              <span class="tab-label">Проверка профилей</span>
-            </a>
-          </li>
-          <li class="pupil-tab {% if editedUser %}active{% else %}hidden{% endif %}">
-            <div class="active-top-border"></div>
-            <a id="pupilTab" href="#pupil_tab" data-toggle="tab">
-              <span class="tab-label">Профиль пользователя</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="tab-pane {% if not editedUser %}active{% endif %}" id="user_list_tab">
-      <div class="empty-pupils-message-container {% if users|length  %}hidden{% endif %}">
-        <div class="tab-header">
-          <h4>Все профили проверены</h4>
-        </div>
-      </div>
-      <div class="not-empty-pupils-container {% if not users|length  %}hidden{% endif %}">
-        <div class="tab-header">
-          <h4>Непроверенные профили<span class="list-count-container">+{{ users|length }}</span></h4>
-        </div>
-        {% include "ZnaikaProfileBundle:Default:not_verified_pupils_list.html.twig" with {'users': users} %}
-      </div>
-    </div>
-    <div class="tab-pane {% if editedUser %}active{% endif %}" id="pupil_tab">
-      {% include "ZnaikaProfileBundle:Default:not_verified_pupil_profile.html.twig" with {'user': editedUser} %}
+{% block pageContent %}
+  <div class="">
+    <div class="tabs-container">
+      <ul class="nav nav-tabs select-content-tab user-profile-tab-menu">
+        <li class="profiles-tab {% if not editedUser %}active{% endif %}">
+          <div class="active-top-border"></div>
+          <a id="videoTab" href="#user_list_tab" data-toggle="tab">
+            <span class="tab-label">Проверка профилей</span>
+          </a>
+        </li>
+        <li class="pupil-tab {% if editedUser %}active{% else %}hidden{% endif %}">
+          <div class="active-top-border"></div>
+          <a id="pupilTab" href="#pupil_tab" data-toggle="tab">
+            <span class="tab-label">Профиль пользователя</span>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="teacher-profile-bottom-horizontal-placeholder">
-    <div class="line"></div>
+  <div class="tab-pane {% if not editedUser %}active{% endif %}" id="user_list_tab">
+    <div class="empty-pupils-message-container {% if users|length  %}hidden{% endif %}">
+      <div class="tab-header">
+        <h4>Все профили проверены</h4>
+      </div>
+    </div>
+    <div class="not-empty-pupils-container {% if not users|length  %}hidden{% endif %}">
+      <div class="tab-header">
+        <h4>Непроверенные профили<span class="list-count-container">+{{ users|length }}</span></h4>
+      </div>
+      {% include "ZnaikaProfileBundle:Default:not_verified_pupils_list.html.twig" with {'users': users} %}
+    </div>
+  </div>
+  <div class="tab-pane {% if editedUser %}active{% endif %}" id="pupil_tab">
+    {% include "ZnaikaProfileBundle:Default:not_verified_pupil_profile.html.twig" with {'user': editedUser} %}
   </div>
 {% endblock %}

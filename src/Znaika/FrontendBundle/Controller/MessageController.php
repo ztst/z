@@ -3,11 +3,11 @@
     namespace Znaika\FrontendBundle\Controller;
 
     use FOS\MessageBundle\FormFactory\NewThreadMessageFormFactory;
-    use FOS\MessageBundle\FormModel\NewThreadMessage;
     use Symfony\Component\HttpFoundation\JsonResponse;
-    use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\Request;
+    use Znaika\FrontendBundle\Entity\Communication\Message;
     use Znaika\FrontendBundle\Entity\Communication\Thread;
+    use Znaika\FrontendBundle\Helper\Util\MessageFilterUtil;
     use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Provider\MessagesProvider;
     use Znaika\FrontendBundle\Repository\Communication\MessageRepository;
@@ -15,97 +15,121 @@
 
     class MessageController extends ZnaikaController
     {
+        const MESSAGES_LIMIT_ON_PAGE = 10;
+
         public function deleteMessageAction(Request $request)
         {
-            $messageId = $request->get("messageId");
-
-            /** @var MessageRepository $messageRepository */
-            $messageRepository = $this->get('znaika.message_repository');
+            $messageId         = $request->get("messageId");
+            $messageRepository = $this->getMessageRepository();
 
             $success = $messageRepository->markIsDeletedByParticipant($this->getUser(), $messageId);
 
             return new JsonResponse(array('success' => $success));
         }
 
-        public function showThreadsAction()
+        public function showThreadsAction(Request $request)
         {
-            $provider = $this->getProvider();
-            $threads  = $provider->getParticipantAllThreads();
+            $filter = $request->get("f", MessageFilterUtil::ALL);
+            $filters = MessageFilterUtil::getAvailableValuesForSelect();
 
-            return $this->container->get('templating')
-                                   ->renderResponse('ZnaikaFrontendBundle:Message:showThreads.html.twig', array(
-                    'threads' => $threads,
-                ));
-        }
+            $provider  = $this->getProvider();
+            $threads   = $provider->getParticipantAllThreads($filter);
+            $recipient = $request->get("sel", false);
 
-        public function showThreadAction($threadId)
-        {
-            /** @var Thread $thread */
-            $thread      = $this->getProvider()->getThread($threadId);
-            $form        = $this->container->get('fos_message.reply_form.factory')->create($thread);
-            $formHandler = $this->container->get('fos_message.reply_form.handler');
-
-            if ($message = $formHandler->process($form))
-            {
-                return new RedirectResponse($this->generateUrl('show_thread', array(
-                    'threadId' => $threadId
-                )));
-            }
-
-            $participant = $thread->getOtherParticipant($this->getUser());
-
-            return $this->container->get('templating')
-                                   ->renderResponse('ZnaikaFrontendBundle:Message:showThread.html.twig', array(
-                    'form'        => $form->createView(),
-                    'thread'      => $thread,
-                    'participant' => $participant
-                ));
-        }
-
-        public function newMessageAction()
-        {
-            $form        = $this->container->get('fos_message.new_thread_form.factory')->create();
-            $formHandler = $this->container->get('fos_message.new_thread_form.handler');
-
-            if ($message = $formHandler->process($form))
-            {
-                return new RedirectResponse($this->generateUrl('show_thread', array(
-                    'threadId' => $message->getThread()->getId()
-                )));
-            }
-
-            /** @var NewThreadMessage $data */
-            $data = $form->getData();
-
-            return $this->render('ZnaikaFrontendBundle:Message:sendMessage.html.twig', array(
-                'form'        => $form->createView(),
-                'data'        => $data,
-                'participant' => $data->getRecipient()
+            return $this->render('ZnaikaFrontendBundle:Message:showThreads.html.twig', array(
+                'threads'       => $threads,
+                'recipientId'   => $recipient,
+                'filters'       => $filters,
+                'currentFilter' => $filter,
             ));
         }
 
-        public function sendMessageAction(Request $request)
+        public function getThreadAjaxAction($userId)
         {
-            $userRepository = $this->get('znaika.user_repository');
-            $participant    = $userRepository->getOneByUserId($request->get('to'));
+            $userRepository = $this->getUserRepository();
+            $recipient      = $userRepository->getOneByUserId($userId);
+            $thread         = $this->getThreadByUser($recipient);
+            $form           = $this->prepareThreadForm($recipient, $thread);
 
-            $provider = $this->getProvider();
-            $thread   = $provider->getThreadWithUser($participant);
+            $messages      = array();
+            $messagesCount = 0;
             if ($thread instanceof Thread)
             {
-                return new RedirectResponse($this->generateUrl('show_thread', array(
-                    'threadId' => $thread->getId()
-                )));
+                $messagesCount     = count($thread->getMessages());
+                $messageRepository = $this->getMessageRepository();
+                $messages          = $messageRepository->getThreadMessages($thread, 0, self::MESSAGES_LIMIT_ON_PAGE);
+                $messages          = array_reverse($messages);
             }
 
-            /** @var UserRepository $userRepository */
-            $form = $this->getFormForNewThreadAction($participant);
-
-            return $this->render('ZnaikaFrontendBundle:Message:sendMessage.html.twig', array(
-                'form'        => $form->createView(),
-                'newThread'   => $form->getData(),
-                'participant' => $participant
+            $html = $this->renderView('ZnaikaFrontendBundle:Message:getThreadAjax.html.twig', array(
+                'form'          => $form->createView(),
+                'thread'        => $thread,
+                'messages'      => $messages,
+                'messagesCount' => $messagesCount,
+                'participant'   => $recipient,
             ));
+
+            $result = array(
+                'html'    => $html,
+                'success' => true
+            );
+
+            return new JsonResponse($result);
+        }
+
+        public function showThreadPrevMessagesAction($threadId)
+        {
+            /** @var Thread $thread */
+            $thread = $this->getProvider()->getThread($threadId);
+
+            $messagesCount     = count($thread->getMessages());
+            $messageRepository = $this->getMessageRepository();
+            $messages          = $messageRepository->getThreadMessages($thread, self::MESSAGES_LIMIT_ON_PAGE,
+                $messagesCount - self::MESSAGES_LIMIT_ON_PAGE);
+            $messages          = array_reverse($messages);
+
+            $html = $this->renderView('ZnaikaFrontendBundle:Message:showThreadPrevMessages.html.twig', array(
+                'messages' => $messages,
+            ));
+
+            $result = array(
+                'html'    => $html,
+                'success' => true
+            );
+
+            return new JsonResponse($result);
+        }
+
+        public function sendMessageAjaxAction(Request $request)
+        {
+            $participantId  = $request->get('participantId');
+            $userRepository = $this->getUserRepository();
+            $recipient      = $userRepository->getOneByUserId($participantId);
+            $thread         = $this->getThreadByUser($recipient);
+            $form           = $this->prepareThreadForm($recipient, $thread);
+            $formHandler    = $this->prepareFormHandleByThread($thread);
+
+            $result = array(
+                "success" => false
+            );
+            /** @var Message $message */
+            $message = $formHandler->process($form);
+            if ($message)
+            {
+                $result['success'] = true;
+
+                $result['html']          = $this->renderView('ZnaikaFrontendBundle:Message:show_message_block.html.twig',
+                    array(
+                        'message' => $message,
+                    ));
+                $result['threadHtml']    = $this->renderView('ZnaikaFrontendBundle:Message:show_thread_last_message.html.twig',
+                    array(
+                        'thread' => $message->getThread(),
+                    ));
+                $result['participantId'] = $participantId;
+            }
+
+            return new JsonResponse($result);
         }
 
         /**
@@ -141,6 +165,80 @@
         protected function getProvider()
         {
             return $this->container->get('fos_message.provider');
+        }
+
+        /**
+         * @return MessageRepository
+         */
+        private function getMessageRepository()
+        {
+            /** @var MessageRepository $messageRepository */
+            $messageRepository = $this->get('znaika.message_repository');
+
+            return $messageRepository;
+        }
+
+        /**
+         * @param $participant
+         *
+         * @return \FOS\MessageBundle\Model\ThreadInterface
+         * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+         */
+        private function getThreadByUser($participant)
+        {
+            if (!$participant instanceof User)
+            {
+                throw $this->createNotFoundException("Send message error: bad participantId({$participant})");
+            }
+
+            $provider = $this->getProvider();
+            $thread   = $provider->getThreadWithUser($participant);
+
+            return $thread;
+        }
+
+        /**
+         * @return UserRepository
+         */
+        private function getUserRepository()
+        {
+            $userRepository = $this->get('znaika.user_repository');
+
+            return $userRepository;
+        }
+
+        /**
+         * @param \Znaika\ProfileBundle\Entity\User $participant
+         * @param $thread
+         *
+         * @return mixed
+         */
+        private function prepareThreadForm(User $participant, $thread)
+        {
+            if ($thread instanceof Thread)
+            {
+                $form = $this->container->get('fos_message.reply_form.factory')->create($thread);
+            }
+            else
+            {
+                $form = $this->getFormForNewThreadAction($participant);
+            }
+
+            return $form;
+        }
+
+        private function prepareFormHandleByThread($thread)
+        {
+            if ($thread instanceof Thread)
+            {
+                $formHandler = $this->container->get('fos_message.reply_form.handler');
+            }
+            else
+            {
+                $formHandler = $this->container->get('fos_message.new_thread_form.handler');
+            }
+
+            return $formHandler;
         }
     }
 

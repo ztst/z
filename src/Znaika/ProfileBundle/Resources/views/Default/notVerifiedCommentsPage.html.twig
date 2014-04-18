@@ -1,12 +1,9 @@
-{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+{% extends 'ZnaikaProfileBundle::Default/user_page_layout.html.twig' %}
 
 {% block stylesheets %}
   {{ parent() }}
 
   {% stylesheets filter="?yui_css"
-    '../app/Resources/public/css/tab_menu.css'
-    '@ZnaikaProfileBundle/Resources/public/css/profile_page.css'
-    '@ZnaikaProfileBundle/Resources/public/css/teacher_profile.css'
     '@ZnaikaProfileBundle/Resources/public/css/moderator_profile.css'
     '@ZnaikaProfileBundle/Resources/public/css/not_verified_comments.css'
   %}
@@ -24,50 +21,41 @@
   {% endjavascripts %}
 {% endblock %}
 
-{% block content %}
-  <div class="teacher-profile-top-horizontal-line"></div>
-  <div class="profile-sidebar-menu-container">
-    {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
-  </div>
-  <div class="teacher-profile-container">
-    <div class="">
-      <div class="tabs-container">
-        <ul class="nav nav-tabs select-content-tab user-profile-tab-menu">
-          <li class="video-with-questions active">
+{% block pageContent %}
+  <div class="">
+    <div class="tabs-container">
+      <ul class="nav nav-tabs select-content-tab user-profile-tab-menu">
+        <li class="video-with-questions active">
+          <div class="active-top-border"></div>
+          <a id="videoTab" href="#video_tab" data-toggle="tab">
+            <span class="tab-label">Уроки с комментариями</span>
+          </a>
+        </li>
+        {% if countComments %}
+          <li class="comments-tab hidden">
             <div class="active-top-border"></div>
-            <a id="videoTab" href="#video_tab" data-toggle="tab">
-              <span class="tab-label">Уроки с комментариями</span>
+            <a id="commentTab" href="#comments_tab" data-toggle="tab">
+              <span class="tab-label">Правка комментариев</span>
             </a>
           </li>
-          {% if countComments %}
-            <li class="comments-tab hidden">
-              <div class="active-top-border"></div>
-              <a id="commentTab" href="#comments_tab" data-toggle="tab">
-                <span class="tab-label">Правка комментариев</span>
-              </a>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
-    </div>
-    <div class="tab-pane active video-tab" id="video_tab">
-      <div class="empty-comments-message-container {% if videos|length  %}hidden{% endif %}">
-        <div class="tab-header">
-          <h4>Все комментарии проверены</h4>
-        </div>
-      </div>
-      <div class="not-empty-comments-container {% if not videos|length  %}hidden{% endif %}">
-        <div class="tab-header">
-          <h4>Видеоуроки с непроверенными комментариями<span class="list-count-container">+{{ videos|length }}</span></h4>
-        </div>
-        {% include "ZnaikaProfileBundle:Default:video_with_not_verified_comments_list.html.twig" with {'videos': videos} %}
-      </div>
-    </div>
-    <div class="tab-pane comments-tab" id="comments_tab">
-      {% include "ZnaikaProfileBundle:Default:moderator_comments_tab.html.twig" with {'videos': videos} %}
+        {% endif %}
+      </ul>
     </div>
   </div>
-  <div class="teacher-profile-bottom-horizontal-placeholder">
-    <div class="line"></div>
+  <div class="tab-pane active video-tab" id="video_tab">
+    <div class="empty-comments-message-container {% if videos|length %}hidden{% endif %}">
+      <div class="tab-header">
+        <h4>Все комментарии проверены</h4>
+      </div>
+    </div>
+    <div class="not-empty-comments-container {% if not videos|length %}hidden{% endif %}">
+      <div class="tab-header">
+        <h4>Видеоуроки с непроверенными комментариями<span class="list-count-container">+{{ videos|length }}</span></h4>
+      </div>
+      {% include "ZnaikaProfileBundle:Default:video_with_not_verified_comments_list.html.twig" with {'videos': videos} %}
+    </div>
+  </div>
+  <div class="tab-pane comments-tab" id="comments_tab">
+    {% include "ZnaikaProfileBundle:Default:moderator_comments_tab.html.twig" with {'videos': videos} %}
   </div>
 {% endblock %}

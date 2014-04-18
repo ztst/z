@@ -5,6 +5,8 @@
     use FOS\MessageBundle\Model\ParticipantInterface;
     use FOS\MessageBundle\Model\ReadableInterface;
     use FOS\MessageBundle\Model\ThreadInterface;
+    use Znaika\FrontendBundle\Entity\Communication\Message;
+    use Znaika\FrontendBundle\Entity\Communication\Thread;
     use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Repository\BaseRepository;
 
@@ -23,7 +25,7 @@
         public function __construct($doctrine)
         {
             $redisRepository = new MessageRedisRepository();
-            $dbRepository = $doctrine->getRepository('ZnaikaFrontendBundle:Communication\Message');
+            $dbRepository    = $doctrine->getRepository('ZnaikaFrontendBundle:Communication\Message');
 
             $this->setRedisRepository($redisRepository);
             $this->setDBRepository($dbRepository);
@@ -39,10 +41,11 @@
         public function getNbUnreadMessageByParticipant(ParticipantInterface $participant)
         {
             $result = $this->redisRepository->getNbUnreadMessageByParticipant($participant);
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->getNbUnreadMessageByParticipant($participant);
             }
+
             return $result;
         }
 
@@ -54,10 +57,11 @@
         public function createMessage()
         {
             $result = $this->redisRepository->createMessage();
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->createMessage();
             }
+
             return $result;
         }
 
@@ -83,10 +87,11 @@
         public function getClass()
         {
             $result = $this->redisRepository->getClass();
-            if ( empty($result) )
+            if (empty($result))
             {
                 $result = $this->dbRepository->getClass();
             }
+
             return $result;
         }
 
@@ -147,5 +152,63 @@
             $success = $this->dbRepository->markIsDeletedByParticipant($participant, $messageId);
 
             return $success;
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function countUnreadThreadMessageByParticipant(User $participant, Thread $thread)
+        {
+            $result = $this->redisRepository->countUnreadThreadMessageByParticipant($participant, $thread);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->countUnreadThreadMessageByParticipant($participant, $thread);
+            }
+
+            return $result;
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function countUnreadThreadsByParticipant(User $participant)
+        {
+            $result = $this->redisRepository->countUnreadThreadsByParticipant($participant);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->countUnreadThreadsByParticipant($participant);
+            }
+
+            return $result;
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function getThreadMessages(Thread $thread, $offset, $limit)
+        {
+            $result = $this->redisRepository->getThreadMessages($thread, $offset, $limit);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getThreadMessages($thread, $offset, $limit);
+            }
+
+            return $result;
+        }
+
+        /**
+         * @param Thread $thread
+         *
+         * @return Message
+         */
+        public function getLastThreadMessage(Thread $thread)
+        {
+            $result = $this->redisRepository->getLastThreadMessage($thread);
+            if (is_null($result))
+            {
+                $result = $this->dbRepository->getLastThreadMessage($thread);
+            }
+
+            return $result;
         }
     }

@@ -4,7 +4,7 @@
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-    use Znaika\FrontendBundle\Form\DataTransformer\UserToIdTransformer;
+    use Znaika\ProfileBundle\Form\DataTransformer\UserToIdTransformer;
 
     /**
      * Description of RecipientsType

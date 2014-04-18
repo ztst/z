@@ -1,34 +1,69 @@
-{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+{% extends 'ZnaikaProfileBundle::Default/user_page_layout.html.twig' %}
 
-{% block content %}
-  <h4>Мои сообщения</h4>
+{% block stylesheets %}
+  {{ parent() }}
 
-  {% if threads %}
-    {% for thread in threads %}
-      {% set lastMessage = thread.getNotDeletedLastMessage(app.user) %}
-      {% if lastMessage %}
-        <div>
-          <a href="{{ url('show_user_profile', {'userId': thread.getOtherParticipant(app.user).getId}) }}">
-            {{ thread.getOtherParticipant(app.user) }}
+  {% stylesheets filter="?yui_css"
+    '@ZnaikaProfileBundle/Resources/public/css/messages.css'
+  %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts filter='?yui_js'
+    '../app/Resources/public/js/classes/form/profile/SendMessageForm.class.js'
+    '../app/Resources/public/js/classes/page/profile/MessagesPage.class.js'
+  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block pageContent %}
+  <div class="">
+    <div class="tabs-container">
+      <ul class="nav nav-tabs select-content-tab user-profile-tab-menu">
+        <li class="threads-tab {% if not recipientId %}active{% endif %}">
+          <div class="active-top-border"></div>
+          <a id="threadsTab" href="#threads" data-toggle="tab">
+            <span class="tab-label">Диалоги</span>
           </a>
-          <br />
-          {{ lastMessage.createdAt|date }}
-          <br />
-          <a href="{{ url('show_thread', {'threadId': thread.id}) }}" title="">
-            К диалогу
+        </li>
+        <li class="thread-tab {% if recipientId %}active{% else %}hidden{% endif %}">
+          <div class="active-top-border"></div>
+          <a id="threadTab" href="#thread" data-toggle="tab">
+            <span class="tab-label">Просмотр диалога</span>
           </a>
-          {% if not fos_message_is_read(thread) %}
-            (Есть новые)
-          {% endif %}
-          <br />
-          {{ lastMessage.sender|e }}
-          <br />
-          {{ lastMessage.body|e }}
-        </div>
-        <hr/>
-      {% endif %}
-    {% endfor %}
-  {% else %}
-    У вас нет сообщений
-  {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="tab-pane {% if not recipientId %}active{% endif %}" id="threads">
+    <select id="messagesFilter">
+      {% for filter in filters|keys %}
+        <option value="{{ path("show_threads", {"f": filter}) }}" {% if currentFilter == filter %}selected="selected"{% endif %}>{{ filters[filter] }}</option>
+      {% endfor %}
+    </select>
+
+    <div class="empty-pupils-message-container {% if threads|length  %}hidden{% endif %}">
+      <div class="tab-header">
+        <h4>У вас нет сообщений</h4>
+      </div>
+    </div>
+    <div class="not-empty-pupils-container {% if not threads|length  %}hidden{% endif %}">
+      <div class="tab-header">
+        <h4>Диалогов: <span class="count-threads">{{ threads|length }}</span></h4>
+      </div>
+      {% include "ZnaikaFrontendBundle:Message:thread_list.html.twig" with {'threads': threads} %}
+    </div>
+  </div>
+  <div class="tab-pane {% if recipientId %}active{% endif %}" id="thread">
+    <div class="thread-preloader {% if not recipientId %}hidden{% endif %}">
+      <img src="{{ asset("images/preloader.gif") }}" alt="Диалог загружается..." />
+    </div>
+    <div class="thread-container"></div>
+    <input type="hidden" id="recipientId" value="{{ recipientId }}"/>
+  </div>
 {% endblock %}

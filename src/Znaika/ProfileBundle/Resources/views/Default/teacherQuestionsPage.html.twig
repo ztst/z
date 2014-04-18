@@ -1,16 +1,4 @@
-{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
-
-{% block stylesheets %}
-  {{ parent() }}
-
-  {% stylesheets filter="?yui_css"
-    '../app/Resources/public/css/tab_menu.css'
-    '@ZnaikaProfileBundle/Resources/public/css/profile_page.css'
-    '@ZnaikaProfileBundle/Resources/public/css/teacher_profile.css'
-  %}
-  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
-  {% endstylesheets %}
-{% endblock %}
+{% extends 'ZnaikaProfileBundle::Default/user_page_layout.html.twig' %}
 
 {% block javascripts %}
   {{ parent() }}
@@ -22,50 +10,41 @@
   {% endjavascripts %}
 {% endblock %}
 
-{% block content %}
-  <div class="teacher-profile-top-horizontal-line"></div>
-  <div class="profile-sidebar-menu-container">
-    {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
-  </div>
-  <div class="teacher-profile-container">
-    <div>
-      <div class="tabs-container">
-        <ul class="nav nav-tabs select-content-tab user-profile-tab-menu">
-          <li class="video-with-questions active">
+{% block pageContent %}
+  <div>
+    <div class="tabs-container">
+      <ul class="nav nav-tabs select-content-tab user-profile-tab-menu">
+        <li class="video-with-questions active">
+          <div class="active-top-border"></div>
+          <a id="videoTab" href="#video_tab" data-toggle="tab">
+            <span class="tab-label">Уроки с вопросами</span>
+          </a>
+        </li>
+        {% if countQuestions %}
+          <li class="questions-tab hidden">
             <div class="active-top-border"></div>
-            <a id="videoTab" href="#video_tab" data-toggle="tab">
-              <span class="tab-label">Уроки с вопросами</span>
+            <a id="questionTab" href="#question_tab" data-toggle="tab">
+              <span class="tab-label">Просмотр вопросов</span>
             </a>
           </li>
-          {% if countQuestions %}
-            <li class="questions-tab hidden">
-              <div class="active-top-border"></div>
-              <a id="questionTab" href="#question_tab" data-toggle="tab">
-                <span class="tab-label">Просмотр вопросов</span>
-              </a>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
-    </div>
-    <div class="tab-pane active video-tab" id="video_tab">
-      <div class="empty-questions-message-container {% if videos|length  %}hidden{% endif %}">
-        <div class="tab-header">
-          <h4>Вопросы к урокам отсутствуют</h4>
-        </div>
-      </div>
-      <div class="not-empty-questions-container {% if not videos|length  %}hidden{% endif %}">
-        <div class="tab-header">
-          <h4>Видеоуроки с новыми вопросами<span class="list-count-container">+{{ videos|length }}</span></h4>
-        </div>
-        {% include "ZnaikaProfileBundle:Default:video_with_questions_list.html.twig" with {'videos': videos} %}
-      </div>
-    </div>
-    <div class="tab-pane questions-tab-content" id="question_tab">
-      {% include "ZnaikaProfileBundle:Default:teacher_questions_tab.html.twig" with {'videos': videos} %}
+        {% endif %}
+      </ul>
     </div>
   </div>
-  <div class="teacher-profile-bottom-horizontal-placeholder">
-    <div class="line"></div>
+  <div class="tab-pane active video-tab" id="video_tab">
+    <div class="empty-questions-message-container {% if videos|length  %}hidden{% endif %}">
+      <div class="tab-header">
+        <h4>Вопросы к урокам отсутствуют</h4>
+      </div>
+    </div>
+    <div class="not-empty-questions-container {% if not videos|length  %}hidden{% endif %}">
+      <div class="tab-header">
+        <h4>Видеоуроки с новыми вопросами<span class="list-count-container">+{{ videos|length }}</span></h4>
+      </div>
+      {% include "ZnaikaProfileBundle:Default:video_with_questions_list.html.twig" with {'videos': videos} %}
+    </div>
+  </div>
+  <div class="tab-pane questions-tab-content" id="question_tab">
+    {% include "ZnaikaProfileBundle:Default:teacher_questions_tab.html.twig" with {'videos': videos} %}
   </div>
 {% endblock %}

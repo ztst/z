@@ -43,7 +43,7 @@ var ViewTeacherQuestionsPage = Base.extend({
                 openQuestionLink.closest("li").remove();
                 $(".questions-tab").addClass("hidden");
                 $("#videoTab").click();
-                $(".videos-with-questions-list li").first().addClass("first");
+                $(".user-profile-page-list li").first().addClass("first");
             }
         }
     },

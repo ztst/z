@@ -40,6 +40,11 @@
 
     class DefaultController extends ZnaikaController
     {
+        public function showMessagesAction(Request $request)
+        {
+            return "";
+        }
+
         /**
          * @param Request $request
          *

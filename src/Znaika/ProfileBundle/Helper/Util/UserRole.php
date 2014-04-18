@@ -7,6 +7,7 @@
         const ROLE_MODERATOR = 1;
         const ROLE_ADMIN     = 2;
         const ROLE_TEACHER   = 3;
+        const ROLE_PARENT    = 4;
 
         public static function getAvailableRoles()
         {

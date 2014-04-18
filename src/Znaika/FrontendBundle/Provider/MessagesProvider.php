@@ -21,17 +21,27 @@
         public function getThreadWithUser($participant)
         {
             $authenticatedParticipant = $this->getAuthenticatedParticipant();
+            $thread = $this->threadManager->findThreadByUsers($authenticatedParticipant, $participant);
 
-            return $this->threadManager->findThreadByUsers($authenticatedParticipant, $participant);
+            if ($thread)
+            {
+                //TODO: make 1 query solution
+                $thread->getMessages();
+                $this->threadReader->markAsRead($thread);
+            }
+
+            return $thread;
         }
 
         /**
+         * @param $filter
+         *
          * @return ThreadInterface[]
          */
-        public function getParticipantAllThreads()
+        public function getParticipantAllThreads($filter)
         {
             $authenticatedParticipant = $this->getAuthenticatedParticipant();
 
-            return $this->threadManager->findParticipantAllThreads($authenticatedParticipant);
+            return $this->threadManager->findParticipantAllThreads($authenticatedParticipant, $filter);
         }
     }

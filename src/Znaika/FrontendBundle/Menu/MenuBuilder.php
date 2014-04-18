@@ -3,10 +3,10 @@
 
     use Knp\Menu\ItemInterface;
     use Knp\Menu\FactoryInterface;
-    use Symfony\Component\DependencyInjection\ContainerInterface;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\Security\Core\SecurityContextInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
+    use Znaika\FrontendBundle\Repository\Communication\MessageRepository;
     use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Znaika\FrontendBundle\Helper\Util\Lesson\SubjectUtil;
@@ -86,7 +86,8 @@
             return $menu;
         }
 
-        public function createSidebarProfileMenu(Request $request, UserRepository $userRepository, VideoCommentRepository $videoCommentRepository)
+        public function createSidebarProfileMenu(Request $request, UserRepository $userRepository,
+                                                 VideoCommentRepository $videoCommentRepository, MessageRepository $messageRepository)
         {
             $menu = $this->factory->createItem("root");
             $menu->setCurrentUri($request->getRequestUri());
@@ -94,20 +95,24 @@
             $menu->setChildrenAttribute("class", "profile-sidebar-menu");
             $this->currentRoute = $request->get('_route');
 
-            $countQuestions = $videoCommentRepository->countTeacherNotAnsweredQuestionComments($this->currentUser);
             $userId         = $this->currentUser->getUserId();
             $menu->addChild("Мой профиль",
                 array("route" => "edit_teacher_profile", "routeParameters" => array("userId" => $userId)));
 
-            $title = "Вопросы к урокам";
-            $title .= $countQuestions ? " <span class='list-count-container user-questions-count'>+$countQuestions</span>" : "";
-            $menuItem = $menu->addChild($title,
-                array("route" => "teacher_questions", "routeParameters" => array("userId" => $userId)));
-            $menuItem->setExtra('safe_label', true);
+            $countThreads = $messageRepository->countUnreadThreadsByParticipant($this->currentUser);
+            $title = "Общение";
+            $title .= $countThreads ? " <span class='list-count-container not-read-threads-count'>+$countThreads</span>" : "";
+            $menu->addChild($title, array("route" => "show_threads"));
+
+            if ($this->securityContext->isGranted(UserRole::getSecurityTextByRole(UserRole::ROLE_TEACHER)))
+            {
+                $countQuestions = $videoCommentRepository->countTeacherNotAnsweredQuestionComments($this->currentUser);
+                $this->addTeacherItems($countQuestions, $menu, $userId);
+            }
 
             if ($this->securityContext->isGranted(UserRole::getSecurityTextByRole(UserRole::ROLE_MODERATOR)))
             {
-                $menu = $this->addModeratorItems($menu, $videoCommentRepository, $userRepository);
+                $this->addModeratorItems($menu, $videoCommentRepository, $userRepository);
             }
 
             return $menu;
@@ -204,8 +209,6 @@
         {
             $this->addCommentMenuItem($menu, $videoCommentRepository);
             $this->addPupilMenuItem($menu, $userRepository);
-
-            return $menu;
         }
 
         private function addCommentMenuItem(ItemInterface $menu, VideoCommentRepository $videoCommentRepository)
@@ -235,5 +238,19 @@
             $menuItem->setExtra('safe_label', true);
 
             return $menu;
+        }
+
+        /**
+         * @param $countQuestions
+         * @param $menu
+         * @param $userId
+         */
+        private function addTeacherItems($countQuestions, $menu, $userId)
+        {
+            $title = "Вопросы к урокам";
+            $title .= $countQuestions ? " <span class='list-count-container user-questions-count'>+$countQuestions</span>" : "";
+            $menuItem = $menu->addChild($title,
+                array("route" => "teacher_questions", "routeParameters" => array("userId" => $userId)));
+            $menuItem->setExtra('safe_label', true);
         }
     }

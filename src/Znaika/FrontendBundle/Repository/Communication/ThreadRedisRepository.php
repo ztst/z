@@ -154,12 +154,7 @@
             // TODO: Implement deleteThread() method.
         }
 
-        /**
-         * @param User $participant
-         *
-         * @return array of ThreadInterface
-         */
-        public function findParticipantAllThreads(User $participant)
+        public function findParticipantAllThreads(User $participant, $filter)
         {
             return null;
         }
