@@ -1014,4 +1014,23 @@ img.mfp-img
     padding: 0;
     text-align: center;
 }
+
+.unregistered-user-like-popup.additional-form-container .additional-form-button-container
+{
+    padding: 0;
+    text-align: center;
+}
+
+.unregistered-user-like-popup.additional-form-container .active-button,
+.unregistered-user-like-popup.additional-form-container .semi-active-button
+{
+    width: 108px;
+}
+
+.unregistered-user-like-popup.additional-form-container .semi-active-button
+{
+    margin-right: 15px;
+    position: relative;
+    top: 1px;
+}
 /* Additional forms styles END */
