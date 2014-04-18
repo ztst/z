@@ -24,7 +24,7 @@ var AddCommentForm = BaseForm.extend({
 
     _needToSubmit: function()
     {
-        return true;
+        return false;
     },
 
     _onIsQuestionButtonClick: function()

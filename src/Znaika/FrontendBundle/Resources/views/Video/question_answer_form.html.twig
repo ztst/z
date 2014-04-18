@@ -1,0 +1,22 @@
+<div class="add-video-comment-container">
+  {{ form_start(form, {'attr': {'id': 'answerForm'}, 'action': path('question_answer_form', {"videoName": video.getUrlName}), 'method': 'POST'}) }}
+    {{ form_errors(form, {'attr': {'class': 'alert alert-danger'}}) }}
+    <div class="form-group">
+      {{ form_label(form.text, 'Ответ', {'label_attr': {'class': 'label-your-comment'}}) }}
+      {{ form_errors(form.text) }}
+      {{ form_widget(form.text, {'attr': {'class': 'form-control comment-text-field'}}) }}
+      {% if has_question_for_current_user(video) %}
+        <input type="hidden" name="isAnswer" value="1" id="isQuestionInput" />
+        <input type="hidden" name="questionId" value="0" id="questionIdInput" />
+      {% elseif not is_teacher() %}
+        <a href="javascript:void(0);" id="isQuestionButton" class="question-comment-button" title="Нажмите, если хотите задать вопрос учителю">&nbsp;</a>
+        <input type="hidden" name="isQuestion" value="0" id="isQuestionInput" />
+      {% endif %}
+    </div>
+    <div>
+      <button class="active-button send-comment-button" type="submit">
+        <span class="active-button-label">Отправить</span>
+      </button>
+    </div>
+  {{ form_end(form) }}
+</div>

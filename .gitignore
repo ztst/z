@@ -20,3 +20,4 @@
 /web/images/*.db
 /web/images/*.db
 /app/config/config_dev.yml
+/app/config/config_prod.yml
