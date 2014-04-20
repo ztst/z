@@ -1,0 +1,12 @@
+<select id="ageFromSelect" class="search-filter-select">
+  <option value="" />От</option>
+  {% for age in agesFrom %}
+    <option value="{{ age }}" {% if currentAgeFrom and currentAgeFrom == age  %}selected="selected"{% endif %}/>{{ age }}</option>
+  {% endfor %}
+</select>
+<select id="ageToSelect" class="search-filter-select">
+  <option value="" />До</option>
+  {% for age in agesTo %}
+    <option value="{{ age }}" {% if currentAgeTo and currentAgeTo == age  %}selected="selected"{% endif %}/>{{ age }}</option>
+  {% endfor %}
+</select>

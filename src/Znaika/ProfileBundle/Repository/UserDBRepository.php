@@ -36,6 +36,11 @@
          */
         public function getByUserIds($userIds)
         {
+            if (empty($userIds))
+            {
+                return array();
+            }
+
             $qb = $this->getEntityManager()->createQueryBuilder();
 
             $qb->select('u')

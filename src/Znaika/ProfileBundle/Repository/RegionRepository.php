@@ -64,20 +64,4 @@
 
             return $result;
         }
-
-        /**
-         * @param string $name
-         *
-         * @return Region
-         */
-        public function getOneByName($name)
-        {
-            $result = $this->redisRepository->getOneByName($name);
-            if (empty($result))
-            {
-                $result = $this->dbRepository->getOneByName($name);
-            }
-
-            return $result;
-        }
     }

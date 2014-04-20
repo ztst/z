@@ -1,0 +1,13 @@
+.user-search-result-container
+{
+    width: 400px;
+    float: left;
+}
+
+.user-search-filters-container
+{
+    margin-left: 400px;
+    border-left: 1px solid #CCCCCC;
+    width: 280px;
+    padding: 10px;
+}

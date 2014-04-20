@@ -92,10 +92,6 @@ services:
         class:        Znaika\FrontendBundle\Repository\Communication\Support\SupportRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
-    znaika.region_repository:
-        class:        Znaika\ProfileBundle\Repository\RegionRepository
-        arguments:    ["@doctrine.orm.entity_manager"]
-
 #menu
     znaika.menu_builder:
         class: Znaika\FrontendBundle\Menu\MenuBuilder
@@ -259,3 +255,8 @@ services:
         class: Znaika\FrontendBundle\Helper\Search\VideoSearch
         arguments:
             - @znaika.video_repository
+
+    znaika.user_search:
+        class: Znaika\FrontendBundle\Helper\Search\UserSearch
+        arguments:
+            - @znaika.user_repository

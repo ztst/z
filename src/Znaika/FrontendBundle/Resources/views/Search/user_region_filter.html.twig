@@ -1,0 +1,6 @@
+<select id="regionSelect" class="search-filter-select">
+  <option value="" />Выбор региона</option>
+  {% for region in regions %}
+    <option value="{{ region.regionId }}" {% if currentRegionId and currentRegionId == region.regionId  %}selected="selected"{% endif %}/>{{ region.regionName }}</option>
+  {% endfor %}
+</select>

@@ -32,14 +32,4 @@
         {
             return null;
         }
-
-        /**
-         * @param string $name
-         *
-         * @return Region
-         */
-        public function getOneByName($name)
-        {
-            return null;
-        }
     }

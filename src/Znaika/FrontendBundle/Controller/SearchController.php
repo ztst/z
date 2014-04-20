@@ -5,6 +5,7 @@
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\Request;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
+    use Znaika\FrontendBundle\Helper\Search\UserSearch;
     use Znaika\FrontendBundle\Helper\Search\VideoSearch;
     use Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\SynopsisRepository;
@@ -14,6 +15,27 @@
     class SearchController extends ZnaikaController
     {
         const RESULT_ON_SPECIAL_PAGE = 15;
+
+        public function searchUsersAjaxAction(Request $request)
+        {
+            $searchString = trim($request->get("q", ""));
+            $page         = intval($request->get("page"));
+            $users        = $this->searchUsers($searchString, $request, self::RESULT_ON_SPECIAL_PAGE, $page);
+            $countUsers   = $this->countFoundedUsers($searchString, $request);
+            $isFinalPage  = $this->isFinalPage($countUsers, $page, self::RESULT_ON_SPECIAL_PAGE);
+
+            $html = $this->renderView('ZnaikaFrontendBundle:Search:search_user_list.html.twig', array(
+                'users' => $users,
+            ));
+
+            $array = array(
+                'html'        => $html,
+                'isFinalPage' => $isFinalPage,
+                'countUsers'  => $countUsers,
+            );
+
+            return new JsonResponse($array);
+        }
 
         public function searchVideoAction(Request $request)
         {
@@ -115,6 +137,13 @@
             return $videos;
         }
 
+        private function countFoundedVideos($searchString, $subject, $grade)
+        {
+            $videoSearch = $this->getVideoSearch();
+
+            return $videoSearch->countVideosBySearchString($searchString, $subject, $grade);
+        }
+
         /**
          * @return VideoSearch
          */
@@ -124,17 +153,30 @@
         }
 
         /**
-         * @param $searchString
-         *
-         * @return array
+         * @return UserSearch
          */
-        private function searchUsers($searchString)
+        private function getUserSearch()
         {
-            $repository = $this->getUserRepository();
-            $users      = $repository->getUsersBySearchString($searchString);
+            return $this->get("znaika.user_search");
+        }
+
+        private function searchUsers($searchString, Request $request, $limit = null, $page = null)
+        {
+            $userSearch = $this->getUserSearch();
+            $userSearch->initFromRequest($request);
+            $users = $userSearch->getUsersBySearchString($searchString, $limit, $page);
 
             return $users;
         }
+
+        private function countFoundedUsers($searchString, Request $request)
+        {
+            $userSearch = $this->getUserSearch();
+            $userSearch->initFromRequest($request);
+
+            return $userSearch->countUserBySearchString($searchString);
+        }
+
 
         /**
          * @param $searchString
@@ -147,13 +189,6 @@
             $synopsises = $repository->getSynopsisesBySearchString($searchString);
 
             return $synopsises;
-        }
-
-        private function countFoundedVideos($searchString, $subject, $grade)
-        {
-            $videoSearch = $this->getVideoSearch();
-
-            return $videoSearch->countVideosBySearchString($searchString, $subject, $grade);
         }
 
         /**
@@ -196,7 +231,7 @@
         private function getSubjectIdFromRequest(Request $request)
         {
             $subjectName = $request->get("s", "");
-            $repository = $this->getSubjectRepository();
+            $repository  = $this->getSubjectRepository();
 
             $subject = $repository->getOneByUrlName($subjectName);
 
