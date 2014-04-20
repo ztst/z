@@ -2,12 +2,121 @@
 {
     width: 400px;
     float: left;
+    background: url("/images/user-profile/user-search-results-background.png") repeat-y;
+}
+
+.users-search-container .tab-header
+{
+    margin-right: 0;
 }
 
 .user-search-filters-container
 {
     margin-left: 400px;
-    border-left: 1px solid #CCCCCC;
     width: 280px;
     padding: 10px;
+}
+
+.users-search-container ul
+{
+    list-style: none;
+    margin-right: 26px;
+}
+
+.users-search-container li
+{
+    padding: 20px 0;
+    border-bottom: 1px solid #efefef;
+}
+
+.send-found-user-message-button
+{
+    padding-left: 18px;
+    color: #036995;
+    font-size: 12px;
+    background: url("/images/user-profile/send-found-user-message-button-icon.png") no-repeat 0 3px;
+}
+
+.users-search-container .message-user-name
+{
+    margin-left: 0;
+}
+
+.users-search-container .message-text-data
+{
+    margin-left: 63px;
+}
+
+.user-search-filters-container
+{
+    padding: 28px;
+}
+
+.user-search-filters-container .search-icon
+{
+    display: block;
+    position: absolute;
+    z-index: 3;
+    top: 8px;
+    left: 10px;
+    width: 14px;
+    height: 14px;
+
+    background: url("/images/header/search-icon.png") no-repeat;
+}
+
+.user-search-filters-container .form-control
+{
+    padding-left: 27px;
+}
+
+.user-search-filters-container .user-search-filters-label
+{
+    float: none;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.user-search-filters-container .role-filter label
+{
+    font-family: "OpenSans","Open Sans",serif;
+}
+
+.user-search-filters-container .role-filter input
+{
+    float: left;
+    margin-right: 6px;
+    margin-top: 6px;
+}
+
+.user-search-filters-container .start-search-button
+{
+    margin-top: 15px;
+    width: 100%;
+}
+
+.user-search-filters-container .start-search-button .active-button-label
+{
+    padding-left: 0;
+}
+
+.user-search-filters-container .input-group
+{
+    width: 100%;
+}
+
+.user-search-filters-container .selectbox .select .text
+{
+    font-family: "OpenSans","Open Sans",serif;
+    width: 202px;
+}
+
+.user-search-filters-container .age-filter .selectbox .select .text
+{
+    width: 75px;
+}
+
+.user-search-filters-container .age-filter .selectbox .dropdown
+{
+    width: 97px;
 }

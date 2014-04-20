@@ -87,51 +87,56 @@
 .select-content-tab .video .tab-label
 {
     padding-left: 14px;
-    background: url('/images/tab-icons/video-tab-icon.png') no-repeat 0 4px;
+    background: url("/images/tab-icons/video-tab-icon.png") no-repeat 0 4px;
 }
 
 .select-content-tab .synopsis .tab-label
 {
     padding-left: 14px;
-    background: url('/images/tab-icons/synopsis-tab-icon.png') no-repeat 0 6px;
+    background: url("/images/tab-icons/synopsis-tab-icon.png") no-repeat 0 6px;
 }
 
 .select-content-tab .quiz .tab-label
 {
-    background: url('/images/tab-icons/quiz-tab-icon.png') no-repeat 0 3px;
+    background: url("/images/tab-icons/quiz-tab-icon.png") no-repeat 0 3px;
 }
 
 .select-content-tab .video-with-questions .tab-label
 {
-    background: url('/images/tab-icons/video-with-questions-tab-icon.png') no-repeat 1px 3px;
+    background: url("/images/tab-icons/video-with-questions-tab-icon.png") no-repeat 1px 3px;
 }
 
 .select-content-tab .questions-tab .tab-label
 {
-    background: url('/images/tab-icons/questions-tab-icon.png') no-repeat 0 3px;
+    background: url("/images/tab-icons/questions-tab-icon.png") no-repeat 0 3px;
 }
 
 .select-content-tab .profiles-tab .tab-label
 {
-    background: url('/images/tab-icons/verify-users-tab-icon.png') no-repeat 0 3px;
+    background: url("/images/tab-icons/verify-users-tab-icon.png") no-repeat 0 3px;
 }
 
 .select-content-tab .pupil-tab .tab-label
 {
-    background: url('/images/tab-icons/verify-user-profile-tab-icon.png') no-repeat 0 3px;
+    background: url("/images/tab-icons/verify-user-profile-tab-icon.png") no-repeat 0 3px;
 }
 
 .select-content-tab .comments-tab .tab-label
 {
-    background: url('/images/tab-icons/comment-tab-icon.png') no-repeat 0 4px;
+    background: url("/images/tab-icons/comment-tab-icon.png") no-repeat 0 4px;
 }
 
 .select-content-tab .threads-tab .tab-label
 {
-    background: url('/images/tab-icons/threads-tab-icon.png') no-repeat 0 3px;
+    background: url("/images/tab-icons/threads-tab-icon.png") no-repeat 0 3px;
 }
 
 .select-content-tab .watch-threads-tab .tab-label
 {
-    background: url('/images/tab-icons/watch-threads-tab-icon.png') no-repeat 0 3px;
+    background: url("/images/tab-icons/watch-threads-tab-icon.png") no-repeat 0 3px;
+}
+
+.select-content-tab .search-users-tab .tab-label
+{
+    background: url("/images/tab-icons/search-people-tab-icon.png") no-repeat 0 3px;
 }

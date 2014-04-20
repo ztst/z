@@ -1,9 +1,16 @@
 <div class="messenger_thread_message {% if not message.isRead %}not-read-message{% endif %} {% if message.sender != app.user %}not-self-message{% endif %}">
-  <div class="messenger_thread_message_info">
-    {{ message.sender|e }}, {{ message.createdAt|date }}
+  <div class="thread-user-pic">
+    <img width="50" height="50" src="{{ user_photo_small_url(message.sender) }}" alt=""/>
   </div>
-  <div class="messenger_thread_message_body" id="message_{{ message.id }}">
-    {{ message.body }}
+  <div class="message-user-name">
+    <a href="{{ url('show_user_profile', {'userId': message.sender.userId}) }}">
+      {{ message.sender|e }}
+    </a>
   </div>
+  <div class="message-text-data">
+    <div class="message-body">
+      {{ message.body }}
+    </div>
+  </div>
+  <div class="clear"></div>
 </div>
-<hr/>

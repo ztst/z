@@ -1,9 +1,11 @@
-<br/>
 {% for key in roles|keys %}
-  <input name="userRoleRadio" type="radio" value="{{ key }}" id="roleCheckbox{{ key }}"
-         {% if currentRole and currentRole == key %}checked="checked"{% endif %}/>
-  <label for="roleCheckbox{{ key }}">{{ roles[key] }}</label>
-  <br/>
+  <div class="input-group">
+    <input name="userRoleRadio" type="radio" value="{{ key }}" id="roleCheckbox{{ key }}" class="role-filter-radio"
+           {% if currentRole and currentRole == key %}checked="checked"{% endif %}/>
+    <label for="roleCheckbox{{ key }}">{{ roles[key] }}</label>
+  </div>
 {% endfor %}
-<input name="userRoleRadio" type="radio" value="" id="roleCheckboxAll" {% if not currentRole %}checked="checked"{% endif %}/>
-<label for="roleCheckboxAll">Всех</label>
+<div class="input-group">
+  <input name="userRoleRadio" type="radio" value="" id="roleCheckboxAll" {% if not currentRole %}checked="checked"{% endif %}/>
+  <label for="roleCheckboxAll">Всех</label>
+</div>
