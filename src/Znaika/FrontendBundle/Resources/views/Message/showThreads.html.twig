@@ -5,6 +5,7 @@
 
   {% stylesheets filter="?yui_css"
     '@ZnaikaProfileBundle/Resources/public/css/messages.css'
+    '@ZnaikaProfileBundle/Resources/public/css/user_search.css'
   %}
     <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
@@ -15,7 +16,9 @@
 
   {% javascripts filter='?yui_js'
     '../app/Resources/public/js/classes/form/profile/SendMessageForm.class.js'
+    '../app/Resources/public/js/classes/page/profile/SearchUserTab.class.js'
     '../app/Resources/public/js/classes/page/profile/MessagesPage.class.js'
+    '../app/Resources/public/js/classes/PageUpDownScroller.class.js'
   %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
   {% endjavascripts %}
@@ -37,9 +40,16 @@
             <span class="tab-label">Просмотр диалогов</span>
           </a>
         </li>
+        <li class="search-users-tab">
+          <div class="active-top-border"></div>
+          <a id="searchUsersTab" href="#searchUsers" data-toggle="tab">
+            <span class="tab-label">Поиск людей</span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
+
   <div class="tab-pane {% if not recipientId %}active{% endif %}" id="threads">
     <div class="empty-pupils-message-container {% if threads|length  %}hidden{% endif %}">
       <div class="empty-result-message">
@@ -58,11 +68,33 @@
       {% include "ZnaikaFrontendBundle:Message:thread_list.html.twig" with {'threads': threads} %}
     </div>
   </div>
+
   <div class="tab-pane {% if recipientId %}active{% endif %}" id="thread">
     <div class="thread-preloader {% if not recipientId %}hidden{% endif %}">
       <img src="{{ asset("images/preloader.gif") }}" alt="Диалог загружается..." />
     </div>
     <div class="thread-container"></div>
     <input type="hidden" id="recipientId" value="{{ recipientId }}"/>
+  </div>
+
+  <div class="tab-pane" id="searchUsers">
+    <div class="user-search-result-container">
+      <div class="users-search-container hidden">
+        <h4>Найдено людей: <span id="foundedUsersCount">0</span></h4>
+        <ul id="usersContainer" class="users-search-container"></ul>
+        <a id="moreUsers" href="javascript:void(0);" title="">Больше пользователей</a>
+      </div>
+      <div id="searchUsersLoadingIndicator" class="users-search-preloader">
+        <img src="{{ asset("images/preloader.gif") }}" alt="Ищем людей..." />
+      </div>
+    </div>
+    <div class="user-search-filters-container filters-block">
+      <input type="text" placeholder="ФИО или никнейм" id="searchUserNameInput" />
+      {{ search_user_region_filter()|raw }}
+      {{ search_user_age_filter()|raw }}
+      {{ search_user_sex_filter()|raw }}
+      {{ search_user_role_filter()|raw }}
+      <a id="searchUsersButton" class="btn btn-default" href="javascript:void(0);" title="">Начать поиск</a>
+    </div>
   </div>
 {% endblock %}

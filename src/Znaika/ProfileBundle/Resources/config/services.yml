@@ -65,8 +65,12 @@ services:
         arguments:    ["@doctrine.orm.entity_manager"]
 
     znaika.ban_info_repository:
-            class:        Znaika\ProfileBundle\Repository\Ban\InfoRepository
-            arguments:    ["@doctrine.orm.entity_manager"]
+        class:        Znaika\ProfileBundle\Repository\Ban\InfoRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
+    znaika.region_repository:
+        class:        Znaika\ProfileBundle\Repository\RegionRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
 
 #twig
     znaika.security_extension:

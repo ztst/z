@@ -85,6 +85,7 @@
                         if ( selectedText != liText ) {
                             $(this).addClass('selected sel').siblings().removeClass('selected sel');
                             option.removeAttr('selected').eq($(this).index()).attr('selected', true);
+                            select.val(option.eq($(this).index()).val());
                             selectedText = liText;
                             divText.text(liText);
                             select.change();

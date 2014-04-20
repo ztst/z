@@ -1,0 +1,6 @@
+<select id="sexSelect" class="search-filter-select">
+  <option value="" />Любой</option>
+  {% for value in values|keys %}
+    <option value="{{ value  }}" {% if currentSex and currentSex == value %}selected="selected"{% endif %}/>{{ values[value] }}</option>
+  {% endfor %}
+</select>

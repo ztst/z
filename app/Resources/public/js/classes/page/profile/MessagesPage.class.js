@@ -5,6 +5,8 @@ var MessagesPage = Base.extend({
     _messageSending: null,
     _showPrevMessagesLink: null,
 
+    _searchTab: null,
+
     constructor: function()
     {
         this.base();
@@ -14,6 +16,9 @@ var MessagesPage = Base.extend({
         this._loadCurrentThread();
 
         this._initFilterSelect();
+
+        this._searchTab = new SearchUserTab();
+        this._searchTab.addListener(SearchUserTab.event.OPEN_THREAD, this, this._openThread);
     },
 
     _initFilterSelect: function()
@@ -48,18 +53,22 @@ var MessagesPage = Base.extend({
             var link = $(this);
             link.removeClass("unread-thread");
             var userId = link.attr("id").replace("openThreadLink", "");
-            var threadTab = $("#threadTab");
-            threadTab.closest("li").removeClass("hidden");
-            threadTab.click();
-
-            if (that._recipient != userId)
-            {
-                $(".thread-container").addClass("hidden");
-                $(".thread-preloader").removeClass("hidden");
-                that._loadThread(userId);
-            }
-            that._recipient = userId;
+            that._openThread(userId);
         });
+    },
+
+    _openThread: function(userId)
+    {
+        var threadTab = $("#threadTab");
+        threadTab.closest("li").removeClass("hidden");
+        threadTab.click();
+        if (this._recipient != userId)
+        {
+            $(".thread-container").addClass("hidden");
+            $(".thread-preloader").removeClass("hidden");
+            this._loadThread(userId);
+        }
+        this._recipient = userId;
     },
 
     _onThreadLoaded: function(response)

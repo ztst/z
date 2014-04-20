@@ -118,6 +118,7 @@ delete_message:
     options:
         expose: true
 
+#search
 search:
     pattern: /search
     defaults: { _controller: ZnaikaFrontendBundle:Search:searchVideo }
@@ -129,6 +130,13 @@ search_video:
 search_video_ajax:
     pattern: /search/next-videos
     defaults: { _controller: ZnaikaFrontendBundle:Search:searchVideoAjax }
+    methods:  [POST]
+    options:
+        expose: true
+
+search_users_ajax:
+    pattern: /search/next-users
+    defaults: { _controller: ZnaikaFrontendBundle:Search:searchUsersAjax }
     methods:  [POST]
     options:
         expose: true

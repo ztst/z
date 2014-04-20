@@ -1,22 +1,19 @@
 {% if users %}
   {% for user in users %}
-    <div class="search-result-container">
-      <div>
-        <a href="{{ path('show_user_profile', { 'userId': user.getUserId }) }}"
-           title="{{ user.getFirstName }} {{ user.getLastName }}">
-          <img class="media-object" width="100" src="{{ asset('images/404.jpg') }}" alt="Здесь будет аватар"/>
-        </a>
-      </div>
-      <div>
-        <h5><strong>Имя: </strong>{{ user.getFirstName }}</h5>
-        <h5><strong>Фамилия: </strong>{{ user.getLastName }}</h5>
-        <a href="{{ path('show_user_profile', { 'userId': user.getUserId }) }}"
-                    title="{{ user.getFirstName }} {{ user.getLastName }}">
-          Просмотреть профиль
-        </a>
-      </div>
-    </div>
+    <li class="" id="userContainer{{ user.UserId }}">
+      <a id="openUserProfile{{ user.userId }}" class="show-user-profile-link" href="javascript:void(0);">
+        <img class="media-object"
+             width="50"
+             height="50"
+             src="{{ user_photo_small_url(user) }}"
+             alt="Здесь будет аватар"/>
+        <span class="user-name">{{ user }}</span>
+        <a href="javascript:void(0);" title="" class="btn btn-primary send-founded-user-message-button">Написать</a>
+        {% if user.region %}<span>{{ user.region.regionName }}</span>{% endif %}
+        {{ search_user_role(user) }}
+      </a>
+    </li>
   {% endfor %}
 {% else %}
-  <h5>Не найдено</h5>
+  <li><h5>Не найдено</h5></li>
 {% endif %}
