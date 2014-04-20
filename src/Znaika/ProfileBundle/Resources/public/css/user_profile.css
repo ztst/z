@@ -403,4 +403,15 @@
 {
     margin-right: 5px;
 }
+
+.region-form .select .text
+{
+    width: 206px;
+}
+
+.region-form .selectbox .dropdown
+{
+    max-height: 350px;
+    width: 222px !important;
+}
 /* selectbox additional styles END */

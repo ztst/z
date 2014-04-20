@@ -125,3 +125,13 @@
 {
     background: url('/images/tab-icons/comment-tab-icon.png') no-repeat 0 4px;
 }
+
+.select-content-tab .threads-tab .tab-label
+{
+    background: url('/images/tab-icons/threads-tab-icon.png') no-repeat 0 3px;
+}
+
+.select-content-tab .watch-threads-tab .tab-label
+{
+    background: url('/images/tab-icons/watch-threads-tab-icon.png') no-repeat 0 3px;
+}

@@ -3,3 +3,20 @@
 {
     background: #fcf8e3 !important;
 }
+
+.empty-result-message
+{
+    margin-top: 20px;
+    padding: 13px 18px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #f9f9f9;
+
+    font-size: 13px;
+}
+
+.empty-result-message a
+{
+    color: #036995;
+    text-decoration: underline;
+}

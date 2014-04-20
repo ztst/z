@@ -31,29 +31,28 @@
             <span class="tab-label">Диалоги</span>
           </a>
         </li>
-        <li class="thread-tab {% if recipientId %}active{% else %}hidden{% endif %}">
+        <li class="watch-threads-tab {% if recipientId %}active{% else %}hidden{% endif %}">
           <div class="active-top-border"></div>
           <a id="threadTab" href="#thread" data-toggle="tab">
-            <span class="tab-label">Просмотр диалога</span>
+            <span class="tab-label">Просмотр диалогов</span>
           </a>
         </li>
       </ul>
     </div>
   </div>
   <div class="tab-pane {% if not recipientId %}active{% endif %}" id="threads">
-    <select id="messagesFilter">
-      {% for filter in filters|keys %}
-        <option value="{{ path("show_threads", {"f": filter}) }}" {% if currentFilter == filter %}selected="selected"{% endif %}>{{ filters[filter] }}</option>
-      {% endfor %}
-    </select>
-
     <div class="empty-pupils-message-container {% if threads|length  %}hidden{% endif %}">
-      <div class="tab-header">
-        <h4>У вас нет сообщений</h4>
+      <div class="empty-result-message">
+        У вас нет диалогов. Чтобы начать новый диалог, найдите собеседника в <a href="javascript:void(0);">поиске людей</a>.
       </div>
     </div>
     <div class="not-empty-pupils-container {% if not threads|length  %}hidden{% endif %}">
       <div class="tab-header">
+        <select id="messagesFilter">
+          {% for filter in filters|keys %}
+            <option value="{{ path("show_threads", {"f": filter}) }}" {% if currentFilter == filter %}selected="selected"{% endif %}>{{ filters[filter] }}</option>
+          {% endfor %}
+        </select>
         <h4>Диалогов: <span class="count-threads">{{ threads|length }}</span></h4>
       </div>
       {% include "ZnaikaFrontendBundle:Message:thread_list.html.twig" with {'threads': threads} %}
