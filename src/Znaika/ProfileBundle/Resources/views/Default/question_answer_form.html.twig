@@ -4,8 +4,8 @@
   </a>
   <div class="question-answer-form-container hidden">
     {{ form_start(form, {
-        'attr': {'id': 'addCommentForm' ~ comment.videoCommentId},
-        'action': path('add_video_comment_form', {"videoName": comment.video.getUrlName}),
+        'attr': {'id': 'answerForm' ~ comment.videoCommentId},
+        'action': path('question_answer_form', {"videoName": comment.video.getUrlName}),
         'method': 'POST'
       })
     }}

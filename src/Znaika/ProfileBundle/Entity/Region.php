@@ -23,6 +23,11 @@
         private $users;
 
         /**
+         * @var \DateTime
+         */
+        private $createdTime;
+
+        /**
          * @return int
          */
         public function getRegionId()
@@ -88,5 +93,21 @@
         public function deleteUser(User $user)
         {
             $this->users->removeElement($user);
+        }
+
+        /**
+         * @param \DateTime $creationDate
+         */
+        public function setCreatedTime($creationDate)
+        {
+            $this->createdTime = $creationDate;
+        }
+
+        /**
+         * @return \DateTime
+         */
+        public function getCreatedTime()
+        {
+            return $this->createdTime;
         }
     }

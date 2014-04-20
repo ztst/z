@@ -3,10 +3,12 @@ var ShowVideoPage = Base.extend({
     _showPrevCommentsLink: null,
 
     _addCommentForm: null,
+    _answerForm: null,
 
     _moveVideoUpButton: null,
     _moveVideoDownButton: null,
     _isMoving: null,
+    _isSending: false,
 
     constructor: function()
     {
@@ -19,7 +21,7 @@ var ShowVideoPage = Base.extend({
 
         if ($("#addCommentForm").length)
         {
-            this._addCommentForm = new AddCommentForm("addCommentForm");
+            this._initAddCommentForm();
         }
 
         if($("#teacherAnswerBlock").length)
@@ -200,7 +202,9 @@ var ShowVideoPage = Base.extend({
 
     _initTeacherAnswerBlock: function()
     {
+        this._answerForm = new AddCommentForm("answerForm");
         var that = this;
+        this._answerForm.addListener(BaseForm.event.SUBMITTED, this, this._onAnswerFormSubmitted);
         $(".question-button").click(function(){
             var commentId = $(this).attr("id").replace("questionButton", "");
 
@@ -238,6 +242,82 @@ var ShowVideoPage = Base.extend({
             this._showPrevCommentsLink.closest(".show-more-link").remove();
             $(".comments-preloader").addClass("hidden");
             this._initCommentLikeButtons();
+        }
+    },
+
+    _initAddCommentForm: function()
+    {
+        this._addCommentForm = new AddCommentForm("addCommentForm");
+        this._addCommentForm.addListener(BaseForm.event.SUBMITTED, this, this._onAddCommentFormSubmitted);
+    },
+
+    _onAddCommentFormSubmitted: function()
+    {
+        if (!this._isSending)
+        {
+            this._isSending = true;
+            var url = this._addCommentForm.getAction();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: this._addCommentForm.serialize(),
+                success: handler(this, "_onAddCommentSuccess")
+            });
+        }
+
+        return false;
+    },
+
+    _onAnswerFormSubmitted: function()
+    {
+        if (!this._isSending)
+        {
+            this._isSending = true;
+            var url = this._answerForm.getAction();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: this._answerForm.serialize(),
+                success: handler(this, "_onAnswerSuccess")
+            });
+        }
+
+        return false;
+    },
+
+    _onAddCommentSuccess: function(response)
+    {
+        if (response.success)
+        {
+            var commentsList = $("#lastCommentsContainer").find("ul");
+            commentsList.find("li").last().removeClass("last");
+            commentsList.append(response.html);
+            commentsList.find("li").last().addClass("last");
+            this._isSending = false;
+        }
+        else
+        {
+            alert("Ошибка при добавлении комментария");
+        }
+    },
+
+    _onAnswerSuccess: function(response)
+    {
+        if (response.success)
+        {
+            $("#comment" + response.questionId).find(".media-body").append(response.html);
+            $("#questionButton" + response.questionId).remove();
+            var teacherAnswerBlock = $("#teacherAnswerBlock");
+            if (!teacherAnswerBlock.find(".questions-buttons").children().length)
+            {
+                teacherAnswerBlock.remove();
+            }
+            teacherAnswerBlock.find(".user-question-container").hide();
+            this._isSending = false;
+        }
+        else
+        {
+            alert("Ошибка при добавлении ответа");
         }
     }
 });

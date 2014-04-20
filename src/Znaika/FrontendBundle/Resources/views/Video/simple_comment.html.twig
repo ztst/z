@@ -1,4 +1,6 @@
-<div class="media comment-answer">
+{% set commentId = comment.videoCommentId %}
+
+<li class="media comment-container {% if firstOrLast is defined %} {{ firstOrLast }} {% endif %}" id="comment{{ commentId }}">
   <a class="pull-left"
      href="{% if is_moderator() %}{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}{% else %}javascript:void(0);{% endif %}">
     <img class="media-object"
@@ -21,12 +23,17 @@
          {{ comment.likesCount }}
         </span>
         <a class="comment-like-button {% if is_user() %}can-like{% endif %}"
-           id="commentLikeButton{{ comment.videoCommentId }}"
+           id="commentLikeButton{{ commentId }}"
            title=""
            href="javascript:void(0);">
           Мне нравится
         </a>
       </div>
     </div>
+    <div class="clear"></div>
+    {% set commentAnswerBlock = comment_answer_block(comment) %}
+    {% if commentAnswerBlock %}
+      {{ commentAnswerBlock|raw }}
+    {% endif %}
   </div>
-</div>
+</li>

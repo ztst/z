@@ -1,6 +1,7 @@
 <?
     namespace Znaika\FrontendBundle\Controller;
 
+    use DateTime;
     use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpFoundation\RedirectResponse;
     use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -168,45 +169,38 @@
 
         public function addVideoCommentFormAction(Request $request)
         {
-            if (!$this->getUser())
-            {
-                throw $this->createNotFoundException("Not logged user try save comment");
-            }
+            list($success, $videoComment) = $this->processComment($request);
 
-            $repository = $this->getVideoRepository();
-            $video      = $repository->getOneByUrlName($request->get('videoName'));
-
-            $videoComment = new VideoComment();
-            $videoComment->setVideo($video);
-            $videoComment->setUser($this->getUser());
-            $form = $this->createForm(new VideoCommentType(), $videoComment);
-
-            $form->handleRequest($request);
-            $success = $form->isValid();
-            if ($success)
-            {
-                $videoCommentRepository = $this->getVideoCommentRepository();
-                $this->prepareVideoCommentType($videoComment, $videoCommentRepository);
-                $videoCommentRepository->save($videoComment);
-
-                $listener = $this->getUserOperationListener();
-                $listener->onAddVideoComment($this->getUser(), $video);
-            }
+            $response = null;
             if ($request->isXmlHttpRequest())
             {
                 $response = JsonResponse::create(array(
-                    "success"    => $success,
-                    "questionId" => $request->get("questionId", 0),
-                    "videoId"    => $video->getVideoId()
+                    "success"     => $success,
+                    "html"        => $this->renderView('ZnaikaFrontendBundle:Video:simple_comment.html.twig', array(
+                            "user" => $this->getUser(),
+                            "comment" => $videoComment,
+                    )),
                 ));
             }
-            else
+
+            return $response;
+        }
+
+        public function questionAnswerFormAction(Request $request)
+        {
+            list($success, $videoComment) = $this->processComment($request);
+
+            $response = null;
+            if ($request->isXmlHttpRequest())
             {
-                $response = new RedirectResponse($this->generateUrl('show_video', array(
-                    "class"       => $video->getGrade(),
-                    "subjectName" => $video->getSubject()->getUrlName(),
-                    "videoName"   => $video->getUrlName()
-                )));
+                $response = JsonResponse::create(array(
+                        "success"    => $success,
+                        "questionId"  => $videoComment->getQuestion()->getVideoCommentId(),
+                        "videoId"    => $videoComment->getVideo()->getVideoId(),
+                        "html"       => $this->renderView('ZnaikaFrontendBundle:Video:comment_answer.html.twig', array(
+                                "comment" => $videoComment,
+                        )),
+                ));
             }
 
             return $response;
@@ -680,5 +674,47 @@
             }
 
             return $subjects;
+        }
+
+        /**
+         * @param Request $request
+         *
+         * @return array
+         * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+         */
+        private function processComment(Request $request)
+        {
+            if (!$this->getUser())
+            {
+                throw $this->createNotFoundException("Not logged user try save comment");
+            }
+
+            $repository = $this->getVideoRepository();
+            $video      = $repository->getOneByUrlName($request->get('videoName'));
+
+            $videoComment = new VideoComment();
+            $videoComment->setVideo($video);
+            $videoComment->setUser($this->getUser());
+            $form = $this->createForm(new VideoCommentType(), $videoComment);
+
+            $form->handleRequest($request);
+            $success = $form->isValid();
+            if ($success)
+            {
+                $videoCommentRepository = $this->getVideoCommentRepository();
+                $this->prepareVideoCommentType($videoComment, $videoCommentRepository);
+                $videoCommentRepository->save($videoComment);
+
+                $listener = $this->getUserOperationListener();
+                $listener->onAddVideoComment($this->getUser(), $video);
+
+                $videoComment->setCreatedTime(new DateTime("now"));
+
+                return array($success, $videoComment);
+            }
+            else
+            {
+                return array($success, null);
+            }
         }
     }

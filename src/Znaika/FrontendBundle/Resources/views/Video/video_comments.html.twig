@@ -1,41 +1,16 @@
 <ul class="media-list">
   {% for comment in comments %}
-    <li class="media comment-container{% if loop.first %} first{% elseif loop.last %} last{% endif %}">
-      <a class="pull-left"
-         href="{% if is_moderator() %}{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}{% else %}javascript:void(0);{% endif %}">
-        <img class="media-object"
-             width="50"
-             height="50"
-             src="{{ user_photo_small_url(comment.user) }}"
-             alt="{{ comment.user }}"/>
-      </a>
-      <div class="media-body">
-        <a class=""
-           href="{% if is_moderator() %}{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}{% else %}javascript:void(0);{% endif %}">
-          {{ comment_title(comment)|raw }}
-        </a>
-        <span class="comment-body">{{ comment_text(comment) }}</span>
-        <div class="media-heading comment-date-and-like">
-          <div class="comment-date">{{ comment_date(comment.getCreatedTime) }}</div>
-          <div class="date-and-like-delimiter"></div>
-          <div class="video-comment-likes">
-            <span class="likes-count">
-             {{ comment.likesCount }}
-            </span>
-            <a class="comment-like-button {% if is_user() %}can-like{% endif %}"
-               id="commentLikeButton{{ comment.videoCommentId }}"
-               title=""
-               href="javascript:void(0);">
-              Мне нравится
-            </a>
-          </div>
-        </div>
-        <div class="clear"></div>
-        {% set commentAnswerBlock = comment_answer_block(comment) %}
-        {% if commentAnswerBlock %}
-          <div class="media comment-answer">{{ commentAnswerBlock|raw }}</div>
-        {% endif %}
-      </div>
-    </li>
+    {% if loop.first %}
+      {% set firstOrLast = "first" %}
+    {% elseif loop.last %}
+      {% set firstOrLast = "last" %}
+    {% else %}
+      {% set firstOrLast = "" %}
+    {% endif %}
+    {% include "ZnaikaFrontendBundle:Video:simple_comment.html.twig" with {
+        "comment": comment,
+        "firstOrLast": firstOrLast
+    }
+    %}
   {% endfor %}
 </ul>

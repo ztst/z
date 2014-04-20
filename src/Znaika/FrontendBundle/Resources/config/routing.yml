@@ -56,6 +56,10 @@ add_video_comment_form:
     pattern: /{videoName}/add_video_comment_form
     defaults: { _controller: ZnaikaFrontendBundle:Video:addVideoCommentForm }
 
+question_answer_form:
+    pattern: /{videoName}/question_answer_form
+    defaults: { _controller: ZnaikaFrontendBundle:Video:questionAnswerForm }
+
 get_prev_comments:
     pattern: /{videoName}/prev-comments
     defaults: { _controller: ZnaikaFrontendBundle:Video:getPrevComments }
