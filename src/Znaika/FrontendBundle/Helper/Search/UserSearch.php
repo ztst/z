@@ -94,6 +94,11 @@
             }
         }
 
+        public function setRole($role)
+        {
+            $this->role = $role;
+        }
+
         protected function getIndexName()
         {
             return self::USER_INDEX_NAME;

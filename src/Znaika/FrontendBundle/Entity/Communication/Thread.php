@@ -74,4 +74,16 @@
             }
             return true;
         }
+
+        public function getOtherParticipant($user)
+        {
+            $participant = null;
+
+            $participants = $this->getOtherParticipants($user);
+            if ( !empty($participants) )
+            {
+                $participant  = $participants[0];
+            }
+            return $participant;
+        }
     }

@@ -15,6 +15,7 @@
     use Znaika\ProfileBundle\Entity\User;
     use Znaika\ProfileBundle\Entity\PasswordRecovery;
     use Znaika\ProfileBundle\Entity\Ban\Info;
+    use Znaika\ProfileBundle\Entity\UserParentRelation;
     use Znaika\ProfileBundle\Form\Model\ChangePassword;
     use Znaika\ProfileBundle\Form\Type\ChangePasswordType;
     use Znaika\ProfileBundle\Form\ChangeUserEmailType;
@@ -26,6 +27,8 @@
     use Znaika\ProfileBundle\Helper\Mail\UserMailer;
     use Znaika\ProfileBundle\Helper\Security\UserAuthenticator;
     use Znaika\ProfileBundle\Helper\Uploader\UserPhotoUploader;
+    use Znaika\ProfileBundle\Repository\RegionRepository;
+    use Znaika\ProfileBundle\Repository\UserParentRelationRepository;
     use Znaika\UserOperationBundle\Helper\UserOperationListener;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentStatus;
     use Znaika\ProfileBundle\Helper\Util\UserBan;
@@ -40,11 +43,6 @@
 
     class DefaultController extends ZnaikaController
     {
-        public function showMessagesAction(Request $request)
-        {
-            return "";
-        }
-
         /**
          * @param Request $request
          *
@@ -151,6 +149,33 @@
                 'user'                => $user,
                 'userId'              => $user->getUserId(),
             ));
+        }
+
+        public function addUserParentAction($parentId)
+        {
+            /** @var User $user */
+            $user = $this->getUser();
+            $userId = $user->getUserId();
+            $relations = $user->getParentRelations();
+            if (count($relations) == 2)
+            {
+                return $this->createNotFoundException("User {$userId} already has 2 parents");
+            }
+
+            $userRepository = $this->getUserRepository();
+            $parent = $userRepository->getOneByUserId($parentId);
+            if ($parent->getRole() != UserRole::ROLE_PARENT)
+            {
+                return $this->createNotFoundException("User {$userId} try add not parent user {$parentId}");
+            }
+
+            $userParentRelation = new UserParentRelation();
+            $userParentRelation->setParent($parent);
+            $userParentRelation->setChild($user);
+            $userParentRelationRepository = $this->getUserParentRelationRepository();
+            $userParentRelationRepository->save($userParentRelation);
+
+            return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
         }
 
         public function teacherQuestionsAction()
@@ -828,5 +853,13 @@
         private function getRegionRepository()
         {
             return $this->get("znaika.region_repository");
+        }
+
+        /**
+         * @return UserParentRelationRepository
+         */
+        private function getUserParentRelationRepository()
+        {
+            return $this->get("znaika.user_parent_relation_repository");
         }
     }

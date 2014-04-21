@@ -54,6 +54,10 @@ edit_teacher_profile:
     pattern: /teacher/edit-profile/{userId}
     defaults: { _controller: ZnaikaProfileBundle:Default:editTeacherProfile }
 
+add_parent:
+    pattern: /user/add-parent/{parentId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:addUserParent }
+
 teacher_questions:
     pattern: /teacher/questions/{userId}
     defaults: { _controller: ZnaikaProfileBundle:Default:teacherQuestions }

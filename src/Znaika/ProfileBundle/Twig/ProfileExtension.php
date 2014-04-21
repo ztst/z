@@ -31,9 +31,10 @@
         public function getFunctions()
         {
             return array(
-                'ban_reason_button'        => new \Twig_Function_Method($this, 'renderBanReasonButton'),
-                'user_sex'                 => new \Twig_Function_Method($this, 'renderUserSex'),
+                'ban_reason_button'         => new \Twig_Function_Method($this, 'renderBanReasonButton'),
+                'user_sex'                  => new \Twig_Function_Method($this, 'renderUserSex'),
                 'count_not_verified_pupils' => new \Twig_Function_Method($this, 'countNotVerifiedPupils'),
+                'user_parents'              => new \Twig_Function_Method($this, 'renderUserParents'),
             );
         }
 
@@ -49,9 +50,19 @@
         {
             $reasons = UserBan::getAvailableTypesTexts();
 
-            $templateFile    = "ZnaikaProfileBundle:Default:user_ban_reason_button.html.twig";
+            $templateFile    = 'ZnaikaProfileBundle:Default:Ban\user_ban_reason_button.html.twig';
             $templateContent = $this->twig->loadTemplate($templateFile);
             $result          = $templateContent->render(array("reasons" => $reasons, "user" => $user));
+
+            return $result;
+        }
+
+        public function renderUserParents(User $user)
+        {
+            $templateFile    = "ZnaikaProfileBundle:Default:user_parents_block.html.twig";
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $relations = $user->getParentRelations();
+            $result          = $templateContent->render(array("relations" => $relations, "canAdd" => count($relations) < 2));
 
             return $result;
         }

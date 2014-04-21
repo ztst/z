@@ -1,0 +1,9 @@
+{% for relation in relations %}
+  <div class="form-group input-group">
+    <input type="text" class="form-control" id="firstNameField" value="{{ relation.parent }}" disabled="disabled" />
+    <a href="javascript:void(0);" title="" class="delete-parent-link">Удалить</a>
+  </div>
+{% endfor %}
+{% if canAdd %}
+  <a href="{{ path('search_parent') }}" title="" class="add-parent-link">Добавить</a>
+{% endif %}

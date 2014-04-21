@@ -141,6 +141,17 @@ search_users_ajax:
     options:
         expose: true
 
+search_parent:
+    pattern: /user/search-parent
+    defaults: { _controller: ZnaikaFrontendBundle:Search:searchParent }
+
+search_parent_ajax:
+    pattern: /user/search-parent-next
+    defaults: { _controller: ZnaikaFrontendBundle:Search:searchParentAjax }
+    methods:  [POST]
+    options:
+        expose: true
+
 add_video_attachment_form:
     pattern: /video/{videoName}/add-video-attachment-form
     defaults: { _controller: ZnaikaFrontendBundle:Video:addVideoAttachmentForm }

@@ -174,6 +174,16 @@
         private $videoLikes;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $parentRelations;
+
+        /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $childRelations;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -185,6 +195,8 @@
             $this->banInfos          = new ArrayCollection();
             $this->videoCommentLikes = new ArrayCollection();
             $this->videoLikes        = new ArrayCollection();
+            $this->parentRelations   = new ArrayCollection();
+            $this->childRelations    = new ArrayCollection();
         }
 
         /**
@@ -977,5 +989,39 @@
         public function getVideoCommentLikes()
         {
             return $this->videoCommentLikes;
+        }
+
+        public function addParentRelation(UserParentRelation $parentRelation)
+        {
+            $this->parentRelations[] = $parentRelation;
+
+            return $this;
+        }
+
+        public function removeParentRelation(UserParentRelation $parentRelation)
+        {
+            $this->parentRelations->removeElement($parentRelation);
+        }
+
+        public function getParentRelations()
+        {
+            return $this->parentRelations;
+        }
+
+        public function addChildRelations(UserParentRelation $relation)
+        {
+            $this->childRelations[] = $relation;
+
+            return $this;
+        }
+
+        public function removeChildRelation(UserParentRelation $relation)
+        {
+            $this->childRelations->removeElement($relation);
+        }
+
+        public function getChildRelations()
+        {
+            return $this->childRelations;
         }
     }

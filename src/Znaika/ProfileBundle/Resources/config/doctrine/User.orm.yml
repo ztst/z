@@ -30,6 +30,8 @@ Znaika\ProfileBundle\Entity\User:
         userRegistrations:  { targetEntity: Znaika\ProfileBundle\Entity\UserRegistration, mappedBy: user }
         passwordRecoveries: { targetEntity: Znaika\ProfileBundle\Entity\PasswordRecovery, mappedBy: user }
         changeUserEmails:   { targetEntity: Znaika\ProfileBundle\Entity\ChangeUserEmail, mappedBy: user }
+        childRelations:     { targetEntity: Znaika\ProfileBundle\Entity\UserParentRelation, mappedBy: child }
+        parentRelations:    { targetEntity: Znaika\ProfileBundle\Entity\UserParentRelation, mappedBy: parent }
         videoCommentLikes:  { targetEntity: Znaika\LikesBundle\Entity\VideoCommentLike, mappedBy: user }
         videoLikes:         { targetEntity: Znaika\LikesBundle\Entity\VideoLike, mappedBy: user }
     manyToOne:

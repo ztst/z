@@ -1,0 +1,42 @@
+{% extends 'ZnaikaFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter="?yui_css"
+  '@ZnaikaProfileBundle/Resources/public/css/profile_page.css'
+  '@ZnaikaProfileBundle/Resources/public/css/user_profile.css'
+  '@ZnaikaProfileBundle/Resources/public/css/teacher_profile.css'
+  %}
+  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts filter='?yui_js'
+    '../app/Resources/public/js/classes/page/SearchParentPage.class.js'
+    '../app/Resources/public/js/classes/PageUpDownScroller.class.js'
+  %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+  <div class="teacher-profile-top-horizontal-line"></div>
+  {% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="alert alert-info">
+      {{ flashMessage|raw }}
+    </div>
+  {% endfor %}
+  <div class="profile-sidebar-menu-container">
+    {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
+  </div>
+
+  <div class="teacher-profile-container user-profile-container">
+  </div>
+  <div class="teacher-profile-bottom-horizontal-placeholder">
+    <div class="line"></div>
+  </div>
+{% endblock %}
