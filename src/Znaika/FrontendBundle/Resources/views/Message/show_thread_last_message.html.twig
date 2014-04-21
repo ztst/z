@@ -3,16 +3,30 @@
 {% if lastMessage %}
   <li id="openThreadLink{{ otherParticipant.userId }}"
       class="{% if isFirst is defined and isFirst %}first{% endif %} open-thread-link {% if not lastMessage.isRead %}unread-thread{% endif %}">
-    <a href="{{ url('show_user_profile', {'userId': otherParticipant.userId}) }}">
-      {{ otherParticipant }}
-    </a>
-    <br />
-    {{ lastMessage.createdAt|date }}
-    <br />
-    {{ lastMessage.sender|e }}
-    <br />
-    {{ lastMessage.body|e }}
-    <br />
-    {{ count_unread_messages(app.user, thread) }}
+    <div class="thread-user-pic">
+      <img width="50" height="50" src="{{ user_photo_small_url(otherParticipant) }}" alt=""/>
+    </div>
+    <div class="message-user-name">
+      <a href="{{ url('show_user_profile', {'userId': otherParticipant.userId}) }}">
+        {{ otherParticipant }}
+      </a>
+    </div>
+    {% if app.user == lastMessage.sender %}
+      <div class="self-user-pic">
+        <img width="32" height="32" src="{{ user_photo_small_url(app.user) }}" alt=""/>
+      </div>
+    {% endif %}
+    <div class="message-text-data {% if app.user == lastMessage.sender %}self-message-text-data{% endif %}">
+      <div class="message-body">
+        {{ lastMessage.body|e }}
+      </div>
+      <div class="message-created-date">
+        {{ lastMessage.createdAt|date }}
+      </div>
+    </div>
+    <div class="unread-messages">
+      <span class="list-count-container">{{ count_unread_messages(app.user, thread) }}</span>
+    </div>
+    <div class="clear"></div>
   </li>
 {% endif %}

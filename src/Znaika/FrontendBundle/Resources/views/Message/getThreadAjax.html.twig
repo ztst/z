@@ -1,6 +1,8 @@
-<h4>
-  Диалог с <a href="{{ path('show_user_profile', {'userId': participant.userId}) }}" title="">{{ participant }}</a>
-</h4>
+<div class="tab-header">
+  <h4>
+    <a href="{{ path('show_user_profile', {'userId': participant.userId}) }}" title="">{{ participant }}</a>
+  </h4>
+</div>
 
 {% if messagesCount > constant('Znaika\\FrontendBundle\\Controller\\MessageController::MESSAGES_LIMIT_ON_PAGE') %}
   <div class="show-more-link show-more-messages">
@@ -15,13 +17,16 @@
 {% for message in messages %}
   {% include "ZnaikaFrontendBundle:Message:show_message_block.html.twig" with {'message': message} %}
 {% endfor %}
-{{ form_start(form, {'attr': {'id': 'sendMessageForm'}, 'action': url('send_message_ajax', {'participantId': participant.userId}), 'method': 'POST'}) }}
-  {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
-  <div class="form-group">
-    {{ form_errors(form.body) }}
-    {{ form_widget(form.body, {'attr': {'class': 'form-control' }}) }}
-  </div>
-  <div>
-    <button type="submit" class="btn btn-primary">Отправить</button>
-  </div>
-{{ form_end(form) }}
+<div class="send-message-form-container">
+  <h3>Ваше сообщение</h3>
+  {{ form_start(form, {'attr': {'id': 'sendMessageForm', 'class': 'send-message-form'}, 'action': url('send_message_ajax', {'participantId': participant.userId}), 'method': 'POST'}) }}
+    {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
+    <div class="form-group">
+      {{ form_errors(form.body) }}
+      {{ form_widget(form.body) }}
+    </div>
+    <button type="submit" class="active-button send-message-button">
+      <span class="active-button-label">Отправить</span>
+    </button>
+  {{ form_end(form) }}
+</div>

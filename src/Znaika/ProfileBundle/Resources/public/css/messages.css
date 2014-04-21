@@ -1,5 +1,179 @@
 .user-profile-page-list .unread-thread,
 .not-read-message
 {
-    background: #fcf8e3 !important;
+    background: #eff8fa;
+}
+
+.not-read-message
+{
+    box-shadow: 0 -1px 0 0 #dcdcdc, 0 1px 0 0 #dcdcdc;
+    border: none !important;
+}
+
+.empty-result-message
+{
+    margin-top: 20px;
+    padding: 13px 18px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #f9f9f9;
+
+    font-size: 13px;
+}
+
+.empty-result-message a
+{
+    color: #036995;
+    text-decoration: underline;
+}
+
+.not-empty-pupils-container li:hover
+{
+    background: #e2f0f7;
+}
+
+.not-empty-pupils-container .tab-header h4
+{
+    float: left;
+}
+
+.not-empty-pupils-container .tab-header .selectbox
+{
+    float: right;
+}
+
+.not-empty-pupils-container .selectbox .select .text
+{
+    width: 150px;
+}
+
+.not-empty-pupils-container .selectbox .dropdown
+{
+    width: 172px;
+}
+
+.not-empty-pupils-container .selectbox .dropdown li:hover
+{
+    text-decoration: underline;
+}
+
+.thread-user-pic,
+.user-profile-page-list .message-user-name,
+.user-profile-page-list .message-text-data
+{
+    float: left;
+}
+
+.user-profile-page-list .message-user-name
+{
+    width: 128px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
+.message-user-name
+{
+    margin-top: -5px;
+    margin-left: 13px;
+}
+
+.self-user-pic
+{
+    float: left;
+    margin-left: 22px;
+}
+
+.message-text-data
+{
+    font-size: 12px;
+    color: #444;
+}
+
+.message-text-data
+{
+    margin-left: 22px;
+    width: 415px;
+}
+
+.message-text-data.self-message-text-data
+{
+    margin-left: 9px;
+    width: 382px;
+}
+
+.message-user-name a
+{
+    color: #333;
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
+.message-body
+{
+    margin-bottom: 5px;
+}
+
+.message-created-date
+{
+    color: #777;
+    font-size: 11px;
+}
+
+.unread-messages
+{
+    float: right;
+    margin-top: 15px;
+}
+
+.messenger_thread_message
+{
+    margin: 0 -26px;
+    padding: 20px 26px;
+    border-bottom: 1px solid #efefef;
+}
+
+.thread-container .message-user-name,
+.thread-container .message-text-data
+{
+    margin-left: 63px;
+    width: auto;
+}
+
+.thread-container .message-body,
+.send-message-form-container textarea
+{
+    color: #444;
+    font-size: 12px;
+}
+
+.send-message-form-container
+{
+    margin-top: 15px;
+    margin-left: 63px;
+    width: 531px;
+}
+
+.send-message-form-container h3
+{
+    color: #333;
+    font-size: 15px;
+}
+
+.send-message-form-container textarea
+{
+    padding: 4px 9px;
+    width: 100%;
+    height: 85px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    resize: none;
+}
+
+.send-message-button
+{
+    float: right;
+}
+
+.send-message-button .active-button-label
+{
+    padding: 0 18px;
 }

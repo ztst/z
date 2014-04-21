@@ -4,6 +4,7 @@
     <option value="{{ age }}" {% if currentAgeFrom and currentAgeFrom == age  %}selected="selected"{% endif %}/>{{ age }}</option>
   {% endfor %}
 </select>
+<span>&nbsp;—&nbsp;</span>
 <select id="ageToSelect" class="search-filter-select">
   <option value="" />До</option>
   {% for age in agesTo %}

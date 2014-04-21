@@ -19,6 +19,13 @@ var MessagesPage = Base.extend({
 
         this._searchTab = new SearchUserTab();
         this._searchTab.addListener(SearchUserTab.event.OPEN_THREAD, this, this._openThread);
+
+        $(document).find(".user-profile-page-list .message-body").ellipsis({
+            row: 2
+        });
+        $(document).find(".user-profile-page-list .message-user-name").ellipsis({
+            row: 3
+        });
     },
 
     _initFilterSelect: function()
@@ -59,9 +66,9 @@ var MessagesPage = Base.extend({
 
     _openThread: function(userId)
     {
-        var threadTab = $("#threadTab");
-        threadTab.closest("li").removeClass("hidden");
-        threadTab.click();
+        var watchThreadsTab = $("#watchThreadsTab");
+        watchThreadsTab.closest("li").removeClass("hidden");
+        watchThreadsTab.click();
         if (this._recipient != userId)
         {
             $(".thread-container").addClass("hidden");
@@ -118,7 +125,7 @@ var MessagesPage = Base.extend({
         this._messageSending = false;
         if (response.success)
         {
-            $("#sendMessageForm").before(response.html);
+            $(".send-message-form-container").before(response.html);
             $("#openThreadLink" + response.participantId).remove();
 
             var threadList = $(".user-profile-page-list");

@@ -154,7 +154,7 @@ var SearchUserTab = EventDispatcher.extend({
     _initOpenThreadLinks: function()
     {
         var that = this;
-        $(".send-founded-user-message-button").click(function(){
+        $(".send-found-user-message-button").click(function(){
             var link = $(this);
             var id = link.closest("li").attr("id").replace("userContainer", "");
 

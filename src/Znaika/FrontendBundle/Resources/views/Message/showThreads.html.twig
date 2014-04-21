@@ -34,10 +34,10 @@
             <span class="tab-label">Диалоги</span>
           </a>
         </li>
-        <li class="thread-tab {% if recipientId %}active{% else %}hidden{% endif %}">
+        <li class="watch-threads-tab {% if recipientId %}active{% else %}hidden{% endif %}">
           <div class="active-top-border"></div>
-          <a id="threadTab" href="#thread" data-toggle="tab">
-            <span class="tab-label">Просмотр диалога</span>
+          <a id="watchThreadsTab" href="#thread" data-toggle="tab">
+            <span class="tab-label">Просмотр диалогов</span>
           </a>
         </li>
         <li class="search-users-tab">
@@ -51,20 +51,20 @@
   </div>
 
   <div class="tab-pane {% if not recipientId %}active{% endif %}" id="threads">
-    <select id="messagesFilter">
-      {% for filter in filters|keys %}
-        <option value="{{ path("show_threads", {"f": filter}) }}" {% if currentFilter == filter %}selected="selected"{% endif %}>{{ filters[filter] }}</option>
-      {% endfor %}
-    </select>
-
     <div class="empty-pupils-message-container {% if threads|length  %}hidden{% endif %}">
-      <div class="tab-header">
-        <h4>У вас нет сообщений</h4>
+      <div class="empty-result-message">
+        У вас нет диалогов. Чтобы начать новый диалог, найдите собеседника в <a href="javascript:void(0);" title="">поиске людей</a>.
       </div>
     </div>
     <div class="not-empty-pupils-container {% if not threads|length  %}hidden{% endif %}">
       <div class="tab-header">
+        <select id="messagesFilter">
+          {% for filter in filters|keys %}
+            <option value="{{ path("show_threads", {"f": filter}) }}" {% if currentFilter == filter %}selected="selected"{% endif %}>{{ filters[filter] }}</option>
+          {% endfor %}
+        </select>
         <h4>Диалогов: <span class="count-threads">{{ threads|length }}</span></h4>
+        <div class="clear"></div>
       </div>
       {% include "ZnaikaFrontendBundle:Message:thread_list.html.twig" with {'threads': threads} %}
     </div>
@@ -81,7 +81,9 @@
   <div class="tab-pane" id="searchUsers">
     <div class="user-search-result-container">
       <div class="users-search-container hidden">
-        <h4>Найдено людей: <span id="foundedUsersCount">0</span></h4>
+        <div class="tab-header">
+          <h4>Найдено людей: <span id="foundedUsersCount">0</span></h4>
+        </div>
         <ul id="usersContainer" class="users-search-container"></ul>
         <a id="moreUsers" href="javascript:void(0);" title="">Больше пользователей</a>
       </div>
@@ -90,12 +92,37 @@
       </div>
     </div>
     <div class="user-search-filters-container filters-block">
-      <input type="text" placeholder="ФИО или никнейм" id="searchUserNameInput" />
-      {{ search_user_region_filter()|raw }}
-      {{ search_user_age_filter()|raw }}
-      {{ search_user_sex_filter()|raw }}
-      {{ search_user_role_filter()|raw }}
-      <a id="searchUsersButton" class="btn btn-default" href="javascript:void(0);" title="">Начать поиск</a>
+      <div class="input-group">
+        <span class="search-icon"></span>
+        <input type="text" placeholder="ФИО или никнейм" id="searchUserNameInput" class="form-control" />
+      </div>
+      <label class="user-search-filters-label">
+        Регион
+      </label>
+      <div class="input-group">
+        {{ search_user_region_filter()|raw }}
+      </div>
+      <label class="user-search-filters-label">
+        Возраст
+      </label>
+      <div class="input-group age-filter">
+        {{ search_user_age_filter()|raw }}
+      </div>
+      <label class="user-search-filters-label">
+        Пол
+      </label>
+      <div class="input-group">
+        {{ search_user_sex_filter()|raw }}
+      </div>
+      <label class="user-search-filters-label">
+        Искать среди
+      </label>
+      <div class="input-group role-filter">
+        {{ search_user_role_filter()|raw }}
+      </div>
+      <a id="searchUsersButton" class="active-button start-search-button" href="javascript:void(0);" title="">
+        <span class="active-button-label">Начать поиск</span>
+      </a>
     </div>
   </div>
 {% endblock %}
