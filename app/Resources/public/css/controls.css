@@ -373,3 +373,21 @@
     font-size: 13px;
     padding: 15px;
 }
+
+.active-link
+{
+    padding-left: 18px;
+    color: #036995;
+    font-size: 12px;
+}
+
+.non-active-link
+{
+    padding-left: 16px;
+    color: #999;
+}
+
+.non-active-link:hover
+{
+    color: #333;
+}

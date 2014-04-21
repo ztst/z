@@ -26,7 +26,7 @@
           <span class="likes-count">
             {{ video.likesCount }}
           </span>
-          <a class="video-like-button {% if is_user() %}can-like{% endif %}"
+          <a class="active-link video-like-button {% if is_user() %}can-like{% endif %}"
              id="videoLikeButton{{ video.videoId }}"
              title=""
              href="javascript:void(0);">

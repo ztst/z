@@ -36,9 +36,6 @@
 
 .send-found-user-message-button
 {
-    padding-left: 18px;
-    color: #036995;
-    font-size: 12px;
     background: url("/images/user-profile/send-found-user-message-button-icon.png") no-repeat 0 3px;
 }
 

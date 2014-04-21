@@ -52,8 +52,7 @@
                 ))
                 ->add("city", "text", array(
                     "required" => false,
-                ))
-                ->add("save", "submit");
+                ));
         }
 
         /**
