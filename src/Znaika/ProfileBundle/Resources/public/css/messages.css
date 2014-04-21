@@ -4,10 +4,10 @@
     background: #eff8fa;
 }
 
-.not-read-message
+.messenger_thread_message.not-read-message
 {
-    box-shadow: 0 -1px 0 0 #dcdcdc, 0 1px 0 0 #dcdcdc;
-    border: none !important;
+    border-bottom: 1px solid #DCDCDC;
+    border-top: 1px solid #DCDCDC;
 }
 
 .empty-result-message

@@ -844,6 +844,7 @@ img.mfp-img
     position: absolute;
     right: 0;
     top: 0;
+    z-index: 2;
 
     background: url('/images/popup/show-password-icon-opened.png') no-repeat 0 11px;
 }
