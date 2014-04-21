@@ -26,6 +26,8 @@ var MessagesPage = Base.extend({
         $(document).find(".user-profile-page-list .message-user-name").ellipsis({
             row: 3
         });
+
+        $("#searchUsersLinkFromEmptyThreads").click(handler(this, "_onSearchUsersLinkFromEmptyThreadsClick"));
     },
 
     _initFilterSelect: function()
@@ -175,6 +177,17 @@ var MessagesPage = Base.extend({
             this._showPrevMessagesLink.closest(".show-more-link").remove();
             $(".comments-preloader").addClass("hidden");
         }
+    },
+
+    _onSearchUsersLinkFromEmptyThreadsClick: function()
+    {
+        $(".search-users-tab").addClass("active");
+        $(".threads-tab").removeClass("active");
+        $(".watch-threads-tab").removeClass("active");
+
+        $("#searchUsers").addClass("active");
+        $("#threads").removeClass("active");
+        $("#watchThreads").removeClass("active");
     }
 },{
     SHOW_MORE_PUPILS_COUNT: 10

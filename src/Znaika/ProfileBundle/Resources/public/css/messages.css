@@ -76,6 +76,13 @@
     margin-left: 13px;
 }
 
+.message-user-name a
+{
+    color: #333;
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
 .self-user-pic
 {
     float: left;
@@ -84,27 +91,16 @@
 
 .message-text-data
 {
-    font-size: 12px;
-    color: #444;
-}
-
-.message-text-data
-{
     margin-left: 22px;
     width: 415px;
+    font-size: 12px;
+    color: #444;
 }
 
 .message-text-data.self-message-text-data
 {
     margin-left: 9px;
     width: 382px;
-}
-
-.message-user-name a
-{
-    color: #333;
-    font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .message-body
