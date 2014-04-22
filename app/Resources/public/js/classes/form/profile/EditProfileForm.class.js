@@ -19,6 +19,7 @@ var EditProfileForm = BaseForm.extend({
 
         $(".birthdate-container select").selectbox();
         $("#regionField").selectbox();
+        $(".teacher-specialization").selectbox();
 
     },
 

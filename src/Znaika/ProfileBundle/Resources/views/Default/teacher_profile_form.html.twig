@@ -25,10 +25,38 @@
     {{ form_errors(form.sex) }}
     {{ form_widget(form.sex, {'id': 'sexField', 'attr': {'class': 'form-control sex-field' }}) }}
   </div>
-  <div class="form-group input-group">
+  <div class="form-group input-group region-form">
     {{ form_label(form.region, 'Регион') }}
     {{ form_errors(form.region) }}
     {{ form_widget(form.region, {'id': 'regionField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div class="form-group teacher-specialization-form">
+    <label>Специализация</label>
+    <div class="input-group">
+      <select class="teacher-specialization">
+        <option>Алгебра</option>
+        <option>Геометрия</option>
+        <option>Термодинамика</option>
+      </select>
+      <div class="active-link delete-specialization-link">
+        Удалить
+      </div>
+    </div>
+    <div class="input-group">
+      <select class="teacher-specialization">
+        <option>Алгебра</option>
+        <option>Геометрия</option>
+        <option>Термодинамика</option>
+      </select>
+      <div class="active-link delete-specialization-link">
+        Удалить
+      </div>
+    </div>
+    <div class="input-group">
+      <div class="active-link add-specialization-link">
+        Добавить
+      </div>
+    </div>
   </div>
   <div class="form-group input-group">
     {{ form_label(form.city, 'Город') }}

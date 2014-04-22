@@ -28,7 +28,6 @@
 {% endblock %}
 
 {% block content %}
-  <div class="teacher-profile-top-horizontal-line"></div>
   {% for flashMessage in app.session.flashbag.get('notice') %}
     <div class="alert alert-info">
       {{ flashMessage }}
@@ -69,8 +68,5 @@
     <div class="photo-column-container teacher-photo-form">
       {% include "ZnaikaProfileBundle:Default:user_photo_form.html.twig" with {'form': userPhotoForm} %}
     </div>
-  </div>
-  <div class="teacher-profile-bottom-horizontal-placeholder">
-    <div class="line"></div>
   </div>
 {% endblock %}

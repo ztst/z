@@ -13,7 +13,7 @@
     </div>
     {% if app.user == lastMessage.sender %}
       <div class="self-user-pic">
-        <img width="32" height="32" src="{{ user_photo_small_url(app.user) }}" alt=""/>
+        <img width="30" height="30" src="{{ user_photo_small_url(app.user) }}" alt=""/>
       </div>
     {% endif %}
     <div class="message-text-data {% if app.user == lastMessage.sender %}self-message-text-data{% endif %}">

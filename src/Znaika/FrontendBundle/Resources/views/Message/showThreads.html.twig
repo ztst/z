@@ -61,11 +61,13 @@
     </div>
     <div class="not-empty-pupils-container {% if not threads|length  %}hidden{% endif %}">
       <div class="tab-header">
+        <div class="threads-group-select">
         <select id="messagesFilter">
           {% for filter in filters|keys %}
             <option value="{{ path("show_threads", {"f": filter}) }}" {% if currentFilter == filter %}selected="selected"{% endif %}>{{ filters[filter] }}</option>
           {% endfor %}
         </select>
+        </div>
         <h4>Диалогов: <span class="count-threads">{{ threads|length }}</span></h4>
         <div class="clear"></div>
       </div>

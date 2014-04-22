@@ -2,13 +2,13 @@
 {
     list-style: none;
     margin-right: 1px;
-    margin-top: 4px;
+    margin-top: 11px;
 }
 
 .profile-sidebar-menu li
 {
     display: inline-block;
-    height: 42px;
+    height: 30px;
     margin-bottom: -1px;
     width: 100%;
     padding-top: 1px;
@@ -17,13 +17,13 @@
 .profile-sidebar-menu li a
 {
     display: block;
-    padding: 8px 53px 8px 36px;
+    padding: 5px 15px 3px 33px;
     text-decoration: none;
     font-family: "OpenSans Semibold", sans-serif;
-    font-size: 15px;
+    font-size: 13px;
     color: #333333;
 
-    background: url('/images/chapters-list/chapter-list-marker.png') no-repeat 20px 15px;
+    background: url("/images/user-profile/profile-sidebar-marker.png") no-repeat 20px 11px;
 }
 
 .profile-sidebar-menu li.current a
@@ -36,13 +36,14 @@
     border-bottom: 1px solid #C3D6E1;
     border-top: 1px solid #C3D6E1;
     padding-top: 0;
-    background: url('/images/teacher-page/profile-sidebar-menu-arrow.png') no-repeat 251px 0 #EEF9FE;
+    background: #EEF9FE;
 }
+
 .tab-pane
 {
     display: none;
 
-    padding: 6px 26px;
+    padding: 0 26px;
 }
 
 .tab-pane.active
@@ -54,13 +55,13 @@
 {
     position: relative;
     float: left;
-    width: 297px;
+    width: 237px;
 }
 
 .teacher-profile-container
 {
     float: left;
-    width: 701px;
+    width: 761px;
     padding-bottom: 30px;
 }
 
@@ -72,7 +73,7 @@
 .user-profile-page-list li
 {
     margin: 0 -26px;
-    padding: 20px 26px 18px;
+    padding: 17px 26px 16px;
     border-top: 1px solid #efefef;
 }
 
@@ -180,12 +181,12 @@
 
 .select-content-tab
 {
-    margin-top: 16px;
+    margin-top: 11px;
 }
 
 .user-profile-tab-menu
 {
-    padding: 0 26px;
+    padding-left: 30px;
 }
 
 .user-profile-page-list .open-video-comment-link a,
@@ -315,7 +316,7 @@
 .list-count-container
 {
     font-family: "OpenSans Semibold", sans-serif;
-    font-size: 16px;
+    font-size: 13px;
     color: #036995;
 
     float: right;
@@ -324,7 +325,7 @@
 .tab-header
 {
     margin: 0 -26px;
-    padding: 8px 26px 8px;
+    padding: 8px 26px 1px;
 
     border-bottom: 1px solid #cccccc;
 }
@@ -332,6 +333,11 @@
 .tab-header .list-count-container
 {
     color: #E8710D;
+}
+
+.tab-header h4
+{
+    margin-top: 15px;
 }
 
 .tab-header h4,
@@ -371,6 +377,51 @@
     margin-right: 3px;
 }
 
+
+/* selectbox additional styles BEGIN */
+.selectbox .select
+{
+    padding: 0 7px;
+    height: 27px;
+    line-height: 25px;
+
+    color: #2a2a2a;
+    font-size: 12px;
+    font-family: "OpenSans", "Open Sans", serif;
+}
+
+.selectbox .trigger .arrow
+{
+    top: 11px;
+    right: 6px;
+    opacity: 1;
+}
+
+.grade-form .selectbox,
+.grade-form .selectbox .select,
+.grade-form .selectbox .dropdown,
+.date-form .selectbox .dropdown
+
+{
+    width: 100px !important;
+}
+
+.date-form .selectbox
+{
+    margin-right: 5px;
+}
+
+.region-form .select .text
+{
+    width: 206px;
+}
+
+.region-form .selectbox .dropdown
+{
+    max-height: 350px;
+    width: 222px !important;
+}
+
 .selectbox .select
 {
     width: auto !important;
@@ -381,6 +432,7 @@
     padding-left: 0;
     padding-right: 14px;
 }
+/* selectbox additional styles END */
 
 .alert
 {

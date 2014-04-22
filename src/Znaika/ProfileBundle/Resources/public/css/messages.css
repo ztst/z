@@ -37,24 +37,39 @@
     float: left;
 }
 
-.not-empty-pupils-container .tab-header .selectbox
+.not-empty-pupils-container .threads-group-select
 {
     float: right;
+    margin-right: 4px;
 }
 
-.not-empty-pupils-container .selectbox .select .text
+.threads-group-select .selectbox .select .text
 {
-    width: 150px;
+    width: 144px;
 }
 
-.not-empty-pupils-container .selectbox .dropdown
+.threads-group-select .selectbox .dropdown
 {
-    width: 172px;
+    width: 196px;
 }
 
-.not-empty-pupils-container .selectbox .dropdown li:hover
+.threads-group-select .selectbox .dropdown li:hover
 {
     text-decoration: underline;
+}
+
+.threads-group-select .selectbox .select
+{
+    padding: 0 16px;
+    height: 31px;
+    line-height: 29px;
+    color: #717070;
+    font-size: 13px;
+}
+
+.threads-group-select .selectbox .trigger .arrow
+{
+    top: 13px;
 }
 
 .thread-user-pic,
@@ -86,7 +101,8 @@
 .self-user-pic
 {
     float: left;
-    margin-left: 22px;
+    margin-top: 1px;
+    margin-left: 21px;
 }
 
 .message-text-data
@@ -105,7 +121,8 @@
 
 .message-body
 {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    line-height: 13px;
 }
 
 .message-created-date
@@ -123,7 +140,7 @@
 .messenger_thread_message
 {
     margin: 0 -26px;
-    padding: 20px 26px;
+    padding: 17px 26px 16px;
     border-bottom: 1px solid #efefef;
 }
 
@@ -138,7 +155,7 @@
 .send-message-form-container textarea
 {
     color: #444;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .send-message-form-container
