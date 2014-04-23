@@ -4,19 +4,20 @@ Znaika\ProfileBundle\Entity\UserParentRelation:
     repositoryClass: Znaika\ProfileBundle\Repository\UserParentRelationDBRepository
     fields:
         userParentRelationId: { column: user_parent_relation_id, type: integer, id: true, generator: { strategy: AUTO } }
-        approved:             { column: approved, type: boolean }
+        approvedByChild:      { column: approved_by_child, type: boolean }
+        approvedByParent:     { column: approved_by_parent, type: boolean }
         createdTime:          { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     manyToOne:
         child:
             targetEntity: Znaika\ProfileBundle\Entity\User
-            inversedBy: childRelations
+            inversedBy: parentRelations
             joinColumn:
                 name: child_id
                 referencedColumnName: user_id
                 onDelete: CASCADE
         parent:
             targetEntity: Znaika\ProfileBundle\Entity\User
-            inversedBy: parentRelations
+            inversedBy: childRelations
             joinColumn:
                 name: parent_id
                 referencedColumnName: user_id

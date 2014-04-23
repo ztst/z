@@ -11,6 +11,8 @@
 
     class ProfileExtension extends \Twig_Extension
     {
+        const MAX_CHILDREN   = 15;
+        const MAX_PARENTS    = 2;
         /**
          * @var \Twig_Environment
          */
@@ -35,6 +37,7 @@
                 'user_sex'                  => new \Twig_Function_Method($this, 'renderUserSex'),
                 'count_not_verified_pupils' => new \Twig_Function_Method($this, 'countNotVerifiedPupils'),
                 'user_parents'              => new \Twig_Function_Method($this, 'renderUserParents'),
+                'user_children'             => new \Twig_Function_Method($this, 'renderUserChildren'),
             );
         }
 
@@ -61,8 +64,18 @@
         {
             $templateFile    = "ZnaikaProfileBundle:Default:user_parents_block.html.twig";
             $templateContent = $this->twig->loadTemplate($templateFile);
-            $relations = $user->getParentRelations();
-            $result          = $templateContent->render(array("relations" => $relations, "canAdd" => count($relations) < 2));
+            $relations       = $user->getParentRelations();
+            $result          = $templateContent->render(array("relations" => $relations, "canAdd" => count($relations) < self::MAX_PARENTS));
+
+            return $result;
+        }
+
+        public function renderUserChildren(User $user)
+        {
+            $templateFile    = "ZnaikaProfileBundle:Default:user_children_block.html.twig";
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $relations       = $user->getChildRelations();
+            $result          = $templateContent->render(array("relations" => $relations, "canAdd" => count($relations) < self::MAX_CHILDREN));
 
             return $result;
         }

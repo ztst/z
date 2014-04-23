@@ -6,7 +6,8 @@ security:
             encode_as_base64: true
 
     role_hierarchy:
-        ROLE_TEACHER:   ROLE_USER
+        ROLE_PARENT:    ROLE_USER
+        ROLE_TEACHER:   ROLE_PARENT
         ROLE_MODERATOR: ROLE_TEACHER
         ROLE_ADMIN:     [ROLE_MODERATOR]
 
@@ -45,6 +46,7 @@ security:
 
     access_control:
         - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/parent, roles: ROLE_PARENT }
         - { path: ^/teacher, roles: ROLE_TEACHER }
         - { path: ^/moderator, roles: ROLE_MODERATOR }
         - { path: ^/admin, roles: ROLE_ADMIN }

@@ -120,6 +120,17 @@
       <div class="input-group role-filter">
         {{ search_user_role_filter()|raw }}
       </div>
+      <div class="additional-teacher-block hidden">
+        <label class="user-search-filters-label">
+          Дополнительно
+        </label>
+        <div class="input-group">
+          {{ search_teacher_subject_filter()|raw }}
+        </div>
+        <div class="input-group">
+          {{ search_teacher_experience_filter()|raw }}
+        </div>
+      </div>
       <a id="searchUsersButton" class="active-button start-search-button" href="javascript:void(0);" title="">
         <span class="active-button-label">Начать поиск</span>
       </a>

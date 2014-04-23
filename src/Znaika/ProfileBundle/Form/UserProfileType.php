@@ -14,19 +14,6 @@
         const MAX_YEARS_OLD = 113;
 
         /**
-         * @var RegionRepository
-         */
-        private $regionRepository;
-
-        /**
-         * @param RegionRepository $regionRepository
-         */
-        public function __construct(RegionRepository $regionRepository)
-        {
-            $this->regionRepository = $regionRepository;
-        }
-
-        /**
          * @param FormBuilderInterface $builder
          * @param array $options
          */
@@ -34,7 +21,6 @@
         {
             $sexTypes = UserSex::getAvailableTypesTexts();
             $grades   = ClassNumberUtil::getAvailableClassesForSelect();
-            $regions  = $this->regionRepository->getAll();
 
             $builder
                 ->add("firstName", "text", array(

@@ -3,7 +3,6 @@
 
     use Znaika\ProfileBundle\Entity\User;
     use Znaika\ProfileBundle\Entity\UserParentRelation;
-    use Znaika\ProfileBundle\Entity\UserRegistration;
     use Znaika\FrontendBundle\Repository\BaseRepository;
 
     class UserParentRelationRepository extends BaseRepository implements IUserParentRelationRepository
@@ -52,28 +51,15 @@
         /**
          * @inheritdoc
          */
-        public function getUserParentRelations(User $user)
+        public function getUserParentRelation(User $child, User $parent)
         {
-            $result = $this->redisRepository->getUserParentRelations($user);
+            $result = $this->redisRepository->getUserParentRelation($child, $parent);
             if (is_null($result))
             {
-                $result = $this->dbRepository->getUserParentRelations($user);
+                $result = $this->dbRepository->getUserParentRelation($child, $parent);
             }
 
             return $result;
         }
 
-        /**
-         * @inheritdoc
-         */
-        public function getUserChildRelations(User $user)
-        {
-            $result = $this->redisRepository->getUserChildRelations($user);
-            if (is_null($result))
-            {
-                $result = $this->dbRepository->getUserChildRelations($user);
-            }
-
-            return $result;
-        }
     }

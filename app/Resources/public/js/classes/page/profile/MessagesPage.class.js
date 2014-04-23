@@ -17,9 +17,14 @@ var MessagesPage = Base.extend({
 
         this._initFilterSelect();
 
-        this._searchTab = new SearchUserTab();
+        this._searchTab = new SearchUserTab(Routing.generate('search_users_ajax'));
         this._searchTab.addListener(SearchUserTab.event.OPEN_THREAD, this, this._openThread);
 
+        this._elipsisThreadLastMessages();
+    },
+
+    _elipsisThreadLastMessages: function()
+    {
         $(document).find(".user-profile-page-list .message-body").ellipsis({
             row: 2
         });
@@ -140,6 +145,7 @@ var MessagesPage = Base.extend({
 
             $(".empty-pupils-message-container").addClass("hidden");
             $(".not-empty-pupils-container").removeClass("hidden");
+            this._elipsisThreadLastMessages();
         }
         else
         {

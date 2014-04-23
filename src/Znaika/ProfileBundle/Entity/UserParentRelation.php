@@ -14,7 +14,12 @@
         /**
          * @var bool
          */
-        private $approved = false;
+        private $approvedByChild = false;
+
+        /**
+         * @var bool
+         */
+        private $approvedByParent = false;
 
         /**
          * @var \DateTime
@@ -50,17 +55,33 @@
         /**
          * @param boolean $approved
          */
-        public function setApproved($approved)
+        public function setApprovedByChild($approved)
         {
-            $this->approved = $approved;
+            $this->approvedByChild = $approved;
         }
 
         /**
          * @return boolean
          */
-        public function getApproved()
+        public function getApprovedByChild()
         {
-            return $this->approved;
+            return $this->approvedByChild;
+        }
+
+        /**
+         * @param boolean $approvedByParent
+         */
+        public function setApprovedByParent($approvedByParent)
+        {
+            $this->approvedByParent = $approvedByParent;
+        }
+
+        /**
+         * @return boolean
+         */
+        public function getApprovedByParent()
+        {
+            return $this->approvedByParent;
         }
 
         /**

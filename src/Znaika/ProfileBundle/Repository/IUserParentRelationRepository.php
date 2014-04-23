@@ -21,16 +21,10 @@
         public function delete(UserParentRelation $userParentRelation);
 
         /**
-         * @param User $user
+         * @param User $child
+         * @param User $parent
          *
-         * @return UserParentRelation[]
+         * @return UserParentRelation
          */
-        public function getUserParentRelations(User $user);
-
-        /**
-         * @param User $user
-         *
-         * @return UserParentRelation[]
-         */
-        public function getUserChildRelations(User $user);
+        public function getUserParentRelation(User $child, User $parent);
     }

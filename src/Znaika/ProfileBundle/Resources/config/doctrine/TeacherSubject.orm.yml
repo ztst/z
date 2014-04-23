@@ -1,0 +1,25 @@
+Znaika\ProfileBundle\Entity\TeacherSubject:
+    type: entity
+    table: teacher_subject
+    fields:
+        teacherSubjectId: { column: teacher_subject_id, type: integer, id: true, generator: { strategy: AUTO } }
+        createdTime:      { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
+    manyToOne:
+        teacher:
+            targetEntity: Znaika\ProfileBundle\Entity\User
+            inversedBy: teacherSubjects
+            joinColumn:
+                name: user_id
+                referencedColumnName: user_id
+                onDelete: CASCADE
+        subject:
+            targetEntity: Znaika\FrontendBundle\Entity\Lesson\Category\Subject
+            inversedBy: teachers
+            joinColumn:
+                name: subject_id
+                referencedColumnName: subject_id
+                onDelete: CASCADE
+    uniqueConstraints:
+        teacherSubjectIdx:
+            columns: user_id, subject_id
+    lifecycleCallbacks: {  }

@@ -184,6 +184,21 @@
         private $childRelations;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $teacherSubjects;
+
+        /**
+         * @var string
+         */
+        private $teacherAchievement;
+
+        /**
+         * @var int
+         */
+        private $teacherExperience;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -197,6 +212,7 @@
             $this->videoLikes        = new ArrayCollection();
             $this->parentRelations   = new ArrayCollection();
             $this->childRelations    = new ArrayCollection();
+            $this->teacherSubjects   = new ArrayCollection();
         }
 
         /**
@@ -1023,5 +1039,43 @@
         public function getChildRelations()
         {
             return $this->childRelations;
+        }
+
+        public function addTeacherSubject(TeacherSubject $subject)
+        {
+            $subject->setTeacher($this);
+            $this->teacherSubjects[] = $subject;
+
+            return $this;
+        }
+
+        public function removeTeacherSubject(TeacherSubject $subject)
+        {
+            $this->teacherSubjects->removeElement($subject);
+        }
+
+        public function getTeacherSubjects()
+        {
+            return $this->teacherSubjects;
+        }
+
+        public function setTeacherAchievement($teacherAchievement)
+        {
+            $this->teacherAchievement = $teacherAchievement;
+        }
+
+        public function getTeacherAchievement()
+        {
+            return $this->teacherAchievement;
+        }
+
+        public function setTeacherExperience($teacherExperience)
+        {
+            $this->teacherExperience = $teacherExperience;
+        }
+
+        public function getTeacherExperience()
+        {
+            return $this->teacherExperience;
         }
     }

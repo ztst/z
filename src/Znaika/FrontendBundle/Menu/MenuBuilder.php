@@ -6,6 +6,7 @@
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\Security\Core\SecurityContextInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
+    use Znaika\FrontendBundle\Helper\Util\UserEditProfileUrlUtil;
     use Znaika\FrontendBundle\Repository\Communication\MessageRepository;
     use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
@@ -96,7 +97,7 @@
             $this->currentRoute = $request->get('_route');
 
             $userId         = $this->currentUser->getUserId();
-            $urlPattern  = $this->currentUser->getRole() == UserRole::ROLE_USER ? "edit_user_profile" : "edit_teacher_profile";
+            $urlPattern     =  UserEditProfileUrlUtil::prepareUrlPatterByRole($this->currentUser->getRole());
             $menu->addChild("Мой профиль",
                 array("route" => $urlPattern, "routeParameters" => array("userId" => $userId)));
 

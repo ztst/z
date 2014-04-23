@@ -24,14 +24,17 @@ Znaika\ProfileBundle\Entity\User:
         banReason:       { column: ban_reason, type: smallint, notnull: true }
         updatedTime:     { column: updated_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
         photoFileName:   { column: photo_file_name, type: string, length: 150, nullable: true }
+        teacherExperience:  { column: teacher_experience, type: smallint, nullable: true }
+        teacherAchievement: { column: teacher_achievement, type: string, length: 255, nullable: true }
     oneToMany:
         videoComments:      { targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment, mappedBy: user }
         banInfos:           { targetEntity: Znaika\ProfileBundle\Entity\Ban\Info, mappedBy: user }
         userRegistrations:  { targetEntity: Znaika\ProfileBundle\Entity\UserRegistration, mappedBy: user }
         passwordRecoveries: { targetEntity: Znaika\ProfileBundle\Entity\PasswordRecovery, mappedBy: user }
         changeUserEmails:   { targetEntity: Znaika\ProfileBundle\Entity\ChangeUserEmail, mappedBy: user }
-        childRelations:     { targetEntity: Znaika\ProfileBundle\Entity\UserParentRelation, mappedBy: child }
-        parentRelations:    { targetEntity: Znaika\ProfileBundle\Entity\UserParentRelation, mappedBy: parent }
+        childRelations:     { targetEntity: Znaika\ProfileBundle\Entity\UserParentRelation, mappedBy: parent }
+        parentRelations:    { targetEntity: Znaika\ProfileBundle\Entity\UserParentRelation, mappedBy: child }
+        teacherSubjects:    { targetEntity: Znaika\ProfileBundle\Entity\TeacherSubject, mappedBy: teacher, cascade: [persist],orphanRemoval: true }
         videoCommentLikes:  { targetEntity: Znaika\LikesBundle\Entity\VideoCommentLike, mappedBy: user }
         videoLikes:         { targetEntity: Znaika\LikesBundle\Entity\VideoLike, mappedBy: user }
     manyToOne:

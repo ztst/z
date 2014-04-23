@@ -16,12 +16,7 @@
             return null;
         }
 
-        public function getUserParentRelations(User $user)
-        {
-            return null;
-        }
-
-        public function getUserChildRelations(User $user)
+        public function getUserParentRelation(User $child, User $parent)
         {
             return null;
         }

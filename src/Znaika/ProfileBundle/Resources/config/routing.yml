@@ -54,9 +54,37 @@ edit_teacher_profile:
     pattern: /teacher/edit-profile/{userId}
     defaults: { _controller: ZnaikaProfileBundle:Default:editTeacherProfile }
 
+edit_parent_profile:
+    pattern: /parent/edit-profile/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:editParentProfile }
+
+delete_parent:
+    pattern: /user/delete-parent/{parentId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:deleteUserParent }
+
+approve_parent:
+    pattern: /user/approve-parent/{parentId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:approveUserParent }
+
 add_parent:
     pattern: /user/add-parent/{parentId}
     defaults: { _controller: ZnaikaProfileBundle:Default:addUserParent }
+    options:
+        expose: true
+
+delete_child:
+    pattern: /parent/delete-child/{childId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:deleteUserChild }
+
+approve_child:
+    pattern: /parent/approve-child/{childId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:approveUserChild }
+
+add_child:
+    pattern: /parent/add-child/{childId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:addUserChild }
+    options:
+        expose: true
 
 teacher_questions:
     pattern: /teacher/questions/{userId}
