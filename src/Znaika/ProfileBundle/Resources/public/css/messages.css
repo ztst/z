@@ -4,10 +4,10 @@
     background: #eff8fa;
 }
 
-.not-read-message
+.messenger_thread_message.not-read-message
 {
-    box-shadow: 0 -1px 0 0 #dcdcdc, 0 1px 0 0 #dcdcdc;
-    border: none !important;
+    border-bottom: 1px solid #DCDCDC;
+    border-top: 1px solid #DCDCDC;
 }
 
 .empty-result-message
@@ -76,6 +76,13 @@
     margin-left: 13px;
 }
 
+.message-user-name a
+{
+    color: #333;
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
 .self-user-pic
 {
     float: left;
@@ -84,27 +91,16 @@
 
 .message-text-data
 {
-    font-size: 12px;
-    color: #444;
-}
-
-.message-text-data
-{
     margin-left: 22px;
     width: 415px;
+    font-size: 12px;
+    color: #444;
 }
 
 .message-text-data.self-message-text-data
 {
     margin-left: 9px;
     width: 382px;
-}
-
-.message-user-name a
-{
-    color: #333;
-    font-size: 13px;
-    font-family: "OpenSans Semibold",sans-serif;
 }
 
 .message-body

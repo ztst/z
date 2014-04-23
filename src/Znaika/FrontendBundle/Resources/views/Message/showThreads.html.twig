@@ -36,7 +36,7 @@
         </li>
         <li class="watch-threads-tab {% if recipientId %}active{% else %}hidden{% endif %}">
           <div class="active-top-border"></div>
-          <a id="watchThreadsTab" href="#thread" data-toggle="tab">
+          <a id="watchThreadsTab" href="#watchThreads" data-toggle="tab">
             <span class="tab-label">Просмотр диалогов</span>
           </a>
         </li>
@@ -53,7 +53,10 @@
   <div class="tab-pane {% if not recipientId %}active{% endif %}" id="threads">
     <div class="empty-pupils-message-container {% if threads|length  %}hidden{% endif %}">
       <div class="empty-result-message">
-        У вас нет диалогов. Чтобы начать новый диалог, найдите собеседника в <a href="javascript:void(0);" title="">поиске людей</a>.
+        У вас нет диалогов. Чтобы начать новый диалог, найдите собеседника в
+        <a href="javascript:void(0);" title="" id="searchUsersLinkFromEmptyThreads" data-toggle="tab">
+          поиске людей
+        </a>.
       </div>
     </div>
     <div class="not-empty-pupils-container {% if not threads|length  %}hidden{% endif %}">
@@ -70,7 +73,7 @@
     </div>
   </div>
 
-  <div class="tab-pane {% if recipientId %}active{% endif %}" id="thread">
+  <div class="tab-pane {% if recipientId %}active{% endif %}" id="watchThreads">
     <div class="thread-preloader {% if not recipientId %}hidden{% endif %}">
       <img src="{{ asset("images/preloader.gif") }}" alt="Диалог загружается..." />
     </div>

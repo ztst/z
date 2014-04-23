@@ -26,7 +26,12 @@
 .users-search-container li
 {
     padding: 20px 0;
-    border-bottom: 1px solid #efefef;
+    border-top: 1px solid #efefef;
+}
+
+.users-search-container li:first-child
+{
+    border-top: none;
 }
 
 .send-found-user-message-button
@@ -37,14 +42,31 @@
     background: url("/images/user-profile/send-found-user-message-button-icon.png") no-repeat 0 3px;
 }
 
-.users-search-container .message-user-name
+.users-search-container .found-user-name
 {
     margin-left: 0;
+    margin-top: -5px;
 }
 
-.users-search-container .message-text-data
+.users-search-container .found-user-name a
+{
+    color: #333;
+    font-size: 13px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
+.found-user-additional-info
+{
+    color: #777;
+    font-size: 11px;
+}
+
+.users-search-container .user-text-data
 {
     margin-left: 63px;
+    width: 310px;
+    font-size: 12px;
+    color: #444;
 }
 
 .user-search-filters-container
