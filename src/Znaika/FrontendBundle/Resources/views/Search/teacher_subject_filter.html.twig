@@ -1,0 +1,6 @@
+<select id="teacherSubjectSelect" class="search-filter-select">
+  <option value="" />Выбор специализации</option>
+  {% for subject in subjects %}
+    <option value="{{ subject.subjectId }}" {% if currentSubject and currentSubject == subject  %}selected="selected"{% endif %}/>{{ subject.name }}</option>
+  {% endfor %}
+</select>

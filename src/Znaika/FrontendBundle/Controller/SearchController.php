@@ -10,6 +10,7 @@
     use Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\SynopsisRepository;
     use Znaika\FrontendBundle\Repository\Lesson\Content\VideoRepository;
+    use Znaika\ProfileBundle\Helper\Util\UserRole;
     use Znaika\ProfileBundle\Repository\UserRepository;
 
     class SearchController extends ZnaikaController
@@ -20,7 +21,7 @@
         {
             $searchString = trim($request->get("q", ""));
             $page         = intval($request->get("page"));
-            $users        = $this->searchUsers($searchString, $request, self::RESULT_ON_SPECIAL_PAGE, $page);
+            $users        = $this->searchUsers($searchString, $request, null, self::RESULT_ON_SPECIAL_PAGE, $page);
             $countUsers   = $this->countFoundedUsers($searchString, $request);
             $isFinalPage  = $this->isFinalPage($countUsers, $page, self::RESULT_ON_SPECIAL_PAGE);
 
@@ -78,6 +79,58 @@
             $array = array(
                 'html'        => $html,
                 'isFinalPage' => $isFinalPage
+            );
+
+            return new JsonResponse($array);
+        }
+
+        public function searchParentAction()
+        {
+            return $this->render('ZnaikaFrontendBundle:Search:searchParent.html.twig', array());
+        }
+
+        public function searchParentAjaxAction(Request $request)
+        {
+            $searchString = trim($request->get("q", ""));
+            $page         = intval($request->get("page"));
+            $users        = $this->searchUsers($searchString, $request, UserRole::ROLE_PARENT, self::RESULT_ON_SPECIAL_PAGE, $page);
+            $countUsers   = $this->countFoundedUsers($searchString, $request, UserRole::ROLE_PARENT);
+            $isFinalPage  = $this->isFinalPage($countUsers, $page, self::RESULT_ON_SPECIAL_PAGE);
+
+            $html = $this->renderView('ZnaikaFrontendBundle:Search:search_parent_list.html.twig', array(
+                'users' => $users,
+            ));
+
+            $array = array(
+                'html'        => $html,
+                'isFinalPage' => $isFinalPage,
+                'countUsers'  => $countUsers,
+            );
+
+            return new JsonResponse($array);
+        }
+
+        public function searchChildAction()
+        {
+            return $this->render('ZnaikaFrontendBundle:Search:searchChild.html.twig', array());
+        }
+
+        public function searchChildAjaxAction(Request $request)
+        {
+            $searchString = trim($request->get("q", ""));
+            $page         = intval($request->get("page"));
+            $users        = $this->searchUsers($searchString, $request, UserRole::ROLE_USER, self::RESULT_ON_SPECIAL_PAGE, $page);
+            $countUsers   = $this->countFoundedUsers($searchString, $request, UserRole::ROLE_USER);
+            $isFinalPage  = $this->isFinalPage($countUsers, $page, self::RESULT_ON_SPECIAL_PAGE);
+
+            $html = $this->renderView('ZnaikaFrontendBundle:Search:search_child_list.html.twig', array(
+                'users' => $users,
+            ));
+
+            $array = array(
+                'html'        => $html,
+                'isFinalPage' => $isFinalPage,
+                'countUsers'  => $countUsers,
             );
 
             return new JsonResponse($array);
@@ -160,18 +213,20 @@
             return $this->get("znaika.user_search");
         }
 
-        private function searchUsers($searchString, Request $request, $limit = null, $page = null)
+        private function searchUsers($searchString, Request $request, $role = null, $limit = null, $page = null)
         {
             $userSearch = $this->getUserSearch();
+            $userSearch->setRole($role);
             $userSearch->initFromRequest($request);
             $users = $userSearch->getUsersBySearchString($searchString, $limit, $page);
 
             return $users;
         }
 
-        private function countFoundedUsers($searchString, Request $request)
+        private function countFoundedUsers($searchString, Request $request, $role = null)
         {
             $userSearch = $this->getUserSearch();
+            $userSearch->setRole($role);
             $userSearch->initFromRequest($request);
 
             return $userSearch->countUserBySearchString($searchString);

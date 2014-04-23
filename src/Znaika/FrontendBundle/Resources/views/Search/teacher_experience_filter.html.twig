@@ -1,0 +1,13 @@
+<select id="teacherExperienceFromSelect" class="search-filter-select">
+  <option value="" />От</option>
+  {% for teacherExperience in teacherExperiencesFrom %}
+    <option value="{{ teacherExperience }}" {% if teacherExperienceFrom and teacherExperienceFrom == teacherExperience  %}selected="selected"{% endif %}/>{{ teacherExperience }}</option>
+  {% endfor %}
+</select>
+<span>&nbsp;—&nbsp;</span>
+<select id="teacherExperienceToSelect" class="search-filter-select">
+  <option value="" />До</option>
+  {% for teacherExperience in teacherExperiencesTo %}
+    <option value="{{ teacherExperience }}" {% if teacherExperienceTo and teacherExperienceTo == teacherExperience  %}selected="selected"{% endif %}/>{{ teacherExperience }}</option>
+  {% endfor %}
+</select>

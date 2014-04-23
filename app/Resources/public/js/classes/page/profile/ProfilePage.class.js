@@ -21,9 +21,9 @@ var ProfilePage = Base.extend({
 
         this._changePasswordForm = new ChangePasswordForm("changePasswordForm");
         this._changePasswordForm.addListener(BaseForm.event.SUBMITTED, this, this._onChangePasswordFormSubmitted);
-
-        this._initPageCloseHandler();
         this._initAccountSettingsFormSwitching();
+//
+        this._initPageCloseHandler();
         this._initChangePasswordOnSocialRegisterCompletePopup();
     },
 

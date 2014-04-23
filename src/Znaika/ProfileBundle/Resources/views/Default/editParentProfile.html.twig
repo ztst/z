@@ -1,0 +1,60 @@
+{% extends 'ZnaikaProfileBundle::Default/user_page_layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets filter="?yui_css"
+    '@ZnaikaProfileBundle/Resources/public/css/user_profile.css'
+  %}
+  <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+  {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts filter='?yui_js'
+    '../app/Resources/public/js/classes/form/profile/EditProfileForm.class.js'
+    '../app/Resources/public/js/classes/form/profile/UserPhotoForm.class.js'
+    '../app/Resources/public/js/classes/form/profile/ChangePasswordForm.class.js'
+    '../app/Resources/public/js/classes/form/profile/ChangeEmailForm.class.js'
+    '../app/Resources/public/js/classes/page/profile/ProfilePage.class.js'
+    '../app/Resources/public/js/classes/page/profile/UserProfilePage.class.js'
+  %}
+  <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block pageContent %}
+  <div class="user-profile-column-container">
+    {% if isSocialRegisterComplete %}
+      {% include "ZnaikaProfileBundle:Default:change_password_on_register_complete.html.twig" with {'form': changePasswordOnRegisterCompleteForm} %}
+    {% endif %}
+
+    <h3>Редактирование профиля</h3>
+    {% include "ZnaikaProfileBundle:Default:parent_profile_form.html.twig" with {'form': profileForm} %}
+
+    <div class="settings-column-container hidden">
+      <h3>Настройки аккаунта</h3>
+      <div class="change-email-controller">
+        <span class="setting-label">Email</span>
+        <span class="current-setting-value">{{ user.email }}</span>
+        <a href="javascript:void(0);" class="edit-account-setting-button" id="editUserEmailLink" title="Изменить email">&nbsp;</a>
+      </div>
+      <div class="change-email-form-container hidden">
+        {% include "ZnaikaProfileBundle:Default:change_email_form.html.twig" with {'form': changeUserEmailFrom} %}
+      </div>
+      <div class="change-password-controller">
+        <span class="setting-label">Пароль</span>
+        <span class="current-setting-value">********</span>
+        <a href="javascript:void(0);" class="edit-account-setting-button" id="editUserPasswordLink" title="Изменить пароль">&nbsp;</a>
+      </div>
+      <div class="change-password-form-container hidden">
+        {% include "ZnaikaProfileBundle:Default:change_password_form.html.twig" with {'form': changePasswordForm} %}
+      </div>
+    </div>
+  </div>
+  <div class="photo-column-container learner-photo-form">
+    {% include "ZnaikaProfileBundle:Default:user_photo_form.html.twig" with {'form': userPhotoForm} %}
+  </div>
+{% endblock %}
