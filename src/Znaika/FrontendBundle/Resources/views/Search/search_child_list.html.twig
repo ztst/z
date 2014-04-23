@@ -8,17 +8,14 @@
              src="{{ user_photo_small_url(user) }}"
              alt="Здесь будет аватар"/>
       </a>
-      <div class="user-text-data">
-        <div class="found-user-name">
+      <div class="message-text-data">
+        <div class="message-user-name">
           <a id="openUserProfile{{ user.userId }}" class="show-user-profile-link" href="{{ path("show_user_profile", {"userId": user.userId}) }}">
             {{ user }}
           </a>
         </div>
-        <div class="found-user-additional-info">
-          {{ search_user_role(user)|lower }}
-        </div>
-        {% if user.region %}<div class="found-user-additional-info">{{ user.region.regionName }}</div>{% endif %}
-        <a href="javascript:void(0);" title="" class="active-link send-found-user-message-button">Отправить сообщение</a>
+        {% if user.region %}<div class="message-created-date">{{ user.region.regionName }}</div>{% endif %}
+        <a href="javascript:void(0);" title="" class="add-child-button">Добавить ребенка</a>
       </div>
       <div class="clear"></div>
     </li>

@@ -10,12 +10,16 @@
     use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
     use Symfony\Component\Security\Core\Encoder\EncoderFactory;
     use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+    use Symfony\Component\Translation\Translator;
     use Znaika\FrontendBundle\Controller\ZnaikaController;
+    use Znaika\FrontendBundle\Helper\Util\UserEditProfileUrlUtil;
     use Znaika\ProfileBundle\Entity\ChangeUserEmail;
     use Znaika\ProfileBundle\Entity\User;
     use Znaika\ProfileBundle\Entity\PasswordRecovery;
     use Znaika\ProfileBundle\Entity\Ban\Info;
+    use Znaika\ProfileBundle\Entity\UserParentRelation;
     use Znaika\ProfileBundle\Form\Model\ChangePassword;
+    use Znaika\ProfileBundle\Form\ParentProfileType;
     use Znaika\ProfileBundle\Form\Type\ChangePasswordType;
     use Znaika\ProfileBundle\Form\ChangeUserEmailType;
     use Znaika\ProfileBundle\Form\PasswordRecoveryType;
@@ -26,6 +30,9 @@
     use Znaika\ProfileBundle\Helper\Mail\UserMailer;
     use Znaika\ProfileBundle\Helper\Security\UserAuthenticator;
     use Znaika\ProfileBundle\Helper\Uploader\UserPhotoUploader;
+    use Znaika\ProfileBundle\Repository\RegionRepository;
+    use Znaika\ProfileBundle\Repository\UserParentRelationRepository;
+    use Znaika\ProfileBundle\Twig\ProfileExtension;
     use Znaika\UserOperationBundle\Helper\UserOperationListener;
     use Znaika\FrontendBundle\Helper\Util\Lesson\VideoCommentStatus;
     use Znaika\ProfileBundle\Helper\Util\UserBan;
@@ -40,11 +47,6 @@
 
     class DefaultController extends ZnaikaController
     {
-        public function showMessagesAction(Request $request)
-        {
-            return "";
-        }
-
         /**
          * @param Request $request
          *
@@ -81,7 +83,7 @@
             if ($canEdit)
             {
                 $currentUser = $this->getUser();
-                $urlPattern  = $currentUser->getRole() == UserRole::ROLE_USER ? "edit_user_profile" : "edit_teacher_profile";
+                $urlPattern = UserEditProfileUrlUtil::prepareUrlPatterByRole($currentUser->getRole());
 
                 return new RedirectResponse($this->generateUrl($urlPattern, array('userId' => $userId)));
             }
@@ -126,7 +128,35 @@
                 'user'                                 => $user,
                 'userId'                               => $user->getUserId(),
                 'isSocialRegisterComplete'             => $isSocialRegisterComplete,
-                'regions'                              => $this->getRegionRepository()->getAll(),
+            ));
+        }
+
+        public function editParentProfileAction(Request $request)
+        {
+            if (!$this->canEditProfile())
+            {
+                throw new AccessDeniedHttpException("Can't manage user");
+            }
+            $isSocialRegisterComplete = $this->getIsSocialRegisterComplete();
+            $user                     = $this->getUser();
+
+            $profileForm                          = $this->handleParentProfileForm($user, $request);
+            $userPhotoForm                        = $this->createForm(new UserPhotoType(), $user);
+            $changeUserEmail                      = $this->createForm(new ChangeUserEmailType(), new ChangeUserEmail());
+            $changePasswordOnRegisterCompleteForm = $this->createForm(new ChangePasswordType(), new ChangePassword());
+            $changePasswordForm                   = $this->createForm(new ChangePasswordType(), new ChangePassword());
+
+            $this->addBanReasonMessage();
+
+            return $this->render('ZnaikaProfileBundle:Default:editParentProfile.html.twig', array(
+                'profileForm'                          => $profileForm->createView(),
+                'userPhotoForm'                        => $userPhotoForm->createView(),
+                'changePasswordForm'                   => $changePasswordForm->createView(),
+                'changePasswordOnRegisterCompleteForm' => $changePasswordOnRegisterCompleteForm->createView(),
+                'changeUserEmailFrom'                  => $changeUserEmail->createView(),
+                'user'                                 => $user,
+                'userId'                               => $user->getUserId(),
+                'isSocialRegisterComplete'             => $isSocialRegisterComplete,
             ));
         }
 
@@ -151,6 +181,139 @@
                 'user'                => $user,
                 'userId'              => $user->getUserId(),
             ));
+        }
+
+        public function addUserParentAction($parentId)
+        {
+            /** @var User $user */
+            $user = $this->getUser();
+            $userId = $user->getUserId();
+            $relations = $user->getParentRelations();
+            if (count($relations) == ProfileExtension::MAX_PARENTS)
+            {
+                return $this->createNotFoundException("User {$userId} already has " . ProfileExtension::MAX_CHILDREN . " parents");
+            }
+
+            $userRepository = $this->getUserRepository();
+            $parent = $userRepository->getOneByUserId($parentId);
+            if ($parent->getRole() != UserRole::ROLE_PARENT)
+            {
+                return $this->createNotFoundException("User {$userId} try add not parent user {$parentId}");
+            }
+
+            $userParentRelationRepository = $this->getUserParentRelationRepository();
+            $userParentRelation = $userParentRelationRepository->getUserParentRelation($user, $parent);
+            $userParentRelation = $userParentRelation ? $userParentRelation : new UserParentRelation();
+            $userParentRelation->setParent($parent);
+            $userParentRelation->setChild($user);
+            $userParentRelation->setApprovedByChild(true);
+            $userParentRelationRepository->save($userParentRelation);
+
+            return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
+        }
+
+        public function deleteUserParentAction($parentId)
+        {
+            /** @var User $user */
+            $user = $this->getUser();
+
+            $userRepository = $this->getUserRepository();
+            $parent = $userRepository->getOneByUserId($parentId);
+
+            $userParentRelationRepository = $this->getUserParentRelationRepository();
+            $userParentRelation = $userParentRelationRepository->getUserParentRelation($user, $parent);
+            if ($userParentRelation)
+            {
+                $userParentRelationRepository->delete($userParentRelation);
+            }
+
+            return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
+        }
+
+        public function approveUserParentAction($parentId)
+        {
+            /** @var User $user */
+            $user = $this->getUser();
+
+            $userRepository = $this->getUserRepository();
+            $parent = $userRepository->getOneByUserId($parentId);
+
+            $userParentRelationRepository = $this->getUserParentRelationRepository();
+            $userParentRelation = $userParentRelationRepository->getUserParentRelation($user, $parent);
+            if ($userParentRelation)
+            {
+                $userParentRelation->setApprovedByChild(true);
+                $userParentRelationRepository->save($userParentRelation);
+            }
+
+            return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
+        }
+
+        public function addUserChildAction($childId)
+        {
+            /** @var User $user */
+            $user = $this->getUser();
+            $userId = $user->getUserId();
+            $relations = $user->getChildRelations();
+            if (count($relations) >= ProfileExtension::MAX_CHILDREN)
+            {
+                die('test');
+                return $this->createNotFoundException("User {$userId} already has " . ProfileExtension::MAX_PARENTS . " children");
+            }
+
+            $userRepository = $this->getUserRepository();
+            $child = $userRepository->getOneByUserId($childId);
+            if ($child->getRole() != UserRole::ROLE_USER)
+            {
+                return $this->createNotFoundException("User {$userId} try add not parent user {$childId}");
+            }
+
+            $userParentRelationRepository = $this->getUserParentRelationRepository();
+            $userParentRelation = $userParentRelationRepository->getUserParentRelation($child, $user);
+            $userParentRelation = $userParentRelation ? $userParentRelation : new UserParentRelation();
+            $userParentRelation->setParent($user);
+            $userParentRelation->setChild($child);
+            $userParentRelation->setApprovedByParent(true);
+            $userParentRelationRepository->save($userParentRelation);
+
+            return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
+        }
+
+        public function deleteUserChildAction($childId)
+        {
+            /** @var User $user */
+            $user = $this->getUser();
+
+            $userRepository = $this->getUserRepository();
+            $child = $userRepository->getOneByUserId($childId);
+
+            $userParentRelationRepository = $this->getUserParentRelationRepository();
+            $userParentRelation = $userParentRelationRepository->getUserParentRelation($child, $user);
+            if ($userParentRelation)
+            {
+                $userParentRelationRepository->delete($userParentRelation);
+            }
+
+            return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
+        }
+
+        public function approveUserChildAction($childId)
+        {
+            /** @var User $user */
+            $user = $this->getUser();
+
+            $userRepository = $this->getUserRepository();
+            $child = $userRepository->getOneByUserId($childId);
+
+            $userParentRelationRepository = $this->getUserParentRelationRepository();
+            $userParentRelation = $userParentRelationRepository->getUserParentRelation($child, $user);
+            if ($userParentRelation)
+            {
+                $userParentRelation->setApprovedByParent(true);
+                $userParentRelationRepository->save($userParentRelation);
+            }
+
+            return new RedirectResponse($this->generateUrl('show_user_profile', array('userId' => $user->getUserId())));
         }
 
         public function teacherQuestionsAction()
@@ -490,9 +653,34 @@
          */
         private function handleProfileForm(User $user, Request $request)
         {
-            $regionRepository = $this->getRegionRepository();
-            $form = $this->createForm(new UserProfileType($regionRepository), $user);
+            $form = $this->createForm(new UserProfileType(), $user);
             if ($request->request->has('user_profile_type'))
+            {
+                $form->handleRequest($request);
+                if ($form->isValid())
+                {
+                    $listener = $this->getUserOperationListener();
+                    $listener->onEditProfile($user);
+
+                    $user->setStatus(UserStatus::NOT_VERIFIED);
+                    $userRepository = $this->getUserRepository();
+                    $userRepository->save($user);
+                }
+            }
+
+            return $form;
+        }
+
+        /**
+         * @param \Znaika\ProfileBundle\Entity\User $user
+         * @param \Symfony\Component\HttpFoundation\Request $request
+         *
+         * @return \Symfony\Component\Form\Form
+         */
+        private function handleParentProfileForm(User $user, Request $request)
+        {
+            $form = $this->createForm(new ParentProfileType(), $user);
+            if ($request->request->has('parent_profile_type'))
             {
                 $form->handleRequest($request);
                 if ($form->isValid())
@@ -517,7 +705,9 @@
         private function handleTeacherProfileForm(User $user)
         {
             $request = $this->getRequest();
-            $form    = $this->createForm(new TeacherProfileType(), $user);
+            /** @var Translator $translator */
+            $translator = $this->get('translator');
+            $form    = $this->createForm(new TeacherProfileType($translator), $user);
 
             if ($request->request->has('teacher_profile_type'))
             {
@@ -828,5 +1018,13 @@
         private function getRegionRepository()
         {
             return $this->get("znaika.region_repository");
+        }
+
+        /**
+         * @return UserParentRelationRepository
+         */
+        private function getUserParentRelationRepository()
+        {
+            return $this->get("znaika.user_parent_relation_repository");
         }
     }

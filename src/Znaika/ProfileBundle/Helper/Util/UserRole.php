@@ -16,6 +16,7 @@
                 self::ROLE_MODERATOR,
                 self::ROLE_ADMIN,
                 self::ROLE_TEACHER,
+                self::ROLE_PARENT,
             );
 
             return $availableRoles;
@@ -28,6 +29,7 @@
                 self::ROLE_MODERATOR => "ROLE_MODERATOR",
                 self::ROLE_ADMIN     => "ROLE_ADMIN",
                 self::ROLE_TEACHER   => "ROLE_TEACHER",
+                self::ROLE_PARENT    => "ROLE_PARENT",
             );
 
             return $availableRoles;
@@ -36,11 +38,12 @@
         public static function getSecurityTextByRole($role)
         {
             $result = "";
-            $texts = self::getAvailableRolesSecurityTexts();
+            $texts  = self::getAvailableRolesSecurityTexts();
             if (array_key_exists($role, $texts))
             {
                 $result = $texts[$role];
             }
+
             return $result;
         }
     }

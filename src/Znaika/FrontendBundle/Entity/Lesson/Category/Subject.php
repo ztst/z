@@ -2,6 +2,7 @@
     namespace Znaika\FrontendBundle\Entity\Lesson\Category;
 
     use Doctrine\ORM\Mapping as ORM;
+    use Znaika\ProfileBundle\Entity\User;
 
     class Subject
     {
@@ -15,6 +16,11 @@
          * @var string
          */
         private $name;
+
+        /**
+         * @var string
+         */
+        private $nameInGenitiveCase;
 
         /**
          * @var string
@@ -37,12 +43,18 @@
         private $videos;
 
         /**
+         * @var \Doctrine\Common\Collections\Collection
+         */
+        private $teachers;
+
+        /**
          * Constructor
          */
         public function __construct()
         {
             $this->chapters = new \Doctrine\Common\Collections\ArrayCollection();
             $this->videos   = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->teachers = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         /**
@@ -193,5 +205,32 @@
         public function getChapters()
         {
             return $this->chapters;
+        }
+
+        public function addTeacher(User $teacher)
+        {
+            $this->teachers[] = $teacher;
+
+            return $this;
+        }
+
+        public function removeTeacher(User $teacher)
+        {
+            $this->teachers->removeElement($teacher);
+        }
+
+        public function getTeachers()
+        {
+            return $this->teachers;
+        }
+
+        public function setNameInGenitiveCase($nameInGenitiveCase)
+        {
+            $this->nameInGenitiveCase = $nameInGenitiveCase;
+        }
+
+        public function getNameInGenitiveCase()
+        {
+            return $this->nameInGenitiveCase;
         }
     }

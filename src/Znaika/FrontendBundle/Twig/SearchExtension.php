@@ -7,7 +7,9 @@
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
     use Znaika\FrontendBundle\Helper\Util\UserSearchAgeUtil;
     use Znaika\FrontendBundle\Repository\Lesson\Category\SubjectRepository;
+    use Znaika\ProfileBundle\Entity\TeacherSubject;
     use Znaika\ProfileBundle\Entity\User;
+    use Znaika\ProfileBundle\Helper\Util\TeacherExperienceUtil;
     use Znaika\ProfileBundle\Helper\Util\UserRole;
     use Znaika\ProfileBundle\Helper\Util\UserSex;
     use Znaika\ProfileBundle\Repository\RegionRepository;
@@ -33,14 +35,16 @@
         public function getFunctions()
         {
             return array(
-                'search_form'               => new \Twig_Function_Method($this, 'renderSearchForm'),
-                'search_grade_filter'       => new \Twig_Function_Method($this, 'renderSearchGradeFilter'),
-                'search_subject_filter'     => new \Twig_Function_Method($this, 'renderSearchSubjectFilter'),
-                'search_user_region_filter' => new \Twig_Function_Method($this, 'renderSearchUserRegionFilter'),
-                'search_user_age_filter'    => new \Twig_Function_Method($this, 'renderSearchUserAgeFilter'),
-                'search_user_sex_filter'    => new \Twig_Function_Method($this, 'renderSearchUserSexFilter'),
-                'search_user_role_filter'   => new \Twig_Function_Method($this, 'renderSearchUserRoleFilter'),
-                'search_user_role'          => new \Twig_Function_Method($this, 'showSearchUserRole'),
+                'search_form'                      => new \Twig_Function_Method($this, 'renderSearchForm'),
+                'search_grade_filter'              => new \Twig_Function_Method($this, 'renderSearchGradeFilter'),
+                'search_subject_filter'            => new \Twig_Function_Method($this, 'renderSearchSubjectFilter'),
+                'search_user_region_filter'        => new \Twig_Function_Method($this, 'renderSearchUserRegionFilter'),
+                'search_user_age_filter'           => new \Twig_Function_Method($this, 'renderSearchUserAgeFilter'),
+                'search_user_sex_filter'           => new \Twig_Function_Method($this, 'renderSearchUserSexFilter'),
+                'search_user_role_filter'          => new \Twig_Function_Method($this, 'renderSearchUserRoleFilter'),
+                'search_user_role'                 => new \Twig_Function_Method($this, 'showSearchUserRole'),
+                'search_teacher_subject_filter'    => new \Twig_Function_Method($this, 'renderSearchTeacherSubjectFilter'),
+                'search_teacher_experience_filter' => new \Twig_Function_Method($this, 'renderSearchTeacherExperienceFilter'),
             );
         }
 
@@ -166,6 +170,48 @@
             return $result;
         }
 
+        public function renderSearchTeacherSubjectFilter()
+        {
+            $request        = $this->container->get("request");
+            $currentSubject = $request->get(UserSearch::SUBJECT_REQUEST_PARAM, "");
+
+            $templateFile    = "ZnaikaFrontendBundle:Search:teacher_subject_filter.html.twig";
+            $templateContent = $this->twig->loadTemplate($templateFile);
+
+            /** @var SubjectRepository $subjectRepository */
+            $subjectRepository = $this->container->get("znaika.subject_repository");
+            $subjects          = $subjectRepository->getAll();
+
+            $result = $templateContent->render(array(
+                "subjects"       => $subjects,
+                "currentSubject" => $currentSubject,
+            ));
+
+            return $result;
+        }
+
+        public function renderSearchTeacherExperienceFilter()
+        {
+            $request               = $this->container->get("request");
+            $currentExperienceFrom = $request->get(UserSearch::EXPERIENCE_FROM_REQUEST_PARAM, "");
+            $currentExperienceTo   = $request->get(UserSearch::EXPERIENCE_TO_REQUEST_PARAM, "");
+
+            $templateFile    = "ZnaikaFrontendBundle:Search:teacher_experience_filter.html.twig";
+            $templateContent = $this->twig->loadTemplate($templateFile);
+
+            $teacherExperiencesFrom = TeacherExperienceUtil::getAvailableValuesFrom();
+            $teacherExperiencesTo   = TeacherExperienceUtil::getAvailableValuesTo();
+
+            $result = $templateContent->render(array(
+                "teacherExperiencesFrom" => $teacherExperiencesFrom,
+                "teacherExperiencesTo"   => $teacherExperiencesTo,
+                "teacherExperienceFrom"  => $currentExperienceFrom,
+                "teacherExperienceTo"    => $currentExperienceTo,
+            ));
+
+            return $result;
+        }
+
         public function renderSearchUserRoleFilter()
         {
             $request     = $this->container->get("request");
@@ -198,7 +244,15 @@
                     $result = "Ученик";
                     break;
                 case UserRole::ROLE_TEACHER:
-                    $result = "Учитель";
+                    $result       = "Учитель";
+                    $subjects     = $user->getTeacherSubjects();
+                    $subjectNames = array();
+                    foreach ($subjects as $subject)
+                    {
+                        /** @var TeacherSubject $subject */
+                        array_push($subjectNames, $subject->getSubject()->getNameInGenitiveCase());
+                    }
+                    $result .= " " . implode(", ", $subjectNames);
                     break;
                 case UserRole::ROLE_PARENT:
                     $result = "Родитель";

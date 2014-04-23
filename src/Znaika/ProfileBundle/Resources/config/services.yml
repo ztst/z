@@ -72,6 +72,10 @@ services:
         class:        Znaika\ProfileBundle\Repository\RegionRepository
         arguments:    ["@doctrine.orm.entity_manager"]
 
+    znaika.user_parent_relation_repository:
+        class:        Znaika\ProfileBundle\Repository\UserParentRelationRepository
+        arguments:    ["@doctrine.orm.entity_manager"]
+
 #twig
     znaika.security_extension:
         class: Znaika\ProfileBundle\Twig\SecurityExtension

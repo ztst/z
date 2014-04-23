@@ -3,8 +3,8 @@ Znaika\ProfileBundle\Entity\Region:
     table: region
     repositoryClass: Znaika\ProfileBundle\Repository\RegionDBRepository
     fields:
-        regionId: { column: region_id, type: integer, id: true, generator: { strategy: AUTO } }
-        regionName: { column: region_name, type: string, length: 255, notnull: true, unique: true }
+        regionId:    { column: region_id, type: integer, id: true, generator: { strategy: AUTO } }
+        regionName:  { column: region_name, type: string, length: 255, notnull: true, unique: true }
         createdTime: { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
     oneToMany:
         users:

@@ -3,7 +3,7 @@
 
     class VideoUtil
     {
-        const VIMEO_COM = "http//vimeo.com/";
+        const VIMEO_COM = "http://vimeo.com/";
 
         public static function getVimeoIdByUrl($url)
         {

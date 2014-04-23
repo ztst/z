@@ -14,8 +14,7 @@ var EditProfileForm = BaseForm.extend({
             radioClass: 'iradio'
         });
 
-        var gradeField = $("#gradeField");
-        gradeField.selectbox();
+        $("#gradeField").selectbox();
 
         $(".birthdate-container select").selectbox();
         $("#regionField").selectbox();
@@ -25,6 +24,11 @@ var EditProfileForm = BaseForm.extend({
 
     isEdited: function()
     {
+        if (this._fields.length != this._form.find("input, select").length)
+        {
+            return true;
+        }
+
         for (var i in this._fields)
         {
             var field = this._fields[i];

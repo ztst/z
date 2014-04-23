@@ -30,21 +30,19 @@
 {% block content %}
   {% for flashMessage in app.session.flashbag.get('notice') %}
     <div class="alert alert-info">
-      {{ flashMessage }}
+      {{ flashMessage|raw }}
     </div>
   {% endfor %}
   <div class="profile-sidebar-menu-container">
     {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
   </div>
+
   <div class="teacher-profile-container">
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-      <div class="alert alert-info">
-        {{ flashMessage }}
-      </div>
-    {% endfor %}
     <div class="user-profile-column-container">
+
       <h3>Личная информация</h3>
       {% include "ZnaikaProfileBundle:Default:teacher_profile_form.html.twig" with {'form': profileForm} %}
+
       <div class="settings-column-container">
         <h3>Настройки аккаунта</h3>
         <div class="change-email-controller">

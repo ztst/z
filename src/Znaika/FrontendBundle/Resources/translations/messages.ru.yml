@@ -35,3 +35,5 @@ congratulations_change_email_success: Поздравляем Вас с успе�
 congratulations_password_changed_success: Поздравляем Вас с успешным изменением пароля.
 
 not_selected: Не выбран
+
+teacher_experience_choice: '{0}Менее 1 года|%count% год|%count% года|%count% лет'

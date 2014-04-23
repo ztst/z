@@ -6,6 +6,7 @@
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\Security\Core\SecurityContextInterface;
     use Znaika\FrontendBundle\Entity\Lesson\Category\Subject;
+    use Znaika\FrontendBundle\Helper\Util\UserEditProfileUrlUtil;
     use Znaika\FrontendBundle\Repository\Communication\MessageRepository;
     use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Helper\Util\Lesson\ClassNumberUtil;
@@ -96,8 +97,9 @@
             $this->currentRoute = $request->get('_route');
 
             $userId         = $this->currentUser->getUserId();
+            $urlPattern     =  UserEditProfileUrlUtil::prepareUrlPatterByRole($this->currentUser->getRole());
             $menu->addChild("Мой профиль",
-                array("route" => "edit_teacher_profile", "routeParameters" => array("userId" => $userId)));
+                array("route" => $urlPattern, "routeParameters" => array("userId" => $userId)));
 
             $countThreads = $messageRepository->countUnreadThreadsByParticipant($this->currentUser);
             $title = "Общение";
@@ -106,8 +108,7 @@
 
             if ($this->securityContext->isGranted(UserRole::getSecurityTextByRole(UserRole::ROLE_TEACHER)))
             {
-                $countQuestions = $videoCommentRepository->countTeacherNotAnsweredQuestionComments($this->currentUser);
-                $this->addTeacherItems($countQuestions, $menu, $userId);
+                $this->addTeacherItems($videoCommentRepository, $menu, $userId);
             }
 
             if ($this->securityContext->isGranted(UserRole::getSecurityTextByRole(UserRole::ROLE_MODERATOR)))
@@ -241,12 +242,13 @@
         }
 
         /**
-         * @param $countQuestions
-         * @param $menu
+         * @param VideoCommentRepository $videoCommentRepository
+         * @param \Knp\Menu\ItemInterface $menu
          * @param $userId
          */
-        private function addTeacherItems($countQuestions, $menu, $userId)
+        private function addTeacherItems($videoCommentRepository, ItemInterface $menu, $userId)
         {
+            $countQuestions = $videoCommentRepository->countTeacherNotAnsweredQuestionComments($this->currentUser);
             $title = "Вопросы к урокам";
             $title .= $countQuestions ? " <span class='list-count-container user-questions-count'>+$countQuestions</span>" : "";
             $menuItem = $menu->addChild($title,

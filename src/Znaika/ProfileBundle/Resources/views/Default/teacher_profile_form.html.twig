@@ -25,7 +25,33 @@
     {{ form_errors(form.sex) }}
     {{ form_widget(form.sex, {'id': 'sexField', 'attr': {'class': 'form-control sex-field' }}) }}
   </div>
+  <div class="form-group">
+    {{ form_label(form.teacherSubjects, 'Специализация') }}
+    {{ form_errors(form.teacherSubjects) }}
+    <ul class="teacher-subjects"
+        data-prototype="{% filter escape %}{% include 'ZnaikaProfileBundle:Default:teacher_subject_prototype.html.twig' with {'form': form.teacherSubjects.vars.prototype} %}{% endfilter %}"
+      >
+      {% for subject in form.teacherSubjects %}
+        <li>
+          {% include 'ZnaikaProfileBundle:Default:teacher_subject_prototype.html.twig' with {'form': subject} %}
+          <a href="javascript:void(0);" title="" class="remove-teacher-subject-link">Удалить специализацию</a>
+        </li>
+      {% endfor %}
+    </ul>
+    <a href="javascript:void(0);" title="" id="addTeacherSubjectLink">Добавить специализацию</a>
+  </div>
+  <div class="form-group input-group">
   <div class="form-group input-group region-form">
+    {{ form_label(form.teacherExperience, 'Опыт преподавания') }}
+    {{ form_errors(form.teacherExperience) }}
+    {{ form_widget(form.teacherExperience, {'id': 'experienceField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div class="form-group input-group">
+    {{ form_label(form.teacherAchievement, 'Достижения') }}
+    {{ form_errors(form.teacherAchievement) }}
+    {{ form_widget(form.teacherAchievement, {'id': 'achievementField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div class="form-group input-group">
     {{ form_label(form.region, 'Регион') }}
     {{ form_errors(form.region) }}
     {{ form_widget(form.region, {'id': 'regionField', 'attr': {'class': 'form-control' }}) }}

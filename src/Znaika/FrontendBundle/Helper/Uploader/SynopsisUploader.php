@@ -94,8 +94,8 @@
             $content = UnixSystemUtils::getFileContents($path);
             $synopsis->setText(strip_tags($content));
             $content = $this->prepareStyles($content);
-            $content = $this->removeExcessTags($content);
             $content = $this->prepareImagesUrls($synopsis, $content);
+            $content = $this->removeExcessTags($content);
             UnixSystemUtils::setFileContents($path, $content);
         }
 
@@ -125,11 +125,19 @@
          */
         private function prepareImagesUrls(Synopsis $synopsis, $content)
         {
-            $patterns   = array(
-                "/src=\"([^\.]+)\.(png|jpg|jpeg|gif)/",
-            );
-            $replaceStr = "src=\"/synopsis_content/" . $synopsis->getVideo()->getContentDir() . "/$1.$2";
-            $content    = preg_replace($patterns, $replaceStr, $content);
+            $doc = new \DOMDocument();
+            $doc->loadHTML($content);
+            $images = $doc->getElementsByTagName("img");
+
+            for ($i = 0; $i < $images->length; $i++)
+            {
+                $image   = $images->item($i);
+                $src = $image->getAttribute("src");
+                $newSrc = "/synopsis_content/" . $synopsis->getVideo()->getContentDir() . "/" . $src;
+
+                $image->setAttribute("src", $newSrc);
+            }
+            $content = $doc->saveHTML();
 
             return $content;
         }
