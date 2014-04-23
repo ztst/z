@@ -37,39 +37,24 @@
     float: left;
 }
 
-.not-empty-pupils-container .threads-group-select
+.not-empty-pupils-container .tab-header .selectbox
 {
     float: right;
-    margin-right: 4px;
 }
 
-.threads-group-select .selectbox .select .text
+.not-empty-pupils-container .selectbox .select .text
 {
-    width: 144px;
+    width: 150px;
 }
 
-.threads-group-select .selectbox .dropdown
+.not-empty-pupils-container .selectbox .dropdown
 {
-    width: 196px;
+    width: 172px;
 }
 
-.threads-group-select .selectbox .dropdown li:hover
+.not-empty-pupils-container .selectbox .dropdown li:hover
 {
     text-decoration: underline;
-}
-
-.threads-group-select .selectbox .select
-{
-    padding: 0 16px;
-    height: 31px;
-    line-height: 29px;
-    color: #717070;
-    font-size: 13px;
-}
-
-.threads-group-select .selectbox .trigger .arrow
-{
-    top: 13px;
 }
 
 .thread-user-pic,
@@ -101,8 +86,7 @@
 .self-user-pic
 {
     float: left;
-    margin-top: 1px;
-    margin-left: 21px;
+    margin-left: 22px;
 }
 
 .message-text-data
@@ -121,8 +105,7 @@
 
 .message-body
 {
-    margin-bottom: 10px;
-    line-height: 13px;
+    margin-bottom: 5px;
 }
 
 .message-created-date
@@ -140,22 +123,34 @@
 .messenger_thread_message
 {
     margin: 0 -26px;
-    padding: 17px 26px 16px;
+    padding: 17px 26px 7px;
     border-bottom: 1px solid #efefef;
+    min-height: 85px;
 }
 
-.thread-container .message-user-name,
+.thread-container .message-user-name
+{
+    float: left;
+}
+
+.thread-container .message-created-date
+{
+    float: right;
+}
+
 .thread-container .message-text-data
 {
-    margin-left: 63px;
-    width: auto;
+    float: left;
+    margin-left: 13px;
+    width: 530px;
+    line-height: 16px;
 }
 
 .thread-container .message-body,
 .send-message-form-container textarea
 {
     color: #444;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .send-message-form-container
@@ -189,4 +184,17 @@
 .send-message-button .active-button-label
 {
     padding: 0 18px;
+}
+
+.threads-group-select .selectbox .select
+{
+    height: 31px;
+    line-height: 29px;
+    color: #717070;
+    font-size: 13px;
+}
+
+.threads-group-select .selectbox .trigger .arrow
+{
+    top: 13px;
 }
