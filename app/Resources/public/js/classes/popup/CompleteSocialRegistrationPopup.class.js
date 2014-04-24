@@ -2,6 +2,7 @@ var CompleteSocialRegistrationPopup = Base.extend({
 
     _createNewUserButton: null,
     _attachUserButton: null,
+    _registrationRoleForm: null,
 
     constructor: function()
     {
@@ -52,6 +53,34 @@ var CompleteSocialRegistrationPopup = Base.extend({
         return false;
     },
 
+    _initRegistrationRoleForm: function()
+    {
+        this._registrationRoleForm = $("#registrationRoleForm");
+        this._registrationRoleForm.submit(handler(this, "_onRegistrationRoleSubmit"));
+        this._registrationRoleForm.find("select").selectbox();
+    },
+
+    _onRegistrationRoleSubmit: function()
+    {
+        var url = this._registrationRoleForm.attr("action");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: this._registrationRoleForm.serialize(),
+            success: handler(this, "_onSendRegistrationRoleSuccess")
+        });
+
+        return false;
+    },
+
+    _onSendRegistrationRoleSuccess: function(response)
+    {
+        if (response.success)
+        {
+            $("#createNewUserFormContainer").html(response.html);
+        }
+    },
+
     _onSendPasswordSuccess: function(response)
     {
         if (response.success)
@@ -90,6 +119,7 @@ var CompleteSocialRegistrationPopup = Base.extend({
         if (response.success)
         {
             $("#createNewUserFormContainer").html(response.html);
+            this._initRegistrationRoleForm();
         }
         else
         {

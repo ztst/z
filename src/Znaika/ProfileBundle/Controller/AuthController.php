@@ -16,6 +16,7 @@
     use Znaika\ProfileBundle\Form\Model\Registration;
     use Znaika\ProfileBundle\Form\Type\RegistrationType;
     use Znaika\ProfileBundle\Form\PasswordRecoveryType;
+    use Znaika\ProfileBundle\Form\UserRoleType;
     use Znaika\ProfileBundle\Helper\Encode\RegisterKeyEncoder;
     use Znaika\ProfileBundle\Helper\Mail\UserMailer;
     use Znaika\ProfileBundle\Helper\Odnoklassniki;
@@ -231,7 +232,7 @@
             $currentTime = new \DateTime("now");
             if ($currentTime > $expiredTime)
             {
-                $this->registerUser($user);
+                $this->registerUser($user, true, false);
 
                 return $this->render('ZnaikaProfileBundle:Default:expiredRegistrationKey.html.twig');
             }
@@ -270,7 +271,7 @@
 
             if ($form->isValid())
             {
-                $response = $this->getRegisterSuccessResponse($registration, $form);
+                $response = $this->getRegisterSuccessResponse($registration);
             }
             else
             {
@@ -280,38 +281,66 @@
             return $response;
         }
 
+        public function registerRoleAction(Request $request)
+        {
+            if (!$request->isXmlHttpRequest())
+            {
+                return new RedirectResponse($this->generateUrl('znaika_frontend_homepage'));
+            }
+
+            $userRepository = $this->getUserRepository();
+            $user           = $userRepository->getOneByEmail($request->get('userEmail'));
+            if ($user->getStatus() != UserStatus::REGISTERED)
+            {
+                throw $this->createNotFoundException("User already registered " . $user->getId());
+            }
+
+            $form = $this->createForm(new UserRoleType(), $user);
+            $form->handleRequest($request);
+
+            $autoGeneratePassword = $request->get("autoGeneratePassword", false);
+            $password = $autoGeneratePassword ?  $this->generateUserPassword($user) : "";
+            $userRepository->save($user);
+
+            $userRegistration = $user->getLastUserRegistration();
+            $this->sendRegisterConfirmEmail($autoGeneratePassword, $userRegistration, $password);
+
+
+            $html     = $this->renderView('ZnaikaProfileBundle:Default:registration_success_block.html.twig');
+            $array    = array('success' => true, 'html' => $html);
+            $response = new JsonResponse($array);
+
+            return $response;
+        }
+
         private function getUserOperationListener()
         {
             return $this->get('znaika.user_operation_listener');
         }
 
-        private function registerUser(User $user)
+        private function registerUser(User $user, $sendEmail = false, $encodePassword = true)
         {
             $request = $this->getRequest();
             $this->setUserNickname($user);
             $this->initFromSocialNetworkInfo($user);
-            $user->setCreatedTime(new \DateTime());
             $user->setStatus(UserStatus::REGISTERED);
 
-            $encoder         = $this->getPasswordEncoder($user);
-            $password        = $user->getPassword();
-            $encodedPassword = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-            $user->setPassword($encodedPassword);
+            $password = $user->getPassword();
+            if ($encodePassword)
+            {
+                $user->setCreatedTime(new \DateTime());
+                $this->encodeUserPassword($user);
+            }
 
             $userRepository = $this->getUserRepository();
             $userRepository->save($user);
 
             $userRegistration = $this->createUserRegistration($user);
 
-            $userMailer = $this->getUserMailer();
-            if ($request->get("autoGeneratePassword", false))
+            $autoGeneratePassword = $request->get("autoGeneratePassword", false);
+            if ($sendEmail)
             {
-                $userMailer
-                    ->sendRegisterWithPasswordGenerateConfirm($userRegistration, $password);
-            }
-            else
-            {
-                $userMailer->sendRegisterConfirm($userRegistration);
+                $this->sendRegisterConfirmEmail($autoGeneratePassword, $userRegistration, $password);
             }
         }
 
@@ -411,22 +440,27 @@
 
         /**
          * @param $registration
-         * @param $form
          *
-         * @internal param \Symfony\Component\HttpFoundation\Request $request
          * @return JsonResponse|\Symfony\Component\HttpFoundation\Response
          */
-        private function getRegisterSuccessResponse(Registration $registration, Form $form)
+        private function getRegisterSuccessResponse(Registration $registration)
         {
-            $request = $this->getRequest();
-            $user    = $registration->getUser();
+            $request              = $this->getRequest();
+            $user                 = $registration->getUser();
+            $password             = $user->getPassword();
+            $autoGeneratePassword = $request->get("autoGeneratePassword", false);
+
             $this->registerUser($user);
 
             if ($request->isXmlHttpRequest())
             {
-                $html     = $this->renderView('ZnaikaProfileBundle:Default:registration_success_block.html.twig',
+                $form     = $this->createForm(new UserRoleType(), $registration->getUser());
+                $html     = $this->renderView('ZnaikaProfileBundle:Default:registration_role_form_block.html.twig',
                     array(
-                        'form' => $form->createView()
+                        'form'                 => $form->createView(),
+                        'user'                 => $registration->getUser(),
+                        'password'             => $password,
+                        'autoGeneratePassword' => $autoGeneratePassword,
                     ));
                 $array    = array('success' => true, 'html' => $html);
                 $response = new JsonResponse($array);
@@ -606,5 +640,47 @@
             $request                  = $this->getRequest();
             $session                  = $request->getSession();
             $session->set("isSocialRegisterComplete", $isSocialRegisterComplete);
+        }
+
+        /**
+         * @param $autoGeneratePassword
+         * @param $userRegistration
+         * @param $password
+         */
+        private function sendRegisterConfirmEmail($autoGeneratePassword, $userRegistration, $password = "")
+        {
+            $userMailer = $this->getUserMailer();
+            if ($autoGeneratePassword)
+            {
+                $userMailer->sendRegisterWithPasswordGenerateConfirm($userRegistration, $password);
+            }
+            else
+            {
+                $userMailer->sendRegisterConfirm($userRegistration);
+            }
+        }
+
+        /**
+         * @param User $user
+         */
+        private function encodeUserPassword(User $user)
+        {
+            $encoder         = $this->getPasswordEncoder($user);
+            $encodedPassword = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+            $user->setPassword($encodedPassword);
+        }
+
+        /**
+         * @param $user
+         *
+         * @return string
+         */
+        private function generateUserPassword($user)
+        {
+            $password = substr(md5(rand()), 0, 8);
+            $user->setPassword($password);
+            $this->encodeUserPassword($user);
+
+            return $password;
         }
     }

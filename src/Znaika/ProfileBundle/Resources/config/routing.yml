@@ -4,6 +4,12 @@ register:
     options:
         expose: true
 
+register_role:
+    pattern: /register-role
+    defaults: { _controller: ZnaikaProfileBundle:Auth:registerRole }
+    options:
+        expose: true
+
 password_recovery:
     pattern: /forget-password
     defaults: { _controller: ZnaikaProfileBundle:Auth:passwordRecovery }

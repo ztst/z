@@ -3,6 +3,7 @@ var MainMenu = EventDispatcher.extend({
     _loginPopupLink: null,
     _loginPopup: null,
 
+    _registrationRoleForm: null,
     _registrationForm: null,
     _loginForm: null,
     _forgetPasswordForm: null,
@@ -40,8 +41,6 @@ var MainMenu = EventDispatcher.extend({
             },
             callbacks: { ajaxContentAdded: handler(this, "_onLoginFormLoaded") }
         });
-
-        //showRegisterForm
     },
 
     _onLoginFormLoaded: function()
@@ -64,6 +63,34 @@ var MainMenu = EventDispatcher.extend({
     {
         this._loginForm = new LoginForm("loginForm");
         this._loginForm.addListener(BaseForm.event.SUBMITTED, this, this._onLoginFormSubmitted);
+    },
+
+    _initRegistrationRoleForm: function()
+    {
+        this._registrationRoleForm = $("#registrationRoleForm");
+        this._registrationRoleForm.submit(handler(this, "_onRegistrationRoleSubmit"));
+        this._registrationRoleForm.find("select").selectbox();
+    },
+
+    _onRegistrationRoleSubmit: function()
+    {
+        var url = this._registrationRoleForm.attr("action");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: this._registrationRoleForm.serialize(),
+            success: handler(this, "_onSendRegistrationRoleSuccess")
+        });
+
+        return false;
+    },
+
+    _onSendRegistrationRoleSuccess: function(response)
+    {
+        if (response.success)
+        {
+            $("#registrationFormContainer").html(response.html);
+        }
     },
 
     _initRegistrationForm: function()
@@ -145,6 +172,7 @@ var MainMenu = EventDispatcher.extend({
         if (response.success)
         {
             $("#registrationFormContainer").html(response.html);
+            this._initRegistrationRoleForm();
         }
         else
         {

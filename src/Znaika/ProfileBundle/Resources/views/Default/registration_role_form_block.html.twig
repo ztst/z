@@ -1,0 +1,29 @@
+<div class="popup additional-form-container">
+  <div class="popup-content">
+    <div class="additional-form-header">
+      <h3>Определение типа пользователя</h3>
+    </div>
+    <div class="additional-form-header-horizontal-bar"></div>
+    <h5>Укажите, кем Вы являетесь, и мы сделаем сайт для Вас<br/> еще удобнее</h5>
+    <div class="">
+      {{ form_start(form, {'attr': {'id': 'registrationRoleForm', 'class': 'registration-role-form'}, 'action': path('register_role'), 'method': 'POST'}) }}
+        {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
+        <div class="form-group input-group">
+          {{ form_label(form.role, 'Вы являетесь') }}
+          {{ form_widget(form.role, {'attr': {'class': 'form-control'} }) }}
+          {{ form_errors(form.role) }}
+        </div>
+        <input type="hidden" name="userEmail" value="{{ user.email }}"/>
+        {% if autoGeneratePassword %}
+          <input type="hidden" name="autoGeneratePassword" value="{{ autoGeneratePassword }}"/>
+        {% endif %}
+        <div class="registration-role-button-container">
+          <button type="submit" class="active-button">
+            <span class="active-button-label">Продолжить</span>
+          </button>
+        </div>
+      {{ form_end(form) }}
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
