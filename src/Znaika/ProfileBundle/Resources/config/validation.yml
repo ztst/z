@@ -8,8 +8,6 @@ Znaika\ProfileBundle\Entity\User:
             - NotBlank: { message: "not_blank" }
             - Email:
                   checkMX: true
-        password:
-            - NotBlank: { message: "not_blank" }
         photo:
             - File:
                 maxSize:          10M

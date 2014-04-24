@@ -46,4 +46,15 @@
 
             return $result;
         }
+
+        public static function getRolesForRegisterFormSelect()
+        {
+            $availableRoles = array(
+                self::ROLE_USER      => "Учеником",
+                self::ROLE_PARENT    => "Родителем",
+                self::ROLE_TEACHER   => "Учителем",
+            );
+
+            return $availableRoles;
+        }
     }

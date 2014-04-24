@@ -1,35 +1,39 @@
 var TeacherProfilePage = ProfilePage.extend({
+
+    constructor: function()
+    {
+        this.base();
+
+        // Get the ul that holds the collection of tags
+        var collectionHolder = $('ul.teacher-subjects');
+
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        collectionHolder.data('index', collectionHolder.find(':input').length);
+
+        var that = this;
+        $("#addTeacherSubjectLink").click(function(e)
+        {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // add a new tag form (see next code block)
+            that._addTagForm(collectionHolder);
+        });
+
+        $(".remove-teacher-subject-link").click(function()
+        {
+            $(this).closest("li").remove();
+        });
+    },
+
     _getEditProfileFormId: function()
     {
         return "editTeacherProfileForm";
-    }
-});
+    },
 
-$(function()
-{
-    new TeacherProfilePage();
-
-
-    // Get the ul that holds the collection of tags
-    var collectionHolder = $('ul.teacher-subjects');
-
-    // count the current form inputs we have (e.g. 2), use that as the new
-    // index when inserting a new item (e.g. 2)
-    collectionHolder.data('index', collectionHolder.find(':input').length);
-
-    $("#addTeacherSubjectLink").click(function(e) {
-        // prevent the link from creating a "#" on the URL
-        e.preventDefault();
-
-        // add a new tag form (see next code block)
-        addTagForm(collectionHolder);
-    });
-
-    $(".remove-teacher-subject-link").click(function(){
-        $(this).closest("li").remove();
-    });
-
-    function addTagForm(collectionHolder) {
+    _addTagForm: function(collectionHolder)
+    {
         // Get the data-prototype explained earlier
         var prototype = collectionHolder.data('prototype');
 
@@ -48,4 +52,9 @@ $(function()
         collectionHolder.append(newFormLi);
         $(".teacher-specialization").find("select").selectbox();
     }
+});
+
+$(function()
+{
+    new TeacherProfilePage();
 });
