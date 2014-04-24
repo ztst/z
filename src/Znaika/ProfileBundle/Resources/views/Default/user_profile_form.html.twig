@@ -20,6 +20,16 @@
     {{ form_errors(form.sex) }}
     {{ form_widget(form.sex, {'id': 'sexField', 'attr': {'class': 'form-control sex-field' }}) }}
   </div>
+  <div class="form-group region-form">
+    {{ form_label(form.region, 'Регион') }}
+    {{ form_errors(form.region) }}
+    {{ form_widget(form.region, {'id': 'regionField', 'attr': {'class': '' }}) }}
+  </div>
+  <div class="form-group input-group">
+    {{ form_label(form.city, 'Город') }}
+    {{ form_errors(form.city) }}
+    {{ form_widget(form.city, {'id': 'cityField', 'attr': {'class': 'form-control' }}) }}
+  </div>
   {{ user_parents(app.user)|raw }}
   <div class="form-group grade-form">
     {{ form_label(form.grade, 'Класс') }}
@@ -31,24 +41,9 @@
     {{ form_errors(form.birthDate) }}
     {{ form_widget(form.birthDate, {'id': 'birthDateField', 'attr': {'class': 'date-select-block' }}) }}
   </div>
-  <div class="form-group region-form">
-    {{ form_label(form.region, 'Регион') }}
-    {{ form_errors(form.region) }}
-    {{ form_widget(form.region, {'id': 'regionField', 'attr': {'class': '' }}) }}
-  </div>
-  <div class="form-group input-group">
-    {{ form_label(form.city, 'Город') }}
-    {{ form_errors(form.city) }}
-    {{ form_widget(form.city, {'id': 'cityField', 'attr': {'class': 'form-control' }}) }}
-  </div>
-  <div class="form-group date-form birthdate-container">
-    {{ form_label(form.birthDate, 'Дата рождения') }}
-    {{ form_errors(form.birthDate) }}
-    {{ form_widget(form.birthDate, {'id': 'birthDateField', 'attr': {'class': 'date-select-block' }}) }}
-  </div>
   <div class="save-user-profile-button-container">
-    <button type="submit" class="semi-active-button save-user-profile-button">
-      <span class="semi-active-button-label">Сохранить</span>
+    <button type="submit" class="active-button save-user-profile-button">
+      <span class="active-button-label">Сохранить</span>
     </button>
   </div>
 {{ form_end(form) }}

@@ -1,5 +1,5 @@
-<div class="user-parents-block">
-  <span>Родители:</span>
+<div class="form-group">
+  <label>Родители</label>
   {% for relation in relations %}
     <div class="user-parent-block">
       {% if relation.approvedByParent %}
@@ -14,6 +14,6 @@
     </div>
   {% endfor %}
   {% if canAdd %}
-    <a href="{{ path('search_parent') }}" title="" class="add-parent-link">Добавить</a>
+    <a href="{{ path('search_parent') }}" title="" class="active-link add-link">Добавить</a>
   {% endif %}
 </div>

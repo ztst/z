@@ -1,60 +1,3 @@
-.wrap > .container
-{
-    background: url('/images/teacher-page/sidebar-menu-row-background.png') repeat-y 0 -11px #ffffff;
-}
-
-.teacher-profile-container .user-profile-column-container,
-.teacher-profile-container .photo-column-container
-{
-    margin-top: 14px;
-}
-
-.teacher-profile-container .form-control
-{
-    padding: 0 6px;
-    height: 27px;
-}
-
-.teacher-profile-container label
-{
-    display: block;
-    float: left;
-    margin-top: 5px;
-}
-
-.teacher-profile-container h3,
-.teacher-profile-container label,
-.teacher-profile-container .setting-label
-{
-    font-family: "OpenSans Semibold",sans-serif;
-    font-weight: normal;
-}
-
-.teacher-profile-container h3
-{
-    margin: 0;
-    padding-bottom: 20px;
-    color: #000;
-    font-size: 16px;
-}
-
-.teacher-profile-container .form-group
-{
-    margin-bottom: 14px;
-}
-
-.teacher-profile-container .settings-column-container
-{
-    padding: 0;
-    margin-top: 45px;
-    width: 100%;
-}
-
-.teacher-profile-container .settings-column-container input
-{
-    width: 180px;
-}
-
 .profile-sidebar-menu-container .user-questions-count
 {
     font-size: 15px;
@@ -103,22 +46,62 @@
     margin-bottom: 14px;
 }
 
-.teacher-specialization-form .selectbox .text
+.teacher-specialization-form .selectbox .text,
+.experience-form .selectbox .text
 {
-    width: 206px;
+    width: 245px;
 }
 
-.teacher-specialization-form .selectbox .dropdown
+.teacher-specialization-form .selectbox .dropdown,
+.experience-form .selectbox .dropdown
 {
-    width: 222px;
+    width: 261px;
 }
 
-.teacher-specialization-form .delete-specialization-link
+.teacher-specialization-form .remove-teacher-subject-link
 {
-    background: url("/images/controls/delete-link-icon.png") no-repeat 0 3px;
+    margin-top: 4px;
+    position: absolute;
+    left: 270px;
+    background: url("/images/controls/delete-link-icon.png") no-repeat scroll 0 3px rgba(0, 0, 0, 0);
 }
 
-.teacher-specialization-form .add-specialization-link
+.teacher-subjects
 {
-    background: url("/images/controls/add-link-icon.png") no-repeat 0 3px;
+    margin-bottom: 5px;
+    list-style: none;
+}
+
+.achievement-field
+{
+    width: 261px;
+    height: 87px;
+    resize: none;
+    border: 1px solid #c8c8c8;
+    border-radius: 3px;
+}
+
+.teacher-specialization
+{
+    margin-bottom: 14px;
+}
+
+.teacher-specialization:last-child
+{
+    margin-bottom: 0;
+}
+
+.teacher-specialization label
+{
+    margin: 0;
+}
+
+.edit-user-profile-form label
+{
+    width: 136px;
+}
+
+.user-profile-column-container
+{
+    width: 441px;
 }

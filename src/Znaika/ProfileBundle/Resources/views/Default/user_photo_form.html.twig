@@ -5,30 +5,30 @@
 </div>
 
 <div id="uploadPhotoProgress" class="hidden">Загружается...</div>
-{{ form_start(form, {'attr': {'id': 'editUserPhotoForm'}, 'action': url('edit_user_photo', {'userId': userId}), 'method': 'POST'}) }}
-  {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
-  <div class="upload-photo-button-container">
-    <a href="javascript:void(0);" class="{% if user.photoFileName %}non-active-button edit-photo-button{% else %}semi-active-button add-photo-button{% endif %}" id="editUserPhotoButton">
-      {% if user.photoFileName %}
-        <span class="non-active-button-label button-label">Изменить фото</span>
-      {% else %}
-        <span class="semi-active-button-label button-label">Добавить фото</span>
-      {% endif %}
-      <div class="form-group photo-button">
-        {{ form_errors(form.photo) }}
-        {{ form_widget(form.photo, {'id': 'submit'}) }}
-      </div>
-    </a>
-  </div>
+{{ form_start(form, {'attr': {'id': 'editUserPhotoForm', 'class': 'photo-buttons-form'}, 'action': url('edit_user_photo', {'userId': userId}), 'method': 'POST'}) }}
+{{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
+<div class="upload-photo-button-container">
+  <a href="javascript:void(0);" class="active-link{% if user.photoFileName %} edit-photo-button{% else %} add-photo-button{% endif %}" id="editUserPhotoButton">
+    {% if user.photoFileName %}
+      <span class="button-label">Загрузить новое фото</span>
+    {% else %}
+      <span class="button-label">Добавить фото</span>
+    {% endif %}
+    <div class="form-group photo-button">
+      {{ form_errors(form.photo) }}
+      {{ form_widget(form.photo, {'id': 'submit'}) }}
+    </div>
+  </a>
+</div>
 
-  <div class="delete-photo-button-container">
-    <a href="javascript:void(0);" class="non-active-button delete-photo-button {% if not user.photoFileName %}hidden{% endif %}" id="deleteUserPhotoButton">
-      <span class="non-active-button-label">Убрать фото</span>
-    </a>
-    <input type="hidden" id="userId" value="{{ user.userId }}"/>
-    <input type="hidden" id="defaultPhotoUrl" value="{{ default_photo_big_url(user) }}" />
-    <input type="hidden" id="defaultSmallPhotoUrl" value="{{ default_photo_small_url(user) }}" />
-  </div>
+<div class="delete-photo-button-container">
+  <a href="javascript:void(0);" class="active-link delete-photo-button {% if not user.photoFileName %}hidden{% endif %}" id="deleteUserPhotoButton">
+    <span>Удалить фото</span>
+  </a>
+  <input type="hidden" id="userId" value="{{ user.userId }}"/>
+  <input type="hidden" id="defaultPhotoUrl" value="{{ default_photo_big_url(user) }}" />
+  <input type="hidden" id="defaultSmallPhotoUrl" value="{{ default_photo_small_url(user) }}" />
+</div>
 {{ form_end(form) }}
 
 <div id="uploadErrorPopup" class="popup mfp-hide">

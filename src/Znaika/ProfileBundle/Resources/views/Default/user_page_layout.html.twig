@@ -6,7 +6,6 @@
   {% stylesheets filter="?yui_css"
     '../app/Resources/public/css/tab_menu.css'
     '@ZnaikaProfileBundle/Resources/public/css/profile_page.css'
-    '@ZnaikaProfileBundle/Resources/public/css/teacher_profile.css'
   %}
   <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
@@ -16,7 +15,7 @@
   <div class="profile-sidebar-menu-container">
     {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
   </div>
-  <div class="teacher-profile-container">
+  <div class="profile-container">
     {% block pageContent %}{% endblock %}
   </div>
 {% endblock %}

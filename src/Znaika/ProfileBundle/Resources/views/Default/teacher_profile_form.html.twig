@@ -25,69 +25,42 @@
     {{ form_errors(form.sex) }}
     {{ form_widget(form.sex, {'id': 'sexField', 'attr': {'class': 'form-control sex-field' }}) }}
   </div>
-  <div class="form-group">
-    {{ form_label(form.teacherSubjects, 'Специализация') }}
-    {{ form_errors(form.teacherSubjects) }}
-    <ul class="teacher-subjects"
-        data-prototype="{% filter escape %}{% include 'ZnaikaProfileBundle:Default:teacher_subject_prototype.html.twig' with {'form': form.teacherSubjects.vars.prototype} %}{% endfilter %}"
-      >
-      {% for subject in form.teacherSubjects %}
-        <li>
-          {% include 'ZnaikaProfileBundle:Default:teacher_subject_prototype.html.twig' with {'form': subject} %}
-          <a href="javascript:void(0);" title="" class="remove-teacher-subject-link">Удалить специализацию</a>
-        </li>
-      {% endfor %}
-    </ul>
-    <a href="javascript:void(0);" title="" id="addTeacherSubjectLink">Добавить специализацию</a>
-  </div>
-  <div class="form-group input-group">
   <div class="form-group input-group region-form">
-    {{ form_label(form.teacherExperience, 'Опыт преподавания') }}
-    {{ form_errors(form.teacherExperience) }}
-    {{ form_widget(form.teacherExperience, {'id': 'experienceField', 'attr': {'class': 'form-control' }}) }}
-  </div>
-  <div class="form-group input-group">
-    {{ form_label(form.teacherAchievement, 'Достижения') }}
-    {{ form_errors(form.teacherAchievement) }}
-    {{ form_widget(form.teacherAchievement, {'id': 'achievementField', 'attr': {'class': 'form-control' }}) }}
-  </div>
-  <div class="form-group input-group">
     {{ form_label(form.region, 'Регион') }}
     {{ form_errors(form.region) }}
     {{ form_widget(form.region, {'id': 'regionField', 'attr': {'class': 'form-control' }}) }}
-  </div>
-  <div class="form-group teacher-specialization-form">
-    <label>Специализация</label>
-    <div class="input-group">
-      <select class="teacher-specialization">
-        <option>Алгебра</option>
-        <option>Геометрия</option>
-        <option>Термодинамика</option>
-      </select>
-      <div class="active-link delete-specialization-link">
-        Удалить
-      </div>
-    </div>
-    <div class="input-group">
-      <select class="teacher-specialization">
-        <option>Алгебра</option>
-        <option>Геометрия</option>
-        <option>Термодинамика</option>
-      </select>
-      <div class="active-link delete-specialization-link">
-        Удалить
-      </div>
-    </div>
-    <div class="input-group">
-      <div class="active-link add-specialization-link">
-        Добавить
-      </div>
-    </div>
   </div>
   <div class="form-group input-group">
     {{ form_label(form.city, 'Город') }}
     {{ form_errors(form.city) }}
     {{ form_widget(form.city, {'id': 'cityField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div class="form-group teacher-specialization-form">
+    {{ form_label(form.teacherSubjects, 'Специализация') }}
+    {{ form_errors(form.teacherSubjects) }}
+    <div class="input-group">
+      <ul class="teacher-subjects"
+          data-prototype="{% filter escape %}{% include 'ZnaikaProfileBundle:Default:teacher_subject_prototype.html.twig' with {'form': form.teacherSubjects.vars.prototype} %}{% endfilter %}"
+        >
+        {% for subject in form.teacherSubjects %}
+          <li class="teacher-specialization">
+            {% include 'ZnaikaProfileBundle:Default:teacher_subject_prototype.html.twig' with {'form': subject} %}
+            <a href="javascript:void(0);" title="" class="active-link remove-teacher-subject-link">Удалить</a>
+          </li>
+        {% endfor %}
+      </ul>
+      <a href="javascript:void(0);" title="" id="addTeacherSubjectLink" class="active-link add-link">Добавить</a>
+    </div>
+  </div>
+  <div class="form-group input-group experience-form">
+    {{ form_label(form.teacherExperience, 'Опыт преподавания') }}
+    {{ form_errors(form.teacherExperience) }}
+    {{ form_widget(form.teacherExperience, {'id': 'experienceField', 'attr': {'class': 'form-control' }}) }}
+  </div>
+  <div class="form-group achievement-form">
+    {{ form_label(form.teacherAchievement, 'Достижения') }}
+    {{ form_errors(form.teacherAchievement) }}
+    {{ form_widget(form.teacherAchievement, {'id': 'achievementField', 'attr': {'class': 'achievement-field' }}) }}
   </div>
   <div class="form-group date-form birthdate-container">
     {{ form_label(form.birthDate, 'Дата рождения') }}
@@ -95,8 +68,8 @@
     {{ form_widget(form.birthDate, {'id': 'birthDateField', 'attr': {'class': 'date-select-block' }}) }}
   </div>
   <div class="save-user-profile-button-container">
-    <button type="submit" class="semi-active-button save-user-profile-button">
-      <span class="semi-active-button-label">Сохранить</span>
+    <button type="submit" class="active-button save-user-profile-button">
+      <span class="active-button-label">Сохранить</span>
     </button>
   </div>
 {{ form_end(form) }}
