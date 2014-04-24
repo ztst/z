@@ -4,6 +4,12 @@ register:
     options:
         expose: true
 
+register_role:
+    pattern: /register-role
+    defaults: { _controller: ZnaikaProfileBundle:Auth:registerRole }
+    options:
+        expose: true
+
 password_recovery:
     pattern: /forget-password
     defaults: { _controller: ZnaikaProfileBundle:Auth:passwordRecovery }
@@ -45,6 +51,10 @@ show_user_profile:
     defaults: { _controller: ZnaikaProfileBundle:Default:showUserProfile }
     requirements:
         userId:  \d+
+
+edit_user_settings:
+    pattern: /user/edit-settings/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:editUserSettings }
 
 edit_user_profile:
     pattern: /user/edit-profile/{userId}

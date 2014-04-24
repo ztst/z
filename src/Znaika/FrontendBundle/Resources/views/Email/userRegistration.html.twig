@@ -1,12 +1,13 @@
 {% extends 'ZnaikaFrontendBundle::Email/emailLayout.html.twig' %}
 
 {% block subject %}
-  Подтверждение регистрации
+  Пожалуйста, подтвердите свою регистрацию
 {% endblock %}
 
 {% block body %}
-  Здравствуйте! Для подтверждения регистрации, пожалуйста, перейдите по ссылке: <br/>
-  <a href="{{ url('register_confirm', {'registerKey': registerKey}) }}" title="">{{ url('register_confirm', {'registerKey': registerKey}) }}</a>. <br/>
+  <b>Здравствуйте! Для подтверждения регистрации, пожалуйста, перейдите по ссылке:</b>
+  <br/>
+  <a href="{{ url('register_confirm', {'registerKey': registerKey}) }}" title="">{{ url('register_confirm', {'registerKey': registerKey}) }}</a><br/>
   <br/>
   Если ссылка не открывается, скопируйте её и вставьте в адресную строку браузера. <br/>
   <br/>

@@ -48,11 +48,6 @@
             $user = $event->getData();
             $form = $event->getForm();
 
-            if ($this->autoGeneratePassword)
-            {
-                $user['password'] = substr(md5(rand()), 0, 8);
-                $event->setData($user);
-            }
             $email = isset($user['email']) ? $user['email'] : "";
             $existingUser = $this->userRepository->getOneByEmail($email);
 

@@ -27,11 +27,6 @@
             return $this->render('ZnaikaFrontendBundle:Default:rules.html.twig');
         }
 
-        public function agreementAction()
-        {
-            return $this->render('ZnaikaFrontendBundle:Default:agreement.html.twig');
-        }
-
         public function supportAction()
         {
             return $this->render('ZnaikaFrontendBundle:Default:support.html.twig');
