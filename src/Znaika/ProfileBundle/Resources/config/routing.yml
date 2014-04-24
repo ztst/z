@@ -52,6 +52,10 @@ show_user_profile:
     requirements:
         userId:  \d+
 
+edit_user_settings:
+    pattern: /user/edit-settings/{userId}
+    defaults: { _controller: ZnaikaProfileBundle:Default:editUserSettings }
+
 edit_user_profile:
     pattern: /user/edit-profile/{userId}
     defaults: { _controller: ZnaikaProfileBundle:Default:editUserProfile }

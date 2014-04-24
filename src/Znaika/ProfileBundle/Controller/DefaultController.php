@@ -102,6 +102,25 @@
             ));
         }
 
+        public function editUserSettingsAction()
+        {
+            if (!$this->canEditProfile())
+            {
+                throw new AccessDeniedHttpException("Can't manage user");
+            }
+            $user = $this->getUser();
+
+            $changeUserEmail     = $this->createForm(new ChangeUserEmailType(), new ChangeUserEmail());
+            $changePasswordForm  = $this->createForm(new ChangePasswordType(), new ChangePassword());
+
+            return $this->render('ZnaikaProfileBundle:Default:editUserSettings.html.twig', array(
+                'changePasswordForm'                   => $changePasswordForm->createView(),
+                'changeUserEmailFrom'                  => $changeUserEmail->createView(),
+                'user'                                 => $user,
+                'userId'                               => $user->getUserId(),
+            ));
+        }
+
         public function editUserProfileAction(Request $request)
         {
             if (!$this->canEditProfile())
@@ -113,18 +132,14 @@
 
             $profileForm                          = $this->handleProfileForm($user, $request);
             $userPhotoForm                        = $this->createForm(new UserPhotoType(), $user);
-            $changeUserEmail                      = $this->createForm(new ChangeUserEmailType(), new ChangeUserEmail());
             $changePasswordOnRegisterCompleteForm = $this->createForm(new ChangePasswordType(), new ChangePassword());
-            $changePasswordForm                   = $this->createForm(new ChangePasswordType(), new ChangePassword());
 
             $this->addBanReasonMessage();
 
             return $this->render('ZnaikaProfileBundle:Default:editUserProfile.html.twig', array(
                 'profileForm'                          => $profileForm->createView(),
                 'userPhotoForm'                        => $userPhotoForm->createView(),
-                'changePasswordForm'                   => $changePasswordForm->createView(),
                 'changePasswordOnRegisterCompleteForm' => $changePasswordOnRegisterCompleteForm->createView(),
-                'changeUserEmailFrom'                  => $changeUserEmail->createView(),
                 'user'                                 => $user,
                 'userId'                               => $user->getUserId(),
                 'isSocialRegisterComplete'             => $isSocialRegisterComplete,
@@ -142,18 +157,14 @@
 
             $profileForm                          = $this->handleParentProfileForm($user, $request);
             $userPhotoForm                        = $this->createForm(new UserPhotoType(), $user);
-            $changeUserEmail                      = $this->createForm(new ChangeUserEmailType(), new ChangeUserEmail());
             $changePasswordOnRegisterCompleteForm = $this->createForm(new ChangePasswordType(), new ChangePassword());
-            $changePasswordForm                   = $this->createForm(new ChangePasswordType(), new ChangePassword());
 
             $this->addBanReasonMessage();
 
             return $this->render('ZnaikaProfileBundle:Default:editParentProfile.html.twig', array(
                 'profileForm'                          => $profileForm->createView(),
                 'userPhotoForm'                        => $userPhotoForm->createView(),
-                'changePasswordForm'                   => $changePasswordForm->createView(),
                 'changePasswordOnRegisterCompleteForm' => $changePasswordOnRegisterCompleteForm->createView(),
-                'changeUserEmailFrom'                  => $changeUserEmail->createView(),
                 'user'                                 => $user,
                 'userId'                               => $user->getUserId(),
                 'isSocialRegisterComplete'             => $isSocialRegisterComplete,
@@ -170,14 +181,10 @@
 
             $profileForm        = $this->handleTeacherProfileForm($user);
             $userPhotoForm      = $this->createForm(new UserPhotoType(), $user);
-            $changeUserEmail    = $this->createForm(new ChangeUserEmailType(), new ChangeUserEmail());
-            $changePasswordForm = $this->createForm(new ChangePasswordType(), new ChangePassword());
 
             return $this->render('ZnaikaProfileBundle:Default:editTeacherProfile.html.twig', array(
                 'profileForm'         => $profileForm->createView(),
                 'userPhotoForm'       => $userPhotoForm->createView(),
-                'changePasswordForm'  => $changePasswordForm->createView(),
-                'changeUserEmailFrom' => $changeUserEmail->createView(),
                 'user'                => $user,
                 'userId'              => $user->getUserId(),
             ));
@@ -1010,14 +1017,6 @@
                 "success"   => $success,
                 "emailBusy" => $emailBusy
             ));
-        }
-
-        /**
-         * @return RegionRepository
-         */
-        private function getRegionRepository()
-        {
-            return $this->get("znaika.region_repository");
         }
 
         /**

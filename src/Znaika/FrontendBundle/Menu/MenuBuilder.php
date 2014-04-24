@@ -116,6 +116,9 @@
                 $this->addModeratorItems($menu, $videoCommentRepository, $userRepository);
             }
 
+            $menu->addChild("Настройки",
+                array("route" => "edit_user_settings", "routeParameters" => array("userId" => $userId)));
+
             return $menu;
         }
 

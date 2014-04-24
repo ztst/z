@@ -43,26 +43,6 @@
 
       <h3>Личная информация</h3>
       {% include "ZnaikaProfileBundle:Default:teacher_profile_form.html.twig" with {'form': profileForm} %}
-
-      <div class="settings-column-container">
-        <h3>Настройки аккаунта</h3>
-        <div class="change-email-controller">
-          <span class="setting-label">Email</span>
-          <span class="current-setting-value">{{ user.email }}</span>
-          <a href="javascript:void(0);" class="edit-account-setting-button" id="editUserEmailLink" title="Изменить email">&nbsp;</a>
-        </div>
-        <div class="change-email-form-container hidden">
-          {% include "ZnaikaProfileBundle:Default:change_email_form.html.twig" with {'form': changeUserEmailFrom} %}
-        </div>
-        <div class="change-password-controller">
-          <span class="setting-label">Пароль</span>
-          <span class="current-setting-value">********</span>
-          <a href="javascript:void(0);" class="edit-account-setting-button" id="editUserPasswordLink" title="Изменить пароль">&nbsp;</a>
-        </div>
-        <div class="change-password-form-container hidden">
-          {% include "ZnaikaProfileBundle:Default:change_password_form.html.twig" with {'form': changePasswordForm} %}
-        </div>
-      </div>
     </div>
     <div class="photo-column-container teacher-photo-form">
       {% include "ZnaikaProfileBundle:Default:user_photo_form.html.twig" with {'form': userPhotoForm} %}
