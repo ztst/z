@@ -38,6 +38,7 @@
                 'count_not_verified_pupils' => new \Twig_Function_Method($this, 'countNotVerifiedPupils'),
                 'user_parents'              => new \Twig_Function_Method($this, 'renderUserParents'),
                 'user_children'             => new \Twig_Function_Method($this, 'renderUserChildren'),
+                'show_user_profile_setting' => new \Twig_Function_Method($this, 'renderShowUserProfile'),
             );
         }
 
@@ -76,6 +77,17 @@
             $templateContent = $this->twig->loadTemplate($templateFile);
             $relations       = $user->getChildRelations();
             $result          = $templateContent->render(array("relations" => $relations, "canAdd" => count($relations) < self::MAX_CHILDREN));
+
+            return $result;
+        }
+
+        public function renderShowUserProfile(User $user)
+        {
+            $showUserProfile = $user->getUserSettings()->getShowUserPage();
+
+            $templateFile    = 'ZnaikaProfileBundle:Default:Settings\show_user_profile_setting.html.twig';
+            $templateContent = $this->twig->loadTemplate($templateFile);
+            $result          = $templateContent->render(array("showUserProfile" => $showUserProfile));
 
             return $result;
         }

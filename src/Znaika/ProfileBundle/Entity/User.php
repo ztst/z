@@ -199,6 +199,11 @@
         private $teacherExperience;
 
         /**
+         * @var UserSettings
+         */
+        private $userSettings;
+
+        /**
          * Constructor
          */
         public function __construct()
@@ -1077,5 +1082,27 @@
         public function getTeacherExperience()
         {
             return $this->teacherExperience;
+        }
+
+        /**
+         * @param \Znaika\ProfileBundle\Entity\UserSettings $userSettings
+         */
+        public function setUserSettings($userSettings)
+        {
+            $this->userSettings = $userSettings;
+        }
+
+        /**
+         * @return \Znaika\ProfileBundle\Entity\UserSettings
+         */
+        public function getUserSettings()
+        {
+            if (!$this->userSettings)
+            {
+                $this->userSettings = new UserSettings();
+                $this->userSettings->setUser($this);
+            }
+
+            return $this->userSettings;
         }
     }

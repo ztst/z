@@ -121,6 +121,27 @@
             ));
         }
 
+        public function editUserSettingsAjaxAction(Request $request)
+        {
+            if (!$request->isXmlHttpRequest())
+            {
+                return new RedirectResponse($this->generateUrl('znaika_frontend_homepage'));
+            }
+
+            /** @var User $user */
+            $user = $this->getUser();
+            $userSettings = $user->getUserSettings();
+            $userSettings->setShowUserPage($request->get("showUserProfile", true));
+            $userRepository = $this->getUserRepository();
+            $userRepository->save($user);
+
+            $result = array(
+                'success' => true
+            );
+
+            return new JsonResponse($result);
+        }
+
         public function editUserProfileAction(Request $request)
         {
             if (!$this->canEditProfile())

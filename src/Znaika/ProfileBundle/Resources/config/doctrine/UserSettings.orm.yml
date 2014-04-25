@@ -1,0 +1,18 @@
+Znaika\ProfileBundle\Entity\UserSettings:
+    type: entity
+    table: user_settings
+    fields:
+        userSettingsId:  { column: user_settings_id, type: integer, id: true, generator: { strategy: AUTO } }
+        showUserPage:    { column: show_user_page, type: boolean }
+        showUserRating:  { column: show_user_rating, type: boolean }
+        showViewedVideo: { column: show_viewed_video, type: boolean }
+        createdTime: { column: created_time, type: datetime, columnDefinition: TIMESTAMP DEFAULT CURRENT_TIMESTAMP }
+    oneToOne:
+        user:
+            targetEntity: Znaika\ProfileBundle\Entity\User
+            inversedBy: userSettings
+            joinColumn:
+                name: user_id
+                referencedColumnName: user_id
+                onDelete: CASCADE
+    lifecycleCallbacks: {  }

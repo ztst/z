@@ -6,6 +6,7 @@ var UserSettingsPage = Base.extend({
 
     _showChangeEmailFormLink: null,
     _showChangePasswordFormLink: null,
+    _isLoading: null,
 
     constructor: function()
     {
@@ -17,6 +18,36 @@ var UserSettingsPage = Base.extend({
         this._changePasswordForm = new ChangePasswordForm("changePasswordForm");
         this._changePasswordForm.addListener(BaseForm.event.SUBMITTED, this, this._onChangePasswordFormSubmitted);
         this._initAccountSettingsFormSwitching();
+
+        $("#saveSettingsButton").click(handler(this, "_onSaveSettingsButtonClick"));
+        $('input').iCheck({
+            checkboxClass: 'icheckbox',
+            radioClass: 'iradio'
+        });
+    },
+
+    _onSaveSettingsButtonClick: function()
+    {
+        if (this._isLoading)
+        {
+            return false;
+        }
+        this._isLoading = true;
+
+        var showUserPage = $("[name='showUserPage']:checked").val();
+
+        var data = {
+            showUserProfile: showUserPage
+        };
+        var url = Routing.generate("edit_user_settings_ajax");
+        $.post(url, data, handler(this, '_onSettingsSaved'), 'json');
+
+        return false;
+    },
+
+    _onSettingsSaved: function()
+    {
+        this._isLoading = false;
     },
 
     _initAccountSettingsFormSwitching: function()
@@ -26,8 +57,6 @@ var UserSettingsPage = Base.extend({
 
         this._showChangeEmailFormLink.click(handler(this, "_onShowChangeEmailFormLink"));
         this._showChangePasswordFormLink.click(handler(this, "_onShowChangePasswordFormLink"));
-
-        $(".cancel-edit-account").click(handler(this, "_closeAccountSettingsForms"));
     },
 
     _onShowChangeEmailFormLink: function()

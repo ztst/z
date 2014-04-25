@@ -1,0 +1,8 @@
+<div class="setting-row">
+  <input id="showUserPage" type="radio" value="1" {% if showUserProfile %}checked="checked"{% endif %} name="showUserPage" />
+  <label for="showUserPage">Моя страница видна всем</label>
+</div>
+<div class="setting-row">
+  <input id="hideUserPage" type="radio" value="0" {% if not showUserProfile %}checked="checked"{% endif %}name="showUserPage" />
+  <label for="hideUserPage">Моя страница видна только мне</label>
+</div>
