@@ -24,9 +24,6 @@
                 ->add("lastName", "text", array(
                     "required" => false,
                 ))
-                ->add("middleName", "text", array(
-                    "required" => false,
-                ))
                 ->add("sex", "choice", array(
                     "choices"     => $sexTypes,
                     "expanded"    => true,

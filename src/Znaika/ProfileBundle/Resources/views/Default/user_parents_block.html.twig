@@ -1,16 +1,16 @@
-<div class="form-group">
-  <label>Родители</label>
+<label>Родители</label>
+<div class="input-group">
   {% for relation in relations %}
     <div class="user-parent-block">
       {% if relation.approvedByParent %}
         <a href="{{ path("show_user_profile", {"userId": relation.parent.userId}) }}" title="{{ relation.parent }}">{{ relation.parent }}</a>
       {% else %}
-        <span>{{ relation.parent }}</span>
+        <span class="relation-name">{{ relation.parent }}</span>
       {% endif %}
       {% if not relation.approvedByChild %}
         <a href="{{ path('approve_parent', {'parentId': relation.parent.userId}) }}" title="" class="approve-parent-link">Подтвердить</a>
       {% endif %}
-      <a href="{{ path('delete_parent', {'parentId': relation.parent.userId}) }}" title="" class="delete-parent-link">Удалить</a>
+      <a href="{{ path('delete_parent', {'parentId': relation.parent.userId}) }}" title="" class="active-link delete-link delete-relation-link">Удалить</a>
     </div>
   {% endfor %}
   {% if canAdd %}

@@ -2,7 +2,7 @@
   {% for user in users %}
     <li class="" id="userContainer{{ user.UserId }}">
       <a id="openUserProfile{{ user.userId }}" class="show-user-profile-link" href="{{ path("show_user_profile", {"userId": user.userId}) }}">
-        <img class="media-object thread-user-pic"
+        <img class="media-object found-user-pic"
              width="50"
              height="50"
              src="{{ user_photo_small_url(user) }}"

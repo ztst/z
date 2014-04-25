@@ -6,6 +6,7 @@
   {% stylesheets filter="?yui_css"
     '@ZnaikaProfileBundle/Resources/public/css/teacher_profile.css'
     '@ZnaikaProfileBundle/Resources/public/css/profile_page.css'
+    '@ZnaikaProfileBundle/Resources/public/css/answer_questions.css'
   %}
     <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
@@ -37,13 +38,13 @@
   </div>
 
   <div class="profile-container teacher-profile-container">
-    <div class="user-profile-column-container">
+    <div class="profile-column-container">
 
       <h3>Редактирование профиля</h3>
       {% include "ZnaikaProfileBundle:Default:teacher_profile_form.html.twig" with {'form': profileForm} %}
     </div>
     <div class="photo-column-container teacher-photo-form">
-      {% include "ZnaikaProfileBundle:Default:user_photo_form.html.twig" with {'form': userPhotoForm} %}
+      {% include "ZnaikaProfileBundle:Default:profile_photo_form.html.twig" with {'form': userPhotoForm} %}
     </div>
   </div>
 {% endblock %}

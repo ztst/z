@@ -61,7 +61,7 @@ var UserPhotoForm = Base.extend({
 
         $("#uploadPhotoProgress").addClass("hidden");
         this._uploadButtonText.html("Добавить фото");
-        this._uploadButton.attr("class", "active-link add-photo-button");
+        this._uploadButton.attr("class", "active-link add-link add-photo-button");
         this._updateBigPhoto($("#defaultPhotoUrl").val());
         this._updateSmallPhoto($("#defaultSmallPhotoUrl").val());
         this._deleteButton.addClass("hidden");

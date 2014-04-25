@@ -8,7 +8,7 @@
 {{ form_start(form, {'attr': {'id': 'editUserPhotoForm', 'class': 'photo-buttons-form'}, 'action': url('edit_user_photo', {'userId': userId}), 'method': 'POST'}) }}
 {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
 <div class="upload-photo-button-container">
-  <a href="javascript:void(0);" class="active-link{% if user.photoFileName %} edit-photo-button{% else %} add-photo-button{% endif %}" id="editUserPhotoButton">
+  <a href="javascript:void(0);" class="active-link{% if user.photoFileName %} edit-photo-button{% else %} add-link add-photo-button{% endif %}" id="editUserPhotoButton">
     {% if user.photoFileName %}
       <span class="button-label">Загрузить новое фото</span>
     {% else %}
@@ -22,7 +22,7 @@
 </div>
 
 <div class="delete-photo-button-container">
-  <a href="javascript:void(0);" class="active-link delete-photo-button {% if not user.photoFileName %}hidden{% endif %}" id="deleteUserPhotoButton">
+  <a href="javascript:void(0);" class="active-link delete-link delete-photo-button {% if not user.photoFileName %}hidden{% endif %}" id="deleteUserPhotoButton">
     <span>Удалить фото</span>
   </a>
   <input type="hidden" id="userId" value="{{ user.userId }}"/>

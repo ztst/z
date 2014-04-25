@@ -33,12 +33,6 @@
     background: url('/images/user-profile/user-profile-horizontal-placeholder-line.png') repeat-y;
 }
 
-.form-control,
-.date-form select
-{
-    border-color: #c8c8c8;
-}
-
 .edit-user-profile-form
 {
     width: 100%;
@@ -66,22 +60,6 @@
     padding: 0;
     width: 100px;
     border-radius: 4px !important;
-}
-
-.date-form .form-control.select
-{
-    padding: 4px 8px 6px;
-    height: 32px;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-}
-
-.form-control.date-select-block
-{
-    display: inline-block;
-    padding: 0;
-    width: 220px;
-    border: none;
 }
 
 .settings-column-container
@@ -220,7 +198,23 @@
 }
 /* change forms styles END */
 
-.user-profile-column-container
+.profile-column-container
 {
     width: 411px;
+}
+
+.photo-column-container
+{
+    padding-left: 68px;
+}
+
+.delete-relation-link
+{
+    position: absolute;
+    left: 270px;
+}
+
+.relation-name
+{
+    font-size: 13px;
 }

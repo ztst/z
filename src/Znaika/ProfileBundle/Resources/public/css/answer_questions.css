@@ -1,0 +1,35 @@
+.question-answer-form-container
+{
+    margin-top: 1px;
+    width: 496px;
+}
+
+.form-group.add-video-comment-container label
+{
+    float: none;
+    color: #333;
+    font-size: 15px;
+    font-family: "OpenSans Semibold",sans-serif;
+}
+
+.form-group.add-video-comment-container textarea
+{
+    padding: 4px 9px;
+    height: auto;
+    border-radius: 0;
+    resize: none;
+
+    color: #2a2a2a;
+    font-size: 12px;
+}
+
+.answer-form-block
+{
+    padding-left: 62px;
+}
+
+.show-answer-form-link
+{
+    float: right;
+    margin-top: -33px;
+}

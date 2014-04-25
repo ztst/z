@@ -4,42 +4,6 @@
     font-family: "OpenSans Semibold", sans-serif;
 }
 
-.question-answer-form-container
-{
-    margin-top: 1px;
-    width: 496px;
-}
-
-.form-group.add-video-comment-container label
-{
-    float: none;
-    color: #333;
-    font-size: 15px;
-    font-family: "OpenSans Semibold",sans-serif;
-}
-
-.form-group.add-video-comment-container textarea
-{
-    padding: 4px 9px;
-    height: auto;
-    border-radius: 0;
-    resize: none;
-
-    color: #2a2a2a;
-    font-size: 12px;
-}
-
-.answer-form-block
-{
-    padding-left: 62px;
-}
-
-.show-answer-form-link
-{
-    float: right;
-    margin-top: -33px;
-}
-
 .teacher-specialization-form .input-group
 {
     margin-left: 107px;
@@ -60,8 +24,8 @@
 
 .teacher-specialization-form .remove-teacher-subject-link
 {
-    margin-top: 4px;
     position: absolute;
+    top: 9px;
     left: 270px;
     background: url("/images/controls/delete-link-icon.png") no-repeat scroll 0 3px rgba(0, 0, 0, 0);
 }
@@ -83,6 +47,7 @@
 
 .teacher-specialization
 {
+    position: relative;
     margin-bottom: 14px;
 }
 
@@ -101,7 +66,12 @@
     width: 136px;
 }
 
-.user-profile-column-container
+.profile-column-container
 {
     width: 441px;
+}
+
+.photo-column-container
+{
+    padding-left: 75px;
 }

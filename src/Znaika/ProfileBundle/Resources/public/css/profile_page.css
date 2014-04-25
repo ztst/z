@@ -32,6 +32,11 @@
     font-size: 16px;
 }
 
+.profile-container .tab-header h4
+{
+    line-height: 17px;
+}
+
 .profile-container .form-group
 {
     margin-bottom: 14px;
@@ -58,11 +63,9 @@
 
 .profile-sidebar-menu li
 {
-    display: inline-block;
-    height: 30px;
-    margin-bottom: -1px;
+    display: block;
+    height: 29px;
     width: 100%;
-    padding-top: 1px;
 }
 
 .profile-sidebar-menu li a
@@ -77,17 +80,17 @@
     background: url("/images/user-profile/profile-sidebar-marker.png") no-repeat 20px 11px;
 }
 
-.profile-sidebar-menu li.current a
-{
-    color: #004e78;
-}
-
 .profile-sidebar-menu li.current
 {
     border-bottom: 1px solid #C3D6E1;
     border-top: 1px solid #C3D6E1;
-    padding-top: 0;
     background: #EEF9FE;
+}
+
+.profile-sidebar-menu li.current a
+{
+    margin-top: -1px;
+    color: #004e78;
 }
 
 .tab-pane
@@ -116,7 +119,7 @@
     padding-bottom: 30px;
 }
 
-.user-profile-column-container,
+.profile-column-container,
 .photo-column-container
 {
     margin-top: 17px;
@@ -157,7 +160,7 @@
 .video-with-questions-list-item,
 .video-with-comments-list-item
 {
-    width: 600px;
+    width: 660px;
 }
 
 .right-count-column
@@ -284,13 +287,13 @@
 }
 
 .photo-column-container,
-.user-profile-column-container,
+.profile-column-container,
 .settings-column-container
 {
     float: left;
 }
 
-.user-profile-column-container
+.profile-column-container
 {
     padding-left: 29px;
     padding-right: 15px;
@@ -315,7 +318,7 @@
     width: 110px;
 }
 
-.user-profile-column-container h3
+.profile-column-container h3
 {
     margin: 0;
     padding-bottom: 20px;
@@ -376,6 +379,11 @@
     color: #036995;
 
     float: right;
+}
+
+.list-count-container.on-page-count-container
+{
+    font-size: 16px;
 }
 
 .tab-header
@@ -519,6 +527,11 @@
     background: url("/images/controls/add-link-icon.png") no-repeat 0 3px;
 }
 
+.delete-link
+{
+    background: #fff url('/images/controls/delete-link-icon.png') no-repeat 0 3px;
+}
+
 .user-profile-container h3,
 .user-profile-container label,
 .user-profile-container .setting-label
@@ -596,24 +609,9 @@
     height: 19px;
 }
 
-.photo-column-container
-{
-    padding-left: 75px;
-}
-
-.add-photo-button
-{
-    background: #fff url('/images/controls/add-link-icon.png') no-repeat 0 3px;
-}
-
 .edit-photo-button
 {
     background: #fff url('/images/user-profile/edit-photo-link-icon.png') no-repeat 0 3px;
-}
-
-.delete-photo-button
-{
-    background: #fff url('/images/controls/delete-link-icon.png') no-repeat 0 3px;
 }
 /* photo styles END */
 
@@ -659,4 +657,26 @@
 .save-user-profile-button .active-button-label
 {
     padding-left: 0;
+}
+
+.form-control,
+.date-form select
+{
+    border-color: #c8c8c8;
+}
+
+.date-form .form-control.select
+{
+    padding: 4px 8px 6px;
+    height: 32px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+.form-control.date-select-block
+{
+    display: inline-block;
+    padding: 0;
+    width: 220px;
+    border: none;
 }
