@@ -39,7 +39,14 @@
          */
         public function getUserLikedVideos(User $user)
         {
-            // TODO: Implement getUserLikedVideos() method.
+            $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+
+            $queryBuilder->select('vl')
+                         ->from('ZnaikaLikesBundle:VideoLike', 'vl')
+                         ->andWhere("vl.user = :user_id")
+                         ->setParameter('user_id', $user->getUserId());
+
+            return $queryBuilder->getQuery()->getResult();
         }
 
         /**

@@ -1,4 +1,4 @@
-{{ form_start(form, {'attr': {'id': 'editUserProfileForm', 'class': 'edit-user-profile-form'}, 'action': path('edit_parent_profile', {'userId': userId}), 'method': 'POST'}) }}
+{{ form_start(form, {'attr': {'id': 'editUserProfileForm', 'class': 'edit-profile-form'}, 'action': path('edit_parent_profile', {'userId': userId}), 'method': 'POST'}) }}
   {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
   <div class="form-group input-group">
     {{ form_label(form.firstName, 'Имя') }}
@@ -30,7 +30,7 @@
     {{ form_errors(form.city) }}
     {{ form_widget(form.city, {'id': 'cityField', 'attr': {'class': 'form-control' }}) }}
   </div>
-  <div class="form-group">
+  <div class="form-group user-relations-form">
     {{ user_children(app.user)|raw }}
   </div>
   <div class="form-group date-form birthdate-container">

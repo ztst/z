@@ -51,6 +51,16 @@ var BaseLikeButton = Base.extend({
             var likesCount = parseInt(likesCountContainer.text());
             likesCount += response.liked ? 1 : -1;
             likesCountContainer.text(likesCount);
+            var isLiked = response.liked;
+            if (isLiked)
+            {
+                this._button.addClass("liked");
+            }
+            else
+            {
+                this._button.removeClass("liked");
+            }
+
             this._isLoading = false;
         }
     },

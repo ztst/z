@@ -33,12 +33,12 @@
     background: url('/images/user-profile/user-profile-horizontal-placeholder-line.png') repeat-y;
 }
 
-.edit-user-profile-form
+.edit-profile-form
 {
     width: 100%;
 }
 
-.edit-user-profile-form input[type="text"]
+.edit-profile-form input[type="text"]
 {
     width: 261px;
 }
@@ -50,7 +50,7 @@
     margin-top: 5px;
 }
 
-.edit-user-profile-form label
+.edit-profile-form label
 {
     width: 106px;
 }
@@ -208,8 +208,20 @@
     padding-left: 68px;
 }
 
+.user-relations-block
+{
+    position: relative;
+    display: inline-block;
+}
+
+.user-relations-block:last-child .form-group
+{
+    margin-bottom: 0;
+}
+
 .delete-relation-link
 {
+    margin-top: 3px;
     position: absolute;
     left: 270px;
 }
@@ -217,4 +229,9 @@
 .relation-name
 {
     font-size: 13px;
+}
+
+.user-relations-form .add-relation-link
+{
+    margin-left: 106px;
 }

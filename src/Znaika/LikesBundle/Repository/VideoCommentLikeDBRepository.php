@@ -51,7 +51,14 @@
          */
         public function getUserVideoLikedComments(User $user, Video $video)
         {
-            // TODO: Implement getUserVideoLikedComments() method.
+            $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+
+            $queryBuilder->select('vcl')
+                         ->from('ZnaikaLikesBundle:VideoCommentLike', 'vcl')
+                         ->andWhere("vcl.user = :user_id")
+                         ->setParameter('user_id', $user->getUserId());
+
+            return $queryBuilder->getQuery()->getResult();
         }
 
     }

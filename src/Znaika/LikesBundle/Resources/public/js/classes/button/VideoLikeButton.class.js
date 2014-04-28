@@ -11,5 +11,5 @@ var VideoLikeButton = BaseLikeButton.extend({
         $.post(url, params, handler(this, "_onLikeSaved"), "json");
 
         return false;
-    },
+    }
 });

@@ -466,7 +466,7 @@
 .date-form .selectbox .dropdown
 
 {
-    width: 100px !important;
+    width: 92px !important;
 }
 
 .date-form .selectbox
@@ -498,7 +498,7 @@
 
 .date-select-block .selectbox .select .text
 {
-    padding-right: 38px;
+    padding-right: 32px;
 }
 
 .date-select-block .selectbox:first-child
@@ -508,7 +508,7 @@
 
 .date-select-block .selectbox:first-child .select .text
 {
-    padding-right: 36px;
+    padding-right: 24px;
 }
 /* selectbox additional styles END */
 
@@ -567,9 +567,22 @@
     font-size: 12px;
 }
 
-.edit-user-profile-form input[type="text"]
+.edit-profile-form input[type="text"]
 {
     width: 261px;
+}
+
+.edit-profile-form input[disabled]
+{
+    cursor: default;
+
+    background: #fdfdfd;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#fdfdfd), to(#f2f2f2));
+    background: -webkit-linear-gradient(#fdfdfd, #f2f2f2);
+    background: -moz-linear-gradient(#fdfdfd, #f2f2f2);
+    background: -ms-linear-gradient(#fdfdfd, #f2f2f2);
+    background: -o-linear-gradient(#fdfdfd, #f2f2f2);
+    background: linear-gradient(#fdfdfd, #f2f2f2);
 }
 
 /* photo styles BEGIN */
@@ -615,7 +628,7 @@
 }
 /* photo styles END */
 
-.edit-user-profile-form .input-group input,
+.edit-profile-form .input-group input,
 .sex-field label,
 .current-setting-value
 {

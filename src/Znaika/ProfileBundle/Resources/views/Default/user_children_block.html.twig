@@ -1,19 +1,12 @@
 <label>Дети</label>
 <div class="input-group">
   {% for relation in relations %}
-    <div class="user-parent-block">
-      {% if relation.approvedByChild %}
-        <a href="{{ path("show_user_profile", {"userId": relation.child.userId}) }}" title="{{ relation.child }}">{{ relation.child }}</a>
-      {% else %}
-        <span class="relation-name">{{ relation.child }}</span>
-      {% endif %}
-      {% if not relation.approvedByParent %}
-        <a href="{{ path('approve_child', {'childId': relation.child.userId}) }}" title="" class="approve-child-link">Подтвердить</a>
-      {% endif %}
+    <div class="user-relations-block">
+      <input type="text" class="form-group form-control relation-name" {{ relation.child }} value="{{ relation.child }}" disabled="disabled" />
       <a href="{{ path('delete_child', {'childId': relation.child.userId}) }}" title="" class="active-link delete-link delete-relation-link">Удалить</a>
     </div>
   {% endfor %}
-  {% if canAdd %}
-    <a href="{{ path('search_child') }}" title="" class="active-link add-link">Добавить</a>
-{% endif %}
 </div>
+{% if canAdd %}
+  <a href="{{ path('search_child') }}" title="" class="active-link add-link add-relation-link">Добавить</a>
+{% endif %}

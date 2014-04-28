@@ -1,4 +1,4 @@
-{{ form_start(form, {'attr': {'id': 'editTeacherProfileForm', 'class': 'edit-user-profile-form'}, 'action': path('edit_teacher_profile', {'userId': userId}), 'method': 'POST'}) }}
+{{ form_start(form, {'attr': {'id': 'editTeacherProfileForm', 'class': 'edit-profile-form'}, 'action': path('edit_teacher_profile', {'userId': userId}), 'method': 'POST'}) }}
   {{ form_errors(form, {'attr': {'class': 'alert alert-danger' }}) }}
   <div class="form-group input-group">
     {{ form_label(form.firstName, 'Имя') }}

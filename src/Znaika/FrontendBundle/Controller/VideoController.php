@@ -14,6 +14,8 @@
     use Znaika\FrontendBundle\Entity\Lesson\Content\Synopsis;
     use Znaika\FrontendBundle\Entity\Lesson\Content\Video;
     use Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment;
+    use Znaika\LikesBundle\Repository\VideoCommentLikeRepository;
+    use Znaika\LikesBundle\Repository\VideoLikeRepository;
     use Znaika\ProfileBundle\Entity\User;
     use Znaika\FrontendBundle\Form\Lesson\Content\Attachment\VideoAttachmentType;
     use Znaika\FrontendBundle\Form\Lesson\Content\SynopsisType;
@@ -175,11 +177,11 @@
             if ($request->isXmlHttpRequest())
             {
                 $response = JsonResponse::create(array(
-                    "success"     => $success,
-                    "html"        => $this->renderView('ZnaikaFrontendBundle:Video:simple_comment.html.twig', array(
-                            "user" => $this->getUser(),
+                    "success" => $success,
+                    "html"    => $this->renderView('ZnaikaFrontendBundle:Video:simple_comment.html.twig', array(
+                            "user"    => $this->getUser(),
                             "comment" => $videoComment,
-                    )),
+                        )),
                 ));
             }
 
@@ -194,11 +196,11 @@
             if ($request->isXmlHttpRequest())
             {
                 $response = JsonResponse::create(array(
-                        "success"    => $success,
-                        "questionId"  => $videoComment->getQuestion()->getVideoCommentId(),
-                        "videoId"    => $videoComment->getVideo()->getVideoId(),
-                        "html"       => $this->renderView('ZnaikaFrontendBundle:Video:comment_answer.html.twig', array(
-                                "comment" => $videoComment,
+                    "success"    => $success,
+                    "questionId" => $videoComment->getQuestion()->getVideoCommentId(),
+                    "videoId"    => $videoComment->getVideo()->getVideoId(),
+                    "html"       => $this->renderView('ZnaikaFrontendBundle:Video:comment_answer.html.twig', array(
+                            "comment" => $videoComment,
                         )),
                 ));
             }
@@ -381,6 +383,18 @@
             $chapterVideos       = $repository->getVideoByChapter($video->getChapter()->getChapterId());
             $userQuizScore       = $this->getCurrentUserQuizScore($video);
 
+            $videoLikeRepository = $this->getVideoLikeRepository();
+            $userLikedVideos      = $videoLikeRepository->getUserLikedVideos($this->getUser());
+            $liked               = false;
+            foreach ($userLikedVideos as $likedVideo)
+            {
+                if ($likedVideo->getVideo() === $video)
+                {
+                    $liked = true;
+                    break;
+                }
+            }
+
             return $this->render('ZnaikaFrontendBundle:Video:showVideo.html.twig', array(
                 'class'               => $class,
                 'video'               => $video,
@@ -388,7 +402,8 @@
                 'viewVideoOperation'  => $viewVideoOperation,
                 'chapterVideos'       => $chapterVideos,
                 'userQuizScore'       => $userQuizScore,
-                'contentToShow'       => $contentToShow
+                'contentToShow'       => $contentToShow,
+                'liked'               => $liked
             ));
         }
 
@@ -402,8 +417,13 @@
                                   ->getVideoComments($video, self::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE, $commentsCount);
             $comments      = array_reverse($comments);
 
+            $videoCommentLikeRepository = $this->getVideoCommentLikeRepository();
+            $userVideoLikedComments      = $videoCommentLikeRepository->getUserVideoLikedComments($this->getUser(),
+                $video);
+
             $html = $this->renderView('ZnaikaFrontendBundle:Video:video_comments.html.twig', array(
-                'comments' => $comments
+                'comments' => $comments,
+                'userVideoLikedComments' => $userVideoLikedComments
             ));
 
             $array = array(
@@ -420,8 +440,13 @@
             $video      = $repository->getOneByUrlName($request->get('videoName'));
             $comments   = $this->getLastVideoComments($video);
 
+            $videoCommentLikeRepository = $this->getVideoCommentLikeRepository();
+            $userVideoLikedComments      = $videoCommentLikeRepository->getUserVideoLikedComments($this->getUser(),
+                $video);
+
             $html = $this->renderView('ZnaikaFrontendBundle:Video:video_comments.html.twig', array(
-                'comments' => $comments
+                'comments'              => $comments,
+                'userVideoLikedComments' => $userVideoLikedComments
             ));
 
             $array = array(
@@ -466,6 +491,14 @@
         }
 
         /**
+         * @return VideoLikeRepository
+         */
+        private function getVideoLikeRepository()
+        {
+            return $this->get('znaika.video_like_repository');
+        }
+
+        /**
          * @return VideoInfoUpdater
          */
         private function getVideoInfoUpdater()
@@ -487,6 +520,14 @@
         private function getChapterRepository()
         {
             return $this->get("znaika.chapter_repository");
+        }
+
+        /**
+         * @return VideoCommentLikeRepository
+         */
+        private function getVideoCommentLikeRepository()
+        {
+            return $this->get('znaika.video_comment_like_repository');
         }
 
         /**

@@ -7,9 +7,16 @@
     {% else %}
       {% set firstOrLast = "" %}
     {% endif %}
+
+    {% set liked = false %}
+    {% if comment in userVideoLikedComments %}
+      {% set liked = true %}
+    {% endif %}
+
     {% include "ZnaikaFrontendBundle:Video:simple_comment.html.twig" with {
         "comment": comment,
-        "firstOrLast": firstOrLast
+        "firstOrLast": firstOrLast,
+        "liked": liked
     }
     %}
   {% endfor %}
