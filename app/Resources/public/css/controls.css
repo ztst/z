@@ -114,24 +114,22 @@
 .edit-account-setting-button:focus
 {
     display: inline-block;
-    text-decoration: none;
-    width: 16px;
-    height: 16px;
+    height: 13px;
+    padding-left: 16px;
+
+    color: #036995;
+    font: 12px/14px "OpenSans", "Open Sans", sans-serif;
 }
 
 .edit-account-setting-button
 {
-    background: url('/images/user-profile/edit-profile-setting-icon.png') no-repeat;
+    background: url('/images/user-profile/edit-profile-setting-icon-1.png') no-repeat;
 }
 
 .edit-account-setting-button.activated
 {
-    background: url('/images/user-profile/edit-profile-setting-icon-activated.png') no-repeat;
-}
-
-.edit-account-setting-button:hover
-{
-    background: url('/images/user-profile/edit-profile-setting-icon-over.png') no-repeat;
+    color: #d35306;
+    background: url('/images/user-profile/edit-profile-setting-icon-activated-1.png') no-repeat;
 }
 
 .send-comment-button

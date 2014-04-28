@@ -62,37 +62,6 @@
     border-radius: 4px !important;
 }
 
-.settings-column-container
-{
-    padding-left: 19px;
-    padding-right: 20px;
-    width: 378px;
-}
-
-.settings-column-container .edit-account-setting-button
-{
-    position: relative;
-    top: 3px;
-}
-
-.change-email-controller
-{
-    margin-top: 2px;
-    margin-bottom: 21px;
-}
-
-.setting-label
-{
-    display: inline-block;
-    width: 58px;
-}
-
-.current-setting-value
-{
-    display: inline-block;
-    margin-right: 13px;
-}
-
 .user-profile-container
 {
     display: inline-block;
@@ -114,89 +83,6 @@
     height: 10px;
     background: url('/images/user-profile/user-profile-horizontal-placeholder-line.png') repeat-y;
 }
-
-/* change forms styles BEGIN */
-.change-form-container
-{
-    position: relative;
-
-    padding: 15px 18px;
-    width: 100%;
-    background: rgba(255, 253, 247, 0.5);
-    border: 1px solid #dfbca7;
-}
-
-.change-email-form-container
-{
-    position: relative;
-    bottom: 10px;
-}
-
-.change-password-form-container
-{
-    position: relative;
-    bottom: -11px;
-}
-
-.change-password-form-container .show-password-icon
-{
-    background-position: 0 9px;
-}
-
-.change-password-form-container .show-password-icon.opened
-{
-    background-position: 0 8px;
-}
-
-.change-form-container h4
-{
-    margin: 0;
-    height: 33px;
-    font-size: 13px;
-    font-family: "OpenSans Bold",sans-serif;
-}
-
-.change-form-container label
-{
-    float: left;
-    width: 111px;
-}
-
-.change-form-container input
-{
-    width: 190px;
-}
-
-.non-active-button-label
-{
-    padding-left: 19px;
-    color: #686868;
-}
-
-.change-buttons-container
-{
-    display: inline-block;
-    float: right;
-    padding-top: 7px;
-}
-
-.change-setting-button,
-.cancel-edit-account
-{
-    margin-left: 12px;
-    float: left;
-}
-
-.change-setting-button .semi-active-button-label
-{
-    background: url('/images/user-profile/change-setting-icon.png') no-repeat 0 3px;
-}
-
-.cancel-edit-account .non-active-button-label
-{
-    background: url('/images/user-profile/cancel-edit-icon.png') no-repeat 0 3px;
-}
-/* change forms styles END */
 
 .profile-column-container
 {

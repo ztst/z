@@ -42,18 +42,6 @@
     margin-bottom: 14px;
 }
 
-.profile-container .settings-column-container
-{
-    padding: 0;
-    margin-top: 45px;
-    width: 100%;
-}
-
-.profile-container .settings-column-container input
-{
-    width: 180px;
-}
-
 .profile-sidebar-menu
 {
     list-style: none;

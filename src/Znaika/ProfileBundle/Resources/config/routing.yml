@@ -56,6 +56,12 @@ edit_user_settings:
     pattern: /user/edit-settings/{userId}
     defaults: { _controller: ZnaikaProfileBundle:Default:editUserSettings }
 
+edit_user_settings_ajax:
+    pattern: /user/edit-settings-ajax
+    defaults: { _controller: ZnaikaProfileBundle:Default:editUserSettingsAjax }
+    options:
+        expose: true
+
 edit_user_profile:
     pattern: /user/edit-profile/{userId}
     defaults: { _controller: ZnaikaProfileBundle:Default:editUserProfile }

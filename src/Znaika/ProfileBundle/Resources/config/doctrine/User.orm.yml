@@ -26,6 +26,8 @@ Znaika\ProfileBundle\Entity\User:
         photoFileName:   { column: photo_file_name, type: string, length: 150, nullable: true }
         teacherExperience:  { column: teacher_experience, type: smallint, nullable: true }
         teacherAchievement: { column: teacher_achievement, type: string, length: 255, nullable: true }
+    oneToOne:
+        userSettings:       { targetEntity: Znaika\ProfileBundle\Entity\UserSettings, mappedBy: user, cascade: [persist] }
     oneToMany:
         videoComments:      { targetEntity: Znaika\FrontendBundle\Entity\Lesson\Content\VideoComment, mappedBy: user }
         banInfos:           { targetEntity: Znaika\ProfileBundle\Entity\Ban\Info, mappedBy: user }
@@ -34,7 +36,7 @@ Znaika\ProfileBundle\Entity\User:
         changeUserEmails:   { targetEntity: Znaika\ProfileBundle\Entity\ChangeUserEmail, mappedBy: user }
         childRelations:     { targetEntity: Znaika\ProfileBundle\Entity\UserParentRelation, mappedBy: parent }
         parentRelations:    { targetEntity: Znaika\ProfileBundle\Entity\UserParentRelation, mappedBy: child }
-        teacherSubjects:    { targetEntity: Znaika\ProfileBundle\Entity\TeacherSubject, mappedBy: teacher, cascade: [persist],orphanRemoval: true }
+        teacherSubjects:    { targetEntity: Znaika\ProfileBundle\Entity\TeacherSubject, mappedBy: teacher, cascade: [persist], orphanRemoval: true }
         videoCommentLikes:  { targetEntity: Znaika\LikesBundle\Entity\VideoCommentLike, mappedBy: user }
         videoLikes:         { targetEntity: Znaika\LikesBundle\Entity\VideoLike, mappedBy: user }
     manyToOne:

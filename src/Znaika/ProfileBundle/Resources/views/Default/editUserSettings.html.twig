@@ -4,7 +4,8 @@
   {{ parent() }}
 
   {% stylesheets filter="?yui_css"
-  '@ZnaikaProfileBundle/Resources/public/css/user_profile.css'
+    '@ZnaikaProfileBundle/Resources/public/css/user_profile.css'
+    '@ZnaikaProfileBundle/Resources/public/css/user_settings.css'
   %}
   <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
@@ -23,24 +24,44 @@
 {% endblock %}
 
 {% block pageContent %}
-  <div class="profile-column-container">
+  <div class="">
+    <div class="settings-column-container first">
+      <div class="setting-title-container">
+        <h3>Настройки аккаунта:</h3>
+      </div>
+      <div class="account-settings-container">
+        <div class="change-email-controller">
+          <span class="setting-label">Email:</span>
+          <span class="current-setting-value">{{ user.email }}</span>
+          <a href="javascript:void(0);" class="edit-account-setting-button" id="editUserEmailLink" title="Изменить email">Изменить</a>
+        </div>
+        <div class="change-email-form-container hidden">
+          {% include "ZnaikaProfileBundle:Default:change_email_form.html.twig" with {'form': changeUserEmailFrom} %}
+        </div>
+        <div class="change-password-controller">
+          <span class="setting-label">Пароль:</span>
+          <span class="current-setting-value">********</span>
+          <a href="javascript:void(0);" class="edit-account-setting-button" id="editUserPasswordLink" title="Изменить пароль">Изменить</a>
+        </div>
+        <div class="change-password-form-container hidden">
+          {% include "ZnaikaProfileBundle:Default:change_password_form.html.twig" with {'form': changePasswordForm} %}
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
     <div class="settings-column-container">
-      <h3>Настройки аккаунта</h3>
-      <div class="change-email-controller">
-        <span class="setting-label">Email</span>
-        <span class="current-setting-value">{{ user.email }}</span>
-        <a href="javascript:void(0);" class="edit-account-setting-button" id="editUserEmailLink" title="Изменить email">&nbsp;</a>
+      <div class="setting-title-container">
+        <h3>Приватность:</h3>
       </div>
-      <div class="change-email-form-container hidden">
-        {% include "ZnaikaProfileBundle:Default:change_email_form.html.twig" with {'form': changeUserEmailFrom} %}
+      <div class="setting-form-container">
+        {{ show_user_profile_setting(app.user)|raw }}
+        <div class="clear"></div>
       </div>
-      <div class="change-password-controller">
-        <span class="setting-label">Пароль</span>
-        <span class="current-setting-value">********</span>
-        <a href="javascript:void(0);" class="edit-account-setting-button" id="editUserPasswordLink" title="Изменить пароль">&nbsp;</a>
-      </div>
-      <div class="change-password-form-container hidden">
-        {% include "ZnaikaProfileBundle:Default:change_password_form.html.twig" with {'form': changePasswordForm} %}
+      <div class="clear"></div>
+    </div>
+    <div class="settings-column-container">
+      <div class="save-settings-button-container">
+        <a href="javascript:void(0);" title="" class="active-button" id="saveSettingsButton">Сохранить</a>
       </div>
     </div>
   </div>
