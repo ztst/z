@@ -1,3 +1,9 @@
+{% set liked = false %}
+{% for likedComment in userVideoLikedComments %}
+  {% if comment == likedComment %}
+    {% set liked = true %}
+  {% endif %}
+{% endfor %}
 <div class="media comment-answer">
   <a class="pull-left"
      href="{% if is_moderator() %}{{ path("not_verified_pupils", {"userId": comment.user.userId}) }}{% else %}javascript:void(0);{% endif %}">
@@ -20,7 +26,7 @@
         <span class="likes-count">
          {{ comment.likesCount }}
         </span>
-        <a class="non-active-link comment-like-button {% if is_user() %}can-like{% endif %}"
+        <a class="non-active-link comment-like-button {% if is_user() %}can-like{% endif %} {% if (liked is defined) and liked %}liked{% endif %}"
            id="commentLikeButton{{ comment.videoCommentId }}"
            title=""
            href="javascript:void(0);">

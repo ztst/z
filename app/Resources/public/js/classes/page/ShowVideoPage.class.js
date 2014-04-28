@@ -299,6 +299,7 @@ var ShowVideoPage = Base.extend({
         {
             alert("Ошибка при добавлении комментария");
         }
+        this._initCommentLikeButtons();
     },
 
     _onAnswerSuccess: function(response)
@@ -319,6 +320,7 @@ var ShowVideoPage = Base.extend({
         {
             alert("Ошибка при добавлении ответа");
         }
+        this._initCommentLikeButtons();
     }
 });
 

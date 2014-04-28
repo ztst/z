@@ -9,14 +9,17 @@
     {% endif %}
 
     {% set liked = false %}
-    {% if comment in userVideoLikedComments %}
-      {% set liked = true %}
-    {% endif %}
+    {% for likedComment in userVideoLikedComments %}
+      {% if comment == likedComment %}
+        {% set liked = true %}
+      {% endif %}
+    {% endfor %}
 
     {% include "ZnaikaFrontendBundle:Video:simple_comment.html.twig" with {
         "comment": comment,
         "firstOrLast": firstOrLast,
-        "liked": liked
+        "liked": liked,
+        "userVideoLikedComments": userVideoLikedComments
     }
     %}
   {% endfor %}

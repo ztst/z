@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="clear"></div>
-    {% set commentAnswerBlock = comment_answer_block(comment) %}
+    {% set commentAnswerBlock = comment_answer_block(comment, userVideoLikedComments) %}
     {% if commentAnswerBlock %}
       {{ commentAnswerBlock|raw }}
     {% endif %}

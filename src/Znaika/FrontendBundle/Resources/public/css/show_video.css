@@ -160,6 +160,11 @@
     background: url("/images/video/video-like-icon.png") no-repeat;
 }
 
+.video-likes .video-like-button.liked
+{
+    color: #033995;
+}
+
 .views-and-likes-delimiter
 {
     margin-left: 12px;
@@ -301,6 +306,11 @@
 {
     margin-left: 1px;
     background: url("/images/video/comment-like-icon.png") no-repeat 0 1px;
+}
+
+.comment-like-button.liked
+{
+    color: #333;
 }
 
 .comment-date-and-like div

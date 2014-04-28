@@ -59,7 +59,7 @@
             );
         }
 
-        public function renderCommentAnswer(VideoComment $comment)
+        public function renderCommentAnswer(VideoComment $comment, $userVideoLikedComments)
         {
             if ($comment->getCommentType() != VideoCommentUtil::QUESTION)
             {
@@ -77,7 +77,8 @@
             $templateFile    = "ZnaikaFrontendBundle:Video:comment_answer.html.twig";
             $templateContent = $this->twig->loadTemplate($templateFile);
             $result          = $templateContent->render(array(
-                "comment" => $answer
+                "comment" => $answer,
+                "userVideoLikedComments" => $userVideoLikedComments
             ));
 
             return $result;

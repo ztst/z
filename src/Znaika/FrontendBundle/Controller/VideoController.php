@@ -179,8 +179,10 @@
                 $response = JsonResponse::create(array(
                     "success" => $success,
                     "html"    => $this->renderView('ZnaikaFrontendBundle:Video:simple_comment.html.twig', array(
-                            "user"    => $this->getUser(),
-                            "comment" => $videoComment,
+                            "user"                   => $this->getUser(),
+                            "comment"                => $videoComment,
+                            "liked"                  => false,
+                            "userVideoLikedComments" => null
                         )),
                 ));
             }
@@ -200,7 +202,9 @@
                     "questionId" => $videoComment->getQuestion()->getVideoCommentId(),
                     "videoId"    => $videoComment->getVideo()->getVideoId(),
                     "html"       => $this->renderView('ZnaikaFrontendBundle:Video:comment_answer.html.twig', array(
-                            "comment" => $videoComment,
+                            "comment"                => $videoComment,
+                            "liked"                  => false,
+                            "userVideoLikedComments" => null
                         )),
                 ));
             }
@@ -384,14 +388,18 @@
             $userQuizScore       = $this->getCurrentUserQuizScore($video);
 
             $videoLikeRepository = $this->getVideoLikeRepository();
-            $userLikedVideos      = $videoLikeRepository->getUserLikedVideos($this->getUser());
             $liked               = false;
-            foreach ($userLikedVideos as $likedVideo)
+            $user                = $this->getUser();
+            if ($user)
             {
-                if ($likedVideo->getVideo() === $video)
+                $userLikedVideos = $videoLikeRepository->getUserLikedVideos($this->getUser());
+                foreach ($userLikedVideos as $likedVideo)
                 {
-                    $liked = true;
-                    break;
+                    if ($likedVideo->getVideo() === $video)
+                    {
+                        $liked = true;
+                        break;
+                    }
                 }
             }
 
@@ -417,12 +425,16 @@
                                   ->getVideoComments($video, self::COMMENTS_LIMIT_ON_SHOW_VIDEO_PAGE, $commentsCount);
             $comments      = array_reverse($comments);
 
+            $user                       = $this->getUser();
             $videoCommentLikeRepository = $this->getVideoCommentLikeRepository();
-            $userVideoLikedComments      = $videoCommentLikeRepository->getUserVideoLikedComments($this->getUser(),
-                $video);
+            if ($user && $video)
+            {
+                $userVideoLikedComments = $videoCommentLikeRepository->getUserVideoLikedComments($this->getUser(),
+                    $video);
+            }
 
             $html = $this->renderView('ZnaikaFrontendBundle:Video:video_comments.html.twig', array(
-                'comments' => $comments,
+                'comments'               => $comments,
                 'userVideoLikedComments' => $userVideoLikedComments
             ));
 
@@ -441,12 +453,21 @@
             $comments   = $this->getLastVideoComments($video);
 
             $videoCommentLikeRepository = $this->getVideoCommentLikeRepository();
-            $userVideoLikedComments      = $videoCommentLikeRepository->getUserVideoLikedComments($this->getUser(),
-                $video);
+            $user                       = $this->getUser();
+            $userVideoCommentLikes      = array();
+            if ($user && $video)
+            {
+                $userVideoCommentLikes = $videoCommentLikeRepository->getUserVideoLikedComments($user, $video);
+            }
+            $result = array();
+            foreach ($userVideoCommentLikes as $c)
+            {
+                $result[] = $c->getVideoComment();
+            }
 
             $html = $this->renderView('ZnaikaFrontendBundle:Video:video_comments.html.twig', array(
-                'comments'              => $comments,
-                'userVideoLikedComments' => $userVideoLikedComments
+                'comments'               => $comments,
+                'userVideoLikedComments' => $result
             ));
 
             $array = array(
