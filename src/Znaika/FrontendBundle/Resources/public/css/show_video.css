@@ -149,8 +149,7 @@
 }
 
 .video-views-amount,
-.video-date,
-.video-likes
+.video-date
 {
     font-size: 12px;
 }
@@ -158,8 +157,6 @@
 .video-likes .video-like-button
 {
     margin-left: 3px;
-    padding-left: 18px;
-    color: #036995;
     background: url("/images/video/video-like-icon.png") no-repeat;
 }
 
@@ -303,14 +300,7 @@
 .comment-like-button
 {
     margin-left: 1px;
-    padding-left: 16px;
-    color: #999;
     background: url("/images/video/comment-like-icon.png") no-repeat 0 1px;
-}
-
-.comment-like-button:hover
-{
-    color: #333;
 }
 
 .comment-date-and-like div

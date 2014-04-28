@@ -24,15 +24,15 @@
 {% endblock %}
 
 {% block pageContent %}
-    <div class="user-profile-column-container">
+    <div class="profile-column-container">
       {% if isSocialRegisterComplete %}
         {% include "ZnaikaProfileBundle:Default:change_password_on_register_complete.html.twig" with {'form': changePasswordOnRegisterCompleteForm} %}
       {% endif %}
 
-      <h3>Личная информация</h3>
+      <h3>Редактирование профиля</h3>
       {% include "ZnaikaProfileBundle:Default:user_profile_form.html.twig" with {'form': profileForm} %}
     </div>
     <div class="photo-column-container learner-photo-form">
-      {% include "ZnaikaProfileBundle:Default:user_photo_form.html.twig" with {'form': userPhotoForm} %}
+      {% include "ZnaikaProfileBundle:Default:profile_photo_form.html.twig" with {'form': userPhotoForm} %}
     </div>
 {% endblock %}

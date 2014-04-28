@@ -1,40 +1,4 @@
-.photo-button
-{
-    filter: alpha(opacity=0);
-    opacity: 0;
-    position: absolute;
-    overflow: hidden;
-    width: 148px;
-    height: 31px;
-    top: 0;
-    left: 0;
-}
 
-.photo-button input
-{
-    filter: alpha(opacity=0);
-    opacity: 0;
-
-    margin-top: -50px;
-    margin-left: -410px;
-    font-size: 70px;
-    height: 100px;
-    width: 611px;
-    position: relative;
-
-    cursor: pointer;
-}
-
-.upload-photo-button-container
-{
-    margin: 14px 0;
-
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-    width: 150px;
-    height: 31px;
-}
 
 .popup-content
 {
@@ -69,77 +33,6 @@
     background: url('/images/user-profile/user-profile-horizontal-placeholder-line.png') repeat-y;
 }
 
-.user-profile-container .form-control
-{
-    padding: 0 6px;
-    height: 27px;
-}
-
-.user-profile-container .form-group
-{
-    margin-bottom: 14px;
-}
-
-.user-profile-container h3,
-.user-profile-container label
-{
-    font-family: "OpenSans Semibold",sans-serif;
-    font-weight: normal;
-}
-
-.user-profile-container h3
-{
-    margin: 0;
-    padding-bottom: 26px;
-    color: #000;
-    font-size: 16px;
-}
-
-.user-profile-container label,
-.setting-label,
-.current-setting-value
-{
-    color: #2a2a2a;
-    font-size: 12px;
-}
-
-.photo-column-container
-{
-    padding-left: 23px;
-    padding-right: 24px;
-    width: 247px;
-
-    text-align: center;
-}
-
-.add-photo-button,
-.edit-photo-button,
-.delete-photo-button
-{
-    width: 147px !important;
-}
-
-.add-photo-button .semi-active-button-label
-{
-    background: #fff url('/images/user-profile/add-photo-button-icon.png') no-repeat 0 3px;
-}
-
-.edit-photo-button .non-active-button-label
-{
-    background: #fff url('/images/user-profile/edit-photo-button-icon.png') no-repeat 0 4px;
-}
-
-.delete-photo-button .non-active-button-label
-{
-    background: #fff url('/images/user-profile/delete-photo-button-icon.png') no-repeat 0 4px;
-}
-
-.form-control,
-.date-form select
-{
-    border-color: #c8c8c8;
-}
-
 .edit-user-profile-form
 {
     width: 100%;
@@ -147,12 +40,7 @@
 
 .edit-user-profile-form input[type="text"]
 {
-    width: 222px;
-}
-
-.save-user-profile-button
-{
-    float: right;
+    width: 261px;
 }
 
 .user-profile-container label
@@ -164,34 +52,7 @@
 
 .edit-user-profile-form label
 {
-    width: 107px;
-}
-
-.edit-user-profile-form .input-group input,
-.sex-field label,
-.current-setting-value
-{
-    font-family: "OpenSans", "Open Sans", serif;
-}
-
-.sex-field .iradio,
-.sex-field input
-{
-    display: block;
-    float: left;
-    margin-top: 7px;
-}
-
-.sex-field
-{
-    padding-left: 0;
-    border: none;
-}
-
-.sex-field label
-{
-    padding-left: 3px;
-    width: 78px;
+    width: 106px;
 }
 
 .grade-select
@@ -199,33 +60,6 @@
     padding: 0;
     width: 100px;
     border-radius: 4px !important;
-}
-
-.date-form .form-control.select
-{
-    padding: 4px 8px 6px;
-    height: 32px;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-}
-
-.form-control.date-select-block
-{
-    display: inline-block;
-    padding: 0;
-    width: 220px;
-    border: none;
-}
-
-.save-user-profile-button-container
-{
-    padding-top: 7px;
-    padding-left: 108px;
-}
-
-.save-user-profile-button .semi-active-button-label
-{
-    background: url("/images/user-profile/save-user-profile-button-icon.png") no-repeat scroll 0 3px #FFFFFF;
 }
 
 .user-profile-container
@@ -250,48 +84,23 @@
     background: url('/images/user-profile/user-profile-horizontal-placeholder-line.png') repeat-y;
 }
 
-/* selectbox additional styles BEGIN */
-.selectbox .select
+.profile-column-container
 {
-    padding: 0 7px;
-    height: 27px;
-    line-height: 25px;
-
-    color: #2a2a2a;
-    font-size: 12px;
-    font-family: "OpenSans", "Open Sans", serif;
-
-    background: #ffffff linear-gradient(#ffffff, #fdfdfd);
+    width: 411px;
 }
 
-.selectbox .trigger .arrow
+.photo-column-container
 {
-    top: 11px;
-    right: 6px;
-    opacity: 1;
+    padding-left: 68px;
 }
 
-.grade-form .selectbox,
-.grade-form .selectbox .select,
-.selectbox .dropdown
-
+.delete-relation-link
 {
-    width: 100px !important;
+    position: absolute;
+    left: 270px;
 }
 
-.date-form .selectbox
+.relation-name
 {
-    margin-right: 5px;
+    font-size: 13px;
 }
-
-.region-form .select .text
-{
-    width: 206px;
-}
-
-.region-form .selectbox .dropdown
-{
-    max-height: 350px;
-    width: 222px !important;
-}
-/* selectbox additional styles END */

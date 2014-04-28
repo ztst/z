@@ -1,110 +1,77 @@
-.wrap > .container
-{
-    background: url('/images/teacher-page/sidebar-menu-row-background.png') repeat-y 0 -11px #ffffff;
-}
-
-.teacher-profile-container .user-profile-column-container,
-.teacher-profile-container .photo-column-container
-{
-    margin-top: 14px;
-}
-
-.teacher-profile-container .form-control
-{
-    padding: 0 6px;
-    height: 27px;
-}
-
-.teacher-profile-container label
-{
-    display: block;
-    float: left;
-    margin-top: 5px;
-}
-
-.teacher-profile-container h3,
-.teacher-profile-container label
-{
-    font-family: "OpenSans Semibold",sans-serif;
-    font-weight: normal;
-}
-
-.teacher-profile-container h3
-{
-    margin: 0;
-    padding-bottom: 20px;
-    color: #000;
-    font-size: 16px;
-}
-
-.teacher-profile-container .form-group
-{
-    margin-bottom: 14px;
-}
-
 .profile-sidebar-menu-container .user-questions-count
 {
     font-size: 15px;
-    font-family: "OpenSans Semibold", sans-serif;
-}
-
-.question-answer-form-container
-{
-    margin-top: 1px;
-    width: 496px;
-}
-
-.form-group.add-video-comment-container label
-{
-    float: none;
-    color: #333;
-    font-size: 15px;
     font-family: "OpenSans Semibold",sans-serif;
 }
 
-.form-group.add-video-comment-container textarea
+.teacher-specialization-form .input-group
 {
-    padding: 4px 9px;
-    height: auto;
-    border-radius: 0;
+    margin-left: 107px;
+    margin-bottom: 14px;
+}
+
+.teacher-specialization-form .selectbox .text,
+.experience-form .selectbox .text
+{
+    width: 245px;
+}
+
+.teacher-specialization-form .selectbox .dropdown,
+.experience-form .selectbox .dropdown
+{
+    width: 261px;
+}
+
+.teacher-specialization-form .remove-teacher-subject-link
+{
+    position: absolute;
+    top: 9px;
+    left: 270px;
+    background: url("/images/controls/delete-link-icon.png") no-repeat scroll 0 3px rgba(0, 0, 0, 0);
+}
+
+.teacher-subjects
+{
+    margin-bottom: 5px;
+    list-style: none;
+}
+
+.achievement-field
+{
+    width: 261px;
+    height: 87px;
     resize: none;
-
-    color: #2a2a2a;
-    font-size: 12px;
+    border: 1px solid #c8c8c8;
+    border-radius: 3px;
 }
 
-.teacher-profile-bottom-horizontal-placeholder
+.teacher-specialization
 {
-    position: absolute;
-    bottom: 54px;
-    width: 296px;
-    height: 65px;
-    background-color: #fff;
+    position: relative;
+    margin-bottom: 14px;
 }
 
-.teacher-profile-bottom-horizontal-placeholder > .line
+.teacher-specialization:last-child
 {
-    width: 100%;
-    height: 32px;
-    background: url('/images/user-profile/user-profile-horizontal-placeholder-line.png') repeat-y 5px 0;
+    margin-bottom: 0;
 }
 
-.teacher-profile-top-horizontal-line
+.teacher-specialization label
 {
-    position: absolute;
-    top: 132px;
-    width: 296px;
-    height: 22px;
-    background: #fff;
+    margin: 0;
 }
 
-.answer-form-block
+.edit-user-profile-form label
 {
-    padding-left: 62px;
+    width: 136px;
 }
 
-.show-answer-form-link
+.profile-column-container
 {
-    float: right;
-    margin-top: -33px;
+    width: 441px;
+}
+
+.photo-column-container
+{
+    padding-left: 75px;
 }

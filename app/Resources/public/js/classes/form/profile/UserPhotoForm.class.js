@@ -61,8 +61,7 @@ var UserPhotoForm = Base.extend({
 
         $("#uploadPhotoProgress").addClass("hidden");
         this._uploadButtonText.html("Добавить фото");
-        this._uploadButtonText.attr("class", "semi-active-button-label");
-        this._uploadButton.attr("class", "semi-active-button add-photo-button");
+        this._uploadButton.attr("class", "active-link add-link add-photo-button");
         this._updateBigPhoto($("#defaultPhotoUrl").val());
         this._updateSmallPhoto($("#defaultSmallPhotoUrl").val());
         this._deleteButton.addClass("hidden");
@@ -82,9 +81,8 @@ var UserPhotoForm = Base.extend({
         $("#uploadPhotoProgress").addClass("hidden");
         if (response.success)
         {
-            this._uploadButtonText.html("Изменить фото");
-            this._uploadButtonText.attr("class", "non-active-button-label");
-            this._uploadButton.attr("class", "non-active-button edit-photo-button");
+            this._uploadButtonText.html("Загрузить новое фото");
+            this._uploadButton.attr("class", "active-link edit-photo-button");
             this._updateBigPhoto(response.bigPhotoUrl);
             this._updateSmallPhoto(response.smallPhotoUrl);
             this._deleteButton.removeClass("hidden");

@@ -1,0 +1,167 @@
+.settings-column-container
+{
+    padding: 0 30px 8px;
+    width: 100%;
+}
+
+
+.settings-column-container .setting-title-container,
+.settings-column-container .account-settings-container,
+.settings-column-container .setting-form-container
+{
+    padding: 30px 0 27px;
+}
+
+.settings-column-container.first .setting-title-container,
+.settings-column-container.first  .account-settings-container,
+.settings-column-container.first  .setting-form-container
+{
+    padding: 17px 0 27px;
+}
+
+.settings-column-container input
+{
+    width: 180px;
+}
+
+.setting-label
+{
+    font-family: "OpenSans Semibold",sans-serif;
+    font-weight: normal;
+}
+
+.setting-title-container h3
+{
+    font: 13px "OpenSans Semibold", sans-serif;
+}
+
+.setting-title-container
+{
+    width: 223px;
+    float: left;
+}
+
+.setting-form-container
+{
+    border-top: 1px solid #efefef;
+}
+
+.save-settings-button-container,
+.setting-form-container,
+.account-settings-container
+{
+    margin-left: 223px;
+}
+
+.save-settings-button-container
+{
+    margin-top: -28px;
+}
+
+/* change forms styles BEGIN */
+.change-form-container
+{
+    position: relative;
+
+    padding: 11px 18px;
+    width: 100%;
+    background: rgba(255, 253, 247, 0.5);
+    border: 1px solid #dfbca7;
+}
+
+.change-password-form-container .show-password-icon
+{
+    background-position: 0 9px;
+}
+
+.change-password-form-container .show-password-icon.opened
+{
+    background-position: 0 8px;
+}
+
+.change-form-container h4
+{
+    margin: 0;
+    height: 33px;
+    font-size: 13px;
+    font-family: "OpenSans Bold",sans-serif;
+}
+
+.change-form-container label
+{
+    float: left;
+    width: 111px;
+}
+
+.change-form-container input
+{
+    width: 209px;
+}
+
+.non-active-button-label
+{
+    padding-left: 19px;
+    color: #686868;
+}
+
+.change-buttons-container
+{
+    display: inline-block;
+    padding-top: 1px;
+    padding-bottom: 7px;
+    margin-left: 111px;
+}
+
+.cancel-edit-account .non-active-button-label
+{
+    background: url('/images/user-profile/cancel-edit-icon.png') no-repeat 0 3px;
+}
+/* change forms styles END */
+
+.change-password-form-container,
+.change-email-form-container
+{
+    margin-top: 15px;
+}
+
+.change-password-form-container,
+.change-email-form-container
+{
+    width: 358px;
+}
+
+.change-email-controller
+{
+    margin-bottom: 6px;
+}
+
+.setting-label
+{
+    display: inline-block;
+    width: 58px;
+}
+
+.current-setting-value
+{
+    display: inline-block;
+    margin-right: 13px;
+}
+
+.setting-form-container label
+{
+    font: 12px "OpenSans", "Open Sans", sans-serif;
+    color: #2a2a2a;
+    float: none;
+    display: inline-block;
+    margin: 0;
+}
+
+.setting-form-container input
+{
+    width: auto;
+}
+
+.setting-row
+{
+    margin: -3px 0 9px;
+}

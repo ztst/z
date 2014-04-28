@@ -2,10 +2,15 @@
   <div class="thread-user-pic">
     <img width="50" height="50" src="{{ user_photo_small_url(message.sender) }}" alt=""/>
   </div>
-  <div class="message-user-name">
-    <a href="{{ url('show_user_profile', {'userId': message.sender.userId}) }}">
-      {{ message.sender|e }}
-    </a>
+  <div class="message-header">
+    <div class="message-user-name">
+      <a href="{{ url('show_user_profile', {'userId': message.sender.userId}) }}">
+        {{ message.sender|e }}
+      </a>
+    </div>
+    <div class="message-created-date">
+      {{ message.createdAt|date }}
+    </div>
   </div>
   <div class="message-text-data">
     <div class="message-body">

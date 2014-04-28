@@ -1,48 +1,91 @@
+.wrap > .container
+{
+    background: url('/images/teacher-page/sidebar-menu-row-background.png') repeat-y 0 -11px #ffffff;
+}
+
+.profile-container .form-control
+{
+    padding: 0 6px;
+    height: 27px;
+}
+
+.profile-container label
+{
+    display: block;
+    float: left;
+    margin-top: 5px;
+}
+
+.profile-container h3,
+.profile-container label,
+.profile-container .setting-label
+{
+    font-family: "OpenSans Semibold",sans-serif;
+    font-weight: normal;
+}
+
+.profile-container h3
+{
+    margin: 0;
+    padding-bottom: 20px;
+    color: #000;
+    font-size: 16px;
+}
+
+.profile-container .tab-header h4
+{
+    line-height: 17px;
+}
+
+.profile-container .form-group
+{
+    margin-bottom: 14px;
+}
+
 .profile-sidebar-menu
 {
     list-style: none;
     margin-right: 1px;
-    margin-top: 4px;
+    margin-top: 11px;
 }
 
 .profile-sidebar-menu li
 {
-    display: inline-block;
-    height: 42px;
-    margin-bottom: -1px;
+    display: block;
+    height: 29px;
     width: 100%;
-    padding-top: 1px;
 }
 
 .profile-sidebar-menu li a
 {
     display: block;
-    padding: 8px 53px 8px 36px;
+    padding: 5px 15px 3px 33px;
     text-decoration: none;
     font-family: "OpenSans Semibold", sans-serif;
-    font-size: 15px;
+    font-size: 13px;
     color: #333333;
 
-    background: url('/images/chapters-list/chapter-list-marker.png') no-repeat 20px 15px;
-}
-
-.profile-sidebar-menu li.current a
-{
-    color: #004e78;
+    background: url("/images/user-profile/profile-sidebar-marker.png") no-repeat 20px 11px;
 }
 
 .profile-sidebar-menu li.current
 {
     border-bottom: 1px solid #C3D6E1;
     border-top: 1px solid #C3D6E1;
-    padding-top: 0;
-    background: url('/images/teacher-page/profile-sidebar-menu-arrow.png') no-repeat 251px 0 #EEF9FE;
+    background: #EEF9FE;
 }
+
+.profile-sidebar-menu li.current a
+{
+    margin-top: -1px;
+    color: #004e78;
+}
+
 .tab-pane
 {
     display: none;
 
-    padding: 6px 26px;
+    padding: 0 26px;
 }
 
 .tab-pane.active
@@ -54,14 +97,20 @@
 {
     position: relative;
     float: left;
-    width: 297px;
+    width: 237px;
 }
 
-.teacher-profile-container
+.profile-container
 {
     float: left;
-    width: 701px;
+    width: 761px;
     padding-bottom: 30px;
+}
+
+.profile-column-container,
+.photo-column-container
+{
+    margin-top: 17px;
 }
 
 .user-profile-page-list
@@ -72,7 +121,7 @@
 .user-profile-page-list li
 {
     margin: 0 -26px;
-    padding: 20px 26px 18px;
+    padding: 17px 26px 16px;
     border-top: 1px solid #efefef;
 }
 
@@ -99,7 +148,7 @@
 .video-with-questions-list-item,
 .video-with-comments-list-item
 {
-    width: 600px;
+    width: 660px;
 }
 
 .right-count-column
@@ -180,12 +229,12 @@
 
 .select-content-tab
 {
-    margin-top: 16px;
+    margin-top: 11px;
 }
 
 .user-profile-tab-menu
 {
-    padding: 0 26px;
+    padding-left: 30px;
 }
 
 .user-profile-page-list .open-video-comment-link a,
@@ -193,7 +242,7 @@
 {
     font-size: 14px;
     font-family: "OpenSans Semibold", sans-serif;
-    color: #222222;
+    color: #222;
 }
 
 .user-profile-page-list .open-video-comment-link,
@@ -206,36 +255,36 @@
 {
     position: relative;
     bottom: 1px;
-    width: 202px;
-    height: 202px;
+    width: 212px;
 
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
+.photo-container img
+{
+    margin: 5px;
+    border-radius: 4px;
+}
+
+.photo-buttons-form
+{
+    margin-top: 3px;
+    margin-left: 6px;
+}
+
 .photo-column-container,
-.user-profile-column-container,
+.profile-column-container,
 .settings-column-container
 {
     float: left;
 }
 
-.user-profile-column-container
+.profile-column-container
 {
-    width: 370px;
-    padding-left: 26px;
+    padding-left: 29px;
     padding-right: 15px;
-}
-
-.profile-container
-{
-    padding: 8px 0;
-}
-
-.profile-container .user-profile-column-container
-{
-    padding: 0 15px 0 0;
 }
 
 .profile-info-row
@@ -257,11 +306,10 @@
     width: 110px;
 }
 
-
-.user-profile-column-container h3
+.profile-column-container h3
 {
     margin: 0;
-    padding-bottom: 26px;
+    padding-bottom: 20px;
     color: #000;
     font-size: 16px;
     font-family: "OpenSans Semibold", sans-serif;
@@ -315,16 +363,21 @@
 .list-count-container
 {
     font-family: "OpenSans Semibold", sans-serif;
-    font-size: 16px;
+    font-size: 13px;
     color: #036995;
 
     float: right;
 }
 
+.list-count-container.on-page-count-container
+{
+    font-size: 16px;
+}
+
 .tab-header
 {
     margin: 0 -26px;
-    padding: 8px 26px 8px;
+    padding: 8px 26px 1px;
 
     border-bottom: 1px solid #cccccc;
 }
@@ -334,12 +387,17 @@
     color: #E8710D;
 }
 
+.tab-header h4
+{
+    margin-top: 15px;
+}
+
 .tab-header h4,
 .tab-header h4 a
 {
     font-size: 16px;
     font-family: "OpenSans Semibold", sans-serif;
-    color: #222222;
+    color: #222;
 }
 
 .tab-header .video-breadcrumbs
@@ -349,7 +407,7 @@
 
 .tab-footer-block
 {
-    border-top: 1px solid #cccccc;
+    border-top: 1px solid #ccc;
     padding: 20px 26px 0;
     margin: 0 -26px;
 }
@@ -371,6 +429,50 @@
     margin-right: 3px;
 }
 
+/* selectbox additional styles BEGIN */
+.selectbox .select
+{
+    padding: 0 7px;
+    height: 27px;
+    line-height: 25px;
+
+    color: #2a2a2a;
+    font-size: 12px;
+    font-family: "OpenSans", "Open Sans", serif;
+}
+
+.selectbox .trigger .arrow
+{
+    top: 11px;
+    right: 6px;
+    opacity: 1;
+}
+
+.grade-form .selectbox,
+.grade-form .selectbox .select,
+.grade-form .selectbox .dropdown,
+.date-form .selectbox .dropdown
+
+{
+    width: 100px !important;
+}
+
+.date-form .selectbox
+{
+    margin-left: 6px;
+}
+
+.region-form .select .text
+{
+    width: 245px;
+}
+
+.region-form .selectbox .dropdown
+{
+    max-height: 350px;
+    width: 261px !important;
+}
+
 .selectbox .select
 {
     width: auto !important;
@@ -382,16 +484,187 @@
     padding-right: 14px;
 }
 
+.date-select-block .selectbox .select .text
+{
+    padding-right: 38px;
+}
+
+.date-select-block .selectbox:first-child
+{
+    margin-left: 0;
+}
+
+.date-select-block .selectbox:first-child .select .text
+{
+    padding-right: 36px;
+}
+/* selectbox additional styles END */
+
 .alert
 {
     margin: 0 30px 10px 16px;
 }
 
-.show-user-profile-container
-{
-}
-
 .show-user-profile-container .alert
 {
     margin: 26px;
+}
+
+.add-link
+{
+    background: url("/images/controls/add-link-icon.png") no-repeat 0 3px;
+}
+
+.delete-link
+{
+    background: #fff url('/images/controls/delete-link-icon.png') no-repeat 0 3px;
+}
+
+.user-profile-container h3,
+.user-profile-container label,
+.user-profile-container .setting-label
+{
+    font-family: "OpenSans Semibold",sans-serif;
+    font-weight: normal;
+}
+
+.user-profile-container .form-control
+{
+    padding: 0 6px;
+    height: 27px;
+}
+
+.user-profile-container .form-group
+{
+    margin-bottom: 14px;
+}
+
+.user-profile-container h3
+{
+    margin: 0;
+    padding-bottom: 26px;
+    color: #000;
+    font-size: 16px;
+}
+
+.user-profile-container label,
+.setting-label,
+.current-setting-value
+{
+    color: #2a2a2a;
+    font-size: 12px;
+}
+
+.edit-user-profile-form input[type="text"]
+{
+    width: 261px;
+}
+
+/* photo styles BEGIN */
+.photo-button
+{
+    filter: alpha(opacity=0);
+    opacity: 0;
+    position: absolute;
+    overflow: hidden;
+    width: 148px;
+    height: 19px;
+    top: 0;
+    left: 0;
+}
+
+.photo-button input
+{
+    filter: alpha(opacity=0);
+    opacity: 0;
+
+    margin-top: -50px;
+    margin-left: -410px;
+    font-size: 70px;
+    height: 100px;
+    width: 611px;
+    position: relative;
+
+    cursor: pointer;
+}
+
+.upload-photo-button-container
+{
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    width: 150px;
+    height: 19px;
+}
+
+.edit-photo-button
+{
+    background: #fff url('/images/user-profile/edit-photo-link-icon.png') no-repeat 0 3px;
+}
+/* photo styles END */
+
+.edit-user-profile-form .input-group input,
+.sex-field label,
+.current-setting-value
+{
+    font-family: "OpenSans", "Open Sans", serif;
+}
+
+.sex-field .iradio,
+.sex-field input
+{
+    display: block;
+    float: left;
+    margin-top: 7px;
+}
+
+.sex-field
+{
+    padding-left: 0;
+    border: none;
+}
+
+.sex-field label
+{
+    padding-left: 3px;
+    width: 78px;
+}
+
+.save-user-profile-button-container
+{
+    padding-top: 7px;
+    padding-left: 108px;
+}
+
+.save-user-profile-button
+{
+    float: right;
+    padding: 5px 44px;
+}
+
+.save-user-profile-button .active-button-label
+{
+    padding-left: 0;
+}
+
+.form-control,
+.date-form select
+{
+    border-color: #c8c8c8;
+}
+
+.date-form .form-control.select
+{
+    padding: 4px 8px 6px;
+    height: 32px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+.form-control.date-select-block
+{
+    display: inline-block;
+    padding: 0;
+    width: 220px;
+    border: none;
 }

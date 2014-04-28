@@ -1,20 +1,15 @@
 .user-search-result-container
 {
-    width: 400px;
     float: left;
+    margin-top: -5px;
+    padding-top: 5px;
+    width: 477px;
     background: url("/images/user-profile/user-search-results-background.png") repeat-y;
 }
 
 .users-search-container .tab-header
 {
     margin-right: 0;
-}
-
-.user-search-filters-container
-{
-    margin-left: 400px;
-    width: 280px;
-    padding: 10px;
 }
 
 .users-search-container ul
@@ -25,7 +20,7 @@
 
 .users-search-container li
 {
-    padding: 20px 0;
+    padding: 17px 0;
     border-top: 1px solid #efefef;
 }
 
@@ -36,16 +31,13 @@
 
 .send-found-user-message-button
 {
-    padding-left: 18px;
-    color: #036995;
-    font-size: 12px;
     background: url("/images/user-profile/send-found-user-message-button-icon.png") no-repeat 0 3px;
 }
 
 .users-search-container .found-user-name
 {
     margin-left: 0;
-    margin-top: -5px;
+    margin-top: -4px;
 }
 
 .users-search-container .found-user-name a
@@ -57,6 +49,7 @@
 
 .found-user-additional-info
 {
+    margin-top: 2px;
     color: #777;
     font-size: 11px;
 }
@@ -71,7 +64,9 @@
 
 .user-search-filters-container
 {
-    padding: 28px;
+    margin-left: 477px;
+    width: 259px;
+    padding: 23px 30px;
 }
 
 .user-search-filters-container .search-icon
@@ -95,12 +90,15 @@
 .user-search-filters-container .user-search-filters-label
 {
     float: none;
-    margin-top: 12px;
+    margin-top: 11px;
+    margin-bottom: 3px;
     font-size: 13px;
 }
 
 .user-search-filters-container .role-filter label
 {
+    margin-top: 2px;
+    line-height: 16px;
     font-family: "OpenSans","Open Sans",serif;
 }
 
@@ -108,7 +106,7 @@
 {
     float: left;
     margin-right: 6px;
-    margin-top: 6px;
+    margin-top: 3px;
 }
 
 .user-search-filters-container .start-search-button
@@ -127,18 +125,36 @@
     width: 100%;
 }
 
+.user-search-filters-container .selectbox .select
+{
+    height: 31px;
+    line-height: 29px;
+    color: #717070;
+    font-size: 13px;
+}
+
 .user-search-filters-container .selectbox .select .text
 {
     font-family: "OpenSans","Open Sans",serif;
-    width: 202px;
+    width: 182px;
 }
 
 .user-search-filters-container .age-filter .selectbox .select .text
 {
-    width: 75px;
+    width: 73px;
 }
 
 .user-search-filters-container .age-filter .selectbox .dropdown
 {
     width: 97px;
+}
+
+.user-search-filters-container .selectbox .trigger .arrow
+{
+    top: 13px;
+}
+
+.found-user-pic
+{
+    float: left;
 }

@@ -47,9 +47,11 @@ var TeacherProfilePage = ProfilePage.extend({
         // increase the index with one for the next item
         collectionHolder.data('index', index + 1);
 
-        // Display the form in the page in an li, before the "Add a tag" link li
-        var newFormLi = $('<li></li>').append(newForm);
+        // Display the form in the page in a li, before the "Add a tag" link li
+        var newFormLi = $('<li class="teacher-specialization"></li>').append(newForm);
         collectionHolder.append(newFormLi);
+        // Initialize custom select in the added li
+        $(".teacher-specialization").find("select").selectbox();
     }
 });
 

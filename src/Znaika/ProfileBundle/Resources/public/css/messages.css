@@ -1,7 +1,7 @@
 .user-profile-page-list .unread-thread,
 .not-read-message
 {
-    background: #eff8fa;
+    background: #f2fcfe;
 }
 
 .messenger_thread_message.not-read-message
@@ -29,7 +29,7 @@
 
 .not-empty-pupils-container li:hover
 {
-    background: #e2f0f7;
+    background: #e5f4ff;
 }
 
 .not-empty-pupils-container .tab-header h4
@@ -123,15 +123,27 @@
 .messenger_thread_message
 {
     margin: 0 -26px;
-    padding: 20px 26px;
+    padding: 17px 26px 7px;
     border-bottom: 1px solid #efefef;
+    min-height: 85px;
 }
 
-.thread-container .message-user-name,
+.thread-container .message-user-name
+{
+    float: left;
+}
+
+.thread-container .message-created-date
+{
+    float: right;
+}
+
 .thread-container .message-text-data
 {
-    margin-left: 63px;
-    width: auto;
+    float: left;
+    margin-left: 13px;
+    width: 530px;
+    line-height: 16px;
 }
 
 .thread-container .message-body,
@@ -172,4 +184,17 @@
 .send-message-button .active-button-label
 {
     padding: 0 18px;
+}
+
+.threads-group-select .selectbox .select
+{
+    height: 31px;
+    line-height: 29px;
+    color: #717070;
+    font-size: 13px;
+}
+
+.threads-group-select .selectbox .trigger .arrow
+{
+    top: 13px;
 }

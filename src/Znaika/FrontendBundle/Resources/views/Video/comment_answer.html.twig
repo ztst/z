@@ -20,7 +20,7 @@
         <span class="likes-count">
          {{ comment.likesCount }}
         </span>
-        <a class="comment-like-button {% if is_user() %}can-like{% endif %}"
+        <a class="non-active-link comment-like-button {% if is_user() %}can-like{% endif %}"
            id="commentLikeButton{{ comment.videoCommentId }}"
            title=""
            href="javascript:void(0);">

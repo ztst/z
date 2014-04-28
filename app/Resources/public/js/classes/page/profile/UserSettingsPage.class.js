@@ -45,9 +45,13 @@ var UserSettingsPage = Base.extend({
         return false;
     },
 
-    _onSettingsSaved: function()
+    _onSettingsSaved: function(response)
     {
         this._isLoading = false;
+        if (response.success)
+        {
+            alert("Изменения сохранены");
+        }
     },
 
     _initAccountSettingsFormSwitching: function()

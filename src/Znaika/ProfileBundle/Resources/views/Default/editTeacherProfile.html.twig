@@ -4,9 +4,9 @@
   {{ parent() }}
 
   {% stylesheets filter="?yui_css"
-    '@ZnaikaProfileBundle/Resources/public/css/user_profile.css'
     '@ZnaikaProfileBundle/Resources/public/css/teacher_profile.css'
     '@ZnaikaProfileBundle/Resources/public/css/profile_page.css'
+    '@ZnaikaProfileBundle/Resources/public/css/answer_questions.css'
   %}
     <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
@@ -28,7 +28,6 @@
 {% endblock %}
 
 {% block content %}
-  <div class="teacher-profile-top-horizontal-line"></div>
   {% for flashMessage in app.session.flashbag.get('notice') %}
     <div class="alert alert-info">
       {{ flashMessage|raw }}
@@ -38,17 +37,14 @@
     {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
   </div>
 
-  <div class="teacher-profile-container">
-    <div class="user-profile-column-container">
+  <div class="profile-container teacher-profile-container">
+    <div class="profile-column-container">
 
-      <h3>Личная информация</h3>
+      <h3>Редактирование профиля</h3>
       {% include "ZnaikaProfileBundle:Default:teacher_profile_form.html.twig" with {'form': profileForm} %}
     </div>
     <div class="photo-column-container teacher-photo-form">
-      {% include "ZnaikaProfileBundle:Default:user_photo_form.html.twig" with {'form': userPhotoForm} %}
+      {% include "ZnaikaProfileBundle:Default:profile_photo_form.html.twig" with {'form': userPhotoForm} %}
     </div>
-  </div>
-  <div class="teacher-profile-bottom-horizontal-placeholder">
-    <div class="line"></div>
   </div>
 {% endblock %}

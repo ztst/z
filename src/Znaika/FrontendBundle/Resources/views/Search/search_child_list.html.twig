@@ -2,20 +2,20 @@
   {% for user in users %}
     <li class="" id="userContainer{{ user.UserId }}">
       <a id="openUserProfile{{ user.userId }}" class="show-user-profile-link" href="{{ path("show_user_profile", {"userId": user.userId}) }}">
-        <img class="media-object thread-user-pic"
+        <img class="media-object found-user-pic"
              width="50"
              height="50"
              src="{{ user_photo_small_url(user) }}"
              alt="Здесь будет аватар"/>
       </a>
-      <div class="message-text-data">
-        <div class="message-user-name">
+      <div class="user-text-data">
+        <div class="found-user-name">
           <a id="openUserProfile{{ user.userId }}" class="show-user-profile-link" href="{{ path("show_user_profile", {"userId": user.userId}) }}">
             {{ user }}
           </a>
         </div>
-        {% if user.region %}<div class="message-created-date">{{ user.region.regionName }}</div>{% endif %}
-        <a href="javascript:void(0);" title="" class="add-child-button">Добавить ребенка</a>
+        {% if user.region %}<div class="found-user-additional-info">{{ user.region.regionName }}</div>{% endif %}
+        <a href="javascript:void(0);" title="" class="active-link add-link add-child-button">Добавить ребенка</a>
       </div>
       <div class="clear"></div>
     </li>

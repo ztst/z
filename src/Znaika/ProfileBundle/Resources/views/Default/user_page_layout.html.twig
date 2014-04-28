@@ -6,21 +6,17 @@
   {% stylesheets filter="?yui_css"
     '../app/Resources/public/css/tab_menu.css'
     '@ZnaikaProfileBundle/Resources/public/css/profile_page.css'
-    '@ZnaikaProfileBundle/Resources/public/css/teacher_profile.css'
+    '@ZnaikaProfileBundle/Resources/public/css/answer_questions.css'
   %}
   <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
   {% endstylesheets %}
 {% endblock %}
 
 {% block content %}
-  <div class="teacher-profile-top-horizontal-line"></div>
   <div class="profile-sidebar-menu-container">
     {{ knp_menu_render('sidebar_profile_menu', {'allow_safe_labels': true}) }}
   </div>
-  <div class="teacher-profile-container">
+  <div class="profile-container">
     {% block pageContent %}{% endblock %}
-  </div>
-  <div class="teacher-profile-bottom-horizontal-placeholder">
-    <div class="line"></div>
   </div>
 {% endblock %}
