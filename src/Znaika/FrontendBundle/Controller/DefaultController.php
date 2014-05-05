@@ -31,4 +31,9 @@
         {
             return $this->render('ZnaikaFrontendBundle:Default:support.html.twig');
         }
+        
+        public function tutorialAction()
+        {
+            return $this->render('ZnaikaFrontendBundle:Default:tutorial.html.twig');
+        }
     }

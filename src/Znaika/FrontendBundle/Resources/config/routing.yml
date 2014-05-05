@@ -199,3 +199,7 @@ support:
 support_create_success:
     pattern: /support-created
     defaults: { _controller: ZnaikaFrontendBundle:Support:supportCreateSuccess }
+
+tutorial:
+    pattern: /tutorial
+    defaults: { _controller: ZnaikaFrontendBundle:Default:tutorial }
